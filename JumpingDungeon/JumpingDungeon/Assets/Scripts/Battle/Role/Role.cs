@@ -7,11 +7,12 @@ using UnityEngine.UI;
 public abstract class Role : MonoBehaviour
 {
     [SerializeField]
-    Force MyForce;
+    public Force MyForce;
     [SerializeField]
-    protected int Move;
+    protected RectTransform HealthBar;
     [SerializeField]
-    RectTransform HealthBar;
+    protected Rigidbody2D MyRigi;
+    protected const float MoveDecay = 0.5f;
 
     private int health;
     public int Health
@@ -29,7 +30,9 @@ public abstract class Role : MonoBehaviour
     public virtual int Damage { get { return BaseDamage + ExtraDamage; } }
     public int ExtraDamage { get; protected set; }
     public int BaseDamage { get; protected set; }
+    public int MoveSpeed { get; protected set; }
     public bool IsAlive { get; protected set; }
+    public Dictionary<RoleCondition, float> Conditions = new Dictionary<RoleCondition, float>();
 
     protected virtual void Awake()
     {
@@ -39,18 +42,22 @@ public abstract class Role : MonoBehaviour
         Health = MaxHealth;
     }
 
-    public virtual void Update()
+    protected virtual void Update()
     {
-
+        MyRigi.velocity *= MoveDecay;
+        ConditionTimerFunc();
     }
     protected virtual void Attack()
     {
 
     }
-    public virtual void BeAttack(int _dmg)
+    public virtual void BeAttack(int _dmg,Vector2 _force)
     {
         //EffectEmitter.EmitParticle("hitEffect", transform.position, Vector3.zero, null);
         ReceiveDmg(_dmg);
+        MyRigi.velocity = Vector2.zero;
+        GetCondition(RoleCondition.Stun, 0.5f);
+        MyRigi.AddForce(_force);
     }
     public virtual void ReceiveDmg(int _dmg)
     {
@@ -75,5 +82,24 @@ public abstract class Role : MonoBehaviour
         }
         else IsAlive = true;
         return !IsAlive;
+    }
+    public virtual void GetCondition(RoleCondition _condition,float _duration)
+    {
+        if (Conditions.ContainsKey(_condition))
+            return;
+        Conditions.Add(_condition, _duration);
+    }
+    protected virtual void ConditionTimerFunc()
+    {
+        List<RoleCondition> keyList=new List<RoleCondition>(Conditions.Keys);
+        for(int i=0;i<keyList.Count;i++)
+        {
+            Conditions[keyList[i]] -= Time.deltaTime;
+            if (Conditions[keyList[i]] <= 0)
+            {
+                Conditions.Remove(keyList[i]);
+                keyList.RemoveAt(i);
+            }
+        }
     }
 }

@@ -14,7 +14,8 @@ public class AttackZone : MonoBehaviour {
         if (_col.gameObject.tag==TargetType.ToString())
         {
             Role er = _col.GetComponent<Role>();
-            er.BeAttack(Attacker.Damage);
+            Vector2 force = (er.transform.position - transform.position).normalized * 100000;
+            er.BeAttack(Attacker.Damage, force);
         }
     }
 }

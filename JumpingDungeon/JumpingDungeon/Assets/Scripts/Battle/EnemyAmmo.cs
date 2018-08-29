@@ -17,7 +17,8 @@ public class EnemyAmmo : Ammo
         {
             case "Player":
                 PlayerRole pr = _col.GetComponent<PlayerRole>();
-                pr.BeAttack(Damage);
+                Vector2 force = (pr.transform.position - transform.position).normalized * 100000;
+                pr.BeAttack(Damage, force);
                 SelfDestroy();
                 break;
             default:
