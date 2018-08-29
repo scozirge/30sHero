@@ -34,22 +34,23 @@ public class ControlPanel : MonoBehaviour
     }
     float GetAngle()
     {
-        return 270 - MyMath.GetAngerFormTowPoint2D(Center.localPosition, Arrow.localPosition);
+        return MyMath.GetAngerFormTowPoint2D(Arrow.localPosition, Center.localPosition);
     }
     void MouseFunc()
     {
         if (Input.GetMouseButtonDown(0))
         {
             float angle = GetAngle();
-            if (angle > 270 || angle <= 45)
+            //Debug.Log(angle);
+            if (angle > 45 && angle <= 135)
             {
                 PRole.Jump(Direction.Right);
             }
-            else if (angle > 45 && angle <= 135)
+            else if (angle > 0 && angle <= 45 || angle >315)
             {
                 PRole.Jump(Direction.Top);
             }
-            else if (angle > 135 && angle <= 225)
+            else if (angle > 225 && angle <= 315)
             {
                 PRole.Jump(Direction.Left);
             }
