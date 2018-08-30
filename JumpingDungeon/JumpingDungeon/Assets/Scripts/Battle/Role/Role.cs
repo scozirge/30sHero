@@ -32,7 +32,7 @@ public abstract class Role : MonoBehaviour
     public int BaseDamage { get; protected set; }
     public int MoveSpeed { get; protected set; }
     public bool IsAlive { get; protected set; }
-    public Dictionary<RoleCondition, float> Conditions = new Dictionary<RoleCondition, float>();
+    public Dictionary<RoleBuffer, BufferData> Buffers = new Dictionary<RoleBuffer, BufferData>();
 
     protected virtual void Awake()
     {
@@ -51,16 +51,25 @@ public abstract class Role : MonoBehaviour
     {
         Vector2 force = MyRigi.velocity.normalized * 100000 * -1;
         MyRigi.AddForce(force);
-        GetCondition(RoleCondition.Stun, 0.3f);
+        GetCondition(RoleBuffer.Stun, new BufferData(0.3f, 0));
     }
-    public virtual void BeAttack(int _dmg, Vector2 _force)
+    public virtual void BeAttack(int _dmg, Vector2 _force,Dictionary<RoleBuffer,BufferData> buffers)
     {
         //EffectEmitter.EmitParticle("hitEffect", transform.position, Vector3.zero, null);
         ReceiveDmg(_dmg);
         MyRigi.velocity = Vector2.zero;
-        GetCondition(RoleCondition.Stun, 0.3f);
-        MyRigi.AddForce(_force);
 
+        //Get conditions
+        if(buffers!=null)
+        {
+            List<RoleBuffer> keyList = new List<RoleBuffer>(buffers.Keys);
+            for (int i = 0; i < keyList.Count; i++)
+            {
+                GetCondition(keyList[i], buffers[keyList[i]]);
+            }
+        }
+        //Add KnockForce
+        MyRigi.AddForce(_force);
     }
     public virtual void ReceiveDmg(int _dmg)
     {
@@ -86,21 +95,27 @@ public abstract class Role : MonoBehaviour
         else IsAlive = true;
         return !IsAlive;
     }
-    public virtual void GetCondition(RoleCondition _condition, float _duration)
+    public virtual void GetCondition(RoleBuffer _condition, BufferData _data)
     {
-        if (Conditions.ContainsKey(_condition))
-            return;
-        Conditions.Add(_condition, _duration);
+        if (Buffers.ContainsKey(_condition))
+        {
+            if (Buffers[_condition].Duration < _data.Duration)
+                Buffers[_condition].Duration = _data.Duration;            
+        }
+        else
+        {
+            Buffers.Add(_condition, _data);
+        }
     }
     protected virtual void ConditionTimerFunc()
     {
-        List<RoleCondition> keyList = new List<RoleCondition>(Conditions.Keys);
+        List<RoleBuffer> keyList = new List<RoleBuffer>(Buffers.Keys);
         for (int i = 0; i < keyList.Count; i++)
         {
-            Conditions[keyList[i]] -= Time.deltaTime;
-            if (Conditions[keyList[i]] <= 0)
+            Buffers[keyList[i]].Duration -= Time.deltaTime;
+            if (Buffers[keyList[i]].Duration <= 0)
             {
-                Conditions.Remove(keyList[i]);
+                Buffers.Remove(keyList[i]);
                 keyList.RemoveAt(i);
             }
         }

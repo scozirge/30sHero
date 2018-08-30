@@ -1039,6 +1039,27 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 45
+--- !u!114 &1047386082
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1047386079}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3283f1f3a7e6b24db127fb13fd7f595, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Element: 0
+  PrefabParent: {fileID: 592269002}
+  Interval: 8
+  AmmoNum: 10
+  AmmoInterval: 0.1
+  StartAngle: 0
+  AngleInterval: 30
+  Patetern: 0
+  AttackPrefab: {fileID: 114962956101920240, guid: 890c4adff7e29b046918781ecd50ab16,
+    type: 2}
 --- !u!50 &1047386084
 Rigidbody2D:
   serializedVersion: 4
@@ -1059,6 +1080,69 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &1047386085
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1047386079}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3283f1f3a7e6b24db127fb13fd7f595, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Element: 0
+  PrefabParent: {fileID: 592269002}
+  Interval: 2
+  AmmoNum: 4
+  AmmoInterval: 0
+  StartAngle: 0
+  AngleInterval: 90
+  Patetern: 0
+  AttackPrefab: {fileID: 114962956101920240, guid: 84d6f2965eaadcd4cb3265ce5e0d2e16,
+    type: 2}
+--- !u!114 &1047386087
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1047386079}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3283f1f3a7e6b24db127fb13fd7f595, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Element: 0
+  PrefabParent: {fileID: 592269002}
+  Interval: 5
+  AmmoNum: 1
+  AmmoInterval: 0
+  StartAngle: 180
+  AngleInterval: 30
+  Patetern: 1
+  AttackPrefab: {fileID: 114962956101920240, guid: 2a7b65f4cce0fc74285da5557aebd023,
+    type: 2}
+--- !u!114 &1047386088
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1047386079}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3283f1f3a7e6b24db127fb13fd7f595, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Element: 0
+  PrefabParent: {fileID: 592269002}
+  Interval: 10
+  AmmoNum: 30
+  AmmoInterval: 0.1
+  StartAngle: 0
+  AngleInterval: 12
+  Patetern: 0
+  AttackPrefab: {fileID: 114962956101920240, guid: 84d6f2965eaadcd4cb3265ce5e0d2e16,
+    type: 2}
 --- !u!1 &1083473530
 GameObject:
   m_ObjectHideFlags: 0

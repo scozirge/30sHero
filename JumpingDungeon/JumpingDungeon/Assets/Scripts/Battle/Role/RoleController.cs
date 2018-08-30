@@ -7,7 +7,7 @@ public partial class PlayerRole
     const int MoveFactor = 1;
     void Controller()
     {
-        if (Conditions.ContainsKey(RoleCondition.Stun))
+        if (Buffers.ContainsKey(RoleBuffer.Stun))
             return;
         float xMoveForce = Input.GetAxis("Horizontal") * MoveSpeed * MoveFactor;
         float yMoveForce = Input.GetAxis("Vertical") * MoveSpeed * MoveFactor;
