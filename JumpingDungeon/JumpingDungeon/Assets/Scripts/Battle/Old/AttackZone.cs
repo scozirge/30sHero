@@ -16,6 +16,7 @@ public class AttackZone : MonoBehaviour {
             Role er = _col.GetComponent<Role>();
             Vector2 force = (er.transform.position - transform.position).normalized * 100000;
             er.BeAttack(Attacker.Damage, force);
+            Attacker.AttackReaction();
         }
     }
 }

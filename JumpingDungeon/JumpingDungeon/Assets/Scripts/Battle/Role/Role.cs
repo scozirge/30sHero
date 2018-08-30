@@ -47,17 +47,20 @@ public abstract class Role : MonoBehaviour
         MyRigi.velocity *= MoveDecay;
         ConditionTimerFunc();
     }
-    protected virtual void Attack()
+    public virtual void AttackReaction()
     {
-
+        Vector2 force = MyRigi.velocity.normalized * 100000 * -1;
+        MyRigi.AddForce(force);
+        GetCondition(RoleCondition.Stun, 0.3f);
     }
-    public virtual void BeAttack(int _dmg,Vector2 _force)
+    public virtual void BeAttack(int _dmg, Vector2 _force)
     {
         //EffectEmitter.EmitParticle("hitEffect", transform.position, Vector3.zero, null);
         ReceiveDmg(_dmg);
         MyRigi.velocity = Vector2.zero;
-        GetCondition(RoleCondition.Stun, 0.5f);
+        GetCondition(RoleCondition.Stun, 0.3f);
         MyRigi.AddForce(_force);
+
     }
     public virtual void ReceiveDmg(int _dmg)
     {
@@ -83,7 +86,7 @@ public abstract class Role : MonoBehaviour
         else IsAlive = true;
         return !IsAlive;
     }
-    public virtual void GetCondition(RoleCondition _condition,float _duration)
+    public virtual void GetCondition(RoleCondition _condition, float _duration)
     {
         if (Conditions.ContainsKey(_condition))
             return;
@@ -91,8 +94,8 @@ public abstract class Role : MonoBehaviour
     }
     protected virtual void ConditionTimerFunc()
     {
-        List<RoleCondition> keyList=new List<RoleCondition>(Conditions.Keys);
-        for(int i=0;i<keyList.Count;i++)
+        List<RoleCondition> keyList = new List<RoleCondition>(Conditions.Keys);
+        for (int i = 0; i < keyList.Count; i++)
         {
             Conditions[keyList[i]] -= Time.deltaTime;
             if (Conditions[keyList[i]] <= 0)

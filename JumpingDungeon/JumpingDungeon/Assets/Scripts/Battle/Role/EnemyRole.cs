@@ -45,11 +45,11 @@ public class EnemyRole : Role
         if (AttackTimer > 0)
             AttackTimer -= Time.deltaTime;
         else
-            Attack();
+            AttackReaction();
     }
-    protected override void Attack()
+    public override void AttackReaction()
     {
-        base.Attack();
+        base.AttackReaction();
         AttackTimer = AttackInterval;
 
         //Generate Ammo and Launch it.
