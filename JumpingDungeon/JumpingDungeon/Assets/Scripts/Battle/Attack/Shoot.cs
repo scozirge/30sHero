@@ -24,11 +24,13 @@ public class Shoot : Attack
         Vector3 dir;
         if (Patetern == ShootPatetern.TowardTarget)
         {
-            dir = (Target.transform.position - Myself.transform.position).normalized;
+            dir = (Target.transform.position - Myself.transform.position);
+            float origAngle = ((Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg) + (StartAngle + CurSpawnAmmoNum * AngleInterval)) * Mathf.Deg2Rad;
+            dir = new Vector3(Mathf.Cos(origAngle), Mathf.Sin(origAngle), 0).normalized;
         }
         else
         {
-            float angle = StartAngle + CurSpawnAmmoNum * AngleInterval * Mathf.Deg2Rad;
+            float angle = (StartAngle + CurSpawnAmmoNum * AngleInterval) * Mathf.Deg2Rad;
             dir = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0).normalized;
         }
         data.Add("Direction", dir);
