@@ -1045,7 +1045,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1047386079}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e3283f1f3a7e6b24db127fb13fd7f595, type: 3}
   m_Name: 
@@ -1094,11 +1094,11 @@ MonoBehaviour:
   Element: 0
   PrefabParent: {fileID: 592269002}
   Interval: 2
-  AmmoNum: 4
+  AmmoNum: 3
   AmmoInterval: 0
-  StartAngle: 0
-  AngleInterval: 90
-  Patetern: 0
+  StartAngle: -15
+  AngleInterval: 15
+  Patetern: 1
   AttackPrefab: {fileID: 114962956101920240, guid: 84d6f2965eaadcd4cb3265ce5e0d2e16,
     type: 2}
 --- !u!114 &1047386087
@@ -1107,19 +1107,19 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1047386079}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e3283f1f3a7e6b24db127fb13fd7f595, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Element: 0
   PrefabParent: {fileID: 592269002}
-  Interval: 5
+  Interval: 1
   AmmoNum: 1
   AmmoInterval: 0
-  StartAngle: 180
-  AngleInterval: 30
-  Patetern: 1
+  StartAngle: 0
+  AngleInterval: 0
+  Patetern: 0
   AttackPrefab: {fileID: 114962956101920240, guid: 2a7b65f4cce0fc74285da5557aebd023,
     type: 2}
 --- !u!114 &1047386088
@@ -1128,7 +1128,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1047386079}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e3283f1f3a7e6b24db127fb13fd7f595, type: 3}
   m_Name: 
