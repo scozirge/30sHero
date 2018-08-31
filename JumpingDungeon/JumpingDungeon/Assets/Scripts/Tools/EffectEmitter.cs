@@ -20,5 +20,14 @@ public class EffectEmitter : MonoBehaviour
         particleGo.transform.localPosition = _pos;
         particleGo.transform.localRotation = Quaternion.Euler(_dir);
     }
+    public static void EmitParticle(ParticleSystem _particle, Vector3 _pos, Vector3 _dir, Transform _parent)
+    {
+        GameObject particleGo = Instantiate(_particle.gameObject, Vector3.zero, Quaternion.identity) as GameObject;
+        if (_parent)
+            particleGo.transform.SetParent(_parent);
+
+        particleGo.transform.localPosition = _pos;
+        particleGo.transform.localRotation = Quaternion.Euler(_dir);
+    }
 
 }

@@ -7,16 +7,15 @@ public class Shoot : Attack
     [SerializeField]
     ShootPatetern Patetern;
     [SerializeField]
-    Ammo AttackPrefab;
+    ShootAmmo AttackPrefab;
 
     protected override void SpawnAttackPrefab()
     {
         base.SpawnAttackPrefab();
         GameObject ammoGO = Instantiate(AttackPrefab.gameObject, Vector3.zero, Quaternion.identity) as GameObject;
-        ShootAmmo ea = ammoGO.GetComponent<ShootAmmo>();
-        MyAmmos.Add(ea);
-        ea.transform.SetParent(PrefabParent);
-        ea.transform.position = transform.position;
+        Ammo ammo = ammoGO.GetComponent<Ammo>();
+        ammo.transform.SetParent(AmmoParent);
+        ammo.transform.position = transform.position;
         //Set AmmoData
         Dictionary<string, object> data = new Dictionary<string, object>();
         data.Add("Damage", Myself.Damage);
@@ -34,7 +33,7 @@ public class Shoot : Attack
             dir = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0).normalized;
         }
         data.Add("Direction", dir);
-        ea.Init(data);
+        ammo.Init(data);
         CurSpawnAmmoNum++;
         if (CurSpawnAmmoNum >= AmmoNum)
         {

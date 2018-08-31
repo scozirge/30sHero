@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Enemy
+  - ParticleParent
+  - AmmoParent
   layers:
   - Default
   - TransparentFX
@@ -41,4 +43,16 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Battle_BG
+    uniqueID: 3337951669
+    locked: 0
+  - name: Effect_Blow
+    uniqueID: 363773173
+    locked: 0
+  - name: Battle
+    uniqueID: 3223312719
+    locked: 0
+  - name: Effect_Above
+    uniqueID: 1875237263
     locked: 0

@@ -4,11 +4,7 @@ using UnityEngine;
 [RequireComponent(typeof(EnemyRole))]
 public class Attack : MonoBehaviour
 {
-    [SerializeField]
-    protected Element Element;
 
-    [SerializeField]
-    protected Transform PrefabParent;
     [SerializeField]
     protected float Interval;
     [SerializeField]
@@ -19,17 +15,18 @@ public class Attack : MonoBehaviour
     protected float StartAngle;
     [SerializeField]
     protected float AngleInterval;
-
+    
     protected EnemyRole Myself;
     protected PlayerRole Target;
     protected float Timer;
     protected float AmmoIntervalTimer;
     protected bool IsAttacking;
     protected int CurSpawnAmmoNum;
-    protected List<ShootAmmo> MyAmmos;
+    protected Transform AmmoParent;
 
     protected virtual void Awake()
     {
+        AmmoParent = GameObject.FindGameObjectWithTag("AmmoParent").transform;
         Myself = GetComponent<EnemyRole>();
         Target = GameObject.FindGameObjectWithTag(Force.Player.ToString()).GetComponent<PlayerRole>();
         Timer = Interval;
@@ -41,8 +38,6 @@ public class Attack : MonoBehaviour
     }
     protected virtual void SpawnAttackPrefab()
     {
-        //Spawn ammo
-        MyAmmos = new List<ShootAmmo>();
     }
     protected virtual void TimerFunc()
     {

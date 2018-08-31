@@ -13,6 +13,12 @@ public abstract class Role : MonoBehaviour
     [SerializeField]
     protected Rigidbody2D MyRigi;
     protected const float MoveDecay = 0.5f;
+    [SerializeField]
+    protected Image[] AttackImages;
+    [SerializeField]
+    protected Image[] StayImages;
+    [SerializeField]
+    protected Image[] MoveImages;
 
     private int health;
     public int Health
