@@ -8,7 +8,7 @@ public partial class PlayerRole : Role
     {
         base.Awake();
         BaseDamage = 100;
-        MoveSpeed = 300;
+        BaseMoveSpeed = 300;
     }
     protected override void Update()
     {

@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-[RequireComponent(typeof(EnemyRole))]
+[RequireComponent(typeof(Role))]
 public class Attack : MonoBehaviour
 {
 
@@ -15,33 +15,49 @@ public class Attack : MonoBehaviour
     protected float StartAngle;
     [SerializeField]
     protected float AngleInterval;
-    
-    protected EnemyRole Myself;
-    protected PlayerRole Target;
+
+    protected Role Myself;
+    protected Role Target;
     protected float Timer;
     protected float AmmoIntervalTimer;
     protected bool IsAttacking;
     protected int CurSpawnAmmoNum;
     protected Transform AmmoParent;
+    protected Dictionary<string, object> AmmoData = new Dictionary<string, object>();
 
     protected virtual void Awake()
     {
         AmmoParent = GameObject.FindGameObjectWithTag("AmmoParent").transform;
-        Myself = GetComponent<EnemyRole>();
-        Target = GameObject.FindGameObjectWithTag(Force.Player.ToString()).GetComponent<PlayerRole>();
+        if (gameObject.tag == Force.Player.ToString())
+        {
+            Myself = GetComponent<PlayerRole>();
+        }
+        else if (gameObject.tag == Force.Enemy.ToString())
+        {
+            Myself = GetComponent<EnemyRole>();
+            Target = GameObject.FindGameObjectWithTag(Force.Player.ToString()).GetComponent<PlayerRole>();
+        }
         Timer = Interval;
     }
     protected virtual void Update()
     {
+        AutoDetectTarge();
         TimerFunc();
         AttackExecuteFunc();
     }
+    protected virtual void AutoDetectTarge()
+    {
+        if (gameObject.tag == Force.Player.ToString())
+            Target = GameobjectFinder.FindClosestGameobjectWithTag(gameObject, Force.Enemy.ToString()).GetComponent<EnemyRole>();
+    }
     protected virtual void SpawnAttackPrefab()
     {
+        AmmoData.Clear();
+        AmmoData.Add("AttackerForce", Myself.MyForce);
     }
     protected virtual void TimerFunc()
     {
-        if(Timer>0)
+        if (Timer > 0)
         {
             Timer -= Time.deltaTime;
         }
@@ -65,5 +81,5 @@ public class Attack : MonoBehaviour
             AmmoIntervalTimer = AmmoInterval;
         }
     }
-    
+
 }

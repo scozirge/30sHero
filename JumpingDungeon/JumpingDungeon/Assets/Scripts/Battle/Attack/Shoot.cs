@@ -17,9 +17,8 @@ public class Shoot : Attack
         ammo.transform.SetParent(AmmoParent);
         ammo.transform.position = transform.position;
         //Set AmmoData
-        Dictionary<string, object> data = new Dictionary<string, object>();
-        data.Add("Damage", Myself.Damage);
-        data.Add("Target", Target);
+        AmmoData.Add("Damage", Myself.Damage);
+        AmmoData.Add("Target", Target);
         Vector3 dir;
         if (Patetern == ShootPatetern.TowardTarget)
         {
@@ -32,8 +31,8 @@ public class Shoot : Attack
             float angle = (StartAngle + CurSpawnAmmoNum * AngleInterval) * Mathf.Deg2Rad;
             dir = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0).normalized;
         }
-        data.Add("Direction", dir);
-        ammo.Init(data);
+        AmmoData.Add("Direction", dir);
+        ammo.Init(AmmoData);
         CurSpawnAmmoNum++;
         if (CurSpawnAmmoNum >= AmmoNum)
         {

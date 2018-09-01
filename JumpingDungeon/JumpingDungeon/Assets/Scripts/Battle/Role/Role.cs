@@ -36,7 +36,29 @@ public abstract class Role : MonoBehaviour
     public virtual int Damage { get { return BaseDamage + ExtraDamage; } }
     public int ExtraDamage { get; protected set; }
     public int BaseDamage { get; protected set; }
-    public int MoveSpeed { get; protected set; }
+    public virtual int Defence { get { return BaseDefence + ExtraDefence; } }
+    public int ExtraDefence { get; protected set; }
+    public int BaseDefence { get; protected set; }
+    public virtual int MoveSpeed { get { return BaseMoveSpeed + ExtraMoveSpeed; } }
+    public int ExtraMoveSpeed { get; protected set; }
+    public int BaseMoveSpeed { get; protected set; }
+    public virtual int AvatarTime { get { return BaseAvatarTime + ExtraAvatarTime; } }
+    public int ExtraAvatarTime { get; protected set; }
+    public int BaseAvatarTime { get; protected set; }
+    public virtual int EnergyDrop { get { return BaseEnergyDrop + ExtraEnergyDrop; } }
+    public int ExtraEnergyDrop { get; protected set; }
+    public int BaseEnergyDrop { get; protected set; }
+    public virtual int MoneyDrop { get { return BaseMoneyDrop + ExtraMoneyDrop; } }
+    public int ExtraMoneyDrop { get; protected set; }
+    public int BaseMoneyDrop { get; protected set; }
+    public virtual int Bloodthirsty { get { return BaseBloodthirsty + ExtraBloodthirsty; } }
+    public int ExtraBloodthirsty { get; protected set; }
+    public int BaseBloodthirsty { get; protected set; }
+    public virtual int PotionEfficacy { get { return BasePotionEfficacy + ExtraPotionEfficacy; } }
+    public int ExtraPotionEfficacy { get; protected set; }
+    public int BasePotionEfficacy { get; protected set; }
+
+
     public bool IsAlive { get; protected set; }
     public Dictionary<RoleBuffer, BufferData> Buffers = new Dictionary<RoleBuffer, BufferData>();
 
