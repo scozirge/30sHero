@@ -328,6 +328,7 @@ GameObject:
   - component: {fileID: 371345240}
   - component: {fileID: 371345241}
   - component: {fileID: 371345242}
+  - component: {fileID: 371345243}
   m_Layer: 5
   m_Name: PlayerRole
   m_TagString: Player
@@ -475,6 +476,25 @@ MonoBehaviour:
     type: 2}
   Dector: {fileID: 1618482827}
   PrepareTime: 1
+--- !u!114 &371345243
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 371345235}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3283f1f3a7e6b24db127fb13fd7f595, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Interval: 5
+  AmmoNum: 30
+  AmmoInterval: 0.1
+  StartAngle: 0
+  AngleInterval: 12
+  Patetern: 0
+  AttackPrefab: {fileID: 114962956101920240, guid: d38f72c2af285c249a4a9e0f5e881493,
+    type: 2}
 --- !u!1 &470031988
 GameObject:
   m_ObjectHideFlags: 0

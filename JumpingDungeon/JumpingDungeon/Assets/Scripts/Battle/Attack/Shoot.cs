@@ -11,6 +11,8 @@ public class Shoot : Attack
 
     protected override void SpawnAttackPrefab()
     {
+        if (Target == null && Patetern == ShootPatetern.TowardTarget)
+            return;
         base.SpawnAttackPrefab();
         GameObject ammoGO = Instantiate(AttackPrefab.gameObject, Vector3.zero, Quaternion.identity) as GameObject;
         Ammo ammo = ammoGO.GetComponent<Ammo>();

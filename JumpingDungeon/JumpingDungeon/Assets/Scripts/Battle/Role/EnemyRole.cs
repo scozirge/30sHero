@@ -20,4 +20,8 @@ public class EnemyRole : Role
     {
         base.AttackReaction();
     }
+    protected virtual void Drop()
+    {
+
+    }
 }

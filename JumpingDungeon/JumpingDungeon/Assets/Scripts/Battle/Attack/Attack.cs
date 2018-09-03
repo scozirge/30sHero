@@ -48,7 +48,11 @@ public class Attack : MonoBehaviour
     protected virtual void AutoDetectTarge()
     {
         if (gameObject.tag == Force.Player.ToString())
-            Target = GameobjectFinder.FindClosestGameobjectWithTag(gameObject, Force.Enemy.ToString()).GetComponent<EnemyRole>();
+        {
+            GameObject go = GameobjectFinder.FindClosestGameobjectWithTag(gameObject, Force.Enemy.ToString());
+            if (go != null)
+                Target = go.GetComponent<EnemyRole>();
+        }
     }
     protected virtual void SpawnAttackPrefab()
     {

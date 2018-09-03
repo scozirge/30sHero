@@ -66,7 +66,7 @@ public abstract class Role : MonoBehaviour
     {
         IsAlive = true;
         MaxHealth = 100;
-        BaseDamage = 20;
+        BaseDamage = 10;
         Health = MaxHealth;
     }
 
@@ -118,7 +118,7 @@ public abstract class Role : MonoBehaviour
         if (Health <= 0)
         {
             IsAlive = false;
-            //EffectEmitter.EmitParticle("deathEffect", transform.position, Vector3.zero, null);
+            SelfDestroy();
         }
         else IsAlive = true;
         return !IsAlive;
@@ -147,5 +147,9 @@ public abstract class Role : MonoBehaviour
                 keyList.RemoveAt(i);
             }
         }
+    }
+    protected virtual void SelfDestroy()
+    {
+        Destroy(gameObject);
     }
 }
