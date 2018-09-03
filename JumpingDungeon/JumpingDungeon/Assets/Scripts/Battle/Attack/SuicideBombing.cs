@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(EnemyRole))]
+[RequireComponent(typeof(Role))]
 public class SuicideBombing : MonoBehaviour
 {
     [SerializeField]
@@ -15,16 +15,21 @@ public class SuicideBombing : MonoBehaviour
     protected float PrepareTime;
 
 
-
+    protected Force TargetForce;
     protected bool Detected;
-    protected EnemyRole Myself;
+    protected Role Myself;
     protected float PrepareTimer;
     protected Transform AmmoParent;
+    protected Dictionary<string, object> AmmoData = new Dictionary<string, object>();
 
     void Awake()
     {
         AmmoParent = GameObject.FindGameObjectWithTag("AmmoParent").transform;
-        Myself = GetComponent<EnemyRole>();
+        Myself = GetComponent<Role>();
+        if (Myself.tag.ToString() == Force.Player.ToString())
+            TargetForce = Force.Enemy;
+        else
+            TargetForce = Force.Player;
         PrepareTimer = PrepareTime;
     }
     void Update()
@@ -36,15 +41,15 @@ public class SuicideBombing : MonoBehaviour
     {
         if (Detected)
             return;
-        switch (_col.gameObject.tag)
+        if (_col.tag.ToString() == TargetForce.ToString())
         {
-            case "Player":
-                Detected = true;
-                SpawnPreparePrefab();
-                break;
-            default:
-                break;
+            TriggerTarget(_col.GetComponent<Role>());
         }
+    }
+    protected virtual void TriggerTarget(Role _curTarget)
+    {
+        Detected = true;
+        SpawnPreparePrefab();
     }
     protected void SpawnPreparePrefab()
     {
@@ -62,9 +67,10 @@ public class SuicideBombing : MonoBehaviour
         go.transform.SetParent(AmmoParent);
         go.transform.position = transform.position;
         //Set AmmoData
-        Dictionary<string, object> data = new Dictionary<string, object>();
-        data.Add("Damage", Myself.Damage);
-        com.Init(data);
+        AmmoData.Clear();
+        AmmoData.Add("Damage", Myself.Damage);
+        AmmoData.Add("AttackerForce", Myself.MyForce);
+        com.Init(AmmoData);
         SelfDestroy();
     }
     protected void PrefareTimerFunc()

@@ -25,24 +25,24 @@ public class ShootAmmo : Ammo
     }
     protected override void OnTriggerEnter2D(Collider2D _col)
     {
+        base.OnTriggerEnter2D(_col);
+    }
+    protected override void OnTriggerStay2D(Collider2D _col)
+    {
         if (IsCausedDamage)
             return;
-        base.OnTriggerEnter2D(_col);
-        switch (_col.gameObject.tag)
-        {
-            case "Player":
-                PlayerRole pr = _col.GetComponent<PlayerRole>();
-                Vector2 force = (pr.transform.position - transform.position).normalized * KnockIntensity;
-                Dictionary<RoleBuffer, BufferData> condition = new Dictionary<RoleBuffer, BufferData>();
-                condition.Add(RoleBuffer.Stun, new BufferData(StunIntensity, 0));
-                pr.BeAttack(Damage, force, condition);
-                if (AmmoType!=ShootAmmoType.Penetration)
-                    SelfDestroy();
-                IsCausedDamage = true;
-                break;
-            default:
-                break;
-        }
+        base.OnTriggerStay2D(_col);
+    }
+    protected override void TriggerTarget(Role _curTarget)
+    {
+        base.TriggerTarget(_curTarget);
+        Vector2 force = (_curTarget.transform.position - transform.position).normalized * KnockIntensity;
+        Dictionary<RoleBuffer, BufferData> condition = new Dictionary<RoleBuffer, BufferData>();
+        condition.Add(RoleBuffer.Stun, new BufferData(StunIntensity, 0));
+        _curTarget.BeAttack(Damage, force, condition);
+        if (AmmoType != ShootAmmoType.Penetration)
+            SelfDestroy();
+        IsCausedDamage = true;
     }
     protected override void Update()
     {

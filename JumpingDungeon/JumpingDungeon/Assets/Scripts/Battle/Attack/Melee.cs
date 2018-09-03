@@ -20,8 +20,7 @@ public class Melee : Attack
         Ammo ammo = ammoGO.GetComponent<Ammo>();
         ammo.transform.SetParent(AmmoParent);
         //Set AmmoData
-        Dictionary<string, object> data = new Dictionary<string, object>();
-        data.Add("Damage", Myself.Damage);
+        AmmoData.Add("Damage", Myself.Damage);
         Vector3 dir;
         if (Patetern == ShootPatetern.TowardTarget)
         {
@@ -35,8 +34,8 @@ public class Melee : Attack
             dir = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0).normalized;
         }
         ammo.transform.position = transform.position + AttackRadius * dir;
-        data.Add("Direction", dir);
-        ammo.Init(data);
+        AmmoData.Add("Direction", dir);
+        ammo.Init(AmmoData);
         CurSpawnAmmoNum++;
         if (CurSpawnAmmoNum >= AmmoNum)
         {
