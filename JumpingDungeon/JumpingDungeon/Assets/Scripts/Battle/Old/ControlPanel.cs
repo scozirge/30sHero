@@ -21,7 +21,7 @@ public class ControlPanel : MonoBehaviour
     void Update()
     {
         CircularMotion();
-        MouseFunc();
+        //MouseFunc();
     }
 
     void CircularMotion()
@@ -36,6 +36,7 @@ public class ControlPanel : MonoBehaviour
     {
         return MyMath.GetAngerFormTowPoint2D(Arrow.localPosition, Center.localPosition);
     }
+    /*
     void MouseFunc()
     {
         if (Input.GetMouseButtonDown(0))
@@ -60,4 +61,5 @@ public class ControlPanel : MonoBehaviour
             }
         }
     }
+    */
 }

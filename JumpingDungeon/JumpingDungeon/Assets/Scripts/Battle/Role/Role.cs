@@ -13,12 +13,7 @@ public abstract class Role : MonoBehaviour
     [SerializeField]
     protected Rigidbody2D MyRigi;
     protected const float MoveDecay = 0.5f;
-    [SerializeField]
-    protected Image[] AttackImages;
-    [SerializeField]
-    protected Image[] StayImages;
-    [SerializeField]
-    protected Image[] MoveImages;
+
 
     private int health;
     public int Health
@@ -31,32 +26,45 @@ public abstract class Role : MonoBehaviour
             health = value;
         }
     }
-    public int MaxHealth { get; protected set; }
+    [SerializeField]
+    protected int BaseHealth;
+    public int ExtraHealth { get; protected set; }
+    public int MaxHealth { get { return BaseHealth + ExtraHealth; } }
     public float HealthRatio { get { return (float)Health / (float)MaxHealth; } }
     public virtual int Damage { get { return BaseDamage + ExtraDamage; } }
     public int ExtraDamage { get; protected set; }
-    public int BaseDamage { get; protected set; }
+    [SerializeField]
+    protected int BaseDamage;
     public virtual int Defence { get { return BaseDefence + ExtraDefence; } }
     public int ExtraDefence { get; protected set; }
-    public int BaseDefence { get; protected set; }
+    [SerializeField]
+    protected int BaseDefence;
     public virtual int MoveSpeed { get { return BaseMoveSpeed + ExtraMoveSpeed; } }
     public int ExtraMoveSpeed { get; protected set; }
-    public int BaseMoveSpeed { get; protected set; }
+    [SerializeField]
+    protected int BaseMoveSpeed;
     public virtual int AvatarTime { get { return BaseAvatarTime + ExtraAvatarTime; } }
     public int ExtraAvatarTime { get; protected set; }
-    public int BaseAvatarTime { get; protected set; }
+    [SerializeField]
+    protected int BaseAvatarTime;
     public virtual int EnergyDrop { get { return BaseEnergyDrop + ExtraEnergyDrop; } }
     public int ExtraEnergyDrop { get; protected set; }
-    public int BaseEnergyDrop { get; protected set; }
+    [SerializeField]
+    protected int BaseEnergyDrop;
     public virtual int MoneyDrop { get { return BaseMoneyDrop + ExtraMoneyDrop; } }
     public int ExtraMoneyDrop { get; protected set; }
-    public int BaseMoneyDrop { get; protected set; }
+    [SerializeField]
+    protected int BaseMoneyDrop;
     public virtual int Bloodthirsty { get { return BaseBloodthirsty + ExtraBloodthirsty; } }
     public int ExtraBloodthirsty { get; protected set; }
-    public int BaseBloodthirsty { get; protected set; }
+    [SerializeField]
+    protected int BaseBloodthirsty;
     public virtual int PotionEfficacy { get { return BasePotionEfficacy + ExtraPotionEfficacy; } }
     public int ExtraPotionEfficacy { get; protected set; }
-    public int BasePotionEfficacy { get; protected set; }
+    [SerializeField]
+    protected int BasePotionEfficacy;
+    [SerializeField]
+    ParticleSystem DeathEffect;
 
 
     public bool IsAlive { get; protected set; }
@@ -65,14 +73,15 @@ public abstract class Role : MonoBehaviour
     protected virtual void Awake()
     {
         IsAlive = true;
-        MaxHealth = 100;
-        BaseDamage = 10;
         Health = MaxHealth;
     }
-
-    protected virtual void Update()
+    protected virtual void Move()
     {
         MyRigi.velocity *= MoveDecay;
+    }
+    protected virtual void Update()
+    {
+        Move();
         ConditionTimerFunc();
     }
     public virtual void AttackReaction()
@@ -81,14 +90,13 @@ public abstract class Role : MonoBehaviour
         MyRigi.AddForce(force);
         GetCondition(RoleBuffer.Stun, new BufferData(0.3f, 0));
     }
-    public virtual void BeAttack(int _dmg, Vector2 _force,Dictionary<RoleBuffer,BufferData> buffers)
+    public virtual void BeAttack(int _dmg, Vector2 _force, Dictionary<RoleBuffer, BufferData> buffers)
     {
-        //EffectEmitter.EmitParticle("hitEffect", transform.position, Vector3.zero, null);
         ReceiveDmg(_dmg);
         MyRigi.velocity = Vector2.zero;
 
         //Get conditions
-        if(buffers!=null)
+        if (buffers != null)
         {
             List<RoleBuffer> keyList = new List<RoleBuffer>(buffers.Keys);
             for (int i = 0; i < keyList.Count; i++)
@@ -97,7 +105,7 @@ public abstract class Role : MonoBehaviour
             }
         }
         //Add KnockForce
-        MyRigi.AddForce(_force);
+        MyRigi.velocity = _force;
     }
     public virtual void ReceiveDmg(int _dmg)
     {
@@ -128,7 +136,7 @@ public abstract class Role : MonoBehaviour
         if (Buffers.ContainsKey(_condition))
         {
             if (Buffers[_condition].Duration < _data.Duration)
-                Buffers[_condition].Duration = _data.Duration;            
+                Buffers[_condition].Duration = _data.Duration;
         }
         else
         {
@@ -150,6 +158,7 @@ public abstract class Role : MonoBehaviour
     }
     protected virtual void SelfDestroy()
     {
+        EffectEmitter.EmitParticle(DeathEffect, transform.position, Vector3.zero, null);
         Destroy(gameObject);
     }
 }

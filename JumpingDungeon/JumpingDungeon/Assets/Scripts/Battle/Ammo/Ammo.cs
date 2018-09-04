@@ -20,6 +20,8 @@ public partial class Ammo : MonoBehaviour
     protected float FireIntensity;
     [SerializeField]
     protected float IceIntensity;
+    [SerializeField]
+    protected float CurseIntensity;
 
     protected Force AttackerForce;
     protected Force TargetForce;

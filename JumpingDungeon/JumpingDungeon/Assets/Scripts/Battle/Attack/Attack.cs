@@ -35,7 +35,9 @@ public class Attack : MonoBehaviour
         else if (gameObject.tag == Force.Enemy.ToString())
         {
             Myself = GetComponent<EnemyRole>();
-            Target = GameObject.FindGameObjectWithTag(Force.Player.ToString()).GetComponent<PlayerRole>();
+            GameObject go = GameObject.FindGameObjectWithTag(Force.Player.ToString());
+            if (go != null)
+                Target = go.GetComponent<PlayerRole>();
         }
         Timer = Interval;
     }

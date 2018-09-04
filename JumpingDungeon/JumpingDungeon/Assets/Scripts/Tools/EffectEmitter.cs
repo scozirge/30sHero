@@ -4,7 +4,11 @@ using UnityEngine;
 
 public class EffectEmitter : MonoBehaviour
 {
-
+    static Transform MySelf;
+    void Awake()
+    {
+        MySelf = transform;
+    }
     public static void EmitParticle(string _effectName, Vector3 _pos, Vector3 _dir, Transform _parent)
     {
         GameObject particlePrefab = Resources.Load<ParticleSystem>(string.Format("Particles/{0}/{0}", _effectName)).gameObject;
@@ -16,6 +20,8 @@ public class EffectEmitter : MonoBehaviour
         GameObject particleGo = Instantiate(particlePrefab.gameObject, Vector3.zero, Quaternion.identity) as GameObject;
         if (_parent)
             particleGo.transform.SetParent(_parent);
+        else
+            particleGo.transform.SetParent(MySelf);
 
         particleGo.transform.localPosition = _pos;
         particleGo.transform.localRotation = Quaternion.Euler(_dir);
@@ -25,6 +31,8 @@ public class EffectEmitter : MonoBehaviour
         GameObject particleGo = Instantiate(_particle.gameObject, Vector3.zero, Quaternion.identity) as GameObject;
         if (_parent)
             particleGo.transform.SetParent(_parent);
+        else
+            particleGo.transform.SetParent(MySelf);
 
         particleGo.transform.localPosition = _pos;
         particleGo.transform.localRotation = Quaternion.Euler(_dir);

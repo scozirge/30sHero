@@ -24,8 +24,8 @@ GameObject:
   - component: {fileID: 114961052217152312}
   - component: {fileID: 58810803581975730}
   - component: {fileID: 50361454880070678}
-  m_Layer: 5
-  m_Name: KnockAmmo
+  m_Layer: 11
+  m_Name: Ammo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -78,7 +78,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.754717, g: 0.16731933, b: 0.16731933, a: 1}
+  m_Color: {r: 0.03773582, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -104,12 +104,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 494231d1f75097a4692d0672e054d3dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LifeTime: 10
-  KnockForce: 100000
-  StunDuration: 0.1
+  LocalParticles:
+  - {fileID: 198350346737686014, guid: d831439896a03fd4e94904ea24d07106, type: 2}
+  GlobalParticle: []
+  LifeTime: 6
+  KnockIntensity: 0
+  StunIntensity: 0
+  FireIntensity: 0
+  IceIntensity: 0
+  CurseIntensity: 0
   AmmoType: 0
-  AmmoSpeed: 300
-  TrackFactor: 0
+  AmmoSpeed: 500
+  TraceFactor: 0
 --- !u!222 &222441390583901092
 CanvasRenderer:
   m_ObjectHideFlags: 1

@@ -4,34 +4,23 @@ using UnityEngine;
 
 public partial class PlayerRole : Role
 {
+    const int MoveFactor = 1;
     protected override void Awake()
     {
         base.Awake();
-        BaseDamage = 100;
-        BaseMoveSpeed = 300;
     }
     protected override void Update()
     {
         base.Update();
-        Controller();
     }
-    public void Jump(Direction _dir)
+    protected override void Move()
     {
-        switch(_dir)
-        {
-            case Direction.Top:
-                transform.position += new Vector3(0, MoveSpeed, 0);
-                break;
-            case Direction.Bottom:
-                transform.position += new Vector3(0, -MoveSpeed, 0);
-                break;
-            case Direction.Right:
-                transform.position += new Vector3(MoveSpeed, 0, 0);
-                break;
-            case Direction.Left:
-                transform.position += new Vector3(-MoveSpeed, 0, 0);
-                break;
-        }
+        base.Move();
+        if (Buffers.ContainsKey(RoleBuffer.Stun))
+            return;
+        float xMoveForce = Input.GetAxis("Horizontal") * MoveSpeed * MoveFactor;
+        float yMoveForce = Input.GetAxis("Vertical") * MoveSpeed * MoveFactor;
+        MyRigi.velocity += new Vector2(xMoveForce, yMoveForce);
     }
     
 
