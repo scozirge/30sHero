@@ -904,6 +904,7 @@ MonoBehaviour:
   SpawnCountInterval: 0
   Enemys:
   - {fileID: 114364750184517408, guid: 4e4608edff7362c45b106e955ca4fabe, type: 2}
+  - {fileID: 114364750184517408, guid: 7f01dc04a6c2a3e4e9f858ce8b73d261, type: 2}
   EnemyParent: {fileID: 1123068882}
   CC: {fileID: 519420030}
 --- !u!1 &1829895747

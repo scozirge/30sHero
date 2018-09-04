@@ -106,13 +106,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LocalParticles: []
   GlobalParticle: []
-  LifeTime: 10
-  KnockIntensity: 0
+  LifeTime: 3
+  KnockIntensity: 3000
   StunIntensity: 0
   FireIntensity: 0
   IceIntensity: 0
+  CurseIntensity: 0
   AmmoType: 0
-  AmmoSpeed: 300
+  AmmoSpeed: 1000
   TraceFactor: 0
 --- !u!222 &222441390583901092
 CanvasRenderer:

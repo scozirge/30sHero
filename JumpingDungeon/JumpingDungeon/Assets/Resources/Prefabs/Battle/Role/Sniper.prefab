@@ -91,7 +91,7 @@ GameObject:
   - component: {fileID: 58819477902178946}
   - component: {fileID: 114016134065368028}
   m_Layer: 9
-  m_Name: Shooter
+  m_Name: Sniper
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -175,13 +175,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3283f1f3a7e6b24db127fb13fd7f595, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Interval: 5
-  AmmoNum: 2
-  AmmoInterval: 0.4
+  Interval: 3
+  AmmoNum: 1
+  AmmoInterval: 0
   StartAngle: 0
   AngleInterval: 0
   Patetern: 1
-  AttackPrefab: {fileID: 114962956101920240, guid: 84d6f2965eaadcd4cb3265ce5e0d2e16,
+  AttackPrefab: {fileID: 114962956101920240, guid: d38f72c2af285c249a4a9e0f5e881493,
     type: 2}
 --- !u!114 &114364750184517408
 MonoBehaviour:
@@ -198,7 +198,7 @@ MonoBehaviour:
   HealthBar: {fileID: 224116466118426486}
   MyRigi: {fileID: 50284349101639710}
   BaseHealth: 100
-  BaseDamage: 5
+  BaseDamage: 10
   BaseDefence: 0
   BaseMoveSpeed: 600
   BaseAvatarTime: 0
@@ -302,10 +302,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Wander: 1
   WanderInterval: 3
-  RandWanderRangeX: 100
-  RandWanderRangeY: 100
-  DebutRotateFactor: 0.01
-  InRangeStartWander: 50
+  RandWanderRangeX: 200
+  RandWanderRangeY: 200
+  DebutRotateFactor: 0.02
+  InRangeStartWander: 200
 --- !u!222 &222009985959918790
 CanvasRenderer:
   m_ObjectHideFlags: 1
