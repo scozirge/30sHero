@@ -17,6 +17,7 @@ public class BattleManage : MonoBehaviour
     [SerializeField]
     CameraController CC;
 
+    public static int Level;
     Vector2 ScreenSize;
     float SpawnIntervalTimer;
     int CurSpawnCount;
@@ -53,14 +54,14 @@ public class BattleManage : MonoBehaviour
                 spawnPos = new Vector3(ScreenSize.x / 2 + 10, Random.Range(-ScreenSize.y / 2, ScreenSize.y / 2)) + CC.transform.position;
                 break;
             case 1:
-                spawnPos = new Vector3(Random.Range(-ScreenSize.x / 2, ScreenSize.x / 2), -ScreenSize.y / 2 - 10) + CC.transform.position;
+                spawnPos = new Vector3(Random.Range(0, ScreenSize.x / 2), -ScreenSize.y / 2 - 10) + CC.transform.position;
                 break;
             case 2:
                 spawnPos = new Vector3(ScreenSize.x / 2 + 10, Random.Range(-ScreenSize.y / 2, ScreenSize.y / 2)) + CC.transform.position;
                 //spawnPos = new Vector3(-ScreenSize.x / 2 - 10, Random.Range(-ScreenSize.y / 2, ScreenSize.y / 2)) + CC.transform.position;
                 break;
             case 3:
-                spawnPos = new Vector3(Random.Range(-ScreenSize.x / 2, ScreenSize.x / 2), ScreenSize.y / 2 + 10) + CC.transform.position;
+                spawnPos = new Vector3(Random.Range(0, ScreenSize.x / 2), ScreenSize.y / 2 + 10) + CC.transform.position;
                 break;
         }
         spawnPos.z = 0;

@@ -4,12 +4,16 @@ using UnityEngine;
 
 public class BufferData
 {
-    public float Duration;
+    public float Time;
     public float Value;
 
-    public BufferData(float _duration, float _value)
+    public BufferData(float _time)
     {
-        Duration = _duration;
+        Time = _time;
+    }
+    public BufferData(float _time, float _value)
+    {
+        Time = _time;
         Value = _value;
     }
 }

@@ -9,18 +9,24 @@ public class AIMove : MonoBehaviour
     [SerializeField]
     bool Wander;
     [SerializeField]
+    bool FollowCamera;
+    [SerializeField]
     float WanderInterval;
-    [SerializeField]
-    int RandWanderRangeX;
-    [SerializeField]
-    int RandWanderRangeY;
     [SerializeField]
     float DebutRotateFactor;
     [SerializeField]
-    float InRangeStartWander;
-
-
+    float WanderRange;
+    [SerializeField]
     Vector3 Destination;
+
+
+
+    static float InRangeStartWander = 50;
+    static CameraController CC;
+
+    Vector3 CameraPos;
+    Vector3 CameraSize;
+    Vector3 RandomOffset;
     float WanderIntervalTimer;
     Vector3 InitialVelocity;
     Vector3 WanderVelocity;
@@ -33,47 +39,44 @@ public class AIMove : MonoBehaviour
     {
         ER = GetComponent<EnemyRole>();
         MyRigi = GetComponent<Rigidbody2D>();
-        CameraController cc = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraController>();
+        if (!CC)
+            CC = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraController>();
         WanderIntervalTimer = WanderInterval;
-
-        int randX = Random.Range(-800, 800);
+        int randX = Random.Range(0, 800);
         int randY = Random.Range(-400, 400);
-        Vector3 rndTarget = new Vector3(randX, randY) + cc.transform.position;
+        Vector3 rndTarget = new Vector3(randX, randY) + CC.transform.position;
         InitialVelocity = (rndTarget - transform.position).normalized * ER.MoveSpeed;
         MyRigi.velocity = InitialVelocity;
-        Vector3 cameraPos = cc.transform.position;
-        Vector3 screenSize = cc.ScreenSize;
-        float randPosX = Random.Range(-screenSize.x / 2, screenSize.x / 2) + cc.transform.position.x;
-        float randPosY = Random.Range(-screenSize.y / 2, screenSize.y / 2) + cc.transform.position.y;
-        Destination = new Vector3(randPosX, randPosY, 0);
+
+        //Set Target Position
+        CameraPos = CC.transform.position;
+        CameraSize = CC.ScreenSize;
+        float randPosX = Random.Range(100, CameraSize.x / 2);
+        float randPosY = Random.Range(-CameraSize.y / 2 + 100, CameraSize.y / 2 - 100);
+        RandomOffset = new Vector2(randPosX, randPosY);
+        Destination = new Vector3(randPosX + CameraPos.x, randPosY + CameraPos.y, 0);
+
     }
 
     public void Debut()
     {
-        if (StartWander)
-            return;
+        if (FollowCamera)
+        {
+            //Follow camera
+            CameraPos = CC.transform.position;
+            Destination = new Vector3(CameraPos.x, CameraPos.y, 0) + RandomOffset;
+        }
+
         Vector2 targetVel = (Destination - transform.position).normalized * ER.MoveSpeed;
         MyRigi.velocity = Vector2.Lerp(MyRigi.velocity, targetVel, DebutRotateFactor);
-
     }
 
     void WanderTimerFunc()
     {
         if (!Wander)
             return;
-
         if (!StartWander)
-        {
-            float dist = Mathf.Abs(Vector2.Distance(Destination, transform.position));
-            if (InRangeStartWander > dist)
-            {
-                StartWander = true;
-                CalculateRandDestination();
-            }
             return;
-        }
-
-
         if (WanderIntervalTimer > 0)
             WanderIntervalTimer -= Time.deltaTime;
         else
@@ -82,21 +85,25 @@ public class AIMove : MonoBehaviour
             CalculateRandDestination();
         }
     }
-    void CalculateRandDestination()
-    {
-        int randX = Random.Range(-RandWanderRangeX, RandWanderRangeX);
-        int randY = Random.Range(-RandWanderRangeY, RandWanderRangeY);
-        RandDestination = new Vector3(randX, randY) + Destination;
-    }
     void WanderMovement()
     {
         if (!StartWander)
+        {
+            float dist = Mathf.Abs(Vector2.Distance(Destination, transform.position));
+            if (dist < InRangeStartWander)
+            {
+                StartWander = true;
+                CalculateRandDestination();
+            }
             return;
-
-        WanderVelocity = (RandDestination - transform.position).normalized * ER.MoveSpeed;
+        }
+        WanderVelocity = (RandDestination - transform.position).normalized * ER.MoveSpeed * 1.2f;
         MyRigi.velocity = Vector2.Lerp(MyRigi.velocity, WanderVelocity, DebutRotateFactor);
     }
-
+    void CalculateRandDestination()
+    {
+        RandDestination = new Vector3(Random.Range(-WanderRange, WanderRange), Random.Range(-WanderRange, WanderRange)) + Destination;
+    }
     void Update()
     {
         Debut();

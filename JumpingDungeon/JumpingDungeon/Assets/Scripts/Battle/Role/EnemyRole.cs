@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyRole : Role
+public partial class EnemyRole : Role
 {
 
     protected const float FrictionDuringTime = 1;
@@ -37,6 +37,12 @@ public class EnemyRole : Role
             StartVelocityDecay = false;
         }
     }
+    protected override void SelfDestroy()
+    {
+        base.SelfDestroy();
+        Drop();
+    }
+
     protected override void Update()
     {
         base.Update();
@@ -45,9 +51,5 @@ public class EnemyRole : Role
     public override void AttackReaction()
     {
         base.AttackReaction();
-    }
-    protected virtual void Drop()
-    {
-
     }
 }

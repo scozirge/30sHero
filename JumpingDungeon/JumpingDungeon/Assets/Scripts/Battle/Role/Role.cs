@@ -31,8 +31,17 @@ public abstract class Role : MonoBehaviour
     public int ExtraHealth { get; protected set; }
     public int MaxHealth { get { return BaseHealth + ExtraHealth; } }
     public float HealthRatio { get { return (float)Health / (float)MaxHealth; } }
-    public virtual int Damage { get { return BaseDamage + ExtraDamage; } }
-    public int ExtraDamage { get; protected set; }
+    public virtual int Damage { get { return (int)(BaseDamage * (1 + DamageMultiple)); } }
+    public float DamageMultiple
+    {
+        get
+        {
+            if (Buffers.ContainsKey(RoleBuffer.DamageBuff))
+                return (int)Buffers[RoleBuffer.DamageBuff].Value;
+            else
+                return 0;
+        }
+    }
     [SerializeField]
     protected int BaseDamage;
     public virtual int Defence { get { return BaseDefence + ExtraDefence; } }
@@ -43,26 +52,7 @@ public abstract class Role : MonoBehaviour
     public int ExtraMoveSpeed { get; protected set; }
     [SerializeField]
     protected int BaseMoveSpeed;
-    public virtual int AvatarTime { get { return BaseAvatarTime + ExtraAvatarTime; } }
-    public int ExtraAvatarTime { get; protected set; }
-    [SerializeField]
-    protected int BaseAvatarTime;
-    public virtual int EnergyDrop { get { return BaseEnergyDrop + ExtraEnergyDrop; } }
-    public int ExtraEnergyDrop { get; protected set; }
-    [SerializeField]
-    protected int BaseEnergyDrop;
-    public virtual int MoneyDrop { get { return BaseMoneyDrop + ExtraMoneyDrop; } }
-    public int ExtraMoneyDrop { get; protected set; }
-    [SerializeField]
-    protected int BaseMoneyDrop;
-    public virtual int Bloodthirsty { get { return BaseBloodthirsty + ExtraBloodthirsty; } }
-    public int ExtraBloodthirsty { get; protected set; }
-    [SerializeField]
-    protected int BaseBloodthirsty;
-    public virtual int PotionEfficacy { get { return BasePotionEfficacy + ExtraPotionEfficacy; } }
-    public int ExtraPotionEfficacy { get; protected set; }
-    [SerializeField]
-    protected int BasePotionEfficacy;
+
     [SerializeField]
     ParticleSystem DeathEffect;
 
@@ -92,6 +82,10 @@ public abstract class Role : MonoBehaviour
     }
     public virtual void BeAttack(int _dmg, Vector2 _force, Dictionary<RoleBuffer, BufferData> buffers)
     {
+        if (Buffers.ContainsKey(RoleBuffer.Invicible))
+        {
+            return;
+        }
         ReceiveDmg(_dmg);
         MyRigi.velocity = Vector2.zero;
 
@@ -135,8 +129,8 @@ public abstract class Role : MonoBehaviour
     {
         if (Buffers.ContainsKey(_condition))
         {
-            if (Buffers[_condition].Duration < _data.Duration)
-                Buffers[_condition].Duration = _data.Duration;
+            if (Buffers[_condition].Time < _data.Time)
+                Buffers[_condition].Time = _data.Time;
         }
         else
         {
@@ -148,8 +142,8 @@ public abstract class Role : MonoBehaviour
         List<RoleBuffer> keyList = new List<RoleBuffer>(Buffers.Keys);
         for (int i = 0; i < keyList.Count; i++)
         {
-            Buffers[keyList[i]].Duration -= Time.deltaTime;
-            if (Buffers[keyList[i]].Duration <= 0)
+            Buffers[keyList[i]].Time -= Time.deltaTime;
+            if (Buffers[keyList[i]].Time <= 0)
             {
                 Buffers.Remove(keyList[i]);
                 keyList.RemoveAt(i);

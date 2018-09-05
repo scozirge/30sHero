@@ -15,7 +15,6 @@ public class PlayerAttack : MonoBehaviour
     {
         if (_col.gameObject.tag == Force.Enemy.ToString())
         {
-
             Role er = _col.GetComponent<Role>();
             Vector2 force = (er.transform.position - transform.position).normalized * KnockForce;
             er.BeAttack(Attacker.Damage, force, null);

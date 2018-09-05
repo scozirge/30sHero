@@ -1,8 +1,9 @@
 ﻿public enum LootType
 {
-    Money,
+    HPRecovery,
     AvataEnergy,
-    Euipment,
     DamageBuff,
-    SkillBuff
+    InvinciblePotion,
+    Money,
+    Euipment
 }
