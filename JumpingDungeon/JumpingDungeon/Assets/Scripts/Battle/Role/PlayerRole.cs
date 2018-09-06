@@ -66,7 +66,6 @@ public partial class PlayerRole : Role
     }
     void RestoreAttack()
     {
-        Debug.Log("test");
         CurAttackState = 0;
     }
     public override void Attack()
@@ -79,14 +78,16 @@ public partial class PlayerRole : Role
         //Play Animation
         AttackTimer.Start(true);
         CurAttackState++;
-        Debug.Log("b");
-        AniPlayer.PlayInt("Attack", CurAttackState);
+        if (CurAttackState == 1)
+            AniPlayer.PlayTrigger("Attack1", 0);
+        else if (CurAttackState == 2)
+            AniPlayer.PlayTrigger("Attack2", 0);
         if (CurAttackState > 1)
             CurAttackState = 0;
+        AttackTimer.RestartCountDown();
     }
     protected override void Update()
     {
-        Debug.Log(CurAttackState);
         base.Update();
         AvatarTimerFunc();
         AttackTimer.RunTimer();
