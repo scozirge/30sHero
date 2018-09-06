@@ -4,6 +4,16 @@ using UnityEngine;
 
 public partial class PlayerRole : Role
 {
+    public bool IsAvatar
+    {
+        get
+        {
+            if (AvatarTimer > 0)
+                return true;
+            else
+                return false;
+        }
+    }
     private float avatarTimer;
     public float AvatarTimer
     {
@@ -42,15 +52,54 @@ public partial class PlayerRole : Role
     protected int BasePotionEfficacy;
     const int MoveFactor = 1;
 
+    int CurAttackState;
+    [SerializeField]
+    float DontAttackRestoreTime;
+    MyTimer AttackTimer;
+
+
     protected override void Awake()
     {
         base.Awake();
         AvatarTimer = MaxAvaterTime;
+        AttackTimer = new MyTimer(DontAttackRestoreTime, RestoreAttack, null);
+    }
+    void RestoreAttack()
+    {
+        Debug.Log("test");
+        CurAttackState = 0;
+    }
+    public override void Attack()
+    {
+        base.Attack();
+        Vector2 force = MyRigi.velocity.normalized * 100000 * -1;
+        MyRigi.AddForce(force);
+        GetCondition(RoleBuffer.Stun, new BufferData(0.3f, 0));
+
+        //Play Animation
+        AttackTimer.Start(true);
+        CurAttackState++;
+        Debug.Log("b");
+        AniPlayer.PlayInt("Attack", CurAttackState);
+        if (CurAttackState > 1)
+            CurAttackState = 0;
     }
     protected override void Update()
     {
+        Debug.Log(CurAttackState);
         base.Update();
         AvatarTimerFunc();
+        AttackTimer.RunTimer();
+    }
+    public override void BeAttack(int _dmg, Vector2 _force, Dictionary<RoleBuffer, BufferData> buffers)
+    {
+        if (!IsAvatar)
+        {
+            IsAlive = false;
+            SelfDestroy();
+        }
+        else
+            base.BeAttack(_dmg, _force, buffers);
     }
     protected void AvatarTimerFunc()
     {
@@ -95,6 +144,7 @@ public partial class PlayerRole : Role
                 break;
         }
     }
+
 
 
 }

@@ -55,10 +55,12 @@ public abstract class Role : MonoBehaviour
 
     [SerializeField]
     ParticleSystem DeathEffect;
-
+    [SerializeField]
+    protected AnimationPlayer AniPlayer;
 
     public bool IsAlive { get; protected set; }
     public Dictionary<RoleBuffer, BufferData> Buffers = new Dictionary<RoleBuffer, BufferData>();
+
 
     protected virtual void Awake()
     {
@@ -73,12 +75,6 @@ public abstract class Role : MonoBehaviour
     {
         Move();
         ConditionTimerFunc();
-    }
-    public virtual void AttackReaction()
-    {
-        Vector2 force = MyRigi.velocity.normalized * 100000 * -1;
-        MyRigi.AddForce(force);
-        GetCondition(RoleBuffer.Stun, new BufferData(0.3f, 0));
     }
     public virtual void BeAttack(int _dmg, Vector2 _force, Dictionary<RoleBuffer, BufferData> buffers)
     {
@@ -154,5 +150,9 @@ public abstract class Role : MonoBehaviour
     {
         EffectEmitter.EmitParticle(DeathEffect, transform.position, Vector3.zero, null);
         Destroy(gameObject);
+    }
+    public virtual void Attack()
+    {
+
     }
 }

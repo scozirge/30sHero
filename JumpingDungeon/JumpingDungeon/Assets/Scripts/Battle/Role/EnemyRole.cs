@@ -47,9 +47,4 @@ public partial class EnemyRole : Role
     {
         base.Update();
     }
-
-    public override void AttackReaction()
-    {
-        base.AttackReaction();
-    }
 }

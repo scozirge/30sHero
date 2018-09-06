@@ -7,9 +7,10 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField]
     ParticleSystem AttackEffect;
     [SerializeField]
-    Role Attacker;
+    PlayerRole Attacker;
     [SerializeField]
     float KnockForce;
+
 
     void OnTriggerEnter2D(Collider2D _col)
     {
@@ -18,7 +19,7 @@ public class PlayerAttack : MonoBehaviour
             Role er = _col.GetComponent<Role>();
             Vector2 force = (er.transform.position - transform.position).normalized * KnockForce;
             er.BeAttack(Attacker.Damage, force, null);
-            Attacker.AttackReaction();
+            Attacker.Attack();
             //SpawnAttackEffect
             if (!AttackEffect)
                 return;
