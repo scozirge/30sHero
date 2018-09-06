@@ -9,6 +9,7 @@ public class Shoot : Attack
     [SerializeField]
     ShootAmmo AttackPrefab;
 
+
     protected override void SpawnAttackPrefab()
     {
         if (Target == null && Patetern == ShootPatetern.TowardTarget)
@@ -42,6 +43,4 @@ public class Shoot : Attack
             CurSpawnAmmoNum = 0;
         }
     }
-
-
 }

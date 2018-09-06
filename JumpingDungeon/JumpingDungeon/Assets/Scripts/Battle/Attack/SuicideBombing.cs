@@ -60,7 +60,7 @@ public class SuicideBombing : MonoBehaviour
             EffectEmitter.EmitParticle(PrepareParticle[i], Vector3.zero, Vector3.zero, transform);
         }
     }
-    protected void Boom()
+    protected void SpawnAttackPrefab()
     {
         GameObject go = Instantiate(AttackPrefab.gameObject, Vector3.zero, Quaternion.identity) as GameObject;
         Ammo com = go.GetComponent<Ammo>();
@@ -83,7 +83,7 @@ public class SuicideBombing : MonoBehaviour
         }
         else
         {
-            Boom();
+            SpawnAttackPrefab();
         }
     }
     void SelfDestroy()

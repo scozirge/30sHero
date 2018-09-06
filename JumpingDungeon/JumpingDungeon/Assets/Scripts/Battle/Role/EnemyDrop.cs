@@ -12,6 +12,7 @@ public partial class EnemyRole
 
     void Drop()
     {
+        //DropLoot;
         for (int i = 0; i < DropCount; i++)
         {
             if (ProbabilityGetter.GetResult(DropProbility))
@@ -20,6 +21,8 @@ public partial class EnemyRole
                 DropSpawner.SpawnLoot((LootType)rand, transform.position);
             }
         }
+        //DropSkill
+        
     }
 
 }

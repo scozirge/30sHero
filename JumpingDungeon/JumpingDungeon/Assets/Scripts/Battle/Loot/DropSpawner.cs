@@ -24,15 +24,17 @@ public class DropSpawner : MonoBehaviour
         IsDesignate = Designate;
     }
 
-    public static void SpawnLoot(LootType _type,Vector3 _pos)
+    public static void SpawnLoot(LootType _type, Vector3 _pos)
     {
         if (!IsDesignate)
             Type = _type;
-        Debug.Log(Type);
         Loot loot = Instantiate(LootPrefab, Vector3.zero, Quaternion.identity) as Loot;
         loot.Init(Type);
         loot.transform.SetParent(MyTransfrom);
         loot.transform.localPosition = _pos;
     }
-
+    public static void SpawnSkill(Vector3 _pos)
+    {
+        
+    }
 }

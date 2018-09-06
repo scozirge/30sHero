@@ -196,7 +196,6 @@ public partial class PlayerRole : Role
                 GetCondition(RoleBuffer.DamageBuff, _data);
                 break;
             case LootType.Euipment:
-
                 break;
             case LootType.HPRecovery:
                 HealHP((int)(MaxHealth * _data.Value + PotionEfficacy));
@@ -205,7 +204,6 @@ public partial class PlayerRole : Role
                 GetCondition(RoleBuffer.Invicible, _data);
                 break;
             case LootType.Money:
-
                 break;
         }
     }

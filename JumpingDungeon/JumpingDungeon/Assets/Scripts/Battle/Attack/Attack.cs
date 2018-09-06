@@ -4,7 +4,6 @@ using UnityEngine;
 [RequireComponent(typeof(Role))]
 public class Attack : MonoBehaviour
 {
-
     [SerializeField]
     protected float Interval;
     [SerializeField]
