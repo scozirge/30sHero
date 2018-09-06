@@ -25,6 +25,10 @@ public class MyTimer
     {
         StartRunTimer = _startRunTimer;
     }
+    public void RestartCountDown()
+    {
+        CurTimer = MaxTime;
+    }
     public void RunTimer()
     {
         if (MaxTime == 0)
