@@ -13,7 +13,7 @@ public class Loot : MonoBehaviour
     [SerializeField]
     float InvincibleTime;
     [SerializeField]
-    int HPRecovery;
+    float HPRecovery;
     [SerializeField]
     int Money;
     [SerializeField]
@@ -21,7 +21,6 @@ public class Loot : MonoBehaviour
     [SerializeField]
     ParticleSystem GetEffect;
 
-    [SerializeField]
     LootType Type;
     float Time;
     float Value;

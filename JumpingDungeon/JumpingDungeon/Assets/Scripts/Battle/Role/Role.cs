@@ -39,7 +39,7 @@ public abstract class Role : MonoBehaviour
         get
         {
             if (Buffers.ContainsKey(RoleBuffer.DamageBuff))
-                return (int)Buffers[RoleBuffer.DamageBuff].Value;
+                return Buffers[RoleBuffer.DamageBuff].Value;
             else
                 return 0;
         }

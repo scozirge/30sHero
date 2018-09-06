@@ -8,15 +8,15 @@ Prefab:
     m_TransformParent: {fileID: 0}
     m_Modifications: []
     m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 0}
+  m_SourcePrefab: {fileID: 0}
   m_RootGameObject: {fileID: 1102576209836190}
-  m_IsPrefabParent: 1
+  m_IsPrefabAsset: 1
 --- !u!1 &1102576209836190
 GameObject:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 5
+  serializedVersion: 6
   m_Component:
   - component: {fileID: 224730334804727236}
   - component: {fileID: 114565999483713276}
@@ -36,7 +36,7 @@ GameObject:
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1102576209836190}
   m_BodyType: 0
@@ -55,7 +55,7 @@ Rigidbody2D:
 --- !u!58 &58518751123803652
 CircleCollider2D:
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1102576209836190}
   m_Enabled: 1
@@ -70,7 +70,7 @@ CircleCollider2D:
 --- !u!114 &114374204824993968
 MonoBehaviour:
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1102576209836190}
   m_Enabled: 1
@@ -86,7 +86,7 @@ MonoBehaviour:
 --- !u!114 &114515800619740280
 MonoBehaviour:
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1102576209836190}
   m_Enabled: 1
@@ -113,7 +113,7 @@ MonoBehaviour:
 --- !u!114 &114565999483713276
 MonoBehaviour:
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1102576209836190}
   m_Enabled: 1
@@ -121,26 +121,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4af727ee3d4bb514e839cabbe0dd2b87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AvataTime: 100
-  DamageBuff: 0
-  DamageBuffTime: 0
-  InvincibleTime: 0
-  HPRecovery: 0
-  Money: 0
-  MoneyLevelBuff: 0
+  AvataTime: 10
+  DamageBuff: 0.5
+  DamageBuffTime: 10
+  InvincibleTime: 10
+  HPRecovery: 0.1
+  Money: 30
+  MoneyLevelBuff: 2
   GetEffect: {fileID: 198350346737686014, guid: d831439896a03fd4e94904ea24d07106,
     type: 2}
-  Type: 0
 --- !u!222 &222452408990536316
 CanvasRenderer:
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1102576209836190}
+  m_CullTransparentMesh: 0
 --- !u!224 &224730334804727236
 RectTransform:
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1102576209836190}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
