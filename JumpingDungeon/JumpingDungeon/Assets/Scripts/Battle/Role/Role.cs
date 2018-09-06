@@ -10,6 +10,7 @@ public abstract class Role : MonoBehaviour
     public Force MyForce;
     [SerializeField]
     protected RectTransform HealthBar;
+    float HPBarWidth;
     [SerializeField]
     protected Rigidbody2D MyRigi;
     protected const float MoveDecay = 0.5f;
@@ -24,6 +25,7 @@ public abstract class Role : MonoBehaviour
             if (value < 0)
                 value = 0;
             health = value;
+            HealthBar.sizeDelta = new Vector2(HPBarWidth * HealthRatio, HealthBar.rect.height);
         }
     }
     [SerializeField]
@@ -65,6 +67,7 @@ public abstract class Role : MonoBehaviour
     protected virtual void Awake()
     {
         IsAlive = true;
+        HPBarWidth = HealthBar.rect.width;
         Health = MaxHealth;
     }
     protected virtual void Move()
@@ -102,7 +105,6 @@ public abstract class Role : MonoBehaviour
         if (!IsAlive)
             return;
         Health -= _dmg;
-        HealthBar.localScale = new Vector2(HealthRatio, 1);
         DeathCheck();
     }
     public virtual void HealHP(int _heal)

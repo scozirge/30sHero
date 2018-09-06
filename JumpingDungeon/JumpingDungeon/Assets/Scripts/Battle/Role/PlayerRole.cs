@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public partial class PlayerRole : Role
 {
@@ -28,12 +29,43 @@ public partial class PlayerRole : Role
         }
     }
     [SerializeField]
+    protected int MaxShield;
+    float shield;
+    protected float Shield
+    {
+        get { return shield; }
+        set
+        {
+            if (value < 0)
+                value = 0;
+            else if (value > MaxShield)
+                value = MaxShield;
+            shield = value;
+            ShieldBar.sizeDelta = new Vector2(ShieldRatio * ShieldBarWidth, ShieldBar.rect.height);
+        }
+    }
+    public float ShieldRatio { get { return (float)Shield / (float)MaxShield; } }
+    [SerializeField]
+    protected RectTransform ShieldBar;
+    float ShieldBarWidth;
+    [SerializeField]
+    float ShieldReGenerateTime;
+    float ShieldGenerateNum { get { return MaxShield / ShieldReGenerateTime; } }
+    [SerializeField]
+    float ShieldRechargeTime;
+    bool StartGenerateShield;
+    MyTimer ShieldTimer;
+
+
+
+    [SerializeField]
     public float MaxAvaterTime;
     public float AvatarTimeRatio { get { return (float)AvatarTimer / (float)MaxAvaterTime; } }
     [SerializeField]
-    protected float AvatarTimeBuff;
+    Text AvatarTimerText;
     [SerializeField]
-    protected RectTransform AvatarTimeBar;
+    protected float AvatarTimeBuff;
+
     public virtual int EnergyDrop { get { return BaseEnergyDrop + ExtraEnergyDrop; } }
     public int ExtraEnergyDrop { get; protected set; }
     [SerializeField]
@@ -58,15 +90,29 @@ public partial class PlayerRole : Role
     MyTimer AttackTimer;
 
 
+
     protected override void Awake()
     {
         base.Awake();
         AvatarTimer = MaxAvaterTime;
         AttackTimer = new MyTimer(DontAttackRestoreTime, RestoreAttack, null);
+        ShieldTimer = new MyTimer(ShieldRechargeTime, ShieldRestore, null);
+        ShieldBarWidth = ShieldBar.rect.width;
+        Shield = MaxShield;
     }
     void RestoreAttack()
     {
         CurAttackState = 0;
+    }
+    void ShieldRestore()
+    {
+        StartGenerateShield = true;
+    }
+    void ShieldGenerate()
+    {
+        if (Shield < MaxShield)
+            if (StartGenerateShield)
+                Shield += ShieldGenerateNum * Time.deltaTime;
     }
     public override void Attack()
     {
@@ -91,6 +137,8 @@ public partial class PlayerRole : Role
         base.Update();
         AvatarTimerFunc();
         AttackTimer.RunTimer();
+        ShieldTimer.RunTimer();
+        ShieldGenerate();
     }
     public override void BeAttack(int _dmg, Vector2 _force, Dictionary<RoleBuffer, BufferData> buffers)
     {
@@ -100,7 +148,23 @@ public partial class PlayerRole : Role
             SelfDestroy();
         }
         else
+        {
+            //Damage Shield
+            if (_dmg > Shield)
+            {
+                _dmg = (int)(_dmg - Shield);
+                Shield = 0;
+            }
+            else
+            {
+                Shield -= _dmg;
+                _dmg = 0;
+            }
+            ShieldTimer.Start(true);
+            ShieldTimer.RestartCountDown();
+            StartGenerateShield = false;
             base.BeAttack(_dmg, _force, buffers);
+        }
     }
     protected void AvatarTimerFunc()
     {
@@ -110,7 +174,7 @@ public partial class PlayerRole : Role
         {
             AvatarTimer = 0;
         }
-        AvatarTimeBar.localScale = new Vector2(AvatarTimeRatio, 1);
+        AvatarTimerText.text = Mathf.Round(AvatarTimer).ToString();
     }
     protected override void Move()
     {

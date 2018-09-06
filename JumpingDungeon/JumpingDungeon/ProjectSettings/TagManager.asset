@@ -48,12 +48,15 @@ TagManager:
   - name: Battle_BG
     uniqueID: 3337951669
     locked: 0
-  - name: Effect_Blow
+  - name: Battle_Background
     uniqueID: 363773173
     locked: 0
-  - name: Battle
+  - name: Battle_Main
     uniqueID: 3223312719
     locked: 0
-  - name: Effect_Above
+  - name: Effect_Foreground
     uniqueID: 1875237263
+    locked: 0
+  - name: UI
+    uniqueID: 491588311
     locked: 0
