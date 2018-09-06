@@ -1390,6 +1390,11 @@ Prefab:
       propertyPath: AvatarTimeBar
       value: 
       objectReference: {fileID: 807843719}
+    - target: {fileID: 114601397981697422, guid: d9e47796d36fc83458ffab41aea6641e,
+        type: 2}
+      propertyPath: MaxAvaterTime
+      value: 30
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d9e47796d36fc83458ffab41aea6641e, type: 2}
   m_IsPrefabParent: 0

@@ -121,8 +121,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4af727ee3d4bb514e839cabbe0dd2b87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AvataTime: 100
+  DamageBuff: 0
+  DamageBuffTime: 0
+  InvincibleTime: 0
+  HPRecovery: 0
+  Money: 0
+  MoneyLevelBuff: 0
   GetEffect: {fileID: 198350346737686014, guid: d831439896a03fd4e94904ea24d07106,
     type: 2}
+  Type: 0
 --- !u!222 &222452408990536316
 CanvasRenderer:
   m_ObjectHideFlags: 1
