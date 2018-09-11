@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using UnityEngine.UI;
-
+[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(AnimationPlayer))]
 public abstract class Role : MonoBehaviour
 {
-    [SerializeField]
     public Force MyForce;
     [SerializeField]
     protected RectTransform HealthBar;
@@ -56,12 +56,12 @@ public abstract class Role : MonoBehaviour
     public int ExtraMoveSpeed { get; protected set; }
     [SerializeField]
     protected int BaseMoveSpeed;
-
     [SerializeField]
     ParticleSystem DeathEffect;
     [SerializeField]
     protected AnimationPlayer AniPlayer;
-
+    [SerializeField]
+    protected Transform RoleTrans;
     public bool IsAlive { get; protected set; }
     public Dictionary<RoleBuffer, BufferData> Buffers = new Dictionary<RoleBuffer, BufferData>();
 
@@ -71,6 +71,7 @@ public abstract class Role : MonoBehaviour
         IsAlive = true;
         HPBarWidth = HealthBar.rect.width;
         Health = MaxHealth;
+        MyForce = MyEnum.ParseEnum<Force>(gameObject.tag);
     }
     protected virtual void Move()
     {
@@ -157,6 +158,8 @@ public abstract class Role : MonoBehaviour
     }
     public virtual void Attack()
     {
-
+    }
+    public virtual void PreAttack()
+    {
     }
 }

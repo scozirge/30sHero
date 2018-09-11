@@ -117,9 +117,8 @@ public partial class PlayerRole : Role
             if (StartGenerateShield)
                 Shield += ShieldGenerateNum * Time.deltaTime;
     }
-    public override void Attack()
+    public void BumpingAttack()
     {
-        base.Attack();
         Vector2 force = MyRigi.velocity.normalized * 100000 * -1;
         MyRigi.AddForce(force);
         GetCondition(RoleBuffer.Stun, new BufferData(0.3f, 0));
@@ -188,6 +187,14 @@ public partial class PlayerRole : Role
         float xMoveForce = Input.GetAxis("Horizontal") * MoveSpeed * MoveFactor;
         float yMoveForce = Input.GetAxis("Vertical") * MoveSpeed * MoveFactor;
         MyRigi.velocity += new Vector2(xMoveForce, yMoveForce);
+        FaceTarget();
+    }
+    void FaceTarget()
+    {
+        int dir = 1;
+        if (MyRigi.velocity.x < 0)
+            dir = -1;
+        RoleTrans.localScale = new Vector2(dir, 1);
     }
     public void GetLoot(LootType _type, BufferData _data)
     {
@@ -220,7 +227,7 @@ public partial class PlayerRole : Role
             MonsterSkills.Add(_name, skill);
         }
     }
-    public void GenerateMonsterSkill(string _name,float _time)
+    public void GenerateMonsterSkill(string _name, float _time)
     {
         if (MonsterSkills.ContainsKey(_name))
         {
@@ -231,10 +238,10 @@ public partial class PlayerRole : Role
     }
     protected virtual void MonsterSkillTimerFunc()
     {
-        for(int i=0;i<ActiveMonsterSkills.Count;i++)
+        for (int i = 0; i < ActiveMonsterSkills.Count; i++)
         {
             ActiveMonsterSkills[i].SkillDuration -= Time.deltaTime;
-            if(ActiveMonsterSkills[i].SkillDuration<=0)
+            if (ActiveMonsterSkills[i].SkillDuration <= 0)
             {
                 if (MonsterSkills.ContainsKey(ActiveMonsterSkills[i].name))
                     MonsterSkills.Remove(ActiveMonsterSkills[i].SkillName);

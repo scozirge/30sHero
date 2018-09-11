@@ -17,16 +17,12 @@ public class SuicideBombing : Skill
 
     protected Force TargetForce;
     protected bool Detected;
-    protected Role Myself;
     protected float PrepareTimer;
-    protected Transform AmmoParent;
-    protected Dictionary<string, object> AmmoData = new Dictionary<string, object>();
 
     protected override void Awake()
     {
         base.Awake();
         AmmoParent = GameObject.FindGameObjectWithTag("AmmoParent").transform;
-        Myself = GetComponent<Role>();
         if (Myself.tag.ToString() == Force.Player.ToString())
             TargetForce = Force.Enemy;
         else
@@ -61,16 +57,13 @@ public class SuicideBombing : Skill
             EffectEmitter.EmitParticle(PrepareParticle[i], Vector3.zero, Vector3.zero, transform);
         }
     }
-    protected void SpawnAttackPrefab()
+    protected override void SpawnAttackPrefab()
     {
+        base.SpawnAttackPrefab();
         GameObject go = Instantiate(AttackPrefab.gameObject, Vector3.zero, Quaternion.identity) as GameObject;
         Ammo com = go.GetComponent<Ammo>();
         go.transform.SetParent(AmmoParent);
         go.transform.position = transform.position;
-        //Set AmmoData
-        AmmoData.Clear();
-        AmmoData.Add("Damage", Myself.Damage);
-        AmmoData.Add("AttackerForce", Myself.MyForce);
         com.Init(AmmoData);
         SelfDestroy();
     }

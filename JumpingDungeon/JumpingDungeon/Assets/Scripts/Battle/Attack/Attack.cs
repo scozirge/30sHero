@@ -16,28 +16,23 @@ public class Attack : Skill
     protected float StartAngle;
     [SerializeField]
     protected float AngleInterval;
+    [SerializeField]
+    protected ShootPatetern Patetern;
 
-    protected Role Myself;
-    protected Role Target;
+
     protected float Timer;
     protected float AmmoIntervalTimer;
     protected bool IsAttacking;
     protected int CurSpawnAmmoNum;
-    protected Transform AmmoParent;
-    protected Dictionary<string, object> AmmoData = new Dictionary<string, object>();
-
+    protected Role Target;
+    protected Vector3 AttackDir = Vector3.zero;
+    static protected float PreAttackTime = 1;
 
     protected override void Awake()
     {
         base.Awake();
-        AmmoParent = GameObject.FindGameObjectWithTag("AmmoParent").transform;
-        if (gameObject.tag == Force.Player.ToString())
+        if (Myself.MyForce == Force.Enemy)
         {
-            Myself = GetComponent<PlayerRole>();
-        }
-        else if (gameObject.tag == Force.Enemy.ToString())
-        {
-            Myself = GetComponent<EnemyRole>();
             GameObject go = GameObject.FindGameObjectWithTag(Force.Player.ToString());
             if (go != null)
                 Target = go.GetComponent<PlayerRole>();
@@ -52,23 +47,45 @@ public class Attack : Skill
     }
     protected virtual void AutoDetectTarge()
     {
-        if (gameObject.tag == Force.Player.ToString())
+        if (Myself.MyForce == Force.Player)
         {
             GameObject go = GameobjectFinder.FindClosestGameobjectWithTag(gameObject, Force.Enemy.ToString());
             if (go != null)
                 Target = go.GetComponent<EnemyRole>();
         }
     }
-    protected virtual void SpawnAttackPrefab()
+    protected override void SpawnAttackPrefab()
     {
-        AmmoData.Clear();
-        AmmoData.Add("AttackerForce", Myself.MyForce);
+        base.SpawnAttackPrefab();
+        AmmoData.Add("Target", Target);
+        //Set AmmoData
+        if (Patetern == ShootPatetern.TowardTarget)
+        {
+            AttackDir = (Target.transform.position - Myself.transform.position);
+            float origAngle = ((Mathf.Atan2(AttackDir.y, AttackDir.x) * Mathf.Rad2Deg) + (StartAngle + CurSpawnAmmoNum * AngleInterval)) * Mathf.Deg2Rad;
+            AttackDir = new Vector3(Mathf.Cos(origAngle), Mathf.Sin(origAngle), 0).normalized;
+        }
+        else
+        {
+            float angle = (StartAngle + CurSpawnAmmoNum * AngleInterval) * Mathf.Deg2Rad;
+            AttackDir = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0).normalized;
+        }
+        AmmoData.Add("Direction", AttackDir);
+
+        CurSpawnAmmoNum++;
+        if (CurSpawnAmmoNum >= AmmoNum)
+        {
+            IsAttacking = false;
+            CurSpawnAmmoNum = 0;
+        }
     }
     protected virtual void TimerFunc()
     {
         if (Timer > 0)
         {
             Timer -= Time.deltaTime;
+            if (Timer <= PreAttackTime)
+                Myself.PreAttack();
         }
         else
         {

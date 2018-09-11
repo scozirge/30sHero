@@ -14,6 +14,11 @@ public class AnimationPlayer : MonoBehaviour
         else
             MyAni.StopPlayback();//重播
     }
+    public void PlayTrigger_NoPlayback(string _motion, float _normalizedTime)
+    {
+        if (Animator.StringToHash(string.Format("Base Layer.{0}", _motion)) != MyAni.GetCurrentAnimatorStateInfo(0).fullPathHash)
+            MyAni.Play(_motion, 0, _normalizedTime);
+    }
     public void PlayInt(string _motion, int _int)
     {
         MyAni.SetInteger(_motion, _int);
