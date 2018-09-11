@@ -1,9 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
 [RequireComponent(typeof(Role))]
-public class Attack : MonoBehaviour
+public class Attack : Skill
 {
+
     [SerializeField]
     protected float Interval;
     [SerializeField]
@@ -24,8 +26,10 @@ public class Attack : MonoBehaviour
     protected Transform AmmoParent;
     protected Dictionary<string, object> AmmoData = new Dictionary<string, object>();
 
-    protected virtual void Awake()
+
+    protected override void Awake()
     {
+        base.Awake();
         AmmoParent = GameObject.FindGameObjectWithTag("AmmoParent").transform;
         if (gameObject.tag == Force.Player.ToString())
         {
@@ -85,6 +89,11 @@ public class Attack : MonoBehaviour
             SpawnAttackPrefab();
             AmmoIntervalTimer = AmmoInterval;
         }
+    }
+    public override void PlayerGetSkill()
+    {
+        base.PlayerGetSkill();
+        Awake();
     }
 
 }

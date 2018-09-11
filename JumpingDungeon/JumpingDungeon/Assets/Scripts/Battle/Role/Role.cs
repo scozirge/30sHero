@@ -24,6 +24,8 @@ public abstract class Role : MonoBehaviour
         {
             if (value < 0)
                 value = 0;
+            else if (value > MaxHealth)
+                value = MaxHealth;
             health = value;
             HealthBar.sizeDelta = new Vector2(HPBarWidth * HealthRatio, HealthBar.rect.height);
         }

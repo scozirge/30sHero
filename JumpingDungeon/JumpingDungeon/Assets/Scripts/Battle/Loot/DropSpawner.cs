@@ -10,8 +10,11 @@ public class DropSpawner : MonoBehaviour
     bool Designate;
     [SerializeField]
     LootType DesignateType;
+    [SerializeField]
+    SkillLoot SkillLoot;
 
     static Loot LootPrefab;
+    static SkillLoot SkillLootPrefab;
     static Transform MyTransfrom;
     static LootType Type;
     static bool IsDesignate;
@@ -20,11 +23,12 @@ public class DropSpawner : MonoBehaviour
     {
         MyTransfrom = GetComponent<Transform>();
         LootPrefab = Loot;
+        SkillLootPrefab = SkillLoot;
         Type = DesignateType;
         IsDesignate = Designate;
     }
 
-    public static void SpawnLoot(LootType _type, Vector3 _pos)
+    public static Loot SpawnLoot(LootType _type, Vector3 _pos)
     {
         if (!IsDesignate)
             Type = _type;
@@ -32,9 +36,13 @@ public class DropSpawner : MonoBehaviour
         loot.Init(Type);
         loot.transform.SetParent(MyTransfrom);
         loot.transform.localPosition = _pos;
+        return loot;
     }
-    public static void SpawnSkill(Vector3 _pos)
+    public static SkillLoot SpawnSkill(Vector3 _pos)
     {
-        
+        SkillLoot loot = Instantiate(SkillLootPrefab, Vector3.zero, Quaternion.identity) as SkillLoot;
+        loot.transform.SetParent(MyTransfrom);
+        loot.transform.localPosition = _pos;
+        return loot;
     }
 }

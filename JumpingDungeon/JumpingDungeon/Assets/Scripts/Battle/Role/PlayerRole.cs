@@ -89,6 +89,9 @@ public partial class PlayerRole : Role
     float DontAttackRestoreTime;
     MyTimer AttackTimer;
 
+    Dictionary<string, Skill> MonsterSkills = new Dictionary<string, Skill>();
+    List<Skill> ActiveMonsterSkills = new List<Skill>();
+
 
 
     protected override void Awake()
@@ -138,6 +141,7 @@ public partial class PlayerRole : Role
         AvatarTimerFunc();
         AttackTimer.RunTimer();
         ShieldTimer.RunTimer();
+        MonsterSkillTimerFunc();
         ShieldGenerate();
     }
     public override void BeAttack(int _dmg, Vector2 _force, Dictionary<RoleBuffer, BufferData> buffers)
@@ -207,7 +211,37 @@ public partial class PlayerRole : Role
                 break;
         }
     }
-
-
+    public void InitMonsterSkill(string _name, Skill _skill)
+    {
+        if (!MonsterSkills.ContainsKey(_name))
+        {
+            Skill skill = gameObject.AddComponent(_skill.GetType()).CopySkill(_skill);
+            skill.PlayerGetSkill();
+            MonsterSkills.Add(_name, skill);
+        }
+    }
+    public void GenerateMonsterSkill(string _name,float _time)
+    {
+        if (MonsterSkills.ContainsKey(_name))
+        {
+            MonsterSkills[_name].SkillDuration = _time;
+            MonsterSkills[_name].enabled = true;
+            ActiveMonsterSkills.Add(MonsterSkills[_name]);
+        }
+    }
+    protected virtual void MonsterSkillTimerFunc()
+    {
+        for(int i=0;i<ActiveMonsterSkills.Count;i++)
+        {
+            ActiveMonsterSkills[i].SkillDuration -= Time.deltaTime;
+            if(ActiveMonsterSkills[i].SkillDuration<=0)
+            {
+                if (MonsterSkills.ContainsKey(ActiveMonsterSkills[i].name))
+                    MonsterSkills.Remove(ActiveMonsterSkills[i].SkillName);
+                ActiveMonsterSkills[i].enabled = false;
+                ActiveMonsterSkills.RemoveAt(i);
+            }
+        }
+    }
 
 }

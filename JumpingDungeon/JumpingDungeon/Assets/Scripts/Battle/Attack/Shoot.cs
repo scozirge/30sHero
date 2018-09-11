@@ -43,4 +43,5 @@ public class Shoot : Attack
             CurSpawnAmmoNum = 0;
         }
     }
+
 }

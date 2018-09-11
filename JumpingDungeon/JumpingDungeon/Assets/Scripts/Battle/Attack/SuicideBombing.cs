@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Role))]
-public class SuicideBombing : MonoBehaviour
+public class SuicideBombing : Skill
 {
     [SerializeField]
     ParticleSystem[] PrepareParticle;
@@ -22,8 +22,9 @@ public class SuicideBombing : MonoBehaviour
     protected Transform AmmoParent;
     protected Dictionary<string, object> AmmoData = new Dictionary<string, object>();
 
-    void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         AmmoParent = GameObject.FindGameObjectWithTag("AmmoParent").transform;
         Myself = GetComponent<Role>();
         if (Myself.tag.ToString() == Force.Player.ToString())

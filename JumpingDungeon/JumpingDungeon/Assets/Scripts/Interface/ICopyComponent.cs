@@ -1,4 +1,0 @@
-﻿interface ICopyComponent
-{
-    void CopyComponent();
-}
