@@ -1462,7 +1462,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SpawnInterval: 5
-  SpawnCount: 1
+  SpawnCount: 10
   SpawnCountInterval: 0.2
   Enemys:
   - {fileID: 114364750184517408, guid: 4e4608edff7362c45b106e955ca4fabe, type: 2}

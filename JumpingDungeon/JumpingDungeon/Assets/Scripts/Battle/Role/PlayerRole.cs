@@ -105,6 +105,7 @@ public partial class PlayerRole : Role
     [SerializeField]
     ParticleSystem MoveAfterimagePrefab;
     ParticleSystem MoveAfterimage;
+    ParticleSystem.MainModule MoveAfterimage_Main;
     int CurAttackState;
     [SerializeField]
     float DontAttackRestoreTime;
@@ -123,17 +124,15 @@ public partial class PlayerRole : Role
         ShieldTimer = new MyTimer(ShieldRechargeTime, ShieldRestore, null);
         ShieldBarWidth = ShieldBar.rect.width;
         Shield = MaxShield;
-        MoveAfterimage = EffectEmitter.EmitParticle(MoveAfterimagePrefab, Vector3.zero, Vector3.zero, transform);
-        Debug.Log(MoveAfterimage.name);
-        ParticleSystem[] ps = MoveAfterimage.GetComponentsInChildren<ParticleSystem>();
-        foreach (ParticleSystem comp in ps)
-        {
-            if (comp.gameObject.GetInstanceID() != GetInstanceID())
-            {
-                MoveAfterimage = comp;
-            }
-        }
-        Debug.Log(MoveAfterimage.name);
+        InitMoveAfterimage();
+
+    }
+    void InitMoveAfterimage()
+    {
+        MoveAfterimage = EffectEmitter.EmitParticle(MoveAfterimagePrefab, Vector3.zero, Vector3.zero, transform).GetComponentInChildrenExcludeSelf<ParticleSystem>();
+        MoveAfterimage_Main = MoveAfterimage.main;
+        MoveAfterimage_Main.maxParticles = 0;
+        MoveAfterimage_Main.startLifetime = 0;
     }
     void RestoreAttack()
     {
@@ -296,8 +295,8 @@ public partial class PlayerRole : Role
             if (decay < 1)
                 decay = 1;
             ExtraMoveSpeed -= Time.deltaTime * decay;
-            var vel = MoveAfterimage.main;
-            vel.maxParticles = Mathf.RoundToInt(ExtraMoveSpeed/2);                
+            MoveAfterimage_Main.maxParticles = Mathf.RoundToInt(ExtraMoveSpeed / 4);
+            MoveAfterimage_Main.startLifetime = ExtraMoveSpeed / 200;
         }
     }
 

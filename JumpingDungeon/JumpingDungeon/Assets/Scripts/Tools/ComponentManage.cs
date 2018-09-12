@@ -4,10 +4,8 @@ using UnityEngine;
 using System;
 using System.Reflection;
 
-public static class CopyComponent
+public static class ComponentManage
 {
-
-
     public static T GetCopyOf<T>(this Component comp, T other) where T : Component
     {
         Type type = comp.GetType();
@@ -72,5 +70,17 @@ public static class CopyComponent
             //Debug.Log(finfo.GetValue(comp));
         }
         return comp as T;
+    }
+    public static T GetComponentInChildrenExcludeSelf<T>(this Component comp) where T : Component
+    {
+        T[] comList = comp.GetComponentsInChildren<T>();
+        foreach (T c in comList)
+        {
+            if (!GameObject.ReferenceEquals(c, comp))
+            {
+                return c;
+            }
+        }
+        return null;
     }
 }
