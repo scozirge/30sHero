@@ -5,7 +5,8 @@ using UnityEngine;
 [RequireComponent(typeof(Role))]
 public class Attack : Skill
 {
-
+    [SerializeField]
+    protected bool AttackOnce;
     [SerializeField]
     protected float Interval;
     [SerializeField]
@@ -18,7 +19,8 @@ public class Attack : Skill
     protected float AngleInterval;
     [SerializeField]
     protected ShootPatetern Patetern;
-
+    [SerializeField]
+    protected bool SpawnedInSelf;
 
     protected float Timer;
     protected float AmmoIntervalTimer;
@@ -38,6 +40,8 @@ public class Attack : Skill
                 Target = go.GetComponent<PlayerRole>();
         }
         Timer = Interval;
+        if (SpawnedInSelf)
+            AmmoParent = transform;
     }
     protected virtual void Update()
     {
@@ -78,18 +82,28 @@ public class Attack : Skill
             IsAttacking = false;
             CurSpawnAmmoNum = 0;
         }
+        AttackTimes++;
     }
+    bool IsPreAttack = false;
     protected virtual void TimerFunc()
     {
+        if (AttackOnce && AttackTimes > 0)
+            return;
         if (Timer > 0)
         {
             Timer -= Time.deltaTime;
-            if (Timer <= PreAttackTime)
-                Myself.PreAttack();
+            if (!IsPreAttack)
+                if (Timer <= PreAttackTime)
+                    if (Myself.MyForce == Force.Enemy)
+                    {
+                        Myself.PreAttack();
+                        IsPreAttack = true;
+                    }
         }
         else
         {
             IsAttacking = true;
+            IsPreAttack = false;
             Timer = Interval;
         }
     }
@@ -106,11 +120,6 @@ public class Attack : Skill
             SpawnAttackPrefab();
             AmmoIntervalTimer = AmmoInterval;
         }
-    }
-    public override void PlayerGetSkill()
-    {
-        base.PlayerGetSkill();
-        Awake();
     }
 
 }

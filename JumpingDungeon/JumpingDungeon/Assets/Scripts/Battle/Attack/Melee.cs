@@ -15,11 +15,14 @@ public class Melee : Attack
     {
         if (Target == null && Patetern == ShootPatetern.TowardTarget)
             return;
+        if (AttackOnce && AttackTimes > 0)
+            return;
         base.SpawnAttackPrefab();
         GameObject ammoGO = Instantiate(AttackPrefab.gameObject, Vector3.zero, Quaternion.identity) as GameObject;
         Ammo ammo = ammoGO.GetComponent<Ammo>();
         ammo.transform.SetParent(AmmoParent);
         ammo.transform.position = transform.position + AttackRadius * AttackDir;
         ammo.Init(AmmoData);
+        SubordinateAmmos.Add(ammo);
     }
 }

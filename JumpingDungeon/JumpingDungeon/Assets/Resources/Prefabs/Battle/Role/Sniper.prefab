@@ -210,14 +210,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3283f1f3a7e6b24db127fb13fd7f595, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SkillName: Sniper
-  SkillDuration: 10
+  PSkillName: Sniper
+  PSkillDuration: 10
+  AttackOnce: 0
   Interval: 3
   AmmoNum: 1
   AmmoInterval: 0
   StartAngle: 0
   AngleInterval: 0
   Patetern: 1
+  SpawnedInSelf: 0
   AttackPrefab: {fileID: 114962956101920240, guid: d38f72c2af285c249a4a9e0f5e881493,
     type: 2}
 --- !u!114 &114364750184517408

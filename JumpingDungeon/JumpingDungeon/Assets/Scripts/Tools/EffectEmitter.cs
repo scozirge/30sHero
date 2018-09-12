@@ -26,16 +26,17 @@ public class EffectEmitter : MonoBehaviour
         particleGo.transform.localPosition = _pos;
         particleGo.transform.localRotation = Quaternion.Euler(_dir);
     }
-    public static void EmitParticle(ParticleSystem _particle, Vector3 _pos, Vector3 _dir, Transform _parent)
+    public static ParticleSystem EmitParticle(ParticleSystem _particle, Vector3 _pos, Vector3 _dir, Transform _parent)
     {
-        GameObject particleGo = Instantiate(_particle.gameObject, Vector3.zero, Quaternion.identity) as GameObject;
+        ParticleSystem particle = Instantiate(_particle, Vector3.zero, Quaternion.identity) as ParticleSystem;
         if (_parent)
-            particleGo.transform.SetParent(_parent);
+            particle.transform.SetParent(_parent);
         else
-            particleGo.transform.SetParent(MySelf);
+            particle.transform.SetParent(MySelf);
 
-        particleGo.transform.localPosition = _pos;
-        particleGo.transform.localRotation = Quaternion.Euler(_dir);
+        particle.transform.localPosition = _pos;
+        particle.transform.localRotation = Quaternion.Euler(_dir);
+        return particle;
     }
 
 }

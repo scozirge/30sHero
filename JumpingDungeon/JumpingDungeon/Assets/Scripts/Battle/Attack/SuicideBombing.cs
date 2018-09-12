@@ -61,10 +61,10 @@ public class SuicideBombing : Skill
     {
         base.SpawnAttackPrefab();
         GameObject go = Instantiate(AttackPrefab.gameObject, Vector3.zero, Quaternion.identity) as GameObject;
-        Ammo com = go.GetComponent<Ammo>();
+        Ammo ammo = go.GetComponent<Ammo>();
         go.transform.SetParent(AmmoParent);
         go.transform.position = transform.position;
-        com.Init(AmmoData);
+        ammo.Init(AmmoData);
         SelfDestroy();
     }
     protected void PrefareTimerFunc()

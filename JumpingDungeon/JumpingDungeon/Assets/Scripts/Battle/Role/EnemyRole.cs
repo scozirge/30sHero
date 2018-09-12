@@ -13,7 +13,9 @@ public partial class EnemyRole : Role
     protected override void Awake()
     {
         base.Awake();
-        Target = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerRole>();
+        GameObject go = GameObject.FindGameObjectWithTag("Player");
+        if (go)
+            Target = go.GetComponent<PlayerRole>();
     }
     protected override void Move()
     {
@@ -26,6 +28,8 @@ public partial class EnemyRole : Role
     }
     void FaceTarget()
     {
+        if (!Target)
+            return;
         if (transform.position.x > Target.transform.position.x)
         {
             RoleTrans.localScale = Vector2.one;
@@ -47,9 +51,14 @@ public partial class EnemyRole : Role
     }
     public override void BeAttack(int _dmg, Vector2 _force, Dictionary<RoleBuffer, BufferData> buffers)
     {
-        base.BeAttack(_dmg, _force, buffers);
-        StartVelocityDecay = true;
+        GetFriction();
         AniPlayer.PlayTrigger("BeAttack", 0);
+        base.BeAttack(_dmg, _force, buffers);
+    }
+    void GetFriction()
+    {
+        StartVelocityDecay = true;
+        FrictionDuringTimer = FrictionDuringTime;
     }
     void FrictionDuringTimeFunc()
     {
@@ -59,7 +68,6 @@ public partial class EnemyRole : Role
             FrictionDuringTimer -= Time.deltaTime;
         else
         {
-            FrictionDuringTimer = FrictionDuringTime;
             StartVelocityDecay = false;
         }
     }

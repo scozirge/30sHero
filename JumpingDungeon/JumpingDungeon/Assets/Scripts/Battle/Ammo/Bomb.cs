@@ -5,13 +5,10 @@ using UnityEngine;
 public class Bomb : Ammo
 {
     [SerializeField]
-    bool ContinuousDamage;
-    [SerializeField]
     float DamageInterval;
 
     protected bool ReadyToDamage;
     protected float DamageIntervalTimer;
-    protected bool EndDamage;
 
     public override void Init(Dictionary<string, object> _dic)
     {
@@ -40,8 +37,8 @@ public class Bomb : Ammo
         condition.Add(RoleBuffer.Stun, new BufferData(StunIntensity, 0));
         _curTarget.BeAttack(Damage, force, condition);
         ReadyToDamage = false;
-        if (!ContinuousDamage)
-            EndDamage = true;
+        if (AmmoType != ShootAmmoType.Penetration)
+            IsCausedDamage = true;
     }
     protected override void Update()
     {
@@ -56,7 +53,7 @@ public class Bomb : Ammo
     {
         if (ReadyToDamage)
             return;
-        if (EndDamage)
+        if (IsCausedDamage)
             return;
         if (DamageIntervalTimer > 0)
         {

@@ -55,7 +55,26 @@ public partial class PlayerRole : Role
     float ShieldRechargeTime;
     bool StartGenerateShield;
     MyTimer ShieldTimer;
-
+    public override float MoveSpeed { get { return BaseMoveSpeed + ExtraMoveSpeed; } }
+    private float extraMoveSpeed;
+    public float ExtraMoveSpeed
+    {
+        get { return extraMoveSpeed; }
+        set
+        {
+            if (value < 0)
+                value = 0;
+            else if (value > MaxEtraMove)
+                value = MaxEtraMove;
+            extraMoveSpeed = value;
+        }
+    }
+    [SerializeField]
+    float GainMoveFromKilling;
+    [SerializeField]
+    float MoveDepletedTime;
+    [SerializeField]
+    float MaxEtraMove;
 
 
     [SerializeField]
@@ -83,7 +102,9 @@ public partial class PlayerRole : Role
     [SerializeField]
     protected int BasePotionEfficacy;
     const int MoveFactor = 1;
-
+    [SerializeField]
+    ParticleSystem MoveAfterimagePrefab;
+    ParticleSystem MoveAfterimage;
     int CurAttackState;
     [SerializeField]
     float DontAttackRestoreTime;
@@ -102,6 +123,17 @@ public partial class PlayerRole : Role
         ShieldTimer = new MyTimer(ShieldRechargeTime, ShieldRestore, null);
         ShieldBarWidth = ShieldBar.rect.width;
         Shield = MaxShield;
+        MoveAfterimage = EffectEmitter.EmitParticle(MoveAfterimagePrefab, Vector3.zero, Vector3.zero, transform);
+        Debug.Log(MoveAfterimage.name);
+        ParticleSystem[] ps = MoveAfterimage.GetComponentsInChildren<ParticleSystem>();
+        foreach (ParticleSystem comp in ps)
+        {
+            if (comp.gameObject.GetInstanceID() != GetInstanceID())
+            {
+                MoveAfterimage = comp;
+            }
+        }
+        Debug.Log(MoveAfterimage.name);
     }
     void RestoreAttack()
     {
@@ -142,6 +174,7 @@ public partial class PlayerRole : Role
         ShieldTimer.RunTimer();
         MonsterSkillTimerFunc();
         ShieldGenerate();
+        ExtraMoveSpeedDecay();
     }
     public override void BeAttack(int _dmg, Vector2 _force, Dictionary<RoleBuffer, BufferData> buffers)
     {
@@ -223,16 +256,16 @@ public partial class PlayerRole : Role
         if (!MonsterSkills.ContainsKey(_name))
         {
             Skill skill = gameObject.AddComponent(_skill.GetType()).CopySkill(_skill);
-            skill.PlayerGetSkill();
+            skill.PlayerInitSkill();
             MonsterSkills.Add(_name, skill);
         }
     }
-    public void GenerateMonsterSkill(string _name, float _time)
+    public void GenerateMonsterSkill(string _name)
     {
         if (MonsterSkills.ContainsKey(_name))
         {
-            MonsterSkills[_name].SkillDuration = _time;
             MonsterSkills[_name].enabled = true;
+            MonsterSkills[_name].PlayerGetSkill();
             ActiveMonsterSkills.Add(MonsterSkills[_name]);
         }
     }
@@ -240,14 +273,31 @@ public partial class PlayerRole : Role
     {
         for (int i = 0; i < ActiveMonsterSkills.Count; i++)
         {
-            ActiveMonsterSkills[i].SkillDuration -= Time.deltaTime;
-            if (ActiveMonsterSkills[i].SkillDuration <= 0)
+            ActiveMonsterSkills[i].PSkillTimer -= Time.deltaTime;
+            if (ActiveMonsterSkills[i].PSkillTimer <= 0)
             {
                 if (MonsterSkills.ContainsKey(ActiveMonsterSkills[i].name))
-                    MonsterSkills.Remove(ActiveMonsterSkills[i].SkillName);
-                ActiveMonsterSkills[i].enabled = false;
+                    MonsterSkills.Remove(ActiveMonsterSkills[i].PSkillName);
+                ActiveMonsterSkills[i].InactivePlayerSkill();
                 ActiveMonsterSkills.RemoveAt(i);
             }
+        }
+    }
+    public void GetExtraMoveSpeed()
+    {
+        ExtraMoveSpeed += GainMoveFromKilling;
+    }
+
+    void ExtraMoveSpeedDecay()
+    {
+        if (ExtraMoveSpeed > 0)
+        {
+            float decay = (ExtraMoveSpeed / MoveDepletedTime);
+            if (decay < 1)
+                decay = 1;
+            ExtraMoveSpeed -= Time.deltaTime * decay;
+            var vel = MoveAfterimage.main;
+            vel.maxParticles = Mathf.RoundToInt(ExtraMoveSpeed/2);                
         }
     }
 

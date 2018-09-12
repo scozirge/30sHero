@@ -257,7 +257,7 @@ MonoBehaviour:
   MyForce: 1
   HealthBar: {fileID: 224308060162890658}
   MyRigi: {fileID: 50240295783364808}
-  BaseHealth: 500
+  BaseHealth: 300
   BaseDamage: 5
   BaseDefence: 0
   BaseMoveSpeed: 600
@@ -345,14 +345,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3283f1f3a7e6b24db127fb13fd7f595, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SkillName: MachineGunner
-  SkillDuration: 15
+  PSkillName: MachineGunner
+  PSkillDuration: 10
+  AttackOnce: 0
   Interval: 5
   AmmoNum: 12
   AmmoInterval: 0.1
   StartAngle: 0
   AngleInterval: 30
   Patetern: 0
+  SpawnedInSelf: 0
   AttackPrefab: {fileID: 114962956101920240, guid: 84d6f2965eaadcd4cb3265ce5e0d2e16,
     type: 2}
 --- !u!222 &222236017872675128

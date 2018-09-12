@@ -22,7 +22,6 @@ public class AIMove : MonoBehaviour
 
 
     static float InRangeStartWander = 50;
-    static CameraController CC;
 
     Vector3 CameraPos;
     Vector3 CameraSize;
@@ -39,18 +38,16 @@ public class AIMove : MonoBehaviour
     {
         ER = GetComponent<EnemyRole>();
         MyRigi = GetComponent<Rigidbody2D>();
-        if (!CC)
-            CC = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraController>();
         WanderIntervalTimer = WanderInterval;
         int randX = Random.Range(0, 800);
         int randY = Random.Range(-400, 400);
-        Vector3 rndTarget = new Vector3(randX, randY) + CC.transform.position;
+        Vector3 rndTarget = new Vector3(randX, randY) + BattleManage.MyCameraControler.transform.position;
         InitialVelocity = (rndTarget - transform.position).normalized * ER.MoveSpeed;
         MyRigi.velocity = InitialVelocity;
 
         //Set Target Position
-        CameraPos = CC.transform.position;
-        CameraSize = CC.ScreenSize;
+        CameraPos = BattleManage.MyCameraControler.transform.position;
+        CameraSize = BattleManage.ScreenSize;
         float randPosX = Random.Range(100, CameraSize.x / 2);
         float randPosY = Random.Range(-CameraSize.y / 2 + 100, CameraSize.y / 2 - 100);
         RandomOffset = new Vector2(randPosX, randPosY);
@@ -63,7 +60,7 @@ public class AIMove : MonoBehaviour
         if (FollowCamera)
         {
             //Follow camera
-            CameraPos = CC.transform.position;
+            CameraPos = BattleManage.MyCameraControler.transform.position;
             Destination = new Vector3(CameraPos.x, CameraPos.y, 0) + RandomOffset;
         }
 

@@ -40,7 +40,7 @@ public static class CopyComponent
     }
 
 
-    static string[] ExcludeSkillProperties = new string[] { "useGUILayout", "runInEditMode", "enabled", "tag", "name", "hideFlags", "bb", "bb", "bb" };
+    static string[] ExcludeSkillProperties = new string[] { "useGUILayout", "runInEditMode", "enabled", "tag", "name", "hideFlags" };
     static string[] ExcluedSkillFields = new string[] { };
 
     public static T CopySkill<T>(this Component comp, T other) where T : Component
@@ -69,6 +69,7 @@ public static class CopyComponent
                 continue;
             //Debug.Log(finfo.Name);
             finfo.SetValue(comp, finfo.GetValue(other));
+            //Debug.Log(finfo.GetValue(comp));
         }
         return comp as T;
     }

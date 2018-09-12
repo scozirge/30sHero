@@ -5,7 +5,6 @@ using UnityEngine;
 public class MeleeAmmo : Ammo
 {
 
-    protected bool IsCausedDamage;
 
     public override void Init(Dictionary<string, object> _dic)
     {
@@ -17,13 +16,13 @@ public class MeleeAmmo : Ammo
     }
     protected override void OnTriggerStay2D(Collider2D _col)
     {
-        if (IsCausedDamage)
+        if (IsCausedDamage && AmmoType != ShootAmmoType.Penetration)
             return;
         base.OnTriggerStay2D(_col);
     }
     protected override void OnTriggerEnter2D(Collider2D _col)
     {
-        if (IsCausedDamage)
+        if (IsCausedDamage && AmmoType != ShootAmmoType.Penetration)
             return;
         base.OnTriggerEnter2D(_col);
     }
@@ -35,5 +34,7 @@ public class MeleeAmmo : Ammo
         condition.Add(RoleBuffer.Stun, new BufferData(StunIntensity, 0));
         _curTarget.BeAttack(Damage, force, condition);
         IsCausedDamage = true;
+        if (AmmoType != ShootAmmoType.Penetration)
+            SelfDestroy();
     }
 }

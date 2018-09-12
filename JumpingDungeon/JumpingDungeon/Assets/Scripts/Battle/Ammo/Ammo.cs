@@ -22,15 +22,20 @@ public partial class Ammo : MonoBehaviour
     protected float IceIntensity;
     [SerializeField]
     protected float CurseIntensity;
+    [SerializeField]
+    protected ShootAmmoType AmmoType;
 
     protected Force AttackerForce;
     protected Force TargetForce;
     protected bool IsLaunch;
+    protected bool IsCausedDamage;
     protected int Damage;
     protected Role Target;
     float LifeTimer;
     protected Rigidbody2D MyRigi;
     protected Transform ParticleParent;
+    float DestructMargin_Left;
+    float DestructMargin_Right;
 
     public virtual void Init(Dictionary<string, object> _dic)
     {
@@ -87,8 +92,9 @@ public partial class Ammo : MonoBehaviour
         if (!IsLaunch)
             return;
         LIfeTimerFunc();
+        DestroyOutSideAmmos();
     }
-    protected virtual void SelfDestroy()
+    public virtual void SelfDestroy()
     {
         Destroy(this.gameObject);
     }
@@ -98,5 +104,18 @@ public partial class Ammo : MonoBehaviour
             LifeTimer -= Time.deltaTime;
         else
             SelfDestroy();
+    }
+    void DestroyOutSideAmmos()
+    {
+        DestructMargin_Left = (BattleManage.MyCameraControler.transform.position.x - (BattleManage.ScreenSize.x / 2 + 100));
+        DestructMargin_Right = (BattleManage.MyCameraControler.transform.position.x + (BattleManage.ScreenSize.x / 2 + 100));
+        if (transform.position.x < DestructMargin_Left ||
+            transform.position.x > DestructMargin_Right ||
+            transform.position.y > BattleManage.ScreenSize.y / 2 + 100 ||
+            transform.position.y < -(BattleManage.ScreenSize.y / 2 + 100)
+            )
+        {
+            SelfDestroy();
+        }
     }
 }

@@ -52,8 +52,7 @@ public abstract class Role : MonoBehaviour
     public int ExtraDefence { get; protected set; }
     [SerializeField]
     protected int BaseDefence;
-    public virtual int MoveSpeed { get { return BaseMoveSpeed + ExtraMoveSpeed; } }
-    public int ExtraMoveSpeed { get; protected set; }
+    public virtual float MoveSpeed { get { return BaseMoveSpeed; } }
     [SerializeField]
     protected int BaseMoveSpeed;
     [SerializeField]
@@ -84,13 +83,14 @@ public abstract class Role : MonoBehaviour
     }
     public virtual void BeAttack(int _dmg, Vector2 _force, Dictionary<RoleBuffer, BufferData> buffers)
     {
-        if (Buffers.ContainsKey(RoleBuffer.Invicible))
-        {
-            return;
-        }
-        ReceiveDmg(_dmg);
+        //Add KnockForce
         MyRigi.velocity = Vector2.zero;
-
+        MyRigi.velocity = _force;
+        //if Invincible, can't take damage and debuff
+        if (Buffers.ContainsKey(RoleBuffer.Invicible))
+            return;
+        //take damage
+        ReceiveDmg(_dmg);
         //Get conditions
         if (buffers != null)
         {
@@ -100,8 +100,6 @@ public abstract class Role : MonoBehaviour
                 GetCondition(keyList[i], buffers[keyList[i]]);
             }
         }
-        //Add KnockForce
-        MyRigi.velocity = _force;
     }
     public virtual void ReceiveDmg(int _dmg)
     {
