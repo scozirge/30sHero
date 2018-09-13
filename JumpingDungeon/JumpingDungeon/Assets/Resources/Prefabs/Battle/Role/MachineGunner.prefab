@@ -211,7 +211,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Wander: 1
-  FollowCamera: 0
+  FollowCamera: 1
   WanderInterval: 2
   DebutRotateFactor: 0.01
   WanderRange: 50
@@ -347,6 +347,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PSkillName: MachineGunner
   PSkillDuration: 10
+  PSkillTimer: 0
   AttackOnce: 0
   Interval: 5
   AmmoNum: 12
