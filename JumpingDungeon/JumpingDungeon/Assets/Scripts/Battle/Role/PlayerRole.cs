@@ -110,7 +110,8 @@ public partial class PlayerRole : Role
     [SerializeField]
     float DontAttackRestoreTime;
     MyTimer AttackTimer;
-
+    [HideInInspector]
+    public int FaceDir;
     Dictionary<string, Skill> MonsterSkills = new Dictionary<string, Skill>();
     List<Skill> ActiveMonsterSkills = new List<Skill>();
 
@@ -125,7 +126,7 @@ public partial class PlayerRole : Role
         ShieldBarWidth = ShieldBar.rect.width;
         Shield = MaxShield;
         InitMoveAfterimage();
-
+        FaceDir = 1;
     }
     void InitMoveAfterimage()
     {
@@ -223,10 +224,12 @@ public partial class PlayerRole : Role
     }
     void FaceTarget()
     {
-        int dir = 1;
-        if (MyRigi.velocity.x < 0)
-            dir = -1;
-        RoleTrans.localScale = new Vector2(dir, 1);
+        if (Input.GetAxis("Horizontal") == 0) { }
+        else if (Input.GetAxis("Horizontal") > 0)
+            FaceDir = 1;
+        else
+            FaceDir = -1;
+        RoleTrans.localScale = new Vector2(FaceDir, 1);
     }
     public void GetLoot(LootType _type, BufferData _data)
     {
