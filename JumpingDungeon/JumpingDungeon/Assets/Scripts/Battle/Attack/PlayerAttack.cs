@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
+    [Tooltip("攻擊特效")]
     [SerializeField]
     ParticleSystem AttackEffect;
     [SerializeField]
     PlayerRole Attacker;
+    [Tooltip("擊退力道")]
     [SerializeField]
     float KnockForce;
 

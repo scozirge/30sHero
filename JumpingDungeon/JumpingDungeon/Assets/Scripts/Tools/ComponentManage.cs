@@ -39,7 +39,7 @@ public static class ComponentManage
 
 
     static string[] ExcludeSkillProperties = new string[] { "useGUILayout", "runInEditMode", "enabled", "tag", "name", "hideFlags" };
-    static string[] ExcluedSkillFields = new string[] { };
+    static string[] ExcluedSkillFields = new string[] { "Detcor" };
 
     public static T CopySkill<T>(this Component comp, T other) where T : Component
     {
@@ -65,7 +65,6 @@ public static class ComponentManage
         {
             if (Array.Exists<string>(ExcluedSkillFields, element => element == finfo.Name))
                 continue;
-            //Debug.Log(finfo.Name);
             finfo.SetValue(comp, finfo.GetValue(other));
             //Debug.Log(finfo.GetValue(comp));
         }
@@ -76,7 +75,7 @@ public static class ComponentManage
         T[] comList = comp.GetComponentsInChildren<T>();
         foreach (T c in comList)
         {
-            if (!GameObject.ReferenceEquals(c, comp))
+            if (!GameObject.ReferenceEquals(c.gameObject, comp.gameObject))
             {
                 return c;
             }

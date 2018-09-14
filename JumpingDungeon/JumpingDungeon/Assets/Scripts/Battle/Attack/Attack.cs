@@ -5,20 +5,28 @@ using UnityEngine;
 [RequireComponent(typeof(Role))]
 public class Attack : Skill
 {
+    [Tooltip("是否只會攻擊一次")]
     [SerializeField]
     protected bool AttackOnce;
+    [Tooltip("每次攻擊的間隔時間")]
     [SerializeField]
     protected float Interval;
+    [Tooltip("每次攻擊發射的子彈數")]
     [SerializeField]
     protected int AmmoNum;
+    [Tooltip("若子彈數不只一發，每發間隔的時間")]
     [SerializeField]
     protected float AmmoInterval;
+    [Tooltip("起始發射角度")]
     [SerializeField]
     protected float StartAngle;
+    [Tooltip("若子彈數不只一發，每發間隔的角度")]
     [SerializeField]
     protected float AngleInterval;
+    [Tooltip("射擊模式")]
     [SerializeField]
     protected ShootPatetern Patetern;
+    [Tooltip("子彈是否跟隨腳色本身跑")]
     [SerializeField]
     protected bool SpawnedInSelf;
 

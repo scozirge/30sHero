@@ -212,6 +212,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PSkillName: Sniper
   PSkillDuration: 10
+  PSkillTimer: 0
   AttackOnce: 0
   Interval: 3
   AmmoNum: 1
@@ -235,7 +236,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MyForce: 1
   HealthBar: {fileID: 224116466118426486}
-  MyRigi: {fileID: 50284349101639710}
   BaseHealth: 100
   BaseDamage: 10
   BaseDefence: 0
@@ -246,6 +246,7 @@ MonoBehaviour:
   RoleTrans: {fileID: 224583850501294528}
   DropProbility: 1
   DropCount: 1
+  DropSkillProbility: 1
   DropSkill: {fileID: 114016134065368028}
 --- !u!114 &114372015654242946
 MonoBehaviour:
@@ -341,10 +342,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Wander: 1
   FollowCamera: 0
-  WanderInterval: 5
-  DebutRotateFactor: 0.01
-  WanderRange: 400
-  Destination: {x: 0, y: 0, z: 0}
+  WanderInterval: 2
+  RotateFactor: 0.01
+  WanderRange: 100
 --- !u!114 &114975952217036742
 MonoBehaviour:
   m_ObjectHideFlags: 1

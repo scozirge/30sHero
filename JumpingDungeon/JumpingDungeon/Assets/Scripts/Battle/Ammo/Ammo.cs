@@ -6,22 +6,31 @@ using System;
 [RequireComponent(typeof(Rigidbody2D))]
 public partial class Ammo : MonoBehaviour
 {
+    [Tooltip("自身跟隨特效物件")]
     [SerializeField]
     ParticleSystem[] LocalParticles;
+    [Tooltip("不跟隨的特效物件")]
     [SerializeField]
     ParticleSystem[] GlobalParticle;
+    [Tooltip("子彈存活時間(秒)")]
     [SerializeField]
     float LifeTime;
+    [Tooltip("子彈擊退力道")]
     [SerializeField]
     protected int KnockIntensity;
+    [Tooltip("暈眩秒數")]
     [SerializeField]
     protected float StunIntensity;
+    [Tooltip("燃燒秒數")]
     [SerializeField]
     protected float FireIntensity;
+    [Tooltip("冰凍秒數")]
     [SerializeField]
     protected float IceIntensity;
+    [Tooltip("詛咒秒數")]
     [SerializeField]
     protected float CurseIntensity;
+    [Tooltip("子彈類型，選擇穿透就是子彈擊中玩家後不會移除，且可能造成多次傷害(炸彈類的子彈)")]
     [SerializeField]
     protected ShootAmmoType AmmoType;
 

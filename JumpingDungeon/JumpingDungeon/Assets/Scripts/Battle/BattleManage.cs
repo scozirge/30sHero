@@ -11,7 +11,7 @@ public class BattleManage : MonoBehaviour
     [SerializeField]
     float SpawnCountInterval;
     [SerializeField]
-    EnemyRole[] Enemys;
+    List<EnemyRole> Enemys;
     [SerializeField]
     Transform EnemyParent;
     [SerializeField]
@@ -51,7 +51,12 @@ public class BattleManage : MonoBehaviour
     }
     void SpanwEnemy()
     {
-        int rndEnemy = Random.Range(0, Enemys.Length);
+        for(int i=0;i<Enemys.Count;i++)
+        {
+            if (Enemys[i] == null)
+                Enemys.RemoveAt(i);
+        }
+        int rndEnemy = Random.Range(0, Enemys.Count);
         EnemyRole er;
         if (DesignatedEnemy)
             er = Instantiate(DesignatedEnemy, Vector3.zero, Quaternion.identity) as EnemyRole;

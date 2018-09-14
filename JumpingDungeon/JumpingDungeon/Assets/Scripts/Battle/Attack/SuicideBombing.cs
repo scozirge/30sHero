@@ -5,12 +5,17 @@ using UnityEngine;
 [RequireComponent(typeof(Role))]
 public class SuicideBombing : Skill
 {
+    [Tooltip("產生炸彈子彈後是否死亡")]
+    [SerializeField]
+    bool Suicide;
+    [Tooltip("爆炸前的特效物件")]
     [SerializeField]
     ParticleSystem[] PrepareParticle;
+    [Tooltip("炸彈子彈物件")]
     [SerializeField]
     Bomb AttackPrefab;
-    [SerializeField]
     Collider2D Dector;
+    [Tooltip("距離爆炸的準備時間(秒)")]
     [SerializeField]
     protected float PrepareTime;
 
@@ -28,6 +33,12 @@ public class SuicideBombing : Skill
         else
             TargetForce = Force.Player;
         PrepareTimer = PrepareTime;
+        Dector = transform.GetComponentInChildrenExcludeSelf<Collider2D>();
+    }
+    public override void PlayerGetSkill()
+    {
+        base.PlayerGetSkill();
+        Detected = false;
     }
     void Update()
     {
@@ -36,11 +47,15 @@ public class SuicideBombing : Skill
 
     void OnTriggerEnter2D(Collider2D _col)
     {
-        if (Detected)
-            return;
-        if (_col.tag.ToString() == TargetForce.ToString())
+        if (this.isActiveAndEnabled)
         {
-            TriggerTarget(_col.GetComponent<Role>());
+            if (Detected)
+                return;
+
+            if (_col.tag.ToString() == TargetForce.ToString())
+            {
+                TriggerTarget(_col.GetComponent<Role>());
+            }
         }
     }
     protected virtual void TriggerTarget(Role _curTarget)
@@ -65,7 +80,19 @@ public class SuicideBombing : Skill
         go.transform.SetParent(AmmoParent);
         go.transform.position = transform.position;
         ammo.Init(AmmoData);
-        SelfDestroy();
+        if (Suicide)
+        {
+            if (Myself.MyForce != Force.Player)
+                SelfDestroy();
+            else
+            {
+                this.enabled = false;
+            }
+        }
+        else
+        {
+            Detected = false;
+        }
     }
     protected void PrefareTimerFunc()
     {
@@ -78,6 +105,7 @@ public class SuicideBombing : Skill
         else
         {
             SpawnAttackPrefab();
+            PrepareTimer = PrepareTime;
         }
     }
     void SelfDestroy()

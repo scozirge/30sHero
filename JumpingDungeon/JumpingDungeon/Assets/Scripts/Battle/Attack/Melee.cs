@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class Melee : Attack
 {
-    [SerializeField]
-    ParticleSystem[] PrepareParticle;
+    [Tooltip("肉搏子彈物件")]
     [SerializeField]
     MeleeAmmo AttackPrefab;
+    [Tooltip("子彈產生半徑(距離攻擊者多少距離)")]
     [SerializeField]
     protected float AttackRadius;
 

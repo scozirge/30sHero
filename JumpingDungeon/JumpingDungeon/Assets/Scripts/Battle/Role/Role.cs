@@ -7,11 +7,11 @@ using UnityEngine.UI;
 [RequireComponent(typeof(AnimationPlayer))]
 public abstract class Role : MonoBehaviour
 {
+    [Tooltip("勢力")]
     public Force MyForce;
     [SerializeField]
     protected RectTransform HealthBar;
     float HPBarWidth;
-    [SerializeField]
     protected Rigidbody2D MyRigi;
     protected const float MoveDecay = 0.5f;
 
@@ -30,6 +30,7 @@ public abstract class Role : MonoBehaviour
             HealthBar.sizeDelta = new Vector2(HPBarWidth * HealthRatio, HealthBar.rect.height);
         }
     }
+    [Tooltip("基礎血量")]
     [SerializeField]
     protected int BaseHealth;
     public int ExtraHealth { get; protected set; }
@@ -46,15 +47,19 @@ public abstract class Role : MonoBehaviour
                 return 0;
         }
     }
+    [Tooltip("基礎傷害")]
     [SerializeField]
     protected int BaseDamage;
     public virtual int Defence { get { return BaseDefence + ExtraDefence; } }
     public int ExtraDefence { get; protected set; }
+    [Tooltip("基礎防禦")]
     [SerializeField]
     protected int BaseDefence;
     public virtual float MoveSpeed { get { return BaseMoveSpeed; } }
+    [Tooltip("基礎移動速度")]
     [SerializeField]
     protected int BaseMoveSpeed;
+    [Tooltip("死亡特效")]
     [SerializeField]
     ParticleSystem DeathEffect;
     [SerializeField]
@@ -71,6 +76,7 @@ public abstract class Role : MonoBehaviour
         HPBarWidth = HealthBar.rect.width;
         Health = MaxHealth;
         MyForce = MyEnum.ParseEnum<Force>(gameObject.tag);
+        MyRigi = GetComponent<Rigidbody2D>();
     }
     protected virtual void Move()
     {

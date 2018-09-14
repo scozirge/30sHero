@@ -211,11 +211,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Wander: 1
-  FollowCamera: 1
+  FollowCamera: 0
   WanderInterval: 2
-  DebutRotateFactor: 0.01
-  WanderRange: 50
-  Destination: {x: 0, y: 0, z: 0}
+  RotateFactor: 0.01
+  WanderRange: 100
 --- !u!114 &114201088946754266
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -256,7 +255,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MyForce: 1
   HealthBar: {fileID: 224308060162890658}
-  MyRigi: {fileID: 50240295783364808}
   BaseHealth: 300
   BaseDamage: 5
   BaseDefence: 0
@@ -267,6 +265,7 @@ MonoBehaviour:
   RoleTrans: {fileID: 224234580222252886}
   DropProbility: 1
   DropCount: 1
+  DropSkillProbility: 1
   DropSkill: {fileID: 114736416922364804}
 --- !u!114 &114422496967354372
 MonoBehaviour:

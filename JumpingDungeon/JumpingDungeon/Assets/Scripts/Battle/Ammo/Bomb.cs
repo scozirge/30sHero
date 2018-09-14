@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Bomb : Ammo
 {
+    [Tooltip("傷害間隔，只有子彈類型是穿透(代表擊中敵方後不會消失)才需要設定")]
     [SerializeField]
     float DamageInterval;
 

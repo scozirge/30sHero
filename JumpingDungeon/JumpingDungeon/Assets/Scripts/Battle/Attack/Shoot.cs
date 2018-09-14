@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Shoot : Attack
 {
+    [Tooltip("飛射子彈物件")]
     [SerializeField]
     ShootAmmo AttackPrefab;
 

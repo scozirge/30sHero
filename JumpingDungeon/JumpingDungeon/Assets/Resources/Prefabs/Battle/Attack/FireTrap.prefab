@@ -76,9 +76,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c4d461c796feba4ea6762325f5d39f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LocalParticles:
+  LocalParticles: []
+  GlobalParticle:
   - {fileID: 19800150, guid: 60797f1eed9349a44ac4f2df97e3c6d5, type: 2}
-  GlobalParticle: []
   LifeTime: 10
   KnockIntensity: 0
   StunIntensity: 0
@@ -86,7 +86,7 @@ MonoBehaviour:
   IceIntensity: 0
   CurseIntensity: 0
   AmmoType: 1
-  DamageInterval: 0.5
+  DamageInterval: 0.3
 --- !u!222 &222441390583901092
 CanvasRenderer:
   m_ObjectHideFlags: 1

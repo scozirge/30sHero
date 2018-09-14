@@ -6,17 +6,21 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class AIMove : MonoBehaviour
 {
+    [Tooltip("移動到指定座標後會不會遊蕩")]
     [SerializeField]
     bool Wander;
+    [Tooltip("是否要跟著攝影機")]
     [SerializeField]
     bool FollowCamera;
+    [Tooltip("遊蕩時間間隔")]
     [SerializeField]
     float WanderInterval;
+    [Tooltip("轉向係數")]
     [SerializeField]
-    float DebutRotateFactor;
+    float RotateFactor;
+    [Tooltip("遊蕩範圍")]
     [SerializeField]
     float WanderRange;
-    [SerializeField]
     Vector3 Destination;
 
 
@@ -33,6 +37,7 @@ public class AIMove : MonoBehaviour
     bool StartWander;
     Rigidbody2D MyRigi;
     EnemyRole ER;
+    bool KeepDebut;
 
     void Start()
     {
@@ -44,15 +49,15 @@ public class AIMove : MonoBehaviour
         Vector3 rndTarget = new Vector3(randX, randY) + BattleManage.MyCameraControler.transform.position;
         InitialVelocity = (rndTarget - transform.position).normalized * ER.MoveSpeed;
         MyRigi.velocity = InitialVelocity;
-
-        //Set Target Position
+        if (RotateFactor < 0.02f)
+            RotateFactor = 0.02f;
+        KeepDebut = true;
         CameraPos = BattleManage.MyCameraControler.transform.position;
         CameraSize = BattleManage.ScreenSize;
         float randPosX = Random.Range(100, CameraSize.x / 2);
         float randPosY = Random.Range(-CameraSize.y / 2 + 100, CameraSize.y / 2 - 100);
         RandomOffset = new Vector2(randPosX, randPosY);
         Destination = new Vector3(randPosX + CameraPos.x, randPosY + CameraPos.y, 0);
-
     }
 
     public void Debut()
@@ -64,8 +69,18 @@ public class AIMove : MonoBehaviour
             Destination = new Vector3(CameraPos.x, CameraPos.y, 0) + RandomOffset;
         }
 
-        Vector2 targetVel = (Destination - transform.position).normalized * ER.MoveSpeed;
-        MyRigi.velocity = Vector2.Lerp(MyRigi.velocity, targetVel, DebutRotateFactor);
+        if (!Wander && KeepDebut)
+            if (Mathf.Abs(Vector3.Distance(Destination, transform.position)) < 30)
+            {
+                KeepDebut = false;
+                MyRigi.velocity = Vector3.zero;
+            }
+
+        if (KeepDebut || FollowCamera)
+        {
+            Vector2 targetVel = (Destination - transform.position).normalized * ER.MoveSpeed;
+            MyRigi.velocity = Vector2.Lerp(MyRigi.velocity, targetVel, RotateFactor);
+        }
     }
 
     void WanderTimerFunc()
@@ -84,6 +99,8 @@ public class AIMove : MonoBehaviour
     }
     void WanderMovement()
     {
+        if (!Wander)
+            return;
         if (!StartWander)
         {
             float dist = Mathf.Abs(Vector2.Distance(Destination, transform.position));
@@ -95,7 +112,7 @@ public class AIMove : MonoBehaviour
             return;
         }
         WanderVelocity = (RandDestination - transform.position).normalized * ER.MoveSpeed * 1.2f;
-        MyRigi.velocity = Vector2.Lerp(MyRigi.velocity, WanderVelocity, DebutRotateFactor);
+        MyRigi.velocity = Vector2.Lerp(MyRigi.velocity, WanderVelocity, RotateFactor);
     }
     void CalculateRandDestination()
     {

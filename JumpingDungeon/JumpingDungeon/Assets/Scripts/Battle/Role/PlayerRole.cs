@@ -28,6 +28,7 @@ public partial class PlayerRole : Role
             avatarTimer = value;
         }
     }
+    [Tooltip("護盾最大值")]
     [SerializeField]
     protected int MaxShield;
     float shield;
@@ -48,15 +49,17 @@ public partial class PlayerRole : Role
     [SerializeField]
     protected RectTransform ShieldBar;
     float ShieldBarWidth;
+    [Tooltip("護盾充飽需求時間(秒)")]
     [SerializeField]
     float ShieldReGenerateTime;
     float ShieldGenerateNum { get { return MaxShield / ShieldReGenerateTime; } }
+    [Tooltip("護盾要沒受到攻擊多久時間(秒)才會開始充能")]
     [SerializeField]
     float ShieldRechargeTime;
     bool StartGenerateShield;
     MyTimer ShieldTimer;
     public override float MoveSpeed { get { return BaseMoveSpeed + ExtraMoveSpeed; } }
-    private float extraMoveSpeed;
+    private float extraMoveSpeed;    
     public float ExtraMoveSpeed
     {
         get { return extraMoveSpeed; }
@@ -69,44 +72,52 @@ public partial class PlayerRole : Role
             extraMoveSpeed = value;
         }
     }
+    [Tooltip("每次殺怪獲得額外速度")]
     [SerializeField]
     float GainMoveFromKilling;
+    [Tooltip("當下額外速度衰減完所需時間(秒)")]
     [SerializeField]
     float MoveDepletedTime;
+    [Tooltip("殺怪最高額外速度")]
     [SerializeField]
     float MaxEtraMove;
 
-
+    [Tooltip("變身時間")]
     [SerializeField]
     public float MaxAvaterTime;
     public float AvatarTimeRatio { get { return (float)AvatarTimer / (float)MaxAvaterTime; } }
     [SerializeField]
     Text AvatarTimerText;
+    [Tooltip("變身時間加成(秒)")]
     [SerializeField]
     protected float AvatarTimeBuff;
 
     public virtual int EnergyDrop { get { return BaseEnergyDrop + ExtraEnergyDrop; } }
     public int ExtraEnergyDrop { get; protected set; }
+    [Tooltip("能量掉落機率")]
     [SerializeField]
     protected int BaseEnergyDrop;
     public virtual int MoneyDrop { get { return BaseMoneyDrop + ExtraMoneyDrop; } }
     public int ExtraMoneyDrop { get; protected set; }
+    [Tooltip("金幣掉落機率")]
     [SerializeField]
     protected int BaseMoneyDrop;
-    public virtual int Bloodthirsty { get { return BaseBloodthirsty + ExtraBloodthirsty; } }
-    public int ExtraBloodthirsty { get; protected set; }
+    public virtual float Bloodthirsty { get { return BaseBloodthirsty + ExtraBloodthirsty; } }
+    public float ExtraBloodthirsty { get; protected set; }
+    [Tooltip("吸血比例")]
     [SerializeField]
-    protected int BaseBloodthirsty;
-    public virtual int PotionEfficacy { get { return BasePotionEfficacy + ExtraPotionEfficacy; } }
-    public int ExtraPotionEfficacy { get; protected set; }
+    protected float BaseBloodthirsty;
+    [Tooltip("藥水效果強化比例")]
     [SerializeField]
-    protected int BasePotionEfficacy;
+    protected float PotionEfficacy;
     const int MoveFactor = 1;
+    [Tooltip("移動加速特效")]
     [SerializeField]
     ParticleSystem MoveAfterimagePrefab;
     ParticleSystem MoveAfterimage;
     ParticleSystem.MainModule MoveAfterimage_Main;
     int CurAttackState;
+    [Tooltip("多久不攻擊會重置攻擊動畫")]
     [SerializeField]
     float DontAttackRestoreTime;
     MyTimer AttackTimer;
@@ -244,7 +255,7 @@ public partial class PlayerRole : Role
             case LootType.Euipment:
                 break;
             case LootType.HPRecovery:
-                HealHP((int)(MaxHealth * _data.Value + PotionEfficacy));
+                HealHP((int)(MaxHealth * _data.Value * (1 + PotionEfficacy)));
                 break;
             case LootType.InvinciblePotion:
                 GetCondition(RoleBuffer.Invicible, _data);

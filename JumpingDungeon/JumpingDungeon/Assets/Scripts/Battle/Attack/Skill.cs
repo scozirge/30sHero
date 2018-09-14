@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class Skill : MonoBehaviour
 {
+    [Tooltip("技能名稱(一樣的技能名稱不會重複獲得)")]
     [SerializeField]
     public string PSkillName;
+    [Tooltip("玩家獲得此技能的持續時間)")]
     [SerializeField]
     protected float PSkillDuration;
     protected Role Myself;
