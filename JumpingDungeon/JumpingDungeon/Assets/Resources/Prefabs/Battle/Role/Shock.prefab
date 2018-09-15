@@ -345,14 +345,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PSkillName: Shock
-  PSkillDuration: 10100
+  PSkillDuration: 10
   PSkillTimer: 0
   Suicide: 0
   PrepareParticle:
   - {fileID: 19803258, guid: f03da2c840f56744882ac020df9d326f, type: 2}
   AttackPrefab: {fileID: 114836237506999114, guid: 56b2f6b10c96f894797a1573261512af,
     type: 2}
-  PrepareTime: 1
+  PrepareTime: 2
 --- !u!222 &222180222257250726
 CanvasRenderer:
   m_ObjectHideFlags: 1
