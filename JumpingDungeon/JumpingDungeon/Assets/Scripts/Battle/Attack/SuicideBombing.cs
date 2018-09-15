@@ -45,13 +45,12 @@ public class SuicideBombing : Skill
         PrefareTimerFunc();
     }
 
-    void OnTriggerEnter2D(Collider2D _col)
+    void OnTriggerStay2D(Collider2D _col)
     {
         if (this.isActiveAndEnabled)
         {
             if (Detected)
                 return;
-
             if (_col.tag.ToString() == TargetForce.ToString())
             {
                 TriggerTarget(_col.GetComponent<Role>());

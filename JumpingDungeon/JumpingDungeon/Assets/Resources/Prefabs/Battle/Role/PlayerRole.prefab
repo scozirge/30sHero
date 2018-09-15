@@ -74,7 +74,6 @@ GameObject:
   - component: {fileID: 114964198349882810}
   - component: {fileID: 58114890521861934}
   - component: {fileID: 114551822075932818}
-  - component: {fileID: 114229075063968274}
   m_Layer: 8
   m_Name: PlayerRole
   m_TagString: Player
@@ -132,7 +131,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 20
+  m_Radius: 80
 --- !u!58 &58631507675247020
 CircleCollider2D:
   m_ObjectHideFlags: 1
@@ -147,7 +146,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 100
+  m_Radius: 200
 --- !u!95 &95614152932324196
 Animator:
   serializedVersion: 3
@@ -166,26 +165,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &114229075063968274
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1821692636444564}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 91622d248ee865744a5de227b5ecb88a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PSkillName: Shock
-  PSkillDuration: 100
-  PSkillTimer: 0
-  Suicide: 0
-  PrepareParticle:
-  - {fileID: 19803258, guid: f03da2c840f56744882ac020df9d326f, type: 2}
-  AttackPrefab: {fileID: 114836237506999114, guid: 56b2f6b10c96f894797a1573261512af,
-    type: 2}
-  PrepareTime: 1
 --- !u!114 &114340850199295502
 MonoBehaviour:
   m_ObjectHideFlags: 1
