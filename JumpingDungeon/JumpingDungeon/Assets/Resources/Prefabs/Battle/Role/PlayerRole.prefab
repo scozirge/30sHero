@@ -247,7 +247,7 @@ MonoBehaviour:
   BaseHealth: 100
   BaseDamage: 50
   BaseDefence: 0
-  BaseMoveSpeed: 200
+  BaseMoveSpeed: 400
   DeathEffect: {fileID: 198196491518267642, guid: 5194d2d50fa82a9429c0aa6ad6c56d6f,
     type: 2}
   AniPlayer: {fileID: 114551822075932818}
