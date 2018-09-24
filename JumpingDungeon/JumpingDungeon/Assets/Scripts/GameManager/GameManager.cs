@@ -10,9 +10,31 @@ public partial class GameManager : MonoBehaviour
     Debugger DebuggerPrefab;
     [SerializeField]
     PopupUI PopUIPrefab;
+    [SerializeField]
+    Sprite[] QualityBotPrefabs;
+    [SerializeField]
+    Sprite[] EquipTypBotPrefab;
+
+    static Sprite[] QualityBotSprites;
+    static Sprite[] EquipTypBot;
+
+    public static Sprite GetItemQualityBotSprite(int _quality)
+    {
+        if (QualityBotSprites.Length >= _quality || _quality < 0)
+            return QualityBotSprites[_quality];
+        else if (QualityBotSprites[_quality] == null)
+            return null;
+        return null;
+    }
+    public static Sprite GetEquipTypeBotSprite(EquipType _type)
+    {
+        return EquipTypBot[(int)_type];
+    }
     void Awake()
     {
         Screen.fullScreen = true;
+        QualityBotSprites = QualityBotPrefabs;
+        EquipTypBot = EquipTypBotPrefab;
     }
     void Start()
     {
@@ -20,10 +42,10 @@ public partial class GameManager : MonoBehaviour
             DeployDebugger();
         if (!PopupUI.IsInit)
             DeployPopupUI();
-        if (!GameDictionary.IsInit)
-            GameDictionary.InitDic();
         if (IsInit)
             return;
+        if (!GameDictionary.IsInit)
+            GameDictionary.InitDic();
         Player.Init();
         DontDestroyOnLoad(gameObject);
         IsInit = true;

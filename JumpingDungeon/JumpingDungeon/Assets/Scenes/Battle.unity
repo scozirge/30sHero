@@ -1679,6 +1679,10 @@ Prefab:
       propertyPath: m_IsTrigger
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1119494924217490, guid: d9e47796d36fc83458ffab41aea6641e, type: 2}
+      propertyPath: m_Name
+      value: skilldector
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114964198349882810, guid: d9e47796d36fc83458ffab41aea6641e, type: 2}
   m_SourcePrefab: {fileID: 100100000, guid: d9e47796d36fc83458ffab41aea6641e, type: 2}

@@ -4,9 +4,19 @@ using UnityEngine;
 
 public class Item : MonoBehaviour
 {
-    protected Data MyData;
-    public virtual void Set(Data _data)
+    public Data MyData;
+    protected MyUI ParentUI;
+
+    public virtual void Set(Data _data, MyUI _ui)
     {
         MyData = _data;
+        ParentUI = _ui;
     }
+    public virtual void OnPress()
+    {
+    }
+    public virtual void Filter(EquipType _type)
+    {
+    }
+
 }

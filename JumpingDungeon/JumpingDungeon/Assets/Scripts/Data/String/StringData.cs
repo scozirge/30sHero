@@ -86,4 +86,8 @@ public class StringData
         }
         return stringArray[_index];
     }
+    public static string GetString(string _stringKey)
+    {
+        return GameDictionary.String_UIDic[_stringKey].GetString(Player.UseLanguage);
+    }
 }

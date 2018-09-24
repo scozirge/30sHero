@@ -4,4 +4,5 @@ using UnityEngine;
 
 public abstract class Data {
     public int ID;
+    public static string DataName;
 }

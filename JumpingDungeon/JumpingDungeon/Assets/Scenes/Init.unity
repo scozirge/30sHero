@@ -144,6 +144,17 @@ MonoBehaviour:
     type: 2}
   PopUIPrefab: {fileID: 114768463510591170, guid: 2740e343e2aaeeb4da13125020b01904,
     type: 2}
+  QualityBotPrefabs:
+  - {fileID: 21300000, guid: 01b59ce25d38b2a4bb1f6db7d6d40ca7, type: 3}
+  - {fileID: 21300000, guid: 1a1eab282e9447c42a64887da31ff094, type: 3}
+  - {fileID: 21300000, guid: 169d0b401c213e146b00c3581aad50e0, type: 3}
+  - {fileID: 21300000, guid: abc4ce7364d2f56419bbf8cad5a83c66, type: 3}
+  - {fileID: 21300000, guid: 50dd4fa83407fd24bbe709ca6cdcf437, type: 3}
+  - {fileID: 21300000, guid: 2d5c2deb694eabe478d2460efc0f56e7, type: 3}
+  EquipTypBotPrefab:
+  - {fileID: 21300000, guid: 4b41f9927d76548449fc00d1324961c7, type: 3}
+  - {fileID: 21300000, guid: c677aefbc89bd824ba402c26dbbee633, type: 3}
+  - {fileID: 21300000, guid: 91f0be839d427af43975c3c4a284c0bf, type: 3}
 --- !u!4 &104443292
 Transform:
   m_ObjectHideFlags: 0

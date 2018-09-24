@@ -7,18 +7,12 @@ public class ItemSpawner : MonoBehaviour
     [SerializeField]
     Item ItemPrefab;
 
-    public Item Spawn()
+    public Item Spawn(Data _data, MyUI _ui)
     {
         Item t = Instantiate(ItemPrefab, Vector3.zero, Quaternion.identity) as Item;
         t.transform.SetParent(transform);
         t.transform.localPosition = Vector3.zero;
-        return t;
-    }
-    public Item Spawn(Vector3 _pos)
-    {
-        Item t = Instantiate(ItemPrefab, Vector3.zero, Quaternion.identity) as Item;
-        t.transform.SetParent(transform);
-        t.transform.localPosition = _pos;
+        t.Set(_data, _ui);
         return t;
     }
 }

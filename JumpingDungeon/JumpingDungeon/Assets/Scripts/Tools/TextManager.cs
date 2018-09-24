@@ -56,8 +56,8 @@ public class TextManager
     /// <summary>
     /// 小數轉為百分比
     /// </summary>
-    public static int ToPercent(float _value)
+    public static float ToPercent(float _value)
     {
-        return Mathf.RoundToInt(_value * 100);
+        return _value * 100;
     }
 }

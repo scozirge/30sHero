@@ -107,6 +107,7 @@ MonoBehaviour:
   LocalParticles:
   - {fileID: 198350346737686014, guid: d831439896a03fd4e94904ea24d07106, type: 2}
   GlobalParticle: []
+  DeadParticles: []
   LifeTime: 6
   KnockIntensity: 0
   StunIntensity: 0
