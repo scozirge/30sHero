@@ -88,12 +88,12 @@ GameObject:
   - component: {fileID: 114884425457605678}
   - component: {fileID: 114364750184517408}
   - component: {fileID: 50284349101639710}
-  - component: {fileID: 114016134065368028}
+  - component: {fileID: 58819477902178946}
   - component: {fileID: 114796498901394522}
   - component: {fileID: 95077092610168030}
-  - component: {fileID: 70218732658532334}
+  - component: {fileID: 114014446417336624}
   m_Layer: 9
-  m_Name: 1S Shooter
+  m_Name: Bothside Melee
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -166,8 +166,8 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 200
---- !u!70 &70218732658532334
-CapsuleCollider2D:
+--- !u!58 &58819477902178946
+CircleCollider2D:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -175,12 +175,12 @@ CapsuleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -2, y: 1.64}
-  m_Size: {x: 161.1, y: 117.1}
-  m_Direction: 1
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 50
 --- !u!95 &95077092610168030
 Animator:
   serializedVersion: 3
@@ -199,7 +199,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &114016134065368028
+--- !u!114 &114014446417336624
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -207,22 +207,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 1570332876556426}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e3283f1f3a7e6b24db127fb13fd7f595, type: 3}
+  m_Script: {fileID: 11500000, guid: d51ff43f4f2a15c45b55bbca6d530f8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PSkillName: Shooter
-  PSkillDuration: 10
+  PSkillName: 
+  PSkillDuration: 0
   PSkillTimer: 0
   AttackOnce: 0
   Interval: 3
-  AmmoNum: 1
+  AmmoNum: 2
   AmmoInterval: 0
   StartAngle: 0
-  AngleInterval: 0
-  Patetern: 1
-  SpawnedInSelf: 0
-  AttackPrefab: {fileID: 114962956101920240, guid: cdb230a6efc22e241a995ba0f5fbb34c,
+  AngleInterval: 180
+  Patetern: 0
+  SpawnedInSelf: 1
+  AttackPrefab: {fileID: 114280530254980642, guid: 98920b54e1a38f644afa93ee1f5f025f,
     type: 2}
+  AttackRadius: 105
 --- !u!114 &114364750184517408
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -247,7 +248,7 @@ MonoBehaviour:
   DropProbility: 1
   DropCount: 1
   DropSkillProbility: 1
-  DropSkill: {fileID: 114016134065368028}
+  DropSkill: {fileID: 0}
 --- !u!114 &114372015654242946
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -321,7 +322,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 3fc7569d04a3c5b48803a9ff1e714527, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 70c2affa324c70d42b5ce37bbde38c9c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

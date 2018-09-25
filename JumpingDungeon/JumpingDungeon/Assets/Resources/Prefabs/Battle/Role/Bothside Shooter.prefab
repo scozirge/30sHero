@@ -93,7 +93,7 @@ GameObject:
   - component: {fileID: 95077092610168030}
   - component: {fileID: 70218732658532334}
   m_Layer: 9
-  m_Name: 1S Shooter
+  m_Name: Bothside Shooter
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -178,8 +178,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -2, y: 1.64}
-  m_Size: {x: 161.1, y: 117.1}
+  m_Offset: {x: 0, y: 7.6}
+  m_Size: {x: 148.05, y: 142}
   m_Direction: 1
 --- !u!95 &95077092610168030
 Animator:
@@ -215,13 +215,13 @@ MonoBehaviour:
   PSkillTimer: 0
   AttackOnce: 0
   Interval: 3
-  AmmoNum: 1
+  AmmoNum: 2
   AmmoInterval: 0
   StartAngle: 0
-  AngleInterval: 0
+  AngleInterval: 180
   Patetern: 1
   SpawnedInSelf: 0
-  AttackPrefab: {fileID: 114962956101920240, guid: cdb230a6efc22e241a995ba0f5fbb34c,
+  AttackPrefab: {fileID: 114962956101920240, guid: f6867f661086beb4f81aea30e1506914,
     type: 2}
 --- !u!114 &114364750184517408
 MonoBehaviour:
@@ -321,7 +321,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 3fc7569d04a3c5b48803a9ff1e714527, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c285bb505279f5f4196a9ecda7be30bd, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

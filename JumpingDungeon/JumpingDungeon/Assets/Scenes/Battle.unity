@@ -1409,16 +1409,15 @@ MonoBehaviour:
   SpawnCount: 1
   SpawnCountInterval: 0.2
   Enemys:
-  - {fileID: 114364750184517408, guid: 4e4608edff7362c45b106e955ca4fabe, type: 2}
-  - {fileID: 114364750184517408, guid: 7f01dc04a6c2a3e4e9f858ce8b73d261, type: 2}
-  - {fileID: 114370154489417922, guid: 419781b298d0d864180c1b601e3524ab, type: 2}
-  - {fileID: 114485926508205134, guid: bd820112e425412458a4e7368699ea55, type: 2}
-  - {fileID: 114485926508205134, guid: fa3d680ebfd0d464b8faf2ede8a54fb6, type: 2}
-  - {fileID: 114485926508205134, guid: fa3d680ebfd0d464b8faf2ede8a54fb6, type: 2}
+  - {fileID: 114364750184517408, guid: 7a4fcaea190fe1341b551043fc61e7ba, type: 2}
+  - {fileID: 114364750184517408, guid: e33fafe7031395e4e90d223a61e0dd19, type: 2}
+  - {fileID: 114364750184517408, guid: 7f6edaf36c640654db036ad9e0a0a0d2, type: 2}
+  - {fileID: 114485926508205134, guid: 36509ae15283f0b4b85c7eb28f152231, type: 2}
+  - {fileID: 114364750184517408, guid: fd1730034bed914409677edaf33d653c, type: 2}
+  - {fileID: 114364750184517408, guid: 4d1f64498757ee445a05825a7c7257a1, type: 2}
   EnemyParent: {fileID: 1123068882}
   CameraControler: {fileID: 519420030}
-  DesignatedEnemy: {fileID: 114485926508205134, guid: bd820112e425412458a4e7368699ea55,
-    type: 2}
+  DesignatedEnemy: {fileID: 0}
 --- !u!1 &1829895747
 GameObject:
   m_ObjectHideFlags: 0
