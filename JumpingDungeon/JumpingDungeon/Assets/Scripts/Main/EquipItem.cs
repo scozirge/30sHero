@@ -11,9 +11,14 @@ public class EquipItem : Item
     Image QualityBottom;
     [SerializeField]
     Text LVText;
+    [SerializeField]
+    GameObject SoldCoverObj;
+    [SerializeField]
+    GameObject SoldCheckObj;
     public EquipType MyType;
     new public EquipData MyData;
     new protected Equip ParentUI;
+    public bool IsSoldCheck;
 
     public override void Set(Data _data, MyUI _ui)
     {
@@ -42,14 +47,30 @@ public class EquipItem : Item
         LVText.text = MyData.GetLVString();
         Icon.sprite = MyData.GetICON();
         QualityBottom.sprite = GameManager.GetItemQualityBotSprite(MyData.Quality);
+        SetSoldMode(false);
+    }
+    public void SetSoldMode(bool _bool)
+    {
+        SoldCoverObj.SetActive(_bool);
+        if (!_bool)
+            IsSoldCheck = false;
+        SoldCheckObj.SetActive(IsSoldCheck);
     }
     public override void OnPress()
     {
         base.OnPress();
         if (!ParentUI)
             return;
-        ParentUI.ShowInfo(MyData);
-        ParentUI.ToEquip(MyData);
+        if (!Equip.SoldMode)
+        {
+            ParentUI.ShowInfo(MyData);
+            ParentUI.ToEquip(MyData);
+        }
+        else
+        {
+            IsSoldCheck = !IsSoldCheck;
+            SoldCheckObj.SetActive(IsSoldCheck);
+        }
     }
     public override void Filter(EquipType _type)
     {

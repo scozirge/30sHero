@@ -15,6 +15,7 @@ public class AccessoryData : EquipData
             return GameSettingData.GetAccessoryShield(LV);
         }
     }
+    public override int SellGold { get { return GameSettingData.GetAccessoryGold(LV, Quality); } }
     /// <summary>
     /// 將字典傳入，依json表設定資料
     /// </summary>

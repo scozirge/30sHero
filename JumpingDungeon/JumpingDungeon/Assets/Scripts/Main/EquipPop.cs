@@ -78,4 +78,11 @@ public class EquipPop : MonoBehaviour
         LvText[1].text = _rightData.GetLVString();
         Content[1].text = "說明";
     }
+    public void UpdateLeftEquipData(EquipData _leftData)
+    {
+        IconSprite[0].sprite = _leftData.GetICON();
+        QualityBottom[0].sprite = GameManager.GetItemQualityBotSprite(_leftData.Quality);
+        LvText[0].text = _leftData.GetLVString();
+        Content[0].text = "說明";
+    }
 }

@@ -39,7 +39,16 @@ public class Equip : MyUI
     Text AvatarTimeText;
     [SerializeField]
     Text SkillTimeText;
-
+    [SerializeField]
+    GameObject SellModeBtnObj;
+    [SerializeField]
+    GameObject NormalModeBtnObj;
+    [SerializeField]
+    Text ItemCoutText;
+    [SerializeField]
+    MyToggle SortTypeToggle;
+    [SerializeField]
+    MyToggle SortWayToggle;
 
 
 
@@ -51,6 +60,8 @@ public class Equip : MyUI
     List<EquipItem> ArmorList = new List<EquipItem>();
     List<EquipItem> AccessoryList = new List<EquipItem>();
     static int CurItemIndex;
+    static int CurEquipAccessoryIndex;
+    public static bool SoldMode;
 
     void Start()
     {
@@ -90,13 +101,39 @@ public class Equip : MyUI
             }
             EquipDic.Add(EquipType.Accessory, AccessoryList);
         }
-
+        ItemCoutText.text = string.Format("{0}/{1}", ItemList.Count, GameSettingData.MaxItemCount);
         Filter();
+        Sort();
     }
     public override void OnEnable()
     {
         base.OnEnable();
         UpdateRoleInfo();
+    }
+    public void SetSoldMode(bool _bool)
+    {
+        SoldMode = _bool;
+        for (int i = 0; i < ItemList.Count; i++)
+        {
+            ItemList[i].SetSoldMode(_bool);
+        }
+        SellModeBtnObj.SetActive(_bool);
+        NormalModeBtnObj.SetActive(!_bool);
+    }
+    public void Sell()
+    {
+        for (int i = 0; i < ItemList.Count; i++)
+        {
+            if (ItemList[i].IsSoldCheck)
+            {
+                Player.SellEquip(ItemList[i].MyData);
+                EquipDic[ItemList[i].MyData.Type].Remove(ItemList[i]);
+                ItemList[i].SelfDestroy();
+                ItemList[i] = null;
+            }
+        }
+        ItemList.RemoveAll(item => item == null);
+        ItemCoutText.text = string.Format("{0}/{1}", ItemList.Count, GameSettingData.MaxItemCount);
     }
     public override void ShowInfo(Data _data)
     {
@@ -136,8 +173,15 @@ public class Equip : MyUI
                 EquipPop.SetEquipData(Player.MyArmor, SelectedEquip);
                 break;
             case EquipType.Accessory:
-                if (Player.MyAccessorys.Length > 0)
-                    EquipPop.SetEquipData(Player.MyAccessorys[0], SelectedEquip);
+                if (Player.MyAccessorys[0] != null && Player.MyAccessorys[1] == null)
+                {
+                    CurEquipAccessoryIndex = 1;
+                }
+                else
+                {
+                    CurEquipAccessoryIndex = 0;
+                }
+                EquipPop.SetEquipData(Player.MyAccessorys[CurEquipAccessoryIndex], SelectedEquip);
                 break;
         }
         CurItemIndex = GetIndex(_data.UID);
@@ -179,7 +223,21 @@ public class Equip : MyUI
             CurItemIndex = EquipDic[CurFilterType].Count - 1;
         SelectedEquip = EquipDic[CurFilterType][CurItemIndex].MyData;
         EquipPop.UpdateRightEquipData(SelectedEquip);
+    }
 
+    public void NextAccessory()
+    {
+        CurEquipAccessoryIndex++;
+        if (CurEquipAccessoryIndex >= Player.MyAccessorys.Length)
+            CurEquipAccessoryIndex = 0;
+        EquipPop.UpdateLeftEquipData(Player.MyAccessorys[CurEquipAccessoryIndex]);
+    }
+    public void PreviousAccessory()
+    {
+        CurEquipAccessoryIndex--;
+        if (CurEquipAccessoryIndex < 0)
+            CurEquipAccessoryIndex = Player.MyAccessorys.Length - 1;
+        EquipPop.UpdateLeftEquipData(Player.MyAccessorys[CurEquipAccessoryIndex]);
     }
 
     public void ToTakeOff(int _equipTypeID)
@@ -205,17 +263,43 @@ public class Equip : MyUI
         if (_index > 1 || _index < 0)
             _index = 0;
         TakeOffType = EquipType.Accessory;
-        if (Player.MyAccessorys.Length > 0)
+        CurEquipAccessoryIndex = _index;
+        if (Player.MyAccessorys[CurEquipAccessoryIndex] != null)
         {
-            if (Player.MyAccessorys[_index] == null)
-                return;
-            EquipPop.SetEquipData(Player.MyAccessorys[_index], null);
+            EquipPop.SetEquipData(Player.MyAccessorys[CurEquipAccessoryIndex], null);
             EquipPop.gameObject.SetActive(true);
         }
     }
     public void CancelEquip()
     {
         EquipPop.gameObject.SetActive(false);
+    }
+    public void Sort()
+    {
+        if (!SortTypeToggle.isOn)
+        {
+            ItemList.Sort(SortByLV);
+        }
+        else
+        {
+            ItemList.Sort(SortByQuality);
+        }
+        if(!SortWayToggle.isOn)
+        {
+            ItemList.Reverse();
+        }
+        for(int i=0;i<ItemList.Count;i++)
+        {
+            ItemList[i].transform.SetSiblingIndex(i);
+        }
+    }
+    static int SortByLV(EquipItem _e1, EquipItem _e2)
+    {
+        return _e1.MyData.LV.CompareTo(_e2.MyData.LV);
+    }
+    static int SortByQuality(EquipItem _e1, EquipItem _e2)
+    {
+        return _e1.MyData.Quality.CompareTo(_e2.MyData.Quality);
     }
     public void ExecuteEquip()
     {
@@ -243,12 +327,12 @@ public class Equip : MyUI
                 case EquipType.Accessory:
                     if (Player.MyAccessorys.Length > 0)
                     {
-                        if (Player.MyAccessorys[0] != null)
+                        if (Player.MyAccessorys[CurEquipAccessoryIndex] != null)
                         {
-                            int index = GetIndexFromTotalItemList(Player.MyAccessorys[0].UID);
+                            int index = GetIndexFromTotalItemList(Player.MyAccessorys[CurEquipAccessoryIndex].UID);
                             EquipDic[CurFilterType].Add(ItemList[index]);
                         }
-                        Player.Equip((AccessoryData)SelectedEquip, 0);
+                        Player.Equip((AccessoryData)SelectedEquip, CurEquipAccessoryIndex);
                     }
                     break;
             }
@@ -272,9 +356,9 @@ public class Equip : MyUI
                 case EquipType.Accessory:
                     if (Player.MyAccessorys.Length > 0)
                     {
-                        itemIndex = GetIndexFromTotalItemList(Player.MyAccessorys[0].UID);
+                        itemIndex = GetIndexFromTotalItemList(Player.MyAccessorys[CurEquipAccessoryIndex].UID);
                         EquipDic[TakeOffType].Add(ItemList[itemIndex]);
-                        Player.TakeOff((AccessoryData)SelectedEquip, 0);
+                        Player.TakeOff((AccessoryData)SelectedEquip, CurEquipAccessoryIndex);
                     }
                     break;
             }

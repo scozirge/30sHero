@@ -15,6 +15,7 @@ public class WeaponData : EquipData
             return GameSettingData.GetWeaponAttack(LV);
         }
     }
+    public override int SellGold { get { return GameSettingData.GetWeaponGold(LV, Quality); } }
     /// <summary>
     /// 將字典傳入，依json表設定資料
     /// </summary>

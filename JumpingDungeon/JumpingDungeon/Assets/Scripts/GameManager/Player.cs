@@ -268,6 +268,10 @@ public partial class Player
         list.Add(w.UID, w);
         list.Add(w2.UID, w2);
         Itmes.Add(EquipType.Weapon, list);
+        List<WeaponData> MyLies = new List<WeaponData>();
+        MyLies.Add(w);
+        MyLies.Add(w2);
+        MyLies.Remove(w);
 
         list = new Dictionary<long, EquipData>();
         ArmorData a = ArmorData.GetNewArmor(2, 2, 1, false);
@@ -277,10 +281,16 @@ public partial class Player
         Itmes.Add(EquipType.Armor, list);
 
         list = new Dictionary<long, EquipData>();
-        AccessoryData ad = AccessoryData.GetNewAccessory(3, 1, 5);
-        AccessoryData ad2 = AccessoryData.GetNewAccessory(1, 4, 2);
+        AccessoryData ad = AccessoryData.GetNewAccessory(1, 5, 1);
+        AccessoryData ad2 = AccessoryData.GetNewAccessory(2, 4, 2);
+        AccessoryData ad3 = AccessoryData.GetNewAccessory(3, 3, 3);
+        AccessoryData ad4 = AccessoryData.GetNewAccessory(1, 2, 4);
+        AccessoryData ad5 = AccessoryData.GetNewAccessory(2, 1, 5);
         list.Add(ad.UID, ad);
         list.Add(ad2.UID, ad2);
+        list.Add(ad3.UID, ad3);
+        list.Add(ad4.UID, ad4);
+        list.Add(ad5.UID, ad5);
         Itmes.Add(EquipType.Accessory, list);
         list = new Dictionary<long, EquipData>();
         //PlayerPrefs.DeleteAll();//清除玩家資料
@@ -342,12 +352,24 @@ public partial class Player
             MyAccessorys[_index].IsEquiped = false;
         MyAccessorys[_index] = null;
     }
+    public static void SellEquip(EquipData _data)
+    {
+        if (Itmes[_data.Type].ContainsKey(_data.UID))
+        {
+            GainGolg(_data.SellGold);
+            Itmes[_data.Type].Remove(_data.UID);
+        }
+        else
+            Debug.LogWarning("Sell Equip isn't in Items");
+    }
     public static void GainGolg(int _gold)
     {
         Gold += _gold;
+        PlayerPanel.UpdateResource();
     }
     public static void GainEmerald(int _emerald)
     {
         Emerald += _emerald;
+        PlayerPanel.UpdateResource();
     }
 }

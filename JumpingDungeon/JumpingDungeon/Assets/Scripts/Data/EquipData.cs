@@ -14,6 +14,7 @@ public abstract class EquipData : Data
     const string ImagePath = "Images/Main/{0}";
     public int Quality;
     public int LV;
+    public virtual int SellGold { get; }
     public string GetLVString()
     {
         return string.Format("{0}{1}", GameDictionary.String_UIDic["LV"].GetString(Player.UseLanguage), LV);

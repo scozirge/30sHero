@@ -18,5 +18,9 @@ public class Item : MonoBehaviour
     public virtual void Filter(EquipType _type)
     {
     }
+    public virtual void SelfDestroy()
+    {
+        Destroy(gameObject);
+    }
 
 }

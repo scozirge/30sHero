@@ -39,6 +39,7 @@ public class GameSettingData : Data
     public static int RandomGoldDrop;
     public static float RandomBloodThirsty;
     public static float RandomPotionEfficiency;
+    public static int MaxItemCount;
 
 
 
@@ -173,6 +174,9 @@ public class GameSettingData : Data
                                 break;
                             case "RandomPotionEfficiency":
                                 RandomPotionEfficiency = float.Parse(item[key].ToString());
+                                break;
+                            case "MaxItemCount":
+                                MaxItemCount = int.Parse(item[key].ToString());
                                 break;
                             default:
                                 Debug.LogWarning(string.Format("{0}表有不明屬性:{1}", DataName, key));

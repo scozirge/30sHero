@@ -15,6 +15,7 @@ public class ArmorData : EquipData
             return GameSettingData.GetArmorHealth(LV);
         }
     }
+    public override int SellGold { get { return GameSettingData.GetArmorGold(LV, Quality); } }
     /// <summary>
     /// 將字典傳入，依json表設定資料
     /// </summary>
