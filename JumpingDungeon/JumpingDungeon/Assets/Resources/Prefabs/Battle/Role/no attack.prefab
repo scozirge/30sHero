@@ -215,7 +215,7 @@ MonoBehaviour:
   BaseDamage: 0
   BaseDefence: 0
   BaseMoveSpeed: 600
-  DeathEffect: {fileID: 198421084779393996, guid: 9d76221f8330c3e4e88f4600ea7c80bc,
+  DeathEffect: {fileID: 198802542160044040, guid: 8f344cf8edc65e44883dfdf0168792bd,
     type: 2}
   AniPlayer: {fileID: 114796498901394522}
   RoleTrans: {fileID: 224787385446496172}
