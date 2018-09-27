@@ -1692,6 +1692,26 @@ Prefab:
       propertyPath: SelfKnockForce
       value: 100000
       objectReference: {fileID: 0}
+    - target: {fileID: 224290569326616614, guid: d9e47796d36fc83458ffab41aea6641e,
+        type: 2}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114601397981697422, guid: d9e47796d36fc83458ffab41aea6641e,
+        type: 2}
+      propertyPath: MyCamera
+      value: 
+      objectReference: {fileID: 519420031}
+    - target: {fileID: 114601397981697422, guid: d9e47796d36fc83458ffab41aea6641e,
+        type: 2}
+      propertyPath: CursorLimitDist
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 114601397981697422, guid: d9e47796d36fc83458ffab41aea6641e,
+        type: 2}
+      propertyPath: RushForce
+      value: 1000000
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114964198349882810, guid: d9e47796d36fc83458ffab41aea6641e, type: 2}
   m_SourcePrefab: {fileID: 100100000, guid: d9e47796d36fc83458ffab41aea6641e, type: 2}

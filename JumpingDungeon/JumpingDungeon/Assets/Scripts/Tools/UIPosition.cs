@@ -3,7 +3,7 @@ using System.Collections;
 
 public class UIPosition
 {
-    public static void UIToWorldPos(RectTransform _canvasRect, Camera _camera, Transform _targetTrans, RectTransform _selfTrans,float _diffPosX,float _diffPosY)
+    public static void UIToWorldPos(RectTransform _canvasRect, Camera _camera, Transform _targetTrans, RectTransform _selfTrans, float _diffPosX, float _diffPosY)
     {
         //then you calculate the position of the UI element
         //0,0 for the canvas is at the center of the screen, whereas WorldToViewPortPoint treats the lower left corner as 0,0. Because of this, you need to subtract the height / width of the canvas * 0.5 to get the correct position.

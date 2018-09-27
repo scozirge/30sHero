@@ -59,7 +59,7 @@ public partial class PlayerRole : Role
     bool StartGenerateShield;
     MyTimer ShieldTimer;
     public override float MoveSpeed { get { return BaseMoveSpeed + ExtraMoveSpeed; } }
-    private float extraMoveSpeed;    
+    private float extraMoveSpeed;
     public float ExtraMoveSpeed
     {
         get { return extraMoveSpeed; }
@@ -110,7 +110,8 @@ public partial class PlayerRole : Role
     [Tooltip("藥水效果強化比例")]
     [SerializeField]
     protected float PotionEfficacy;
-    const int MoveFactor = 1;
+    const int KeyboardMoveFactor = 1;
+    const int CursorMoveFactor = 40;
     [Tooltip("移動加速特效")]
     [SerializeField]
     ParticleSystem MoveAfterimagePrefab;
@@ -123,6 +124,20 @@ public partial class PlayerRole : Role
     [Tooltip("自身攻擊時彈開力道")]
     [SerializeField]
     int SelfKnockForce;
+    [Tooltip("移動方式")]
+    [SerializeField]
+    MoveControl ControlDevice;
+    [Tooltip("滑鼠在多少距離內不移動")]
+    [SerializeField]
+    float CursorLimitDist;
+    [Tooltip("攝影機")]
+    [SerializeField]
+    Camera MyCamera;
+    [Tooltip("衝刺力道")]
+    [SerializeField]
+    int RushForce;
+
+
     MyTimer AttackTimer;
     [HideInInspector]
     public int FaceDir;
@@ -226,23 +241,65 @@ public partial class PlayerRole : Role
         }
         AvatarTimerText.text = Mathf.Round(AvatarTimer).ToString();
     }
+
     protected override void Move()
     {
         base.Move();
         if (Buffers.ContainsKey(RoleBuffer.Stun))
             return;
-        float xMoveForce = Input.GetAxis("Horizontal") * MoveSpeed * MoveFactor;
-        float yMoveForce = Input.GetAxis("Vertical") * MoveSpeed * MoveFactor;
-        MyRigi.velocity += new Vector2(xMoveForce, yMoveForce);
+
+        if (ControlDevice == MoveControl.Cursor)
+        {
+            //滑鼠移動
+            Vector3 cursorPos = Input.mousePosition;
+            cursorPos = MyCamera.ScreenToWorldPoint(new Vector3(cursorPos.x, cursorPos.y, 0));
+            cursorPos.z = 0;
+            float distance = Vector3.Distance(cursorPos, transform.position);
+            if (distance > CursorLimitDist)
+            {
+                Vector3 dir = (cursorPos - transform.position);
+                if (dir.x > 0)
+                    FaceDir = 1;
+                else
+                    FaceDir = -1;
+                float origAngle = (Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg) * Mathf.Deg2Rad;
+                dir = new Vector3(Mathf.Cos(origAngle), Mathf.Sin(origAngle), 0).normalized;
+                Vector2 force = dir * MoveSpeed * CursorMoveFactor;
+                MyRigi.AddForce(force);
+                //衝刺
+                if (Input.GetMouseButtonDown(0))
+                {
+                    Vector2 rushForce = dir * RushForce;
+                    MyRigi.AddForce(rushForce);
+                }
+            }
+        }
+        else if (ControlDevice == MoveControl.Keyboard)
+        {
+            //鍵盤移動
+            float xMoveForce = 0;
+            float yMoveForce = 0;
+            xMoveForce = Input.GetAxis("Horizontal") * MoveSpeed * KeyboardMoveFactor;
+            yMoveForce = Input.GetAxis("Vertical") * MoveSpeed * KeyboardMoveFactor;
+            MyRigi.velocity += new Vector2(xMoveForce, yMoveForce);
+        }
         FaceTarget();
     }
     void FaceTarget()
     {
-        if (Input.GetAxis("Horizontal") == 0) { }
-        else if (Input.GetAxis("Horizontal") > 0)
-            FaceDir = 1;
-        else
-            FaceDir = -1;
+        if (ControlDevice == MoveControl.Cursor)
+        {
+            //滑鼠移動
+        }
+        else if (ControlDevice == MoveControl.Keyboard)
+        {
+            //鍵盤移動
+            if (Input.GetAxis("Horizontal") == 0) { }
+            else if (Input.GetAxis("Horizontal") > 0)
+                FaceDir = 1;
+            else
+                FaceDir = -1;
+        }
         RoleTrans.localScale = new Vector2(FaceDir, 1);
     }
     public void GetLoot(LootType _type, BufferData _data)
