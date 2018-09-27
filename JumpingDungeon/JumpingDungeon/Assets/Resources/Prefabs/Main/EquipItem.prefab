@@ -187,6 +187,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Icon: {fileID: 0}
   LVText: {fileID: 0}
+  MyType: 0
 --- !u!114 &114367273034673202
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -341,7 +342,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 12800000, guid: eab19f146f468874e92ae2105ed03340, type: 3}
-    m_FontSize: 36
+    m_FontSize: 40
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 3
@@ -354,6 +355,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: lv1
   UIString: 
+  IsInit: 0
 --- !u!222 &222395911879556232
 CanvasRenderer:
   m_ObjectHideFlags: 1
@@ -409,7 +411,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 86, y: -86}
+  m_AnchoredPosition: {x: 86, y: 190}
   m_SizeDelta: {x: 172, y: 172}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224261494179376206

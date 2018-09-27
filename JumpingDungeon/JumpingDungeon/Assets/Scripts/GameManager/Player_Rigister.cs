@@ -9,7 +9,10 @@ public partial class Player
     /// </summary>
     public static void SetLanguage(Language _language)
     {
+        if (UseLanguage == _language)
+            return;
         UseLanguage = _language;
+        MyText.RefreshActivityTexts();
     }
     public static void SignUpGetData(string[] _data)
     {

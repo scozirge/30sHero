@@ -8,13 +8,6 @@ public class AccessoryData : EquipData
 {
     public override EquipType Type { get { return EquipType.Accessory; } }
     static long MaxUID;
-    public override int BaseShield
-    {
-        get
-        {
-            return GameSettingData.GetAccessoryShield(LV);
-        }
-    }
     public override int SellGold { get { return GameSettingData.GetAccessoryGold(LV, Quality); } }
     /// <summary>
     /// 將字典傳入，依json表設定資料
@@ -45,19 +38,17 @@ public class AccessoryData : EquipData
         }
         protected set { return; }
     }
-    public int Attack
-    {
-        get
-        {
-            return GameSettingData.GetAccessoryShield(LV);
-        }
-    }
     public int Gold
     {
         get
         {
             return GameSettingData.GetAccessoryGold(LV, Quality);
         }
+    }
+    protected override void SetRandomProperties()
+    {
+        base.SetRandomProperties();
+        Properties[RoleProperty.Shield] += GameSettingData.GetAccessoryShield(LV);
     }
     public AccessoryData(JsonData _item)
         : base(_item)

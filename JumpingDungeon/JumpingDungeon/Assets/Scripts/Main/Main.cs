@@ -20,6 +20,9 @@ public class Main : MonoBehaviour
     MainUI CurUI;
 
 
+    static Text MyGoldText;
+    static Text MyEmeraldText;
+
     Dictionary<MainUI, MyUI> UIDic = new Dictionary<MainUI, MyUI>();
 
     // Use this for initialization
@@ -36,11 +39,20 @@ public class Main : MonoBehaviour
             else
                 UIDic[keys[i]].SetActive(true);
         }
+        MyGoldText = GoldText;
+        MyEmeraldText = EmeraldText;
     }
     void OnEnable()
     {
         GoldText.text = Player.Gold.ToString();
         EmeraldText.text = Player.Emerald.ToString();
+    }
+    public static void UpdateResource()
+    {
+        if (MyGoldText == null)
+            return;
+        MyGoldText.text = Player.Gold.ToString();
+        MyEmeraldText.text = Player.Emerald.ToString();
     }
     public void ChangeUI(int _enumID)
     {
@@ -63,7 +75,7 @@ public class Main : MonoBehaviour
     }
     public void Battle()
     {
-
+        ChangeScene.GoToScene(MyScene.Battle);
     }
 
 }

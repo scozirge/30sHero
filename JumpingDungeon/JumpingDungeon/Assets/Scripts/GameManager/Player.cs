@@ -31,237 +31,40 @@ public partial class Player
     public static float BaseEquipDrop;
     public static float BaseBloodthirsty;
     public static float BasePotionEfficacy;
+    //Strengthen Dic
+    public static Dictionary<int, StrengthenData> StrengthenDic = new Dictionary<int, StrengthenData>();
+    //Properties
+    static Dictionary<RoleProperty, float> Properties = new Dictionary<RoleProperty, float>();
+    static Dictionary<RoleProperty, float> EquipPlus = new Dictionary<RoleProperty, float>();
+    static Dictionary<RoleProperty, float> EquipMultiple = new Dictionary<RoleProperty, float>();
+    static Dictionary<RoleProperty, float> StrengthenPlus = new Dictionary<RoleProperty, float>();
+    static Dictionary<RoleProperty, float> StrengthenMultiple = new Dictionary<RoleProperty, float>();
 
-    public static int Strength
+    public static float GetProperties(RoleProperty _property)
     {
-        get
-        {
-            int result = BaseStrength;
-            if (MyWeapon != null)
-                result += MyWeapon.Strength;
-            if (MyArmor != null)
-                result += MyArmor.Strength;
-            for (int i = 0; i < MyAccessorys.Length; i++)
-            {
-                if (MyAccessorys[i] != null)
-                    result += MyAccessorys[i].Strength;
-            }
-            return result;
-        }
-    }
-    public static int Health
-    {
-        get
-        {
-            int result = BaseHealth;
-            if (MyWeapon != null)
-                result += MyWeapon.Health;
-            if (MyArmor != null)
-                result += MyArmor.Health;
-            for (int i = 0; i < MyAccessorys.Length; i++)
-            {
-                if (MyAccessorys[i] != null)
-                    result += MyAccessorys[i].Health;
-            }
-            return result;
-        }
-    }
-    public static int Shield
-    {
-        get
-        {
-            int result = BaseShield;
-            if (MyWeapon != null)
-                result += MyWeapon.Shield;
-            if (MyArmor != null)
-                result += MyArmor.Shield;
-            for (int i = 0; i < MyAccessorys.Length; i++)
-            {
-                if (MyAccessorys[i] != null)
-                    result += MyAccessorys[i].Shield;
-            }
-            return result;
-        }
-    }
-    public static int ShieldRecovery
-    {
-        get
-        {
-            int result = BaseShieldRecovery;
-            if (MyWeapon != null)
-                result += MyWeapon.RandomShieldRecovery;
-            if (MyArmor != null)
-                result += MyArmor.RandomShieldRecovery;
-            for (int i = 0; i < MyAccessorys.Length; i++)
-            {
-                if (MyAccessorys[i] != null)
-                    result += MyAccessorys[i].RandomShieldRecovery;
-            }
-            return result;
-        }
+        return 
+            Properties[_property] 
+            *
+            (EquipMultiple[_property] + StrengthenMultiple[_property])
+            +
+            (EquipPlus[_property] + StrengthenPlus[_property]);
     }
 
-    public static int MoveSpeed
-    {
-        get
-        {
-            int result = BaseMoveSpeed;
-            if (MyWeapon != null)
-                result += MyWeapon.RandomMoveSpeed;
-            if (MyArmor != null)
-                result += MyArmor.RandomMoveSpeed;
-            for (int i = 0; i < MyAccessorys.Length; i++)
-            {
-                if (MyAccessorys[i] != null)
-                    result += MyAccessorys[i].RandomMoveSpeed;
-            }
-            return result;
-        }
-    }
-    public static int MaxMoveSpeed
-    {
-        get
-        {
-            int result = BaseMaxMoveSpeed;
-            if (MyWeapon != null)
-                result += MyWeapon.RandomMaxMoveSpeed;
-            if (MyArmor != null)
-                result += MyArmor.RandomMaxMoveSpeed;
-            for (int i = 0; i < MyAccessorys.Length; i++)
-            {
-                if (MyAccessorys[i] != null)
-                    result += MyAccessorys[i].RandomMaxMoveSpeed;
-            }
-            return result;
-        }
-    }
-    public static float AvatarTime
-    {
-        get
-        {
-            float result = BaseAvatarTime;
-            if (MyWeapon != null)
-                result += MyWeapon.RandomAvatarTime;
-            if (MyArmor != null)
-                result += MyArmor.RandomAvatarTime;
-            for (int i = 0; i < MyAccessorys.Length; i++)
-            {
-                if (MyAccessorys[i] != null)
-                    result += MyAccessorys[i].RandomAvatarTime;
-            }
-            return result;
-        }
-    }
-    public static float SkillTime
-    {
-        get
-        {
-            float result = BaseSkillTime;
-            if (MyWeapon != null)
-                result += MyWeapon.RandomSkillTime;
-            if (MyArmor != null)
-                result += MyArmor.RandomSkillTime;
-            for (int i = 0; i < MyAccessorys.Length; i++)
-            {
-                if (MyAccessorys[i] != null)
-                    result += MyAccessorys[i].RandomSkillTime;
-            }
-            return result;
-        }
-    }
-    public static float SkillDrop
-    {
-        get
-        {
-            float result = BaseSkillDrop;
-            if (MyWeapon != null)
-                result += MyWeapon.RandomSkillDrop;
-            if (MyArmor != null)
-                result += MyArmor.RandomSkillDrop;
-            for (int i = 0; i < MyAccessorys.Length; i++)
-            {
-                if (MyAccessorys[i] != null)
-                    result += MyAccessorys[i].RandomSkillDrop;
-            }
-            return result;
-        }
-    }
-    public static int GoldDrop
-    {
-        get
-        {
-            int result = BaseGoldDrop;
-            if (MyWeapon != null)
-                result += MyWeapon.RandomGoldDrop;
-            if (MyArmor != null)
-                result += MyArmor.RandomGoldDrop;
-            for (int i = 0; i < MyAccessorys.Length; i++)
-            {
-                if (MyAccessorys[i] != null)
-                    result += MyAccessorys[i].RandomGoldDrop;
-            }
-            return result;
-        }
-    }
-    public static float EquipDrop
-    {
-        get
-        {
-            float result = BaseEquipDrop;
-            if (MyWeapon != null)
-                result += MyWeapon.RandomEquipDrop;
-            if (MyArmor != null)
-                result += MyArmor.RandomEquipDrop;
-            for (int i = 0; i < MyAccessorys.Length; i++)
-            {
-                if (MyAccessorys[i] != null)
-                    result += MyAccessorys[i].RandomEquipDrop;
-            }
-            return result;
-        }
-    }
-    public static float Bloodthirsty
-    {
-        get
-        {
-            float result = BaseBloodthirsty;
-            if (MyWeapon != null)
-                result += MyWeapon.RandomBloodThirsty;
-            if (MyArmor != null)
-                result += MyArmor.RandomBloodThirsty;
-            for (int i = 0; i < MyAccessorys.Length; i++)
-            {
-                if (MyAccessorys[i] != null)
-                    result += MyAccessorys[i].RandomBloodThirsty;
-            }
-            return result;
-        }
-    }
-    public static float PotionEfficacy
-    {
-        get
-        {
-            float result = BasePotionEfficacy;
-            if (MyWeapon != null)
-                result += MyWeapon.RandomPotionEfficiency;
-            if (MyArmor != null)
-                result += MyArmor.RandomPotionEfficiency;
-            for (int i = 0; i < MyAccessorys.Length; i++)
-            {
-                if (MyAccessorys[i] != null)
-                    result += MyAccessorys[i].RandomPotionEfficiency;
-            }
-            return result;
-        }
-    }
-    //Strengthen LV
-    public static Dictionary<int, int> StrengthenLVDic = new Dictionary<int, int>();
+
 
 
     public static void Init()
     {
-        Player.SetLanguage(Language.ZH_TW);
-        StrengthenLVDic.Add(1, 3);
+        Player.SetLanguage(Language.EN);
+        Properties = GameSettingData.GetNewRolePropertiesDic(0);
+        EquipPlus = GameSettingData.GetNewRolePropertiesDic(0);
+        EquipMultiple = GameSettingData.GetNewRolePropertiesDic(1);
+        StrengthenPlus = GameSettingData.GetNewRolePropertiesDic(0);
+        StrengthenMultiple = GameSettingData.GetNewRolePropertiesDic(1);
+        StrengthenDic = StrengthenData.GetNewStrengthenDic(0);
+        //測試用
+        GainGold(100);
+        StrengthenDic[1].LV = 3;
         Dictionary<long, EquipData> list = new Dictionary<long, EquipData>();
         WeaponData w = WeaponData.GetNewWeapon(1, 4, 3);
         WeaponData w2 = WeaponData.GetNewWeapon(2, 5, 2);
@@ -315,6 +118,7 @@ public partial class Player
             MyWeapon.IsEquiped = false;
         MyWeapon = _data;
         MyWeapon.IsEquiped = true;
+        GameSettingData.RolePropertyOperate(EquipPlus, _data.Properties, Operator.Plus);
     }
     public static void Equip(ArmorData _data)
     {
@@ -322,6 +126,7 @@ public partial class Player
             MyArmor.IsEquiped = false;
         MyArmor = _data;
         MyArmor.IsEquiped = true;
+        GameSettingData.RolePropertyOperate(EquipPlus, _data.Properties, Operator.Plus);
     }
     public static void Equip(AccessoryData _data, int _index)
     {
@@ -331,18 +136,21 @@ public partial class Player
             MyAccessorys[_index].IsEquiped = false;
         MyAccessorys[_index] = _data;
         MyAccessorys[_index].IsEquiped = true;
+        GameSettingData.RolePropertyOperate(EquipPlus, _data.Properties, Operator.Plus);
     }
     public static void TakeOff(WeaponData _data)
     {
         if (MyWeapon != null)
             MyWeapon.IsEquiped = false;
         MyWeapon = null;
+        GameSettingData.RolePropertyOperate(EquipPlus, _data.Properties, Operator.Minus);
     }
     public static void TakeOff(ArmorData _data)
     {
         if (MyArmor != null)
             MyArmor.IsEquiped = false;
         MyArmor = null;
+        GameSettingData.RolePropertyOperate(EquipPlus, _data.Properties, Operator.Minus);
     }
     public static void TakeOff(AccessoryData _data, int _index)
     {
@@ -356,20 +164,25 @@ public partial class Player
     {
         if (Itmes[_data.Type].ContainsKey(_data.UID))
         {
-            GainGolg(_data.SellGold);
+            GainGold(_data.SellGold);
             Itmes[_data.Type].Remove(_data.UID);
         }
         else
             Debug.LogWarning("Sell Equip isn't in Items");
     }
-    public static void GainGolg(int _gold)
+    public static void GainGold(int _gold)
     {
         Gold += _gold;
-        PlayerPanel.UpdateResource();
+        Main.UpdateResource();
     }
     public static void GainEmerald(int _emerald)
     {
         Emerald += _emerald;
-        PlayerPanel.UpdateResource();
+        Main.UpdateResource();
+    }
+    public static void UpgradeStrengthen(StrengthenData _data)
+    {
+        GainGold(-_data.GetPrice());
+        _data.LevelUp();
     }
 }

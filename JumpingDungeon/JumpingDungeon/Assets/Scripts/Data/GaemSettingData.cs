@@ -30,7 +30,7 @@ public class GameSettingData : Data
     public static int RandomShieldRecovery;
     public static int RandomMoveSpeed;
     public static int RandomMaxMoveSpeed;
-    public static float RandomMaxMoveDecay;
+    public static float RandomMoveDecay;
     public static float RandomAvatarTime;
     public static float RandomAvatarDrop;
     public static float RandomSkillTime;
@@ -40,7 +40,14 @@ public class GameSettingData : Data
     public static float RandomBloodThirsty;
     public static float RandomPotionEfficiency;
     public static int MaxItemCount;
+    public static string GrowingNumberColor;
+    public static string DropingNumberColor;
+    public static string NormalNumberColor;
+    public static string StrengthenPath;
+    public static string EquipPath;
 
+    //裝備可隨機的屬性類型
+    static List<RoleProperty> RandomPropertyList = new List<RoleProperty>() { RoleProperty.Strength, RoleProperty.Health, RoleProperty.Shield, RoleProperty.ShieldRecovery, RoleProperty.MoveSpeed, RoleProperty.MaxMoveSpeed, RoleProperty.MoveDecay, RoleProperty.AvatarTime, RoleProperty.AvatarDrop, RoleProperty.SkillTime, RoleProperty.SkillDrop, RoleProperty.EquipDrop, RoleProperty.GoldDrop, RoleProperty.BloodThirsty, RoleProperty.PotionEfficiency };
 
 
     /// <summary>
@@ -59,6 +66,7 @@ public class GameSettingData : Data
             _dic.Add(id, data);
         }
     }
+
     GameSettingData(JsonData _item)
     {
         try
@@ -148,8 +156,8 @@ public class GameSettingData : Data
                             case "RandomMaxMoveSpeed":
                                 RandomMaxMoveSpeed = int.Parse(item[key].ToString());
                                 break;
-                            case "RandomMaxMoveDecay":
-                                RandomMaxMoveDecay = float.Parse(item[key].ToString());
+                            case "RandomMoveDecay":
+                                RandomMoveDecay = float.Parse(item[key].ToString());
                                 break;
                             case "RandomAvatarTime":
                                 RandomAvatarTime = float.Parse(item[key].ToString());
@@ -178,6 +186,21 @@ public class GameSettingData : Data
                             case "MaxItemCount":
                                 MaxItemCount = int.Parse(item[key].ToString());
                                 break;
+                            case "GrowingNumberColor":
+                                GrowingNumberColor = item[key].ToString();
+                                break;
+                            case "DropingNumberColor":
+                                DropingNumberColor = item[key].ToString();
+                                break;
+                            case "NormalNumberColor":
+                                NormalNumberColor = item[key].ToString();
+                                break;
+                            case "StrengthenPath":
+                                StrengthenPath = item[key].ToString();
+                                break;
+                            case "EquipPath":
+                                EquipPath = item[key].ToString();
+                                break;
                             default:
                                 Debug.LogWarning(string.Format("{0}表有不明屬性:{1}", DataName, key));
                                 break;
@@ -194,7 +217,7 @@ public class GameSettingData : Data
             Debug.LogException(ex);
         }
     }
-    public static int GetWeaponAttack(int _lv)
+    public static int GetWeaponStrength(int _lv)
     {
         return WeaponValue + _lv * WeaponLVUpValue;
     }
@@ -218,103 +241,93 @@ public class GameSettingData : Data
     {
         return Mathf.RoundToInt((AccessoryGold + _lv * AccessoryLVUpGold) * GoldQualityDic[_quality]);
     }
-    public static Dictionary<string, float> GetRandomEquipProperties(int _quality, int _lv)
+    public static Dictionary<RoleProperty, float> GetNewRolePropertiesDic(float _initValue)
     {
-        Dictionary<string, float> dic = new Dictionary<string, float>();
+        Dictionary<RoleProperty, float> dic = new Dictionary<RoleProperty, float>();
+        for (int i = 0; i < Enum.GetValues(typeof(RoleProperty)).Length; i++)
+        {
+            dic.Add((RoleProperty)i, _initValue);
+        }
+        return dic;
+    }
+    public static void RolePropertyOperate(Dictionary<RoleProperty, float> _dic1, Dictionary<RoleProperty, float> _dic2, Operator _operator)
+    {
+        List<RoleProperty> keys = new List<RoleProperty>(_dic1.Keys);
+        switch (_operator)
+        {
+            case Operator.Plus:
+                for (int i = 0; i < keys.Count; i++)
+                {
+                    _dic1[keys[i]] += _dic2[keys[i]];
+                }
+                break;
+            case Operator.Minus:
+                for (int i = 0; i < keys.Count; i++)
+                {
+                    _dic1[keys[i]] -= _dic2[keys[i]];
+                }
+                break;
+            default:
+                Debug.LogWarning(string.Format("對兩個腳色屬性字典做運算時不應該使用{0}", _operator.ToString()));
+                break;
+        }
+    }
+    public static Dictionary<RoleProperty, float> GetRandomEquipProperties(int _quality, int _lv)
+    {
+        Dictionary<RoleProperty, float> dic = GetNewRolePropertiesDic(0);
+
         for (int i = 0; i < _quality; i++)
         {
-            int rand = UnityEngine.Random.Range(0, 15);
-            switch (rand)
+            int rand = UnityEngine.Random.Range(0, RandomPropertyList.Count);
+            switch (RandomPropertyList[rand])
             {
-                case 0:
-                    if (dic.ContainsKey("RandomStrength"))
-                        dic["RandomStrength"] += RandomStrength * _lv;
-                    else
-                        dic.Add("RandomStrength", RandomStrength * _lv);
+                case RoleProperty.Strength:
+                    dic[(RoleProperty)rand] += RandomStrength * _lv;
                     break;
-                case 1:
-                    if (dic.ContainsKey("RandomHealth"))
-                        dic["RandomHealth"] += RandomHealth * _lv;
-                    else
-                        dic.Add("RandomHealth", RandomHealth * _lv);
+                case RoleProperty.Health:
+                    dic[(RoleProperty)rand] += RandomHealth * _lv;
                     break;
-                case 2:
-                    if (dic.ContainsKey("RandomShield"))
-                        dic["RandomShield"] += RandomShield * _lv;
-                    else
-                        dic.Add("RandomShield", RandomShield * _lv);
+                case RoleProperty.Shield:
+                    dic[(RoleProperty)rand] += RandomShield * _lv;
                     break;
-                case 3:
-                    if (dic.ContainsKey("RandomShieldRecovery"))
-                        dic["RandomShieldRecovery"] += RandomShieldRecovery * _lv;
-                    else
-                        dic.Add("RandomShieldRecovery", RandomShieldRecovery * _lv);
+                case RoleProperty.ShieldRecovery:
+                    dic[(RoleProperty)rand] += RandomShieldRecovery * _lv;
                     break;
-                case 4:
-                    if (dic.ContainsKey("RandomMoveSpeed"))
-                        dic["RandomMoveSpeed"] += RandomMoveSpeed * _lv;
-                    else
-                        dic.Add("RandomMoveSpeed", RandomMoveSpeed * _lv);
+                case RoleProperty.MoveSpeed:
+                    dic[(RoleProperty)rand] += RandomMoveSpeed * _lv;
                     break;
-                case 5:
-                    if (dic.ContainsKey("RandomMaxMoveSpeed"))
-                        dic["RandomMaxMoveSpeed"] += RandomMaxMoveSpeed * _lv;
-                    else
-                        dic.Add("RandomMaxMoveSpeed", RandomMaxMoveSpeed * _lv);
+                case RoleProperty.MaxMoveSpeed:
+                    dic[(RoleProperty)rand] += RandomMaxMoveSpeed * _lv;
                     break;
-                case 6:
-                    if (dic.ContainsKey("RandomMaxMoveDecay"))
-                        dic["RandomMaxMoveDecay"] += RandomMaxMoveDecay * _lv;
-                    else
-                        dic.Add("RandomMaxMoveDecay", RandomMaxMoveDecay * _lv);
+                case RoleProperty.MoveDecay:
+                    dic[(RoleProperty)rand] += RandomMoveDecay * _lv;
                     break;
-                case 7:
-                    if (dic.ContainsKey("RandomAvatarTime"))
-                        dic["RandomAvatarTime"] += RandomAvatarTime * _lv;
-                    else
-                        dic.Add("RandomAvatarTime", RandomAvatarTime * _lv);
+                case RoleProperty.AvatarTime:
+                    dic[(RoleProperty)rand] += RandomAvatarTime * _lv;
                     break;
-                case 8:
-                    if (dic.ContainsKey("RandomAvatarDrop"))
-                        dic["RandomAvatarDrop"] += RandomAvatarDrop * _lv;
-                    else
-                        dic.Add("RandomAvatarDrop", RandomAvatarDrop * _lv);
+                case RoleProperty.AvatarDrop:
+                    dic[(RoleProperty)rand] += RandomAvatarDrop * _lv;
                     break;
-                case 9:
-                    if (dic.ContainsKey("RandomSkillTime"))
-                        dic["RandomSkillTime"] += RandomSkillTime * _lv;
-                    else
-                        dic.Add("RandomSkillTime", RandomSkillTime * _lv);
+                case RoleProperty.SkillTime:
+                    dic[(RoleProperty)rand] += RandomSkillTime * _lv;
                     break;
-                case 10:
-                    if (dic.ContainsKey("RandomSkillDrop"))
-                        dic["RandomSkillDrop"] += RandomSkillDrop * _lv;
-                    else
-                        dic.Add("RandomSkillDrop", RandomSkillDrop * _lv);
+                case RoleProperty.SkillDrop:
+                    dic[(RoleProperty)rand] += RandomSkillDrop * _lv;
                     break;
-                case 11:
-                    if (dic.ContainsKey("RandomEquipDrop"))
-                        dic["RandomEquipDrop"] += RandomEquipDrop * _lv;
-                    else
-                        dic.Add("RandomEquipDrop", RandomEquipDrop * _lv);
+                case RoleProperty.EquipDrop:
+                    dic[(RoleProperty)rand] += RandomEquipDrop * _lv;
                     break;
-                case 12:
-                    if (dic.ContainsKey("RandomGoldDrop"))
-                        dic["RandomGoldDrop"] += RandomGoldDrop * _lv;
-                    else
-                        dic.Add("RandomGoldDrop", RandomGoldDrop * _lv);
+                case RoleProperty.GoldDrop:
+                    dic[(RoleProperty)rand] += RandomGoldDrop * _lv;
                     break;
-                case 13:
-                    if (dic.ContainsKey("RandomBloodThirsty"))
-                        dic["RandomBloodThirsty"] += RandomBloodThirsty * _lv;
-                    else
-                        dic.Add("RandomBloodThirsty", RandomBloodThirsty * _lv);
+                case RoleProperty.BloodThirsty:
+                    dic[(RoleProperty)rand] += RandomBloodThirsty * _lv;
                     break;
-                case 14:
-                    if (dic.ContainsKey("RandomPotionEfficiency"))
-                        dic["RandomPotionEfficiency"] += RandomPotionEfficiency * _lv;
-                    else
-                        dic.Add("RandomPotionEfficiency", RandomPotionEfficiency * _lv);
+                case RoleProperty.PotionEfficiency:
+                    dic[(RoleProperty)rand] += RandomPotionEfficiency * _lv;
+                    break;
+                default:
+                    Debug.LogWarning(string.Format("{0}:{1}不存在", rand, (RoleProperty)rand));
                     break;
             }
         }

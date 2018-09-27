@@ -10,19 +10,18 @@ public class EquipItem : Item
     [SerializeField]
     Image QualityBottom;
     [SerializeField]
-    Text LVText;
+    MyText LVText;
     [SerializeField]
     GameObject SoldCoverObj;
     [SerializeField]
     GameObject SoldCheckObj;
     public EquipType MyType;
-    new public EquipData MyData;
-    new protected Equip ParentUI;
+    public EquipData MyData;
+    Equip ParentUI;
     public bool IsSoldCheck;
 
-    public override void Set(Data _data, MyUI _ui)
+    public void Set(EquipData _data, Equip _ui)
     {
-        base.Set(_data, _ui);
         if (_data.GetType() == typeof(WeaponData))
         {
             MyType = EquipType.Weapon;
@@ -33,7 +32,6 @@ public class EquipItem : Item
             MyType = EquipType.Armor;
             MyData = ((ArmorData)_data);
         }
-
         else if (_data.GetType() == typeof(AccessoryData))
         {
             MyType = EquipType.Accessory;
@@ -43,11 +41,17 @@ public class EquipItem : Item
             return;
         if (_ui.GetType() == typeof(Equip))
             ParentUI = ((Equip)_ui);
-
-        LVText.text = MyData.GetLVString();
+        RefreshText();
+        MyText.AddRefreshFunc(RefreshText);
         Icon.sprite = MyData.GetICON();
+        Icon.SetNativeSize();
         QualityBottom.sprite = GameManager.GetItemQualityBotSprite(MyData.Quality);
         SetSoldMode(false);
+    }
+    public override void RefreshText()
+    {
+        base.RefreshText();
+        LVText.text = MyData.GetLVString();
     }
     public void SetSoldMode(bool _bool)
     {
@@ -63,7 +67,6 @@ public class EquipItem : Item
             return;
         if (!Equip.SoldMode)
         {
-            ParentUI.ShowInfo(MyData);
             ParentUI.ToEquip(MyData);
         }
         else

@@ -8,10 +8,10 @@ public abstract class MyUI : MonoBehaviour
     {
         gameObject.SetActive(_bool);
     }
-    public virtual void ShowInfo(Data _data)
+    public virtual void OnEnable()
     {
     }
-    public virtual void OnEnable()
+    public virtual void RefreshText()
     {
     }
 }

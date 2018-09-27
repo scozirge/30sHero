@@ -120,6 +120,9 @@ public partial class PlayerRole : Role
     [Tooltip("多久不攻擊會重置攻擊動畫")]
     [SerializeField]
     float DontAttackRestoreTime;
+    [Tooltip("自身攻擊時彈開力道")]
+    [SerializeField]
+    int SelfKnockForce;
     MyTimer AttackTimer;
     [HideInInspector]
     public int FaceDir;
@@ -162,7 +165,7 @@ public partial class PlayerRole : Role
     }
     public void BumpingAttack()
     {
-        Vector2 force = MyRigi.velocity.normalized * 100000 * -1;
+        Vector2 force = MyRigi.velocity.normalized * SelfKnockForce * -1;
         MyRigi.AddForce(force);
         GetCondition(RoleBuffer.Stun, new BufferData(0.3f, 0));
 

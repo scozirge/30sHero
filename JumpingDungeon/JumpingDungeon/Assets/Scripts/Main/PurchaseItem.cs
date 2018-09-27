@@ -8,19 +8,14 @@ public class PurchaseItem : Item
 {
     [SerializeField]
     Image Icon;
-    new protected PurchaseData MyData;
-    new protected Purchase ParentUI;
+    public PurchaseData MyData;
+    Purchase ParentUI;
     Toggle TheToggle;
 
-    public override void Set(Data _data, MyUI _ui)
+    public void Set(PurchaseData _data, Purchase _ui)
     {
-        base.Set(_data, _ui);
-        if (_data.GetType() == typeof(PurchaseData))
-            MyData = ((PurchaseData)_data);
-        else
-            return;
-        if (_ui.GetType() == typeof(Purchase))
-            ParentUI = ((Purchase)_ui);
+        MyData = _data;
+        ParentUI = _ui;
         Icon.sprite = MyData.GetICON();
         TheToggle = GetComponent<Toggle>();
         TheToggle.group = ParentUI.GetComponent<ToggleGroup>();
@@ -30,7 +25,5 @@ public class PurchaseItem : Item
         base.OnPress();
         if (!ParentUI)
             return;
-        //TheToggle.isOn = true;
-        ParentUI.ShowInfo(MyData);
     }
 }

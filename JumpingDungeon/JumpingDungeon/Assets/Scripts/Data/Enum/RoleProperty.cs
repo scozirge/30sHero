@@ -1,0 +1,19 @@
+﻿public enum RoleProperty
+{
+    Strength,
+    Health,
+    Shield,
+    ShieldRecovery,
+    MoveSpeed,
+    MaxMoveSpeed,
+    MoveDecay,
+    AvatarTime,
+    AvatarDrop,
+    SkillTime,
+    SkillDrop,
+    EquipDrop,
+    GoldDrop,
+    BloodThirsty,
+    PotionEfficiency,
+    PotionDrop
+}

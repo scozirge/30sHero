@@ -9,9 +9,8 @@ public abstract class EquipData : Data
     public long UID;
     public virtual EquipType Type { get; protected set; }
     public virtual string Name { get; protected set; }
-    public virtual string Description { get; protected set; }
+
     public string IconString;
-    const string ImagePath = "Images/Main/{0}";
     public int Quality;
     public int LV;
     public virtual int SellGold { get; }
@@ -20,29 +19,16 @@ public abstract class EquipData : Data
         return string.Format("{0}{1}", GameDictionary.String_UIDic["LV"].GetString(Player.UseLanguage), LV);
     }
     public bool IsEquiped;
-    public virtual int BaseStrength { get; }
-    public int Strength
-    {
-        get { return Mathf.RoundToInt(BaseStrength + RandomStrength); }
-    }
-    public virtual int BaseHealth { get; }
-    public int Health
-    {
-        get { return Mathf.RoundToInt(BaseHealth + RandomHealth); }
-    }
-    public virtual int BaseShield { get; }
-    public int Shield
-    {
-        get { return Mathf.RoundToInt(BaseShield + RandomShield); }
-    }
+    public Dictionary<RoleProperty, float> Properties = new Dictionary<RoleProperty, float>();
     //Random Attributes
+    /*
     public int RandomStrength;
     public int RandomHealth;
     public int RandomShield;
     public int RandomShieldRecovery;
     public int RandomMoveSpeed;
     public int RandomMaxMoveSpeed;
-    public float RandomMaxMoveDecay;
+    public float RandomMoveDecay;
     public float RandomAvatarTime;
     public float RandomAvatarDrop;
     public float RandomSkillTime;
@@ -51,6 +37,7 @@ public abstract class EquipData : Data
     public int RandomGoldDrop;
     public float RandomBloodThirsty;
     public float RandomPotionEfficiency;
+    */
 
     protected EquipData(JsonData _item)
     {
@@ -80,40 +67,67 @@ public abstract class EquipData : Data
     }
     public Sprite GetICON()
     {
-        return Resources.Load<Sprite>(string.Format(ImagePath, IconString));
+        return Resources.Load<Sprite>(string.Format(GameSettingData.EquipPath, IconString));
     }
-    protected void SetRandomProperties()
+    protected virtual void SetRandomProperties()
     {
-        Dictionary<string, float> dic = GameSettingData.GetRandomEquipProperties(Quality, LV);
-        if (dic.ContainsKey("RandomStrength"))
-            RandomStrength = (int)dic["RandomStrength"];
-        if (dic.ContainsKey("RandomHealth"))
-            RandomHealth = (int)dic["RandomHealth"];
-        if (dic.ContainsKey("RandomShield"))
-            RandomShield = (int)dic["RandomShield"];
-        if (dic.ContainsKey("RandomShieldRecovery"))
-            RandomShieldRecovery = (int)dic["RandomShieldRecovery"];
-        if (dic.ContainsKey("RandomMoveSpeed"))
-            RandomMoveSpeed = (int)dic["RandomMoveSpeed"];
-        if (dic.ContainsKey("RandomMaxMoveSpeed"))
-            RandomMaxMoveSpeed = (int)dic["RandomMaxMoveSpeed"];
-        if (dic.ContainsKey("RandomMaxMoveDecay"))
-            RandomMaxMoveDecay = dic["RandomMaxMoveDecay"];
-        if (dic.ContainsKey("RandomAvatarTime"))
-            RandomAvatarTime = dic["RandomAvatarTime"];
-        if (dic.ContainsKey("RandomAvatarDrop"))
-            RandomAvatarDrop = dic["RandomAvatarDrop"];
-        if (dic.ContainsKey("RandomSkillTime"))
-            RandomSkillTime = dic["RandomSkillTime"];
-        if (dic.ContainsKey("RandomSkillDrop"))
-            RandomSkillDrop = dic["RandomSkillDrop"];
-        if (dic.ContainsKey("RandomEquipDrop"))
-            RandomEquipDrop = dic["RandomEquipDrop"];
-        if (dic.ContainsKey("RandomGoldDrop"))
-            RandomGoldDrop = (int)dic["RandomGoldDrop"];
-        if (dic.ContainsKey("RandomBloodThirsty"))
-            RandomBloodThirsty = dic["RandomBloodThirsty"];
-        if (dic.ContainsKey("RandomPotionEfficiency"))
-            RandomPotionEfficiency = dic["RandomPotionEfficiency"];
+        Properties = GameSettingData.GetNewRolePropertiesDic(0);
+
+        Dictionary<RoleProperty, float> dic = GameSettingData.GetRandomEquipProperties(Quality, LV);
+        List<RoleProperty> kes = new List<RoleProperty>(Properties.Keys);
+        for (int i = 0; i < kes.Count; i++)
+        {
+            Properties[kes[i]] = dic[kes[i]];
+        }
+    }
+    public List<PropertyText> GetPropertyTextList()
+    {
+        List<PropertyText> list = new List<PropertyText>();
+        List<RoleProperty> kes = new List<RoleProperty>(Properties.Keys);
+        for (int i = 0; i < kes.Count; i++)
+        {
+            if (Properties[kes[i]] == 0)
+                continue;
+            PropertyText pt = new PropertyText();
+            pt.Text = string.Format("{0}+{1}", StringData.GetString(kes[i].ToString()), Properties[kes[i]]);
+            pt.Comparison = Comparator.Equal;
+            pt.ColorCode = GameSettingData.NormalNumberColor;
+            list.Add(pt);
+        }
+        return list;
+    }
+    public List<PropertyText> GetPropertyTextList(EquipData _data)
+    {
+        List<PropertyText> list = new List<PropertyText>();
+        List<RoleProperty> kes = new List<RoleProperty>(Properties.Keys);
+        for (int i = 0; i < kes.Count; i++)
+        {
+            if (Properties[kes[i]] == 0 && _data.Properties[kes[i]] == 0)
+                continue;
+            float valueDiff = Properties[kes[i]] - _data.Properties[kes[i]];
+            PropertyText pt = new PropertyText();
+            if (valueDiff >= 0)
+            {
+                pt.Text = string.Format("{0}+{1}", StringData.GetString(kes[i].ToString()), Properties[kes[i]]);
+                if (valueDiff > 0)
+                {
+                    pt.Comparison = Comparator.Greater;
+                    pt.ColorCode = GameSettingData.GrowingNumberColor;
+                }
+                else
+                {
+                    pt.Comparison = Comparator.Equal;
+                    pt.ColorCode = GameSettingData.NormalNumberColor;
+                }
+            }
+            else if (valueDiff < 0)
+            {
+                pt.Text = string.Format("{0}{1}", StringData.GetString(kes[i].ToString()), Properties[kes[i]]);
+                pt.Comparison = Comparator.Less;
+                pt.ColorCode = GameSettingData.DropingNumberColor;
+            }
+            list.Add(pt);
+        }
+        return list;
     }
 }

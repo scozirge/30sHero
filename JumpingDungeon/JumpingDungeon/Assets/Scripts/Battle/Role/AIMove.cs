@@ -118,12 +118,13 @@ public class AIMove : MonoBehaviour
     {
         RandDestination = new Vector3(Random.Range(-WanderRange, WanderRange), Random.Range(-WanderRange, WanderRange)) + Destination;
     }
-    void Update()
+    void FixedUpdate()
     {
         Debut();
-        WanderTimerFunc();
         WanderMovement();
     }
-
-
+    void Update()
+    {
+        WanderTimerFunc();
+    }
 }

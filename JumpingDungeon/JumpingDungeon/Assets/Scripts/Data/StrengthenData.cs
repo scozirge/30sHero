@@ -44,11 +44,10 @@ public class StrengthenData : Data
     public int LevelUpGold;
     public string IconString;
     public int LV;
-    public string GetLVString()
+    public string GetLVString(int _plus)
     {
-        return string.Format("{0}{1}", GameDictionary.String_UIDic["LV"].GetString(Player.UseLanguage), LV);
+        return string.Format("{0}{1}", StringData.GetString("LV"), LV + _plus);
     }
-    const string ImagePath = "Images/Main/{0}";
 
     /// <summary>
     /// 將字典傳入，依json表設定資料
@@ -65,6 +64,7 @@ public class StrengthenData : Data
             int id = int.Parse(items[i]["ID"].ToString());
             _dic.Add(id, data);
         }
+
     }
     StrengthenData(JsonData _item)
     {
@@ -77,8 +77,6 @@ public class StrengthenData : Data
                 {
                     case "ID":
                         ID = int.Parse(item[key].ToString());
-                        if (Player.StrengthenLVDic.ContainsKey(ID))
-                            LV = Player.StrengthenLVDic[ID];
                         break;
                     case "StrengthenType":
                         StrengthenType = item[key].ToString();
@@ -123,6 +121,22 @@ public class StrengthenData : Data
     }
     public Sprite GetICON()
     {
-        return Resources.Load<Sprite>(string.Format(ImagePath, IconString));
+        return Resources.Load<Sprite>(string.Format(GameSettingData.StrengthenPath, IconString));
+    }
+    public static Dictionary<int,StrengthenData> GetNewStrengthenDic(int _lv)
+    {
+        Dictionary<int, StrengthenData> dic = new Dictionary<int, StrengthenData>();
+        List<int> keys = new List<int>(GameDictionary.StrengthenDic.Keys);
+        for(int i=0;i<keys.Count;i++)
+        {
+            dic.Add(keys[i], GetNewStrengthenData(keys[i], _lv));
+        }
+        return dic;
+    }
+    public static StrengthenData GetNewStrengthenData(int _id, int _lv)
+    {
+        StrengthenData data = GameDictionary.StrengthenDic[_id].MemberwiseClone() as StrengthenData;
+        data.LV = _lv;
+        return data;
     }
 }

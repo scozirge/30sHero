@@ -82,9 +82,12 @@ public abstract class Role : MonoBehaviour
     {
         MyRigi.velocity *= MoveDecay;
     }
-    protected virtual void Update()
+    protected virtual void FixedUpdate()
     {
         Move();
+    }
+    protected virtual void Update()
+    {
         ConditionTimerFunc();
     }
     public virtual void BeAttack(int _dmg, Vector2 _force, Dictionary<RoleBuffer, BufferData> buffers)

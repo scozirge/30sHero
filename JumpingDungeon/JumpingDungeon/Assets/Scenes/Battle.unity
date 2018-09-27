@@ -1682,6 +1682,16 @@ Prefab:
       propertyPath: m_Name
       value: skilldector
       objectReference: {fileID: 0}
+    - target: {fileID: 114601397981697422, guid: d9e47796d36fc83458ffab41aea6641e,
+        type: 2}
+      propertyPath: BaseMoveSpeed
+      value: 400
+      objectReference: {fileID: 0}
+    - target: {fileID: 114601397981697422, guid: d9e47796d36fc83458ffab41aea6641e,
+        type: 2}
+      propertyPath: SelfKnockForce
+      value: 100000
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114964198349882810, guid: d9e47796d36fc83458ffab41aea6641e, type: 2}
   m_SourcePrefab: {fileID: 100100000, guid: d9e47796d36fc83458ffab41aea6641e, type: 2}

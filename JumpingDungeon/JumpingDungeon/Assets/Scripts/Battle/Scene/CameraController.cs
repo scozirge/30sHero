@@ -22,7 +22,7 @@ public class CameraController : MonoBehaviour
         FaceOffsetX = Mathf.Abs(Player.transform.position.x);
     }
     // LateUpdate is called after Update each frame
-    void Update()
+    void FixedUpdate()
     {
         if (!Player)
             return;

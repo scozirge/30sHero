@@ -49,6 +49,8 @@ public class Equip : MyUI
     MyToggle SortTypeToggle;
     [SerializeField]
     MyToggle SortWayToggle;
+    [SerializeField]
+    Toggle[] TagToggles;
 
 
 
@@ -70,7 +72,8 @@ public class Equip : MyUI
             List<long> keys = new List<long>(Player.Itmes[EquipType.Weapon].Keys);
             for (int i = 0; i < keys.Count; i++)
             {
-                EquipItem ei = (EquipItem)MySpanwer.Spawn(Player.Itmes[EquipType.Weapon][keys[i]], this);
+                EquipItem ei = (EquipItem)MySpanwer.Spawn();
+                ei.Set(Player.Itmes[EquipType.Weapon][keys[i]],this);
                 ItemList.Add(ei);
                 if (!ei.MyData.IsEquiped)
                     WeaponList.Add(ei);
@@ -82,7 +85,8 @@ public class Equip : MyUI
             List<long> keys = new List<long>(Player.Itmes[EquipType.Armor].Keys);
             for (int i = 0; i < keys.Count; i++)
             {
-                EquipItem ei = (EquipItem)MySpanwer.Spawn(Player.Itmes[EquipType.Armor][keys[i]], this);
+                EquipItem ei = (EquipItem)MySpanwer.Spawn();
+                ei.Set(Player.Itmes[EquipType.Armor][keys[i]], this);
                 ItemList.Add(ei);
                 if (!ei.MyData.IsEquiped)
                     ArmorList.Add(ei);
@@ -94,7 +98,8 @@ public class Equip : MyUI
             List<long> keys = new List<long>(Player.Itmes[EquipType.Accessory].Keys);
             for (int i = 0; i < keys.Count; i++)
             {
-                EquipItem ei = (EquipItem)MySpanwer.Spawn(Player.Itmes[EquipType.Accessory][keys[i]], this);
+                EquipItem ei = (EquipItem)MySpanwer.Spawn();
+                ei.Set(Player.Itmes[EquipType.Accessory][keys[i]], this);
                 ItemList.Add(ei);
                 if (!ei.MyData.IsEquiped)
                     AccessoryList.Add(ei);
@@ -108,7 +113,18 @@ public class Equip : MyUI
     public override void OnEnable()
     {
         base.OnEnable();
+        ToFilter(0);
+        Sort();
         UpdateRoleInfo();
+        SetSoldMode(false);
+        if (TagToggles!=null)
+        {
+            for (int i = 0; i < TagToggles.Length; i++)
+            {
+                TagToggles[i].isOn = false;
+            }
+            TagToggles[0].isOn = true;
+        }
     }
     public void SetSoldMode(bool _bool)
     {
@@ -134,10 +150,6 @@ public class Equip : MyUI
         }
         ItemList.RemoveAll(item => item == null);
         ItemCoutText.text = string.Format("{0}/{1}", ItemList.Count, GameSettingData.MaxItemCount);
-    }
-    public override void ShowInfo(Data _data)
-    {
-        base.ShowInfo(_data);
     }
     public void ToFilter(int _typeID)
     {
@@ -284,11 +296,11 @@ public class Equip : MyUI
         {
             ItemList.Sort(SortByQuality);
         }
-        if(!SortWayToggle.isOn)
+        if (!SortWayToggle.isOn)
         {
             ItemList.Reverse();
         }
-        for(int i=0;i<ItemList.Count;i++)
+        for (int i = 0; i < ItemList.Count; i++)
         {
             ItemList[i].transform.SetSiblingIndex(i);
         }
@@ -401,13 +413,13 @@ public class Equip : MyUI
                 AccessoryQuality[i].sprite = GameManager.GetItemQualityBotSprite(0);
             }
         }
-        StrengthText.text = Player.Strength.ToString();
-        HealthText.text = Player.Health.ToString();
-        ShieldText.text = Player.Shield.ToString();
-        ShieldRecoveryText.text = string.Format("{0}/{1}", Player.Shield, StringData.GetString("Second"));
-        MoveSpeedText.text = string.Format("{0}/{1}", Player.MoveSpeed, StringData.GetString("Second"));
-        MaxMoveText.text = string.Format("{0}/{1}", Player.MaxMoveSpeed, StringData.GetString("Second"));
-        AvatarTimeText.text = string.Format("{0}{1}", Player.AvatarTime, StringData.GetString("Second"));
-        SkillTimeText.text = string.Format("{0}{1}", Player.SkillTime, StringData.GetString("Second"));
+        StrengthText.text = Player.GetProperties(RoleProperty.Strength).ToString();
+        HealthText.text = Player.GetProperties(RoleProperty.Health).ToString();
+        ShieldText.text = Player.GetProperties(RoleProperty.Shield).ToString();
+        ShieldRecoveryText.text = string.Format("{0}/{1}", Player.GetProperties(RoleProperty.ShieldRecovery), StringData.GetString("Second"));
+        MoveSpeedText.text = string.Format("{0}/{1}", Player.GetProperties(RoleProperty.MoveSpeed), StringData.GetString("Second"));
+        MaxMoveText.text = string.Format("{0}/{1}", Player.GetProperties(RoleProperty.MaxMoveSpeed), StringData.GetString("Second"));
+        AvatarTimeText.text = string.Format("{0}{1}", Player.GetProperties(RoleProperty.AvatarTime), StringData.GetString("Second"));
+        SkillTimeText.text = string.Format("{0}{1}", Player.GetProperties(RoleProperty.SkillTime), StringData.GetString("Second"));
     }
 }
