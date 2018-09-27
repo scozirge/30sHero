@@ -181,12 +181,8 @@ public partial class PlayerRole : Role
             if (StartGenerateShield)
                 Shield += ShieldGenerateNum * Time.deltaTime;
     }
-    public void BumpingAttack()
+    public void AttackMotion()
     {
-        Vector2 force = MyRigi.velocity.normalized * SelfKnockForce * -1;
-        MyRigi.AddForce(force);
-        GetCondition(RoleBuffer.Stun, new BufferData(SelfSturnTime, 0));
-
         //Play Animation
         AttackTimer.Start(true);
         CurAttackState++;
@@ -197,6 +193,12 @@ public partial class PlayerRole : Role
         if (CurAttackState > 1)
             CurAttackState = 0;
         AttackTimer.RestartCountDown();
+    }
+    public void BumpingAttack()
+    {
+        Vector2 force = MyRigi.velocity.normalized * SelfKnockForce * -1;
+        MyRigi.AddForce(force);
+        GetCondition(RoleBuffer.Stun, new BufferData(SelfSturnTime, 0));
     }
     protected override void Update()
     {

@@ -23,6 +23,7 @@ public class PlayerAttack : MonoBehaviour
             er.BeAttack(Attacker.Damage, force, null);
             if (er.IsAlive)
                 Attacker.BumpingAttack();
+            Attacker.AttackMotion();
             //SpawnAttackEffect
             if (!AttackEffect)
                 return;
