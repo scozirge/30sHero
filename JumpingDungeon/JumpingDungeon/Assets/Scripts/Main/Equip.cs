@@ -9,8 +9,7 @@ public class Equip : MyUI
     ItemSpawner MySpanwer;
     [SerializeField]
     EquipPop EquipPop;
-    [SerializeField]
-    EquipData SelectedEquip;
+
     [SerializeField]
     Image WeaponIcon;
     [SerializeField]
@@ -53,7 +52,7 @@ public class Equip : MyUI
     Toggle[] TagToggles;
 
 
-
+    EquipData SelectedEquip;
     public EquipType CurFilterType;
     EquipType TakeOffType;
     List<EquipItem> ItemList = new List<EquipItem>();

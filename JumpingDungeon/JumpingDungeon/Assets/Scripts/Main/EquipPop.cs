@@ -116,6 +116,7 @@ public class EquipPop : MonoBehaviour
         }
         else
         {
+            LeftSelectObj.SetActive((_leftData.Type == EquipType.Accessory));
             RightSelectObj.SetActive(true);
             EquipObjs[0].SetActive(true);
             ArrowObj.SetActive(true);
@@ -149,8 +150,8 @@ public class EquipPop : MonoBehaviour
         IconSprite[0].sprite = _leftData.GetICON();
         QualityBottom[0].sprite = GameManager.GetItemQualityBotSprite(_leftData.Quality);
         LvText[0].text = _leftData.GetLVString();
-        SetPropertyItems(_leftData, LeftPropertyItems, true);
-        SetPropertyItems(LeftData, RightPropertyItems, false);
+        SetPropertyItems(LeftData, LeftPropertyItems, true);
+        SetPropertyItems(RightData, RightPropertyItems, false);
         IconSprite[0].SetNativeSize();
     }
 }

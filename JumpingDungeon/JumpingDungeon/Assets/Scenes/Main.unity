@@ -459,7 +459,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: "\u6B66\u5668"
   UIString: Accessory
-  IsInit: 0
+  IsAddTextList: 0
 --- !u!222 &14343568
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -790,7 +790,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: "\u6392\u5E8F"
   UIString: SortQuality
-  IsInit: 0
+  IsAddTextList: 0
 --- !u!114 &28441385
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1315,7 +1315,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: Set
   UIString: Set
-  IsInit: 0
+  IsAddTextList: 0
 --- !u!114 &116428790
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1543,7 +1543,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: "\u958B\u555F"
   UIString: ON
-  IsInit: 0
+  IsAddTextList: 0
 --- !u!222 &126402066
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2235,7 +2235,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: "\u529B\u91CF"
   UIString: SkillTime
-  IsInit: 0
+  IsAddTextList: 0
 --- !u!222 &220617827
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2581,7 +2581,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: "\u6280\u80FD\u540D\u7A31"
   UIString: 
-  IsInit: 0
+  IsAddTextList: 0
 --- !u!222 &285251928
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2658,7 +2658,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: "\u529B\u91CF"
   UIString: MaxMoveSpeed
-  IsInit: 0
+  IsAddTextList: 0
 --- !u!222 &302458097
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3532,7 +3532,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: 999
   UIString: 
-  IsInit: 0
+  IsAddTextList: 0
 --- !u!222 &401648327
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3624,7 +3624,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: "\u6B66\u5668"
   UIString: Weapon
-  IsInit: 0
+  IsAddTextList: 0
 --- !u!222 &402592555
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4001,7 +4001,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: Store
   UIString: Store
-  IsInit: 0
+  IsAddTextList: 0
 --- !u!114 &477474523
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4737,7 +4737,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: "\u529B\u91CF"
   UIString: Health
-  IsInit: 0
+  IsAddTextList: 0
 --- !u!222 &583274238
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4814,7 +4814,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: 999
   UIString: 
-  IsInit: 0
+  IsAddTextList: 0
 --- !u!222 &585548232
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4891,7 +4891,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: "\u529B\u91CF"
   UIString: Strength
-  IsInit: 0
+  IsAddTextList: 0
 --- !u!222 &600553356
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4969,7 +4969,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: 99999999
   UIString: 
-  IsInit: 0
+  IsAddTextList: 0
 --- !u!222 &600972662
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5094,7 +5094,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: 999
   UIString: 
-  IsInit: 0
+  IsAddTextList: 0
 --- !u!222 &613060384
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5159,7 +5159,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: lv1
   UIString: 
-  IsInit: 0
+  IsAddTextList: 0
 --- !u!114 &615407489
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5480,7 +5480,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: lv1
   UIString: 
-  IsInit: 0
+  IsAddTextList: 0
 --- !u!114 &694162752
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5606,7 +5606,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: 999
   UIString: 
-  IsInit: 0
+  IsAddTextList: 0
 --- !u!222 &707104173
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6249,7 +6249,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: $1234
   UIString: 
-  IsInit: 0
+  IsAddTextList: 0
 --- !u!222 &816814152
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6567,7 +6567,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: ON
   UIString: ON
-  IsInit: 0
+  IsAddTextList: 0
 --- !u!222 &847563343
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6914,7 +6914,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: "\u5F37\u5316"
   UIString: 
-  IsInit: 0
+  IsAddTextList: 0
 --- !u!114 &901858731
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7020,7 +7020,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: "\u958B\u555F"
   UIString: English
-  IsInit: 0
+  IsAddTextList: 0
 --- !u!222 &926075712
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -7270,7 +7270,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: "\u88DD\u5099\u4E2D"
   UIString: Equipped
-  IsInit: 0
+  IsAddTextList: 0
 --- !u!222 &1036061726
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -7418,7 +7418,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: "\u529B\u91CF"
   UIString: Shield
-  IsInit: 0
+  IsAddTextList: 0
 --- !u!222 &1054443973
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -7787,7 +7787,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: "\u529B\u91CF"
   UIString: MoveSpeed
-  IsInit: 0
+  IsAddTextList: 0
 --- !u!222 &1159924952
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -7865,7 +7865,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: Equip
   UIString: Equip
-  IsInit: 0
+  IsAddTextList: 0
 --- !u!114 &1162659215
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8292,7 +8292,7 @@ MonoBehaviour:
     m_LineSpacing: 1.5
   m_Text: "\u7ACB\u5373\u7372\u5F97\u9053\u5177\u7ACB\u5373\u7372\u5F97\u9053\u5177\u7ACB\u5373\u7372\u5F97\u9053\u5177\u7ACB\u5373\u7372\u5F97\u9053\u5177\u7ACB\u5373\u7372\u5F97\u9053\u5177\u7ACB\u5373\u7372\u5F97\u9053\u5177\u7ACB\u5373\u7372\u5F97\u9053\u5177\u7ACB\u5373\u7372\u5F97\u9053\u5177\u7ACB\u5373\u7372\u5F97\u9053\u5177\u7ACB\u5373\u7372\u5F97\u9053\u5177\u7ACB\u5373\u7372\u5F97\u9053\u5177\u7ACB\u5373\u7372\u5F97\u9053\u5177\u7ACB\u5373\u7372\u5F97\u9053\u5177\u7ACB\u5373\u7372\u5F97\u9053\u5177\u7ACB\u5373\u7372\u5F97\u9053\u5177\u7ACB\u5373\u7372\u5F97\u9053\u5177\u7ACB\u5373\u7372\u5F97\u9053\u5177\u7ACB\u5373\u7372\u5F97\u9053\u5177\u7ACB\u5373\u7372\u5F97\u9053\u5177\u7ACB\u5373\u7372\u5F97\u9053\u5177"
   UIString: 
-  IsInit: 0
+  IsAddTextList: 0
 --- !u!222 &1198986622
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -8708,7 +8708,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: "\u6B66\u5668"
   UIString: Sound
-  IsInit: 0
+  IsAddTextList: 0
 --- !u!222 &1267659294
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -8785,7 +8785,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: 999
   UIString: 
-  IsInit: 0
+  IsAddTextList: 0
 --- !u!222 &1295093062
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -8863,7 +8863,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: "\u300B"
   UIString: Arrow
-  IsInit: 0
+  IsAddTextList: 0
 --- !u!114 &1296392131
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9038,7 +9038,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: "\u6B66\u5668"
   UIString: Armor
-  IsInit: 0
+  IsAddTextList: 0
 --- !u!222 &1303695248
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -9434,7 +9434,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: "\u6392\u5E8F"
   UIString: Cancel
-  IsInit: 0
+  IsAddTextList: 0
 --- !u!114 &1347158149
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9681,7 +9681,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: "\u6B66\u5668"
   UIString: Music
-  IsInit: 0
+  IsAddTextList: 0
 --- !u!222 &1352859941
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -9827,7 +9827,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: 999
   UIString: 
-  IsInit: 0
+  IsAddTextList: 0
 --- !u!222 &1402855502
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -9904,7 +9904,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: 999
   UIString: 
-  IsInit: 0
+  IsAddTextList: 0
 --- !u!222 &1405692045
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -10216,7 +10216,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: LV
   UIString: SortLV
-  IsInit: 0
+  IsAddTextList: 0
 --- !u!114 &1435945213
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10695,7 +10695,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: "\u529B\u91CF"
   UIString: ShieldRecovery
-  IsInit: 0
+  IsAddTextList: 0
 --- !u!222 &1522426270
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -11391,7 +11391,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: "\u529B\u91CF"
   UIString: AvatarTime
-  IsInit: 0
+  IsAddTextList: 0
 --- !u!222 &1594206382
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -11483,7 +11483,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: Upgrade
   UIString: Upgrade
-  IsInit: 0
+  IsAddTextList: 0
 --- !u!222 &1603998485
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -11561,7 +11561,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: "\u300B"
   UIString: Arrow
-  IsInit: 0
+  IsAddTextList: 0
 --- !u!114 &1604981801
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11732,7 +11732,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: "\u958B\u555F"
   UIString: Chinese
-  IsInit: 0
+  IsAddTextList: 0
 --- !u!224 &1613448805
 RectTransform:
   m_ObjectHideFlags: 0
@@ -11824,7 +11824,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: "\u6B66\u5668"
   UIString: Language
-  IsInit: 0
+  IsAddTextList: 0
 --- !u!222 &1617937139
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -12436,7 +12436,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1978107121}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.9999999
+  m_Size: 0.99999994
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -12547,7 +12547,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: 99999999
   UIString: 
-  IsInit: 0
+  IsAddTextList: 0
 --- !u!222 &1712891757
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -12853,7 +12853,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: 99999999
   UIString: 
-  IsInit: 0
+  IsAddTextList: 0
 --- !u!222 &1732040349
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -13217,7 +13217,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: "\u6B66\u5668"
   UIString: Strengthen_Enchant
-  IsInit: 0
+  IsAddTextList: 0
 --- !u!222 &1831822065
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -13676,7 +13676,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: "\u6B66\u5668"
   UIString: Strengthen_Skill
-  IsInit: 0
+  IsAddTextList: 0
 --- !u!222 &1878918665
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -13786,7 +13786,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.000040784274}
+  m_AnchoredPosition: {x: 0, y: -0.000008223375}
   m_SizeDelta: {x: 23.7, y: 47.4}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1885360549
@@ -14011,7 +14011,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: "\u6B66\u5668"
   UIString: Setting
-  IsInit: 0
+  IsAddTextList: 0
 --- !u!222 &1902365747
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -14173,7 +14173,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: 9999
   UIString: 
-  IsInit: 0
+  IsAddTextList: 0
 --- !u!222 &1911887116
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -14616,7 +14616,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: Battle
   UIString: Battle
-  IsInit: 0
+  IsAddTextList: 0
 --- !u!114 &1962710474
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14793,7 +14793,7 @@ RectTransform:
   m_Father: {fileID: 62285921}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.00000011920929}
+  m_AnchorMin: {x: 0, y: 0.000000059604645}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
@@ -14970,7 +14970,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: 999
   UIString: 
-  IsInit: 0
+  IsAddTextList: 0
 --- !u!222 &2030056457
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -15424,7 +15424,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: "\u8CE3\u51FA"
   UIString: Sell
-  IsInit: 0
+  IsAddTextList: 0
 --- !u!222 &2073736233
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -15916,7 +15916,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: 100/999
   UIString: 
-  IsInit: 0
+  IsAddTextList: 0
 --- !u!114 &2097576079
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16043,7 +16043,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: "\u6392\u5E8F"
   UIString: Sell
-  IsInit: 0
+  IsAddTextList: 0
 --- !u!114 &2115919013
 MonoBehaviour:
   m_ObjectHideFlags: 0
