@@ -21,7 +21,8 @@ public class PlayerAttack : MonoBehaviour
             Role er = _col.GetComponent<Role>();
             Vector2 force = (er.transform.position - transform.position).normalized * KnockForce;
             er.BeAttack(Attacker.Damage, force, null);
-            Attacker.BumpingAttack();
+            if (er.IsAlive)
+                Attacker.BumpingAttack();
             //SpawnAttackEffect
             if (!AttackEffect)
                 return;

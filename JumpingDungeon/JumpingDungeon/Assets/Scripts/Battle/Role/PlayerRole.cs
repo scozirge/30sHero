@@ -124,6 +124,9 @@ public partial class PlayerRole : Role
     [Tooltip("自身攻擊時彈開力道")]
     [SerializeField]
     int SelfKnockForce;
+    [Tooltip("自身攻擊時彈開暈眩時間")]
+    [SerializeField]
+    float SelfSturnTime;
     [Tooltip("移動方式")]
     [SerializeField]
     MoveControl ControlDevice;
@@ -182,7 +185,7 @@ public partial class PlayerRole : Role
     {
         Vector2 force = MyRigi.velocity.normalized * SelfKnockForce * -1;
         MyRigi.AddForce(force);
-        GetCondition(RoleBuffer.Stun, new BufferData(0.3f, 0));
+        GetCondition(RoleBuffer.Stun, new BufferData(SelfSturnTime, 0));
 
         //Play Animation
         AttackTimer.Start(true);
