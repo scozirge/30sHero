@@ -38,7 +38,6 @@ GameObject:
   - component: {fileID: 224150828886270898}
   - component: {fileID: 222441390583901092}
   - component: {fileID: 114961052217152312}
-  - component: {fileID: 50361454880070678}
   - component: {fileID: 114280530254980642}
   - component: {fileID: 111902319203830060}
   - component: {fileID: 58514737129317236}
@@ -67,26 +66,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!50 &50361454880070678
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1566857461941104}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!58 &58514737129317236
 CircleCollider2D:
   m_ObjectHideFlags: 1

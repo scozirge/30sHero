@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-[RequireComponent(typeof(Rigidbody2D))]
 public partial class Ammo : MonoBehaviour
 {
     [Tooltip("自身跟隨特效物件")]
@@ -52,7 +51,12 @@ public partial class Ammo : MonoBehaviour
     public virtual void Init(Dictionary<string, object> _dic)
     {
         ParticleParent = GameObject.FindGameObjectWithTag("ParticleParent").transform;
-        MyRigi = GetComponent<Rigidbody2D>();
+        MyRigi = GetComponentInParent<Rigidbody2D>();
+        if (MyRigi == null)
+        {
+            MyRigi = gameObject.AddComponent<Rigidbody2D>();
+            MyRigi.gravityScale = 0;
+        }
         LifeTimer = LifeTime;
         AttackerForce = ((Force)(_dic["AttackerForce"]));
         if (AttackerForce == Force.Player)
