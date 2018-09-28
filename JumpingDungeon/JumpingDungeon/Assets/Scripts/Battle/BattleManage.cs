@@ -35,7 +35,6 @@ public class BattleManage : MonoBehaviour
         MyCameraControler = CameraControler;
         CurSpawnCount = 0;
         ScreenSize = MyCameraControler.ScreenSize;
-
     }
     void SpawnIntervalTimerFunc()
     {
@@ -51,7 +50,7 @@ public class BattleManage : MonoBehaviour
     }
     void SpanwEnemy()
     {
-        for(int i=0;i<Enemys.Count;i++)
+        for (int i = 0; i < Enemys.Count; i++)
         {
             if (Enemys[i] == null)
                 Enemys.RemoveAt(i);
@@ -62,23 +61,66 @@ public class BattleManage : MonoBehaviour
             er = Instantiate(DesignatedEnemy, Vector3.zero, Quaternion.identity) as EnemyRole;
         else
             er = Instantiate(Enemys[rndEnemy], Vector3.zero, Quaternion.identity) as EnemyRole;
+
+
+        //Set SpawnPos
+        int quadrant = 1;//象限
+        int nearMargin = 0;//靠近左右邊(0)或靠近上下邊(1)
         er.transform.SetParent(EnemyParent);
-        int randDir = Random.Range(0, 3);
-        Vector3 spawnPos = Vector3.zero;
-        switch (randDir)
+        AIMove am = er.GetComponent<AIMove>();
+
+        if (am != null)
         {
-            case 0:
-                spawnPos = new Vector3(ScreenSize.x / 2 + 10, Random.Range(-ScreenSize.y / 2, ScreenSize.y / 2)) + MyCameraControler.transform.position;
-                break;
+            Vector2 erScreenPos = am.Destination;
+
+            if (erScreenPos == Vector2.zero)
+            {
+                erScreenPos = am.SetRandDestination();
+            }
+
+            if (erScreenPos.x >= 0 && erScreenPos.y >= 0)
+            {
+                quadrant = 1;//第1象限
+                nearMargin = Mathf.Abs(ScreenSize.x / 2 - erScreenPos.x) < Mathf.Abs(ScreenSize.y / 2 - erScreenPos.y) ? 0 : 1;
+            }
+            else if (erScreenPos.x < 0 && erScreenPos.y >= 0)
+            {
+                quadrant = 2;//第2象限
+                nearMargin = Mathf.Abs(-ScreenSize.x / 2 - erScreenPos.x) < Mathf.Abs(ScreenSize.y / 2 - erScreenPos.y) ? 0 : 1;
+            }
+            else if (erScreenPos.x < 0 && erScreenPos.y < 0)
+            {
+                quadrant = 3;//第3象限
+                nearMargin = Mathf.Abs(-ScreenSize.x / 2 - erScreenPos.x) < Mathf.Abs(-ScreenSize.y / 2 - erScreenPos.y) ? 0 : 1;
+            }
+            else if (erScreenPos.x > 0 && erScreenPos.y < 0)
+            {
+                quadrant = 4;//第4象限
+                nearMargin = Mathf.Abs(ScreenSize.x / 2 - erScreenPos.x) < Mathf.Abs(-ScreenSize.y / 2 - erScreenPos.y) ? 0 : 1;
+            }
+        }
+        else
+        {
+            quadrant = Random.Range(1, 5);
+        }
+        Vector3 spawnPos = Vector3.zero;
+        switch (quadrant)
+        {
             case 1:
-                spawnPos = new Vector3(Random.Range(0, ScreenSize.x / 2), -ScreenSize.y / 2 - 10) + MyCameraControler.transform.position;
+                spawnPos = (nearMargin == 0) ? new Vector3(ScreenSize.x / 2, Random.Range(0, ScreenSize.y / 2)) + MyCameraControler.transform.position :
+                 new Vector3(Random.Range(0, ScreenSize.x / 2), ScreenSize.y / 2) + MyCameraControler.transform.position;
                 break;
             case 2:
-                spawnPos = new Vector3(ScreenSize.x / 2 + 10, Random.Range(-ScreenSize.y / 2, ScreenSize.y / 2)) + MyCameraControler.transform.position;
-                //spawnPos = new Vector3(-ScreenSize.x / 2 - 10, Random.Range(-ScreenSize.y / 2, ScreenSize.y / 2)) + CC.transform.position;
+                spawnPos = (nearMargin == 0) ? new Vector3(-ScreenSize.x / 2, Random.Range(0, ScreenSize.y / 2)) + MyCameraControler.transform.position :
+                new Vector3(Random.Range(-ScreenSize.x / 2, 0), ScreenSize.y / 2) + MyCameraControler.transform.position;
                 break;
             case 3:
-                spawnPos = new Vector3(Random.Range(0, ScreenSize.x / 2), ScreenSize.y / 2 + 10) + MyCameraControler.transform.position;
+                spawnPos = (nearMargin == 0) ? new Vector3(-ScreenSize.x / 2, Random.Range(-ScreenSize.y / 2, 0)) + MyCameraControler.transform.position :
+                new Vector3(Random.Range(-ScreenSize.x / 2, 0), -ScreenSize.y / 2) + MyCameraControler.transform.position;
+                break;
+            case 4:
+                spawnPos = (nearMargin == 0) ? new Vector3(ScreenSize.x / 2, Random.Range(-ScreenSize.y / 2, 0)) + MyCameraControler.transform.position :
+                new Vector3(Random.Range(0, ScreenSize.x / 2), -ScreenSize.y / 2) + MyCameraControler.transform.position;
                 break;
         }
         spawnPos.z = 0;

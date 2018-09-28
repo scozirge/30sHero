@@ -21,14 +21,13 @@ public class AIMove : MonoBehaviour
     [Tooltip("遊蕩範圍")]
     [SerializeField]
     float WanderRange;
-    Vector3 Destination;
+    [SerializeField]
+    public Vector2 Destination;
 
 
 
     static float InRangeStartWander = 50;
 
-    Vector3 CameraPos;
-    Vector3 CameraSize;
     Vector3 RandomOffset;
     float WanderIntervalTimer;
     Vector3 InitialVelocity;
@@ -52,12 +51,21 @@ public class AIMove : MonoBehaviour
         if (RotateFactor < 0.02f)
             RotateFactor = 0.02f;
         KeepDebut = true;
-        CameraPos = BattleManage.MyCameraControler.transform.position;
-        CameraSize = BattleManage.ScreenSize;
-        float randPosX = Random.Range(100, CameraSize.x / 2);
-        float randPosY = Random.Range(-CameraSize.y / 2 + 100, CameraSize.y / 2 - 100);
+        if (Destination == Vector2.zero)
+        {
+            SetRandDestination();
+        }
+
+    }
+    public Vector2 SetRandDestination()
+    {
+        Vector2 RandomOffset = Vector2.zero;
+        float randPosX = Random.Range(100, BattleManage.ScreenSize.x / 2);
+        float randPosY = Random.Range(-BattleManage.ScreenSize.y / 2 + 100, BattleManage.ScreenSize.y / 2 - 100);
         RandomOffset = new Vector2(randPosX, randPosY);
-        Destination = new Vector3(randPosX + CameraPos.x, randPosY + CameraPos.y, 0);
+        Vector2 cameraPos = BattleManage.MyCameraControler.transform.position;
+        Destination = new Vector3(randPosX + cameraPos.x, randPosY + cameraPos.y, 0);
+        return RandomOffset;
     }
 
     public void Debut()
@@ -65,8 +73,8 @@ public class AIMove : MonoBehaviour
         if (FollowCamera)
         {
             //Follow camera
-            CameraPos = BattleManage.MyCameraControler.transform.position;
-            Destination = new Vector3(CameraPos.x, CameraPos.y, 0) + RandomOffset;
+            Vector2 cameraPos = BattleManage.MyCameraControler.transform.position;
+            Destination = new Vector3(cameraPos.x, cameraPos.y, 0) + RandomOffset;
         }
 
         if (!Wander && KeepDebut)
@@ -78,7 +86,7 @@ public class AIMove : MonoBehaviour
 
         if (KeepDebut || FollowCamera)
         {
-            Vector2 targetVel = (Destination - transform.position).normalized * ER.MoveSpeed;
+            Vector2 targetVel = (Destination - (Vector2)transform.position).normalized * ER.MoveSpeed;
             MyRigi.velocity = Vector2.Lerp(MyRigi.velocity, targetVel, RotateFactor);
         }
     }
@@ -116,7 +124,7 @@ public class AIMove : MonoBehaviour
     }
     void CalculateRandDestination()
     {
-        RandDestination = new Vector3(Random.Range(-WanderRange, WanderRange), Random.Range(-WanderRange, WanderRange)) + Destination;
+        RandDestination = new Vector2(Random.Range(-WanderRange, WanderRange), Random.Range(-WanderRange, WanderRange)) + Destination;
     }
     void FixedUpdate()
     {

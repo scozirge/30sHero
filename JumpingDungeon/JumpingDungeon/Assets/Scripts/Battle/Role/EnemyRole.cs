@@ -5,9 +5,11 @@ using UnityEngine;
 public partial class EnemyRole : Role
 {
 
+
     protected const float FrictionDuringTime = 1;
     protected float FrictionDuringTimer = FrictionDuringTime;
     protected bool StartVelocityDecay;
+
     PlayerRole Target;
 
     protected override void Awake()
