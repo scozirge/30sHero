@@ -12,7 +12,13 @@ public class CameraController : MonoBehaviour
     bool FaceOffset;
     [SerializeField]
     float LerpFactor;
+    static AnimationPlayer MyPlayer;
     Vector3 Offset;         //Private variable to store the offset distance between the player and camera
+    [Tooltip("攝影機震動音效")]
+    [SerializeField]
+    AudioClip ShakeSound;
+
+    static AudioClip MyShakeSound;
     float FaceOffsetX;
     // Use this for initialization
     void Start()
@@ -20,6 +26,8 @@ public class CameraController : MonoBehaviour
         //Calculate and store the offset value by getting the distance between the player's position and camera's position.
         Offset = transform.position - Player.transform.position;
         FaceOffsetX = Mathf.Abs(Player.transform.position.x);
+        MyPlayer = GetComponent<AnimationPlayer>();
+        MyShakeSound = ShakeSound;
     }
     // LateUpdate is called after Update each frame
     void FixedUpdate()
@@ -37,5 +45,10 @@ public class CameraController : MonoBehaviour
         else
             transform.position = Vector3.Lerp(transform.position, new Vector3(Player.transform.position.x, 0, 0) + Offset, LerpFactor);
     }
-
+    public static void PlayMotion(string _motionName)
+    {
+        if (MyPlayer != null)
+            MyPlayer.PlayTrigger(_motionName, 0);
+        AudioPlayer.PlaySound(MyShakeSound);
+    }
 }

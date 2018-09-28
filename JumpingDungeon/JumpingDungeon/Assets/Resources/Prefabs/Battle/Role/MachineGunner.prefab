@@ -263,6 +263,7 @@ MonoBehaviour:
     type: 2}
   AniPlayer: {fileID: 114453156640465214}
   RoleTrans: {fileID: 224234580222252886}
+  DeathSound: {fileID: 8300000, guid: fc274ce0d0fd8fb40b2e7557d54975e8, type: 3}
   DropProbility: 1
   DropCount: 1
   DropSkillProbility: 1

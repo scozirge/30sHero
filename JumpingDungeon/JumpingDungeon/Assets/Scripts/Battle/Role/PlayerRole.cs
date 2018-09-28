@@ -139,6 +139,12 @@ public partial class PlayerRole : Role
     [Tooltip("衝刺力道")]
     [SerializeField]
     int RushForce;
+    [Tooltip("衝刺音效")]
+    [SerializeField]
+    AudioClip RushSound;
+    [Tooltip("攻擊音效")]
+    [SerializeField]
+    AudioClip AttackSound;
 
 
     MyTimer AttackTimer;
@@ -193,6 +199,8 @@ public partial class PlayerRole : Role
         if (CurAttackState > 1)
             CurAttackState = 0;
         AttackTimer.RestartCountDown();
+        CameraController.PlayMotion("Shake1");
+        AudioPlayer.PlaySound(AttackSound);
     }
     public void BumpingAttack()
     {
@@ -276,6 +284,7 @@ public partial class PlayerRole : Role
                 {
                     Vector2 rushForce = dir * RushForce;
                     MyRigi.AddForce(rushForce);
+                    AudioPlayer.PlaySound(RushSound);
                 }
             }
         }

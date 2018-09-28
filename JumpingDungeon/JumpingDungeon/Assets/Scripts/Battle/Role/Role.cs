@@ -66,6 +66,12 @@ public abstract class Role : MonoBehaviour
     protected AnimationPlayer AniPlayer;
     [SerializeField]
     protected Transform RoleTrans;
+    [Tooltip("死亡音效")]
+    [SerializeField]
+    AudioClip DeathSound;
+
+
+
     public bool IsAlive { get; protected set; }
     public Dictionary<RoleBuffer, BufferData> Buffers = new Dictionary<RoleBuffer, BufferData>();
 
@@ -161,6 +167,7 @@ public abstract class Role : MonoBehaviour
     protected virtual void SelfDestroy()
     {
         EffectEmitter.EmitParticle(DeathEffect, transform.position, Vector3.zero, null);
+        AudioPlayer.PlaySound(DeathSound);
         Destroy(gameObject);
     }
     public virtual void Attack()
