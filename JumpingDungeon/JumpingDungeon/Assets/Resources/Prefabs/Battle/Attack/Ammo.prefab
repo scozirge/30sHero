@@ -94,6 +94,7 @@ MonoBehaviour:
   IceIntensity: 0
   CurseIntensity: 0
   AmmoType: 0
+  Damage: 0
   AmmoSpeed: 500
   TraceFactor: 0
 --- !u!222 &222441390583901092

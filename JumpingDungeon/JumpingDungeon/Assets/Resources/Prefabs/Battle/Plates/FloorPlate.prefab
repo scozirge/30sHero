@@ -68,7 +68,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RandomFlip: 1
-  RandomRotate: 1
+  RandomRotate: 0
 --- !u!222 &222284048793137522
 CanvasRenderer:
   m_ObjectHideFlags: 1

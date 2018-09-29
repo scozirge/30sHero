@@ -9,12 +9,13 @@ public class ShootAmmo : Ammo
     [SerializeField]
     protected float TraceFactor;
 
-
+    Role Attacker;
     protected Vector3 Ammovelocity;
     public override void Init(Dictionary<string, object> _dic)
     {
         base.Init(_dic);
         Target = ((Role)_dic["Target"]);
+        Attacker = (Role)(_dic["Attacker"]);
         Ammovelocity = (Vector3)(_dic["Direction"]) * AmmoSpeed;
         //transform.LookAt(MyRigi.velocity);
 
@@ -32,13 +33,13 @@ public class ShootAmmo : Ammo
             return;
         base.OnTriggerStay2D(_col);
     }
-    protected override void TriggerTarget(Role _curTarget)
+    protected override void TriggerTarget(Role _role)
     {
-        base.TriggerTarget(_curTarget);
-        Vector2 force = (_curTarget.transform.position - transform.position).normalized * KnockIntensity;
+        base.TriggerTarget(_role);
+        Vector2 force = (_role.transform.position - transform.position).normalized * KnockIntensity;
         Dictionary<RoleBuffer, BufferData> condition = new Dictionary<RoleBuffer, BufferData>();
         condition.Add(RoleBuffer.Stun, new BufferData(StunIntensity, 0));
-        _curTarget.BeAttack(Damage, force, condition);
+        _role.BeAttack(Damage, force, condition);
         IsCausedDamage = true;
         if (AmmoType != ShootAmmoType.Penetration)
             SelfDestroy();
@@ -56,5 +57,23 @@ public class ShootAmmo : Ammo
     {
         base.Launch();
         MyRigi.velocity = Ammovelocity;
+    }
+    public override void ForceReverse()
+    {
+        base.ForceReverse();
+        if (AttackerRoleTag == Force.Player)
+        {
+            AttackerRoleTag = Force.Enemy;
+            tag = AmmoForce.EnemyAmmo.ToString();
+            TargetRoleTag = Force.Player;
+        }
+        else
+        {
+            AttackerRoleTag = Force.Player;
+            tag = AmmoForce.PlayerAmmo.ToString();
+            TargetRoleTag = Force.Enemy;
+        }
+        Target = Attacker;
+        MyRigi.velocity *= -1;
     }
 }

@@ -40,22 +40,22 @@ public class SuicideBombing : Skill
         base.PlayerGetSkill();
         Detected = false;
     }
-    void Update()
+    protected override void Update()
     {
+        base.Update();
         PrefareTimerFunc();
     }
-
-    void OnTriggerStay2D(Collider2D _col)
+    protected override void TimerFunc()
     {
-        if (this.isActiveAndEnabled)
-        {
-            if (Detected)
-                return;
-            if (_col.tag.ToString() == TargetForce.ToString())
-            {
-                TriggerTarget(_col.GetComponent<Role>());
-            }
-        }
+        if (!Target)
+            return;
+        if (Vector3.Distance(Target.transform.position, transform.position) > DetecteRadius)
+            return;
+        if (Detected)
+            return;
+        base.TimerFunc();
+
+        TriggerTarget(Target.GetComponent<Role>());
     }
     protected virtual void TriggerTarget(Role _curTarget)
     {

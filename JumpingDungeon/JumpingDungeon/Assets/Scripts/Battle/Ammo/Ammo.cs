@@ -35,18 +35,19 @@ public partial class Ammo : MonoBehaviour
     [Tooltip("子彈類型，選擇穿透就是子彈擊中玩家後不會移除，且可能造成多次傷害(炸彈類的子彈)")]
     [SerializeField]
     protected ShootAmmoType AmmoType;
-
-    protected Force AttackerForce;
-    protected Force TargetForce;
+    protected Force AttackerRoleTag;
+    protected Force TargetRoleTag;
     protected bool IsLaunch;
     protected bool IsCausedDamage;
-    protected int Damage;
+    [HideInInspector]
+    public int Damage;
     protected Role Target;
     float LifeTimer;
     protected Rigidbody2D MyRigi;
     protected Transform ParticleParent;
     float DestructMargin_Left;
     float DestructMargin_Right;
+
 
     public virtual void Init(Dictionary<string, object> _dic)
     {
@@ -58,11 +59,17 @@ public partial class Ammo : MonoBehaviour
             MyRigi.gravityScale = 0;
         }
         LifeTimer = LifeTime;
-        AttackerForce = ((Force)(_dic["AttackerForce"]));
-        if (AttackerForce == Force.Player)
-            TargetForce = Force.Enemy;
+        AttackerRoleTag = ((Force)(_dic["AttackerForce"]));
+        if (AttackerRoleTag == Force.Player)
+        {
+            tag = AmmoForce.PlayerAmmo.ToString();
+            TargetRoleTag = Force.Enemy;
+        }
         else
-            TargetForce = Force.Player;
+        {
+            tag = AmmoForce.EnemyAmmo.ToString();
+            TargetRoleTag = Force.Player;
+        }
         Damage = int.Parse(_dic["Damage"].ToString());
         SpawnParticles();
     }
@@ -96,21 +103,20 @@ public partial class Ammo : MonoBehaviour
     }
     protected virtual void OnTriggerEnter2D(Collider2D _col)
     {
-        if (_col.tag.ToString() == TargetForce.ToString())
-        {
+        if (TargetRoleTag.ToString() == _col.tag.ToString())
             TriggerTarget(_col.GetComponent<Role>());
-        }
-    }
-    protected virtual void TriggerTarget(Role _curTarget)
-    {
+
     }
     protected virtual void OnTriggerStay2D(Collider2D _col)
     {
-        string tagName = _col.tag.ToString();
-        if (tagName == TargetForce.ToString())
-        {
+        if (TargetRoleTag.ToString() == _col.tag.ToString())
             TriggerTarget(_col.GetComponent<Role>());
-        }
+        else if (TargetRoleTag.ToString() == _col.tag.ToString())
+            TriggerTarget(_col.GetComponent<Role>());
+
+    }
+    protected virtual void TriggerTarget(Role _role)
+    {
     }
     protected virtual void Update()
     {
@@ -143,5 +149,8 @@ public partial class Ammo : MonoBehaviour
         {
             SelfDestroy();
         }
+    }
+    public virtual void ForceReverse()
+    {
     }
 }

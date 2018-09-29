@@ -18,6 +18,8 @@ public class BattleManage : MonoBehaviour
     CameraController CameraControler;
     [SerializeField]
     EnemyRole DesignatedEnemy;
+    [SerializeField]
+    bool SpawnOnce;
 
     public static CameraController MyCameraControler;
     public static int Level;
@@ -26,6 +28,7 @@ public class BattleManage : MonoBehaviour
     int CurSpawnCount;
     float DestructMargin_Left;
     float DestructMargin_Right;
+    int SpawnTimes;
     List<EnemyRole> EnemyList = new List<EnemyRole>();
 
     // Use this for initialization
@@ -50,6 +53,8 @@ public class BattleManage : MonoBehaviour
     }
     void SpanwEnemy()
     {
+        if (SpawnOnce && SpawnTimes > 0)
+            return;
         for (int i = 0; i < Enemys.Count; i++)
         {
             if (Enemys[i] == null)
@@ -131,6 +136,7 @@ public class BattleManage : MonoBehaviour
         else
             CurSpawnCount = 0;
         EnemyList.Add(er);
+        SpawnTimes++;
     }
     IEnumerator WaitToSpawnEnemy()
     {

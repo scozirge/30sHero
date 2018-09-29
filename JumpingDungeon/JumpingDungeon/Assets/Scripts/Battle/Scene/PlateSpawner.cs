@@ -45,9 +45,9 @@ public class PlateSpawner : MonoBehaviour
     }
     void Update()
     {
-        AdustPos();
+        AdjustPos();
     }
-    void AdustPos()
+    void AdjustPos()
     {
         float cameraX=FollowCamera.transform.position.x;
         if (cameraX>0)

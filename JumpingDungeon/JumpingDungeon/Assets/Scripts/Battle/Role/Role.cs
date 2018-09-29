@@ -71,7 +71,6 @@ public abstract class Role : MonoBehaviour
     AudioClip DeathSound;
 
 
-
     public bool IsAlive { get; protected set; }
     public Dictionary<RoleBuffer, BufferData> Buffers = new Dictionary<RoleBuffer, BufferData>();
 

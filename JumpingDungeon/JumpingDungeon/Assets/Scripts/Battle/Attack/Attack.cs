@@ -34,42 +34,27 @@ public class Attack : Skill
     protected float AmmoIntervalTimer;
     protected bool IsAttacking;
     protected int CurSpawnAmmoNum;
-    protected Role Target;
+    bool IsPreAttack = false;
     protected Vector3 AttackDir = Vector3.zero;
     static protected float PreAttackTime = 1;
 
     protected override void Awake()
     {
         base.Awake();
-        if (Myself.MyForce == Force.Enemy)
-        {
-            GameObject go = GameObject.FindGameObjectWithTag(Force.Player.ToString());
-            if (go != null)
-                Target = go.GetComponent<PlayerRole>();
-        }
         Timer = Interval;
+        InRange = false;
         if (SpawnedInSelf)
             AmmoParent = transform;
     }
-    protected virtual void Update()
+    protected override void Update()
     {
-        AutoDetectTarge();
-        TimerFunc();
+        base.Update();
         AttackExecuteFunc();
     }
-    protected virtual void AutoDetectTarge()
-    {
-        if (Myself.MyForce == Force.Player)
-        {
-            GameObject go = GameobjectFinder.FindClosestGameobjectWithTag(gameObject, Force.Enemy.ToString());
-            if (go != null)
-                Target = go.GetComponent<EnemyRole>();
-        }
-    }
+
     protected override void SpawnAttackPrefab()
     {
         base.SpawnAttackPrefab();
-        AmmoData.Add("Target", Target);
         //Set AmmoData
         if (Patetern == ShootPatetern.TowardTarget)
         {
@@ -92,11 +77,18 @@ public class Attack : Skill
         }
         AttackTimes++;
     }
-    bool IsPreAttack = false;
-    protected virtual void TimerFunc()
+    bool InRange;
+    protected override void TimerFunc()
     {
+        if (!Target)
+            return;
+        if (Vector3.Distance(Target.transform.position, transform.position) <= DetecteRadius)
+            InRange = true;
+        if (!InRange)
+            return;
         if (AttackOnce && AttackTimes > 0)
             return;
+        base.TimerFunc();
         if (Timer > 0)
         {
             Timer -= Time.deltaTime;
@@ -112,6 +104,7 @@ public class Attack : Skill
         {
             IsAttacking = true;
             IsPreAttack = false;
+            InRange = false;
             Timer = Interval;
         }
     }

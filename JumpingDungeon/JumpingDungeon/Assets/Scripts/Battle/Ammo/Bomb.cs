@@ -30,13 +30,13 @@ public class Bomb : Ammo
             return;
         base.OnTriggerEnter2D(_col);
     }
-    protected override void TriggerTarget(Role _curTarget)
+    protected override void TriggerTarget(Role _role)
     {
-        base.TriggerTarget(_curTarget);
-        Vector2 force = (_curTarget.transform.position - transform.position).normalized * KnockIntensity;
+        base.TriggerTarget(_role);
+        Vector2 force = (_role.transform.position - transform.position).normalized * KnockIntensity;
         Dictionary<RoleBuffer, BufferData> condition = new Dictionary<RoleBuffer, BufferData>();
         condition.Add(RoleBuffer.Stun, new BufferData(StunIntensity, 0));
-        _curTarget.BeAttack(Damage, force, condition);
+        _role.BeAttack(Damage, force, condition);
         ReadyToDamage = false;
         if (AmmoType != ShootAmmoType.Penetration)
             IsCausedDamage = true;

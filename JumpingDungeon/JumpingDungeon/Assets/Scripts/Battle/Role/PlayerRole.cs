@@ -152,7 +152,7 @@ public partial class PlayerRole : Role
     public int FaceDir;
     Dictionary<string, Skill> MonsterSkills = new Dictionary<string, Skill>();
     List<Skill> ActiveMonsterSkills = new List<Skill>();
-
+    public EnemyRole ClosestEnemy;
 
 
     protected override void Awake()
@@ -173,6 +173,7 @@ public partial class PlayerRole : Role
         MoveAfterimage_Main.maxParticles = 0;
         MoveAfterimage_Main.startLifetime = 0;
     }
+
     void RestoreAttack()
     {
         CurAttackState = 0;
@@ -211,6 +212,9 @@ public partial class PlayerRole : Role
     protected override void Update()
     {
         base.Update();
+        GameObject go = GameobjectFinder.FindClosestGameobjectWithTag(gameObject, Force.Enemy.ToString());
+        if(go)
+            ClosestEnemy = go.GetComponent<EnemyRole>();
         AvatarTimerFunc();
         AttackTimer.RunTimer();
         ShieldTimer.RunTimer();

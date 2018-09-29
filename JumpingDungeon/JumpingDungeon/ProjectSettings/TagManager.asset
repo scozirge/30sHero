@@ -8,6 +8,8 @@ TagManager:
   - ParticleParent
   - AmmoParent
   - Loot
+  - PlayerAmmo
+  - EnemyAmmo
   layers:
   - Default
   - TransparentFX

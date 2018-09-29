@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
 public class Skill : MonoBehaviour
 {
@@ -10,6 +11,12 @@ public class Skill : MonoBehaviour
     [Tooltip("玩家獲得此技能的持續時間)")]
     [SerializeField]
     protected float PSkillDuration;
+    [Tooltip("偵測有目標在半徑範圍內才會攻擊)")]
+    [SerializeField]
+    protected int DetecteRadius = 800;
+    [Tooltip("傷害倍率(傷害=傷害倍率x腳色攻擊力))")]
+    [SerializeField]
+    protected float Percent = 1;
     protected Role Myself;
     protected Dictionary<string, object> AmmoData = new Dictionary<string, object>();
     protected Transform AmmoParent;
@@ -17,7 +24,16 @@ public class Skill : MonoBehaviour
     protected int AttackTimes;
     [HideInInspector]
     public float PSkillTimer;
-
+    protected Role Target;
+    void OnDrawGizmos()
+    {
+        if (!Application.isEditor)
+            return;
+        if (Selection.activeGameObject != transform.gameObject)
+            return;
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, DetecteRadius);
+    }
     protected virtual void Awake()
     {
         if (PSkillName == null)
@@ -29,7 +45,13 @@ public class Skill : MonoBehaviour
         else if (gameObject.tag == Force.Enemy.ToString())
         {
             Myself = GetComponent<EnemyRole>();
+            GameObject go = GameObject.FindGameObjectWithTag(Force.Player.ToString());
+            if (go != null)
+                Target = go.GetComponent<PlayerRole>();
         }
+        if (Percent < 0)
+            Percent = 0;
+
         AmmoParent = GameObject.FindGameObjectWithTag("AmmoParent").transform;
         SubordinateAmmos = new List<Ammo>();
     }
@@ -48,7 +70,8 @@ public class Skill : MonoBehaviour
     {
         //Set AmmoData
         AmmoData.Clear();
-        AmmoData.Add("Damage", Myself.Damage);
+        AmmoData.Add("Target", Target);
+        AmmoData.Add("Damage", Myself.Damage * Percent);
         AmmoData.Add("AttackerForce", Myself.MyForce);
         Myself.Attack();
     }
@@ -65,5 +88,20 @@ public class Skill : MonoBehaviour
                 SubordinateAmmos[i].SelfDestroy();
             SubordinateAmmos.RemoveAt(i);
         }
+    }
+    protected virtual void Update()
+    {
+        AutoDetectTarge();//要再TimeFunc之前，不然會一殺死怪物就觸發技能
+        TimerFunc();
+    }
+    protected virtual void AutoDetectTarge()
+    {
+        if (Myself.MyForce == Force.Player)
+        {
+            Target = ((PlayerRole)Myself).ClosestEnemy;
+        }
+    }
+    protected virtual void TimerFunc()
+    {
     }
 }
