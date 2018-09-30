@@ -16,7 +16,8 @@ public class Skill : MonoBehaviour
     protected int DetecteRadius = 800;
     [Tooltip("傷害倍率(傷害=傷害倍率x腳色攻擊力))")]
     [SerializeField]
-    protected float Percent = 1;
+    protected float DamagePercent = 1;
+
     protected Role Myself;
     protected Dictionary<string, object> AmmoData = new Dictionary<string, object>();
     protected Transform AmmoParent;
@@ -25,6 +26,8 @@ public class Skill : MonoBehaviour
     [HideInInspector]
     public float PSkillTimer;
     protected Role Target;
+    protected bool CanAttack;
+
     void OnDrawGizmos()
     {
         if (!Application.isEditor)
@@ -45,15 +48,16 @@ public class Skill : MonoBehaviour
         else if (gameObject.tag == Force.Enemy.ToString())
         {
             Myself = GetComponent<EnemyRole>();
-            GameObject go = GameObject.FindGameObjectWithTag(Force.Player.ToString());
-            if (go != null)
-                Target = go.GetComponent<PlayerRole>();
         }
-        if (Percent < 0)
-            Percent = 0;
-
+        if (DamagePercent < 0)
+            DamagePercent = 0;
+        CanAttack = !Myself.CheckCondition(RoleBuffer.Stun);
         AmmoParent = GameObject.FindGameObjectWithTag("AmmoParent").transform;
         SubordinateAmmos = new List<Ammo>();
+    }
+    public virtual void SetCanAttack(bool _bool)
+    {
+        CanAttack = _bool;
     }
     public virtual void PlayerInitSkill()
     {
@@ -70,8 +74,7 @@ public class Skill : MonoBehaviour
     {
         //Set AmmoData
         AmmoData.Clear();
-        AmmoData.Add("Target", Target);
-        AmmoData.Add("Damage", Myself.Damage * Percent);
+        AmmoData.Add("Damage", Myself.Damage * DamagePercent);
         AmmoData.Add("AttackerForce", Myself.MyForce);
         Myself.Attack();
     }

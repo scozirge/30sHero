@@ -34,11 +34,14 @@ public class BattleManage : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        if (!GameManager.IsInit)
+            GameManager.DeployGameManager();
         SpawnIntervalTimer = SpawnInterval;
         MyCameraControler = CameraControler;
         CurSpawnCount = 0;
         ScreenSize = MyCameraControler.ScreenSize;
     }
+
     void SpawnIntervalTimerFunc()
     {
         if (SpawnInterval <= 0)
@@ -72,6 +75,7 @@ public class BattleManage : MonoBehaviour
         int quadrant = 1;//象限
         int nearMargin = 0;//靠近左右邊(0)或靠近上下邊(1)
         er.transform.SetParent(EnemyParent);
+        er.name = string.Format("{0}-{1}", SpawnTimes, CurSpawnCount);
         AIMove am = er.GetComponent<AIMove>();
 
         if (am != null)
@@ -134,9 +138,11 @@ public class BattleManage : MonoBehaviour
         if (CurSpawnCount < SpawnCount)
             StartCoroutine(WaitToSpawnEnemy());
         else
+        {
             CurSpawnCount = 0;
+            SpawnTimes++;
+        }
         EnemyList.Add(er);
-        SpawnTimes++;
     }
     IEnumerator WaitToSpawnEnemy()
     {

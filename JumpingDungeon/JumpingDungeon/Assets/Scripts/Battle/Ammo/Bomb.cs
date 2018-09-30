@@ -8,6 +8,7 @@ public class Bomb : Ammo
     [SerializeField]
     float DamageInterval;
 
+
     protected bool ReadyToDamage;
     protected float DamageIntervalTimer;
 
@@ -34,11 +35,10 @@ public class Bomb : Ammo
     {
         base.TriggerTarget(_role);
         Vector2 force = (_role.transform.position - transform.position).normalized * KnockIntensity;
-        Dictionary<RoleBuffer, BufferData> condition = new Dictionary<RoleBuffer, BufferData>();
-        condition.Add(RoleBuffer.Stun, new BufferData(StunIntensity, 0));
-        _role.BeAttack(Damage, force, condition);
+        _role.BeAttack(Value, force);
+        TriggerHitCondition(_role);
         ReadyToDamage = false;
-        if (AmmoType != ShootAmmoType.Penetration)
+        if (AmmoType != ShootAmmoType.Permanent)
             IsCausedDamage = true;
     }
     protected override void Update()

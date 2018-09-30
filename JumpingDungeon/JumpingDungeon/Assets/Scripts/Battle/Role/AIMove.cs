@@ -24,7 +24,7 @@ public class AIMove : MonoBehaviour
     [SerializeField]
     public Vector2 Destination;
 
-
+    bool CanMove;
 
     static float InRangeStartWander = 50;
 
@@ -51,6 +51,7 @@ public class AIMove : MonoBehaviour
         if (RotateFactor < 0.02f)
             RotateFactor = 0.02f;
         KeepDebut = true;
+        CanMove = true;
         if (Destination == Vector2.zero)
         {
             SetRandDestination();
@@ -59,7 +60,6 @@ public class AIMove : MonoBehaviour
     }
     public Vector2 SetRandDestination()
     {
-        Vector2 RandomOffset = Vector2.zero;
         float randPosX = Random.Range(100, BattleManage.ScreenSize.x / 2);
         float randPosY = Random.Range(-BattleManage.ScreenSize.y / 2 + 100, BattleManage.ScreenSize.y / 2 - 100);
         RandomOffset = new Vector2(randPosX, randPosY);
@@ -128,11 +128,23 @@ public class AIMove : MonoBehaviour
     }
     void FixedUpdate()
     {
-        Debut();
-        WanderMovement();
+        if (CanMove)
+        {
+            Debut();
+            WanderMovement();
+        }
+    }
+    public void SetCanMove(bool _bool)
+    {
+        CanMove = _bool;
+        if (!CanMove)
+            MyRigi.velocity = Vector3.zero;
     }
     void Update()
     {
-        WanderTimerFunc();
+        if (CanMove)
+        {
+            WanderTimerFunc();
+        }
     }
 }

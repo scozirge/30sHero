@@ -1014,18 +1014,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PSkillName: s
   PSkillDuration: 999
-  DetecteRadius: 400
-  Percent: 1
+  DetecteRadius: 2000
+  DamagePercent: 0
   PSkillTimer: 0
   AttackOnce: 0
-  Interval: 1
-  AmmoNum: 1
+  Interval: 0.5
+  AmmoNum: 3
   AmmoInterval: 0
-  StartAngle: 0
-  AngleInterval: 0
+  StartAngle: -90
+  AngleInterval: 90
   Patetern: 1
   SpawnedInSelf: 0
-  AttackPrefab: {fileID: 114962956101920240, guid: cdb230a6efc22e241a995ba0f5fbb34c,
+  AttackPrefab: {fileID: 114962956101920240, guid: 764d9b4a6227801439c2df1cb4a677b2,
     type: 2}
 --- !u!1 &1033918694
 GameObject:

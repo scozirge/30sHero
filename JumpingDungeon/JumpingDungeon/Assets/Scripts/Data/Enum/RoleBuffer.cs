@@ -1,6 +1,9 @@
 ﻿public enum RoleBuffer
 {
     Stun,
-    Invicible,
+    Burn,
+    Freeze,
+    Curse,
+    Immortal,
     DamageBuff
 }

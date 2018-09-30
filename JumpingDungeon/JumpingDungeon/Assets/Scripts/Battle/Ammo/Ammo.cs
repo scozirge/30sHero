@@ -22,16 +22,18 @@ public partial class Ammo : MonoBehaviour
     protected int KnockIntensity;
     [Tooltip("暈眩秒數")]
     [SerializeField]
-    protected float StunIntensity;
+    public float StunIntensity;
     [Tooltip("燃燒秒數")]
     [SerializeField]
-    protected float FireIntensity;
+    protected float BurnIntensity;
     [Tooltip("冰凍秒數")]
     [SerializeField]
-    protected float IceIntensity;
+    protected float FreezeIntensity;
     [Tooltip("詛咒秒數")]
     [SerializeField]
     protected float CurseIntensity;
+
+
     [Tooltip("子彈類型，選擇穿透就是子彈擊中玩家後不會移除，且可能造成多次傷害(炸彈類的子彈)")]
     [SerializeField]
     protected ShootAmmoType AmmoType;
@@ -40,7 +42,7 @@ public partial class Ammo : MonoBehaviour
     protected bool IsLaunch;
     protected bool IsCausedDamage;
     [HideInInspector]
-    public int Damage;
+    public int Value;
     protected Role Target;
     float LifeTimer;
     protected Rigidbody2D MyRigi;
@@ -48,7 +50,13 @@ public partial class Ammo : MonoBehaviour
     float DestructMargin_Left;
     float DestructMargin_Right;
 
-
+    protected virtual void TriggerHitCondition(Role _role)
+    {
+        _role.GetBuffer(RoleBuffer.Stun, StunIntensity);
+        _role.GetBuffer(RoleBuffer.Burn, BurnIntensity);
+        _role.GetBuffer(RoleBuffer.Freeze, FreezeIntensity);
+        _role.GetBuffer(RoleBuffer.Curse, CurseIntensity);
+    }
     public virtual void Init(Dictionary<string, object> _dic)
     {
         ParticleParent = GameObject.FindGameObjectWithTag("ParticleParent").transform;
@@ -60,17 +68,16 @@ public partial class Ammo : MonoBehaviour
         }
         LifeTimer = LifeTime;
         AttackerRoleTag = ((Force)(_dic["AttackerForce"]));
+        TargetRoleTag = ((Force)(_dic["TargetRoleTag"]));
         if (AttackerRoleTag == Force.Player)
         {
             tag = AmmoForce.PlayerAmmo.ToString();
-            TargetRoleTag = Force.Enemy;
         }
         else
         {
             tag = AmmoForce.EnemyAmmo.ToString();
-            TargetRoleTag = Force.Player;
         }
-        Damage = int.Parse(_dic["Damage"].ToString());
+        Value = int.Parse(_dic["Damage"].ToString());
         SpawnParticles();
     }
     protected virtual void SpawnParticles()

@@ -7,7 +7,4 @@ public class Purchase : MyUI {
     [SerializeField]
     ItemSpawner MySpanwer;
 
-    List<Item> ItemList = new List<Item>();
-
-
 }

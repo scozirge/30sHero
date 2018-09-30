@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 public partial class Player
 {
+    public static bool IsInit;
     public static Language UseLanguage { get; private set; }
     public static string AC { get; private set; }
     public static int Gold { get; private set; }
@@ -55,6 +56,8 @@ public partial class Player
 
     public static void Init()
     {
+        if (IsInit)
+            return;
         Player.SetLanguage(Language.EN);
         Properties = GameSettingData.GetNewRolePropertiesDic(0);
         EquipPlus = GameSettingData.GetNewRolePropertiesDic(0);
@@ -104,7 +107,7 @@ public partial class Player
         //    ACPass = PlayerPrefs.GetString("ACPass");
         //if (PlayerPrefs.GetString("Name") != "")
         //    Name = PlayerPrefs.GetString("Name");
-
+        IsInit = true;
     }
     public static void UpdateRecord(Dictionary<string, object> _data)
     {

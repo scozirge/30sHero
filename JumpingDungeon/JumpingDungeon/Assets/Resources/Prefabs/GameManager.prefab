@@ -1,0 +1,81 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1371045023159492}
+  m_IsPrefabAsset: 1
+--- !u!1 &1371045023159492
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4975406249194266}
+  - component: {fileID: 114174026396617276}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4975406249194266
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1371045023159492}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -127.51266, y: -29.730404, z: -12.75}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114174026396617276
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1371045023159492}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 303711054dff4c8489467493aae334ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GM: {fileID: 0}
+  DebuggerPrefab: {fileID: 114470120245784644, guid: 34d7f35244719c441ae89560ab8f936f,
+    type: 2}
+  PopUIPrefab: {fileID: 114768463510591170, guid: 2740e343e2aaeeb4da13125020b01904,
+    type: 2}
+  QualityBotPrefabs:
+  - {fileID: 21300000, guid: 01b59ce25d38b2a4bb1f6db7d6d40ca7, type: 3}
+  - {fileID: 21300000, guid: 1a1eab282e9447c42a64887da31ff094, type: 3}
+  - {fileID: 21300000, guid: 169d0b401c213e146b00c3581aad50e0, type: 3}
+  - {fileID: 21300000, guid: abc4ce7364d2f56419bbf8cad5a83c66, type: 3}
+  - {fileID: 21300000, guid: 50dd4fa83407fd24bbe709ca6cdcf437, type: 3}
+  - {fileID: 21300000, guid: 2d5c2deb694eabe478d2460efc0f56e7, type: 3}
+  EquipTypBotPrefab:
+  - {fileID: 21300000, guid: 4b41f9927d76548449fc00d1324961c7, type: 3}
+  - {fileID: 21300000, guid: c677aefbc89bd824ba402c26dbbee633, type: 3}
+  - {fileID: 21300000, guid: 91f0be839d427af43975c3c4a284c0bf, type: 3}
+  StunPrefab: {fileID: 198778626335910482, guid: 7907fa2d41ff8db43be35d4e8129f585,
+    type: 2}
+  FreezePrefab: {fileID: 198778626335910482, guid: 7907fa2d41ff8db43be35d4e8129f585,
+    type: 2}
+  BurnPrefab: {fileID: 198778626335910482, guid: 7907fa2d41ff8db43be35d4e8129f585,
+    type: 2}
+  CursePrefab: {fileID: 198778626335910482, guid: 7907fa2d41ff8db43be35d4e8129f585,
+    type: 2}
+  ImmortalPrefab: {fileID: 198712052328016582, guid: 30de476e70ea7e94cb7b6a40fa9ba507,
+    type: 2}
+  DamageBuffPrefab: {fileID: 198778626335910482, guid: 7907fa2d41ff8db43be35d4e8129f585,
+    type: 2}

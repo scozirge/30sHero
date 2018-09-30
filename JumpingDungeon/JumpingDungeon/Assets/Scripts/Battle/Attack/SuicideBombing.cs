@@ -14,7 +14,7 @@ public class SuicideBombing : Skill
     [Tooltip("炸彈子彈物件")]
     [SerializeField]
     Bomb AttackPrefab;
-    Collider2D Dector;
+    //Collider2D Dector;
     [Tooltip("距離爆炸的準備時間(秒)")]
     [SerializeField]
     protected float PrepareTime;
@@ -31,9 +31,15 @@ public class SuicideBombing : Skill
         if (Myself.tag.ToString() == Force.Player.ToString())
             TargetForce = Force.Enemy;
         else
+        {
+            GameObject go = GameObject.FindGameObjectWithTag(Force.Player.ToString());
+            if (go != null)
+                Target = go.GetComponent<PlayerRole>();
             TargetForce = Force.Player;
+        }
+
         PrepareTimer = PrepareTime;
-        Dector = transform.GetComponentInChildrenExcludeSelf<Collider2D>();
+        //Dector = transform.GetComponentInChildrenExcludeSelf<Collider2D>();
     }
     public override void PlayerGetSkill()
     {
@@ -47,6 +53,8 @@ public class SuicideBombing : Skill
     }
     protected override void TimerFunc()
     {
+        if (!CanAttack)
+            return;
         if (!Target)
             return;
         if (Vector3.Distance(Target.transform.position, transform.position) > DetecteRadius)
@@ -74,6 +82,11 @@ public class SuicideBombing : Skill
     protected override void SpawnAttackPrefab()
     {
         base.SpawnAttackPrefab();
+        if (gameObject.tag == Force.Player.ToString())
+            AmmoData.Add("TargetRoleTag", Force.Enemy);
+        else
+            AmmoData.Add("TargetRoleTag", Force.Player);
+        AmmoData.Add("Target", Target);
         GameObject go = Instantiate(AttackPrefab.gameObject, Vector3.zero, Quaternion.identity) as GameObject;
         Ammo ammo = go.GetComponent<Ammo>();
         go.transform.SetParent(AmmoParent);

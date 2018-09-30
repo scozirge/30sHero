@@ -7,6 +7,8 @@ public partial class GameManager : MonoBehaviour
 
     public static bool IsInit { get; protected set; }
     [SerializeField]
+    GameManager GM;
+    [SerializeField]
     Debugger DebuggerPrefab;
     [SerializeField]
     PopupUI PopUIPrefab;
@@ -15,8 +17,29 @@ public partial class GameManager : MonoBehaviour
     [SerializeField]
     Sprite[] EquipTypBotPrefab;
 
+    [Tooltip("暈眩特效")]
+    [SerializeField]
+    public ParticleSystem StunPrefab;
+    [Tooltip("冰凍特效")]
+    [SerializeField]
+    public ParticleSystem FreezePrefab;
+    [Tooltip("燃燒特效")]
+    [SerializeField]
+    public ParticleSystem BurnPrefab;
+    [Tooltip("詛咒特效")]
+    [SerializeField]
+    public ParticleSystem CursePrefab;
+    [Tooltip("無敵特效")]
+    [SerializeField]
+    public ParticleSystem ImmortalPrefab;
+    [Tooltip("傷害上升特效")]
+    [SerializeField]
+    public ParticleSystem DamageBuffPrefab;
+
+
     static Sprite[] QualityBotSprites;
     static Sprite[] EquipTypBot;
+    static Dictionary<RoleBuffer, ParticleSystem> BufferParticles = new Dictionary<RoleBuffer, ParticleSystem>();
 
     public static Sprite GetItemQualityBotSprite(int _quality)
     {
@@ -30,25 +53,48 @@ public partial class GameManager : MonoBehaviour
     {
         return EquipTypBot[(int)_type];
     }
-    void Awake()
+    public static ParticleSystem GetBufferParticle(RoleBuffer _type)
     {
-        Screen.fullScreen = true;
+        if (!BufferParticles.ContainsKey(_type))
+        {
+            Debug.LogWarning(string.Format("無此狀態特效:{0}", _type));
+            return null;
+        }
+        return BufferParticles[_type];
+    }
+    void Init()
+    {
+        if (IsInit)
+            return;
         QualityBotSprites = QualityBotPrefabs;
         EquipTypBot = EquipTypBotPrefab;
-    }
-    void Start()
-    {
+        BufferParticles.Add(RoleBuffer.Stun, StunPrefab);
+        BufferParticles.Add(RoleBuffer.Freeze, FreezePrefab);
+        BufferParticles.Add(RoleBuffer.Burn, BurnPrefab);
+        BufferParticles.Add(RoleBuffer.Curse, CursePrefab);
+        BufferParticles.Add(RoleBuffer.Immortal, ImmortalPrefab);
+        BufferParticles.Add(RoleBuffer.DamageBuff, DamageBuffPrefab);
         if (!Debugger.IsSpawn)
             DeployDebugger();
         if (!PopupUI.IsInit)
             DeployPopupUI();
-        if (IsInit)
-            return;
         if (!GameDictionary.IsInit)
             GameDictionary.InitDic();
         Player.Init();
         DontDestroyOnLoad(gameObject);
         IsInit = true;
+        Debug.Log("GameManager Inited");
+    }
+    void Awake()
+    {
+        Init();
+    }
+    public static void DeployGameManager()
+    {
+        GameManager gmPrefab = Resources.Load<GameManager>("Prefabs/GameManager");
+        GameManager gm = Instantiate(gmPrefab, Vector3.zero, Quaternion.identity) as GameManager;
+        gm.transform.position = Vector3.zero; ;
+        gm.Init();
     }
     void DeployDebugger()
     {

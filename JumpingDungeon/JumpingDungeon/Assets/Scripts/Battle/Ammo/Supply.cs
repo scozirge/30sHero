@@ -2,25 +2,30 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShootAmmo : Ammo
+public class Supply : Ammo
 {
     [SerializeField]
     protected float AmmoSpeed;
     [SerializeField]
     protected float TraceFactor;
+    [Tooltip("無敵秒數")]
+    [SerializeField]
+    protected float ImmortalIntensity;
 
-
-    Role Attacker;
     protected Vector3 Ammovelocity;
     public override void Init(Dictionary<string, object> _dic)
     {
         base.Init(_dic);
         Target = ((Role)_dic["Target"]);
-        Attacker = (Role)(_dic["Attacker"]);
         Ammovelocity = (Vector3)(_dic["Direction"]) * AmmoSpeed;
         //transform.LookAt(MyRigi.velocity);
 
         Launch();
+    }
+    protected override void TriggerHitCondition(Role _role)
+    {
+        base.TriggerHitCondition(_role);
+        _role.GetBuffer(RoleBuffer.Immortal, ImmortalIntensity);
     }
     protected override void OnTriggerEnter2D(Collider2D _col)
     {
@@ -54,9 +59,8 @@ public class ShootAmmo : Ammo
     protected override void TriggerTarget(Role _role)
     {
         base.TriggerTarget(_role);
-        Vector2 force = (_role.transform.position - transform.position).normalized * KnockIntensity;
+        _role.HealHP(Value);
         TriggerHitCondition(_role);
-        _role.BeAttack(Value, force);
         IsCausedDamage = true;
         if (AmmoType != ShootAmmoType.Permanent)
             SelfDestroy();
@@ -74,23 +78,5 @@ public class ShootAmmo : Ammo
     {
         base.Launch();
         MyRigi.velocity = Ammovelocity;
-    }
-    public override void ForceReverse()
-    {
-        base.ForceReverse();
-        if (AttackerRoleTag == Force.Player)
-        {
-            AttackerRoleTag = Force.Enemy;
-            tag = AmmoForce.EnemyAmmo.ToString();
-            TargetRoleTag = Force.Player;
-        }
-        else
-        {
-            AttackerRoleTag = Force.Player;
-            tag = AmmoForce.PlayerAmmo.ToString();
-            TargetRoleTag = Force.Enemy;
-        }
-        Target = Attacker;
-        MyRigi.velocity *= -1;
     }
 }

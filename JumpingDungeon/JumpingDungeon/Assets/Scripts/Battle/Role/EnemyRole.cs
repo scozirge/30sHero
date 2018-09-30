@@ -10,11 +10,13 @@ public partial class EnemyRole : Role
     protected float FrictionDuringTimer = FrictionDuringTime;
     protected bool StartVelocityDecay;
 
+    AIMove MyAIMove;
     PlayerRole Target;
 
     protected override void Awake()
     {
         base.Awake();
+        MyAIMove = GetComponent<AIMove>();
         GameObject go = GameObject.FindGameObjectWithTag("Player");
         if (go)
             Target = go.GetComponent<PlayerRole>();
@@ -51,11 +53,11 @@ public partial class EnemyRole : Role
         base.PreAttack();
         AniPlayer.PlayTrigger_NoPlayback("PreAttack", 0);
     }
-    public override void BeAttack(int _dmg, Vector2 _force, Dictionary<RoleBuffer, BufferData> buffers)
+    public override void BeAttack(int _dmg, Vector2 _force)
     {
         GetFriction();
         AniPlayer.PlayTrigger("BeAttack", 0);
-        base.BeAttack(_dmg, _force, buffers);
+        base.BeAttack(_dmg, _force);
     }
     void GetFriction()
     {
@@ -82,5 +84,19 @@ public partial class EnemyRole : Role
     protected override void Update()
     {
         base.Update();
+    }
+    protected override void AddBuffer(RoleBuffer _buffer, BufferData _data)
+    {
+        base.AddBuffer(_buffer, _data);
+        if (_buffer == RoleBuffer.Stun)
+            if (MyAIMove)
+                MyAIMove.SetCanMove(false);
+    }
+    public override void RemoveBuffer(RoleBuffer _buffer)
+    {
+        base.RemoveBuffer(_buffer);
+        if (_buffer == RoleBuffer.Stun)
+            if (MyAIMove)
+                MyAIMove.SetCanMove(false);
     }
 }

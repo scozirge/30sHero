@@ -73,7 +73,8 @@ public abstract class Role : MonoBehaviour
 
     public bool IsAlive { get; protected set; }
     public Dictionary<RoleBuffer, BufferData> Buffers = new Dictionary<RoleBuffer, BufferData>();
-
+    Dictionary<RoleBuffer, ParticleSystem> BufferParticles = new Dictionary<RoleBuffer, ParticleSystem>();
+    protected List<Skill> Skills = new List<Skill>();
 
     protected virtual void Awake()
     {
@@ -82,6 +83,8 @@ public abstract class Role : MonoBehaviour
         Health = MaxHealth;
         MyForce = MyEnum.ParseEnum<Force>(gameObject.tag);
         MyRigi = GetComponent<Rigidbody2D>();
+        Skill[] coms = GetComponents<Skill>();
+        Skills = coms.ToList<Skill>();
     }
     protected virtual void Move()
     {
@@ -95,25 +98,17 @@ public abstract class Role : MonoBehaviour
     {
         ConditionTimerFunc();
     }
-    public virtual void BeAttack(int _dmg, Vector2 _force, Dictionary<RoleBuffer, BufferData> buffers)
+
+    public virtual void BeAttack(int _dmg, Vector2 _force)
     {
         //Add KnockForce
         MyRigi.velocity = Vector2.zero;
         MyRigi.velocity = _force;
         //if Invincible, can't take damage and debuff
-        if (Buffers.ContainsKey(RoleBuffer.Invicible))
+        if (Buffers.ContainsKey(RoleBuffer.Immortal))
             return;
         //take damage
         ReceiveDmg(_dmg);
-        //Get conditions
-        if (buffers != null)
-        {
-            List<RoleBuffer> keyList = new List<RoleBuffer>(buffers.Keys);
-            for (int i = 0; i < keyList.Count; i++)
-            {
-                GetCondition(keyList[i], buffers[keyList[i]]);
-            }
-        }
     }
     public virtual void ReceiveDmg(int _dmg)
     {
@@ -138,16 +133,40 @@ public abstract class Role : MonoBehaviour
         else IsAlive = true;
         return !IsAlive;
     }
-    public virtual void GetCondition(RoleBuffer _condition, BufferData _data)
+    public void GetBuffer(RoleBuffer _bufferType, params float[] _values)
     {
-        if (Buffers.ContainsKey(_condition))
+        if (_values.Length > 0 && _values[0] != 0)
         {
-            if (Buffers[_condition].Time < _data.Time)
-                Buffers[_condition].Time = _data.Time;
+            switch (_values.Length)
+            {
+                case 1:
+                    AddBuffer(_bufferType, new BufferData(_values[0]));
+                    break;
+                case 2:
+                    AddBuffer(_bufferType, new BufferData(_values[0], _values[1]));
+                    break;
+            }
+        }
+    }
+    protected virtual void AddBuffer(RoleBuffer _buffer, BufferData _data)
+    {
+        if (Buffers.ContainsKey(_buffer))
+        {
+            if (Buffers[_buffer].Time < _data.Time)
+                Buffers[_buffer].Time = _data.Time;
         }
         else
         {
-            Buffers.Add(_condition, _data);
+            Buffers.Add(_buffer, _data);
+            ParticleSystem ps = EffectEmitter.EmitParticle(GameManager.GetBufferParticle(_buffer), Vector3.zero, Vector3.zero, transform);
+            BufferParticles.Add(_buffer, ps);
+        }
+        if (_buffer == RoleBuffer.Stun)
+        {
+            for (int i = 0; i < Skills.Count; i++)
+            {
+                Skills[i].SetCanAttack(false);
+            }
         }
     }
     protected virtual void ConditionTimerFunc()
@@ -158,10 +177,26 @@ public abstract class Role : MonoBehaviour
             Buffers[keyList[i]].Time -= Time.deltaTime;
             if (Buffers[keyList[i]].Time <= 0)
             {
-                Buffers.Remove(keyList[i]);
-                keyList.RemoveAt(i);
+                RemoveBuffer(keyList[i]);
             }
         }
+    }
+    public virtual void RemoveBuffer(RoleBuffer _buffer)
+    {
+        Buffers.Remove(_buffer);
+        Destroy(BufferParticles[_buffer].gameObject);
+        BufferParticles.Remove(_buffer);
+        if (_buffer == RoleBuffer.Stun)
+        {
+            for (int i = 0; i < Skills.Count; i++)
+            {
+                Skills[i].SetCanAttack(true);
+            }
+        }
+    }
+    public bool CheckCondition(RoleBuffer _condition)
+    {
+        return Buffers.ContainsKey(_condition);
     }
     protected virtual void SelfDestroy()
     {

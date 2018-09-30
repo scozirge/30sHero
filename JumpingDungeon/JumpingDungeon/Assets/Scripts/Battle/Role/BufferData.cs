@@ -11,7 +11,7 @@ public class BufferData
     {
         Time = _time;
     }
-    public BufferData(float _time, float _value)
+    public BufferData(float _time,float _value)
     {
         Time = _time;
         Value = _value;

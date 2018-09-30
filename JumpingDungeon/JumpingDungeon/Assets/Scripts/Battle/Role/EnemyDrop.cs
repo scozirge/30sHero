@@ -22,7 +22,10 @@ public partial class EnemyRole
 
     void Drop()
     {
-        PlayerRole pr = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerRole>();
+        GameObject go = GameObject.FindGameObjectWithTag("Player");
+        if (!go)
+            return;
+        PlayerRole pr = go.GetComponent<PlayerRole>();
         //DropLoot;
         for (int i = 0; i < DropCount; i++)
         {
@@ -41,8 +44,7 @@ public partial class EnemyRole
                 pr.InitMonsterSkill(DropSkill.PSkillName, DropSkill);
                 SkillLoot drops = DropSpawner.SpawnSkill(transform.position);
                 drops.Init(DropSkill.PSkillName);
-            }{ }
-
+            }
         }
         pr.GetExtraMoveSpeed();
     }

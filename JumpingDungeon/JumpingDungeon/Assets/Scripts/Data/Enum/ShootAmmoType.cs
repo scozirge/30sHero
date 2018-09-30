@@ -1,5 +1,6 @@
 ﻿public enum ShootAmmoType
 {
     Default,
-    Penetration
+    Permanent,
+    LockOnTarget
 }

@@ -43,6 +43,13 @@ public class Attack : Skill
         base.Awake();
         Timer = Interval;
         InRange = false;
+
+        if (gameObject.tag == Force.Enemy.ToString())
+        {
+            GameObject go = GameObject.FindGameObjectWithTag(Force.Player.ToString());
+            if (go != null)
+                Target = go.GetComponent<PlayerRole>();
+        }
         if (SpawnedInSelf)
             AmmoParent = transform;
     }
@@ -67,19 +74,27 @@ public class Attack : Skill
             float angle = (StartAngle + CurSpawnAmmoNum * AngleInterval) * Mathf.Deg2Rad;
             AttackDir = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0).normalized;
         }
+        if (gameObject.tag == Force.Player.ToString())
+            AmmoData.Add("TargetRoleTag", Force.Enemy);
+        else
+        {
+            AmmoData.Add("TargetRoleTag", Force.Player);
+        }
         AmmoData.Add("Direction", AttackDir);
-
+        AmmoData.Add("Target", Target);
         CurSpawnAmmoNum++;
         if (CurSpawnAmmoNum >= AmmoNum)
         {
             IsAttacking = false;
             CurSpawnAmmoNum = 0;
+            AttackTimes++;
         }
-        AttackTimes++;
     }
     bool InRange;
     protected override void TimerFunc()
     {
+        if (!CanAttack)
+            return;
         if (!Target)
             return;
         if (Vector3.Distance(Target.transform.position, transform.position) <= DetecteRadius)

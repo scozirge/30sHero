@@ -207,7 +207,7 @@ public partial class PlayerRole : Role
     {
         Vector2 force = MyRigi.velocity.normalized * SelfKnockForce * -1;
         MyRigi.AddForce(force);
-        GetCondition(RoleBuffer.Stun, new BufferData(SelfSturnTime, 0));
+        AddBuffer(RoleBuffer.Stun, new BufferData(SelfSturnTime, 0));
     }
     protected override void Update()
     {
@@ -222,7 +222,7 @@ public partial class PlayerRole : Role
         ShieldGenerate();
         ExtraMoveSpeedDecay();
     }
-    public override void BeAttack(int _dmg, Vector2 _force, Dictionary<RoleBuffer, BufferData> buffers)
+    public override void BeAttack(int _dmg, Vector2 _force)
     {
         if (!IsAvatar)
         {
@@ -245,7 +245,7 @@ public partial class PlayerRole : Role
             ShieldTimer.Start(true);
             ShieldTimer.RestartCountDown();
             StartGenerateShield = false;
-            base.BeAttack(_dmg, _force, buffers);
+            base.BeAttack(_dmg, _force);
         }
     }
     protected void AvatarTimerFunc()
@@ -328,7 +328,7 @@ public partial class PlayerRole : Role
                 AvatarTimer += _data.Time * (1 + AvatarTimeBuff);
                 break;
             case LootType.DamageBuff:
-                GetCondition(RoleBuffer.DamageBuff, _data);
+                AddBuffer(RoleBuffer.DamageBuff, _data);
                 break;
             case LootType.Euipment:
                 break;
@@ -336,7 +336,7 @@ public partial class PlayerRole : Role
                 HealHP((int)(MaxHealth * _data.Value * (1 + PotionEfficacy)));
                 break;
             case LootType.InvinciblePotion:
-                GetCondition(RoleBuffer.Invicible, _data);
+                AddBuffer(RoleBuffer.Immortal, _data);
                 break;
             case LootType.Money:
                 break;
@@ -349,6 +349,7 @@ public partial class PlayerRole : Role
             Skill skill = gameObject.AddComponent(_skill.GetType()).CopySkill(_skill);
             skill.PlayerInitSkill();
             MonsterSkills.Add(_name, skill);
+            Skills.Add(_skill);
         }
     }
     public void GenerateMonsterSkill(string _name)

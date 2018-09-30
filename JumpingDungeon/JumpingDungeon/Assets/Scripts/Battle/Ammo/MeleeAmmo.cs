@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class MeleeAmmo : Ammo
 {
-    [Tooltip("Melee是一般肉搏,Block是擋子彈,Reflect是檔子彈+也可以攻擊人,Mirror是擋子彈+攻擊人+反彈ShootAmmo類型的攻擊")]
+    [Tooltip("Melee是一般肉搏,Block是擋子彈,Reflect是檔子彈+也可以攻擊人,Mirror是反彈ShootAmmo類型的攻擊")]
     [SerializeField]
     MeleeType MyMeleeType;
     [Tooltip("格擋強度，1是全部格擋，0.1是只檔10%傷害")]
     [SerializeField]
     protected float BlockIntensity;
+
 
     Role Attacker;
     protected AmmoForce TargetAmmoForce;
@@ -36,7 +37,7 @@ public class MeleeAmmo : Ammo
     }
     protected override void OnTriggerStay2D(Collider2D _col)
     {
-        if (IsCausedDamage && AmmoType != ShootAmmoType.Penetration)
+        if (IsCausedDamage && AmmoType != ShootAmmoType.Permanent)
             return;
         base.OnTriggerStay2D(_col);
         if (TargetAmmoForce.ToString() == _col.tag.ToString())
@@ -44,7 +45,7 @@ public class MeleeAmmo : Ammo
     }
     protected override void OnTriggerEnter2D(Collider2D _col)
     {
-        if (IsCausedDamage && AmmoType != ShootAmmoType.Penetration)
+        if (IsCausedDamage && AmmoType != ShootAmmoType.Permanent)
             return;
         base.OnTriggerEnter2D(_col);
         if (TargetAmmoForce.ToString() == _col.tag.ToString())
@@ -54,25 +55,24 @@ public class MeleeAmmo : Ammo
     {
         base.TriggerTarget(_role);
         Vector2 force = (_role.transform.position - transform.position).normalized * KnockIntensity;
-        Dictionary<RoleBuffer, BufferData> condition = new Dictionary<RoleBuffer, BufferData>();
-        condition.Add(RoleBuffer.Stun, new BufferData(StunIntensity, 0));
-        if (MyMeleeType == MeleeType.Melee || MyMeleeType == MeleeType.Reflect || MyMeleeType == MeleeType.Mirror)
+        if (MyMeleeType == MeleeType.Melee || MyMeleeType == MeleeType.Reflect)
         {
-            _role.BeAttack(Damage, force, condition);
+            _role.BeAttack(Value, force);
             IsCausedDamage = true;
         }
         else if (MyMeleeType == MeleeType.Block)
         {
-            _role.BeAttack(0, force, condition);
+            _role.BeAttack(0, force);
         }
-        if (AmmoType != ShootAmmoType.Penetration)
+        TriggerHitCondition(_role);
+        if (AmmoType != ShootAmmoType.Permanent)
             SelfDestroy();
     }
     protected void TriggerAmmo(Ammo _ammo)
     {
         if (MyMeleeType == MeleeType.Melee)
             return;
-        Attacker.ReceiveDmg((int)(_ammo.Damage * -(BlockIntensity - 1)));
+        Attacker.ReceiveDmg((int)(_ammo.Value * -(BlockIntensity - 1)));
         if (MyMeleeType == MeleeType.Block || MyMeleeType == MeleeType.Reflect)
         {
             _ammo.SelfDestroy();
@@ -82,7 +82,7 @@ public class MeleeAmmo : Ammo
         {
             _ammo.ForceReverse();
         }
-        if (AmmoType != ShootAmmoType.Penetration)
+        if (AmmoType != ShootAmmoType.Permanent)
             SelfDestroy();
 
     }
