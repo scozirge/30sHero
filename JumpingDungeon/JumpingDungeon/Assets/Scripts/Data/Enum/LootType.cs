@@ -3,7 +3,7 @@
     HPRecovery,
     AvataEnergy,
     DamageBuff,
-    InvinciblePotion,
+    Immortal,
     Money,
     Euipment
 }

@@ -20,23 +20,13 @@ public partial class Ammo : MonoBehaviour
     [Tooltip("子彈擊退力道")]
     [SerializeField]
     protected int KnockIntensity;
-    [Tooltip("暈眩秒數")]
-    [SerializeField]
-    public float StunIntensity;
-    [Tooltip("燃燒秒數")]
-    [SerializeField]
-    protected float BurnIntensity;
-    [Tooltip("冰凍秒數")]
-    [SerializeField]
-    protected float FreezeIntensity;
-    [Tooltip("詛咒秒數")]
-    [SerializeField]
-    protected float CurseIntensity;
-
-
     [Tooltip("子彈類型，選擇穿透就是子彈擊中玩家後不會移除，且可能造成多次傷害(炸彈類的子彈)")]
     [SerializeField]
     protected ShootAmmoType AmmoType;
+    [Tooltip("暈眩(秒數)、燃燒(秒數)、冰凍(秒數)、詛咒(秒數)、無敵(秒數)、格檔(時間,秒數)")]
+    [SerializeField]
+    protected BufferData[] Buffers;
+
     protected Force AttackerRoleTag;
     protected Force TargetRoleTag;
     protected bool IsLaunch;
@@ -52,10 +42,12 @@ public partial class Ammo : MonoBehaviour
 
     protected virtual void TriggerHitCondition(Role _role)
     {
-        _role.GetBuffer(RoleBuffer.Stun, StunIntensity);
-        _role.GetBuffer(RoleBuffer.Burn, BurnIntensity);
-        _role.GetBuffer(RoleBuffer.Freeze, FreezeIntensity);
-        _role.GetBuffer(RoleBuffer.Curse, CurseIntensity);
+        if (Buffers == null)
+            return;
+        for (int i = 0; i < Buffers.Length;i++ )
+        {
+            _role.AddBuffer(Buffers[i]);
+        }
     }
     public virtual void Init(Dictionary<string, object> _dic)
     {

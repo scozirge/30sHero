@@ -35,6 +35,9 @@ public partial class GameManager : MonoBehaviour
     [Tooltip("傷害上升特效")]
     [SerializeField]
     public ParticleSystem DamageBuffPrefab;
+    [Tooltip("隔檔特效")]
+    [SerializeField]
+    public ParticleSystem BlockPrefab;
 
 
     static Sprite[] QualityBotSprites;
@@ -73,6 +76,7 @@ public partial class GameManager : MonoBehaviour
         BufferParticles.Add(RoleBuffer.Burn, BurnPrefab);
         BufferParticles.Add(RoleBuffer.Curse, CursePrefab);
         BufferParticles.Add(RoleBuffer.Immortal, ImmortalPrefab);
+        BufferParticles.Add(RoleBuffer.Block, BlockPrefab);
         BufferParticles.Add(RoleBuffer.DamageBuff, DamageBuffPrefab);
         if (!Debugger.IsSpawn)
             DeployDebugger();

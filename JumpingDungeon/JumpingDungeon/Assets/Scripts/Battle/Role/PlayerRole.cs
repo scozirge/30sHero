@@ -207,7 +207,7 @@ public partial class PlayerRole : Role
     {
         Vector2 force = MyRigi.velocity.normalized * SelfKnockForce * -1;
         MyRigi.AddForce(force);
-        AddBuffer(RoleBuffer.Stun, new BufferData(SelfSturnTime, 0));
+        AddBuffer(new BufferData(RoleBuffer.Stun, SelfSturnTime));
     }
     protected override void Update()
     {
@@ -224,6 +224,8 @@ public partial class PlayerRole : Role
     }
     public override void BeAttack(int _dmg, Vector2 _force)
     {
+        if (EvitableAttack())
+            return;
         if (!IsAvatar)
         {
             IsAlive = false;
@@ -320,23 +322,23 @@ public partial class PlayerRole : Role
         }
         RoleTrans.localScale = new Vector2(FaceDir, 1);
     }
-    public void GetLoot(LootType _type, BufferData _data)
+    public void GetLoot(LootData _data)
     {
-        switch (_type)
+        switch (_data.Type)
         {
             case LootType.AvataEnergy:
                 AvatarTimer += _data.Time * (1 + AvatarTimeBuff);
                 break;
             case LootType.DamageBuff:
-                AddBuffer(RoleBuffer.DamageBuff, _data);
+                AddBuffer(RoleBuffer.DamageBuff, _data.Time, _data.Value);
                 break;
             case LootType.Euipment:
                 break;
             case LootType.HPRecovery:
                 HealHP((int)(MaxHealth * _data.Value * (1 + PotionEfficacy)));
                 break;
-            case LootType.InvinciblePotion:
-                AddBuffer(RoleBuffer.Immortal, _data);
+            case LootType.Immortal:
+                AddBuffer(RoleBuffer.Immortal, _data.Time);
                 break;
             case LootType.Money:
                 break;

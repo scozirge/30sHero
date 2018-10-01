@@ -55,6 +55,8 @@ public partial class EnemyRole : Role
     }
     public override void BeAttack(int _dmg, Vector2 _force)
     {
+        if (EvitableAttack())
+            return;
         GetFriction();
         AniPlayer.PlayTrigger("BeAttack", 0);
         base.BeAttack(_dmg, _force);
@@ -85,10 +87,10 @@ public partial class EnemyRole : Role
     {
         base.Update();
     }
-    protected override void AddBuffer(RoleBuffer _buffer, BufferData _data)
+    public override void AddBuffer(BufferData _buffer)
     {
-        base.AddBuffer(_buffer, _data);
-        if (_buffer == RoleBuffer.Stun)
+        base.AddBuffer(_buffer);
+        if (_buffer.Type == RoleBuffer.Stun)
             if (MyAIMove)
                 MyAIMove.SetCanMove(false);
     }

@@ -77,11 +77,11 @@ MonoBehaviour:
   DeadParticles: []
   LifeTime: 1
   KnockIntensity: 0
-  StunIntensity: 0
-  BurnIntensity: 0
-  FreezeIntensity: 0
-  CurseIntensity: 0
   AmmoType: 1
+  Buffers:
+  - Type: 0
+    Time: 2
+    Value: 0
   Value: 0
   MyMeleeType: 3
   BlockIntensity: 1

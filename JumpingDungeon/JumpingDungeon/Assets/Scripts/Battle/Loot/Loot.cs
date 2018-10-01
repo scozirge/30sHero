@@ -24,7 +24,7 @@ public class Loot : MonoBehaviour
     LootType Type;
     float Time;
     float Value;
-    BufferData Data;
+    LootData Data;
 
     public void Init(LootType _type)
     {
@@ -43,14 +43,14 @@ public class Loot : MonoBehaviour
             case LootType.HPRecovery:
                 Value = HPRecovery;
                 break;
-            case LootType.InvinciblePotion:
+            case LootType.Immortal:
                 Time = InvincibleTime;
                 break;
             case LootType.Money:
                 Value = Money + MoneyLevelBuff * BattleManage.Level;
                 break;
         }
-        Data = new BufferData(Time, Value);
+        Data = new LootData(Type, Time, Value);
     }
 
     void OnTriggerEnter2D(Collider2D _col)
@@ -58,7 +58,7 @@ public class Loot : MonoBehaviour
         if (_col.gameObject.tag == Force.Player.ToString())
         {
             EffectEmitter.EmitParticle(GetEffect, transform.position, Vector3.zero, null);
-            _col.GetComponent<PlayerRole>().GetLoot(Type, Data);
+            _col.GetComponent<PlayerRole>().GetLoot(Data);
             SelfDestroy();
         }
     }

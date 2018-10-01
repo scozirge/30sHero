@@ -104,11 +104,23 @@ public abstract class Role : MonoBehaviour
         //Add KnockForce
         MyRigi.velocity = Vector2.zero;
         MyRigi.velocity = _force;
-        //if Invincible, can't take damage and debuff
-        if (Buffers.ContainsKey(RoleBuffer.Immortal))
-            return;
         //take damage
         ReceiveDmg(_dmg);
+    }
+    protected virtual bool EvitableAttack()
+    {
+        //if Immortal or Block, can't take damage
+        if (Buffers.ContainsKey(RoleBuffer.Immortal))
+            return true;
+        if (Buffers.ContainsKey(RoleBuffer.Block))
+        {
+            if (--Buffers[RoleBuffer.Block].Value <= 0)
+            {
+                RemoveBuffer(RoleBuffer.Block);
+            }
+            return true;
+        }
+        return false;
     }
     public virtual void ReceiveDmg(int _dmg)
     {
@@ -133,35 +145,34 @@ public abstract class Role : MonoBehaviour
         else IsAlive = true;
         return !IsAlive;
     }
-    public void GetBuffer(RoleBuffer _bufferType, params float[] _values)
+    public void AddBuffer(RoleBuffer _bufferType, params float[] _values)
     {
         if (_values.Length > 0 && _values[0] != 0)
         {
             switch (_values.Length)
             {
                 case 1:
-                    AddBuffer(_bufferType, new BufferData(_values[0]));
+                    AddBuffer(new BufferData(_bufferType, _values[0]));
                     break;
                 case 2:
-                    AddBuffer(_bufferType, new BufferData(_values[0], _values[1]));
+                    AddBuffer(new BufferData(_bufferType, _values[0], _values[1]));
                     break;
             }
         }
     }
-    protected virtual void AddBuffer(RoleBuffer _buffer, BufferData _data)
+    public virtual void AddBuffer(BufferData _buffer)
     {
-        if (Buffers.ContainsKey(_buffer))
+        if (Buffers.ContainsKey(_buffer.Type))
         {
-            if (Buffers[_buffer].Time < _data.Time)
-                Buffers[_buffer].Time = _data.Time;
+            Buffers[_buffer.Type] = _buffer;
         }
         else
         {
-            Buffers.Add(_buffer, _data);
-            ParticleSystem ps = EffectEmitter.EmitParticle(GameManager.GetBufferParticle(_buffer), Vector3.zero, Vector3.zero, transform);
-            BufferParticles.Add(_buffer, ps);
+            Buffers.Add(_buffer.Type, _buffer);
+            ParticleSystem ps = EffectEmitter.EmitParticle(GameManager.GetBufferParticle(_buffer.Type), Vector3.zero, Vector3.zero, transform);
+            BufferParticles.Add(_buffer.Type, ps);
         }
-        if (_buffer == RoleBuffer.Stun)
+        if (_buffer.Type == RoleBuffer.Stun)
         {
             for (int i = 0; i < Skills.Count; i++)
             {

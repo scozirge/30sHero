@@ -8,9 +8,6 @@ public class Supply : Ammo
     protected float AmmoSpeed;
     [SerializeField]
     protected float TraceFactor;
-    [Tooltip("無敵秒數")]
-    [SerializeField]
-    protected float ImmortalIntensity;
 
     protected Vector3 Ammovelocity;
     public override void Init(Dictionary<string, object> _dic)
@@ -21,11 +18,6 @@ public class Supply : Ammo
         //transform.LookAt(MyRigi.velocity);
 
         Launch();
-    }
-    protected override void TriggerHitCondition(Role _role)
-    {
-        base.TriggerHitCondition(_role);
-        _role.GetBuffer(RoleBuffer.Immortal, ImmortalIntensity);
     }
     protected override void OnTriggerEnter2D(Collider2D _col)
     {

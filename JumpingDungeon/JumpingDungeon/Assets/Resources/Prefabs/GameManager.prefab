@@ -79,3 +79,5 @@ MonoBehaviour:
     type: 2}
   DamageBuffPrefab: {fileID: 198778626335910482, guid: 7907fa2d41ff8db43be35d4e8129f585,
     type: 2}
+  BlockPrefab: {fileID: 198778626335910482, guid: 7907fa2d41ff8db43be35d4e8129f585,
+    type: 2}

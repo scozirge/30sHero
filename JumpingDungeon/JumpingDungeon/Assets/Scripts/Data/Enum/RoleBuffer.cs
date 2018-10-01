@@ -5,5 +5,6 @@
     Freeze,
     Curse,
     Immortal,
+    Block,
     DamageBuff
 }
