@@ -662,7 +662,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MyForce: 0
   HealthBar: {fileID: 135074930}
-  BaseHealth: 100
+  BaseHealth: 200
   BaseDamage: 50
   BaseDefence: 0
   BaseMoveSpeed: 400
@@ -1015,7 +1015,7 @@ MonoBehaviour:
   PSkillName: s
   PSkillDuration: 999
   DetecteRadius: 2000
-  DamagePercent: 0
+  DamagePercent: 0.1
   PSkillTimer: 0
   AttackOnce: 0
   Interval: 0.5
