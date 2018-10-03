@@ -4,6 +4,5 @@
     AvataEnergy,
     DamageBuff,
     Immortal,
-    Money,
-    Euipment
+    Move
 }

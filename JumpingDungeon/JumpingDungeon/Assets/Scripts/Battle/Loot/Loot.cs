@@ -1,63 +1,33 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Loot : MonoBehaviour
 {
+    [Tooltip("HPRecovery(Value:回血百分比) \nAvataEnergy(Time:秒) \nDamageBuff(Time:秒、Value:傷害百分比) \nImmortal(Time:秒) \nMove(Time:秒、Value:移動值)")]
     [SerializeField]
-    float AvataTime;
+    List<LootData> LootList;
     [SerializeField]
-    float DamageBuff;
-    [SerializeField]
-    float DamageBuffTime;
-    [SerializeField]
-    float InvincibleTime;
-    [SerializeField]
-    float HPRecovery;
-    [SerializeField]
-    int Money;
-    [SerializeField]
-    float MoneyLevelBuff;
-    [SerializeField]
-    ParticleSystem GetEffect;
+    Image MyIcon;
 
     LootType Type;
     float Time;
     float Value;
     LootData Data;
-
-    public void Init(LootType _type)
+    
+    void Start()
     {
-        Type = _type;
-        switch (_type)
-        {
-            case LootType.AvataEnergy:
-                Time = AvataTime;
-                break;
-            case LootType.DamageBuff:
-                Value = DamageBuff;
-                Time = DamageBuffTime;
-                break;
-            case LootType.Euipment:
-                break;
-            case LootType.HPRecovery:
-                Value = HPRecovery;
-                break;
-            case LootType.Immortal:
-                Time = InvincibleTime;
-                break;
-            case LootType.Money:
-                Value = Money + MoneyLevelBuff * BattleManage.Level;
-                break;
-        }
-        Data = new LootData(Type, Time, Value);
+        int rand = Random.Range(0, LootList.Count);
+        Data = LootList[rand];
+        MyIcon.sprite = Data.LootIcon;
     }
 
     void OnTriggerEnter2D(Collider2D _col)
     {
         if (_col.gameObject.tag == Force.Player.ToString())
         {
-            EffectEmitter.EmitParticle(GetEffect, transform.position, Vector3.zero, null);
+            EffectEmitter.EmitParticle(Data.GetParticle, Vector2.zero, Vector2.zero, _col.transform);
             _col.GetComponent<PlayerRole>().GetLoot(Data);
             SelfDestroy();
         }

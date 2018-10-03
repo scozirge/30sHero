@@ -10,6 +10,7 @@ TagManager:
   - Loot
   - PlayerAmmo
   - EnemyAmmo
+  - Gate
   layers:
   - Default
   - TransparentFX

@@ -1,15 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+[System.Serializable]
 public struct LootData
 {
     public LootType Type;
     public float Time;
     public float Value;
-    public LootData(LootType _type, float _time, float _value)
-    {
-        Type = _type;
-        Time = _time;
-        Value = _value;
-    }
+    public Sprite LootIcon;
+    [Tooltip("吃到道具後產身在腳色身上的特效)")]
+    [SerializeField]
+    public ParticleSystem GetParticle;
 }

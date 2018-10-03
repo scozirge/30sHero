@@ -31,8 +31,7 @@ public partial class EnemyRole
         {
             if (ProbabilityGetter.GetResult(DropProbility))
             {
-                int rand = UnityEngine.Random.Range(0, Enum.GetNames(typeof(LootType)).Length);
-                DropSpawner.SpawnLoot((LootType)rand, transform.position);
+                DropSpawner.SpawnLoot(transform.position);
             }
         }
 

@@ -5,16 +5,7 @@ using UnityEngine.UI;
 
 public partial class PlayerRole : Role
 {
-    public bool IsAvatar
-    {
-        get
-        {
-            if (AvatarTimer > 0)
-                return true;
-            else
-                return false;
-        }
-    }
+    public bool IsAvatar { get; protected set; }
     private float avatarTimer;
     public float AvatarTimer
     {
@@ -112,6 +103,7 @@ public partial class PlayerRole : Role
     protected float PotionEfficacy;
     const int KeyboardMoveFactor = 1;
     const int CursorMoveFactor = 40;
+    const int KeyboardJumpMoveFactor = 4;
     [Tooltip("移動加速特效")]
     [SerializeField]
     ParticleSystem MoveAfterimagePrefab;
@@ -145,15 +137,20 @@ public partial class PlayerRole : Role
     [Tooltip("攻擊音效")]
     [SerializeField]
     AudioClip AttackSound;
+    [Tooltip("弱化後移動跳躍的CD時間")]
+    [SerializeField]
+    float JumpCDTime;
+
 
 
     MyTimer AttackTimer;
+    MyTimer JumpTimer;
     [HideInInspector]
     public int FaceDir;
     Dictionary<string, Skill> MonsterSkills = new Dictionary<string, Skill>();
     List<Skill> ActiveMonsterSkills = new List<Skill>();
     public EnemyRole ClosestEnemy;
-
+    bool CanJump;
 
     protected override void Awake()
     {
@@ -161,10 +158,13 @@ public partial class PlayerRole : Role
         AvatarTimer = MaxAvaterTime;
         AttackTimer = new MyTimer(DontAttackRestoreTime, RestoreAttack, null);
         ShieldTimer = new MyTimer(ShieldRechargeTime, ShieldRestore, null);
+        JumpTimer = new MyTimer(JumpCDTime, SetCanJump, null);
         ShieldBarWidth = ShieldBar.rect.width;
         Shield = MaxShield;
         InitMoveAfterimage();
         FaceDir = 1;
+        IsAvatar = true;
+        CanJump = true;
     }
     void InitMoveAfterimage()
     {
@@ -173,7 +173,10 @@ public partial class PlayerRole : Role
         MoveAfterimage_Main.maxParticles = 0;
         MoveAfterimage_Main.startLifetime = 0;
     }
-
+    void SetCanJump()
+    {
+        CanJump = true;
+    }
     void RestoreAttack()
     {
         CurAttackState = 0;
@@ -190,6 +193,8 @@ public partial class PlayerRole : Role
     }
     public void AttackMotion()
     {
+        if (!IsAvatar)
+            return;
         //Play Animation
         AttackTimer.Start(true);
         CurAttackState++;
@@ -205,6 +210,13 @@ public partial class PlayerRole : Role
     }
     public void BumpingAttack()
     {
+        if (!IsAvatar)
+        {
+            IsAlive = false;
+            SelfDestroy();
+            return;
+        }
+
         Vector2 force = MyRigi.velocity.normalized * SelfKnockForce * -1;
         MyRigi.AddForce(force);
         AddBuffer(new BufferData(RoleBuffer.Stun, SelfSturnTime));
@@ -213,25 +225,32 @@ public partial class PlayerRole : Role
     {
         base.Update();
         GameObject go = GameobjectFinder.FindClosestGameobjectWithTag(gameObject, Force.Enemy.ToString());
-        if(go)
+        if (go)
             ClosestEnemy = go.GetComponent<EnemyRole>();
         AvatarTimerFunc();
         AttackTimer.RunTimer();
         ShieldTimer.RunTimer();
+        JumpTimer.RunTimer();
         MonsterSkillTimerFunc();
         ShieldGenerate();
         ExtraMoveSpeedDecay();
     }
     public override void BeAttack(int _dmg, Vector2 _force)
     {
-        if (EvitableAttack())
-            return;
-        if (!IsAvatar)
+        if (IsAvatar)
+        {
+            base.BeAttack(_dmg, _force);
+        }
+        else
         {
             IsAlive = false;
             SelfDestroy();
         }
-        else
+    }
+    protected override void ShieldBlock(ref int _dmg)
+    {
+        base.ShieldBlock(ref _dmg);
+        if (Shield != 0)
         {
             //Damage Shield
             if (_dmg > Shield)
@@ -244,19 +263,25 @@ public partial class PlayerRole : Role
                 Shield -= _dmg;
                 _dmg = 0;
             }
-            ShieldTimer.Start(true);
-            ShieldTimer.RestartCountDown();
-            StartGenerateShield = false;
-            base.BeAttack(_dmg, _force);
         }
+        ShieldTimer.Start(true);
+        ShieldTimer.RestartCountDown();
+        StartGenerateShield = false;
     }
     protected void AvatarTimerFunc()
     {
+        if (!IsAvatar)
+            return;
         if (AvatarTimer > 0)
             AvatarTimer -= Time.deltaTime;
         else
         {
+            AniPlayer.PlayTrigger("Idle2", 0);
             AvatarTimer = 0;
+            ExtraMoveSpeed = 0;
+            MoveDecay = 0.7f;
+            RemoveAllBuffer();
+            IsAvatar = false;
         }
         AvatarTimerText.text = Mathf.Round(AvatarTimer).ToString();
     }
@@ -297,11 +322,40 @@ public partial class PlayerRole : Role
         else if (ControlDevice == MoveControl.Keyboard)
         {
             //鍵盤移動
-            float xMoveForce = 0;
-            float yMoveForce = 0;
-            xMoveForce = Input.GetAxis("Horizontal") * MoveSpeed * KeyboardMoveFactor;
-            yMoveForce = Input.GetAxis("Vertical") * MoveSpeed * KeyboardMoveFactor;
-            MyRigi.velocity += new Vector2(xMoveForce, yMoveForce);
+            if (IsAvatar)
+            {
+                float xMoveForce = 0;
+                float yMoveForce = 0;
+                xMoveForce = Input.GetAxis("Horizontal") * MoveSpeed * KeyboardMoveFactor;
+                yMoveForce = Input.GetAxis("Vertical") * MoveSpeed * KeyboardMoveFactor;
+                MyRigi.velocity += new Vector2(xMoveForce, yMoveForce);
+            }
+            else
+            {
+                if (!CanJump)
+                    return;
+                float xMoveForce = 0;
+                float yMoveForce = 0;
+                if (Input.GetAxis("Horizontal") == 0)
+                    xMoveForce = 0;
+                else if (Input.GetAxis("Horizontal") > 0)
+                    xMoveForce = 1;
+                else if (Input.GetAxis("Horizontal") < 0)
+                    xMoveForce = -1;
+                if (Input.GetAxis("Vertical") == 0)
+                    yMoveForce = 0;
+                else if (Input.GetAxis("Vertical") > 0)
+                    yMoveForce = 1;
+                else if (Input.GetAxis("Vertical") < 0)
+                    yMoveForce = -1;
+                if(xMoveForce!=0 || yMoveForce!=0)
+                    AniPlayer.PlayTrigger("Jump", 0);
+                xMoveForce *= MoveSpeed * KeyboardJumpMoveFactor;
+                yMoveForce *= MoveSpeed * KeyboardJumpMoveFactor;
+                MyRigi.velocity += new Vector2(xMoveForce, yMoveForce);
+                JumpTimer.Start(true);
+                CanJump = false;
+            }
         }
         FaceTarget();
     }
@@ -332,20 +386,18 @@ public partial class PlayerRole : Role
             case LootType.DamageBuff:
                 AddBuffer(RoleBuffer.DamageBuff, _data.Time, _data.Value);
                 break;
-            case LootType.Euipment:
-                break;
             case LootType.HPRecovery:
                 HealHP((int)(MaxHealth * _data.Value * (1 + PotionEfficacy)));
                 break;
             case LootType.Immortal:
                 AddBuffer(RoleBuffer.Immortal, _data.Time);
                 break;
-            case LootType.Money:
-                break;
         }
     }
     public void InitMonsterSkill(string _name, Skill _skill)
     {
+        if (!IsAvatar)
+            return;
         if (!MonsterSkills.ContainsKey(_name))
         {
             Skill skill = gameObject.AddComponent(_skill.GetType()).CopySkill(_skill);
@@ -356,6 +408,8 @@ public partial class PlayerRole : Role
     }
     public void GenerateMonsterSkill(string _name)
     {
+        if (!IsAvatar)
+            return;
         if (MonsterSkills.ContainsKey(_name))
         {
             MonsterSkills[_name].enabled = true;
@@ -379,11 +433,15 @@ public partial class PlayerRole : Role
     }
     public void GetExtraMoveSpeed()
     {
+        if (!IsAvatar)
+            return;
         ExtraMoveSpeed += GainMoveFromKilling;
     }
 
     void ExtraMoveSpeedDecay()
     {
+        if (!IsAvatar)
+            return;
         if (ExtraMoveSpeed > 0)
         {
             float decay = (ExtraMoveSpeed / MoveDepletedTime);
@@ -394,5 +452,6 @@ public partial class PlayerRole : Role
             MoveAfterimage_Main.startLifetime = ExtraMoveSpeed / 200;
         }
     }
+
 
 }
