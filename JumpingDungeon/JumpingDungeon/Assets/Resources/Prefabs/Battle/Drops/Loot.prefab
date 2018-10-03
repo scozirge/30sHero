@@ -78,11 +78,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ba44017135a3df4fb4ad12647f588ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MoveSpeed: 100
+  Wander: 1
+  MoveSpeed: 150
   FollowCamera: 0
-  WanderInterval: 2
-  RotateFactor: 0.01
+  WanderInterval: 5
+  RotateFactor: 0.001
   WanderRange: 100
+  Destination: {x: 0, y: 0}
 --- !u!114 &114515800619740280
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -102,7 +104,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 21300000, guid: f6e95768a3968f444b76748cd4598721, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -121,15 +123,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4af727ee3d4bb514e839cabbe0dd2b87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AvataTime: 10
-  DamageBuff: 0.5
-  DamageBuffTime: 10
-  InvincibleTime: 10
-  HPRecovery: 0.1
-  Money: 30
-  MoneyLevelBuff: 2
-  GetEffect: {fileID: 198350346737686014, guid: d831439896a03fd4e94904ea24d07106,
-    type: 2}
+  LootList:
+  - Type: 0
+    Time: 0
+    Value: 0.1
+    LootIcon: {fileID: 21300000, guid: f6e95768a3968f444b76748cd4598721, type: 3}
+    GetParticle: {fileID: 198421084779393996, guid: 9d76221f8330c3e4e88f4600ea7c80bc,
+      type: 2}
+  MyIcon: {fileID: 114515800619740280}
 --- !u!222 &222452408990536316
 CanvasRenderer:
   m_ObjectHideFlags: 1

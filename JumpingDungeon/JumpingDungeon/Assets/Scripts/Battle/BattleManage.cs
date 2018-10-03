@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BattleManage : MonoBehaviour
+public partial class BattleManage : MonoBehaviour
 {
     [SerializeField]
     float SpawnInterval;
@@ -20,9 +20,12 @@ public class BattleManage : MonoBehaviour
     EnemyRole DesignatedEnemy;
     [SerializeField]
     bool SpawnOnce;
+    [SerializeField]
+    PlayerRole MyPlayer;
 
+    static BattleManage BM;
     public static CameraController MyCameraControler;
-    public static int Level;
+    public static int Floor;
     public static Vector2 ScreenSize;
     float SpawnIntervalTimer;
     int CurSpawnCount;
@@ -30,12 +33,15 @@ public class BattleManage : MonoBehaviour
     float DestructMargin_Right;
     int SpawnTimes;
     List<EnemyRole> EnemyList = new List<EnemyRole>();
+    
 
     // Use this for initialization
     void Start()
     {
         if (!GameManager.IsInit)
             GameManager.DeployGameManager();
+        BM = this;
+        InitStage();
         SpawnIntervalTimer = SpawnInterval;
         MyCameraControler = CameraControler;
         CurSpawnCount = 0;
@@ -154,6 +160,7 @@ public class BattleManage : MonoBehaviour
     {
         SpawnIntervalTimerFunc();
         InActivityOutSideEnemys();
+        UpdateCurMeter();
     }
     void InActivityOutSideEnemys()
     {

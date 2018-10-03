@@ -13,7 +13,8 @@ public abstract class Role : MonoBehaviour
     protected RectTransform HealthBar;
     float HPBarWidth;
     protected Rigidbody2D MyRigi;
-    protected const float MoveDecay = 0.5f;
+    [SerializeField]
+    protected float MoveDecay = 0.5f;
 
 
     private int health;
@@ -104,6 +105,10 @@ public abstract class Role : MonoBehaviour
         //Add KnockForce
         MyRigi.velocity = Vector2.zero;
         MyRigi.velocity = _force;
+        if (EvitableAttack())
+            return;
+        //ShieldBlock
+        ShieldBlock(ref _dmg);
         //take damage
         ReceiveDmg(_dmg);
     }
@@ -121,6 +126,9 @@ public abstract class Role : MonoBehaviour
             return true;
         }
         return false;
+    }
+    protected virtual void ShieldBlock(ref int _dmg)
+    {
     }
     public virtual void ReceiveDmg(int _dmg)
     {
@@ -204,6 +212,10 @@ public abstract class Role : MonoBehaviour
                 Skills[i].SetCanAttack(true);
             }
         }
+    }
+    public void RemoveAllBuffer()
+    {
+        Buffers = new Dictionary<RoleBuffer, BufferData>();
     }
     public bool CheckCondition(RoleBuffer _condition)
     {

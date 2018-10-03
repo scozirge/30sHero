@@ -19,8 +19,8 @@ public class AnimationPlayer : MonoBehaviour
         if (Animator.StringToHash(string.Format("Base Layer.{0}", _motion)) != MyAni.GetCurrentAnimatorStateInfo(0).fullPathHash)
             MyAni.Play(_motion, 0, _normalizedTime);
     }
-    public void PlayInt(string _motion, int _int)
+    public void PlayFloat(string _motion, float _value)
     {
-        MyAni.SetInteger(_motion, _int);
+        MyAni.SetFloat(_motion, _value);
     }
 }

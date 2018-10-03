@@ -55,8 +55,6 @@ public partial class EnemyRole : Role
     }
     public override void BeAttack(int _dmg, Vector2 _force)
     {
-        if (EvitableAttack())
-            return;
         GetFriction();
         AniPlayer.PlayTrigger("BeAttack", 0);
         base.BeAttack(_dmg, _force);
