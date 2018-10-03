@@ -78,7 +78,7 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 150}
+  m_Offset: {x: 0, y: 170}
   serializedVersion: 2
   m_Radius: 53
 --- !u!58 &58851127021771310
@@ -93,7 +93,7 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -150}
+  m_Offset: {x: 0, y: -170}
   serializedVersion: 2
   m_Radius: 53
 --- !u!111 &111902319203830060
@@ -154,11 +154,11 @@ MonoBehaviour:
   DeadParticles: []
   LifeTime: 9999
   KnockIntensity: 12000
-  StunIntensity: 1
-  FireIntensity: 0
-  IceIntensity: 0
-  CurseIntensity: 0
   AmmoType: 1
+  Buffers: []
+  Value: 0
+  MyMeleeType: 0
+  BlockIntensity: 0
 --- !u!114 &114552515078149846
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -249,7 +249,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -150}
+  m_AnchoredPosition: {x: 0, y: -170}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224150828886270898
@@ -266,7 +266,7 @@ RectTransform:
   - {fileID: 224031625393973524}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -86.47522}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
@@ -287,6 +287,6 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 150}
+  m_AnchoredPosition: {x: 0, y: 170}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
