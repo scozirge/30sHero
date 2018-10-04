@@ -6,24 +6,33 @@ public class MyTimer
 {
     float CurTimer;
     float MaxTime;
-    bool StartRunTimer;
+    public bool StartRunTimer;
+    public bool Loop;
     public delegate void MyDelegate();
     MyDelegate TimeOutFunc;
     MyDelegate RunTimeFunc;
 
-    public MyTimer(float _maxTime, MyDelegate _timeOutFunc, MyDelegate _RunTimeFunc)
+    public MyTimer(float _maxTime, MyDelegate _timeOutFunc, bool _startRunTimer, bool _loop)
     {
         MaxTime = _maxTime;
         CurTimer = MaxTime;
         TimeOutFunc = _timeOutFunc;
-        RunTimeFunc = _RunTimeFunc;
-        StartRunTimer = false;
+        StartRunTimer = _startRunTimer;
+        Loop = _loop;
         if (MaxTime == 0)
             Debug.LogWarning("MaxTime of MyTimer is 0");
     }
-    public void Start(bool _startRunTimer)
+
+    public MyTimer(float _maxTime, MyDelegate _timeOutFunc, MyDelegate _runTimeFunc, bool _startRunTimer, bool _loop)
     {
+        MaxTime = _maxTime;
+        CurTimer = MaxTime;
+        TimeOutFunc = _timeOutFunc;
+        RunTimeFunc = _runTimeFunc;
         StartRunTimer = _startRunTimer;
+        Loop = _loop;
+        if (MaxTime == 0)
+            Debug.LogWarning("MaxTime of MyTimer is 0");
     }
     public void RestartCountDown()
     {
@@ -42,7 +51,7 @@ public class MyTimer
         else
         {
             CurTimer = MaxTime;
-            StartRunTimer = false;
+            StartRunTimer = Loop;
             if (TimeOutFunc != null)
                 TimeOutFunc();
         }

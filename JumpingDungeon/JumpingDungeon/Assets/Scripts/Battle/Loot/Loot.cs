@@ -15,7 +15,7 @@ public class Loot : MonoBehaviour
     float Time;
     float Value;
     LootData Data;
-    
+
     void Start()
     {
         int rand = Random.Range(0, LootList.Count);
@@ -34,6 +34,7 @@ public class Loot : MonoBehaviour
     }
     void SelfDestroy()
     {
+        BattleManage.RemoveLoot(this);
         Destroy(gameObject);
     }
 }

@@ -2,61 +2,48 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(EnemyRole))]
 [RequireComponent(typeof(Rigidbody2D))]
-public class AIMove : MonoBehaviour
-{
+public abstract class AIMove : MonoBehaviour {
     [Tooltip("移動到指定座標後會不會遊蕩")]
     [SerializeField]
-    bool Wander;
+    protected bool Wander;
     [Tooltip("是否要跟著攝影機")]
     [SerializeField]
-    bool FollowCamera;
+    protected bool FollowCamera;
     [Tooltip("遊蕩時間間隔")]
     [SerializeField]
-    float WanderInterval;
+    protected float WanderInterval;
     [Tooltip("轉向係數")]
     [SerializeField]
-    float RotateFactor;
+    protected float RotateFactor;
     [Tooltip("遊蕩範圍")]
     [SerializeField]
-    float WanderRange;
+    protected float WanderRange;
     [SerializeField]
     public Vector2 Destination;
 
-    bool CanMove;
+    protected bool CanMove;
+    protected static float InRangeStartWander = 50;
+    protected Vector3 RandomOffset;
+    protected float WanderIntervalTimer;
+    protected Vector3 WanderVelocity;
+    protected Vector3 RandDestination;
+    protected bool StartWander;
+    protected Rigidbody2D MyRigi;
+    protected bool KeepDebut;
 
-    static float InRangeStartWander = 50;
 
-    Vector3 RandomOffset;
-    float WanderIntervalTimer;
-    Vector3 InitialVelocity;
-    Vector3 WanderVelocity;
-    Vector3 RandDestination;
-    bool StartWander;
-    Rigidbody2D MyRigi;
-    EnemyRole ER;
-    bool KeepDebut;
 
-    void Start()
+ 
+
+    protected virtual void Start()
     {
-        ER = GetComponent<EnemyRole>();
         MyRigi = GetComponent<Rigidbody2D>();
         WanderIntervalTimer = WanderInterval;
-        int randX = Random.Range(0, 800);
-        int randY = Random.Range(-400, 400);
-        Vector3 rndTarget = new Vector3(randX, randY) + BattleManage.MyCameraControler.transform.position;
-        InitialVelocity = (rndTarget - transform.position).normalized * ER.MoveSpeed;
-        MyRigi.velocity = InitialVelocity;
         if (RotateFactor < 0.02f)
             RotateFactor = 0.02f;
         KeepDebut = true;
         CanMove = true;
-        if (Destination == Vector2.zero)
-        {
-            SetRandDestination();
-        }
-
     }
     public Vector2 SetRandDestination()
     {
@@ -67,8 +54,7 @@ public class AIMove : MonoBehaviour
         Destination = new Vector3(randPosX + cameraPos.x, randPosY + cameraPos.y, 0);
         return RandomOffset;
     }
-
-    public void Debut()
+    protected virtual void Debut()
     {
         if (FollowCamera)
         {
@@ -83,14 +69,7 @@ public class AIMove : MonoBehaviour
                 KeepDebut = false;
                 MyRigi.velocity = Vector3.zero;
             }
-
-        if (KeepDebut || FollowCamera)
-        {
-            Vector2 targetVel = (Destination - (Vector2)transform.position).normalized * ER.MoveSpeed;
-            MyRigi.velocity = Vector2.Lerp(MyRigi.velocity, targetVel, RotateFactor);
-        }
     }
-
     void WanderTimerFunc()
     {
         if (!Wander)
@@ -105,24 +84,10 @@ public class AIMove : MonoBehaviour
             CalculateRandDestination();
         }
     }
-    void WanderMovement()
+    protected virtual void WanderMovement()
     {
-        if (!Wander)
-            return;
-        if (!StartWander)
-        {
-            float dist = Mathf.Abs(Vector2.Distance(Destination, transform.position));
-            if (dist < InRangeStartWander)
-            {
-                StartWander = true;
-                CalculateRandDestination();
-            }
-            return;
-        }
-        WanderVelocity = (RandDestination - transform.position).normalized * ER.MoveSpeed * 1.2f;
-        MyRigi.velocity = Vector2.Lerp(MyRigi.velocity, WanderVelocity, RotateFactor);
     }
-    void CalculateRandDestination()
+    protected void CalculateRandDestination()
     {
         RandDestination = new Vector2(Random.Range(-WanderRange, WanderRange), Random.Range(-WanderRange, WanderRange)) + Destination;
     }

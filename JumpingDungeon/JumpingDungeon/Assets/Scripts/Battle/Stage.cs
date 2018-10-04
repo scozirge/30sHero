@@ -9,42 +9,34 @@ public partial class BattleManage
     [SerializeField]
     MyText MeterText;
     [SerializeField]
-    int MeterDistance;
-    [SerializeField]
-    int FloorMeter;
+    int FloorPlate;
     [SerializeField]
     Gate GatePrefab;
     [SerializeField]
     Transform GateParent;
+    [SerializeField]
+    int PlateSizeX;
 
-    float StartOffsetPos;
-    static int StartMeter;
-    static int CurMeter;
-    void UpdateCurMeter()
+    static int StartPlate = -1;
+    static int CurPlate = 0;
+    void UpdateCurPlate()
     {
         if (!MyPlayer)
-            return;  
-        CurMeter = (int)((BM.MyPlayer.transform.position.x - StartOffsetPos) / BM.MeterDistance);
-        BM.MeterText.text = string.Format("{0}{1}", CurMeter, StringData.GetString("Meter"));
+            return;
+        CurPlate = (int)((BM.MyPlayer.transform.position.x + 1.5 * BM.PlateSizeX) / BM.PlateSizeX);
+        BM.MeterText.text = string.Format("{0}{1}", CurPlate, StringData.GetString("Meter"));
     }
     void InitStage()
     {
         if (!MyPlayer)
-            return; 
-        StartOffsetPos = BM.MyPlayer.transform.position.x;
-        StartMeter = (int)((MyPlayer.transform.position.x - StartOffsetPos) / MeterDistance);
-        UpdateFloor();
-        SpawnGate(Floor - 1);
+            return;
+        Floor = (int)(CurPlate / BM.FloorPlate) + 1;
+        UpdateFloorText();
+        SpawnGate(Floor-1);
         SpawnGate(Floor);
     }
-    public static void SetFloor(int _floor)
+    static void UpdateFloorText()
     {
-        Floor = _floor;
-        BM.FloorText.text = string.Format("{0}{1}", Floor, StringData.GetString("Floor"));
-    }
-    static void UpdateFloor()
-    {
-        Floor = (int)((StartMeter - CurMeter) / BM.FloorMeter) + 1;
         BM.FloorText.text = string.Format("{0}{1}", Floor, StringData.GetString("Floor"));
     }
     static void SpawnGate(int _floor)
@@ -52,18 +44,22 @@ public partial class BattleManage
         Gate gate = Instantiate(BM.GatePrefab, Vector3.zero, Quaternion.identity) as Gate;
         gate.transform.SetParent(BM.GateParent);
         gate.Init(_floor);
-        if (_floor == 0)
-            gate.transform.position = new Vector2(_floor * BM.FloorMeter * BM.MeterDistance - 850, 0);
-        else
-            gate.transform.position = new Vector2(_floor * BM.FloorMeter * BM.MeterDistance, 0);
+        gate.transform.position = new Vector2((_floor * BM.FloorPlate * BM.PlateSizeX) - (BM.PlateSizeX * 1.5f), 0);
     }
     public static void SpawnNextGate(int _destroyedFloor)
     {
-        UpdateFloor();
         if (Floor > _destroyedFloor)
+        {
             SpawnGate(_destroyedFloor - 1);
+            Floor--;
+            UpdateFloorText();
+        }
         else
+        {
             SpawnGate(_destroyedFloor + 1);
+            Floor++;
+            UpdateFloorText();
+        }
 
     }
 }

@@ -10,13 +10,13 @@ public partial class EnemyRole : Role
     protected float FrictionDuringTimer = FrictionDuringTime;
     protected bool StartVelocityDecay;
 
-    AIMove MyAIMove;
+    AIRoleMove MyAIMove;
     PlayerRole Target;
 
     protected override void Awake()
     {
         base.Awake();
-        MyAIMove = GetComponent<AIMove>();
+        MyAIMove = GetComponent<AIRoleMove>();
         GameObject go = GameObject.FindGameObjectWithTag("Player");
         if (go)
             Target = go.GetComponent<PlayerRole>();
@@ -77,6 +77,7 @@ public partial class EnemyRole : Role
     }
     protected override void SelfDestroy()
     {
+        BattleManage.RemoveEnemy(this);
         base.SelfDestroy();
         Drop();
     }

@@ -2,25 +2,37 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AILootMove : AIMove
+[RequireComponent(typeof(EnemyRole))]
+public class AIRoleMove : AIMove
 {
-    [Tooltip("移動速度")]
-    [SerializeField]
-    protected int MoveSpeed;
+
+
+    Vector3 InitialVelocity;
+    EnemyRole ER;
+
     protected override void Start()
     {
         base.Start();
+        ER = GetComponent<EnemyRole>();
+        int randX = Random.Range(0, 800);
+        int randY = Random.Range(-400, 400);
+        Vector3 rndTarget = new Vector3(randX, randY) + BattleManage.MyCameraControler.transform.position;
+        InitialVelocity = (rndTarget - transform.position).normalized * ER.MoveSpeed;
+        MyRigi.velocity = InitialVelocity;
         if (Destination == Vector2.zero)
         {
-            Destination = transform.position;
+            SetRandDestination();
         }
+
     }
+
     protected override void Debut()
     {
         base.Debut();
+
         if (KeepDebut || FollowCamera)
         {
-            Vector2 targetVel = (Destination - (Vector2)transform.position).normalized * MoveSpeed;
+            Vector2 targetVel = (Destination - (Vector2)transform.position).normalized * ER.MoveSpeed;
             MyRigi.velocity = Vector2.Lerp(MyRigi.velocity, targetVel, RotateFactor);
         }
     }
@@ -39,7 +51,7 @@ public class AILootMove : AIMove
             }
             return;
         }
-        WanderVelocity = (RandDestination - transform.position).normalized * MoveSpeed * 1.2f;
+        WanderVelocity = (RandDestination - transform.position).normalized * ER.MoveSpeed * 1.2f;
         MyRigi.velocity = Vector2.Lerp(MyRigi.velocity, WanderVelocity, RotateFactor);
     }
 }

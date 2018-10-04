@@ -5,35 +5,52 @@ using UnityEngine;
 public partial class BattleManage : MonoBehaviour
 {
     [SerializeField]
-    float SpawnInterval;
+    float SpawnEnemyInterval;
     [SerializeField]
-    int SpawnCount;
+    float SpawnLootInterval;
     [SerializeField]
-    float SpawnCountInterval;
+    int SpawnEnemyCount;
+    [SerializeField]
+    int SpawnLootCount;
+    [SerializeField]
+    float SpawnEnemyCountInterval;
+    [SerializeField]
+    float SpawnLootCountInterval;
+    [SerializeField]
+    int MaxEnemyCout;
+    [SerializeField]
+    int MaxLootCout;
     [SerializeField]
     List<EnemyRole> Enemys;
     [SerializeField]
-    Transform EnemyParent;
+    EnemyRole DesignatedEnemy;
+    [SerializeField]
+    Loot LootPrefab;
     [SerializeField]
     CameraController CameraControler;
     [SerializeField]
-    EnemyRole DesignatedEnemy;
-    [SerializeField]
-    bool SpawnOnce;
-    [SerializeField]
     PlayerRole MyPlayer;
 
+
+
+    int CurSpawnCount;
+    int CurSpawnLootCount;
+
+
+
+    Transform EnemyParent;
+    Transform LootParetn;
+    MyTimer SpawnEnemyTimer;
+    MyTimer SpawnLootTimer;
     static BattleManage BM;
     public static CameraController MyCameraControler;
     public static int Floor;
     public static Vector2 ScreenSize;
-    float SpawnIntervalTimer;
-    int CurSpawnCount;
     float DestructMargin_Left;
     float DestructMargin_Right;
-    int SpawnTimes;
     List<EnemyRole> EnemyList = new List<EnemyRole>();
-    
+    List<Loot> LootList = new List<Loot>();
+
 
     // Use this for initialization
     void Start()
@@ -41,34 +58,26 @@ public partial class BattleManage : MonoBehaviour
         if (!GameManager.IsInit)
             GameManager.DeployGameManager();
         BM = this;
+        EnemyParent = GameObject.FindGameObjectWithTag("EnemyParent").GetComponent<Transform>();
+        LootParetn = GameObject.FindGameObjectWithTag("LootParent").GetComponent<Transform>();
         InitStage();
-        SpawnIntervalTimer = SpawnInterval;
+        SpawnEnemyTimer = new MyTimer(SpawnEnemyInterval, SpanwEnemy, true, false);
+        SpawnLootTimer = new MyTimer(SpawnLootInterval, SpawnLoot, true, false);
         MyCameraControler = CameraControler;
         CurSpawnCount = 0;
         ScreenSize = MyCameraControler.ScreenSize;
-    }
-
-    void SpawnIntervalTimerFunc()
-    {
-        if (SpawnInterval <= 0)
-            return;
-        if (SpawnIntervalTimer > 0)
-            SpawnIntervalTimer -= Time.deltaTime;
-        else
-        {
-            SpawnIntervalTimer = SpawnInterval;
-            SpanwEnemy();
-        }
-    }
-    void SpanwEnemy()
-    {
-        if (SpawnOnce && SpawnTimes > 0)
-            return;
         for (int i = 0; i < Enemys.Count; i++)
         {
             if (Enemys[i] == null)
                 Enemys.RemoveAt(i);
         }
+    }
+
+
+    void SpanwEnemy()
+    {
+        if (!CheckEnemySpawnLimit())
+            return;
         int rndEnemy = Random.Range(0, Enemys.Count);
         EnemyRole er;
         if (DesignatedEnemy)
@@ -81,86 +90,144 @@ public partial class BattleManage : MonoBehaviour
         int quadrant = 1;//象限
         int nearMargin = 0;//靠近左右邊(0)或靠近上下邊(1)
         er.transform.SetParent(EnemyParent);
-        er.name = string.Format("{0}-{1}", SpawnTimes, CurSpawnCount);
-        AIMove am = er.GetComponent<AIMove>();
-
-        if (am != null)
-        {
-            Vector2 erScreenPos = am.Destination;
-
-            if (erScreenPos == Vector2.zero)
-            {
-                erScreenPos = am.SetRandDestination();
-            }
-
-            if (erScreenPos.x >= 0 && erScreenPos.y >= 0)
-            {
-                quadrant = 1;//第1象限
-                nearMargin = Mathf.Abs(ScreenSize.x / 2 - erScreenPos.x) < Mathf.Abs(ScreenSize.y / 2 - erScreenPos.y) ? 0 : 1;
-            }
-            else if (erScreenPos.x < 0 && erScreenPos.y >= 0)
-            {
-                quadrant = 2;//第2象限
-                nearMargin = Mathf.Abs(-ScreenSize.x / 2 - erScreenPos.x) < Mathf.Abs(ScreenSize.y / 2 - erScreenPos.y) ? 0 : 1;
-            }
-            else if (erScreenPos.x < 0 && erScreenPos.y < 0)
-            {
-                quadrant = 3;//第3象限
-                nearMargin = Mathf.Abs(-ScreenSize.x / 2 - erScreenPos.x) < Mathf.Abs(-ScreenSize.y / 2 - erScreenPos.y) ? 0 : 1;
-            }
-            else if (erScreenPos.x > 0 && erScreenPos.y < 0)
-            {
-                quadrant = 4;//第4象限
-                nearMargin = Mathf.Abs(ScreenSize.x / 2 - erScreenPos.x) < Mathf.Abs(-ScreenSize.y / 2 - erScreenPos.y) ? 0 : 1;
-            }
-        }
-        else
-        {
-            quadrant = Random.Range(1, 5);
-        }
-        Vector3 spawnPos = Vector3.zero;
-        switch (quadrant)
-        {
-            case 1:
-                spawnPos = (nearMargin == 0) ? new Vector3(ScreenSize.x / 2, Random.Range(0, ScreenSize.y / 2)) + MyCameraControler.transform.position :
-                 new Vector3(Random.Range(0, ScreenSize.x / 2), ScreenSize.y / 2) + MyCameraControler.transform.position;
-                break;
-            case 2:
-                spawnPos = (nearMargin == 0) ? new Vector3(-ScreenSize.x / 2, Random.Range(0, ScreenSize.y / 2)) + MyCameraControler.transform.position :
-                new Vector3(Random.Range(-ScreenSize.x / 2, 0), ScreenSize.y / 2) + MyCameraControler.transform.position;
-                break;
-            case 3:
-                spawnPos = (nearMargin == 0) ? new Vector3(-ScreenSize.x / 2, Random.Range(-ScreenSize.y / 2, 0)) + MyCameraControler.transform.position :
-                new Vector3(Random.Range(-ScreenSize.x / 2, 0), -ScreenSize.y / 2) + MyCameraControler.transform.position;
-                break;
-            case 4:
-                spawnPos = (nearMargin == 0) ? new Vector3(ScreenSize.x / 2, Random.Range(-ScreenSize.y / 2, 0)) + MyCameraControler.transform.position :
-                new Vector3(Random.Range(0, ScreenSize.x / 2), -ScreenSize.y / 2) + MyCameraControler.transform.position;
-                break;
-        }
-        spawnPos.z = 0;
-        er.transform.position = spawnPos;
+        AIMove am = er.GetComponent<AIRoleMove>();
+        SetQuadrantAndNearMargin(am, ref quadrant, ref nearMargin);
+        er.transform.position = GetSpawnPos(quadrant, nearMargin);
         CurSpawnCount++;
-        if (CurSpawnCount < SpawnCount)
+        if (CurSpawnCount < SpawnEnemyCount)
             StartCoroutine(WaitToSpawnEnemy());
         else
         {
             CurSpawnCount = 0;
-            SpawnTimes++;
+            SpawnEnemyTimer.StartRunTimer = true;
         }
         EnemyList.Add(er);
     }
+    bool CheckEnemySpawnLimit()
+    {
+        if (MaxEnemyCout == 0)
+            return true;
+        if (EnemyList.Count < MaxEnemyCout)
+            return true;
+        return false;
+    }
+    bool CheckLootSpawnLimit()
+    {
+        if (MaxLootCout == 0)
+            return true;
+        if (LootList.Count < MaxLootCout)
+            return true;
+        return false;
+    }
+    void SpawnLoot()
+    {
+        if (!CheckLootSpawnLimit())
+            return;
+        Loot loot = Instantiate(LootPrefab, Vector3.zero, Quaternion.identity) as Loot;
+
+        //Set SpawnPos
+        int quadrant = 1;//象限
+        int nearMargin = 0;//靠近左右邊(0)或靠近上下邊(1)
+        loot.transform.SetParent(LootParetn);
+        AIMove am = loot.GetComponent<AILootMove>();
+        SetQuadrantAndNearMargin(am, ref quadrant, ref nearMargin);
+        loot.transform.position = GetSpawnPos(quadrant, nearMargin);
+        CurSpawnLootCount++;
+        if (CurSpawnLootCount < SpawnLootCount)
+            StartCoroutine(WaitToSpawnLoot());
+        else
+        {
+            CurSpawnLootCount = 0;
+            SpawnLootTimer.StartRunTimer = true;
+        }
+        LootList.Add(loot);
+    }
+    void SetQuadrantAndNearMargin(AIMove _am, ref int _quadrant, ref int _nearMargin)
+    {
+        if (_am != null)
+        {
+            Vector2 erScreenPos = _am.Destination;
+            if (erScreenPos == Vector2.zero)
+            {
+                erScreenPos = _am.SetRandDestination();
+            }
+
+            if (erScreenPos.x >= 0 && erScreenPos.y >= 0)
+            {
+                _quadrant = 1;//第1象限
+                _nearMargin = Mathf.Abs(ScreenSize.x / 2 - erScreenPos.x) < Mathf.Abs(ScreenSize.y / 2 - erScreenPos.y) ? 0 : 1;
+            }
+            else if (erScreenPos.x < 0 && erScreenPos.y >= 0)
+            {
+                _quadrant = 2;//第2象限
+                _nearMargin = Mathf.Abs(-ScreenSize.x / 2 - erScreenPos.x) < Mathf.Abs(ScreenSize.y / 2 - erScreenPos.y) ? 0 : 1;
+            }
+            else if (erScreenPos.x < 0 && erScreenPos.y < 0)
+            {
+                _quadrant = 3;//第3象限
+                _nearMargin = Mathf.Abs(-ScreenSize.x / 2 - erScreenPos.x) < Mathf.Abs(-ScreenSize.y / 2 - erScreenPos.y) ? 0 : 1;
+            }
+            else if (erScreenPos.x > 0 && erScreenPos.y < 0)
+            {
+                _quadrant = 4;//第4象限
+                _nearMargin = Mathf.Abs(ScreenSize.x / 2 - erScreenPos.x) < Mathf.Abs(-ScreenSize.y / 2 - erScreenPos.y) ? 0 : 1;
+            }
+        }
+        else
+        {
+            _quadrant = Random.Range(1, 5);
+        }
+    }
+    Vector3 GetSpawnPos(int _quadrant, int _nearMargin)
+    {
+        Vector3 spawnPos = Vector3.zero;
+        switch (_quadrant)
+        {
+            case 1:
+                spawnPos = (_nearMargin == 0) ? new Vector3(ScreenSize.x / 2, Random.Range(0, ScreenSize.y / 2)) + MyCameraControler.transform.position :
+                 new Vector3(Random.Range(0, ScreenSize.x / 2), ScreenSize.y / 2) + MyCameraControler.transform.position;
+                break;
+            case 2:
+                spawnPos = (_nearMargin == 0) ? new Vector3(-ScreenSize.x / 2, Random.Range(0, ScreenSize.y / 2)) + MyCameraControler.transform.position :
+                new Vector3(Random.Range(-ScreenSize.x / 2, 0), ScreenSize.y / 2) + MyCameraControler.transform.position;
+                break;
+            case 3:
+                spawnPos = (_nearMargin == 0) ? new Vector3(-ScreenSize.x / 2, Random.Range(-ScreenSize.y / 2, 0)) + MyCameraControler.transform.position :
+                new Vector3(Random.Range(-ScreenSize.x / 2, 0), -ScreenSize.y / 2) + MyCameraControler.transform.position;
+                break;
+            case 4:
+                spawnPos = (_nearMargin == 0) ? new Vector3(ScreenSize.x / 2, Random.Range(-ScreenSize.y / 2, 0)) + MyCameraControler.transform.position :
+                new Vector3(Random.Range(0, ScreenSize.x / 2), -ScreenSize.y / 2) + MyCameraControler.transform.position;
+                break;
+        }
+        spawnPos.z = 0;
+        return spawnPos;
+    }
     IEnumerator WaitToSpawnEnemy()
     {
-        yield return new WaitForSeconds(SpawnCountInterval);
+        yield return new WaitForSeconds(SpawnEnemyCountInterval);
         SpanwEnemy();
+    }
+    IEnumerator WaitToSpawnLoot()
+    {
+        yield return new WaitForSeconds(SpawnLootCountInterval);
+        SpawnLoot();
+    }
+    public static void RemoveEnemy(EnemyRole _er)
+    {
+        BM.EnemyList.Remove(_er);
+    }
+    public static void RemoveLoot(Loot _loot)
+    {
+        BM.LootList.Remove(_loot);
     }
     // Update is called once per frame
     void Update()
     {
-        SpawnIntervalTimerFunc();
         InActivityOutSideEnemys();
-        UpdateCurMeter();
+        UpdateCurPlate();
+        SpawnEnemyTimer.RunTimer();
+        SpawnLootTimer.RunTimer();
     }
     void InActivityOutSideEnemys()
     {

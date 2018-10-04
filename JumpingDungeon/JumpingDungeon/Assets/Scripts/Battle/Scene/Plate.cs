@@ -1,13 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class Plate : MonoBehaviour
 {
     [SerializeField]
     bool RandomFlip;
     [SerializeField]
     bool RandomRotate;
+    [SerializeField]
+    Image BottomImage;
+    [SerializeField]
+    Color[] Colors;
 
     public int CurColumn { get; private set; }
     int MaxColumn { get; set; }

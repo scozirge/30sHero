@@ -156,9 +156,9 @@ public partial class PlayerRole : Role
     {
         base.Awake();
         AvatarTimer = MaxAvaterTime;
-        AttackTimer = new MyTimer(DontAttackRestoreTime, RestoreAttack, null);
-        ShieldTimer = new MyTimer(ShieldRechargeTime, ShieldRestore, null);
-        JumpTimer = new MyTimer(JumpCDTime, SetCanJump, null);
+        AttackTimer = new MyTimer(DontAttackRestoreTime, RestoreAttack,false,false);
+        ShieldTimer = new MyTimer(ShieldRechargeTime, ShieldRestore,false,false);
+        JumpTimer = new MyTimer(JumpCDTime, SetCanJump, false, false);
         ShieldBarWidth = ShieldBar.rect.width;
         Shield = MaxShield;
         InitMoveAfterimage();
@@ -196,7 +196,7 @@ public partial class PlayerRole : Role
         if (!IsAvatar)
             return;
         //Play Animation
-        AttackTimer.Start(true);
+        AttackTimer.StartRunTimer = true;
         CurAttackState++;
         if (CurAttackState == 1)
             AniPlayer.PlayTrigger("Attack1", 0);
@@ -264,7 +264,7 @@ public partial class PlayerRole : Role
                 _dmg = 0;
             }
         }
-        ShieldTimer.Start(true);
+        ShieldTimer.StartRunTimer = true;
         ShieldTimer.RestartCountDown();
         StartGenerateShield = false;
     }
@@ -353,7 +353,7 @@ public partial class PlayerRole : Role
                 xMoveForce *= MoveSpeed * KeyboardJumpMoveFactor;
                 yMoveForce *= MoveSpeed * KeyboardJumpMoveFactor;
                 MyRigi.velocity += new Vector2(xMoveForce, yMoveForce);
-                JumpTimer.Start(true);
+                JumpTimer.StartRunTimer = true;
                 CanJump = false;
             }
         }
