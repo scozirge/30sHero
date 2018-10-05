@@ -60,7 +60,7 @@ public class PlateSpawner : MonoBehaviour
             {
                 for (int i = 0; i < PlateList.Count; i++)
                 {
-                    if (PlateList[i].CurColumn == ConstraintCountX - 1)
+                    if (PlateList[i].ColumnRank == ConstraintCountX - 1)
                         PlateList[i].transform.localPosition -= new Vector3(IntervalDistX * ConstraintCountX, 0);
                     PlateList[i].LevelDown();
                 }
@@ -70,7 +70,7 @@ public class PlateSpawner : MonoBehaviour
 
                 for (int i = 0; i < PlateList.Count; i++)
                 {
-                    if (PlateList[i].CurColumn == 0)
+                    if (PlateList[i].ColumnRank == 0)
                         PlateList[i].transform.localPosition += new Vector3(IntervalDistX * ConstraintCountX, 0);
                     PlateList[i].LevelUp();
                 }
