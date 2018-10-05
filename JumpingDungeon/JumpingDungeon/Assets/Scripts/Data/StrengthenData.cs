@@ -135,7 +135,7 @@ public class StrengthenData : Data
     }
     public static StrengthenData GetNewStrengthenData(int _id, int _lv)
     {
-        StrengthenData data = GameDictionary.StrengthenDic[_id].MemberwiseClone() as StrengthenData;
+        StrengthenData data = GameDictionary.StrengthenDic[_id].MemberwiseClone() as StrengthenData;        
         data.LV = _lv;
         return data;
     }

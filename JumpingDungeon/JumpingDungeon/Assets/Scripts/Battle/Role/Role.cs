@@ -177,8 +177,11 @@ public abstract class Role : MonoBehaviour
         else
         {
             Buffers.Add(_buffer.Type, _buffer);
-            ParticleSystem ps = EffectEmitter.EmitParticle(GameManager.GetBufferParticle(_buffer.Type), Vector3.zero, Vector3.zero, transform);
-            BufferParticles.Add(_buffer.Type, ps);
+            if(!BufferParticles.ContainsKey(_buffer.Type))
+            {
+                ParticleSystem ps = EffectEmitter.EmitParticle(GameManager.GetBufferParticle(_buffer.Type), Vector3.zero, Vector3.zero, transform);
+                BufferParticles.Add(_buffer.Type, ps);
+            }
         }
         if (_buffer.Type == RoleBuffer.Stun)
         {

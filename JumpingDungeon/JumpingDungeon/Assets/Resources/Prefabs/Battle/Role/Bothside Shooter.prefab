@@ -182,9 +182,10 @@ MonoBehaviour:
   PSkillName: Shooter
   PSkillDuration: 10
   DetecteRadius: 800
+  DamagePercent: 1
   PSkillTimer: 0
   AttackOnce: 0
-  Interval: 3
+  Interval: 2
   AmmoNum: 2
   AmmoInterval: 0
   StartAngle: 0
@@ -206,6 +207,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MyForce: 1
   HealthBar: {fileID: 224116466118426486}
+  MoveDecay: 0.5
   BaseHealth: 100
   BaseDamage: 4
   BaseDefence: 0

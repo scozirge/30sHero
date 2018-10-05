@@ -40,13 +40,14 @@ public partial class Ammo : MonoBehaviour
     float DestructMargin_Left;
     float DestructMargin_Right;
 
-    protected virtual void TriggerHitCondition(Role _role)
+    public virtual void TriggerHitCondition(Role _role)
     {
         if (Buffers == null)
             return;
+        
         for (int i = 0; i < Buffers.Length;i++ )
         {
-            _role.AddBuffer(Buffers[i]);
+            _role.AddBuffer(Buffers[i].GetMemberwiseClone());
         }
     }
     public virtual void Init(Dictionary<string, object> _dic)

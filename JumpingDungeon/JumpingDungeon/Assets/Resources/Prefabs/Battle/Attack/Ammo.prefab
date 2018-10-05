@@ -84,26 +84,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LocalParticles:
-  - {fileID: 198350346737686014, guid: d831439896a03fd4e94904ea24d07106, type: 2}
+  - {fileID: 198298351546003630, guid: 401dd455506d6584d9f350837c07a79b, type: 2}
   GlobalParticle: []
   DeadParticles: []
-  LifeTime: 6
-  KnockIntensity: 0
-  StunIntensity: 0
-  BurnIntensity: 0
-  FreezeIntensity: 0
-  CurseIntensity: 0
-  ImmortalIntensity: 0
+  LifeTime: 3
+  KnockIntensity: 2000
   AmmoType: 0
+  Buffers:
+  - Type: 0
+    Time: 0.2
+    Value: 0
   Value: 0
-  AmmoSpeed: 500
+  AmmoSpeed: 600
   TraceFactor: 0
-  KnockIntensity: 0
-  StunIntensity: 0
-  BurnIntensity: 0
-  FreezeIntensity: 0
-  CurseIntensity: 0
-  ImmortalIntensity: 0
 --- !u!222 &222441390583901092
 CanvasRenderer:
   m_ObjectHideFlags: 1

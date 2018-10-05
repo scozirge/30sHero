@@ -80,7 +80,7 @@ MonoBehaviour:
   AmmoType: 1
   Buffers:
   - Type: 0
-    Time: 2
+    Time: 1
     Value: 0
   Value: 0
   MyMeleeType: 3

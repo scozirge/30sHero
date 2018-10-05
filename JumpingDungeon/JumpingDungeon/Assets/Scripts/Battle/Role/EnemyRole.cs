@@ -4,8 +4,7 @@ using UnityEngine;
 
 public partial class EnemyRole : Role
 {
-
-
+    public EnemyData RelyData;
     protected const float FrictionDuringTime = 1;
     protected float FrictionDuringTimer = FrictionDuringTime;
     protected bool StartVelocityDecay;
@@ -13,6 +12,10 @@ public partial class EnemyRole : Role
     AIRoleMove MyAIMove;
     PlayerRole Target;
 
+    public void SetEnemyData(EnemyData _data)
+    {
+        RelyData = _data;
+    }
     protected override void Awake()
     {
         base.Awake();

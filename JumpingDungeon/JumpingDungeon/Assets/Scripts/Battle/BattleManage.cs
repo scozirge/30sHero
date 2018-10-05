@@ -5,6 +5,8 @@ using UnityEngine;
 public partial class BattleManage : MonoBehaviour
 {
     [SerializeField]
+    bool TestMode;
+    [SerializeField]
     float SpawnEnemyInterval;
     [SerializeField]
     float SpawnLootInterval;
@@ -32,17 +34,15 @@ public partial class BattleManage : MonoBehaviour
     PlayerRole MyPlayer;
 
 
-
+    static List<EnemyRole> AvailableMillions;
+    static List<EnemyRole> AvailableDemonGergons;
     int CurSpawnCount;
     int CurSpawnLootCount;
-
-
-
     Transform EnemyParent;
     Transform LootParetn;
     MyTimer SpawnEnemyTimer;
     MyTimer SpawnLootTimer;
-    static BattleManage BM;
+    public static BattleManage BM;
     public static CameraController MyCameraControler;
     public static int Floor;
     public static Vector2 ScreenSize;
@@ -50,13 +50,15 @@ public partial class BattleManage : MonoBehaviour
     float DestructMargin_Right;
     List<EnemyRole> EnemyList = new List<EnemyRole>();
     List<Loot> LootList = new List<Loot>();
-
+    static int NextDemogorgonFloor;
+    static bool IsDemogorgonFloor;
 
     // Use this for initialization
-    void Start()
+    void Awake()
     {
         if (!GameManager.IsInit)
             GameManager.DeployGameManager();
+
         BM = this;
         EnemyParent = GameObject.FindGameObjectWithTag("EnemyParent").GetComponent<Transform>();
         LootParetn = GameObject.FindGameObjectWithTag("LootParent").GetComponent<Transform>();
@@ -66,24 +68,49 @@ public partial class BattleManage : MonoBehaviour
         MyCameraControler = CameraControler;
         CurSpawnCount = 0;
         ScreenSize = MyCameraControler.ScreenSize;
-        for (int i = 0; i < Enemys.Count; i++)
+        //SpawnEnemySet
+        if (TestMode)
         {
-            if (Enemys[i] == null)
-                Enemys.RemoveAt(i);
+            for (int i = 0; i < Enemys.Count; i++)
+            {
+                if (Enemys[i] == null)
+                    Enemys.RemoveAt(i);
+            }
+            AvailableMillions = Enemys;
         }
+        else
+            AvailableMillions = EnemyData.GetAvailableMillions(Floor);
+        AvailableDemonGergons = EnemyData.GetNextDemogorgon(Floor, out NextDemogorgonFloor);
+        IsDemogorgonFloor = CheckDemogorgon(Floor);
     }
 
-
+    void SpawnDemogorgon()
+    {
+        for (int i = 0; i < AvailableDemonGergons.Count; i++)
+        {
+            EnemyRole er = Instantiate(AvailableDemonGergons[i], Vector3.zero, Quaternion.identity) as EnemyRole;
+            //Set SpawnPos
+            int quadrant = 1;//象限
+            int nearMargin = 0;//靠近左右邊(0)或靠近上下邊(1)
+            er.transform.SetParent(EnemyParent);
+            AIMove am = er.GetComponent<AIRoleMove>();
+            SetQuadrantAndNearMargin(am, ref quadrant, ref nearMargin);
+            er.transform.position = GetSpawnPos(quadrant, nearMargin);
+            EnemyList.Add(er);
+        }
+        AvailableDemonGergons = EnemyData.GetNextDemogorgon(Floor+1, out NextDemogorgonFloor);
+        IsDemogorgonFloor = false;
+    }
     void SpanwEnemy()
     {
         if (!CheckEnemySpawnLimit())
             return;
-        int rndEnemy = Random.Range(0, Enemys.Count);
+        int rndEnemy = Random.Range(0, AvailableMillions.Count);
         EnemyRole er;
         if (DesignatedEnemy)
             er = Instantiate(DesignatedEnemy, Vector3.zero, Quaternion.identity) as EnemyRole;
         else
-            er = Instantiate(Enemys[rndEnemy], Vector3.zero, Quaternion.identity) as EnemyRole;
+            er = Instantiate(AvailableMillions[rndEnemy], Vector3.zero, Quaternion.identity) as EnemyRole;
 
 
         //Set SpawnPos

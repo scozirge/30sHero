@@ -23,7 +23,7 @@ public class PlateSpawner : MonoBehaviour
     int OffsetLevel;
     int OrigOffsetLevel;
 
-    void Awake()
+    void Start()
     {
         InitSpawnBG();
     }

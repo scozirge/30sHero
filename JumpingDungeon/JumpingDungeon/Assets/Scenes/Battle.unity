@@ -662,7 +662,7 @@ MonoBehaviour:
   MyForce: 0
   HealthBar: {fileID: 135074930}
   MoveDecay: 0.5
-  BaseHealth: 200
+  BaseHealth: 300
   BaseDamage: 50
   BaseDefence: 0
   BaseMoveSpeed: 400
@@ -671,7 +671,7 @@ MonoBehaviour:
   AniPlayer: {fileID: 883968454}
   RoleTrans: {fileID: 354062485}
   DeathSound: {fileID: 8300000, guid: fc274ce0d0fd8fb40b2e7557d54975e8, type: 3}
-  MaxShield: 30
+  MaxShield: 100
   ShieldBar: {fileID: 112607288}
   ShieldReGenerateTime: 3
   ShieldRechargeTime: 3
@@ -1437,7 +1437,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
-  m_SortingLayerID: 363773173
+  m_SortingLayerID: -957015627
   m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!1 &1379692251
@@ -1978,7 +1978,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf3b69d7446504f4da805d7d731903ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SpawnEnemyInterval: 5
+  TestMode: 0
+  SpawnEnemyInterval: 4
   SpawnLootInterval: 5
   SpawnEnemyCount: 0
   SpawnLootCount: 1
@@ -1988,7 +1989,7 @@ MonoBehaviour:
   MaxLootCout: 0
   Enemys:
   - {fileID: 114364750184517408, guid: 7a4fcaea190fe1341b551043fc61e7ba, type: 2}
-  - {fileID: 0}
+  - {fileID: 114364750184517408, guid: 4e4608edff7362c45b106e955ca4fabe, type: 2}
   - {fileID: 114364750184517408, guid: 7f6edaf36c640654db036ad9e0a0a0d2, type: 2}
   - {fileID: 114485926508205134, guid: 36509ae15283f0b4b85c7eb28f152231, type: 2}
   - {fileID: 114364750184517408, guid: fd1730034bed914409677edaf33d653c, type: 2}
@@ -2000,12 +2001,12 @@ MonoBehaviour:
   MyPlayer: {fileID: 371345243}
   FloorText: {fileID: 1794995101}
   MeterText: {fileID: 1479774048}
-  FloorPlate: 4
+  FloorPlate: 10
   GatePrefab: {fileID: 114196004098046030, guid: f13058442fb94894587304b5c65d196f,
     type: 2}
   GateParent: {fileID: 1018406180}
   PlateSizeX: 884
-  Colors: []
+  BoosDebutPlate: 9
 --- !u!1 &1794995099
 GameObject:
   m_ObjectHideFlags: 0

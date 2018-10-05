@@ -19,4 +19,9 @@ public class BufferData
         Time = _time;
         Value = _value;
     }
+    public BufferData GetMemberwiseClone()
+    {
+        BufferData data = this.MemberwiseClone() as BufferData;
+        return data;
+    }
 }

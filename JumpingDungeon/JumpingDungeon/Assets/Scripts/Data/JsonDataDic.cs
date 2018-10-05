@@ -11,6 +11,7 @@ public partial class GameDictionary
     public static Dictionary<int, ArmorData> ArmorDic;
     public static Dictionary<int, AccessoryData> AccessoryDic;
     public static Dictionary<string, GameSettingData> GameSettingDic;
+    public static Dictionary<int, EnemyData> EnemyDic;
 
     //String
     public static Dictionary<string, StringData> String_UIDic;
@@ -36,6 +37,8 @@ public partial class GameDictionary
         ArmorData.SetData(ArmorDic, "Armor");
         AccessoryDic = new Dictionary<int, AccessoryData>();
         AccessoryData.SetData(AccessoryDic, "Accessory");
+        EnemyDic = new Dictionary<int, EnemyData>();
+        EnemyData.SetData(EnemyDic, "Enemy");
 
         //String
         String_UIDic = StringGetter.GetStringData("String_UI");

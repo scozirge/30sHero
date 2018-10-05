@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 public class DungeonPlate : Plate
 {
-    [SerializeField]
     int FloorPlateCount;
     [SerializeField]
     bool RandomColor;
@@ -20,6 +19,7 @@ public class DungeonPlate : Plate
     {
         base.Init(_column, _maxColumn);
         CurPlate = ColumnRank - 1 + 100000;
+        FloorPlateCount = BattleManage.BM.FloorPlate;
         UpdatePlateColor();
     }
     public override void LevelDown()
@@ -38,7 +38,7 @@ public class DungeonPlate : Plate
             return;
         if (Colors.Count == 0)
             return;
-        CurFloor = CurPlate / 4;
+        CurFloor = CurPlate / FloorPlateCount;
         if (!FloorColor.ContainsKey(CurFloor))
         {
             FloorColor.Add(CurFloor, GetRandomColor(CurFloor));

@@ -9,7 +9,7 @@ public partial class BattleManage
     [SerializeField]
     MyText MeterText;
     [SerializeField]
-    int FloorPlate;
+    public int FloorPlate;
     [SerializeField]
     Gate GatePrefab;
     [SerializeField]
@@ -17,8 +17,7 @@ public partial class BattleManage
     [SerializeField]
     int PlateSizeX;
     [SerializeField]
-    List<Color> Colors;
-
+    int BoosDebutPlate;
 
     static int CurPlate = 0;
     void UpdateCurPlate()
@@ -27,6 +26,11 @@ public partial class BattleManage
             return;
         CurPlate = (int)((BM.MyPlayer.transform.position.x + 1.5 * BM.PlateSizeX) / BM.PlateSizeX);
         BM.MeterText.text = string.Format("{0}{1}", CurPlate, StringData.GetString("Meter"));
+        if(IsDemogorgonFloor)
+        {
+            if (CurPlate == NextDemogorgonFloor * FloorPlate - BoosDebutPlate)
+                SpawnDemogorgon();
+        }
     }
     void InitStage()
     {
@@ -62,6 +66,12 @@ public partial class BattleManage
             Floor++;
             UpdateFloorText();
         }
-
+        AvailableMillions = EnemyData.GetAvailableMillions(Floor);
+        IsDemogorgonFloor = CheckDemogorgon(Floor);
     }
+    public static bool CheckDemogorgon(int _floor)
+    {
+        return (_floor == NextDemogorgonFloor);
+    }
+
 }
