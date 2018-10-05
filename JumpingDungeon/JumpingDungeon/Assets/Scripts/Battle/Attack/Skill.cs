@@ -30,10 +30,6 @@ public class Skill : MonoBehaviour
 
     void OnDrawGizmos()
     {
-        if (!Application.isEditor)
-            return;
-        if (Selection.activeGameObject != transform.gameObject)
-            return;
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, DetecteRadius);
     }

@@ -16,8 +16,10 @@ public partial class BattleManage
     Transform GateParent;
     [SerializeField]
     int PlateSizeX;
+    [SerializeField]
+    List<Color> Colors;
 
-    static int StartPlate = -1;
+
     static int CurPlate = 0;
     void UpdateCurPlate()
     {
@@ -32,7 +34,7 @@ public partial class BattleManage
             return;
         Floor = (int)(CurPlate / BM.FloorPlate) + 1;
         UpdateFloorText();
-        SpawnGate(Floor-1);
+        SpawnGate(Floor - 1);
         SpawnGate(Floor);
     }
     static void UpdateFloorText()
