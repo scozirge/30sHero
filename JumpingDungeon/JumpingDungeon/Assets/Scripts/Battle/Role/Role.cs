@@ -79,6 +79,8 @@ public abstract class Role : MonoBehaviour
 
     protected virtual void Awake()
     {
+        if (MoveDecay <= 0.2f)
+            MoveDecay = 0.2f;
         IsAlive = true;
         HPBarWidth = HealthBar.rect.width;
         Health = MaxHealth;

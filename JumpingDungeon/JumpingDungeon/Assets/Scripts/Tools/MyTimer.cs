@@ -19,8 +19,12 @@ public class MyTimer
         TimeOutFunc = _timeOutFunc;
         StartRunTimer = _startRunTimer;
         Loop = _loop;
+        
         if (MaxTime == 0)
-            Debug.LogWarning("MaxTime of MyTimer is 0");
+        {
+            Debug.LogWarning(string.Format("{0}'s MaxTime of MyTimer is 0", _timeOutFunc.Method.Name));
+        }
+
     }
 
     public MyTimer(float _maxTime, MyDelegate _timeOutFunc, MyDelegate _runTimeFunc, bool _startRunTimer, bool _loop)
