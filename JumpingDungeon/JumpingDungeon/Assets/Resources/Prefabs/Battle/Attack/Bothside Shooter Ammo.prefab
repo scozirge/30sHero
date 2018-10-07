@@ -89,11 +89,10 @@ MonoBehaviour:
   DeadParticles: []
   LifeTime: 6
   KnockIntensity: 0
-  StunIntensity: 0
-  FireIntensity: 0
-  IceIntensity: 0
-  CurseIntensity: 0
   AmmoType: 0
+  DamageInterval: 0.3
+  Buffers: []
+  Value: 0
   AmmoSpeed: 200
   TraceFactor: 0
 --- !u!222 &222441390583901092

@@ -52,8 +52,6 @@ public class Supply : Ammo
     {
         base.TriggerTarget(_role);
         _role.HealHP(Value);
-        TriggerHitCondition(_role);
-        IsCausedDamage = true;
         if (AmmoType != ShootAmmoType.Permanent)
             SelfDestroy();
     }

@@ -23,9 +23,13 @@ public partial class Ammo : MonoBehaviour
     [Tooltip("子彈類型，選擇穿透就是子彈擊中玩家後不會移除，且可能造成多次傷害(炸彈類的子彈)")]
     [SerializeField]
     protected ShootAmmoType AmmoType;
+    [Tooltip("傷害間隔，只有子彈類型是穿透(代表擊中敵方後不會消失)才需要設定")]
+    [SerializeField]
+    protected float DamageInterval = 0.3f;
     [Tooltip("暈眩(秒數)、燃燒(秒數)、冰凍(秒數)、詛咒(秒數)、無敵(秒數)、格檔(時間,秒數)")]
     [SerializeField]
     protected BufferData[] Buffers;
+
 
     protected Force AttackerRoleTag;
     protected Force TargetRoleTag;
@@ -40,6 +44,11 @@ public partial class Ammo : MonoBehaviour
     float DestructMargin_Left;
     float DestructMargin_Right;
 
+    protected MyTimer DamageTime;
+    protected bool ReadyToDamage;
+    protected float DamageIntervalTimer;
+
+
     public virtual void TriggerHitCondition(Role _role)
     {
         if (Buffers == null)
@@ -52,6 +61,12 @@ public partial class Ammo : MonoBehaviour
     }
     public virtual void Init(Dictionary<string, object> _dic)
     {
+        ReadyToDamage = true;
+        if (DamageInterval <= 0)
+            DamageInterval = 0.1f;
+        DamageTime = new MyTimer(DamageInterval, DamageTimeOutFunc, false, false);
+        DamageIntervalTimer = DamageInterval;
+
         ParticleParent = GameObject.FindGameObjectWithTag("ParticleParent").transform;
         MyRigi = GetComponentInParent<Rigidbody2D>();
         if (MyRigi == null)
@@ -72,6 +87,11 @@ public partial class Ammo : MonoBehaviour
         }
         Value = int.Parse(_dic["Damage"].ToString());
         SpawnParticles();
+    }
+    protected void DamageTimeOutFunc()
+    {
+        DamageIntervalTimer = DamageInterval;
+        ReadyToDamage = true;
     }
     protected virtual void SpawnParticles()
     {
@@ -103,12 +123,16 @@ public partial class Ammo : MonoBehaviour
     }
     protected virtual void OnTriggerEnter2D(Collider2D _col)
     {
+        if (!ReadyToDamage)
+            return;
         if (TargetRoleTag.ToString() == _col.tag.ToString())
             TriggerTarget(_col.GetComponent<Role>());
 
     }
     protected virtual void OnTriggerStay2D(Collider2D _col)
     {
+        if (!ReadyToDamage)
+            return;
         if (TargetRoleTag.ToString() == _col.tag.ToString())
             TriggerTarget(_col.GetComponent<Role>());
         else if (TargetRoleTag.ToString() == _col.tag.ToString())
@@ -117,12 +141,19 @@ public partial class Ammo : MonoBehaviour
     }
     protected virtual void TriggerTarget(Role _role)
     {
+        ReadyToDamage = false;
+        TriggerHitCondition(_role);
+        if (AmmoType != ShootAmmoType.Permanent)
+            IsCausedDamage = true;
+        DamageTime.StartRunTimer = true;
     }
     protected virtual void Update()
     {
         if (!IsLaunch)
             return;
         LIfeTimerFunc();
+        if (!ReadyToDamage && !IsCausedDamage)
+            DamageTime.RunTimer();
         DestroyOutSideAmmos();
     }
     public virtual void SelfDestroy()
