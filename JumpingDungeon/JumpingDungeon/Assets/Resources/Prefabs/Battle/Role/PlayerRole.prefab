@@ -11,22 +11,6 @@ Prefab:
   m_SourcePrefab: {fileID: 0}
   m_RootGameObject: {fileID: 1821692636444564}
   m_IsPrefabAsset: 1
---- !u!1 &1119494924217490
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 224222255910736768}
-  - component: {fileID: 58631507675247020}
-  m_Layer: 8
-  m_Name: skilldector
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!1 &1289631118377060
 GameObject:
   m_ObjectHideFlags: 1
@@ -73,6 +57,7 @@ GameObject:
   - component: {fileID: 50875358054220770}
   - component: {fileID: 58114890521861934}
   - component: {fileID: 114551822075932818}
+  - component: {fileID: 114348573124540410}
   m_Layer: 8
   m_Name: PlayerRole
   m_TagString: Player
@@ -163,7 +148,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.91, y: 6.32}
@@ -184,21 +169,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 80
---- !u!58 &58631507675247020
-CircleCollider2D:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1119494924217490}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 300
 --- !u!95 &95614152932324196
 Animator:
   serializedVersion: 3
@@ -244,6 +214,32 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114348573124540410
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1821692636444564}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3283f1f3a7e6b24db127fb13fd7f595, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PSkillName: s
+  PSkillDuration: 999
+  DetecteRadius: 2000
+  DamagePercent: 0.1
+  PSkillTimer: 0
+  AttackOnce: 0
+  Interval: 0.5
+  AmmoNum: 3
+  AmmoInterval: 0
+  StartAngle: -90
+  AngleInterval: 90
+  Patetern: 1
+  SpawnedInSelf: 0
+  AttackPrefab: {fileID: 114962956101920240, guid: 764d9b4a6227801439c2df1cb4a677b2,
+    type: 2}
 --- !u!114 &114437109372056144
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -296,22 +292,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MyForce: 0
   HealthBar: {fileID: 0}
-  BaseHealth: 100
+  MoveDecay: 0
+  BaseHealth: 200
   BaseDamage: 50
   BaseDefence: 0
-  BaseMoveSpeed: 300
+  BaseMoveSpeed: 700
   DeathEffect: {fileID: 198802542160044040, guid: 8f344cf8edc65e44883dfdf0168792bd,
     type: 2}
   AniPlayer: {fileID: 114551822075932818}
   RoleTrans: {fileID: 224424989099534612}
-  DeathSound: {fileID: 0}
+  DeathSound: {fileID: 8300000, guid: fc274ce0d0fd8fb40b2e7557d54975e8, type: 3}
   MaxShield: 30
   ShieldBar: {fileID: 0}
   ShieldReGenerateTime: 3
   ShieldRechargeTime: 3
-  GainMoveFromKilling: 20
-  MoveDepletedTime: 10
-  MaxEtraMove: 200
+  GainMoveFromKilling: 50
+  MoveDepletedTime: 8
+  MaxEtraMove: 700
   MaxAvaterTime: 60
   AvatarTimerText: {fileID: 0}
   AvatarTimeBuff: 0
@@ -322,15 +319,17 @@ MonoBehaviour:
   MoveAfterimagePrefab: {fileID: 198230356777013556, guid: 4ac12026ed62f024b9bc36b2da373c93,
     type: 2}
   DontAttackRestoreTime: 1
-  SelfKnockForce: 0
-  SelfSturnTime: 0
-  ControlDevice: 0
-  CursorLimitDist: 0
+  SelfKnockForce: 100000
+  SelfSturnTime: 0.3
+  ControlDevice: 1
+  CursorLimitDist: 200
   MyCamera: {fileID: 0}
-  RushForce: 0
-  RushSound: {fileID: 0}
-  AttackSound: {fileID: 0}
+  RushForce: 1000000
+  RushSound: {fileID: 8300000, guid: 41b00c1ca9d97ea4796281c66b69da09, type: 3}
+  AttackSound: {fileID: 8300000, guid: fc274ce0d0fd8fb40b2e7557d54975e8, type: 3}
+  JumpCDTime: 0.2
   FaceDir: 0
+  ClosestEnemy: {fileID: 0}
 --- !u!114 &114618768542438684
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -396,24 +395,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 304, y: 304}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!224 &224222255910736768
-RectTransform:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1119494924217490}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 224439159575615530}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224290569326616614
 RectTransform:
   m_ObjectHideFlags: 1
@@ -425,7 +406,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 224439159575615530}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -445,7 +426,7 @@ RectTransform:
   - {fileID: 224119802998225490}
   - {fileID: 224111025219653712}
   m_Father: {fileID: 224439159575615530}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -462,7 +443,6 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 224222255910736768}
   - {fileID: 224424989099534612}
   - {fileID: 224290569326616614}
   m_Father: {fileID: 0}
@@ -470,6 +450,6 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -400, y: 0}
+  m_AnchoredPosition: {x: -511, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}

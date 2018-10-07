@@ -153,12 +153,12 @@ MonoBehaviour:
   GlobalParticle: []
   DeadParticles: []
   LifeTime: 9999
-  KnockIntensity: 5000
+  KnockIntensity: 10000
   AmmoType: 1
-  DamageInterval: 0.3
+  DamageInterval: 0.001
   Buffers:
   - Type: 0
-    Time: 1
+    Time: 0.1
     Value: 0
   Value: 0
   MyMeleeType: 0

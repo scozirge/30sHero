@@ -88,12 +88,12 @@ MonoBehaviour:
   GlobalParticle: []
   DeadParticles: []
   LifeTime: 3
-  KnockIntensity: 2000
+  KnockIntensity: 4000
   AmmoType: 0
   DamageInterval: 0.3
   Buffers:
   - Type: 0
-    Time: 0.2
+    Time: 0.1
     Value: 0
   Value: 0
   AmmoSpeed: 600
