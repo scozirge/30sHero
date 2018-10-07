@@ -26,7 +26,7 @@ public partial class Ammo : MonoBehaviour
     [Tooltip("傷害間隔，只有子彈類型是穿透(代表擊中敵方後不會消失)才需要設定")]
     [SerializeField]
     protected float DamageInterval = 0.3f;
-    [Tooltip("暈眩(秒數)、燃燒(秒數)、冰凍(秒數)、詛咒(秒數)、無敵(秒數)、格檔(時間,秒數)")]
+    [Tooltip("暈眩(秒數)、燃燒(秒數)、冰凍(秒數)、傷害Buff(秒數,增/減值)、無敵(秒數)、格檔(時間,秒數)")]
     [SerializeField]
     protected BufferData[] Buffers;
 

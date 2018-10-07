@@ -18,9 +18,9 @@ public partial class EnemyRole : Role
     {
         RelyData = _data;
     }
-    protected override void Awake()
+    protected override void Start()
     {
-        base.Awake();
+        base.Start();
         MyAIMove = GetComponent<AIRoleMove>();
         GameObject go = GameObject.FindGameObjectWithTag("Player");
         if (go)
@@ -100,10 +100,10 @@ public partial class EnemyRole : Role
             if (MyAIMove)
                 MyAIMove.SetCanMove(false);
     }
-    public override void RemoveBuffer(RoleBuffer _buffer)
+    public override void RemoveBuffer(BufferData _buffer)
     {
         base.RemoveBuffer(_buffer);
-        if (_buffer == RoleBuffer.Stun)
+        if (_buffer.Type == RoleBuffer.Stun)
             if (MyAIMove)
                 MyAIMove.SetCanMove(false);
     }

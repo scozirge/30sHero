@@ -49,7 +49,7 @@ public partial class PlayerRole : Role
     float ShieldRechargeTime;
     bool StartGenerateShield;
     MyTimer ShieldTimer;
-    public override float MoveSpeed { get { return BaseMoveSpeed + ExtraMoveSpeed; } }
+    public override float MoveSpeed { get { return base.MoveSpeed + ExtraMoveSpeed; } }
     private float extraMoveSpeed;
     public float ExtraMoveSpeed
     {
@@ -152,9 +152,9 @@ public partial class PlayerRole : Role
     public EnemyRole ClosestEnemy;
     bool CanJump;
 
-    protected override void Awake()
+    protected override void Start()
     {
-        base.Awake();
+        base.Start();
         AvatarTimer = MaxAvaterTime;
         AttackTimer = new MyTimer(DontAttackRestoreTime, RestoreAttack,false,false);
         ShieldTimer = new MyTimer(ShieldRechargeTime, ShieldRestore,false,false);
@@ -451,7 +451,7 @@ public partial class PlayerRole : Role
     {
         if (!IsAvatar)
             return;
-        if (CheckCondition(RoleBuffer.Stun))
+        if (Buffers.ContainsKey(RoleBuffer.Stun))
         {
             MoveAfterimage_Main.maxParticles = 0;
             MoveAfterimage_Main.startLifetime = 0;

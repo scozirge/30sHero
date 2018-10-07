@@ -45,6 +45,12 @@ public class GameSettingData : Data
     public static string NormalNumberColor;
     public static string StrengthenPath;
     public static string EquipPath;
+    public static float FreezeMove;
+    public static float BurnDamage;
+    public static float CurseDamageReduce;
+    public static float BurnInterval;
+
+
 
     //裝備可隨機的屬性類型
     static List<RoleProperty> RandomPropertyList = new List<RoleProperty>() { RoleProperty.Strength, RoleProperty.Health, RoleProperty.Shield, RoleProperty.ShieldRecovery, RoleProperty.MoveSpeed, RoleProperty.MaxMoveSpeed, RoleProperty.MoveDecay, RoleProperty.AvatarTime, RoleProperty.AvatarDrop, RoleProperty.SkillTime, RoleProperty.SkillDrop, RoleProperty.EquipDrop, RoleProperty.GoldDrop, RoleProperty.BloodThirsty, RoleProperty.PotionEfficiency };
@@ -200,6 +206,18 @@ public class GameSettingData : Data
                                 break;
                             case "EquipPath":
                                 EquipPath = item[key].ToString();
+                                break;
+                            case "FreezeMove":
+                                FreezeMove = float.Parse(item[key].ToString());
+                                break;
+                            case "BurnDamage":
+                                BurnDamage = float.Parse(item[key].ToString());
+                                break;
+                            case "BurnInterval":
+                                BurnInterval = float.Parse(item[key].ToString());
+                                break;
+                            case "CurseDamageReduce":
+                                CurseDamageReduce = float.Parse(item[key].ToString());
                                 break;
                             default:
                                 Debug.LogWarning(string.Format("{0}表有不明屬性:{1}", DataName, key));

@@ -92,9 +92,9 @@ MonoBehaviour:
   AmmoType: 1
   DamageInterval: 0.3
   Buffers:
-  - Type: 0
-    Time: 0.5
-    Value: 0
+  - Type: 2
+    Time: 3
+    Value: 0.5
   Value: 0
   AmmoSpeed: 1000
   TraceFactor: 0

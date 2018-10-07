@@ -69,15 +69,15 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 91f0be839d427af43975c3c4a284c0bf, type: 3}
   StunPrefab: {fileID: 198778626335910482, guid: 7907fa2d41ff8db43be35d4e8129f585,
     type: 2}
-  FreezePrefab: {fileID: 198778626335910482, guid: 7907fa2d41ff8db43be35d4e8129f585,
+  FreezePrefab: {fileID: 198778626335910482, guid: ae8b58be06573b14e84af7e77617b720,
     type: 2}
-  BurnPrefab: {fileID: 198778626335910482, guid: 7907fa2d41ff8db43be35d4e8129f585,
+  BurnPrefab: {fileID: 198778626335910482, guid: 5256d43f5295b3c4c8f96c4e21e46b8b,
     type: 2}
-  CursePrefab: {fileID: 198778626335910482, guid: 7907fa2d41ff8db43be35d4e8129f585,
+  CursePrefab: {fileID: 198118325992113576, guid: 5a92c9c5d13ad794797dffcd0662e4f1,
     type: 2}
   ImmortalPrefab: {fileID: 198712052328016582, guid: 30de476e70ea7e94cb7b6a40fa9ba507,
     type: 2}
-  DamageBuffPrefab: {fileID: 198778626335910482, guid: 7907fa2d41ff8db43be35d4e8129f585,
+  DamageBuffPrefab: {fileID: 198118325992113576, guid: 0c765d955ef08f44e8aa4432ff351ce1,
     type: 2}
-  BlockPrefab: {fileID: 198778626335910482, guid: 7907fa2d41ff8db43be35d4e8129f585,
+  BlockPrefab: {fileID: 198799690855025450, guid: 813210bc99f9fa84eaf509350897f250,
     type: 2}
