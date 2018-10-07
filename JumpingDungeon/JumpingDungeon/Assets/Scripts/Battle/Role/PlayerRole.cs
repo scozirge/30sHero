@@ -282,6 +282,8 @@ public partial class PlayerRole : Role
             MoveDecay = 0.7f;
             RemoveAllBuffer();
             IsAvatar = false;
+            MoveAfterimage_Main.maxParticles = 0;
+            MoveAfterimage_Main.startLifetime = 0;
         }
         AvatarTimerText.text = Mathf.Round(AvatarTimer).ToString();
     }
@@ -329,6 +331,13 @@ public partial class PlayerRole : Role
                 xMoveForce = Input.GetAxis("Horizontal") * MoveSpeed * KeyboardMoveFactor;
                 yMoveForce = Input.GetAxis("Vertical") * MoveSpeed * KeyboardMoveFactor;
                 MyRigi.velocity += new Vector2(xMoveForce, yMoveForce);
+                //衝刺
+                if (Input.GetKeyDown(KeyCode.Space))
+                {
+                    Vector2 rushForce = new Vector2(xMoveForce, yMoveForce) * RushForce;
+                    MyRigi.AddForce(rushForce);
+                    AudioPlayer.PlaySound(RushSound);
+                }
             }
             else
             {
@@ -442,14 +451,26 @@ public partial class PlayerRole : Role
     {
         if (!IsAvatar)
             return;
+        if (CheckCondition(RoleBuffer.Stun))
+        {
+            MoveAfterimage_Main.maxParticles = 0;
+            MoveAfterimage_Main.startLifetime = 0;
+            return;
+        }
         if (ExtraMoveSpeed > 0)
         {
             float decay = (ExtraMoveSpeed / MoveDepletedTime);
             if (decay < 1)
                 decay = 1;
             ExtraMoveSpeed -= Time.deltaTime * decay;
-            MoveAfterimage_Main.maxParticles = Mathf.RoundToInt(ExtraMoveSpeed / 4);
-            MoveAfterimage_Main.startLifetime = ExtraMoveSpeed / 200;
+            int particleCount = Mathf.RoundToInt(ExtraMoveSpeed / 4);
+            if (particleCount > 15)
+                particleCount = 15;
+            MoveAfterimage_Main.maxParticles = particleCount;
+            float lifeTime = ExtraMoveSpeed / 100;
+            if (lifeTime > 0.5)
+                lifeTime = 0.5f;
+            MoveAfterimage_Main.startLifetime = lifeTime;
         }
     }
 

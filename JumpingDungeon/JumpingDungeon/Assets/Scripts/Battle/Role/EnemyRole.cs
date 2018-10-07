@@ -4,6 +4,8 @@ using UnityEngine;
 
 public partial class EnemyRole : Role
 {
+    [SerializeField]
+    GameObject HealthObj;
     public EnemyData RelyData;
     protected const float FrictionDuringTime = 1;
     protected float FrictionDuringTimer = FrictionDuringTime;
@@ -23,6 +25,8 @@ public partial class EnemyRole : Role
         GameObject go = GameObject.FindGameObjectWithTag("Player");
         if (go)
             Target = go.GetComponent<PlayerRole>();
+        if (Health <= Target.Damage)
+            HealthObj.SetActive(false);
     }
     protected override void Move()
     {

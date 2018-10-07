@@ -237,6 +237,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MyForce: 1
   HealthBar: {fileID: 224534074262623662}
+  MoveDecay: 0.5
   BaseHealth: 100
   BaseDamage: 5
   BaseDefence: 0
@@ -250,6 +251,7 @@ MonoBehaviour:
   DropCount: 1
   DropSkillProbility: 1
   DropSkill: {fileID: 114990997637341776}
+  HealthObj: {fileID: 1825838027108386}
 --- !u!114 &114684685883932382
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -318,6 +320,7 @@ MonoBehaviour:
   PSkillName: FireTrap
   PSkillDuration: 10
   DetecteRadius: 400
+  DamagePercent: 1
   PSkillTimer: 0
   Suicide: 1
   PrepareParticle:

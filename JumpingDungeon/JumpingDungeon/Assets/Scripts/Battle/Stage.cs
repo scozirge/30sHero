@@ -4,6 +4,7 @@ using UnityEngine;
 
 public partial class BattleManage
 {
+
     [SerializeField]
     MyText FloorText;
     [SerializeField]
@@ -12,6 +13,8 @@ public partial class BattleManage
     public int FloorPlate;
     [SerializeField]
     Gate GatePrefab;
+    [SerializeField]
+    Gate EntrancePrefab;
     [SerializeField]
     Transform GateParent;
     [SerializeField]
@@ -47,7 +50,14 @@ public partial class BattleManage
     }
     static void SpawnGate(int _floor)
     {
-        Gate gate = Instantiate(BM.GatePrefab, Vector3.zero, Quaternion.identity) as Gate;
+        Gate gate;
+        if(_floor!=0)
+        {
+            gate = Instantiate(BM.GatePrefab, Vector3.zero, Quaternion.identity) as Gate;        }
+        else
+        {
+            gate = Instantiate(BM.EntrancePrefab, Vector3.zero, Quaternion.identity) as Gate;
+        }
         gate.transform.SetParent(BM.GateParent);
         gate.Init(_floor);
         gate.transform.position = new Vector2((_floor * BM.FloorPlate * BM.PlateSizeX) - (BM.PlateSizeX * 1.5f), 0);
