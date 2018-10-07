@@ -155,6 +155,7 @@ MonoBehaviour:
   LifeTime: 9999
   KnockIntensity: 5000
   AmmoType: 1
+  DamageInterval: 0.3
   Buffers:
   - Type: 0
     Time: 1

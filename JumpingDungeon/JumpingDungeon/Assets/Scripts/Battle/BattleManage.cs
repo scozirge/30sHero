@@ -63,8 +63,6 @@ public partial class BattleManage : MonoBehaviour
         EnemyParent = GameObject.FindGameObjectWithTag("EnemyParent").GetComponent<Transform>();
         LootParetn = GameObject.FindGameObjectWithTag("LootParent").GetComponent<Transform>();
         InitStage();
-        SpawnEnemyTimer = new MyTimer(SpawnEnemyInterval, SpanwEnemy, true, false);
-        SpawnLootTimer = new MyTimer(SpawnLootInterval, SpawnLoot, true, false);
         MyCameraControler = CameraControler;
         CurSpawnCount = 0;
         ScreenSize = MyCameraControler.ScreenSize;
@@ -80,6 +78,8 @@ public partial class BattleManage : MonoBehaviour
         }
         else
             AvailableMillions = EnemyData.GetAvailableMillions(Floor);
+        SpawnEnemyTimer = new MyTimer(SpawnEnemyInterval, SpanwEnemy, true, false);
+        SpawnLootTimer = new MyTimer(SpawnLootInterval, SpawnLoot, true, false);
         AvailableDemonGergons = EnemyData.GetNextDemogorgon(Floor, out NextDemogorgonFloor);
         IsDemogorgonFloor = CheckDemogorgon(Floor);
     }
@@ -98,7 +98,7 @@ public partial class BattleManage : MonoBehaviour
             er.transform.position = GetSpawnPos(quadrant, nearMargin);
             EnemyList.Add(er);
         }
-        AvailableDemonGergons = EnemyData.GetNextDemogorgon(Floor+1, out NextDemogorgonFloor);
+        AvailableDemonGergons = EnemyData.GetNextDemogorgon(Floor + 1, out NextDemogorgonFloor);
         IsDemogorgonFloor = false;
     }
     void SpanwEnemy()
@@ -107,7 +107,7 @@ public partial class BattleManage : MonoBehaviour
             return;
         int rndEnemy = Random.Range(0, AvailableMillions.Count);
         EnemyRole er;
-        if (DesignatedEnemy)
+        if (DesignatedEnemy && TestMode)
             er = Instantiate(DesignatedEnemy, Vector3.zero, Quaternion.identity) as EnemyRole;
         else
             er = Instantiate(AvailableMillions[rndEnemy], Vector3.zero, Quaternion.identity) as EnemyRole;

@@ -82,7 +82,9 @@ public class EnemyData
         List<EnemyRole> roles = new List<EnemyRole>();
         for (int i = 0; i < Roles.Count; i++)
         {
-            if (Roles[i].RelyData.DebutFloor <= _floor && Roles[i].RelyData.Type == EnemyType.Minion)
+            if (Roles[i].RelyData.Type != EnemyType.Minion)
+                continue;
+            if (Roles[i].RelyData.DebutFloor == 1 || Roles[i].RelyData.DebutFloor <= _floor)
             {
                 roles.Add(Roles[i]);
             }
@@ -97,7 +99,7 @@ public class EnemyData
         {
             if (Roles[i].RelyData.Type == EnemyType.Demogorgon)
             {
-                if (_curfloor<= Roles[i].RelyData.DebutFloor)
+                if (_curfloor <= Roles[i].RelyData.DebutFloor)
                 {
                     if (_nextBossFloor == 0)
                     {

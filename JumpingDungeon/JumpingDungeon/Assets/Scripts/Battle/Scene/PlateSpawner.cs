@@ -15,7 +15,7 @@ public class PlateSpawner : MonoBehaviour
     [SerializeField]
     int ConstraintCountY;
     [SerializeField]
-    Vector2 StartPos;
+    Vector3 StartPos;
     [SerializeField]
     Plate Prefab;
 
@@ -37,7 +37,7 @@ public class PlateSpawner : MonoBehaviour
                 Plate plate = go.GetComponent<Plate>();
                 plate.Init(i, ConstraintCountX);
                 plate.transform.SetParent(transform);
-                plate.transform.localPosition = Vector2.zero;
+                plate.transform.localPosition = StartPos;
                 plate.transform.localPosition += new Vector3(IntervalDistX * i - ConstraintCountX / 2 * IntervalDistX, IntervalDistY * j - ConstraintCountY / 2 * IntervalDistY, 0);
                 PlateList.Add(plate);
             }
@@ -49,8 +49,8 @@ public class PlateSpawner : MonoBehaviour
     }
     void AdjustPos()
     {
-        float cameraX=FollowCamera.transform.position.x;
-        if (cameraX>0)
+        float cameraX = FollowCamera.transform.position.x;
+        if (cameraX > 0)
             OffsetLevel = Mathf.FloorToInt(cameraX / IntervalDistX);
         else
             OffsetLevel = Mathf.CeilToInt(cameraX / IntervalDistX);

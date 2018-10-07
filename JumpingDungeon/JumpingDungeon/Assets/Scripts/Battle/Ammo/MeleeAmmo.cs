@@ -58,13 +58,11 @@ public class MeleeAmmo : Ammo
         if (MyMeleeType == MeleeType.Melee || MyMeleeType == MeleeType.Reflect)
         {
             _role.BeAttack(Value, force);
-            IsCausedDamage = true;
         }
         else if (MyMeleeType == MeleeType.Block)
         {
             _role.BeAttack(0, force);
         }
-        TriggerHitCondition(_role);
         if (AmmoType != ShootAmmoType.Permanent)
             SelfDestroy();
     }
