@@ -209,7 +209,7 @@ MonoBehaviour:
   AngleInterval: 0
   Patetern: 0
   SpawnedInSelf: 1
-  AttackPrefab: {fileID: 114280530254980642, guid: 12aba89e0f731e743a7598a54c6dbb8d,
+  AttackPrefab: {fileID: 114280530254980642, guid: fcf9df39c8fb32746933d109f1770680,
     type: 2}
   AttackRadius: 0
 --- !u!114 &114364750184517408

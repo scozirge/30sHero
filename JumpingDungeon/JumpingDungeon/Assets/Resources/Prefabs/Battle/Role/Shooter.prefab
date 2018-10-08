@@ -202,8 +202,8 @@ MonoBehaviour:
   DamagePercent: 1
   PSkillTimer: 0
   AttackOnce: 0
-  Interval: 4
-  AmmoNum: 4
+  Interval: 2
+  AmmoNum: 1
   AmmoInterval: 0.2
   StartAngle: 0
   AngleInterval: 90
