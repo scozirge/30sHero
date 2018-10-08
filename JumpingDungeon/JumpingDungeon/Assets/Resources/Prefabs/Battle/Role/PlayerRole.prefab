@@ -57,7 +57,7 @@ GameObject:
   - component: {fileID: 50875358054220770}
   - component: {fileID: 58114890521861934}
   - component: {fileID: 114551822075932818}
-  - component: {fileID: 114348573124540410}
+  - component: {fileID: 114381087991437778}
   m_Layer: 8
   m_Name: PlayerRole
   m_TagString: Player
@@ -130,8 +130,8 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
+  m_Mass: 0.1
+  m_LinearDrag: 50
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
@@ -214,7 +214,7 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114348573124540410
+--- !u!114 &114381087991437778
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -292,8 +292,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MyForce: 0
   HealthBar: {fileID: 0}
-  MoveDecay: 0
-  BaseHealth: 200
+  DirectX: 0
+  DirectY: 0
+  BaseHealth: 300
   BaseDamage: 50
   BaseDefence: 0
   BaseMoveSpeed: 700
@@ -302,14 +303,17 @@ MonoBehaviour:
   AniPlayer: {fileID: 114551822075932818}
   RoleTrans: {fileID: 224424989099534612}
   DeathSound: {fileID: 8300000, guid: fc274ce0d0fd8fb40b2e7557d54975e8, type: 3}
-  MaxShield: 30
+  KnockDrag: 10
+  NormalDrag: 50
+  KnockDragDuration: 0.1
+  MaxShield: 100
   ShieldBar: {fileID: 0}
   ShieldReGenerateTime: 3
-  ShieldRechargeTime: 3
-  GainMoveFromKilling: 50
-  MoveDepletedTime: 8
-  MaxEtraMove: 700
-  MaxAvaterTime: 60
+  ShieldRechargeTime: 5
+  GainMoveFromKilling: 10
+  MoveDepletedTime: 10
+  MaxEtraMove: 200
+  MaxAvaterTime: 180
   AvatarTimerText: {fileID: 0}
   AvatarTimeBuff: 0
   BaseEnergyDrop: 0
@@ -319,16 +323,16 @@ MonoBehaviour:
   MoveAfterimagePrefab: {fileID: 198230356777013556, guid: 4ac12026ed62f024b9bc36b2da373c93,
     type: 2}
   DontAttackRestoreTime: 1
-  SelfKnockForce: 100000
-  SelfSturnTime: 0.3
+  SelfKnockForce: 20000
+  SelfSturnTime: 0.25
   ControlDevice: 1
   CursorLimitDist: 200
   MyCamera: {fileID: 0}
-  RushForce: 1000000
+  RushForce: 10
   RushSound: {fileID: 8300000, guid: 41b00c1ca9d97ea4796281c66b69da09, type: 3}
   AttackSound: {fileID: 8300000, guid: fc274ce0d0fd8fb40b2e7557d54975e8, type: 3}
   JumpCDTime: 0.2
-  FaceDir: 0
+  FaceLeftOrRight: 0
   ClosestEnemy: {fileID: 0}
 --- !u!114 &114618768542438684
 MonoBehaviour:

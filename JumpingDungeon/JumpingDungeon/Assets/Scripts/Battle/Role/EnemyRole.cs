@@ -52,11 +52,6 @@ public partial class EnemyRole : Role
     }
     protected override void Move()
     {
-        FrictionDuringTimeFunc();
-        if (StartVelocityDecay)
-        {
-            MyRigi.velocity *= MoveDecay;
-        }
         FaceTarget();
     }
     void FaceTarget()
@@ -84,25 +79,8 @@ public partial class EnemyRole : Role
     }
     public override void BeAttack(int _dmg, Vector2 _force)
     {
-        GetFriction();
         AniPlayer.PlayTrigger("BeAttack", 0);
         base.BeAttack(_dmg, _force);
-    }
-    void GetFriction()
-    {
-        StartVelocityDecay = true;
-        FrictionDuringTimer = FrictionDuringTime;
-    }
-    void FrictionDuringTimeFunc()
-    {
-        if (!StartVelocityDecay)
-            return;
-        if (FrictionDuringTimer > 0)
-            FrictionDuringTimer -= Time.deltaTime;
-        else
-        {
-            StartVelocityDecay = false;
-        }
     }
     protected override void SelfDestroy()
     {

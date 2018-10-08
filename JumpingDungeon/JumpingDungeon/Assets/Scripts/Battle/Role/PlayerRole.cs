@@ -159,6 +159,7 @@ public partial class PlayerRole : Role
         AttackTimer = new MyTimer(DontAttackRestoreTime, RestoreAttack, false, false);
         ShieldTimer = new MyTimer(ShieldRechargeTime, ShieldRestore, false, false);
         JumpTimer = new MyTimer(JumpCDTime, SetCanJump, false, false);
+
         ShieldBarWidth = ShieldBar.rect.width;
         Shield = MaxShield;
         InitMoveAfterimage();
@@ -166,6 +167,7 @@ public partial class PlayerRole : Role
         IsAvatar = true;
         CanJump = true;
     }
+
     void InitMoveAfterimage()
     {
         MoveAfterimage = EffectEmitter.EmitParticle(MoveAfterimagePrefab, Vector3.zero, Vector3.zero, transform).GetComponentInChildrenExcludeSelf<ParticleSystem>();
@@ -216,7 +218,7 @@ public partial class PlayerRole : Role
             SelfDestroy();
             return;
         }
-
+        ChangeToKnockDrag();
         Vector2 force = MyRigi.velocity.normalized * SelfKnockForce * -1;
         MyRigi.AddForce(force);
         AddBuffer(new BufferData(RoleBuffer.Stun, SelfSturnTime));
@@ -295,7 +297,6 @@ public partial class PlayerRole : Role
             AniPlayer.PlayTrigger("Idle2", 0);
             AvatarTimer = 0;
             ExtraMoveSpeed = 0;
-            MoveDecay = 0.7f;
             RemoveAllBuffer();
             IsAvatar = false;
             MoveAfterimage_Main.maxParticles = 0;
@@ -334,8 +335,9 @@ public partial class PlayerRole : Role
                 if (Input.GetMouseButtonDown(0))
                 {
                     Vector2 rushForce = dir * RushForce;
+                    ChangeToKnockDrag();
                     MyRigi.AddForce(rushForce);
-                    AudioPlayer.PlaySound(RushSound);
+                    AudioPlayer.PlaySound(RushSound);                    
                 }
             }
         }
@@ -359,6 +361,7 @@ public partial class PlayerRole : Role
                     }
                     else
                         rushForce = new Vector2(xMoveForce, yMoveForce) * RushForce * 1000000;
+                    ChangeToKnockDrag();
                     MyRigi.AddForce(rushForce);
                     AudioPlayer.PlaySound(RushSound);
                 }

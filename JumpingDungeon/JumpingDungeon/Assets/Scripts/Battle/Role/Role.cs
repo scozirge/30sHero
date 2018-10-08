@@ -13,8 +13,6 @@ public abstract class Role : MonoBehaviour
     protected RectTransform HealthBar;
     float HPBarWidth;
     protected Rigidbody2D MyRigi;
-    [SerializeField]
-    protected float MoveDecay = 0.5f;
 
     [HideInInspector]
     public Direction DirectX;
@@ -67,6 +65,13 @@ public abstract class Role : MonoBehaviour
     [Tooltip("死亡音效")]
     [SerializeField]
     AudioClip DeathSound;
+    [SerializeField]
+    protected float KnockDrag;
+    [SerializeField]
+    protected float NormalDrag;
+    [SerializeField]
+    protected float KnockDragDuration;
+    protected MyTimer DragTimer;
 
     MyTimer BurningTimer;
     public float DamageBuff { get; protected set; }
@@ -80,17 +85,26 @@ public abstract class Role : MonoBehaviour
 
     protected virtual void Start()
     {
-        if (MoveDecay <= 0.2f)
-            MoveDecay = 0.2f;
         IsAlive = true;
         HPBarWidth = HealthBar.rect.width;
         Health = MaxHealth;
         MyForce = MyEnum.ParseEnum<Force>(gameObject.tag);
+        DragTimer = new MyTimer(KnockDragDuration, DragRecovery, false, false);
         MyRigi = GetComponent<Rigidbody2D>();
         Skill[] coms = GetComponents<Skill>();
         Skills = coms.ToList<Skill>();
         BurningTimer = new MyTimer(GameSettingData.BurnInterval, Burn, false, false);
         BurningTimer.StartRunTimer = false;
+        DragRecovery();
+    }
+    protected void ChangeToKnockDrag()
+    {
+        DragTimer.StartRunTimer = true;
+        MyRigi.drag = KnockDrag;
+    }
+    void DragRecovery()
+    {
+        MyRigi.drag = NormalDrag;
     }
     void Burn()
     {
@@ -108,11 +122,13 @@ public abstract class Role : MonoBehaviour
     {
         ConditionTimerFunc();
         BurningTimer.RunTimer();
+        DragTimer.RunTimer();
     }
 
     public virtual void BeAttack(int _dmg, Vector2 _force)
     {
         //Add KnockForce
+        ChangeToKnockDrag();
         MyRigi.velocity = Vector2.zero;
         MyRigi.velocity = _force;
         if (EvitableAttack())

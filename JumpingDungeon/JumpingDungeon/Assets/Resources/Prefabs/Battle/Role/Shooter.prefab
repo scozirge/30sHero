@@ -144,7 +144,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
+  m_LinearDrag: 50
   m_AngularDrag: 0
   m_GravityScale: 0
   m_Material: {fileID: 0}
@@ -224,7 +224,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MyForce: 1
   HealthBar: {fileID: 224533501668842482}
-  MoveDecay: 0.5
+  DirectX: 0
+  DirectY: 0
   BaseHealth: 100
   BaseDamage: 5
   BaseDefence: 0
@@ -234,6 +235,9 @@ MonoBehaviour:
   AniPlayer: {fileID: 114796498901394522}
   RoleTrans: {fileID: 224787385446496172}
   DeathSound: {fileID: 8300000, guid: fc274ce0d0fd8fb40b2e7557d54975e8, type: 3}
+  KnockDrag: 50
+  NormalDrag: 0
+  KnockDragDuration: 0.1
   DropProbility: 1
   DropCount: 1
   DropSkillProbility: 1
