@@ -8,6 +8,8 @@ public class Plate : MonoBehaviour
     bool RandomFlip;
     [SerializeField]
     bool RandomRotate;
+    [SerializeField]
+    Vector3 Rotation;
 
 
     protected int CurPlate;
@@ -17,6 +19,7 @@ public class Plate : MonoBehaviour
     {
         ColumnRank = _column;
         MaxColumn = _maxColumn;
+        transform.rotation = Quaternion.Euler(Rotation);
         RandomTransform();
     }
     public virtual void LevelUp()

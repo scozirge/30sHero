@@ -48,7 +48,11 @@ public class DungeonPlate : Plate
     }
     Color GetRandomColor(int _floor)
     {
-        List<Color> colors = Colors;
+        List<Color> colors = new List<Color>();
+        for (int i = 0; i < Colors.Count; i++)
+        {
+            colors.Add(Colors[i]);
+        }
         if (FloorColor.ContainsKey(_floor - 1))
             colors.Remove(FloorColor[_floor - 1]);
         if (FloorColor.ContainsKey(_floor + 1))

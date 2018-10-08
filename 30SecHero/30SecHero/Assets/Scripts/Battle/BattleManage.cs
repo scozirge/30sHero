@@ -81,6 +81,7 @@ public partial class BattleManage : MonoBehaviour
         SpawnEnemyTimer = new MyTimer(SpawnEnemyInterval, SpanwEnemy, true, false);
         SpawnLootTimer = new MyTimer(SpawnLootInterval, SpawnLoot, true, false);
         AvailableDemonGergons = EnemyData.GetNextDemogorgon(Floor, out NextDemogorgonFloor);
+        //Debug.Log("NextDemogorgonFloor=" + NextDemogorgonFloor);
         IsDemogorgonFloor = CheckDemogorgon(Floor);
     }
 
@@ -89,6 +90,7 @@ public partial class BattleManage : MonoBehaviour
         for (int i = 0; i < AvailableDemonGergons.Count; i++)
         {
             EnemyRole er = Instantiate(AvailableDemonGergons[i], Vector3.zero, Quaternion.identity) as EnemyRole;
+            er.SetEnemyData(GameDictionary.EnemyDic[AvailableDemonGergons[i].ID]);
             //Set SpawnPos
             int quadrant = 1;//象限
             int nearMargin = 0;//靠近左右邊(0)或靠近上下邊(1)
@@ -99,19 +101,30 @@ public partial class BattleManage : MonoBehaviour
             EnemyList.Add(er);
         }
         AvailableDemonGergons = EnemyData.GetNextDemogorgon(Floor + 1, out NextDemogorgonFloor);
+        //Debug.Log("NextDemogorgonFloor=" + NextDemogorgonFloor);
         IsDemogorgonFloor = false;
     }
     void SpanwEnemy()
     {
         if (!CheckEnemySpawnLimit())
+        {
+            CurSpawnCount = 0;
+            SpawnEnemyTimer.StartRunTimer = true;
             return;
-        int rndEnemy = Random.Range(0, AvailableMillions.Count);
+        }
+        if (AvailableMillions.Count == 0)
+            return;
+
         EnemyRole er;
         if (DesignatedEnemy && TestMode)
             er = Instantiate(DesignatedEnemy, Vector3.zero, Quaternion.identity) as EnemyRole;
         else
+        {
+            int rndEnemy = Random.Range(0, AvailableMillions.Count);
             er = Instantiate(AvailableMillions[rndEnemy], Vector3.zero, Quaternion.identity) as EnemyRole;
-
+            if (GameDictionary.EnemyDic.ContainsKey(AvailableMillions[rndEnemy].ID))
+                er.SetEnemyData(GameDictionary.EnemyDic[AvailableMillions[rndEnemy].ID]);
+        }
         //Set SpawnPos
         int quadrant = 1;//象限
         int nearMargin = 0;//靠近左右邊(0)或靠近上下邊(1)

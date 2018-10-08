@@ -23,7 +23,8 @@ public class AIRoleMove : AIMove
         {
             SetRandDestination();
         }
-
+        else
+            RandomOffset = Destination;
     }
 
     protected override void Debut()

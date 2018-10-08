@@ -18,6 +18,8 @@ public class PlateSpawner : MonoBehaviour
     Vector3 StartPos;
     [SerializeField]
     Plate Prefab;
+    [SerializeField]
+    Vector3 PrefabRptate;
 
     List<Plate> PlateList = new List<Plate>();
     int OffsetLevel;
@@ -38,6 +40,7 @@ public class PlateSpawner : MonoBehaviour
                 plate.Init(i, ConstraintCountX);
                 plate.transform.SetParent(transform);
                 plate.transform.localPosition = StartPos;
+                plate.transform.localEulerAngles = PrefabRptate;
                 plate.transform.localPosition += new Vector3(IntervalDistX * i - ConstraintCountX / 2 * IntervalDistX, IntervalDistY * j - ConstraintCountY / 2 * IntervalDistY, 0);
                 PlateList.Add(plate);
             }

@@ -14,6 +14,8 @@ public class AILootMove : AIMove
         {
             Destination = transform.position;
         }
+        else
+            RandomOffset = Destination;
     }
     protected override void Debut()
     {

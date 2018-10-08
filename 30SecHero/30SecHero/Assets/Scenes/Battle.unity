@@ -751,6 +751,7 @@ MonoBehaviour:
   ConstraintCountY: 1
   StartPos: {x: 7514, y: 503, z: 0}
   Prefab: {fileID: 114890944755143688, guid: 31bcf1799a1bc7d4aa0bd9fc93235bcb, type: 2}
+  PrefabRptate: {x: 0, y: 0, z: 0}
 --- !u!222 &1065337600
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -776,6 +777,7 @@ MonoBehaviour:
   ConstraintCountY: 1
   StartPos: {x: 7514, y: -503, z: 0}
   Prefab: {fileID: 114890944755143688, guid: 31bcf1799a1bc7d4aa0bd9fc93235bcb, type: 2}
+  PrefabRptate: {x: 0, y: 0, z: 180}
 --- !u!1 &1085317099
 GameObject:
   m_ObjectHideFlags: 0
@@ -999,6 +1001,7 @@ MonoBehaviour:
   ConstraintCountY: 1
   StartPos: {x: 0, y: 0, z: 0}
   Prefab: {fileID: 114653323007763930, guid: 0d9785887b25ffc45b303130a6de0050, type: 2}
+  PrefabRptate: {x: 0, y: 0, z: 0}
 --- !u!1 &1272262352
 GameObject:
   m_ObjectHideFlags: 0
@@ -1127,6 +1130,7 @@ MonoBehaviour:
   ConstraintCountY: 1
   StartPos: {x: 0, y: 0, z: 0}
   Prefab: {fileID: 114072550915065818, guid: 75dee0cd7cd2fde48a2e41eeefc2371d, type: 2}
+  PrefabRptate: {x: 0, y: 0, z: 0}
 --- !u!1 &1479774046
 GameObject:
   m_ObjectHideFlags: 0
@@ -1395,6 +1399,7 @@ MonoBehaviour:
   ConstraintCountY: 1
   StartPos: {x: 0, y: 0, z: 0}
   Prefab: {fileID: 114720947718538718, guid: 5aa2eaa0053cba141bd0a448a22769b1, type: 2}
+  PrefabRptate: {x: 0, y: 0, z: 0}
 --- !u!1 &1671040063
 GameObject:
   m_ObjectHideFlags: 0
@@ -1605,7 +1610,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf3b69d7446504f4da805d7d731903ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TestMode: 0
+  TestMode: 1
   SpawnEnemyInterval: 3
   SpawnLootInterval: 0
   SpawnEnemyCount: 2
@@ -1621,7 +1626,7 @@ MonoBehaviour:
   - {fileID: 114485926508205134, guid: 36509ae15283f0b4b85c7eb28f152231, type: 2}
   - {fileID: 114364750184517408, guid: fd1730034bed914409677edaf33d653c, type: 2}
   - {fileID: 114364750184517408, guid: 4d1f64498757ee445a05825a7c7257a1, type: 2}
-  DesignatedEnemy: {fileID: 114364750184517408, guid: 50777d9b850aa59469f5eefa4cbae533,
+  DesignatedEnemy: {fileID: 114364750184517408, guid: fd1730034bed914409677edaf33d653c,
     type: 2}
   LootPrefab: {fileID: 114565999483713276, guid: 0384220ed63709741ba419f3ba98af08,
     type: 2}
@@ -1767,6 +1772,7 @@ MonoBehaviour:
   ConstraintCountY: 3
   StartPos: {x: 0, y: 0, z: 0}
   Prefab: {fileID: 114859031322494674, guid: 73fbadedc35e290488fbf8e2e8d322f1, type: 2}
+  PrefabRptate: {x: 0, y: 0, z: 0}
 --- !u!222 &1829895750
 CanvasRenderer:
   m_ObjectHideFlags: 0

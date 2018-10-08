@@ -6,6 +6,9 @@ public class Gate : MonoBehaviour {
 
     [SerializeField]
     ParticleSystem DeathParticle;
+    [Tooltip("牆壁破壞音效")]
+    [SerializeField]
+    AudioClip DestroySound;
 
     public int Floor { get; private set; }
 
@@ -25,6 +28,8 @@ public class Gate : MonoBehaviour {
         if (DeathParticle)
             EffectEmitter.EmitParticle(DeathParticle, transform.position, Vector3.zero, null);
         BattleManage.SpawnNextGate(Floor);
+        CameraController.PlayMotion("Shake1");
+        AudioPlayer.PlaySound(DestroySound);
         Destroy(gameObject);
     }
 }
