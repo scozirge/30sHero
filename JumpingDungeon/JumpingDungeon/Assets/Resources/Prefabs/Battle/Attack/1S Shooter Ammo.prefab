@@ -97,7 +97,7 @@ MonoBehaviour:
     Value: 0
   Value: 0
   AmmoSpeed: 600
-  TraceFactor: 0.1
+  TraceFactor: 0
 --- !u!222 &222441390583901092
 CanvasRenderer:
   m_ObjectHideFlags: 1

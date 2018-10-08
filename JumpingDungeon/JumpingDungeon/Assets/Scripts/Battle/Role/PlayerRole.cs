@@ -146,7 +146,7 @@ public partial class PlayerRole : Role
     MyTimer AttackTimer;
     MyTimer JumpTimer;
     [HideInInspector]
-    public int FaceDir;
+    public int FaceLeftOrRight;
     Dictionary<string, Skill> MonsterSkills = new Dictionary<string, Skill>();
     List<Skill> ActiveMonsterSkills = new List<Skill>();
     public EnemyRole ClosestEnemy;
@@ -156,13 +156,13 @@ public partial class PlayerRole : Role
     {
         base.Start();
         AvatarTimer = MaxAvaterTime;
-        AttackTimer = new MyTimer(DontAttackRestoreTime, RestoreAttack,false,false);
-        ShieldTimer = new MyTimer(ShieldRechargeTime, ShieldRestore,false,false);
+        AttackTimer = new MyTimer(DontAttackRestoreTime, RestoreAttack, false, false);
+        ShieldTimer = new MyTimer(ShieldRechargeTime, ShieldRestore, false, false);
         JumpTimer = new MyTimer(JumpCDTime, SetCanJump, false, false);
         ShieldBarWidth = ShieldBar.rect.width;
         Shield = MaxShield;
         InitMoveAfterimage();
-        FaceDir = 1;
+        FaceLeftOrRight = 1;
         IsAvatar = true;
         CanJump = true;
     }
@@ -234,6 +234,22 @@ public partial class PlayerRole : Role
         MonsterSkillTimerFunc();
         ShieldGenerate();
         ExtraMoveSpeedDecay();
+        SetEnemyDirection();
+    }
+    void SetEnemyDirection()
+    {
+        if (!ClosestEnemy)
+            return;
+        Vector2 dir = ClosestEnemy.transform.position - transform.position;
+        if (dir.x >= 0)
+            DirectX = Direction.Right;
+        else
+            DirectX = Direction.Left;
+
+        if (dir.y >= 0)
+            DirectY = Direction.Top;
+        else
+            DirectY = Direction.Bottom;
     }
     public override void BeAttack(int _dmg, Vector2 _force)
     {
@@ -305,9 +321,9 @@ public partial class PlayerRole : Role
             {
                 Vector3 dir = (cursorPos - transform.position);
                 if (dir.x > 0)
-                    FaceDir = 1;
+                    FaceLeftOrRight = 1;
                 else
-                    FaceDir = -1;
+                    FaceLeftOrRight = -1;
                 float origAngle = (Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg) * Mathf.Deg2Rad;
                 dir = new Vector3(Mathf.Cos(origAngle), Mathf.Sin(origAngle), 0).normalized;
                 Vector2 force = dir * MoveSpeed * CursorMoveFactor;
@@ -357,7 +373,7 @@ public partial class PlayerRole : Role
                     yMoveForce = 1;
                 else if (Input.GetAxis("Vertical") < 0)
                     yMoveForce = -1;
-                if(xMoveForce!=0 || yMoveForce!=0)
+                if (xMoveForce != 0 || yMoveForce != 0)
                     AniPlayer.PlayTrigger("Jump", 0);
                 xMoveForce *= MoveSpeed * KeyboardJumpMoveFactor;
                 yMoveForce *= MoveSpeed * KeyboardJumpMoveFactor;
@@ -379,11 +395,17 @@ public partial class PlayerRole : Role
             //鍵盤移動
             if (Input.GetAxis("Horizontal") == 0) { }
             else if (Input.GetAxis("Horizontal") > 0)
-                FaceDir = 1;
+            {
+                FaceLeftOrRight = 1;
+                MoveAfterimage_Main.startRotationY = 0;
+            }
             else
-                FaceDir = -1;
+            {
+                FaceLeftOrRight = -1;
+                MoveAfterimage_Main.startRotationY = 180;
+            }
         }
-        RoleTrans.localScale = new Vector2(FaceDir, 1);
+        RoleTrans.localScale = new Vector2(FaceLeftOrRight, 1);
     }
     public void GetLoot(LootData _data)
     {
@@ -463,9 +485,9 @@ public partial class PlayerRole : Role
             if (decay < 1)
                 decay = 1;
             ExtraMoveSpeed -= Time.deltaTime * decay;
-            int particleCount = Mathf.RoundToInt(ExtraMoveSpeed / 4);
-            if (particleCount > 15)
-                particleCount = 15;
+            int particleCount = Mathf.RoundToInt(ExtraMoveSpeed / 5);
+            if (particleCount > 20)
+                particleCount = 20;
             MoveAfterimage_Main.maxParticles = particleCount;
             float lifeTime = ExtraMoveSpeed / 100;
             if (lifeTime > 0.5)

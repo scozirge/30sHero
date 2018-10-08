@@ -112,7 +112,6 @@ public partial class BattleManage : MonoBehaviour
         else
             er = Instantiate(AvailableMillions[rndEnemy], Vector3.zero, Quaternion.identity) as EnemyRole;
 
-
         //Set SpawnPos
         int quadrant = 1;//象限
         int nearMargin = 0;//靠近左右邊(0)或靠近上下邊(1)
@@ -134,7 +133,13 @@ public partial class BattleManage : MonoBehaviour
     {
         if (MaxEnemyCout == 0)
             return true;
-        if (EnemyList.Count < MaxEnemyCout)
+        int cout = 0;
+        for (int i = 0; i < EnemyList.Count; i++)
+        {
+            if (EnemyList[i].isActiveAndEnabled)
+                cout++;
+        }
+        if (cout < MaxEnemyCout)
             return true;
         return false;
     }
@@ -266,13 +271,16 @@ public partial class BattleManage : MonoBehaviour
                 EnemyList.RemoveAt(i);
             else
             {
-                if (EnemyList[i].transform.position.x < DestructMargin_Left ||
-                    EnemyList[i].transform.position.x > DestructMargin_Right)
+                if (EnemyList[i].Type != EnemyType.Demogorgon)
                 {
-                    EnemyList[i].gameObject.SetActive(false);
+                    if (EnemyList[i].transform.position.x < DestructMargin_Left ||
+    EnemyList[i].transform.position.x > DestructMargin_Right)
+                    {
+                        EnemyList[i].gameObject.SetActive(false);
+                    }
+                    else
+                        EnemyList[i].gameObject.SetActive(true);
                 }
-                else
-                    EnemyList[i].gameObject.SetActive(true);
             }
         }
     }

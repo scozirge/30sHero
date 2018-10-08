@@ -37,7 +37,7 @@ public class CameraController : MonoBehaviour
         // Set the position of the camera's transform to be the same as the player's, but offset by the calculated offset distance.
         if (FaceOffset)
         {
-            Vector3 faceOffset = new Vector3(Player.FaceDir * FaceOffsetX, Offset.y, Offset.z);
+            Vector3 faceOffset = new Vector3(Player.FaceLeftOrRight * FaceOffsetX, Offset.y, Offset.z);
             //Debug.Log(FaceOffsetX);
             //Debug.Log(new Vector3(FaceOffsetX, Offset.y, Offset.z));
             transform.position = Vector3.Lerp(transform.position, new Vector3(Player.transform.position.x, 0, 0) + faceOffset, LerpFactor);

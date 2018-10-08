@@ -63,17 +63,49 @@ public class Attack : Skill
     {
         base.SpawnAttackPrefab();
         //Set AmmoData
-        if (Patetern == ShootPatetern.TowardTarget)
+        float origAngle;
+        int reverse = 1;
+        switch (Patetern)
         {
-            AttackDir = (Target.transform.position - Myself.transform.position);
-            float origAngle = ((Mathf.Atan2(AttackDir.y, AttackDir.x) * Mathf.Rad2Deg) + (StartAngle + CurSpawnAmmoNum * AngleInterval)) * Mathf.Deg2Rad;
-            AttackDir = new Vector3(Mathf.Cos(origAngle), Mathf.Sin(origAngle), 0).normalized;
+            case ShootPatetern.Default:
+                float angle = (StartAngle + CurSpawnAmmoNum * AngleInterval) * Mathf.Deg2Rad;
+                AttackDir = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0).normalized;
+                break;
+            case ShootPatetern.LeftRight:
+                if (Myself.DirectX == Direction.Right)
+                {
+                    reverse=1;
+                    AttackDir = Vector2.right;
+                }
+                else
+                {
+                    reverse = -1;
+                    AttackDir = Vector2.left;
+                }
+                origAngle = ((Mathf.Atan2(AttackDir.y, AttackDir.x) * Mathf.Rad2Deg) + (StartAngle + CurSpawnAmmoNum * AngleInterval * reverse)) * Mathf.Deg2Rad;
+                AttackDir = new Vector3(Mathf.Cos(origAngle), Mathf.Sin(origAngle), 0).normalized;
+                break;
+            case ShootPatetern.TopDown:
+                if (Myself.DirectY == Direction.Top)
+                {
+                    reverse=1;
+                    AttackDir = Vector2.up;
+                }
+                else
+                {
+                    reverse = -1;
+                    AttackDir = Vector2.down;
+                }
+                origAngle = ((Mathf.Atan2(AttackDir.y, AttackDir.x) * Mathf.Rad2Deg) + (StartAngle + CurSpawnAmmoNum * AngleInterval * reverse)) * Mathf.Deg2Rad;
+                AttackDir = new Vector3(Mathf.Cos(origAngle), Mathf.Sin(origAngle), 0).normalized;
+                break;
+            case ShootPatetern.TowardTarget:
+                AttackDir = (Target.transform.position - Myself.transform.position);
+                origAngle = ((Mathf.Atan2(AttackDir.y, AttackDir.x) * Mathf.Rad2Deg) + (StartAngle + CurSpawnAmmoNum * AngleInterval)) * Mathf.Deg2Rad;
+                AttackDir = new Vector3(Mathf.Cos(origAngle), Mathf.Sin(origAngle), 0).normalized;
+                break;
         }
-        else
-        {
-            float angle = (StartAngle + CurSpawnAmmoNum * AngleInterval) * Mathf.Deg2Rad;
-            AttackDir = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0).normalized;
-        }
+
         if (gameObject.tag == Force.Player.ToString())
             AmmoData.Add("TargetRoleTag", Force.Enemy);
         else

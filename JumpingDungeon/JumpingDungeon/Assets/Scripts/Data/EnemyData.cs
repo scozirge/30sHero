@@ -8,8 +8,9 @@ public class EnemyData
     public int ID;
     public string Name;
     public int DebutFloor;
-    public static string DataName;
     public EnemyType Type;
+    public static string DataName;
+
     static List<EnemyRole> Roles;
     /// <summary>
     /// 將字典傳入，依json表設定資料
@@ -66,7 +67,7 @@ public class EnemyData
         List<int> keys = new List<int>(GameDictionary.EnemyDic.Keys);
         for (int i = 0; i < keys.Count; i++)
         {
-            EnemyRole er = Resources.Load<EnemyRole>(string.Format("Prefabs/Battle/Role/{0}", GameDictionary.EnemyDic[keys[i]].Name));
+            EnemyRole er = Resources.Load<EnemyRole>(string.Format("Prefabs/Battle/Role/{0}", GameDictionary.EnemyDic[keys[i]].Name)).GetMemberwiseClone();
             if (!er)
             {
                 Debug.LogWarning(string.Format("名稱為{0}的怪物Prefab不存在", GameDictionary.EnemyDic[keys[i]].Name));
@@ -82,9 +83,9 @@ public class EnemyData
         List<EnemyRole> roles = new List<EnemyRole>();
         for (int i = 0; i < Roles.Count; i++)
         {
-            if (Roles[i].RelyData.Type != EnemyType.Minion)
+            if (Roles[i].Type != EnemyType.Minion)
                 continue;
-            if (Roles[i].RelyData.DebutFloor == 1 || Roles[i].RelyData.DebutFloor <= _floor)
+            if (Roles[i].DebutFloor == 1 || Roles[i].DebutFloor <= _floor)
             {
                 roles.Add(Roles[i]);
             }
@@ -97,18 +98,18 @@ public class EnemyData
         List<EnemyRole> roles = new List<EnemyRole>();
         for (int i = 0; i < Roles.Count; i++)
         {
-            if (Roles[i].RelyData.Type == EnemyType.Demogorgon)
+            if (Roles[i].Type == EnemyType.Demogorgon)
             {
-                if (_curfloor <= Roles[i].RelyData.DebutFloor)
+                if (_curfloor <= Roles[i].DebutFloor)
                 {
                     if (_nextBossFloor == 0)
                     {
-                        _nextBossFloor = Roles[i].RelyData.DebutFloor;
+                        _nextBossFloor = Roles[i].DebutFloor;
                         roles.Add(Roles[i]);
                     }
                     else
                     {
-                        if (Roles[i].RelyData.DebutFloor == _nextBossFloor)
+                        if (Roles[i].DebutFloor == _nextBossFloor)
                             roles.Add(Roles[i]);
                     }
                 }

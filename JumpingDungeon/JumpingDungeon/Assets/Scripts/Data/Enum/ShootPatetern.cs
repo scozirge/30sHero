@@ -1,5 +1,7 @@
 ﻿public enum ShootPatetern
 {
     Default,
-    TowardTarget
+    TowardTarget,
+    LeftRight,
+    TopDown
 }

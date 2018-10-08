@@ -6,7 +6,10 @@ public partial class EnemyRole : Role
 {
     [SerializeField]
     GameObject HealthObj;
-    public EnemyData RelyData;
+    public int ID { get; protected set; }
+    public string Name { get; protected set; }
+    public int DebutFloor { get; protected set; }
+    public EnemyType Type { get; protected set; }
     protected const float FrictionDuringTime = 1;
     protected float FrictionDuringTimer = FrictionDuringTime;
     protected bool StartVelocityDecay;
@@ -16,7 +19,10 @@ public partial class EnemyRole : Role
 
     public void SetEnemyData(EnemyData _data)
     {
-        RelyData = _data;
+        ID = _data.ID;
+        Name = _data.Name;
+        DebutFloor = _data.DebutFloor;
+        Type = _data.Type;
     }
     protected override void Start()
     {
@@ -25,8 +31,24 @@ public partial class EnemyRole : Role
         GameObject go = GameObject.FindGameObjectWithTag("Player");
         if (go)
             Target = go.GetComponent<PlayerRole>();
-        if (Health <= Target.Damage)
+        if (Target && Health <= Target.Damage)
             HealthObj.SetActive(false);
+    }
+    void SetEnemyDirection()
+    {
+        if (!Target)
+            return;
+        Vector2 dir = Target.transform.position - transform.position;
+
+        if (dir.x >= 0)
+            DirectX = Direction.Right;
+        else
+            DirectX = Direction.Left;
+
+        if (dir.y >= 0)
+            DirectY = Direction.Top;
+        else
+            DirectY = Direction.Bottom;
     }
     protected override void Move()
     {
@@ -92,6 +114,7 @@ public partial class EnemyRole : Role
     protected override void Update()
     {
         base.Update();
+        SetEnemyDirection();
     }
     public override void AddBuffer(BufferData _buffer)
     {
@@ -106,5 +129,10 @@ public partial class EnemyRole : Role
         if (_buffer.Type == RoleBuffer.Stun)
             if (MyAIMove)
                 MyAIMove.SetCanMove(false);
+    }
+    public EnemyRole GetMemberwiseClone()
+    {
+        EnemyRole role = this.MemberwiseClone() as EnemyRole;
+        return role;
     }
 }

@@ -16,7 +16,10 @@ public abstract class Role : MonoBehaviour
     [SerializeField]
     protected float MoveDecay = 0.5f;
 
-
+    [HideInInspector]
+    public Direction DirectX;
+    [HideInInspector]
+    public Direction DirectY;
     private int health;
     public int Health
     {
