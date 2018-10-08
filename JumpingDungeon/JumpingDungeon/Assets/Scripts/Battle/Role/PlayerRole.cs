@@ -307,6 +307,8 @@ public partial class PlayerRole : Role
     protected override void Move()
     {
         base.Move();
+        //MyRigi.velocity *= MoveDecay;
+
         if (Buffers.ContainsKey(RoleBuffer.Stun))
             return;
 
@@ -350,7 +352,13 @@ public partial class PlayerRole : Role
                 //衝刺
                 if (Input.GetKeyDown(KeyCode.Space))
                 {
-                    Vector2 rushForce = new Vector2(xMoveForce, yMoveForce) * RushForce;
+                    Vector2 rushForce;
+                    if (xMoveForce == 0 && yMoveForce == 0)
+                    {
+                        rushForce = new Vector2(FaceLeftOrRight, 0) * RushForce*1000000;
+                    }
+                    else
+                        rushForce = new Vector2(xMoveForce, yMoveForce) * RushForce * 1000000;
                     MyRigi.AddForce(rushForce);
                     AudioPlayer.PlaySound(RushSound);
                 }
@@ -485,9 +493,9 @@ public partial class PlayerRole : Role
             if (decay < 1)
                 decay = 1;
             ExtraMoveSpeed -= Time.deltaTime * decay;
-            int particleCount = Mathf.RoundToInt(ExtraMoveSpeed / 5);
-            if (particleCount > 20)
-                particleCount = 20;
+            int particleCount = 10+Mathf.RoundToInt(ExtraMoveSpeed / 5);
+            if (particleCount > 40)
+                particleCount = 40;
             MoveAfterimage_Main.maxParticles = particleCount;
             float lifeTime = ExtraMoveSpeed / 100;
             if (lifeTime > 0.5)

@@ -99,7 +99,6 @@ public abstract class Role : MonoBehaviour
     }
     protected virtual void Move()
     {
-        MyRigi.velocity *= MoveDecay;
     }
     protected virtual void FixedUpdate()
     {
