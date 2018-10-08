@@ -1963,8 +1963,20 @@ Prefab:
     - target: {fileID: 114601397981697422, guid: d9e47796d36fc83458ffab41aea6641e,
         type: 2}
       propertyPath: MaxAvaterTime
-      value: 1
+      value: 180
       objectReference: {fileID: 0}
+    - target: {fileID: 114601397981697422, guid: d9e47796d36fc83458ffab41aea6641e,
+        type: 2}
+      propertyPath: BeHitEffect
+      value: 
+      objectReference: {fileID: 198766691851678274, guid: 0dc4f5410669a9a48874136700ca00d6,
+        type: 2}
+    - target: {fileID: 114601397981697422, guid: d9e47796d36fc83458ffab41aea6641e,
+        type: 2}
+      propertyPath: BeHitEffect_Shield
+      value: 
+      objectReference: {fileID: 198350346737686014, guid: f2d13c3558e85fd41b7c5255972c24e4,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d9e47796d36fc83458ffab41aea6641e, type: 2}
   m_IsPrefabAsset: 0

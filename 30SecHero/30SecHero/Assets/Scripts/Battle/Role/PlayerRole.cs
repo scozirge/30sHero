@@ -5,6 +5,12 @@ using UnityEngine.UI;
 
 public partial class PlayerRole : Role
 {
+    [Tooltip("被攻擊特效(護頓)")]
+    [SerializeField]
+    ParticleSystem BeHitEffect_Shield;
+    [Tooltip("被攻擊特效(沒護頓)")]
+    [SerializeField]
+    ParticleSystem BeHitEffect;
     public bool IsAvatar { get; protected set; }
     private float avatarTimer;
     public float AvatarTimer
@@ -270,6 +276,7 @@ public partial class PlayerRole : Role
         base.ShieldBlock(ref _dmg);
         if (Shield != 0)
         {
+            EffectEmitter.EmitParticle(BeHitEffect_Shield, Vector2.zero, Vector3.zero, transform);
             //Damage Shield
             if (_dmg > Shield)
             {
@@ -282,6 +289,11 @@ public partial class PlayerRole : Role
                 _dmg = 0;
             }
         }
+        else
+        {
+            EffectEmitter.EmitParticle(BeHitEffect, Vector2.zero, Vector3.zero, transform);
+        }
+
         ShieldTimer.StartRunTimer = true;
         ShieldTimer.RestartCountDown();
         StartGenerateShield = false;
