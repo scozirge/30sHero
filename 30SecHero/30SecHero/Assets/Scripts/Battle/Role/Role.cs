@@ -99,6 +99,7 @@ public abstract class Role : MonoBehaviour
     }
     protected void ChangeToKnockDrag()
     {
+        DragTimer.RestartCountDown();
         DragTimer.StartRunTimer = true;
         MyRigi.drag = KnockDrag;
     }
