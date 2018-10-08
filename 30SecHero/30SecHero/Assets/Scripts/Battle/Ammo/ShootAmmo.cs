@@ -18,6 +18,7 @@ public class ShootAmmo : Ammo
         Target = ((Role)_dic["Target"]);
         Attacker = (Role)(_dic["Attacker"]);
         Ammovelocity = (Vector3)(_dic["Direction"]) * AmmoSpeed;
+        //transform.rotation = Quaternion.Euler(new Vector3(0, 0, (float)_dic["AmmoRotation"]));
         //transform.LookAt(MyRigi.velocity);
 
         Launch();
@@ -66,12 +67,16 @@ public class ShootAmmo : Ammo
         {
             Vector2 targetVel = (Target.transform.position - transform.position).normalized * AmmoSpeed;
             MyRigi.velocity = Vector2.Lerp(MyRigi.velocity, targetVel, TraceFactor);
+            float angle = Mathf.Atan2(MyRigi.velocity.y, MyRigi.velocity.x) * Mathf.Rad2Deg;
+            transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         }
     }
     public override void Launch()
     {
         base.Launch();
         MyRigi.velocity = Ammovelocity;
+        float angle = Mathf.Atan2(MyRigi.velocity.y, MyRigi.velocity.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
     }
     public override void ForceReverse()
     {

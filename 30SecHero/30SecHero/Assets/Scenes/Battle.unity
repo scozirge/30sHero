@@ -1605,7 +1605,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf3b69d7446504f4da805d7d731903ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TestMode: 1
+  TestMode: 0
   SpawnEnemyInterval: 3
   SpawnLootInterval: 0
   SpawnEnemyCount: 2
@@ -1960,6 +1960,11 @@ Prefab:
       propertyPath: MyCamera
       value: 
       objectReference: {fileID: 519420031}
+    - target: {fileID: 114601397981697422, guid: d9e47796d36fc83458ffab41aea6641e,
+        type: 2}
+      propertyPath: MaxAvaterTime
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d9e47796d36fc83458ffab41aea6641e, type: 2}
   m_IsPrefabAsset: 0

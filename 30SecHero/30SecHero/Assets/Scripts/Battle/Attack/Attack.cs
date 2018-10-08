@@ -36,6 +36,7 @@ public class Attack : Skill
     protected int CurSpawnAmmoNum;
     bool IsPreAttack = false;
     protected Vector3 AttackDir = Vector3.zero;
+    //protected float AmmoRotation;
     static protected float PreAttackTime = 1;
 
     protected override void Awake()
@@ -70,6 +71,7 @@ public class Attack : Skill
             case ShootPatetern.Default:
                 float angle = (StartAngle + CurSpawnAmmoNum * AngleInterval) * Mathf.Deg2Rad;
                 AttackDir = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0).normalized;
+                //AmmoRotation = (Mathf.Atan2(AttackDir.y, AttackDir.x) * Mathf.Rad2Deg) + (StartAngle + CurSpawnAmmoNum * AngleInterval)* Mathf.Deg2Rad;
                 break;
             case ShootPatetern.LeftRight:
                 if (Myself.DirectX == Direction.Right)
@@ -84,6 +86,7 @@ public class Attack : Skill
                 }
                 origAngle = ((Mathf.Atan2(AttackDir.y, AttackDir.x) * Mathf.Rad2Deg) + (StartAngle + CurSpawnAmmoNum * AngleInterval * reverse)) * Mathf.Deg2Rad;
                 AttackDir = new Vector3(Mathf.Cos(origAngle), Mathf.Sin(origAngle), 0).normalized;
+                //AmmoRotation = (Mathf.Atan2(AttackDir.y, AttackDir.x) * Mathf.Rad2Deg) + (StartAngle + CurSpawnAmmoNum * AngleInterval * reverse) * Mathf.Deg2Rad;
                 break;
             case ShootPatetern.TopDown:
                 if (Myself.DirectY == Direction.Top)
@@ -98,11 +101,13 @@ public class Attack : Skill
                 }
                 origAngle = ((Mathf.Atan2(AttackDir.y, AttackDir.x) * Mathf.Rad2Deg) + (StartAngle + CurSpawnAmmoNum * AngleInterval * reverse)) * Mathf.Deg2Rad;
                 AttackDir = new Vector3(Mathf.Cos(origAngle), Mathf.Sin(origAngle), 0).normalized;
+                //AmmoRotation = (Mathf.Atan2(AttackDir.y, AttackDir.x) * Mathf.Rad2Deg) + (StartAngle + CurSpawnAmmoNum * AngleInterval * reverse) * Mathf.Deg2Rad;
                 break;
             case ShootPatetern.TowardTarget:
                 AttackDir = (Target.transform.position - Myself.transform.position);
                 origAngle = ((Mathf.Atan2(AttackDir.y, AttackDir.x) * Mathf.Rad2Deg) + (StartAngle + CurSpawnAmmoNum * AngleInterval)) * Mathf.Deg2Rad;
                 AttackDir = new Vector3(Mathf.Cos(origAngle), Mathf.Sin(origAngle), 0).normalized;
+                //AmmoRotation = (Mathf.Atan2(AttackDir.y, AttackDir.x) * Mathf.Rad2Deg) + (StartAngle + CurSpawnAmmoNum * AngleInterval) * Mathf.Deg2Rad;
                 break;
         }
 
@@ -114,6 +119,7 @@ public class Attack : Skill
         }
         AmmoData.Add("Direction", AttackDir);
         AmmoData.Add("Target", Target);
+        //AmmoData.Add("AmmoRotation", AmmoRotation);
         CurSpawnAmmoNum++;
         if (CurSpawnAmmoNum >= AmmoNum)
         {

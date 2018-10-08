@@ -302,6 +302,7 @@ MonoBehaviour:
   DropSkillProbility: 1
   DropSkill: {fileID: 0}
   HealthObj: {fileID: 1602129080475702}
+  PlayMotionDuration: 0.5
 --- !u!114 &114782772971967276
 MonoBehaviour:
   m_ObjectHideFlags: 1
