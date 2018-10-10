@@ -1611,14 +1611,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TestMode: 1
-  SpawnEnemyInterval: 3
-  SpawnLootInterval: 0
-  SpawnEnemyCount: 2
-  SpawnLootCount: 0
+  SpawnEnemyInterval: 5
+  SpawnLootInterval: 1
+  SpawnEnemyCount: 1
+  SpawnLootCount: 1
   SpawnEnemyCountInterval: 0
   SpawnLootCountInterval: 0
   MaxEnemyCout: 7
-  MaxLootCout: 0
+  MaxLootCout: 2
   Enemys:
   - {fileID: 114364750184517408, guid: 7a4fcaea190fe1341b551043fc61e7ba, type: 2}
   - {fileID: 114364750184517408, guid: 4e4608edff7362c45b106e955ca4fabe, type: 2}
@@ -1969,7 +1969,7 @@ Prefab:
     - target: {fileID: 114601397981697422, guid: d9e47796d36fc83458ffab41aea6641e,
         type: 2}
       propertyPath: MaxAvaterTime
-      value: 180
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 114601397981697422, guid: d9e47796d36fc83458ffab41aea6641e,
         type: 2}
@@ -1983,6 +1983,31 @@ Prefab:
       value: 
       objectReference: {fileID: 198350346737686014, guid: f2d13c3558e85fd41b7c5255972c24e4,
         type: 2}
+    - target: {fileID: 114601397981697422, guid: d9e47796d36fc83458ffab41aea6641e,
+        type: 2}
+      propertyPath: NormalDrag
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 114601397981697422, guid: d9e47796d36fc83458ffab41aea6641e,
+        type: 2}
+      propertyPath: BaseMoveSpeed
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 114601397981697422, guid: d9e47796d36fc83458ffab41aea6641e,
+        type: 2}
+      propertyPath: KnockDrag
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 114601397981697422, guid: d9e47796d36fc83458ffab41aea6641e,
+        type: 2}
+      propertyPath: StopDrag
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 114601397981697422, guid: d9e47796d36fc83458ffab41aea6641e,
+        type: 2}
+      propertyPath: MaxEtraMove
+      value: 500
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d9e47796d36fc83458ffab41aea6641e, type: 2}
   m_IsPrefabAsset: 0
@@ -2019,7 +2044,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 0, y: -60}
-  m_SizeDelta: {x: 150, y: 150}
+  m_SizeDelta: {x: 200, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2091431469
 MonoBehaviour:

@@ -40,8 +40,8 @@ public abstract class Role : MonoBehaviour
     public float HealthRatio { get { return (float)Health / (float)MaxHealth; } }
     public virtual int Damage { get {
         return (int)(BaseDamage * 
-        (1 + (Buffers.ContainsKey(RoleBuffer.DamageBuff)?Buffers[RoleBuffer.DamageBuff].Value:0+
-        (Buffers.ContainsKey(RoleBuffer.Curse)?-GameSettingData.CurseDamageReduce:0)))); } }
+        (1 + (Buffers.ContainsKey(RoleBuffer.DamageUp)?Buffers[RoleBuffer.DamageUp].Value:0+
+        (Buffers.ContainsKey(RoleBuffer.DamageDown)?-GameSettingData.CurseDamageReduce:0)))); } }
     [Tooltip("基礎傷害")]
     [SerializeField]
     protected int BaseDamage;
@@ -51,7 +51,7 @@ public abstract class Role : MonoBehaviour
     [SerializeField]
     protected int BaseDefence;
     public virtual float MoveSpeed { get { return BaseMoveSpeed * (1 + (Buffers.ContainsKey(RoleBuffer.Freeze)?
-        -GameSettingData.FreezeMove:0  )); } }
+        -GameSettingData.FreezeMove:0  ))+ (Buffers.ContainsKey(RoleBuffer.SpeedUp) ? Buffers[RoleBuffer.SpeedUp].Value : 0); } }
     [Tooltip("基礎移動速度")]
     [SerializeField]
     protected int BaseMoveSpeed;
@@ -65,8 +65,10 @@ public abstract class Role : MonoBehaviour
     [Tooltip("死亡音效")]
     [SerializeField]
     AudioClip DeathSound;
+    [Tooltip("擊退摩擦力")]
     [SerializeField]
     protected float KnockDrag;
+    [Tooltip("一般摩擦力")]
     [SerializeField]
     protected float NormalDrag;
     [SerializeField]
@@ -103,7 +105,7 @@ public abstract class Role : MonoBehaviour
         DragTimer.StartRunTimer = true;
         MyRigi.drag = KnockDrag;
     }
-    void DragRecovery()
+    protected void DragRecovery()
     {
         MyRigi.drag = NormalDrag;
     }
@@ -206,8 +208,11 @@ public abstract class Role : MonoBehaviour
             Buffers.Add(_buffer.Type, _buffer);
             if (!BufferParticles.ContainsKey(_buffer.Type))
             {
-                ParticleSystem ps = EffectEmitter.EmitParticle(GameManager.GetBufferParticle(_buffer.Type), Vector3.zero, Vector3.zero, transform);
-                BufferParticles.Add(_buffer.Type, ps);
+                if(GameManager.GetBufferParticle(_buffer.Type)!=null)
+                {
+                    ParticleSystem ps = EffectEmitter.EmitParticle(GameManager.GetBufferParticle(_buffer.Type), Vector3.zero, Vector3.zero, transform);
+                    BufferParticles.Add(_buffer.Type, ps);
+                }
             }
             BufferEffectChange(_buffer, true);
         }
@@ -226,9 +231,13 @@ public abstract class Role : MonoBehaviour
     }
     public virtual void RemoveBuffer(BufferData _buffer)
     {
-        Buffers.Remove(_buffer.Type);
-        Destroy(BufferParticles[_buffer.Type].gameObject);
-        BufferParticles.Remove(_buffer.Type);
+        if (Buffers.ContainsKey(_buffer.Type))
+            Buffers.Remove(_buffer.Type);
+        if(BufferParticles.ContainsKey(_buffer.Type))
+        {
+            Destroy(BufferParticles[_buffer.Type].gameObject);
+            BufferParticles.Remove(_buffer.Type);
+        }
         BufferEffectChange(_buffer, false);
     }
     void BufferEffectChange(BufferData _buffer, bool _add)
@@ -251,7 +260,6 @@ public abstract class Role : MonoBehaviour
                 }
                 break;
         }
-
     }
     public void RemoveAllBuffer()
     {

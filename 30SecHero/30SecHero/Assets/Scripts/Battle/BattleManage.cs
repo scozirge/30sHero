@@ -160,14 +160,25 @@ public partial class BattleManage : MonoBehaviour
     {
         if (MaxLootCout == 0)
             return true;
-        if (LootList.Count < MaxLootCout)
+        int cout = 0;
+        for (int i = 0; i < LootList.Count; i++)
+        {
+            if (LootList[i].isActiveAndEnabled)
+                cout++;
+        }
+        if (cout < MaxLootCout)
             return true;
         return false;
     }
     void SpawnLoot()
     {
         if (!CheckLootSpawnLimit())
+        {
+            CurSpawnLootCount = 0;
+            SpawnLootTimer.StartRunTimer = true;
             return;
+        }
+
         Loot loot = Instantiate(LootPrefab, Vector3.zero, Quaternion.identity) as Loot;
 
         //Set SpawnPos
@@ -269,15 +280,16 @@ public partial class BattleManage : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        InActivityOutSideEnemys();
+        InActivityOutSideEnemysAndLoots();
         UpdateCurPlate();
         SpawnEnemyTimer.RunTimer();
         SpawnLootTimer.RunTimer();
     }
-    void InActivityOutSideEnemys()
+    void InActivityOutSideEnemysAndLoots()
     {
         DestructMargin_Left = (MyCameraControler.transform.position.x - (ScreenSize.x / 2 + 200));
         DestructMargin_Right = (MyCameraControler.transform.position.x + (ScreenSize.x / 2 + 200));
+        //Enemys
         for (int i = 0; i < EnemyList.Count; i++)
         {
             if (EnemyList[i] == null)
@@ -294,6 +306,22 @@ public partial class BattleManage : MonoBehaviour
                     else
                         EnemyList[i].gameObject.SetActive(true);
                 }
+            }
+        }
+        //Loots
+        for (int i = 0; i < LootList.Count; i++)
+        {
+            if (LootList[i] == null)
+                LootList.RemoveAt(i);
+            else
+            {
+                if (LootList[i].transform.position.x < DestructMargin_Left ||
+LootList[i].transform.position.x > DestructMargin_Right)
+                {
+                    LootList[i].gameObject.SetActive(false);
+                }
+                else
+                    LootList[i].gameObject.SetActive(true);
             }
         }
     }

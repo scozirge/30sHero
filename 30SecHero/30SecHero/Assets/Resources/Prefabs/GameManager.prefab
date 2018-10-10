@@ -73,11 +73,13 @@ MonoBehaviour:
     type: 2}
   BurnPrefab: {fileID: 198778626335910482, guid: 5256d43f5295b3c4c8f96c4e21e46b8b,
     type: 2}
-  CursePrefab: {fileID: 198118325992113576, guid: 5a92c9c5d13ad794797dffcd0662e4f1,
+  DamageDownPrefab: {fileID: 198118325992113576, guid: 5a92c9c5d13ad794797dffcd0662e4f1,
     type: 2}
   ImmortalPrefab: {fileID: 198712052328016582, guid: 30de476e70ea7e94cb7b6a40fa9ba507,
     type: 2}
-  DamageBuffPrefab: {fileID: 198118325992113576, guid: 0c765d955ef08f44e8aa4432ff351ce1,
+  DamageUpPrefab: {fileID: 198118325992113576, guid: 0c765d955ef08f44e8aa4432ff351ce1,
     type: 2}
   BlockPrefab: {fileID: 198799690855025450, guid: 813210bc99f9fa84eaf509350897f250,
+    type: 2}
+  SpeedUpPrefab: {fileID: 198517669597110872, guid: 3a7b985db268f2b40a2a27be2db75ccc,
     type: 2}

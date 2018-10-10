@@ -3,8 +3,9 @@
     Stun,
     Burn,
     Freeze,
-    Curse,
+    DamageDown,
     Immortal,
     Block,
-    DamageBuff
+    DamageUp,
+    SpeedUp
 }

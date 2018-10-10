@@ -2,7 +2,7 @@
 {
     HPRecovery,
     AvataEnergy,
-    DamageBuff,
+    DamageUp,
     Immortal,
-    Move
+    SpeedUp
 }

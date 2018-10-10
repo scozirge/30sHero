@@ -148,7 +148,7 @@ public partial class EnemyRole : Role
         base.RemoveBuffer(_buffer);
         if (_buffer.Type == RoleBuffer.Stun)
             if (MyAIMove)
-                MyAIMove.SetCanMove(false);
+                MyAIMove.SetCanMove(true);
     }
     public EnemyRole GetMemberwiseClone()
     {

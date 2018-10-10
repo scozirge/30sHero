@@ -146,7 +146,9 @@ public partial class PlayerRole : Role
     [Tooltip("弱化後移動跳躍的CD時間")]
     [SerializeField]
     float JumpCDTime;
-
+    [Tooltip("靜止摩擦力")]
+    [SerializeField]
+    protected float StopDrag;
 
 
     MyTimer AttackTimer;
@@ -198,6 +200,13 @@ public partial class PlayerRole : Role
         if (Shield < MaxShield)
             if (StartGenerateShield)
                 Shield += ShieldGenerateNum * Time.deltaTime;
+    }
+    protected void ChangeToStopDrag()
+    {
+        if (!DragTimer.StartRunTimer)
+        {
+            MyRigi.drag = StopDrag;
+        }
     }
     public void AttackMotion()
     {
@@ -342,14 +351,14 @@ public partial class PlayerRole : Role
                 float origAngle = (Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg) * Mathf.Deg2Rad;
                 dir = new Vector3(Mathf.Cos(origAngle), Mathf.Sin(origAngle), 0).normalized;
                 Vector2 force = dir * MoveSpeed * CursorMoveFactor;
-                MyRigi.AddForce(force);
+                MyRigi.velocity = force;
                 //衝刺
                 if (Input.GetMouseButtonDown(0))
                 {
                     Vector2 rushForce = dir * RushForce;
                     ChangeToKnockDrag();
-                    MyRigi.AddForce(rushForce);
-                    AudioPlayer.PlaySound(RushSound);                    
+                    MyRigi.velocity = rushForce;
+                    AudioPlayer.PlaySound(RushSound);
                 }
             }
         }
@@ -362,19 +371,25 @@ public partial class PlayerRole : Role
                 float yMoveForce = 0;
                 xMoveForce = Input.GetAxis("Horizontal") * MoveSpeed * KeyboardMoveFactor;
                 yMoveForce = Input.GetAxis("Vertical") * MoveSpeed * KeyboardMoveFactor;
-                MyRigi.velocity += new Vector2(xMoveForce, yMoveForce);
+                if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.W))
+                    DragRecovery(); 
+                else
+                    ChangeToStopDrag();
+                //MyRigi.velocity += new Vector2(xMoveForce, yMoveForce);
+                MyRigi.velocity = new Vector2(xMoveForce, yMoveForce);
                 //衝刺
                 if (Input.GetKeyDown(KeyCode.Space))
                 {
                     Vector2 rushForce;
                     if (xMoveForce == 0 && yMoveForce == 0)
                     {
-                        rushForce = new Vector2(FaceLeftOrRight, 0) * RushForce*1000000;
+                        rushForce = new Vector2(FaceLeftOrRight, 0) * RushForce * 1000000;
                     }
                     else
                         rushForce = new Vector2(xMoveForce, yMoveForce) * RushForce * 1000000;
                     ChangeToKnockDrag();
-                    MyRigi.AddForce(rushForce);
+                    MyRigi.velocity = rushForce;
+                    //MyRigi.AddForce(rushForce);
                     AudioPlayer.PlaySound(RushSound);
                 }
             }
@@ -400,7 +415,7 @@ public partial class PlayerRole : Role
                     AniPlayer.PlayTrigger("Jump", 0);
                 xMoveForce *= MoveSpeed * KeyboardJumpMoveFactor;
                 yMoveForce *= MoveSpeed * KeyboardJumpMoveFactor;
-                MyRigi.velocity += new Vector2(xMoveForce, yMoveForce);
+                MyRigi.velocity = new Vector2(xMoveForce, yMoveForce);
                 JumpTimer.StartRunTimer = true;
                 CanJump = false;
             }
@@ -437,14 +452,17 @@ public partial class PlayerRole : Role
             case LootType.AvataEnergy:
                 AvatarTimer += _data.Time * (1 + AvatarTimeBuff);
                 break;
-            case LootType.DamageBuff:
-                AddBuffer(RoleBuffer.DamageBuff, _data.Time, _data.Value);
+            case LootType.DamageUp:
+                AddBuffer(RoleBuffer.DamageUp, _data.Time, _data.Value);
                 break;
             case LootType.HPRecovery:
                 HealHP((int)(MaxHealth * _data.Value * (1 + PotionEfficacy)));
                 break;
             case LootType.Immortal:
                 AddBuffer(RoleBuffer.Immortal, _data.Time);
+                break;
+            case LootType.SpeedUp:
+                AddBuffer(RoleBuffer.SpeedUp, _data.Time, _data.Value);
                 break;
         }
     }
@@ -508,7 +526,7 @@ public partial class PlayerRole : Role
             if (decay < 1)
                 decay = 1;
             ExtraMoveSpeed -= Time.deltaTime * decay;
-            int particleCount = 10+Mathf.RoundToInt(ExtraMoveSpeed / 5);
+            int particleCount = 10 + Mathf.RoundToInt(ExtraMoveSpeed / 5);
             if (particleCount > 40)
                 particleCount = 40;
             MoveAfterimage_Main.maxParticles = particleCount;

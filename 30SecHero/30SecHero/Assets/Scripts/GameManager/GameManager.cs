@@ -28,16 +28,19 @@ public partial class GameManager : MonoBehaviour
     public ParticleSystem BurnPrefab;
     [Tooltip("詛咒特效")]
     [SerializeField]
-    public ParticleSystem CursePrefab;
+    public ParticleSystem DamageDownPrefab;
     [Tooltip("無敵特效")]
     [SerializeField]
     public ParticleSystem ImmortalPrefab;
     [Tooltip("傷害上升特效")]
     [SerializeField]
-    public ParticleSystem DamageBuffPrefab;
+    public ParticleSystem DamageUpPrefab;
     [Tooltip("隔檔特效")]
     [SerializeField]
     public ParticleSystem BlockPrefab;
+    [Tooltip("速度上升特效")]
+    [SerializeField]
+    public ParticleSystem SpeedUpPrefab;
 
 
     static Sprite[] QualityBotSprites;
@@ -74,10 +77,11 @@ public partial class GameManager : MonoBehaviour
         BufferParticles.Add(RoleBuffer.Stun, StunPrefab);
         BufferParticles.Add(RoleBuffer.Freeze, FreezePrefab);
         BufferParticles.Add(RoleBuffer.Burn, BurnPrefab);
-        BufferParticles.Add(RoleBuffer.Curse, CursePrefab);
+        BufferParticles.Add(RoleBuffer.DamageDown, DamageDownPrefab);
         BufferParticles.Add(RoleBuffer.Immortal, ImmortalPrefab);
         BufferParticles.Add(RoleBuffer.Block, BlockPrefab);
-        BufferParticles.Add(RoleBuffer.DamageBuff, DamageBuffPrefab);
+        BufferParticles.Add(RoleBuffer.DamageUp, DamageUpPrefab);
+        BufferParticles.Add(RoleBuffer.SpeedUp, SpeedUpPrefab);
         if (!Debugger.IsSpawn)
             DeployDebugger();
         if (!PopupUI.IsInit)

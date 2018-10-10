@@ -374,10 +374,10 @@ MonoBehaviour:
   PSkillTimer: 0
   AttackOnce: 0
   Interval: 5
-  AmmoNum: 24
-  AmmoInterval: 0.05
+  AmmoNum: 12
+  AmmoInterval: 0.1
   StartAngle: 0
-  AngleInterval: 15
+  AngleInterval: 30
   Patetern: 0
   SpawnedInSelf: 0
   AttackPrefab: {fileID: 114962956101920240, guid: 84d6f2965eaadcd4cb3265ce5e0d2e16,
