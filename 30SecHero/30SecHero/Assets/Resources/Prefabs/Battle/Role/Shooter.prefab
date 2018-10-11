@@ -202,11 +202,11 @@ MonoBehaviour:
   DamagePercent: 1
   PSkillTimer: 0
   AttackOnce: 0
-  Interval: 4
-  AmmoNum: 4
+  Interval: 3
+  AmmoNum: 1
   AmmoInterval: 0.2
   StartAngle: 0
-  AngleInterval: 90
+  AngleInterval: 0
   Patetern: 1
   SpawnedInSelf: 0
   AttackPrefab: {fileID: 114962956101920240, guid: cdb230a6efc22e241a995ba0f5fbb34c,
@@ -230,14 +230,14 @@ MonoBehaviour:
   BaseDamage: 5
   BaseDefence: 0
   BaseMoveSpeed: 600
-  DeathEffect: {fileID: 198421084779393996, guid: 9d76221f8330c3e4e88f4600ea7c80bc,
+  DeathEffect: {fileID: 198802542160044040, guid: 8f344cf8edc65e44883dfdf0168792bd,
     type: 2}
   AniPlayer: {fileID: 114796498901394522}
   RoleTrans: {fileID: 224787385446496172}
   DeathSound: {fileID: 8300000, guid: fc274ce0d0fd8fb40b2e7557d54975e8, type: 3}
-  KnockDrag: 50
+  KnockDrag: 40
   NormalDrag: 0
-  KnockDragDuration: 0.1
+  KnockDragDuration: 0.7
   DropProbility: 1
   DropCount: 1
   DropSkillProbility: 1
@@ -377,9 +377,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Wander: 1
   FollowCamera: 0
-  WanderInterval: 2
+  WanderInterval: 0.5
   RotateFactor: 0.01
-  WanderRange: 100
+  WanderRange: 50
   Destination: {x: 0, y: 0}
 --- !u!222 &222141267103412294
 CanvasRenderer:

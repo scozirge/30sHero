@@ -208,9 +208,9 @@ MonoBehaviour:
   AniPlayer: {fileID: 114796498901394522}
   RoleTrans: {fileID: 224787385446496172}
   DeathSound: {fileID: 8300000, guid: fc274ce0d0fd8fb40b2e7557d54975e8, type: 3}
-  KnockDrag: 50
+  KnockDrag: 40
   NormalDrag: 0
-  KnockDragDuration: 0.1
+  KnockDragDuration: 0.7
   DropProbility: 1
   DropCount: 1
   DropSkillProbility: 0
@@ -352,7 +352,7 @@ MonoBehaviour:
   FollowCamera: 0
   WanderInterval: 2
   RotateFactor: 0.01
-  WanderRange: 50
+  WanderRange: 25
   Destination: {x: 0, y: 0}
 --- !u!222 &222141267103412294
 CanvasRenderer:

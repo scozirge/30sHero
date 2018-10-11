@@ -198,7 +198,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PSkillName: Two Blade Melee
   PSkillDuration: 10
-  DetecteRadius: 400
+  DetecteRadius: 1869
   DamagePercent: 1
   PSkillTimer: 0
   AttackOnce: 1
@@ -209,7 +209,7 @@ MonoBehaviour:
   AngleInterval: 0
   Patetern: 0
   SpawnedInSelf: 1
-  AttackPrefab: {fileID: 114280530254980642, guid: 12aba89e0f731e743a7598a54c6dbb8d,
+  AttackPrefab: {fileID: 114280530254980642, guid: fcf9df39c8fb32746933d109f1770680,
     type: 2}
   AttackRadius: 0
 --- !u!114 &114364750184517408
@@ -236,9 +236,9 @@ MonoBehaviour:
   AniPlayer: {fileID: 114796498901394522}
   RoleTrans: {fileID: 224787385446496172}
   DeathSound: {fileID: 8300000, guid: fc274ce0d0fd8fb40b2e7557d54975e8, type: 3}
-  KnockDrag: 50
+  KnockDrag: 40
   NormalDrag: 0
-  KnockDragDuration: 0.1
+  KnockDragDuration: 0.7
   DropProbility: 1
   DropCount: 1
   DropSkillProbility: 1
