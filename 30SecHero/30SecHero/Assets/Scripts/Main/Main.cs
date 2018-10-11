@@ -26,8 +26,10 @@ public class Main : MonoBehaviour
     Dictionary<MainUI, MyUI> UIDic = new Dictionary<MainUI, MyUI>();
 
     // Use this for initialization
-    void Start()
+    void Awake()
     {
+        if (!GameManager.IsInit)
+            GameManager.DeployGameManager();
         UIDic.Add(MainUI.Strengthen, MyStrengthen);
         UIDic.Add(MainUI.Purchase, MyPurchase);
         UIDic.Add(MainUI.Equip, MyEquip);

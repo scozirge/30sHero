@@ -129,40 +129,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4af727ee3d4bb514e839cabbe0dd2b87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DesginateLootIndex: 5
+  DesginateLootIndex: 0
   LootList:
   - Type: 0
     Time: 0
     Value: 0.1
-    LootIcon: {fileID: 21300000, guid: f6e95768a3968f444b76748cd4598721, type: 3}
+    LootIcon: {fileID: 21300000, guid: 549e299f332f55f4f880f4c1ad449c54, type: 3}
     GetParticle: {fileID: 198421084779393996, guid: 9d76221f8330c3e4e88f4600ea7c80bc,
       type: 2}
   - Type: 1
     Time: 5
     Value: 0
-    LootIcon: {fileID: 21300000, guid: 80f493ca0dd795d43ac7006c07bfea07, type: 3}
+    LootIcon: {fileID: 21300000, guid: 0ed44ed113e37aa48b1963e3eb445ace, type: 3}
     GetParticle: {fileID: 198421084779393996, guid: 9d76221f8330c3e4e88f4600ea7c80bc,
       type: 2}
   - Type: 2
     Time: 10
     Value: 0.5
-    LootIcon: {fileID: 21300000, guid: 6c6f978748de53f44a7a89d33be74189, type: 3}
+    LootIcon: {fileID: 21300000, guid: aef88ca2dfcface48966dcb4e703ba9e, type: 3}
     GetParticle: {fileID: 198421084779393996, guid: 9d76221f8330c3e4e88f4600ea7c80bc,
       type: 2}
   - Type: 3
     Time: 5
     Value: 0
-    LootIcon: {fileID: 21300000, guid: 43a7abe3ad2ed3144bec5cad0ff25797, type: 3}
+    LootIcon: {fileID: 21300000, guid: 6f54b1c98b21ba542b28ea2a3478a416, type: 3}
     GetParticle: {fileID: 198421084779393996, guid: 9d76221f8330c3e4e88f4600ea7c80bc,
       type: 2}
   - Type: 4
     Time: 5
     Value: 300
-    LootIcon: {fileID: 21300000, guid: 7f90d368db119304499820d7b3f5720b, type: 3}
+    LootIcon: {fileID: 21300000, guid: d4116117b11f21e4fa3dad142fa6b626, type: 3}
     GetParticle: {fileID: 198421084779393996, guid: 9d76221f8330c3e4e88f4600ea7c80bc,
       type: 2}
   MyIcon: {fileID: 114629167383406342}
-  Type: 0
 --- !u!114 &114629167383406342
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -249,11 +248,11 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 224730334804727236}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 13.39}
   m_SizeDelta: {x: 59, y: 58}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224391326762884460
@@ -267,7 +266,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 224730334804727236}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -284,8 +283,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 224391326762884460}
   - {fileID: 224282732515872052}
+  - {fileID: 224391326762884460}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

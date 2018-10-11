@@ -10,7 +10,8 @@ public abstract class EquipData : Data
     public virtual EquipType Type { get; protected set; }
     public virtual string Name { get; protected set; }
 
-    public string IconString;
+    //string[] IconStrings = new string[3];
+    public Sprite[] Icons = new Sprite[3];
     public int Quality;
     public int LV;
     public virtual int SellGold { get; }
@@ -51,8 +52,23 @@ public abstract class EquipData : Data
                     case "ID":
                         ID = int.Parse(item[key].ToString());
                         break;
-                    case "Icon":
-                        IconString = item[key].ToString();
+                    case "Icon1":
+                        //IconStrings[0] = item[key].ToString();
+                        Icons[0] = Resources.Load<Sprite>(string.Format(GameSettingData.GetEquipIconPath(Type), item[key].ToString()));
+                        if (Icons[0] == null)
+                            Debug.LogWarning(string.Format("裝備路徑找不到ICON{0}", string.Format(GameSettingData.GetEquipIconPath(Type), item[key].ToString())));
+                        break;
+                    case "Icon2":
+                        //IconStrings[1] = item[key].ToString();
+                        Icons[1] = Resources.Load<Sprite>(string.Format(GameSettingData.GetEquipIconPath(Type), item[key].ToString()));
+                        if (Icons[1] == null)
+                            Debug.LogWarning(string.Format("裝備路徑找不到ICON{0}", string.Format(GameSettingData.GetEquipIconPath(Type), item[key].ToString())));
+                        break;
+                    case "Icon3":
+                        //IconStrings[2] = item[key].ToString();
+                        Icons[2] = Resources.Load<Sprite>(string.Format(GameSettingData.GetEquipIconPath(Type), item[key].ToString()));
+                        if (Icons[2] == null)
+                            Debug.LogWarning(string.Format("裝備路徑找不到ICON{0}", string.Format(GameSettingData.GetEquipIconPath(Type), item[key].ToString())));
                         break;
                     default:
                         Debug.LogWarning(string.Format("{0}表有不明屬性:{1}", DataName, key));
@@ -64,10 +80,6 @@ public abstract class EquipData : Data
         {
             Debug.LogException(ex);
         }
-    }
-    public Sprite GetICON()
-    {
-        return Resources.Load<Sprite>(string.Format(GameSettingData.EquipPath, IconString));
     }
     protected virtual void SetRandomProperties()
     {

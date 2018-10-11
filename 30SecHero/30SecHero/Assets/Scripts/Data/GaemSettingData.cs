@@ -44,7 +44,9 @@ public class GameSettingData : Data
     public static string DropingNumberColor;
     public static string NormalNumberColor;
     public static string StrengthenPath;
-    public static string EquipPath;
+    public static string WeaponPath;
+    public static string ArmorPath;
+    public static string AccessoryPath;
     public static float FreezeMove;
     public static float BurnDamage;
     public static float CurseDamageReduce;
@@ -205,7 +207,13 @@ public class GameSettingData : Data
                                 StrengthenPath = item[key].ToString();
                                 break;
                             case "EquipPath":
-                                EquipPath = item[key].ToString();
+                                WeaponPath = item[key].ToString();
+                                break;
+                            case "ArmorPath":
+                                ArmorPath = item[key].ToString();
+                                break;
+                            case "AccessoryPath":
+                                AccessoryPath = item[key].ToString();
                                 break;
                             case "FreezeMove":
                                 FreezeMove = float.Parse(item[key].ToString());
@@ -233,6 +241,20 @@ public class GameSettingData : Data
         catch (Exception ex)
         {
             Debug.LogException(ex);
+        }
+    }
+    public static string GetEquipIconPath(EquipType _type)
+    {
+        switch (_type)
+        {
+            case EquipType.Weapon:
+                return WeaponPath;
+            case EquipType.Armor:
+                return ArmorPath;
+            case EquipType.Accessory:
+                return AccessoryPath;
+            default:
+                return "";
         }
     }
     public static int GetWeaponStrength(int _lv)

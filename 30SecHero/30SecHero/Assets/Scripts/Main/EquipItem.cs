@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class EquipItem : Item
 {
     [SerializeField]
-    Image Icon;
+    Image[] Icons;
     [SerializeField]
     Image QualityBottom;
     [SerializeField]
@@ -43,8 +43,11 @@ public class EquipItem : Item
             ParentUI = ((Equip)_ui);
         RefreshText();
         MyText.AddRefreshFunc(RefreshText);
-        Icon.sprite = MyData.GetICON();
-        Icon.SetNativeSize();
+        for (int i = 0; i < Icons.Length;i++ )
+        {
+            Icons[i].sprite = MyData.Icons[i];
+            Icons[i].SetNativeSize();
+        }
         QualityBottom.sprite = GameManager.GetItemQualityBotSprite(MyData.Quality);
         SetSoldMode(false);
     }

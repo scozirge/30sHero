@@ -11,15 +11,17 @@ public class Equip : MyUI
     EquipPop EquipPop;
 
     [SerializeField]
-    Image WeaponIcon;
+    Image[] WeaponIcon;
     [SerializeField]
     Image WeaponQuality;
     [SerializeField]
-    Image ArmorIcon;
+    Image[] ArmorIcon;
     [SerializeField]
     Image ArmorQuality;
     [SerializeField]
-    Image[] AccessoryIcon;
+    Image[] Accessory1Icon;
+    [SerializeField]
+    Image[] Accessory2Icon;
     [SerializeField]
     Image[] AccessoryQuality;
     [SerializeField]
@@ -72,7 +74,7 @@ public class Equip : MyUI
             for (int i = 0; i < keys.Count; i++)
             {
                 EquipItem ei = (EquipItem)MySpanwer.Spawn();
-                ei.Set(Player.Itmes[EquipType.Weapon][keys[i]],this);
+                ei.Set(Player.Itmes[EquipType.Weapon][keys[i]], this);
                 ItemList.Add(ei);
                 if (!ei.MyData.IsEquiped)
                     WeaponList.Add(ei);
@@ -116,7 +118,7 @@ public class Equip : MyUI
         Sort();
         UpdateRoleInfo();
         SetSoldMode(false);
-        if (TagToggles!=null)
+        if (TagToggles != null)
         {
             for (int i = 0; i < TagToggles.Length; i++)
             {
@@ -381,36 +383,98 @@ public class Equip : MyUI
     {
         if (Player.MyWeapon != null)
         {
-            WeaponIcon.sprite = Player.MyWeapon.GetICON();
+            for (int i = 0; i < WeaponIcon.Length; i++)
+            {
+                WeaponIcon[i].sprite = Player.MyWeapon.Icons[i];
+                WeaponIcon[i].enabled = true;
+                WeaponIcon[i].SetNativeSize();
+            }
             WeaponQuality.sprite = GameManager.GetItemQualityBotSprite(Player.MyWeapon.Quality);
         }
         else
         {
-            WeaponIcon.sprite = GameManager.GetEquipTypeBotSprite(EquipType.Weapon);
+            for (int i = 0; i < WeaponIcon.Length; i++)
+            {
+                if (i == 0)
+                    WeaponIcon[i].sprite = GameManager.GetEquipTypeBotSprite(EquipType.Weapon);
+                else
+                    WeaponIcon[i].enabled = false;
+                WeaponIcon[i].SetNativeSize();
+            }
             WeaponQuality.sprite = GameManager.GetItemQualityBotSprite(0);
         }
         if (Player.MyArmor != null)
         {
-            ArmorIcon.sprite = Player.MyArmor.GetICON();
+            for (int i = 0; i < ArmorIcon.Length; i++)
+            {
+                ArmorIcon[i].sprite = Player.MyArmor.Icons[i];
+                ArmorIcon[i].enabled = true;
+                ArmorIcon[i].SetNativeSize();
+            }
             ArmorQuality.sprite = GameManager.GetItemQualityBotSprite(Player.MyArmor.Quality);
         }
         else
         {
-            ArmorIcon.sprite = GameManager.GetEquipTypeBotSprite(EquipType.Armor);
+            for (int i = 0; i < ArmorIcon.Length; i++)
+            {
+                if (i == 0)
+                    ArmorIcon[i].sprite = GameManager.GetEquipTypeBotSprite(EquipType.Armor);
+                else
+                    ArmorIcon[i].enabled = false;
+                ArmorIcon[i].SetNativeSize();
+            }
             ArmorQuality.sprite = GameManager.GetItemQualityBotSprite(0);
         }
-        for (int i = 0; i < 2; i++)
+        //Accessory1
+        if (Player.MyAccessorys[0] != null)
         {
-            if (Player.MyAccessorys[i] != null)
+            for (int j = 0; j < Accessory1Icon.Length; j++)
             {
-                AccessoryIcon[i].sprite = Player.MyAccessorys[i].GetICON();
-                AccessoryQuality[i].sprite = GameManager.GetItemQualityBotSprite(Player.MyAccessorys[i].Quality);
+                if (j == 0)
+                    Accessory1Icon[j].sprite = GameManager.GetEquipTypeBotSprite(EquipType.Accessory);
+                else
+                    Accessory1Icon[j].enabled = true;
+                Accessory1Icon[j].SetNativeSize();
             }
-            else
+            AccessoryQuality[0].sprite = GameManager.GetItemQualityBotSprite(Player.MyAccessorys[0].Quality);
+        }
+        else
+        {
+            for (int j = 0; j < Accessory1Icon.Length; j++)
             {
-                AccessoryIcon[i].sprite = GameManager.GetEquipTypeBotSprite(EquipType.Accessory);
-                AccessoryQuality[i].sprite = GameManager.GetItemQualityBotSprite(0);
+                if (j == 0)
+                    Accessory1Icon[j].sprite = GameManager.GetEquipTypeBotSprite(EquipType.Accessory);
+                else
+                    Accessory1Icon[j].enabled = false;
+                Accessory1Icon[j].SetNativeSize();
             }
+            AccessoryQuality[0].sprite = GameManager.GetItemQualityBotSprite(0);
+        }
+        //Accessory2
+        if (Player.MyAccessorys[1] != null)
+        {
+            for (int j = 0; j < Accessory2Icon.Length; j++)
+            {
+                if (j == 0)
+                    Accessory2Icon[j].sprite = GameManager.GetEquipTypeBotSprite(EquipType.Accessory);
+                else
+                    Accessory2Icon[j].enabled = true;
+                Accessory2Icon[j].SetNativeSize();
+            }
+            AccessoryQuality[0].sprite = GameManager.GetItemQualityBotSprite(Player.MyAccessorys[1].Quality);
+        }
+        else
+        {
+            for (int j = 0; j < Accessory2Icon.Length; j++)
+            {
+                if (j == 0)
+
+                    Accessory2Icon[j].sprite = GameManager.GetEquipTypeBotSprite(EquipType.Accessory);
+                else
+                    Accessory2Icon[j].enabled = false;
+                Accessory2Icon[j].SetNativeSize();
+            }
+            AccessoryQuality[1].sprite = GameManager.GetItemQualityBotSprite(0);
         }
         StrengthText.text = Player.GetProperties(RoleProperty.Strength).ToString();
         HealthText.text = Player.GetProperties(RoleProperty.Health).ToString();
