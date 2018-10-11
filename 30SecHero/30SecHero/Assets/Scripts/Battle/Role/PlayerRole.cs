@@ -109,7 +109,9 @@ public partial class PlayerRole : Role
     protected float PotionEfficacy;
     const int KeyboardMoveFactor = 1;
     const int CursorMoveFactor = 40;
-    const int KeyboardJumpMoveFactor = 4;
+    [Tooltip("史萊姆跳躍速度")]
+    [SerializeField]
+    float KeyboardJumpMoveFactor = 4;
     [Tooltip("移動加速特效")]
     [SerializeField]
     ParticleSystem MoveAfterimagePrefab;
