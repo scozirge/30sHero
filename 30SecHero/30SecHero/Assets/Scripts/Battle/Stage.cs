@@ -76,8 +76,11 @@ public partial class BattleManage
             Floor++;
             UpdateFloorText();
         }
-        AvailableMillions = EnemyData.GetAvailableMillions(Floor);
-        IsDemogorgonFloor = CheckDemogorgon(Floor);
+        if (!BM.TestMode)
+        {
+            AvailableMillions = EnemyData.GetAvailableMillions(Floor);
+            IsDemogorgonFloor = CheckDemogorgon(Floor);
+        }
     }
     public static bool CheckDemogorgon(int _floor)
     {

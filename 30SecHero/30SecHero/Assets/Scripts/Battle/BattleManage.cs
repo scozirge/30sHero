@@ -77,10 +77,13 @@ public partial class BattleManage : MonoBehaviour
             AvailableMillions = Enemys;
         }
         else
+        {
             AvailableMillions = EnemyData.GetAvailableMillions(Floor);
+            AvailableDemonGergons = EnemyData.GetNextDemogorgon(Floor, out NextDemogorgonFloor);
+        }
         SpawnEnemyTimer = new MyTimer(SpawnEnemyInterval, SpanwEnemy, true, false);
         SpawnLootTimer = new MyTimer(SpawnLootInterval, SpawnLoot, true, false);
-        AvailableDemonGergons = EnemyData.GetNextDemogorgon(Floor, out NextDemogorgonFloor);
+
         //Debug.Log("NextDemogorgonFloor=" + NextDemogorgonFloor);
         IsDemogorgonFloor = CheckDemogorgon(Floor);
     }
