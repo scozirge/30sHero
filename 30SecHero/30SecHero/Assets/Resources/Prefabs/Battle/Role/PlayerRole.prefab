@@ -308,7 +308,7 @@ MonoBehaviour:
   KnockDragDuration: 0.1
   BeHitEffect_Shield: {fileID: 198350346737686014, guid: f2d13c3558e85fd41b7c5255972c24e4,
     type: 2}
-  BeHitEffect: {fileID: 198766691851678274, guid: 0dc4f5410669a9a48874136700ca00d6,
+  BeHitEffect: {fileID: 198545341295034162, guid: 8759edc6a0f30934c8eb874b3f77a7a2,
     type: 2}
   MaxShield: 100
   ShieldBar: {fileID: 0}
@@ -324,6 +324,7 @@ MonoBehaviour:
   BaseMoneyDrop: 0
   BaseBloodthirsty: 0
   PotionEfficacy: 0
+  KeyboardJumpMoveFactor: 4
   MoveAfterimagePrefab: {fileID: 198230356777013556, guid: 4ac12026ed62f024b9bc36b2da373c93,
     type: 2}
   DontAttackRestoreTime: 1
