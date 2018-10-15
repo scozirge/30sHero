@@ -202,12 +202,12 @@ MonoBehaviour:
   DamagePercent: 1
   PSkillTimer: 0
   AttackOnce: 0
-  Interval: 2
+  Interval: 3
   AmmoNum: 2
   AmmoInterval: 0
   StartAngle: 0
   AngleInterval: 180
-  Patetern: 1
+  Patetern: 2
   SpawnedInSelf: 0
   AttackPrefab: {fileID: 114962956101920240, guid: f6867f661086beb4f81aea30e1506914,
     type: 2}
@@ -235,9 +235,9 @@ MonoBehaviour:
   AniPlayer: {fileID: 114796498901394522}
   RoleTrans: {fileID: 224787385446496172}
   DeathSound: {fileID: 8300000, guid: fc274ce0d0fd8fb40b2e7557d54975e8, type: 3}
-  KnockDrag: 50
+  KnockDrag: 40
   NormalDrag: 0
-  KnockDragDuration: 0.1
+  KnockDragDuration: 0.7
   DropProbility: 1
   DropCount: 1
   DropSkillProbility: 1

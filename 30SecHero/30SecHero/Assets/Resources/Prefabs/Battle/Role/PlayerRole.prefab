@@ -297,7 +297,7 @@ MonoBehaviour:
   BaseHealth: 300
   BaseDamage: 50
   BaseDefence: 0
-  BaseMoveSpeed: 700
+  BaseMoveSpeed: 1000
   DeathEffect: {fileID: 198802542160044040, guid: 8f344cf8edc65e44883dfdf0168792bd,
     type: 2}
   AniPlayer: {fileID: 114551822075932818}
@@ -306,14 +306,18 @@ MonoBehaviour:
   KnockDrag: 10
   NormalDrag: 50
   KnockDragDuration: 0.1
+  BeHitEffect_Shield: {fileID: 198350346737686014, guid: f2d13c3558e85fd41b7c5255972c24e4,
+    type: 2}
+  BeHitEffect: {fileID: 198766691851678274, guid: 0dc4f5410669a9a48874136700ca00d6,
+    type: 2}
   MaxShield: 100
   ShieldBar: {fileID: 0}
   ShieldReGenerateTime: 3
   ShieldRechargeTime: 5
-  GainMoveFromKilling: 10
+  GainMoveFromKilling: 100
   MoveDepletedTime: 10
-  MaxEtraMove: 200
-  MaxAvaterTime: 180
+  MaxEtraMove: 500
+  MaxAvaterTime: 60
   AvatarTimerText: {fileID: 0}
   AvatarTimeBuff: 0
   BaseEnergyDrop: 0
@@ -323,15 +327,16 @@ MonoBehaviour:
   MoveAfterimagePrefab: {fileID: 198230356777013556, guid: 4ac12026ed62f024b9bc36b2da373c93,
     type: 2}
   DontAttackRestoreTime: 1
-  SelfKnockForce: 20000
+  SelfKnockForce: 10000
   SelfSturnTime: 0.25
   ControlDevice: 1
   CursorLimitDist: 200
   MyCamera: {fileID: 0}
-  RushForce: 10
+  RushForce: 1
   RushSound: {fileID: 8300000, guid: 41b00c1ca9d97ea4796281c66b69da09, type: 3}
   AttackSound: {fileID: 8300000, guid: fc274ce0d0fd8fb40b2e7557d54975e8, type: 3}
   JumpCDTime: 0.2
+  StopDrag: 200
   FaceLeftOrRight: 0
   ClosestEnemy: {fileID: 0}
 --- !u!114 &114618768542438684
@@ -345,10 +350,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a5de78645e07e74e83b7c3141e581bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AttackEffect: {fileID: 198350346737686014, guid: 570c1ce50541c594da32c4256706f57d,
+  AttackEffect: {fileID: 198271489546005640, guid: d78b7a87f9cdee140ad9598ed66e7f92,
     type: 2}
   Attacker: {fileID: 114601397981697422}
-  KnockForce: 20000
+  KnockForce: 1000000
 --- !u!222 &222078249104412168
 CanvasRenderer:
   m_ObjectHideFlags: 1
@@ -454,6 +459,6 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -511, y: 0}
+  m_AnchoredPosition: {x: -19, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
