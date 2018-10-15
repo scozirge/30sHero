@@ -8,6 +8,8 @@ public class PurchaseItem : Item
 {
     [SerializeField]
     Image Icon;
+    [SerializeField]
+    Text CountText;
     public PurchaseData MyData;
     Purchase ParentUI;
     Toggle TheToggle;
@@ -16,14 +18,19 @@ public class PurchaseItem : Item
     {
         MyData = _data;
         ParentUI = _ui;
+        CountText.text = MyData.EmeraldCount.ToString();
         Icon.sprite = MyData.GetICON();
         TheToggle = GetComponent<Toggle>();
         TheToggle.group = ParentUI.GetComponent<ToggleGroup>();
     }
     public override void OnPress()
     {
+        if (!TheToggle.isOn)
+            return;
         base.OnPress();
         if (!ParentUI)
             return;
+        ParentUI.ShowInfo(this);
+
     }
 }

@@ -54,6 +54,7 @@ public partial class Player
         Name_K = _name;
         UserID_K = _kongregateID;
         ServerRequest.QuickSignUp();
+        KongregateAPIBehaviour.ShowItemList();
     }
     public static void SignIn_CB(string[] _data)
     {

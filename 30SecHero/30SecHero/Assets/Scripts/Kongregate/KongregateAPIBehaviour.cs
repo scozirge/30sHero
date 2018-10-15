@@ -44,4 +44,59 @@ public class KongregateAPIBehaviour : MonoBehaviour
         Debug.Log("///////////////Kongregate User Info: " + username + ", userId: " + userId);
         Player.SetKongregateUserData_CB(username, userId);
     }
+    public static void ShowItemList()
+    {
+        Debug.Log("////////////////Send ShowItemList");
+        Application.ExternalEval(@"
+          kongregate.mtx.requestItemList([], function(result) {
+            var unityObject = kongregateUnitySupport.getUnityObject();
+            if(result.success) {
+                var datas = [];
+                for(var i = 0; i < result.data.length; i++) 
+                {
+                    var item = result.data[i];
+                    if(i!=0)
+                        datas+='/';
+                    datas+=[item.identifier, item.name, item.description , item.price ].join(',');
+                }       
+                unityObject.SendMessage('KongregateAPI', 'OnItemListCB', datas);     
+            }
+            else
+            {
+                unityObject.SendMessage('KongregateAPI', 'OnItemListCB', 'Fail'); 
+            }
+          });
+        ");
+    }
+    public void OnItemListCB(string _datas)
+    {
+        if (_datas != "Fail")
+            Purchase.MySelf.ShowItemListCB(_datas);
+        else
+        {
+            CaseTableData.ShowPopLog(8);
+        }
+    }
+    public static void PurchaseItem(int _id)
+    {
+        Debug.Log("////////////////Send PurchaseIte ID:" + _id);
+        Application.ExternalEval(@"
+          kongregate.mtx.purchaseItems(['" + _id + @"'], function(result) {
+            var unityObject = kongregateUnitySupport.getUnityObject();
+            var success = String(result.success);
+            unityObject.SendMessage('KongregateAPI', 'OnPurchaseResult', success);
+          });");
+    }
+    public void OnPurchaseResult(string _result)
+    {
+        Debug.Log("OnPurchaseResult"+_result);
+        if(_result=="true")
+        {
+            Debug.Log("Yes");
+        }
+        else
+        {
+            Debug.Log("No");
+        }
+    }
 }

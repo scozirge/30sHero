@@ -14,7 +14,7 @@ public class PurchaseData : Data
                 Debug.LogWarning(string.Format("{0}表不包含{1}的文字資料", DataName, ID));
                 return "NullText";
             }
-            return GameDictionary.String_StrengthenDic[ID.ToString()].GetString(0, Player.UseLanguage);
+            return GameDictionary.String_PurchaseDic[ID.ToString()].GetString(0, Player.UseLanguage);
         }
         private set { return; }
     }
@@ -27,15 +27,13 @@ public class PurchaseData : Data
                 Debug.LogWarning(string.Format("{0}表不包含{1}的文字資料", DataName, ID));
                 return "NullText";
             }
-            return GameDictionary.String_StrengthenDic[ID.ToString()].GetString(1, Player.UseLanguage);
+            return GameDictionary.String_PurchaseDic[ID.ToString()].GetString(1, Player.UseLanguage);
         }
         private set { return; }
     }
-    public string StrengthenType;
-    public float BaseValue;
-    public float LevelUpValue;
+    public int EmeraldCount { get; private set; }
+    public int Price { get; private set; }
     public string IconString;
-
     const string ImagePath = "Images/Main/{0}";
 
     /// <summary>
@@ -54,6 +52,10 @@ public class PurchaseData : Data
             _dic.Add(id, data);
         }
     }
+    public void SetPurchasePrice(int _price)
+    {
+        Price = _price;
+    }
     PurchaseData(JsonData _item)
     {
         try
@@ -66,14 +68,8 @@ public class PurchaseData : Data
                     case "ID":
                         ID = int.Parse(item[key].ToString());
                         break;
-                    case "StrengthenType":
-                        StrengthenType = item[key].ToString();
-                        break;
-                    case "BaseValue":
-                        BaseValue = float.Parse(item[key].ToString());
-                        break;
-                    case "LevelUpValue":
-                        LevelUpValue = float.Parse(item[key].ToString());
+                    case "EmeraldCount":
+                        EmeraldCount = int.Parse(item[key].ToString());
                         break;
                     case "Icon":
                         IconString = item[key].ToString();
