@@ -152,7 +152,8 @@ public partial class PlayerRole : Role
     [SerializeField]
     protected float StopDrag;
 
-
+    ParticleSystem CurShieldBeHitEffect;
+    ParticleSystem CurBeHitEffect;
     MyTimer AttackTimer;
     MyTimer JumpTimer;
     [HideInInspector]
@@ -287,7 +288,8 @@ public partial class PlayerRole : Role
         base.ShieldBlock(ref _dmg);
         if (Shield != 0)
         {
-            EffectEmitter.EmitParticle(BeHitEffect_Shield, Vector2.zero, Vector3.zero, transform);
+            if (CurShieldBeHitEffect) Destroy(CurShieldBeHitEffect.gameObject);
+            CurShieldBeHitEffect = EffectEmitter.EmitParticle(BeHitEffect_Shield, Vector2.zero, Vector3.zero, transform);
             //Damage Shield
             if (_dmg > Shield)
             {
@@ -302,7 +304,8 @@ public partial class PlayerRole : Role
         }
         else
         {
-            EffectEmitter.EmitParticle(BeHitEffect, Vector2.zero, Vector3.zero, transform);
+            if (CurShieldBeHitEffect) Destroy(CurShieldBeHitEffect.gameObject);
+            CurShieldBeHitEffect = EffectEmitter.EmitParticle(BeHitEffect, Vector2.zero, Vector3.zero, transform);
         }
 
         ShieldTimer.StartRunTimer = true;
@@ -374,7 +377,7 @@ public partial class PlayerRole : Role
                 xMoveForce = Input.GetAxis("Horizontal") * MoveSpeed * KeyboardMoveFactor;
                 yMoveForce = Input.GetAxis("Vertical") * MoveSpeed * KeyboardMoveFactor;
                 if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.W))
-                    DragRecovery(); 
+                    DragRecovery();
                 else
                     ChangeToStopDrag();
                 //MyRigi.velocity += new Vector2(xMoveForce, yMoveForce);
