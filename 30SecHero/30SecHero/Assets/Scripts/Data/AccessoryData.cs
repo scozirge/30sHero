@@ -54,14 +54,17 @@ public class AccessoryData : EquipData
         : base(_item)
     {
     }
-    public static AccessoryData GetNewAccessory(int _id, int _lv, int _quality)
+    public static AccessoryData GetNewAccessory(int _uid, int _id, int _equipSlot, int _lv, int _quality)
     {
         AccessoryData data = GameDictionary.AccessoryDic[_id].MemberwiseClone() as AccessoryData;
-        MaxUID++;
-        data.UID = MaxUID;
+        data.UID = _uid;
         data.LV = _lv;
         data.Quality = _quality;
         data.SetRandomProperties();
+        if (_equipSlot == 3)
+            Player.Equip(data, 0);
+        else if (_equipSlot == 4)
+            Player.Equip(data, 1);
         return data;
     }
 }

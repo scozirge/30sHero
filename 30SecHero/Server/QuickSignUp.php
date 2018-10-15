@@ -16,7 +16,8 @@ $con_l = mysql_connect($db_host_load,$db_user,$db_pass) or ("Fail:1:"  . mysql_e
 if (!$con_l)
 	die('Fail:1:' . mysql_error());
 mysql_select_db($db_name , $con_l) or die ("Fail:1:" . mysql_error());
-$check = mysql_query("SELECT * FROM ".$db_name.".playeraccount WHERE `userID_K`=".$userID,$con_l);
+
+$check = mysql_query("SELECT * FROM ".$db_name.".playeraccount WHERE `userID_K`=".$userID_K,$con_l);
 $numrows = mysql_num_rows($check);
 //新增寫入DB連線
 $con_w = mysql_connect($db_host_write,$db_user,$db_pass,true) or ("Fail:1:"  . mysql_error());
@@ -32,7 +33,7 @@ if ($numrows == 0)//找不到已經存在的Kongregate帳號就創新帳號
     $signUpResult = mysql_query("INSERT INTO  ".$db_name.".playeraccount (  `userID_K` ,`gold` ,`emerald`,`signUpTime`,`signInTime`) VALUES ( '".$ac_K."','".$userID_K."','".$gold."','".$emerald."' ,'".$signUpTime."','".$signUpTime."') ; ",$con_w);
 	if ($signUpResult)
 	{
-		//寫入玩家名稱player+流水號
+		//流水號
 		$id=mysql_insert_id();
        //對帳號進行加密
         $rep = new Crypt3Des (); // new一個加密類
@@ -58,8 +59,10 @@ else//找到Kongregate帳戶就進行登入
 	while($row = mysql_fetch_assoc($check))
 	{
 		$id=$row['id'];
+		$gold=$row['gold'];
+		$emerald=$row['emerald'];
 	}
-	$set = mysql_query("UPDATE ".$db_name.".playeraccount SET `id` = '".$id."',`signInTime` = '".$signUpTime."' WHERE `userID_K` = '".$userID_K."' ",$con_w);
+	$set = mysql_query("UPDATE ".$db_name.".playeraccount SET `signInTime` = '".$signUpTime."' WHERE `userID_K` = '".$userID_K."' ",$con_w);
 	if ($set)
 	{
 		//計算執行時間

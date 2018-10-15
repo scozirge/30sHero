@@ -13,16 +13,29 @@ public class PopupUI : MonoBehaviour {
     Text Loading_Value;
 
     [SerializeField]
-    GameObject WarningGo;
+    GameObject ClickCancelGo;
     [SerializeField]
-    Text Warning_Title;
-    [SerializeField]
-    Text Warning_Value;
+    Text ClickCancel_Value;
 
     [SerializeField]
-    GameObject Error_BackToMenuGo;
+    GameObject LoadingTitleGo;
     [SerializeField]
-    Text Error_BackToMenu_Value;
+    Text LoadingTitle;
+    [SerializeField]
+    Text LoadingValue;
+
+    [SerializeField]
+    GameObject ClickCancelTitleGo;
+    [SerializeField]
+    Text ClickCancelTitle;
+    [SerializeField]
+    Text ClickCancelValue;
+
+    [SerializeField]
+    GameObject RestartGo;
+    [SerializeField]
+    Text Restart_Value;
+
     public void Init()
     {
         Myself = this;
@@ -36,40 +49,74 @@ public class PopupUI : MonoBehaviour {
         Myself.LoadingGo.SetActive(true);
         Myself.Loading_Value.text = _text;
     }
-
+    public static void ShowRestart(string _text)
+    {
+        if (!Myself)
+            return;
+        Myself.RestartGo.SetActive(true);
+        Myself.Restart_Value.text = _text;
+    }
+    public void Restart()
+    {
+        Myself.RestartGo.SetActive(false);
+        ChangeScene.RestartGame();
+    }
     public static void HideLoading()
     {
         if (!Myself)
             return;
         Myself.LoadingGo.SetActive(false);
     }
+    public static void ShowClickCancel( string _text)
+    {
+        if (!Myself)
+            return;
+        Myself.ClickCancelGo.SetActive(true);
+        Myself.ClickCancel_Value.text = _text;
+    }
+    public static void HidewClickCancel()
+    {
+        if (!Myself)
+            return;
+        Myself.ClickCancelGo.SetActive(false);
+    }
+    public void HideCancel()
+    {
+        if (!Myself)
+            return;
+        ClickCancelGo.SetActive(false);
+    }
+    public static void ShowTitleLoading( string _title,string _value)
+    {
+        if (!Myself)
+            return;
+        Myself.LoadingTitleGo.SetActive(true);
+        Myself.LoadingTitle.text = _title;
+        Myself.LoadingValue.text = _value;
+    }
+    public static void HidewTitleLoading()
+    {
+        if (!Myself)
+            return;
+        Myself.LoadingTitleGo.SetActive(false);
+    }
+    public static void ShowTitleClickCancel(string _title, string _value)
+    {
+        if (!Myself)
+            return;
+        Myself.ClickCancelTitleGo.SetActive(true);
+        Myself.ClickCancelTitle.text = _title;
+        Myself.ClickCancelValue.text = _value;
+    }
+    public static void HideClickCancelTitle()
+    {
+        if (!Myself)
+            return;
+        Myself.ClickCancelTitleGo.SetActive(false);
+    }
+    public void HidekCancelTitle()
+    {
+        ClickCancelTitleGo.SetActive(false);
+    }
 
-    public static void ShowWarning(string _title,string _description)
-    {
-        if (!Myself)
-            return;
-        Myself.WarningGo.SetActive(true);
-        Myself.Warning_Title.text = _title;
-        Myself.Warning_Value.text = _description;
-    }
-    public void HideWarning()
-    {
-        if (!Myself)
-            return;
-        Myself.WarningGo.SetActive(false);
-    }
-
-    public static void ShowError_BackToMenu(string _title, string _description)
-    {
-        if (!Myself)
-            return;
-        Myself.Error_BackToMenuGo.SetActive(true);
-        Myself.Error_BackToMenu_Value.text = _description;
-    }
-    public void HideError_BackToMenu()
-    {
-        if (!Myself)
-            return;
-        Myself.Error_BackToMenuGo.SetActive(false);
-    }
 }

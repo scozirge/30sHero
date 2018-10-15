@@ -26,10 +26,6 @@ public class AudioPlayer : MonoBehaviour
     }
     static void Init()
     {
-        if (PlayerPrefs.GetInt("IsMute") == 0)
-            MuteSound(false);
-        else
-            AudioPlayer.MuteSound(true);
 
         LoopSoundDic = new Dictionary<string, AudioSource>();
         LoopMusicDic = new Dictionary<string, AudioSource>();
@@ -49,14 +45,10 @@ public class AudioPlayer : MonoBehaviour
     }
     public static void MuteSound(bool _isMute)
     {
-        if (_isMute == IsSoundMute)
-            return;
         IsSoundMute = _isMute;
     }
     public static void MuteMusic(bool _isMute)
     {
-        if (_isMute == IsMusicMute)
-            return;
         IsMusicMute = _isMute;
     }
     public void PlaySoundByString(string _soundName)

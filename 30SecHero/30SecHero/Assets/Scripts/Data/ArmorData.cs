@@ -54,15 +54,15 @@ public class ArmorData : EquipData
         : base(_item)
     {
     }
-    public static ArmorData GetNewArmor(int _id, int _lv, int _quality, bool _isEquiped)
+    public static ArmorData GetNewArmor(int _uid, int _id, int _equipSlot, int _lv, int _quality)
     {
         ArmorData data = GameDictionary.ArmorDic[_id].MemberwiseClone() as ArmorData;
-        MaxUID++;
-        data.UID = MaxUID;
+        data.UID = _uid;
         data.LV = _lv;
         data.Quality = _quality;
-        data.IsEquiped = _isEquiped;
         data.SetRandomProperties();
+        if (_equipSlot == 2)
+            Player.Equip(data);
         return data;
     }
 

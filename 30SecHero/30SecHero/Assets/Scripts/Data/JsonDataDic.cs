@@ -12,6 +12,8 @@ public partial class GameDictionary
     public static Dictionary<int, AccessoryData> AccessoryDic;
     public static Dictionary<string, GameSettingData> GameSettingDic;
     public static Dictionary<int, EnemyData> EnemyDic;
+    //Case表
+    public static Dictionary<int, CaseTableData> CaseTableDic;
 
     //String
     public static Dictionary<string, StringData> String_UIDic;
@@ -19,6 +21,7 @@ public partial class GameDictionary
     public static Dictionary<string, StringData> String_WeaponDic;
     public static Dictionary<string, StringData> String_ArmorDic;
     public static Dictionary<string, StringData> String_AccessoryDic;
+    public static Dictionary<string, StringData> String_CaseTableDic;
 
     ///// <summary>
     ///// 將Json資料寫入字典裡
@@ -39,6 +42,9 @@ public partial class GameDictionary
         AccessoryData.SetData(AccessoryDic, "Accessory");
         EnemyDic = new Dictionary<int, EnemyData>();
         EnemyData.SetData(EnemyDic, "Enemy");
+        //Case
+        CaseTableDic = new Dictionary<int, CaseTableData>();
+        CaseTableData.SetData(CaseTableDic);
 
         //String
         String_UIDic = StringGetter.GetStringData("String_UI");
@@ -46,5 +52,6 @@ public partial class GameDictionary
         String_WeaponDic = StringGetter.GetStringData("String_Weapon");
         String_ArmorDic = StringGetter.GetStringData("String_Armor");
         String_AccessoryDic = StringGetter.GetStringData("String_Accessory");
+        String_CaseTableDic = StringGetter.GetStringData("String_CaseTable");
     }
 }

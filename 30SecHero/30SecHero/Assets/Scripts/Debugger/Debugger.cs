@@ -73,7 +73,7 @@ public partial class Debugger : MonoBehaviour
             m_frameCounter = 0;
             m_timeCounter = 0.0f;
         }
-        Text_FPS.text = string.Format("FPS:{0}", m_lastFramerate.ToString());
+        Text_FPS.text = string.Format("FPS:{0}", Mathf.Round(m_lastFramerate).ToString());
     }
     public void ShowLog(string _title, string _log)
     {

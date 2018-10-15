@@ -36,11 +36,12 @@ else//找到Kongregate帳戶
             $currentRankStr.='/';
 		$id=$row['id'];
 		$jid=$row['jid'];
-		$type=$row['type'];
+		$type=$row['equipType'];
 		$equipSlot=$row['equipSlot'];
 		$lv=$row['lv'];
 		$quality=$row['quality'];
 		$currentRankStr.=$id.','.$jid.','.$type.','.$equipSlot.','.$lv.','.$quality;
+		$dataCount++;
 	}
     //計算執行時間
     $time_end = microtime(true);

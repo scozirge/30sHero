@@ -7,7 +7,6 @@ using System;
 public class WeaponData : EquipData
 {
     public override EquipType Type { get { return EquipType.Weapon; } }
-    static long MaxUID;
     public override int SellGold { get { return GameSettingData.GetWeaponGold(LV, Quality); } }
     /// <summary>
     /// 將字典傳入，依json表設定資料
@@ -54,14 +53,15 @@ public class WeaponData : EquipData
         : base(_item)
     {
     }
-    public static WeaponData GetNewWeapon(int _id, int _lv, int _quality)
+    public static WeaponData GetNewWeapon(int _uid, int _id, int _equipSlot, int _lv, int _quality)
     {
         WeaponData data = GameDictionary.WeaponDic[_id].MemberwiseClone() as WeaponData;
-        MaxUID++;
-        data.UID = MaxUID;
+        data.UID = _uid;
         data.LV = _lv;
         data.Quality = _quality;
         data.SetRandomProperties();
+        if (_equipSlot == 1)
+            Player.Equip(data);
         return data;
     }
 

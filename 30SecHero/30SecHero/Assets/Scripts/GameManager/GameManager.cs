@@ -16,6 +16,8 @@ public partial class GameManager : MonoBehaviour
     Sprite[] QualityBotPrefabs;
     [SerializeField]
     Sprite[] EquipTypBotPrefab;
+    [SerializeField]
+    ServerRequest MyServer;
 
     [Tooltip("暈眩特效")]
     [SerializeField]
@@ -46,6 +48,7 @@ public partial class GameManager : MonoBehaviour
     static Sprite[] QualityBotSprites;
     static Sprite[] EquipTypBot;
     static Dictionary<RoleBuffer, ParticleSystem> BufferParticles = new Dictionary<RoleBuffer, ParticleSystem>();
+    KongregateAPIBehaviour KG;
 
     public static Sprite GetItemQualityBotSprite(int _quality)
     {
@@ -88,7 +91,11 @@ public partial class GameManager : MonoBehaviour
             DeployPopupUI();
         if (!GameDictionary.IsInit)
             GameDictionary.InitDic();
+        MyServer.Init();
         Player.Init();
+        KG = GetComponent<KongregateAPIBehaviour>();
+        if (KG != null)
+            KG.Init();
         DontDestroyOnLoad(gameObject);
         IsInit = true;
         Debug.Log("GameManager Inited");

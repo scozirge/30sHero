@@ -139,10 +139,16 @@ public class Equip : MyUI
     }
     public void Sell()
     {
+        string ids = "";
+        bool getFirstEquip = false;
         for (int i = 0; i < ItemList.Count; i++)
         {
             if (ItemList[i].IsSoldCheck)
             {
+                if (getFirstEquip)
+                    ids += ",";
+                ids += ItemList[i].MyData.UID.ToString();
+                getFirstEquip = true;
                 Player.SellEquip(ItemList[i].MyData);
                 EquipDic[ItemList[i].MyData.Type].Remove(ItemList[i]);
                 ItemList[i].SelfDestroy();
@@ -151,6 +157,8 @@ public class Equip : MyUI
         }
         ItemList.RemoveAll(item => item == null);
         ItemCoutText.text = string.Format("{0}/{1}", ItemList.Count, GameSettingData.MaxItemCount);
+        if (ids != "")
+            ServerRequest.SellEquip(ids);
     }
     public void ToFilter(int _typeID)
     {
@@ -322,6 +330,7 @@ public class Equip : MyUI
             switch (SelectedEquip.Type)
             {
                 case EquipType.Weapon:
+                    ServerRequest.ChangeEquip(SelectedEquip.UID, 1, (Player.MyWeapon != null) ? Player.MyWeapon.UID : 0, 0);
                     if (Player.MyWeapon != null)
                     {
                         int index = GetIndexFromTotalItemList(Player.MyWeapon.UID);
@@ -330,6 +339,7 @@ public class Equip : MyUI
                     Player.Equip((WeaponData)SelectedEquip);
                     break;
                 case EquipType.Armor:
+                    ServerRequest.ChangeEquip(SelectedEquip.UID, 2, (Player.MyArmor != null) ? Player.MyArmor.UID : 0, 0);
                     if (Player.MyArmor != null)
                     {
                         int index = GetIndexFromTotalItemList(Player.MyArmor.UID);
@@ -340,6 +350,7 @@ public class Equip : MyUI
                 case EquipType.Accessory:
                     if (Player.MyAccessorys.Length > 0)
                     {
+                        ServerRequest.ChangeEquip(SelectedEquip.UID, CurEquipAccessoryIndex + 3, (Player.MyAccessorys[CurEquipAccessoryIndex] != null) ? Player.MyAccessorys[CurEquipAccessoryIndex].UID : 0, 0);
                         if (Player.MyAccessorys[CurEquipAccessoryIndex] != null)
                         {
                             int index = GetIndexFromTotalItemList(Player.MyAccessorys[CurEquipAccessoryIndex].UID);
@@ -357,11 +368,13 @@ public class Equip : MyUI
             switch (TakeOffType)
             {
                 case EquipType.Weapon:
+                    ServerRequest.ChangeEquip(Player.MyWeapon.UID, 0, 0, 0);
                     itemIndex = GetIndexFromTotalItemList(Player.MyWeapon.UID);
                     EquipDic[TakeOffType].Add(ItemList[itemIndex]);
                     Player.TakeOff(Player.MyWeapon);
                     break;
                 case EquipType.Armor:
+                    ServerRequest.ChangeEquip(Player.MyArmor.UID, 0, 0, 0);
                     itemIndex = GetIndexFromTotalItemList(Player.MyArmor.UID);
                     EquipDic[TakeOffType].Add(ItemList[itemIndex]);
                     Player.TakeOff(Player.MyArmor);
@@ -369,6 +382,7 @@ public class Equip : MyUI
                 case EquipType.Accessory:
                     if (Player.MyAccessorys.Length > 0)
                     {
+                        ServerRequest.ChangeEquip(Player.MyAccessorys[CurEquipAccessoryIndex].UID, 0, 0, 0);
                         itemIndex = GetIndexFromTotalItemList(Player.MyAccessorys[CurEquipAccessoryIndex].UID);
                         EquipDic[TakeOffType].Add(ItemList[itemIndex]);
                         Player.TakeOff((AccessoryData)SelectedEquip, CurEquipAccessoryIndex);
@@ -430,10 +444,8 @@ public class Equip : MyUI
         {
             for (int j = 0; j < Accessory1Icon.Length; j++)
             {
-                if (j == 0)
-                    Accessory1Icon[j].sprite = GameManager.GetEquipTypeBotSprite(EquipType.Accessory);
-                else
-                    Accessory1Icon[j].enabled = true;
+                Accessory1Icon[j].sprite = Player.MyAccessorys[0].Icons[j];
+                Accessory1Icon[j].enabled = true;
                 Accessory1Icon[j].SetNativeSize();
             }
             AccessoryQuality[0].sprite = GameManager.GetItemQualityBotSprite(Player.MyAccessorys[0].Quality);
@@ -455,13 +467,11 @@ public class Equip : MyUI
         {
             for (int j = 0; j < Accessory2Icon.Length; j++)
             {
-                if (j == 0)
-                    Accessory2Icon[j].sprite = GameManager.GetEquipTypeBotSprite(EquipType.Accessory);
-                else
-                    Accessory2Icon[j].enabled = true;
+                Accessory2Icon[j].sprite = Player.MyAccessorys[1].Icons[j];
+                Accessory2Icon[j].enabled = true;
                 Accessory2Icon[j].SetNativeSize();
             }
-            AccessoryQuality[0].sprite = GameManager.GetItemQualityBotSprite(Player.MyAccessorys[1].Quality);
+            AccessoryQuality[1].sprite = GameManager.GetItemQualityBotSprite(Player.MyAccessorys[1].Quality);
         }
         else
         {

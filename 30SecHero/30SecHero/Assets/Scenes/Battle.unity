@@ -1969,7 +1969,7 @@ Prefab:
     - target: {fileID: 114601397981697422, guid: d9e47796d36fc83458ffab41aea6641e,
         type: 2}
       propertyPath: MaxAvaterTime
-      value: 60
+      value: 120
       objectReference: {fileID: 0}
     - target: {fileID: 114601397981697422, guid: d9e47796d36fc83458ffab41aea6641e,
         type: 2}
@@ -2007,6 +2007,11 @@ Prefab:
         type: 2}
       propertyPath: MaxEtraMove
       value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 114601397981697422, guid: d9e47796d36fc83458ffab41aea6641e,
+        type: 2}
+      propertyPath: KeyboardJumpMoveFactor
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d9e47796d36fc83458ffab41aea6641e, type: 2}

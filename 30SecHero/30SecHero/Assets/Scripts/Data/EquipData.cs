@@ -6,7 +6,7 @@ using System;
 
 public abstract class EquipData : Data
 {
-    public long UID;
+    public int UID;
     public virtual EquipType Type { get; protected set; }
     public virtual string Name { get; protected set; }
 

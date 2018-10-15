@@ -99,7 +99,8 @@ public class Strengthen : MyUI
     }
     public void ToStrengthen()
     {
-        Player.UpgradeStrengthen(CurSelectedData);
+        ServerRequest.StrengthenUpgrade(CurSelectedData.ID, CurSelectedData.LV + 1, Player.Gold - CurSelectedData.GetPrice());
+        Player.StrengthenUpgrade(CurSelectedData.ID);
         CurSelectedItem.UpdateUI();
         ShowInfo(CurSelectedItem);
     }

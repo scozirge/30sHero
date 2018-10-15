@@ -34,7 +34,7 @@ public class StrengthenItem : Item
     public override void RefreshText()
     {
         base.RefreshText();
-        LVText.text = MyData.GetLVString(1);
+        LVText.text = MyData.GetLVString(0);
     }
     public void UpdateUI()
     {

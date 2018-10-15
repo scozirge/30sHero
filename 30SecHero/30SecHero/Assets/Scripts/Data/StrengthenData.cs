@@ -43,7 +43,7 @@ public class StrengthenData : Data
     public int BaseGold;
     public int LevelUpGold;
     public string IconString;
-    public int LV;
+    public int LV { get; private set; }
     public string GetLVString(int _plus)
     {
         return string.Format("{0}{1}", StringData.GetString("LV"), LV + _plus);
@@ -111,9 +111,15 @@ public class StrengthenData : Data
             Debug.LogException(ex);
         }
     }
-    public int LevelUp()
+    public void SetLV(int _lv)
     {
-        return ++LV;
+        if (_lv < 0)
+            return;
+        LV = _lv;
+    }
+    public void LVUP()
+    {
+        LV++;
     }
     public int GetPrice()
     {

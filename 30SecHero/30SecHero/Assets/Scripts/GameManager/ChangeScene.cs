@@ -12,4 +12,8 @@ public class ChangeScene : MonoBehaviour
     {
         SceneManager.LoadScene(_scene);
     }
+    public static void RestartGame()
+    {
+        GoToScene(MyScene.Init);
+    }
 }

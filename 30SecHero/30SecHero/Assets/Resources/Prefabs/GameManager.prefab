@@ -20,6 +20,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4975406249194266}
   - component: {fileID: 114174026396617276}
+  - component: {fileID: 114495893002156964}
+  - component: {fileID: 114832130926922520}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -67,6 +69,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 4b41f9927d76548449fc00d1324961c7, type: 3}
   - {fileID: 21300000, guid: c677aefbc89bd824ba402c26dbbee633, type: 3}
   - {fileID: 21300000, guid: 91f0be839d427af43975c3c4a284c0bf, type: 3}
+  MyServer: {fileID: 114495893002156964}
   StunPrefab: {fileID: 198778626335910482, guid: 7907fa2d41ff8db43be35d4e8129f585,
     type: 2}
   FreezePrefab: {fileID: 198778626335910482, guid: ae8b58be06573b14e84af7e77617b720,
@@ -83,3 +86,25 @@ MonoBehaviour:
     type: 2}
   SpeedUpPrefab: {fileID: 198517669597110872, guid: 3a7b985db268f2b40a2a27be2db75ccc,
     type: 2}
+--- !u!114 &114495893002156964
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1371045023159492}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5031f92ff4f23f14a8af39bd74b20140, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114832130926922520
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1371045023159492}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05b16470d5b4df544b7c58b5cafea00d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

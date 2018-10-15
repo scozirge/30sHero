@@ -10,14 +10,30 @@ public class Set : MyUI
     MyToggle SoundToggle;
     [SerializeField]
     MyToggle LanguageToggle;
+    public override void OnEnable()
+    {
+        base.OnEnable();
+        if (Player.UseLanguage == Language.EN)
+            LanguageToggle.isOn = true;
+        else
+            LanguageToggle.isOn = false;
+        if (Player.MusicOn)
+            MusicToggle.isOn = true;
+        else
+            MusicToggle.isOn = false;
+        if (Player.SoundOn)
+            SoundToggle.isOn = true;
+        else
+            SoundToggle.isOn = false;
+    }
 
     public void SetMusic()
     {
-        AudioPlayer.MuteMusic(!MusicToggle.isOn);
+        Player.SetMusic(MusicToggle.isOn);
     }
     public void SetSound()
     {
-        AudioPlayer.MuteSound(!SoundToggle.isOn);
+        Player.SetSound(SoundToggle.isOn);
     }
     public void SetLanguage()
     {
