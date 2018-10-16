@@ -21,7 +21,6 @@ GameObject:
   - component: {fileID: 4427843541120812}
   - component: {fileID: 198303073744368798}
   - component: {fileID: 199720628349700486}
-  - component: {fileID: 114863564470170448}
   m_Layer: 0
   m_Name: StunnedCirclingStars
   m_TagString: Untagged
@@ -118,19 +117,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Loop: 1
   LifeTime: 0
---- !u!114 &114863564470170448
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1743022328760320}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7faa64a828219b44cb0eb5bfbfa83524, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rotateVector: {x: 0, y: 0, z: 145}
-  rotateSpace: 0
 --- !u!198 &198063869068057178
 ParticleSystem:
   m_ObjectHideFlags: 1

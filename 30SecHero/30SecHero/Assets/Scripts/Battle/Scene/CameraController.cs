@@ -17,17 +17,26 @@ public class CameraController : MonoBehaviour
     [Tooltip("攝影機震動音效")]
     [SerializeField]
     AudioClip ShakeSound;
+    [SerializeField]
+    List<EffectData> EffectList;
 
     static AudioClip MyShakeSound;
+    static Dictionary<string, EffectData> EffectDic = new Dictionary<string, EffectData>();
     float FaceOffsetX;
+    static CameraController MySelf;
     // Use this for initialization
     void Start()
     {
+        MySelf = this;
         //Calculate and store the offset value by getting the distance between the player's position and camera's position.
         Offset = transform.position - Player.transform.position;
         FaceOffsetX = Mathf.Abs(Player.transform.position.x);
         MyPlayer = GetComponent<AnimationPlayer>();
         MyShakeSound = ShakeSound;
+        for (int i = 0; i < EffectList.Count; i++)
+        {
+            EffectDic.Add(EffectList[i].Name, EffectList[i]);
+        }
     }
     // LateUpdate is called after Update each frame
     void FixedUpdate()
@@ -50,5 +59,14 @@ public class CameraController : MonoBehaviour
         if (MyPlayer != null)
             MyPlayer.PlayTrigger(_motionName, 0);
         AudioPlayer.PlaySound(MyShakeSound);
+    }
+    public static void PlayEffect(string _effectName)
+    {
+        if (!MySelf)
+            return;
+        if (EffectDic.ContainsKey(_effectName))
+        {
+            EffectEmitter.EmitParticle(EffectDic[_effectName].Particle, Vector3.zero, Vector3.zero, MySelf.transform);
+        }
     }
 }

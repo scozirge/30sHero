@@ -11,6 +11,9 @@ public partial class PlayerRole : Role
     [Tooltip("被攻擊特效(沒護頓)")]
     [SerializeField]
     ParticleSystem BeHitEffect;
+    [Tooltip("額外動畫播放器")]
+    [SerializeField]
+    protected AnimationPlayer ExtraAniPlayer;
     public bool IsAvatar { get; protected set; }
     private float avatarTimer;
     public float AvatarTimer
@@ -152,7 +155,6 @@ public partial class PlayerRole : Role
     [SerializeField]
     protected float StopDrag;
 
-    ParticleSystem CurShieldBeHitEffect;
     ParticleSystem CurBeHitEffect;
     MyTimer AttackTimer;
     MyTimer JumpTimer;
@@ -182,6 +184,8 @@ public partial class PlayerRole : Role
     void InitMoveAfterimage()
     {
         MoveAfterimage = EffectEmitter.EmitParticle(MoveAfterimagePrefab, Vector3.zero, Vector3.zero, transform).GetComponentInChildrenExcludeSelf<ParticleSystem>();
+        if (MoveAfterimage == null)
+            return;
         MoveAfterimage_Main = MoveAfterimage.main;
         MoveAfterimage_Main.maxParticles = 0;
         MoveAfterimage_Main.startLifetime = 0;
@@ -288,8 +292,8 @@ public partial class PlayerRole : Role
         base.ShieldBlock(ref _dmg);
         if (Shield != 0)
         {
-            if (CurShieldBeHitEffect) Destroy(CurShieldBeHitEffect.gameObject);
-            CurShieldBeHitEffect = EffectEmitter.EmitParticle(BeHitEffect_Shield, Vector2.zero, Vector3.zero, transform);
+            if (CurBeHitEffect) Destroy(CurBeHitEffect.gameObject);
+            CurBeHitEffect = EffectEmitter.EmitParticle(BeHitEffect_Shield, Vector2.zero, Vector3.zero, transform);
             //Damage Shield
             if (_dmg > Shield)
             {
@@ -304,8 +308,9 @@ public partial class PlayerRole : Role
         }
         else
         {
-            if (CurShieldBeHitEffect) Destroy(CurShieldBeHitEffect.gameObject);
-            CurShieldBeHitEffect = EffectEmitter.EmitParticle(BeHitEffect, Vector2.zero, Vector3.zero, transform);
+            if (CurBeHitEffect) Destroy(CurBeHitEffect.gameObject);
+            CurBeHitEffect = EffectEmitter.EmitParticle(BeHitEffect, Vector2.zero, Vector3.zero, transform);
+            CameraController.PlayEffect("BeHitFrame");
         }
 
         ShieldTimer.StartRunTimer = true;
@@ -325,8 +330,11 @@ public partial class PlayerRole : Role
             ExtraMoveSpeed = 0;
             RemoveAllBuffer();
             IsAvatar = false;
-            MoveAfterimage_Main.maxParticles = 0;
-            MoveAfterimage_Main.startLifetime = 0;
+            if (MoveAfterimage)
+            {
+                MoveAfterimage_Main.maxParticles = 0;
+                MoveAfterimage_Main.startLifetime = 0;
+            }
         }
         AvatarTimerText.text = Mathf.Round(AvatarTimer).ToString();
     }
@@ -440,12 +448,14 @@ public partial class PlayerRole : Role
             else if (Input.GetAxis("Horizontal") > 0)
             {
                 FaceLeftOrRight = 1;
-                MoveAfterimage_Main.startRotationY = 0;
+                if (MoveAfterimage)
+                    MoveAfterimage_Main.startRotationY = 0;
             }
             else
             {
                 FaceLeftOrRight = -1;
-                MoveAfterimage_Main.startRotationY = 180;
+                if (MoveAfterimage)
+                    MoveAfterimage_Main.startRotationY = 180;
             }
         }
         RoleTrans.localScale = new Vector2(FaceLeftOrRight, 1);
@@ -513,16 +523,20 @@ public partial class PlayerRole : Role
         if (!IsAvatar)
             return;
         ExtraMoveSpeed += GainMoveFromKilling;
+        ExtraAniPlayer.PlayTrigger("SpeedUp", 0);
     }
 
     void ExtraMoveSpeedDecay()
     {
+        if (!MoveAfterimage)
+            return;
         if (!IsAvatar)
             return;
         if (Buffers.ContainsKey(RoleBuffer.Stun))
         {
-            MoveAfterimage_Main.maxParticles = 0;
-            MoveAfterimage_Main.startLifetime = 0;
+
+                MoveAfterimage_Main.maxParticles = 0;
+                MoveAfterimage_Main.startLifetime = 0;
             return;
         }
         if (ExtraMoveSpeed > 0)

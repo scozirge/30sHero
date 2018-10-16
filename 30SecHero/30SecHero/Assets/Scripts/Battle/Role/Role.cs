@@ -58,6 +58,7 @@ public abstract class Role : MonoBehaviour
     [Tooltip("死亡特效")]
     [SerializeField]
     ParticleSystem DeathEffect;
+    [Tooltip("腳色動畫播放器")]
     [SerializeField]
     protected AnimationPlayer AniPlayer;
     [SerializeField]
@@ -212,7 +213,8 @@ public abstract class Role : MonoBehaviour
                 if(GameManager.GetBufferParticle(_buffer.Type)!=null)
                 {
                     ParticleSystem ps = EffectEmitter.EmitParticle(GameManager.GetBufferParticle(_buffer.Type), Vector3.zero, Vector3.zero, transform);
-                    BufferParticles.Add(_buffer.Type, ps);
+                    if(ps)
+                        BufferParticles.Add(_buffer.Type, ps);
                 }
             }
             BufferEffectChange(_buffer, true);

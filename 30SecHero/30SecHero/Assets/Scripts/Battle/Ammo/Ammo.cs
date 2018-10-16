@@ -146,6 +146,7 @@ public partial class Ammo : MonoBehaviour
         if (AmmoType != ShootAmmoType.Permanent)
             IsCausedDamage = true;
         DamageTime.StartRunTimer = true;
+        SpawnDeadParticles();
     }
     protected virtual void Update()
     {
@@ -158,7 +159,6 @@ public partial class Ammo : MonoBehaviour
     }
     public virtual void SelfDestroy()
     {
-        SpawnDeadParticles();
         Destroy(this.gameObject);
     }
     protected virtual void LIfeTimerFunc()

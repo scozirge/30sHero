@@ -72,6 +72,8 @@ public static class ComponentManage
     }
     public static T GetComponentInChildrenExcludeSelf<T>(this Component comp) where T : Component
     {
+        if (comp == null)
+            return null;
         T[] comList = comp.GetComponentsInChildren<T>();
         foreach (T c in comList)
         {
