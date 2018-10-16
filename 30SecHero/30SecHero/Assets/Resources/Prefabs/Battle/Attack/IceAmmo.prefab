@@ -86,7 +86,8 @@ MonoBehaviour:
   LocalParticles:
   - {fileID: 198961861250452476, guid: eb0ea27b669344b4db59e706c1954d0f, type: 2}
   GlobalParticle: []
-  DeadParticles: []
+  DeadParticles:
+  - {fileID: 19871332, guid: 932046b7eaf3b554f8d74c81e2f00558, type: 2}
   LifeTime: 3
   KnockIntensity: 0
   AmmoType: 1

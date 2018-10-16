@@ -70,21 +70,21 @@ MonoBehaviour:
   - {fileID: 21300000, guid: c677aefbc89bd824ba402c26dbbee633, type: 3}
   - {fileID: 21300000, guid: 91f0be839d427af43975c3c4a284c0bf, type: 3}
   MyServer: {fileID: 114495893002156964}
-  StunPrefab: {fileID: 198778626335910482, guid: 7907fa2d41ff8db43be35d4e8129f585,
+  StunPrefab: {fileID: 198063869068057178, guid: edffd9c1784edc94989a833933ba67b4,
     type: 2}
-  FreezePrefab: {fileID: 198778626335910482, guid: ae8b58be06573b14e84af7e77617b720,
+  FreezePrefab: {fileID: 198176649790183064, guid: 8a0d6a69b57aaff408ae8bdecc61c0ca,
     type: 2}
-  BurnPrefab: {fileID: 198778626335910482, guid: 5256d43f5295b3c4c8f96c4e21e46b8b,
+  BurnPrefab: {fileID: 198682381177258040, guid: 26372b3ba29515c45896c0f5a7b6c2b1,
     type: 2}
-  DamageDownPrefab: {fileID: 198118325992113576, guid: 5a92c9c5d13ad794797dffcd0662e4f1,
+  DamageDownPrefab: {fileID: 198106105346108706, guid: 81776a12614bb2b45a1c9c4b992bb50b,
     type: 2}
-  ImmortalPrefab: {fileID: 198712052328016582, guid: 30de476e70ea7e94cb7b6a40fa9ba507,
+  ImmortalPrefab: {fileID: 198796042616351790, guid: 9cee33da8b3d059458361ee2c1d444c8,
     type: 2}
-  DamageUpPrefab: {fileID: 198118325992113576, guid: 0c765d955ef08f44e8aa4432ff351ce1,
+  DamageUpPrefab: {fileID: 198001080371431652, guid: 59b3bdab785296840b86c087aae64409,
     type: 2}
-  BlockPrefab: {fileID: 198799690855025450, guid: 813210bc99f9fa84eaf509350897f250,
+  BlockPrefab: {fileID: 198853811207955838, guid: 48c7fe97ee5fbd0478fa25692681f2f2,
     type: 2}
-  SpeedUpPrefab: {fileID: 198517669597110872, guid: 3a7b985db268f2b40a2a27be2db75ccc,
+  SpeedUpPrefab: {fileID: 198124011897465664, guid: 93b517a4923930e45bf9a7cba303ae26,
     type: 2}
 --- !u!114 &114495893002156964
 MonoBehaviour:

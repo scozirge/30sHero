@@ -306,25 +306,25 @@ MonoBehaviour:
   KnockDrag: 10
   NormalDrag: 50
   KnockDragDuration: 0.1
-  BeHitEffect_Shield: {fileID: 198350346737686014, guid: f2d13c3558e85fd41b7c5255972c24e4,
+  BeHitEffect_Shield: {fileID: 198853811207955838, guid: 48c7fe97ee5fbd0478fa25692681f2f2,
     type: 2}
-  BeHitEffect: {fileID: 198545341295034162, guid: 8759edc6a0f30934c8eb874b3f77a7a2,
+  BeHitEffect: {fileID: 198766691851678274, guid: 0dc4f5410669a9a48874136700ca00d6,
     type: 2}
   MaxShield: 100
   ShieldBar: {fileID: 0}
   ShieldReGenerateTime: 3
   ShieldRechargeTime: 5
-  GainMoveFromKilling: 100
+  GainMoveFromKilling: 150
   MoveDepletedTime: 10
-  MaxEtraMove: 500
-  MaxAvaterTime: 60
+  MaxEtraMove: 1000
+  MaxAvaterTime: 120
   AvatarTimerText: {fileID: 0}
   AvatarTimeBuff: 0
   BaseEnergyDrop: 0
   BaseMoneyDrop: 0
   BaseBloodthirsty: 0
   PotionEfficacy: 0
-  KeyboardJumpMoveFactor: 4
+  KeyboardJumpMoveFactor: 10
   MoveAfterimagePrefab: {fileID: 198230356777013556, guid: 4ac12026ed62f024b9bc36b2da373c93,
     type: 2}
   DontAttackRestoreTime: 1
@@ -351,7 +351,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a5de78645e07e74e83b7c3141e581bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AttackEffect: {fileID: 198271489546005640, guid: d78b7a87f9cdee140ad9598ed66e7f92,
+  AttackEffect: {fileID: 198308960938074910, guid: 6ebb3848cff528744a0ce66822bd1588,
     type: 2}
   Attacker: {fileID: 114601397981697422}
   KnockForce: 1000000
@@ -460,6 +460,6 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -19, y: 0}
+  m_AnchoredPosition: {x: -511, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}

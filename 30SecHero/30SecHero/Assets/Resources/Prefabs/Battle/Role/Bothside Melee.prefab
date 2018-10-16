@@ -255,7 +255,7 @@ MonoBehaviour:
   DirectX: 0
   DirectY: 0
   BaseHealth: 100
-  BaseDamage: 4
+  BaseDamage: 10
   BaseDefence: 0
   BaseMoveSpeed: 600
   DeathEffect: {fileID: 198802542160044040, guid: 8f344cf8edc65e44883dfdf0168792bd,
@@ -263,9 +263,9 @@ MonoBehaviour:
   AniPlayer: {fileID: 114796498901394522}
   RoleTrans: {fileID: 224787385446496172}
   DeathSound: {fileID: 8300000, guid: fc274ce0d0fd8fb40b2e7557d54975e8, type: 3}
-  KnockDrag: 40
+  KnockDrag: 30
   NormalDrag: 0
-  KnockDragDuration: 0.7
+  KnockDragDuration: 0.9
   DropProbility: 1
   DropCount: 1
   DropSkillProbility: 1
