@@ -206,6 +206,8 @@ MonoBehaviour:
     GetParticle: {fileID: 198421084779393996, guid: 9d76221f8330c3e4e88f4600ea7c80bc,
       type: 2}
   MyIcon: {fileID: 114629167383406342}
+  DeathEffect: {fileID: 198308960938074910, guid: 6ebb3848cff528744a0ce66822bd1588,
+    type: 2}
 --- !u!114 &114629167383406342
 MonoBehaviour:
   m_ObjectHideFlags: 1

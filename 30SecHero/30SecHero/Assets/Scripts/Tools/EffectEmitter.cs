@@ -9,13 +9,13 @@ public class EffectEmitter : MonoBehaviour
     {
         MySelf = transform;
     }
-    public static void EmitParticle(string _effectName, Vector3 _pos, Vector3 _dir, Transform _parent)
+    public static ParticleSystem EmitParticle(string _effectName, Vector3 _pos, Vector3 _dir, Transform _parent)
     {
         GameObject particlePrefab = Resources.Load<ParticleSystem>(string.Format("Particles/{0}/{0}", _effectName)).gameObject;
         if (particlePrefab == null)
         {
             Debug.LogWarning("No particle prefab are assigned:" + string.Format("Particles/{0}/{0}", _effectName));
-            return;
+            return null;
         }
         GameObject particleGo = Instantiate(particlePrefab.gameObject, Vector3.zero, Quaternion.identity) as GameObject;
         if (_parent)
@@ -25,6 +25,9 @@ public class EffectEmitter : MonoBehaviour
 
         particleGo.transform.localPosition = _pos;
         particleGo.transform.localRotation = Quaternion.Euler(_dir);
+        particleGo.AddComponent<ParticleManager>();
+        ParticleSystem ps= particleGo.GetComponent<ParticleSystem>();
+        return ps;
     }
     public static ParticleSystem EmitParticle(ParticleSystem _particle, Vector3 _pos, Vector3 _dir, Transform _parent)
     {
@@ -36,6 +39,7 @@ public class EffectEmitter : MonoBehaviour
 
         particle.transform.localPosition = _pos;
         particle.transform.localRotation = Quaternion.Euler(_dir);
+        particle.gameObject.AddComponent<ParticleManager>();
         return particle;
     }
 

@@ -84,4 +84,21 @@ public static class ComponentManage
         }
         return null;
     }
+    public static T[] GetComponentsInChildrenExcludeSelf<T>(this Component comp) where T : Component
+    {
+        if (comp == null)
+            return null;
+        T[] comList = comp.GetComponentsInChildren<T>();
+        List<T> list = new List<T>();
+        foreach (T c in comList)
+        {
+            if (!GameObject.ReferenceEquals(c.gameObject, comp.gameObject))
+            {
+                list.Add(c);
+            }
+        }
+        if (list.Count != 0)
+            return list.ToArray();
+        return null;
+    }
 }

@@ -13,6 +13,8 @@ public class Loot : MonoBehaviour
     List<LootData> LootList;
     [SerializeField]
     Image MyIcon;
+    [SerializeField]
+    ParticleSystem DeathEffect;
 
     float Time;
     float Value;
@@ -41,6 +43,7 @@ public class Loot : MonoBehaviour
         {
             EffectEmitter.EmitParticle(Data.GetParticle, Vector2.zero, Vector2.zero, _col.transform);
             _col.GetComponent<PlayerRole>().GetLoot(Data);
+            if (DeathEffect) EffectEmitter.EmitParticle(DeathEffect, transform.position, Vector3.zero, null);
             SelfDestroy();
         }
     }
