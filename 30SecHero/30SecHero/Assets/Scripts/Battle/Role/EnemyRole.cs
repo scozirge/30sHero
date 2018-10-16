@@ -8,6 +8,8 @@ public partial class EnemyRole : Role
     GameObject HealthObj;
     [SerializeField]
     float PlayMotionDuration = 0.5f;
+    [SerializeField]
+    List<BufferData> InitBuffers;
 
 
     public int ID { get; protected set; }
@@ -42,6 +44,11 @@ public partial class EnemyRole : Role
         if (Target && Health <= Target.Damage)
             HealthObj.SetActive(false);
         InitMotionPic();
+        if(InitBuffers!=null)
+            for(int i=0;i<InitBuffers.Count;i++)
+            {
+                AddBuffer(InitBuffers[i].GetMemberwiseClone());
+            }
     }
     void InitMotionPic()
     {
