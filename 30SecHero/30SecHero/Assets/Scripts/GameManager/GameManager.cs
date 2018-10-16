@@ -95,7 +95,6 @@ public partial class GameManager : MonoBehaviour
         if (!GameDictionary.IsInit)
             GameDictionary.InitDic();
         MyServer.Init();
-        Player.Init();
         KG = GetComponent<KongregateAPIBehaviour>();
         if (KG != null)
             KG.Init();

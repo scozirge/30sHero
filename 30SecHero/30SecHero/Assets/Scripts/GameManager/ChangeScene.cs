@@ -10,10 +10,18 @@ public class ChangeScene : MonoBehaviour
     }
     public void GoToScene(string _scene)
     {
-        SceneManager.LoadScene(_scene);
+        NextSceneName = _scene;
     }
     public static void RestartGame()
     {
         GoToScene(MyScene.Init);
+    }
+    string NextSceneName = "";
+    void Update()
+    {
+        if (NextSceneName == "")
+            return;
+        if(KongregateAPIBehaviour.EndLogin)
+            SceneManager.LoadScene(NextSceneName);
     }
 }

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 public partial class Player
 {
     public static Language UseLanguage { get; private set; }
+    public static bool LocalData = true;
     public static bool MusicOn { get; private set; }
     public static bool SoundOn { get; private set; }
     public static bool IsRigister { get; private set; }
@@ -18,61 +19,87 @@ public partial class Player
         switch (UseLanguage)
         {
             case Language.ZH_TW:
-                PlayerPrefs.SetInt("UseLanguage", 0);
+                PlayerPrefs.SetInt(LocoData.UseLanguage.ToString(), 0);
                 break;
             case Language.ZH_CN:
-                PlayerPrefs.SetInt("UseLanguage", 1);
+                PlayerPrefs.SetInt(LocoData.UseLanguage.ToString(), 1);
                 break;
             case Language.EN:
-                PlayerPrefs.SetInt("UseLanguage", 2);
+                PlayerPrefs.SetInt(LocoData.UseLanguage.ToString(), 2);
                 break;
             default:
-                PlayerPrefs.SetInt("UseLanguage", 0);
+                PlayerPrefs.SetInt(LocoData.UseLanguage.ToString(), 0);
                 break;
         }
+    }
+    public static void UseLocalData(bool _bool)
+    {
+        LocalData = _bool;
+        Debug.Log("UseLocalData:" + _bool);
+        Player.Init();
+        if (LocalData)
+            GetLocalData();
+        else
+            ServerRequest.QuickSignUp();
     }
     public static void SetSound(bool _on)
     {
         SoundOn = _on;
         AudioPlayer.MuteSound(!SoundOn);
         if (SoundOn)
-            PlayerPrefs.SetInt("SoundOn", 1);
+            PlayerPrefs.SetInt(LocoData.SoundOn.ToString(), 1);
         else
-            PlayerPrefs.SetInt("SoundOn", 0);
+            PlayerPrefs.SetInt(LocoData.SoundOn.ToString(), 0);
     }
     public static void SetMusic(bool _on)
     {
         MusicOn = _on;
         AudioPlayer.MuteMusic(!MusicOn);
         if (MusicOn)
-            PlayerPrefs.SetInt("MusicOn", 1);
+            PlayerPrefs.SetInt(LocoData.MusicOn.ToString(), 1);
         else
-            PlayerPrefs.SetInt("MusicOn", 0);
+            PlayerPrefs.SetInt(LocoData.MusicOn.ToString(), 0);
     }
-    public static void SetKongregateUserData_CB(string _name, int _kongregateID)
+    public static void GetLocalData()
+    {
+        //資源
+        int gold = PlayerPrefs.GetInt(LocoData.Gold.ToString());
+        Debug.Log("gold=" + gold);
+        if (gold != 0)
+            SetGold(gold);
+        int emerald = PlayerPrefs.GetInt(LocoData.Emerald.ToString());
+        if (emerald != 0)
+            SetEmerald(emerald);
+        Debug.Log("emerald=" + emerald);
+        //裝備
+        string equipStr = PlayerPrefs.GetString(LocoData.Equip.ToString());
+        Debug.Log("equipStr=" + equipStr);
+        if(equipStr!="")
+        {
+            string[] equipData = equipStr.Split('/');
+            GetEquip_CB(equipData);
+        }
+        //強化
+        string strengthenStr = PlayerPrefs.GetString(LocoData.Strengthen.ToString());
+        Debug.Log("strengthenStr=" + strengthenStr);
+        if(strengthenStr!="")
+        {
+            string[] strengthenData = strengthenStr.Split('/');
+            GetStrengthen_CB(strengthenData);
+        }
+    }
+    public static void GetKongregateUserData_CB(string _name, int _kongregateID)
     {
         Name_K = _name;
         UserID_K = _kongregateID;
-        ServerRequest.QuickSignUp();
-        KongregateAPIBehaviour.ShowItemList();
     }
     public static void SignIn_CB(string[] _data)
     {
         ID = int.Parse(_data[0]);
-        GainGold(int.Parse(_data[1]));
-        GainEmerald(int.Parse(_data[2]));
+        SetGold(int.Parse(_data[1]));
+        SetEmerald(int.Parse(_data[2]));
         ServerRequest.GetEquip();
-    }
-    public static void GetStrengthen_CB(string[] _data)
-    {
-        for (int i = 0; i < _data.Length; i++)
-        {
-            string[] properties = _data[i].Split(',');
-            int jid = int.Parse(properties[0]);
-            int lv = int.Parse(properties[1]);
-            if (StrengthenDic.ContainsKey(jid))
-                StrengthenDic[jid].SetLV(lv);
-        }
+        ServerRequest.GetStrengthen();
     }
     public static void GetEquip_CB(string[] _data)
     {
@@ -108,7 +135,17 @@ public partial class Player
         Itmes.Add(EquipType.Weapon, wlist);
         Itmes.Add(EquipType.Armor, alist);
         Itmes.Add(EquipType.Accessory, aclist);
-        ServerRequest.GetStrengthen();
+    }
+    public static void GetStrengthen_CB(string[] _data)
+    {
+        for (int i = 0; i < _data.Length; i++)
+        {
+            string[] properties = _data[i].Split(',');
+            int jid = int.Parse(properties[0]);
+            int lv = int.Parse(properties[1]);
+            if (StrengthenDic.ContainsKey(jid))
+                StrengthenDic[jid].SetLV(lv);
+        }
     }
     public static void StrengthenUpgrade_CB(string[] _data)
     {

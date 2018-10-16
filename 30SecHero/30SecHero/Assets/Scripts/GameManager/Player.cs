@@ -103,6 +103,11 @@ public partial class Player
         Gold = _gold;
         Main.UpdateResource();
     }
+    public static void SetEmerald(int _emerald)
+    {
+        Emerald = _emerald;
+        Main.UpdateResource();
+    }
     public static void GainGold(int _gold)
     {
         Gold += _gold;
@@ -113,12 +118,31 @@ public partial class Player
         Emerald += _emerald;
         Main.UpdateResource();
     }
-    public static void StrengthenUpgrade(int _id)
+    public static void StrengthenUpgrade(StrengthenData _data)
     {
-        GainGold(-StrengthenDic[_id].GetPrice());
-        if (StrengthenDic.ContainsKey(_id))
+        //執行強化
+        GainGold(-_data.GetPrice());
+        if (StrengthenDic.ContainsKey(_data.ID))
         {
-            StrengthenDic[_id].LVUP();
+            StrengthenDic[_data.ID].LVUP();
         }
+        //寫入資料
+        if (LocalData)
+        {
+            //金幣
+            PlayerPrefs.SetInt(LocoData.Gold.ToString(), Gold);
+            //強化
+            List<int> keys=new List<int>(StrengthenDic.Keys);
+            string dataStr = "";
+            for(int i=0;i<keys.Count;i++)
+            {
+                if (i != 0)
+                    dataStr += "/";
+                dataStr += StrengthenDic[keys[i]].ID + "," + StrengthenDic[keys[i]].LV;
+            }
+            PlayerPrefs.SetString(LocoData.Strengthen.ToString(), dataStr);
+        }
+        else
+            ServerRequest.StrengthenUpgrade(_data.ID, _data.LV + 1, Player.Gold);
     }
 }

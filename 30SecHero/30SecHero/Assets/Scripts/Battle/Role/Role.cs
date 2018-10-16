@@ -238,8 +238,10 @@ public abstract class Role : MonoBehaviour
             Buffers.Remove(_buffer.Type);
         if(BufferParticles.ContainsKey(_buffer.Type))
         {
-            Debug.Log(_buffer.Type);
-            Destroy(BufferParticles[_buffer.Type].gameObject);
+            if (BufferParticles[_buffer.Type])
+                Destroy(BufferParticles[_buffer.Type].gameObject);
+            else
+                Debug.LogWarning(string.Format("特效被非預期的移除了:{0}", _buffer.Type));
             BufferParticles.Remove(_buffer.Type);
         }
         BufferEffectChange(_buffer, false);

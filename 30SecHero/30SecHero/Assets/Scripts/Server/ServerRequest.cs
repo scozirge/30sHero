@@ -52,9 +52,4 @@ public partial class ServerRequest : MonoBehaviour
         else
             return TestServerURL;
     }
-
-    public static void Register()
-    {
-        QuickSignUp();
-    }
 }

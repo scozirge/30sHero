@@ -5,6 +5,10 @@ using UnityEngine;
 public class KongregateAPIBehaviour : MonoBehaviour
 {
     private static KongregateAPIBehaviour instance;
+    MyTimer InitTimer;
+    public static bool KongregateLogin = false;
+    public static bool EndLogin;
+    float WaitInitTime = 5;
 
     public void Init()
     {
@@ -26,7 +30,21 @@ public class KongregateAPIBehaviour : MonoBehaviour
         kongregateUnitySupport.initAPI('KongregateAPI', 'OnKongregateAPILoaded');
       };"
         );
-        //Player.SetKongregateUserData_CB("scozirge", 1);
+        //OnKongregateUserInfo("1|scozirge");
+        if (Application.isEditor)
+            WaitInitTime = 0.5f;
+        InitTimer = new MyTimer(WaitInitTime, EndKongregateLogin, true, false);
+    }
+    void Update()
+    {
+        InitTimer.RunTimer();
+    }
+    public void EndKongregateLogin()
+    {
+        if (EndLogin)
+            return;
+        EndLogin = true;
+        Player.UseLocalData(!KongregateLogin);
     }
 
     public void OnKongregateAPILoaded(string userInfoString)
@@ -37,12 +55,18 @@ public class KongregateAPIBehaviour : MonoBehaviour
 
     public void OnKongregateUserInfo(string userInfoString)
     {
+        InitTimer.StartRunTimer = false;
         var info = userInfoString.Split('|');
         var userId = System.Convert.ToInt32(info[0]);
         var username = info[1];
         //var gameAuthToken = info[2];
         Debug.Log("///////////////Kongregate User Info: " + username + ", userId: " + userId);
-        Player.SetKongregateUserData_CB(username, userId);
+        if (userId != 0)
+        {
+            KongregateLogin = true;
+            Player.GetKongregateUserData_CB(username, userId);
+        }
+        EndKongregateLogin();
     }
     public static void ShowItemList()
     {

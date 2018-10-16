@@ -19,7 +19,6 @@ public class Purchase : MyUI
     [SerializeField]
     Text CountText;
 
-    bool IsInit;
     List<PurchaseItem> ItemList = new List<PurchaseItem>();
 
     public static Purchase MySelf;
@@ -66,7 +65,6 @@ public class Purchase : MyUI
             ItemList[0].OnPress();
             ItemList[0].GetComponent<Toggle>().isOn = true;
         }
-        IsInit = true;
     }
     public void ShowInfo(PurchaseItem _item)
     {

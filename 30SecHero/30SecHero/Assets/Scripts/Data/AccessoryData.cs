@@ -67,4 +67,12 @@ public class AccessoryData : EquipData
             Player.Equip(data, 1);
         return data;
     }
+    public override void SetEquipStatus(bool _isEquiped, int _equipSlot)
+    {
+        base.SetEquipStatus(_isEquiped, _equipSlot);
+        if (_isEquiped)
+            EquipSlot = _equipSlot;
+        else
+            _equipSlot = 0;
+    }
 }

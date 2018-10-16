@@ -330,7 +330,6 @@ public class Equip : MyUI
             switch (SelectedEquip.Type)
             {
                 case EquipType.Weapon:
-                    ServerRequest.ChangeEquip(SelectedEquip.UID, 1, (Player.MyWeapon != null) ? Player.MyWeapon.UID : 0, 0);
                     if (Player.MyWeapon != null)
                     {
                         int index = GetIndexFromTotalItemList(Player.MyWeapon.UID);
@@ -339,7 +338,6 @@ public class Equip : MyUI
                     Player.Equip((WeaponData)SelectedEquip);
                     break;
                 case EquipType.Armor:
-                    ServerRequest.ChangeEquip(SelectedEquip.UID, 2, (Player.MyArmor != null) ? Player.MyArmor.UID : 0, 0);
                     if (Player.MyArmor != null)
                     {
                         int index = GetIndexFromTotalItemList(Player.MyArmor.UID);
@@ -350,7 +348,6 @@ public class Equip : MyUI
                 case EquipType.Accessory:
                     if (Player.MyAccessorys.Length > 0)
                     {
-                        ServerRequest.ChangeEquip(SelectedEquip.UID, CurEquipAccessoryIndex + 3, (Player.MyAccessorys[CurEquipAccessoryIndex] != null) ? Player.MyAccessorys[CurEquipAccessoryIndex].UID : 0, 0);
                         if (Player.MyAccessorys[CurEquipAccessoryIndex] != null)
                         {
                             int index = GetIndexFromTotalItemList(Player.MyAccessorys[CurEquipAccessoryIndex].UID);

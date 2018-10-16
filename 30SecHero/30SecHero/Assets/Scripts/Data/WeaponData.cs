@@ -64,5 +64,12 @@ public class WeaponData : EquipData
             Player.Equip(data);
         return data;
     }
-
+    public override void SetEquipStatus(bool _isEquiped, int _equipSlot)
+    {
+        base.SetEquipStatus(_isEquiped, _equipSlot);
+        if (_isEquiped)
+            EquipSlot = 1;
+        else
+            _equipSlot = 0;
+    }
 }

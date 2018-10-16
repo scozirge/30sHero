@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 public class Main : MonoBehaviour
 {
+    bool Isinit = false;
     [SerializeField]
     Text GoldText;
     [SerializeField]
@@ -30,6 +31,11 @@ public class Main : MonoBehaviour
     {
         if (!GameManager.IsInit)
             GameManager.DeployGameManager();
+    }
+    void Init()
+    {
+        if (Isinit)
+            return;
         UIDic.Add(MainUI.Strengthen, MyStrengthen);
         UIDic.Add(MainUI.Purchase, MyPurchase);
         UIDic.Add(MainUI.Equip, MyEquip);
@@ -43,11 +49,19 @@ public class Main : MonoBehaviour
         }
         MyGoldText = GoldText;
         MyEmeraldText = EmeraldText;
+        Isinit = true;
     }
     void OnEnable()
     {
+        if (!Isinit)
+            return;
         GoldText.text = Player.Gold.ToString();
         EmeraldText.text = Player.Emerald.ToString();
+    }
+    void Update()
+    {
+        if (Player.IsInit)
+            Init();
     }
     public static void UpdateResource()
     {

@@ -7,6 +7,7 @@ using System;
 public abstract class EquipData : Data
 {
     public int UID;
+    public int EquipSlot { get; protected set; }
     public virtual EquipType Type { get; protected set; }
     public virtual string Name { get; protected set; }
 
@@ -19,7 +20,7 @@ public abstract class EquipData : Data
     {
         return string.Format("{0}{1}", GameDictionary.String_UIDic["LV"].GetString(Player.UseLanguage), LV);
     }
-    public bool IsEquiped;
+    public bool IsEquiped { get; protected set; }
     public Dictionary<RoleProperty, float> Properties = new Dictionary<RoleProperty, float>();
     //Random Attributes
     /*
@@ -39,7 +40,10 @@ public abstract class EquipData : Data
     public float RandomBloodThirsty;
     public float RandomPotionEfficiency;
     */
-
+    public virtual void SetEquipStatus(bool _isEquiped,int _equipSlot)
+    {
+        IsEquiped = _isEquiped;
+    }
     protected EquipData(JsonData _item)
     {
         try
