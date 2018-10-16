@@ -5,6 +5,9 @@ using UnityEngine.UI;
 
 public partial class PlayerRole : Role
 {
+    [Tooltip("解除變身特效")]
+    [SerializeField]
+    ParticleSystem AvatarRemoveEffect;
     [Tooltip("被攻擊特效(護頓)")]
     [SerializeField]
     ParticleSystem BeHitEffect_Shield;
@@ -323,13 +326,14 @@ public partial class PlayerRole : Role
             return;
         if (AvatarTimer > 0)
             AvatarTimer -= Time.deltaTime;
-        else
+        else//解除變身
         {
             AniPlayer.PlayTrigger("Idle2", 0);
             AvatarTimer = 0;
             ExtraMoveSpeed = 0;
             RemoveAllBuffer();
             IsAvatar = false;
+            EffectEmitter.EmitParticle(AvatarRemoveEffect, Vector3.zero, Vector3.zero, transform);
             if (MoveAfterimage)
             {
                 MoveAfterimage_Main.maxParticles = 0;

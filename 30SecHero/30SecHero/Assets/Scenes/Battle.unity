@@ -701,6 +701,17 @@ Prefab:
       propertyPath: MaxShield
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 114529601492733476, guid: d9e47796d36fc83458ffab41aea6641e,
+        type: 2}
+      propertyPath: AvatarRemoveEffect
+      value: 
+      objectReference: {fileID: 198350346737686014, guid: ddb5839dcf2d33e44ae99e5d8f31d965,
+        type: 2}
+    - target: {fileID: 114529601492733476, guid: d9e47796d36fc83458ffab41aea6641e,
+        type: 2}
+      propertyPath: MaxAvaterTime
+      value: 120
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d9e47796d36fc83458ffab41aea6641e, type: 2}
   m_IsPrefabAsset: 0
