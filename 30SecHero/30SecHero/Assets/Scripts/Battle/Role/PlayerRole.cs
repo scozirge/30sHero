@@ -296,7 +296,7 @@ public partial class PlayerRole : Role
         if (Shield != 0)
         {
             if (CurBeHitEffect) Destroy(CurBeHitEffect.gameObject);
-            CurBeHitEffect = EffectEmitter.EmitParticle(BeHitEffect_Shield, Vector2.zero, Vector3.zero, transform);
+            if (BeHitEffect_Shield) CurBeHitEffect = EffectEmitter.EmitParticle(BeHitEffect_Shield, Vector2.zero, Vector3.zero, transform);
             //Damage Shield
             if (_dmg > Shield)
             {
@@ -312,7 +312,7 @@ public partial class PlayerRole : Role
         else
         {
             if (CurBeHitEffect) Destroy(CurBeHitEffect.gameObject);
-            CurBeHitEffect = EffectEmitter.EmitParticle(BeHitEffect, Vector2.zero, Vector3.zero, transform);
+            if (BeHitEffect) CurBeHitEffect = EffectEmitter.EmitParticle(BeHitEffect, Vector2.zero, Vector3.zero, transform);
             CameraController.PlayEffect("BeHitFrame");
         }
 
@@ -539,8 +539,8 @@ public partial class PlayerRole : Role
         if (Buffers.ContainsKey(RoleBuffer.Stun))
         {
 
-                MoveAfterimage_Main.maxParticles = 0;
-                MoveAfterimage_Main.startLifetime = 0;
+            MoveAfterimage_Main.maxParticles = 0;
+            MoveAfterimage_Main.startLifetime = 0;
             return;
         }
         if (ExtraMoveSpeed > 0)
