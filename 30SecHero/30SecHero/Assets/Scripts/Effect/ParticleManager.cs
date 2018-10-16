@@ -33,7 +33,10 @@ public class ParticleManager : MonoBehaviour
                 if (LifeTime < time)
                     LifeTime = time;
             }
-            ParticleLifeTimeDic.Add(name, LifeTime);
+            if(Loop)
+                ParticleLifeTimeDic.Add(name, 1000);
+            else
+                ParticleLifeTimeDic.Add(name, LifeTime);
         }
         if (!Loop)
             StartCoroutine(WaitToDestroy(LifeTime));

@@ -238,6 +238,7 @@ public abstract class Role : MonoBehaviour
             Buffers.Remove(_buffer.Type);
         if(BufferParticles.ContainsKey(_buffer.Type))
         {
+            Debug.Log(_buffer.Type);
             Destroy(BufferParticles[_buffer.Type].gameObject);
             BufferParticles.Remove(_buffer.Type);
         }
