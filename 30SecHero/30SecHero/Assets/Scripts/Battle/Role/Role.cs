@@ -170,6 +170,7 @@ public abstract class Role : MonoBehaviour
     {
         if (!IsAlive)
             return;
+        EffectEmitter.EmitParticle(GameManager.GetOtherParticle("Heal"), Vector3.zero, Vector3.zero, transform);
         Health += _heal;
     }
     protected virtual bool DeathCheck()

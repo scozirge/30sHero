@@ -26,7 +26,7 @@ public class KongregateAPIBehaviour : MonoBehaviour
         kongregateUnitySupport.initAPI('KongregateAPI', 'OnKongregateAPILoaded');
       };"
         );
-        Player.SetKongregateUserData_CB("scozirge", 1);
+        //Player.SetKongregateUserData_CB("scozirge", 1);
     }
 
     public void OnKongregateAPILoaded(string userInfoString)
@@ -89,14 +89,14 @@ public class KongregateAPIBehaviour : MonoBehaviour
     }
     public void OnPurchaseResult(string _result)
     {
-        Debug.Log("OnPurchaseResult"+_result);
-        if(_result=="true")
+        Debug.Log("OnPurchaseResult" + _result);
+        if (_result == "true")
         {
-            Debug.Log("Yes");
+            Purchase.ToPurchaseCB(true);
         }
         else
         {
-            Debug.Log("No");
+            Purchase.ToPurchaseCB(false);
         }
     }
 }

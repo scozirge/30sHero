@@ -124,4 +124,8 @@ public partial class Player
     {
         Debug.Log("販賣裝備成功");
     }
+    public static void PurchaseEmerald_CB(string[] _data)
+    {
+        Debug.Log("購買綠寶石成功");
+    }
 }

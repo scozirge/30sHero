@@ -83,8 +83,23 @@ public class Purchase : MyUI
         Icon.sprite = CurSelectedData.GetICON();
         CountText.text = CurSelectedData.EmeraldCount.ToString();
     }
+    static PurchaseData CurPurchaseData;
     public void ToPurchase()
     {
-        KongregateAPIBehaviour.PurchaseItem(CurSelectedData.ID);
+        CurPurchaseData = CurSelectedData;
+        KongregateAPIBehaviour.PurchaseItem(CurPurchaseData.ID);
+    }
+    public static void ToPurchaseCB(bool _result)
+    {
+        if(_result)
+        {
+            Player.GainEmerald(CurPurchaseData.EmeraldCount);
+            PopupUI.ShowClickCancel(string.Format(StringData.GetString("PurchaseEmeraldSuccess"), CurPurchaseData.EmeraldCount));
+            ServerRequest.PurchaseEmerald(Player.Emerald);
+        }
+        else
+        {
+            PopupUI.ShowClickCancel("PurchaseEmeraldFail");
+        }
     }
 }

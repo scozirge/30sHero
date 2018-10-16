@@ -7,8 +7,6 @@ public partial class GameManager : MonoBehaviour
 
     public static bool IsInit { get; protected set; }
     [SerializeField]
-    GameManager GM;
-    [SerializeField]
     Debugger DebuggerPrefab;
     [SerializeField]
     PopupUI PopUIPrefab;
@@ -43,11 +41,15 @@ public partial class GameManager : MonoBehaviour
     [Tooltip("速度上升特效")]
     [SerializeField]
     public ParticleSystem SpeedUpPrefab;
+    [Tooltip("補血特效")]
+    [SerializeField]
+    public ParticleSystem HealPrefab;
 
 
     static Sprite[] QualityBotSprites;
     static Sprite[] EquipTypBot;
     static Dictionary<RoleBuffer, ParticleSystem> BufferParticles = new Dictionary<RoleBuffer, ParticleSystem>();
+    static Dictionary<string, ParticleSystem> OtherParticles = new Dictionary<string, ParticleSystem>();
     KongregateAPIBehaviour KG;
 
     public static Sprite GetItemQualityBotSprite(int _quality)
@@ -85,6 +87,7 @@ public partial class GameManager : MonoBehaviour
         BufferParticles.Add(RoleBuffer.Block, BlockPrefab);
         BufferParticles.Add(RoleBuffer.DamageUp, DamageUpPrefab);
         BufferParticles.Add(RoleBuffer.SpeedUp, SpeedUpPrefab);
+        OtherParticles.Add("Heal", HealPrefab);
         if (!Debugger.IsSpawn)
             DeployDebugger();
         if (!PopupUI.IsInit)
@@ -121,5 +124,14 @@ public partial class GameManager : MonoBehaviour
         PopupUI ppui = Instantiate(PopUIPrefab, Vector3.zero, Quaternion.identity) as PopupUI;
         ppui.transform.position = Vector3.zero; ;
         ppui.Init();
+    }
+    public static ParticleSystem GetOtherParticle(string _key)
+    {
+        if(OtherParticles.ContainsKey(_key))
+        {
+            return OtherParticles[_key];
+        }
+        Debug.LogWarning("不存在的特效名稱:" + _key);
+        return null;
     }
 }
