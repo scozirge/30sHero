@@ -483,7 +483,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
+  near clip plane: -1000
   far clip plane: 2000
   field of view: 60
   orthographic: 1
@@ -1271,6 +1271,48 @@ MonoBehaviour:
   StartPos: {x: 0, y: 0, z: 0}
   Prefab: {fileID: 114072550915065818, guid: 75dee0cd7cd2fde48a2e41eeefc2371d, type: 2}
   PrefabRptate: {x: 0, y: 0, z: 0}
+--- !u!1001 &1459169598
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4931360382703210, guid: 8759edc6a0f30934c8eb874b3f77a7a2, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4931360382703210, guid: 8759edc6a0f30934c8eb874b3f77a7a2, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4931360382703210, guid: 8759edc6a0f30934c8eb874b3f77a7a2, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4931360382703210, guid: 8759edc6a0f30934c8eb874b3f77a7a2, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4931360382703210, guid: 8759edc6a0f30934c8eb874b3f77a7a2, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4931360382703210, guid: 8759edc6a0f30934c8eb874b3f77a7a2, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4931360382703210, guid: 8759edc6a0f30934c8eb874b3f77a7a2, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4931360382703210, guid: 8759edc6a0f30934c8eb874b3f77a7a2, type: 2}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 8759edc6a0f30934c8eb874b3f77a7a2, type: 2}
+  m_IsPrefabAsset: 0
 --- !u!1 &1479774046
 GameObject:
   m_ObjectHideFlags: 0
@@ -1766,7 +1808,7 @@ MonoBehaviour:
   - {fileID: 114485926508205134, guid: 36509ae15283f0b4b85c7eb28f152231, type: 2}
   - {fileID: 114364750184517408, guid: fd1730034bed914409677edaf33d653c, type: 2}
   - {fileID: 114364750184517408, guid: 4d1f64498757ee445a05825a7c7257a1, type: 2}
-  DesignatedEnemy: {fileID: 114364750184517408, guid: fd1730034bed914409677edaf33d653c,
+  DesignatedEnemy: {fileID: 114364750184517408, guid: 4e4608edff7362c45b106e955ca4fabe,
     type: 2}
   LootPrefab: {fileID: 114565999483713276, guid: 0384220ed63709741ba419f3ba98af08,
     type: 2}
