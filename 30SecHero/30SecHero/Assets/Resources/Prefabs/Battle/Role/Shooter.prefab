@@ -74,10 +74,10 @@ GameObject:
   - component: {fileID: 114884425457605678}
   - component: {fileID: 114364750184517408}
   - component: {fileID: 50284349101639710}
-  - component: {fileID: 58819477902178946}
   - component: {fileID: 114016134065368028}
   - component: {fileID: 114796498901394522}
   - component: {fileID: 95077092610168030}
+  - component: {fileID: 70781196735773232}
   m_Layer: 9
   m_Name: Shooter
   m_TagString: Enemy
@@ -152,8 +152,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!58 &58819477902178946
-CircleCollider2D:
+--- !u!70 &70781196735773232
+CapsuleCollider2D:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -165,8 +165,8 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 45
+  m_Size: {x: 171.1, y: 109.1}
+  m_Direction: 1
 --- !u!95 &95077092610168030
 Animator:
   serializedVersion: 3
@@ -378,9 +378,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Wander: 1
   FollowCamera: 0
-  WanderInterval: 0.5
+  WanderInterval: 0.25
   RotateFactor: 0.01
-  WanderRange: 50
+  WanderRange: 25
   Destination: {x: 0, y: 0}
 --- !u!222 &222141267103412294
 CanvasRenderer:
