@@ -139,26 +139,20 @@ public class Equip : MyUI
     }
     public void Sell()
     {
-        string ids = "";
-        bool getFirstEquip = false;
+        List<EquipData> list = new List<EquipData>();
         for (int i = 0; i < ItemList.Count; i++)
         {
             if (ItemList[i].IsSoldCheck)
             {
-                if (getFirstEquip)
-                    ids += ",";
-                ids += ItemList[i].MyData.UID.ToString();
-                getFirstEquip = true;
-                Player.SellEquip(ItemList[i].MyData);
+                list.Add(ItemList[i].MyData);
                 EquipDic[ItemList[i].MyData.Type].Remove(ItemList[i]);
                 ItemList[i].SelfDestroy();
                 ItemList[i] = null;
             }
         }
         ItemList.RemoveAll(item => item == null);
+        Player.SellEquips(list);
         ItemCoutText.text = string.Format("{0}/{1}", ItemList.Count, GameSettingData.MaxItemCount);
-        if (ids != "")
-            ServerRequest.SellEquip(ids);
     }
     public void ToFilter(int _typeID)
     {
@@ -365,24 +359,21 @@ public class Equip : MyUI
             switch (TakeOffType)
             {
                 case EquipType.Weapon:
-                    ServerRequest.ChangeEquip(Player.MyWeapon.UID, 0, 0, 0);
                     itemIndex = GetIndexFromTotalItemList(Player.MyWeapon.UID);
                     EquipDic[TakeOffType].Add(ItemList[itemIndex]);
-                    Player.TakeOff(Player.MyWeapon);
+                    Player.TakeOff(TakeOffType, 0);
                     break;
                 case EquipType.Armor:
-                    ServerRequest.ChangeEquip(Player.MyArmor.UID, 0, 0, 0);
                     itemIndex = GetIndexFromTotalItemList(Player.MyArmor.UID);
                     EquipDic[TakeOffType].Add(ItemList[itemIndex]);
-                    Player.TakeOff(Player.MyArmor);
+                    Player.TakeOff(TakeOffType, 0);
                     break;
                 case EquipType.Accessory:
                     if (Player.MyAccessorys.Length > 0)
                     {
-                        ServerRequest.ChangeEquip(Player.MyAccessorys[CurEquipAccessoryIndex].UID, 0, 0, 0);
                         itemIndex = GetIndexFromTotalItemList(Player.MyAccessorys[CurEquipAccessoryIndex].UID);
                         EquipDic[TakeOffType].Add(ItemList[itemIndex]);
-                        Player.TakeOff((AccessoryData)SelectedEquip, CurEquipAccessoryIndex);
+                        Player.TakeOff(TakeOffType, 0);
                     }
                     break;
             }

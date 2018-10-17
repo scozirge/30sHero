@@ -102,21 +102,81 @@ public partial class Player
     {
         Gold = _gold;
         Main.UpdateResource();
+        //寫入資料
+        if(PlayerInfoInitDataFinish)
+        {
+            if (!LocalData)
+            {
+                Debug.Log("更新server玩家資源");
+                ServerRequest.UpdateResource();
+            }
+            else
+            {
+                Debug.Log("更新Loco玩家資源");
+                PlayerPrefs.SetInt(LocoData.Gold.ToString(), Player.Gold);
+                PlayerPrefs.SetInt(LocoData.Emerald.ToString(), Player.Emerald);
+            }
+        }
     }
     public static void SetEmerald(int _emerald)
     {
         Emerald = _emerald;
         Main.UpdateResource();
+        //寫入資料
+        if (PlayerInfoInitDataFinish)
+        {
+            if (!LocalData)
+            {
+                Debug.Log("更新server玩家資源");
+                ServerRequest.UpdateResource();
+            }
+            else
+            {
+                Debug.Log("更新Loco玩家資源");
+                PlayerPrefs.SetInt(LocoData.Gold.ToString(), Player.Gold);
+                PlayerPrefs.SetInt(LocoData.Emerald.ToString(), Player.Emerald);
+            }
+        }
     }
     public static void GainGold(int _gold)
     {
         Gold += _gold;
         Main.UpdateResource();
+        //寫入資料
+        if (PlayerInfoInitDataFinish)
+        {
+            if (!LocalData)
+            {
+                Debug.Log("更新server玩家資源");
+                ServerRequest.UpdateResource();
+            }
+            else
+            {
+                Debug.Log("更新Loco玩家資源");
+                PlayerPrefs.SetInt(LocoData.Gold.ToString(), Player.Gold);
+                PlayerPrefs.SetInt(LocoData.Emerald.ToString(), Player.Emerald);
+            }
+        }
     }
     public static void GainEmerald(int _emerald)
     {
         Emerald += _emerald;
         Main.UpdateResource();
+        //寫入資料
+        if (PlayerInfoInitDataFinish)
+        {
+            if (!LocalData)
+            {
+                Debug.Log("更新server玩家資源");
+                ServerRequest.UpdateResource();
+            }
+            else
+            {
+                Debug.Log("更新Loco玩家資源");
+                PlayerPrefs.SetInt(LocoData.Gold.ToString(), Player.Gold);
+                PlayerPrefs.SetInt(LocoData.Emerald.ToString(), Player.Emerald);
+            }
+        }
     }
     public static void StrengthenUpgrade(StrengthenData _data)
     {
@@ -127,22 +187,27 @@ public partial class Player
             StrengthenDic[_data.ID].LVUP();
         }
         //寫入資料
-        if (LocalData)
+        if (StrengthenInitDataFinish)
         {
-            //金幣
-            PlayerPrefs.SetInt(LocoData.Gold.ToString(), Gold);
-            //強化
-            List<int> keys=new List<int>(StrengthenDic.Keys);
-            string dataStr = "";
-            for(int i=0;i<keys.Count;i++)
+            if (LocalData)
             {
-                if (i != 0)
-                    dataStr += "/";
-                dataStr += StrengthenDic[keys[i]].ID + "," + StrengthenDic[keys[i]].LV;
+                Debug.Log("更新Loco玩家強化");
+                //強化
+                List<int> keys = new List<int>(StrengthenDic.Keys);
+                string dataStr = "";
+                for (int i = 0; i < keys.Count; i++)
+                {
+                    if (i != 0)
+                        dataStr += "/";
+                    dataStr += StrengthenDic[keys[i]].ID + "," + StrengthenDic[keys[i]].LV;
+                }
+                PlayerPrefs.SetString(LocoData.Strengthen.ToString(), dataStr);
             }
-            PlayerPrefs.SetString(LocoData.Strengthen.ToString(), dataStr);
+            else
+            {
+                Debug.Log("更新server玩家強化");
+                ServerRequest.StrengthenUpgrade(_data.ID, _data.LV + 1, Player.Gold);
+            }
         }
-        else
-            ServerRequest.StrengthenUpgrade(_data.ID, _data.LV + 1, Player.Gold);
     }
 }

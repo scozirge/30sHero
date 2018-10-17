@@ -9,6 +9,13 @@ public partial class Player
     public static bool SoundOn { get; private set; }
     public static bool IsRigister { get; private set; }
     public static bool LVSort { get; private set; }
+
+    //玩家資料
+    static bool PlayerInfoInitDataFinish = false;
+    //強化
+    static bool StrengthenInitDataFinish = false;
+    //遊戲開始讀取玩家裝備資料，讀取完EquipInitDataFinish=true(false時玩家設定裝備不會寫入本地或雲端)
+    static bool EquipInitDataFinish = false;
     /// <summary>
     /// 設定語言
     /// </summary>
@@ -71,6 +78,7 @@ public partial class Player
         if (emerald != 0)
             SetEmerald(emerald);
         Debug.Log("emerald=" + emerald);
+        PlayerInfoInitDataFinish = true;
         //裝備
         string equipStr = PlayerPrefs.GetString(LocoData.Equip.ToString());
         Debug.Log("equipStr=" + equipStr);
@@ -100,6 +108,7 @@ public partial class Player
         SetEmerald(int.Parse(_data[2]));
         ServerRequest.GetEquip();
         ServerRequest.GetStrengthen();
+        PlayerInfoInitDataFinish = true;
     }
     public static void GetEquip_CB(string[] _data)
     {
@@ -135,6 +144,7 @@ public partial class Player
         Itmes.Add(EquipType.Weapon, wlist);
         Itmes.Add(EquipType.Armor, alist);
         Itmes.Add(EquipType.Accessory, aclist);
+        EquipInitDataFinish = true;
     }
     public static void GetStrengthen_CB(string[] _data)
     {
@@ -146,6 +156,7 @@ public partial class Player
             if (StrengthenDic.ContainsKey(jid))
                 StrengthenDic[jid].SetLV(lv);
         }
+        StrengthenInitDataFinish = true;
     }
     public static void StrengthenUpgrade_CB(string[] _data)
     {
@@ -164,5 +175,9 @@ public partial class Player
     public static void PurchaseEmerald_CB(string[] _data)
     {
         Debug.Log("購買綠寶石成功");
+    }
+    public static void UpdateResource_CB(string[] _data)
+    {
+        Debug.Log("更新玩家資源成功");
     }
 }

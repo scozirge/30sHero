@@ -20,7 +20,7 @@ public partial class Player
         {
             if (i != 0)
                 dataStr += "/";
-            dataStr += Itmes[EquipType.Weapon][keys[i]].UID + "," + Itmes[EquipType.Weapon][keys[i]].ID + "," + Itmes[EquipType.Weapon][keys[i]].Type + "," + Itmes[EquipType.Weapon][keys[i]].EquipSlot + "," + Itmes[EquipType.Weapon][keys[i]].LV + "," + Itmes[EquipType.Weapon][keys[i]].Quality;
+            dataStr += Itmes[EquipType.Weapon][keys[i]].UID + "," + Itmes[EquipType.Weapon][keys[i]].ID + "," + (int)Itmes[EquipType.Weapon][keys[i]].Type + "," + Itmes[EquipType.Weapon][keys[i]].EquipSlot + "," + Itmes[EquipType.Weapon][keys[i]].LV + "," + Itmes[EquipType.Weapon][keys[i]].Quality;
         }
         //防具文字
         keys = new List<long>(Itmes[EquipType.Armor].Keys);
@@ -28,7 +28,10 @@ public partial class Player
         {
             if (i != 0)
                 dataStr += "/";
-            dataStr += Itmes[EquipType.Armor][keys[i]].UID + "," + Itmes[EquipType.Armor][keys[i]].ID + "," + Itmes[EquipType.Armor][keys[i]].Type + "," + Itmes[EquipType.Armor][keys[i]].EquipSlot + "," + Itmes[EquipType.Armor][keys[i]].LV + "," + Itmes[EquipType.Armor][keys[i]].Quality;
+            else
+                if (dataStr != "")
+                    dataStr += "/";
+            dataStr += Itmes[EquipType.Armor][keys[i]].UID + "," + Itmes[EquipType.Armor][keys[i]].ID + "," + (int)Itmes[EquipType.Armor][keys[i]].Type + "," + Itmes[EquipType.Armor][keys[i]].EquipSlot + "," + Itmes[EquipType.Armor][keys[i]].LV + "," + Itmes[EquipType.Armor][keys[i]].Quality;
         }
         //飾品文字
         keys = new List<long>(Itmes[EquipType.Accessory].Keys);
@@ -36,7 +39,10 @@ public partial class Player
         {
             if (i != 0)
                 dataStr += "/";
-            dataStr += Itmes[EquipType.Accessory][keys[i]].UID + "," + Itmes[EquipType.Accessory][keys[i]].ID + "," + Itmes[EquipType.Accessory][keys[i]].Type + "," + Itmes[EquipType.Accessory][keys[i]].EquipSlot + "," + Itmes[EquipType.Accessory][keys[i]].LV + "," + Itmes[EquipType.Accessory][keys[i]].Quality;
+            else
+                if (dataStr != "")
+                    dataStr += "/";
+            dataStr += Itmes[EquipType.Accessory][keys[i]].UID + "," + Itmes[EquipType.Accessory][keys[i]].ID + "," + (int)Itmes[EquipType.Accessory][keys[i]].Type + "," + Itmes[EquipType.Accessory][keys[i]].EquipSlot + "," + Itmes[EquipType.Accessory][keys[i]].LV + "," + Itmes[EquipType.Accessory][keys[i]].Quality;
         }
         PlayerPrefs.SetString(LocoData.Equip.ToString(), dataStr);
     }
@@ -50,13 +56,18 @@ public partial class Player
         MyWeapon.SetEquipStatus(true, 1);
         GameSettingData.RolePropertyOperate(EquipPlus, _data.Properties, Operator.Plus);
         //寫入資料
-        if (!LocalData)
+        if (EquipInitDataFinish)
         {
-            ServerRequest.ChangeEquip(_data.UID, _data.EquipSlot, (origEquipData != null) ? origEquipData.UID : 0, 0);
-        }
-        else
-        {
-            EquipSaveLocalData();
+            if (!LocalData)
+            {
+                Debug.Log("更新Server玩家裝備");
+                ServerRequest.ChangeEquip(_data.UID, _data.EquipSlot, (origEquipData != null) ? origEquipData.UID : 0, 0);
+            }
+            else
+            {
+                Debug.Log("更新Loco玩家裝備");
+                EquipSaveLocalData();
+            }
         }
     }
     public static void Equip(ArmorData _data)
@@ -69,13 +80,18 @@ public partial class Player
         MyArmor.SetEquipStatus(true, 2);
         GameSettingData.RolePropertyOperate(EquipPlus, _data.Properties, Operator.Plus);
         //寫入資料
-        if (!LocalData)
+        if (EquipInitDataFinish)
         {
-            ServerRequest.ChangeEquip(_data.UID, _data.EquipSlot, (origEquipData != null) ? origEquipData.UID : 0, 0);
-        }
-        else
-        {
-            EquipSaveLocalData();
+            if (!LocalData)
+            {
+                Debug.Log("更新Server玩家裝備");
+                ServerRequest.ChangeEquip(_data.UID, _data.EquipSlot, (origEquipData != null) ? origEquipData.UID : 0, 0);
+            }
+            else
+            {
+                Debug.Log("更新Loco玩家裝備");
+                EquipSaveLocalData();
+            }
         }
     }
     public static void Equip(AccessoryData _data, int _index)
@@ -90,66 +106,59 @@ public partial class Player
         MyAccessorys[_index].SetEquipStatus(true, 3 + _index);
         GameSettingData.RolePropertyOperate(EquipPlus, _data.Properties, Operator.Plus);
         //寫入資料
-        if (!LocalData)
+        if (EquipInitDataFinish)
         {
-            ServerRequest.ChangeEquip(_data.UID, _data.EquipSlot, (origEquipData != null) ? origEquipData.UID : 0, 0);
-        }
-        else
-        {
-            EquipSaveLocalData();
+            if (!LocalData)
+            {
+                Debug.Log("更新Server玩家裝備");
+                ServerRequest.ChangeEquip(_data.UID, _data.EquipSlot, (origEquipData != null) ? origEquipData.UID : 0, 0);
+            }
+            else
+            {
+                Debug.Log("更新Loco玩家裝備");
+                EquipSaveLocalData();
+            }
         }
     }
-    public static void TakeOff(WeaponData _data)
-    {
-        //執行更換裝備
-        if (MyWeapon != null)
-            MyWeapon.SetEquipStatus(false, 0);
-        MyWeapon = null;
-        GameSettingData.RolePropertyOperate(EquipPlus, _data.Properties, Operator.Minus);
-        //寫入資料
-        if (!LocalData)
-        {
-            ServerRequest.ChangeEquip(_data.UID, 0, 0, 0);
-        }
-        else
-        {
-            EquipSaveLocalData();
-        }        
-    }
-    public static void TakeOff(ArmorData _data)
-    {
-        //執行更換裝備
-        if (MyArmor != null)
-            MyArmor.SetEquipStatus(false, 0);
-        MyArmor = null;
-        GameSettingData.RolePropertyOperate(EquipPlus, _data.Properties, Operator.Minus);
-        //寫入資料
-        if (!LocalData)
-        {
-            ServerRequest.ChangeEquip(_data.UID, 0, 0, 0);
-        }
-        else
-        {
-            EquipSaveLocalData();
-        } 
-    }
-    public static void TakeOff(AccessoryData _data, int _index)
+    public static void TakeOff(EquipType _type, int _index)
     {
         //執行更換裝備
         if (_index < 0 || _index > MyAccessorys.Length)
             return;
-        if (MyAccessorys[_index] != null)
-            MyAccessorys[_index].SetEquipStatus(false, 0);
-        MyAccessorys[_index] = null;
-        //寫入資料
-        if (!LocalData)
+        EquipData originalEquip = null;
+        switch(_type)
         {
-            ServerRequest.ChangeEquip(_data.UID, 0, 0, 0);
+            case EquipType.Weapon:
+                originalEquip = Player.MyWeapon;
+                MyWeapon = null;
+                break;
+            case EquipType.Armor:
+                originalEquip = Player.MyArmor;
+                MyArmor = null;
+                break;
+            case EquipType.Accessory:
+                originalEquip = Player.MyAccessorys[_index];
+                Player.MyAccessorys[_index] = null;
+                break;
         }
-        else
+        if (originalEquip == null)
+            return;
+        originalEquip.SetEquipStatus(false, 0);
+        GameSettingData.RolePropertyOperate(EquipPlus, originalEquip.Properties, Operator.Minus);
+        //寫入資料
+        if (EquipInitDataFinish)
         {
-            EquipSaveLocalData();
-        } 
+            if (!LocalData)
+            {
+                Debug.Log("更新Server玩家裝備");
+                ServerRequest.ChangeEquip(originalEquip.UID, 0, 0, 0);
+            }
+            else
+            {
+                Debug.Log("更新Loco玩家裝備");
+                EquipSaveLocalData();
+            }
+        }
     }
     public static void SellEquip(EquipData _data)
     {
@@ -160,5 +169,60 @@ public partial class Player
         }
         else
             Debug.LogWarning("Sell Equip isn't in Items");
+        //寫入資料
+        string id = _data.UID.ToString();
+        if (EquipInitDataFinish)
+        {
+            if (!LocalData)
+            {
+                if (id != "")
+                {
+                    Debug.Log("更新Server玩家裝備");
+                    ServerRequest.SellEquip(id);
+                }
+            }
+            else
+            {
+                Debug.Log("更新Loco玩家裝備");
+                EquipSaveLocalData();
+            }
+        }
+    }
+    public static void SellEquips(List<EquipData> _datas)
+    {
+        //執行販賣裝備
+        string ids = "";
+        bool getFirstEquip = false;
+        for (int i = 0; i < _datas.Count; i++)
+        {
+            if (Itmes[_datas[i].Type].ContainsKey(_datas[i].UID))
+            {
+                if (getFirstEquip)
+                    ids += ",";
+                ids += _datas[i].UID.ToString();
+                getFirstEquip = true;
+                GainGold(_datas[i].SellGold);
+                Itmes[_datas[i].Type].Remove(_datas[i].UID);
+            }
+            else
+                Debug.LogWarning("Sell Equip isn't in Items");
+        }
+        //寫入資料
+        if (EquipInitDataFinish)
+        {
+            if (!LocalData)
+            {
+                if (ids != "")
+                {
+                    Debug.Log("更新Server玩家裝備");
+                    ServerRequest.SellEquip(ids);
+                }
+            }
+            else
+            {
+                Debug.Log("更新Loco玩家裝備");
+                EquipSaveLocalData();
+            }
+        }
     }
 }

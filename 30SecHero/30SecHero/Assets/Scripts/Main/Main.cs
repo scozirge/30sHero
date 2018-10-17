@@ -49,6 +49,8 @@ public class Main : MonoBehaviour
         }
         MyGoldText = GoldText;
         MyEmeraldText = EmeraldText;
+        GoldText.text = Player.Gold.ToString();
+        EmeraldText.text = Player.Emerald.ToString();
         Isinit = true;
     }
     void OnEnable()

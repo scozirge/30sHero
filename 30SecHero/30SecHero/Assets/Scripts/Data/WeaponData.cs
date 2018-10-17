@@ -70,6 +70,6 @@ public class WeaponData : EquipData
         if (_isEquiped)
             EquipSlot = 1;
         else
-            _equipSlot = 0;
+            EquipSlot = 0;
     }
 }

@@ -73,6 +73,6 @@ public class AccessoryData : EquipData
         if (_isEquiped)
             EquipSlot = _equipSlot;
         else
-            _equipSlot = 0;
+            EquipSlot = 0;
     }
 }

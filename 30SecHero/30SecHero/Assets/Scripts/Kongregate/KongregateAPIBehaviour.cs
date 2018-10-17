@@ -30,10 +30,10 @@ public class KongregateAPIBehaviour : MonoBehaviour
         kongregateUnitySupport.initAPI('KongregateAPI', 'OnKongregateAPILoaded');
       };"
         );
-        //OnKongregateUserInfo("1|scozirge");
         if (Application.isEditor)
             WaitInitTime = 0.5f;
         InitTimer = new MyTimer(WaitInitTime, EndKongregateLogin, true, false);
+        //OnKongregateUserInfo("1|scozirge");
     }
     void Update()
     {

@@ -71,6 +71,6 @@ public class ArmorData : EquipData
         if (_isEquiped)
             EquipSlot = 2;
         else
-            _equipSlot = 0;
+            EquipSlot = 0;
     }
 }
