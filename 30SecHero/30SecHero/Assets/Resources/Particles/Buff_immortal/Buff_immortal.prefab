@@ -38,7 +38,6 @@ GameObject:
   - component: {fileID: 4448069417282608}
   - component: {fileID: 198796042616351790}
   - component: {fileID: 199461736427273634}
-  - component: {fileID: 114663567931299808}
   m_Layer: 0
   m_Name: Buff_immortal
   m_TagString: Untagged
@@ -71,7 +70,7 @@ Transform:
   m_GameObject: {fileID: 1673304558015178}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 50, y: 50, z: 50}
+  m_LocalScale: {x: 60, y: 60, z: 60}
   m_Children:
   - {fileID: 4547449108071944}
   - {fileID: 4772125224474242}
@@ -104,19 +103,6 @@ Transform:
   m_Father: {fileID: 4448069417282608}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114663567931299808
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1673304558015178}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f8f63618a6dbe9c43a5c0c6ca3bd311e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Loop: 1
-  LifeTime: 0
 --- !u!198 &198344836726782068
 ParticleSystem:
   m_ObjectHideFlags: 1

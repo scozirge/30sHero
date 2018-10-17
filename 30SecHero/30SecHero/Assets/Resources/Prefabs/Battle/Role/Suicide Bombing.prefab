@@ -239,11 +239,11 @@ MonoBehaviour:
   HealthBar: {fileID: 224534074262623662}
   DirectX: 0
   DirectY: 0
-  BaseHealth: 100
+  BaseHealth: 20
   BaseDamage: 10
   BaseDefence: 0
   BaseMoveSpeed: 600
-  DeathEffect: {fileID: 198421084779393996, guid: 9d76221f8330c3e4e88f4600ea7c80bc,
+  DeathEffect: {fileID: 198802542160044040, guid: 8f344cf8edc65e44883dfdf0168792bd,
     type: 2}
   AniPlayer: {fileID: 114287811667066566}
   RoleTrans: {fileID: 224512683455321584}
@@ -254,9 +254,10 @@ MonoBehaviour:
   DropProbility: 1
   DropCount: 1
   DropSkillProbility: 1
-  DropSkill: {fileID: 114990997637341776}
+  DropSkill: {fileID: 0}
   HealthObj: {fileID: 1825838027108386}
   PlayMotionDuration: 0.5
+  InitBuffers: []
 --- !u!114 &114684685883932382
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -329,10 +330,10 @@ MonoBehaviour:
   PSkillTimer: 0
   Suicide: 1
   PrepareParticle:
-  - {fileID: 19803258, guid: f03da2c840f56744882ac020df9d326f, type: 2}
+  - {fileID: 198962121974398558, guid: 7b5cfc2b626dfbe4d800e4a9ea706e96, type: 2}
   AttackPrefab: {fileID: 114836237506999114, guid: 774f612a87c98c24a8231a3a8fa34b6d,
     type: 2}
-  PrepareTime: 2
+  PrepareTime: 1.5
 --- !u!222 &222180222257250726
 CanvasRenderer:
   m_ObjectHideFlags: 1

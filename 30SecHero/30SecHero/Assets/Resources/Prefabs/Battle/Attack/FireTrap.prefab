@@ -43,7 +43,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 200
+  m_Radius: 300
 --- !u!114 &114836237506999114
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -57,16 +57,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LocalParticles: []
   GlobalParticle:
-  - {fileID: 19800150, guid: 60797f1eed9349a44ac4f2df97e3c6d5, type: 2}
+  - {fileID: 198466921542759630, guid: e77354340c4749646b37a0d627136175, type: 2}
   DeadParticles: []
-  LifeTime: 10
+  LifeTime: 0.4
   KnockIntensity: 0
-  StunIntensity: 0
-  FireIntensity: 0
-  IceIntensity: 0
-  CurseIntensity: 0
   AmmoType: 1
   DamageInterval: 0.3
+  Buffers: []
+  Value: 0
 --- !u!222 &222441390583901092
 CanvasRenderer:
   m_ObjectHideFlags: 1

@@ -227,7 +227,7 @@ MonoBehaviour:
   HealthBar: {fileID: 224817521960005936}
   DirectX: 0
   DirectY: 0
-  BaseHealth: 100
+  BaseHealth: 20
   BaseDamage: 10
   BaseDefence: 0
   BaseMoveSpeed: 600
@@ -245,6 +245,7 @@ MonoBehaviour:
   DropSkill: {fileID: 0}
   HealthObj: {fileID: 1610887402048710}
   PlayMotionDuration: 0.5
+  InitBuffers: []
 --- !u!114 &114497804762892658
 MonoBehaviour:
   m_ObjectHideFlags: 1

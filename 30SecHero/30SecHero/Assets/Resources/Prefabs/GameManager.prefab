@@ -85,7 +85,7 @@ MonoBehaviour:
     type: 2}
   SpeedUpPrefab: {fileID: 198124011897465664, guid: 93b517a4923930e45bf9a7cba303ae26,
     type: 2}
-  HealPrefab: {fileID: 198350346737686014, guid: d831439896a03fd4e94904ea24d07106,
+  HealPrefab: {fileID: 198889853383162744, guid: b416d3cbed17605439ab332417f2d379,
     type: 2}
 --- !u!114 &114495893002156964
 MonoBehaviour:

@@ -115,7 +115,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8f63618a6dbe9c43a5c0c6ca3bd311e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Loop: 0
+  Loop: 1
   LifeTime: 2
 --- !u!198 &198507064879819008
 ParticleSystem:

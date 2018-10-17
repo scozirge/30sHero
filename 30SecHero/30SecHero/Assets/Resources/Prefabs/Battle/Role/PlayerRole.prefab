@@ -340,8 +340,8 @@ MonoBehaviour:
   HealthBar: {fileID: 0}
   DirectX: 0
   DirectY: 0
-  BaseHealth: 300
-  BaseDamage: 50
+  BaseHealth: 30
+  BaseDamage: 10
   BaseDefence: 0
   BaseMoveSpeed: 1000
   DeathEffect: {fileID: 198802542160044040, guid: 8f344cf8edc65e44883dfdf0168792bd,
@@ -352,12 +352,13 @@ MonoBehaviour:
   KnockDrag: 10
   NormalDrag: 50
   KnockDragDuration: 0.1
-  BeHitEffect_Shield: {fileID: 198350346737686014, guid: f2d13c3558e85fd41b7c5255972c24e4,
+  AvatarRemoveEffect: {fileID: 198350346737686014, guid: ddb5839dcf2d33e44ae99e5d8f31d965,
     type: 2}
-  BeHitEffect: {fileID: 198766691851678274, guid: 0dc4f5410669a9a48874136700ca00d6,
+  BeHitEffect_Shield: {fileID: 198853811207955838, guid: 48c7fe97ee5fbd0478fa25692681f2f2,
     type: 2}
+  BeHitEffect: {fileID: 0}
   ExtraAniPlayer: {fileID: 114768325752054400}
-  MaxShield: 100
+  MaxShield: 10
   ShieldBar: {fileID: 0}
   ShieldReGenerateTime: 3
   ShieldRechargeTime: 5
