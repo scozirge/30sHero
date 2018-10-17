@@ -343,7 +343,7 @@ MonoBehaviour:
   BaseHealth: 30
   BaseDamage: 10
   BaseDefence: 0
-  BaseMoveSpeed: 1000
+  BaseMoveSpeed: 1200
   DeathEffect: {fileID: 198802542160044040, guid: 8f344cf8edc65e44883dfdf0168792bd,
     type: 2}
   AniPlayer: {fileID: 114254621464860768}
@@ -385,7 +385,7 @@ MonoBehaviour:
   RushSound: {fileID: 8300000, guid: 41b00c1ca9d97ea4796281c66b69da09, type: 3}
   AttackSound: {fileID: 8300000, guid: fc274ce0d0fd8fb40b2e7557d54975e8, type: 3}
   JumpCDTime: 0.2
-  StopDrag: 200
+  StopDrag: 800
   FaceLeftOrRight: 0
   ClosestEnemy: {fileID: 0}
 --- !u!114 &114657669388382614

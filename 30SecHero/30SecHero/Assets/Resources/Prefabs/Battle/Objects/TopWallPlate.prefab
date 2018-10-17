@@ -53,7 +53,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 884, y: 80}
+  m_Size: {x: 884, y: 10}
   m_EdgeRadius: 0
 --- !u!114 &114036370845390570
 MonoBehaviour:
@@ -95,6 +95,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RandomFlip: 1
   RandomRotate: 0
+  Rotation: {x: 0, y: 0, z: 0}
 --- !u!222 &222757399237075328
 CanvasRenderer:
   m_ObjectHideFlags: 1

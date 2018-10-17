@@ -9,32 +9,32 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1566857461941104}
+  m_RootGameObject: {fileID: 1716256600817328}
   m_IsPrefabAsset: 1
---- !u!1 &1566857461941104
+--- !u!1 &1716256600817328
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 224150828886270898}
-  - component: {fileID: 114962956101920240}
-  - component: {fileID: 222441390583901092}
-  - component: {fileID: 58810803581975730}
+  - component: {fileID: 224000269160176478}
+  - component: {fileID: 114891869535078406}
+  - component: {fileID: 222835867889518962}
+  - component: {fileID: 58494718014183302}
   m_Layer: 11
-  m_Name: 1S Shooter Ammo
+  m_Name: 3S Shooter Ammo Fire
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!58 &58810803581975730
+--- !u!58 &58494718014183302
 CircleCollider2D:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1566857461941104}
+  m_GameObject: {fileID: 1716256600817328}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
@@ -44,12 +44,12 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 34.8
---- !u!114 &114962956101920240
+--- !u!114 &114891869535078406
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1566857461941104}
+  m_GameObject: {fileID: 1716256600817328}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 494231d1f75097a4692d0672e054d3dc, type: 3}
@@ -71,19 +71,19 @@ MonoBehaviour:
   Value: 0
   AmmoSpeed: 600
   TraceFactor: 0
---- !u!222 &222441390583901092
+--- !u!222 &222835867889518962
 CanvasRenderer:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1566857461941104}
+  m_GameObject: {fileID: 1716256600817328}
   m_CullTransparentMesh: 0
---- !u!224 &224150828886270898
+--- !u!224 &224000269160176478
 RectTransform:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1566857461941104}
+  m_GameObject: {fileID: 1716256600817328}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.9, y: 0.9, z: 1}

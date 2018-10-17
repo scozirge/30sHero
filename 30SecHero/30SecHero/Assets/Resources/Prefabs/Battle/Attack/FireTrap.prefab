@@ -60,7 +60,7 @@ MonoBehaviour:
   - {fileID: 198466921542759630, guid: e77354340c4749646b37a0d627136175, type: 2}
   DeadParticles: []
   LifeTime: 0.4
-  KnockIntensity: 0
+  KnockIntensity: 2000
   AmmoType: 1
   DamageInterval: 0.3
   Buffers: []

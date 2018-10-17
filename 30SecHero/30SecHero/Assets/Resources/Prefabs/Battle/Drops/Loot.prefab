@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 114374204824993968}
   - component: {fileID: 222452408990536316}
   - component: {fileID: 50034968546695924}
-  - component: {fileID: 58518751123803652}
+  - component: {fileID: 70917800928637858}
   m_Layer: 12
   m_Name: Loot
   m_TagString: Untagged
@@ -102,8 +102,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!58 &58518751123803652
-CircleCollider2D:
+--- !u!70 &70917800928637858
+CapsuleCollider2D:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -114,9 +114,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 25
+  m_Offset: {x: 0, y: 6.2}
+  m_Size: {x: 115.7, y: 152.73}
+  m_Direction: 0
 --- !u!114 &114194850014833858
 MonoBehaviour:
   m_ObjectHideFlags: 1
