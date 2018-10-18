@@ -168,8 +168,6 @@ public abstract class Role : MonoBehaviour
     }
     public virtual void HealHP(int _heal)
     {
-        if (_heal == 0)
-            return;
         if (!IsAlive)
             return;
         EffectEmitter.EmitParticle(GameManager.GetOtherParticle("Heal"), Vector3.zero, Vector3.zero, transform);

@@ -51,7 +51,8 @@ public class Supply : Ammo
     protected override void TriggerTarget(Role _role)
     {
         base.TriggerTarget(_role);
-        _role.HealHP(Value);
+        if (Value>0)
+            _role.HealHP(Value);
         if (AmmoType != ShootAmmoType.Permanent)
             SelfDestroy();
     }
