@@ -512,6 +512,7 @@ public partial class PlayerRole : Role
                 AddBuffer(RoleBuffer.SpeedUp, _data.Time * (1 + PotionEfficiency), _data.Value);
                 break;
         }
+        AttackMotion();
     }
     public void InitMonsterSkill(string _name, Skill _skill)
     {
