@@ -32,10 +32,9 @@ public abstract class Role : MonoBehaviour
             HealthBar.sizeDelta = new Vector2(HPBarWidth * HealthRatio, HealthBar.rect.height);
         }
     }
-    [Tooltip("基礎血量")]
+    [Tooltip("最大血量")]
     [SerializeField]
-    protected int BaseHealth;
-    public int MaxHealth { get; protected set; }
+    public int MaxHealth;
     public float HealthRatio { get { return (float)Health / (float)MaxHealth; } }
     public virtual int Damage { get {
         return (int)(BaseDamage * 
@@ -44,11 +43,6 @@ public abstract class Role : MonoBehaviour
     [Tooltip("基礎傷害")]
     [SerializeField]
     protected int BaseDamage;
-    public virtual int Defence { get { return BaseDefence + ExtraDefence; } }
-
-    [Tooltip("基礎防禦")]
-    [SerializeField]
-    protected int BaseDefence;
     public virtual float MoveSpeed { get { return BaseMoveSpeed * (1 + (Buffers.ContainsKey(RoleBuffer.Freeze)?
         -GameSettingData.FreezeMove:0  ))+ (Buffers.ContainsKey(RoleBuffer.SpeedUp) ? Buffers[RoleBuffer.SpeedUp].Value : 0); } }
     [Tooltip("基礎移動速度")]

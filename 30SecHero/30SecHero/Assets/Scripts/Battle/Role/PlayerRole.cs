@@ -5,6 +5,9 @@ using UnityEngine.UI;
 
 public partial class PlayerRole : Role
 {
+    [Tooltip("使用測試模式，非測試模式時，玩家數值為讀表")]
+    [SerializeField]
+    bool TestMode;
     [Tooltip("解除變身特效")]
     [SerializeField]
     ParticleSystem AvatarRemoveEffect;
@@ -173,6 +176,7 @@ public partial class PlayerRole : Role
 
     protected override void Start()
     {
+        InitPlayerProperties();
         base.Start();
         AvatarTimer = MaxAvaterTime;
         AttackTimer = new MyTimer(DontAttackRestoreTime, RestoreAttack, false, false);
@@ -188,23 +192,25 @@ public partial class PlayerRole : Role
     }
     void InitPlayerProperties()
     {
-        MaxHealth = 1+(int)Player.GetProperties(RoleProperty.Health);
-        BaseDamage = 1+(int)Player.GetProperties(RoleProperty.Strength);
-        MaxShield = 1+(int)Player.GetProperties(RoleProperty.Shield);
-        ShieldGenerateProportion = 1 + (float)Player.GetProperties(RoleProperty.ShieldRecovery);
-        BaseMoveSpeed = 1+(int)Player.GetProperties(RoleProperty.MoveSpeed);
-        MaxExtraMove = 1+(int)Player.GetProperties(RoleProperty.MaxMoveSpeed);
-        MoveDepletedTime = 1 * ((float)Player.GetProperties(RoleProperty.MoveDecay) - 1);
-        MaxAvaterTime = (float)Player.GetProperties(RoleProperty.AvatarTime);
-        EnergyDrop = (float)Player.GetProperties(RoleProperty.AvatarDrop);
-        AvatarTimeBuff= (int)Player.GetProperties(RoleProperty.AvatarTime);
-        SkillTimeBuff = (float)Player.GetProperties(RoleProperty.SkillTime);
-        SkillDrop = (float)Player.GetProperties(RoleProperty.SkillDrop);
-        EquipDrop = (float)Player.GetProperties(RoleProperty.EquipDrop);
-        GoldDrop = (float)Player.GetProperties(RoleProperty.GoldDrop);
-        BloodThirsty = (float)Player.GetProperties(RoleProperty.BloodThirsty);
-        PotionEfficiency = (float)Player.GetProperties(RoleProperty.PotionEfficiency);
-        PotionDrop = (float)Player.GetProperties(RoleProperty.PotionDrop);
+        if (TestMode)
+            return;
+        MaxHealth = GameSettingData.MaxHealth + (int)Player.GetProperties(RoleProperty.Health);
+        BaseDamage = GameSettingData.BaseDamage + (int)Player.GetProperties(RoleProperty.Strength);
+        MaxShield = GameSettingData.MaxShield + (int)Player.GetProperties(RoleProperty.Shield);
+        ShieldGenerateProportion = GameSettingData.ShieldGenerateProportion + (float)Player.GetProperties(RoleProperty.ShieldRecovery);
+        BaseMoveSpeed = GameSettingData.BaseMoveSpeed + (int)Player.GetProperties(RoleProperty.MoveSpeed);
+        MaxExtraMove = GameSettingData.MaxExtraMove + (int)Player.GetProperties(RoleProperty.MaxMoveSpeed);
+        MoveDepletedTime = GameSettingData.MoveDepletedTime * (1 - (float)Player.GetProperties(RoleProperty.MoveDecay));
+        MaxAvaterTime = GameSettingData.MaxAvaterTime + (float)Player.GetProperties(RoleProperty.AvatarTime);
+        EnergyDrop = GameSettingData.EnergyDrop + (float)Player.GetProperties(RoleProperty.AvatarDrop);
+        AvatarTimeBuff = GameSettingData.AvatarTimeBuff + (int)Player.GetProperties(RoleProperty.AvatarTime);
+        SkillTimeBuff = GameSettingData.SkillTimeBuff + (float)Player.GetProperties(RoleProperty.SkillTime);
+        SkillDrop = GameSettingData.SkillDrop + (float)Player.GetProperties(RoleProperty.SkillDrop);
+        EquipDrop = GameSettingData.EquipDrop + (float)Player.GetProperties(RoleProperty.EquipDrop);
+        GoldDrop = GameSettingData.GoldDrop + (float)Player.GetProperties(RoleProperty.GoldDrop);
+        BloodThirsty = GameSettingData.BloodThirsty + (float)Player.GetProperties(RoleProperty.BloodThirsty);
+        PotionEfficiency = GameSettingData.PotionEfficiency + (float)Player.GetProperties(RoleProperty.PotionEfficiency);
+        PotionDrop = GameSettingData.PotionDrop + (float)Player.GetProperties(RoleProperty.PotionDrop);
     }
     void InitMoveAfterimage()
     {

@@ -32,7 +32,8 @@ public partial class BattleManage : MonoBehaviour
     CameraController CameraControler;
     [SerializeField]
     PlayerRole MyPlayer;
-
+    [SerializeField]
+    GameObject SceneObject;
 
     static List<EnemyRole> AvailableMillions;
     static List<EnemyRole> AvailableDemonGergons;
@@ -52,13 +53,18 @@ public partial class BattleManage : MonoBehaviour
     List<Loot> LootList = new List<Loot>();
     static int NextDemogorgonFloor;
     static bool IsDemogorgonFloor;
+    bool IsInit;
 
     // Use this for initialization
     void Awake()
     {
         if (!GameManager.IsInit)
             GameManager.DeployGameManager();
-
+        SceneObject.SetActive(false);
+    }
+    void Init()
+    {
+        SceneObject.SetActive(true);
         BM = this;
         EnemyParent = GameObject.FindGameObjectWithTag("EnemyParent").GetComponent<Transform>();
         LootParetn = GameObject.FindGameObjectWithTag("LootParent").GetComponent<Transform>();
@@ -86,6 +92,8 @@ public partial class BattleManage : MonoBehaviour
 
         //Debug.Log("NextDemogorgonFloor=" + NextDemogorgonFloor);
         IsDemogorgonFloor = CheckDemogorgon(Floor);
+        IsInit = true;
+        Debug.Log("Init BattleManager");
     }
 
     void SpawnDemogorgon()
@@ -283,10 +291,15 @@ public partial class BattleManage : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        InActivityOutSideEnemysAndLoots();
-        UpdateCurPlate();
-        SpawnEnemyTimer.RunTimer();
-        SpawnLootTimer.RunTimer();
+        if (IsInit)
+        {
+            InActivityOutSideEnemysAndLoots();
+            UpdateCurPlate();
+            SpawnEnemyTimer.RunTimer();
+            SpawnLootTimer.RunTimer();
+        }
+        else if (Player.IsInit)
+            Init();
     }
     void InActivityOutSideEnemysAndLoots()
     {

@@ -11,7 +11,7 @@ public partial class EnemyRole
     float DropProbility;
     [Tooltip("指定掉落道具")]
     [SerializeField]
-    List<LootType> DesignateLoot = new List<LootType>();
+    List<LootType> DesignateLoot;
     [Tooltip("掉落技能機率")]
     [SerializeField]
     float DropSkillProbility;
@@ -29,8 +29,6 @@ public partial class EnemyRole
         //DropLoot;
         for (int i = 0; i < DesignateLoot.Count; i++)
         {
-            if (DesignateLoot[i] == null)
-                continue;
             if (ProbabilityGetter.GetResult(DropProbility))
             {
                 Loot loot = DropSpawner.SpawnLoot(transform.position);

@@ -51,6 +51,27 @@ public class GameSettingData : Data
     public static float BurnDamage;
     public static float CurseDamageReduce;
     public static float BurnInterval;
+    //腳色基本數值
+    public static int MaxHealth;
+    public static int BaseDamage;
+    public static int BaseMoveSpeed;
+    public static int MaxShield;
+    public static float ShieldGenerateProportion;
+    public static float ShieldRechargeTime;
+    public static int GainMoveFromKilling;
+    public static float MoveDepletedTime;
+    public static int MaxExtraMove;
+    public static float MaxAvaterTime;
+    public static float EnergyDrop;
+    public static float AvatarTimeBuff;
+    public static float SkillTimeBuff;
+    public static float SkillDrop;
+    public static float EquipDrop;
+    public static float GoldDrop;
+    public static float BloodThirsty;
+    public static float PotionEfficiency;
+    public static float PotionDrop;
+
 
 
 
@@ -226,6 +247,64 @@ public class GameSettingData : Data
                                 break;
                             case "CurseDamageReduce":
                                 CurseDamageReduce = float.Parse(item[key].ToString());
+                                break;
+                                //腳色基本數值
+                            case "MaxHealth":
+                                MaxHealth = int.Parse(item[key].ToString());
+                                break;
+                            case "BaseDamage":
+                                BaseDamage = int.Parse(item[key].ToString());
+                                break;
+                            case "BaseMoveSpeed":
+                                BaseMoveSpeed = int.Parse(item[key].ToString());
+                                break;
+                            case "MaxShield":
+                                MaxShield = int.Parse(item[key].ToString());
+                                break;
+                            case "ShieldGenerateProportion":
+                                ShieldGenerateProportion = float.Parse(item[key].ToString());
+                                break;
+                            case "ShieldRechargeTime":
+                                ShieldRechargeTime = float.Parse(item[key].ToString());
+                                break;
+                            case "GainMoveFromKilling":
+                                GainMoveFromKilling = int.Parse(item[key].ToString());
+                                break;
+                            case "MoveDepletedTime":
+                                MoveDepletedTime = float.Parse(item[key].ToString());
+                                break;
+                            case "MaxExtraMove":
+                                MaxExtraMove = int.Parse(item[key].ToString());
+                                break;
+                            case "MaxAvaterTime":
+                                MaxAvaterTime = float.Parse(item[key].ToString());
+                                break;
+                            case "EnergyDrop":
+                                EnergyDrop = float.Parse(item[key].ToString());
+                                break;
+                            case "AvatarTimeBuff":
+                                AvatarTimeBuff = float.Parse(item[key].ToString());
+                                break;
+                            case "SkillTimeBuff":
+                                SkillTimeBuff = float.Parse(item[key].ToString());
+                                break;
+                            case "SkillDrop":
+                                SkillDrop = float.Parse(item[key].ToString());
+                                break;
+                            case "EquipDrop":
+                                EquipDrop = float.Parse(item[key].ToString());
+                                break;
+                            case "GoldDrop":
+                                GoldDrop = float.Parse(item[key].ToString());
+                                break;
+                            case "BloodThirsty":
+                                BloodThirsty = float.Parse(item[key].ToString());
+                                break;
+                            case "PotionEfficiency":
+                                PotionEfficiency = float.Parse(item[key].ToString());
+                                break;
+                            case "PotionDrop":
+                                PotionDrop = float.Parse(item[key].ToString());
                                 break;
                             default:
                                 Debug.LogWarning(string.Format("{0}表有不明屬性:{1}", DataName, key));
