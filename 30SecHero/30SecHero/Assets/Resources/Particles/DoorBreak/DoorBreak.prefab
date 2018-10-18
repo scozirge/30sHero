@@ -55,7 +55,6 @@ GameObject:
   - component: {fileID: 4813456161056812}
   - component: {fileID: 198697248839094646}
   - component: {fileID: 199389384527177384}
-  - component: {fileID: 114935322043089200}
   m_Layer: 0
   m_Name: DoorBreak
   m_TagString: Untagged
@@ -126,7 +125,6 @@ GameObject:
   - component: {fileID: 199237289836422662}
   - component: {fileID: 82682782434407768}
   - component: {fileID: 108888620800083250}
-  - component: {fileID: 114682706761833006}
   m_Layer: 0
   m_Name: ExplosionNovaBlue
   m_TagString: Untagged
@@ -456,32 +454,6 @@ Light:
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
---- !u!114 &114682706761833006
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1498920671559086}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f54e17d705a2894d88787e24190ebfa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  life: 0.3
-  killAfterLife: 1
---- !u!114 &114935322043089200
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1133463646354820}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f8f63618a6dbe9c43a5c0c6ca3bd311e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Loop: 0
-  LifeTime: 5
 --- !u!198 &198129945156426466
 ParticleSystem:
   m_ObjectHideFlags: 1

@@ -89,7 +89,6 @@ GameObject:
   - component: {fileID: 224751268816372196}
   - component: {fileID: 198298351546003630}
   - component: {fileID: 199931849068112394}
-  - component: {fileID: 114414832212230282}
   m_Layer: 0
   m_Name: FireBall
   m_TagString: Untagged
@@ -114,19 +113,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &114414832212230282
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1853425581391548}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f8f63618a6dbe9c43a5c0c6ca3bd311e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Loop: 1
-  LifeTime: 0
 --- !u!198 &198213413132236254
 ParticleSystem:
   m_ObjectHideFlags: 1

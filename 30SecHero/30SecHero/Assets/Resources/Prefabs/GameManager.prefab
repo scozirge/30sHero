@@ -81,7 +81,7 @@ MonoBehaviour:
     type: 2}
   DamageUpPrefab: {fileID: 198001080371431652, guid: 59b3bdab785296840b86c087aae64409,
     type: 2}
-  BlockPrefab: {fileID: 198853811207955838, guid: 48c7fe97ee5fbd0478fa25692681f2f2,
+  BlockPrefab: {fileID: 198853811207955838, guid: b4d4ebdfdacb8e64a873156266007ccf,
     type: 2}
   SpeedUpPrefab: {fileID: 198124011897465664, guid: 93b517a4923930e45bf9a7cba303ae26,
     type: 2}
