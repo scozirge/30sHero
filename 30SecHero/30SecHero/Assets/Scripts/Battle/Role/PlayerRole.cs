@@ -93,12 +93,15 @@ public partial class PlayerRole : Role
     [Tooltip("變身時間加成(秒)")]
     [SerializeField]
     protected float AvatarTimeBuff;
-
-    public virtual int EnergyDrop { get { return BaseEnergyDrop + ExtraEnergyDrop; } }
-    public int ExtraEnergyDrop { get; protected set; }
+    [Tooltip("技能時間加成(秒)")]
+    [SerializeField]
+    protected float SkillTimeBuff;
+    [Tooltip("技能掉落機率")]
+    [SerializeField]
+    protected float SkillDrop;
     [Tooltip("能量掉落機率")]
     [SerializeField]
-    protected int BaseEnergyDrop;
+    protected float EnergyDrop;
     public virtual int MoneyDrop { get { return BaseMoneyDrop + ExtraMoneyDrop; } }
     public int ExtraMoneyDrop { get; protected set; }
     [Tooltip("金幣掉落機率")]
@@ -187,18 +190,18 @@ public partial class PlayerRole : Role
         MaxHealth = 1+(int)Player.GetProperties(RoleProperty.Health);
         BaseDamage = 1+(int)Player.GetProperties(RoleProperty.Strength);
         MaxShield = 1+(int)Player.GetProperties(RoleProperty.Shield);
-        BaseHealth = 1+(int)Player.GetProperties(RoleProperty.ShieldRecovery);
+        ShieldGenerateProportion = 1 + (float)Player.GetProperties(RoleProperty.ShieldRecovery);
         BaseMoveSpeed = 1+(int)Player.GetProperties(RoleProperty.MoveSpeed);
         MaxExtraMove = 1+(int)Player.GetProperties(RoleProperty.MaxMoveSpeed);
-        MoveDepletedTime = 1 * (int)Player.GetProperties(RoleProperty.MoveDecay);
-        BaseHealth += (int)Player.GetProperties(RoleProperty.Health);
-        BaseHealth += (int)Player.GetProperties(RoleProperty.Health);
-        BaseHealth += (int)Player.GetProperties(RoleProperty.Health);
-        BaseHealth += (int)Player.GetProperties(RoleProperty.Health);
-        BaseHealth += (int)Player.GetProperties(RoleProperty.Health);
-        BaseHealth += (int)Player.GetProperties(RoleProperty.Health);
-        BaseHealth += (int)Player.GetProperties(RoleProperty.Health);
-        BaseMoveSpeed += (int)Player.GetProperties(RoleProperty.MoveSpeed);
+        MoveDepletedTime = 1 * ((float)Player.GetProperties(RoleProperty.MoveDecay) - 1);
+        MaxAvaterTime = (float)Player.GetProperties(RoleProperty.AvatarTime);
+        EnergyDrop = (float)Player.GetProperties(RoleProperty.AvatarDrop);
+        AvatarTimeBuff= (int)Player.GetProperties(RoleProperty.AvatarTime);
+        SkillTimeBuff = (float)Player.GetProperties(RoleProperty.SkillTime);
+        SkillDrop = (float)Player.GetProperties(RoleProperty.SkillDrop);
+        BaseHealth = (int)Player.GetProperties(RoleProperty.Health);
+        BaseHealth = (int)Player.GetProperties(RoleProperty.Health);
+        BaseMoveSpeed = (int)Player.GetProperties(RoleProperty.MoveSpeed);
     }
     void InitMoveAfterimage()
     {
@@ -485,7 +488,7 @@ public partial class PlayerRole : Role
         switch (_data.Type)
         {
             case LootType.AvataEnergy:
-                AvatarTimer += _data.Time * (1 + AvatarTimeBuff);
+                AvatarTimer += _data.Time + AvatarTimeBuff;
                 break;
             case LootType.DamageUp:
                 AddBuffer(RoleBuffer.DamageUp, _data.Time, _data.Value);
@@ -520,7 +523,7 @@ public partial class PlayerRole : Role
         if (MonsterSkills.ContainsKey(_name))
         {
             MonsterSkills[_name].enabled = true;
-            MonsterSkills[_name].PlayerGetSkill();
+            MonsterSkills[_name].PlayerGetSkill(SkillTimeBuff);
             ActiveMonsterSkills.Add(MonsterSkills[_name]);
         }
     }

@@ -41,9 +41,9 @@ public class SuicideBombing : Skill
         PrepareTimer = PrepareTime;
         //Dector = transform.GetComponentInChildrenExcludeSelf<Collider2D>();
     }
-    public override void PlayerGetSkill()
+    public override void PlayerGetSkill(float _skillTimeBuff)
     {
-        base.PlayerGetSkill();
+        base.PlayerGetSkill(_skillTimeBuff);
         Detected = false;
     }
     protected override void Update()

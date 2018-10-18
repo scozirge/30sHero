@@ -60,11 +60,11 @@ public class Skill : MonoBehaviour
         Awake();
         enabled = false;
     }
-    public virtual void PlayerGetSkill()
+    public virtual void PlayerGetSkill(float _skillTimeBuff)
     {
         if (SubordinateAmmos.Count == 0)
             AttackTimes = 0;
-        PSkillTimer = PSkillDuration;
+        PSkillTimer = PSkillDuration + _skillTimeBuff;
     }
     protected virtual void SpawnAttackPrefab()
     {
