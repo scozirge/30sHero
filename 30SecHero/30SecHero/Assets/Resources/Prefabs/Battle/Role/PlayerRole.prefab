@@ -365,19 +365,21 @@ MonoBehaviour:
   GainMoveFromKilling: 150
   MoveDepletedTime: 10
   MaxExtraMove: 500
-  MaxAvaterTime: 30
+  MaxAvaterTime: 120
   AvatarTimerText: {fileID: 0}
+  EnergyDrop: 0
   AvatarTimeBuff: 0
   SkillTimeBuff: 0
   SkillDrop: 0
-  EnergyDrop: 0
-  BaseMoneyDrop: 0
-  BaseBloodthirsty: 0
-  PotionEfficacy: 0
+  EquipDrop: 0
+  GoldDrop: 0
+  BloodThirsty: 0
+  PotionEfficiency: 0
+  PotionDrop: 0
   KeyboardJumpMoveFactor: 10
   MoveAfterimagePrefab: {fileID: 198230356777013556, guid: 4ac12026ed62f024b9bc36b2da373c93,
     type: 2}
-  DontAttackRestoreTime: 1
+  DontAttackRestoreTime: 10
   SelfKnockForce: 10000
   SelfSturnTime: 0.25
   ControlDevice: 1
@@ -386,7 +388,7 @@ MonoBehaviour:
   RushForce: 1
   RushSound: {fileID: 8300000, guid: 41b00c1ca9d97ea4796281c66b69da09, type: 3}
   AttackSound: {fileID: 8300000, guid: fc274ce0d0fd8fb40b2e7557d54975e8, type: 3}
-  JumpCDTime: 0.2
+  JumpCDTime: 0.5
   StopDrag: 800
   FaceLeftOrRight: 0
   ClosestEnemy: {fileID: 0}
