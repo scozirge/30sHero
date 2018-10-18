@@ -231,7 +231,7 @@ MonoBehaviour:
   BaseDamage: 10
   BaseDefence: 0
   BaseMoveSpeed: 600
-  DeathEffect: {fileID: 198421084779393996, guid: 9d76221f8330c3e4e88f4600ea7c80bc,
+  DeathEffect: {fileID: 198802542160044040, guid: 8f344cf8edc65e44883dfdf0168792bd,
     type: 2}
   AniPlayer: {fileID: 114796498901394522}
   RoleTrans: {fileID: 224787385446496172}
@@ -243,7 +243,7 @@ MonoBehaviour:
   DropCount: 1
   DropSkillProbility: 1
   DropSkill: {fileID: 0}
-  HealthObj: {fileID: 0}
+  HealthObj: {fileID: 1610887402048710}
   PlayMotionDuration: 0.5
   InitBuffers: []
 --- !u!114 &114497804762892658
