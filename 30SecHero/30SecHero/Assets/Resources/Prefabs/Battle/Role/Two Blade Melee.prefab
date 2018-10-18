@@ -230,7 +230,7 @@ MonoBehaviour:
   BaseHealth: 20
   BaseDamage: 10
   BaseDefence: 0
-  BaseMoveSpeed: 600
+  BaseMoveSpeed: 200
   DeathEffect: {fileID: 198802542160044040, guid: 8f344cf8edc65e44883dfdf0168792bd,
     type: 2}
   AniPlayer: {fileID: 114796498901394522}
@@ -240,7 +240,7 @@ MonoBehaviour:
   NormalDrag: 0
   KnockDragDuration: 0.9
   DropProbility: 1
-  DropCount: 1
+  DesignateLoot: 
   DropSkillProbility: 1
   DropSkill: {fileID: 114014446417336624}
   HealthObj: {fileID: 1462443595628808}
@@ -352,9 +352,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Wander: 1
   FollowCamera: 0
-  WanderInterval: 2
-  RotateFactor: 0.01
-  WanderRange: 80
+  DebutSpeed: 2000
+  WanderInterval: 0.5
+  RotateFactor: 0.02
+  WanderRange: 25
   Destination: {x: 0, y: 0}
 --- !u!114 &114906583810752894
 MonoBehaviour:

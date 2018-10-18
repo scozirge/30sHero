@@ -206,11 +206,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4f0a44c2e05082409ff650163011e2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Wander: 0
+  Wander: 1
   FollowCamera: 0
-  WanderInterval: 2
-  RotateFactor: 0.01
-  WanderRange: 50
+  DebutSpeed: 2000
+  WanderInterval: 0.5
+  RotateFactor: 0.02
+  WanderRange: 25
   Destination: {x: 0, y: 0}
 --- !u!114 &114287811667066566
 MonoBehaviour:
@@ -242,7 +243,7 @@ MonoBehaviour:
   BaseHealth: 20
   BaseDamage: 10
   BaseDefence: 0
-  BaseMoveSpeed: 600
+  BaseMoveSpeed: 200
   DeathEffect: {fileID: 198802542160044040, guid: 8f344cf8edc65e44883dfdf0168792bd,
     type: 2}
   AniPlayer: {fileID: 114287811667066566}
@@ -252,7 +253,7 @@ MonoBehaviour:
   NormalDrag: 0
   KnockDragDuration: 0.9
   DropProbility: 1
-  DropCount: 1
+  DesignateLoot: 
   DropSkillProbility: 1
   DropSkill: {fileID: 0}
   HealthObj: {fileID: 1825838027108386}

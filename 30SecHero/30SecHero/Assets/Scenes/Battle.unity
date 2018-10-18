@@ -1760,15 +1760,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf3b69d7446504f4da805d7d731903ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TestMode: 1
-  SpawnEnemyInterval: 5
-  SpawnLootInterval: 1
-  SpawnEnemyCount: 1
+  TestMode: 0
+  SpawnEnemyInterval: 1.7
+  SpawnLootInterval: 9
+  SpawnEnemyCount: 4
   SpawnLootCount: 1
-  SpawnEnemyCountInterval: 0
+  SpawnEnemyCountInterval: 0.3
   SpawnLootCountInterval: 0
   MaxEnemyCout: 7
-  MaxLootCout: 2
+  MaxLootCout: 1
   Enemys:
   - {fileID: 114364750184517408, guid: 7a4fcaea190fe1341b551043fc61e7ba, type: 2}
   - {fileID: 114364750184517408, guid: 4e4608edff7362c45b106e955ca4fabe, type: 2}
