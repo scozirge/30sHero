@@ -22,7 +22,7 @@ public class AILootMove : AIMove
         base.Debut();
         if (KeepDebut || FollowCamera)
         {
-            Vector2 targetVel = (Destination - (Vector2)transform.position).normalized * MoveSpeed;
+            Vector2 targetVel = (Destination - (Vector2)transform.position).normalized * DebutSpeed;
             MyRigi.velocity = Vector2.Lerp(MyRigi.velocity, targetVel, RotateFactor);
         }
     }

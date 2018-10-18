@@ -10,6 +10,9 @@ public abstract class AIMove : MonoBehaviour {
     [Tooltip("是否要跟著攝影機")]
     [SerializeField]
     protected bool FollowCamera;
+    [Tooltip("進場速度")]
+    [SerializeField]
+    protected int DebutSpeed;
     [Tooltip("遊蕩時間間隔")]
     [SerializeField]
     protected float WanderInterval;

@@ -6,7 +6,6 @@ using UnityEngine;
 public class AIRoleMove : AIMove
 {
 
-
     Vector3 InitialVelocity;
     EnemyRole ER;
 
@@ -17,7 +16,7 @@ public class AIRoleMove : AIMove
         int randX = Random.Range(0, 800);
         int randY = Random.Range(-400, 400);
         Vector3 rndTarget = new Vector3(randX, randY) + BattleManage.MyCameraControler.transform.position;
-        InitialVelocity = (rndTarget - transform.position).normalized * ER.MoveSpeed;
+        InitialVelocity = (rndTarget - transform.position).normalized * DebutSpeed;
         MyRigi.velocity = InitialVelocity;
         if (Destination == Vector2.zero)
         {

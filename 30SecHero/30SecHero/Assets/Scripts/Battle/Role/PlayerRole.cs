@@ -83,13 +83,15 @@ public partial class PlayerRole : Role
     [Tooltip("殺怪最高額外速度")]
     [SerializeField]
     float MaxExtraMove;
-
     [Tooltip("變身時間")]
     [SerializeField]
     public float MaxAvaterTime;
     public float AvatarTimeRatio { get { return (float)AvatarTimer / (float)MaxAvaterTime; } }
     [SerializeField]
     Text AvatarTimerText;
+    [Tooltip("能量掉落機率")]
+    [SerializeField]
+    protected float EnergyDrop;
     [Tooltip("變身時間加成(秒)")]
     [SerializeField]
     protected float AvatarTimeBuff;
@@ -99,9 +101,6 @@ public partial class PlayerRole : Role
     [Tooltip("技能掉落機率")]
     [SerializeField]
     protected float SkillDrop;
-    [Tooltip("能量掉落機率")]
-    [SerializeField]
-    protected float EnergyDrop;
     [Tooltip("裝備掉落機率")]
     [SerializeField]
     protected float EquipDrop;
@@ -114,6 +113,9 @@ public partial class PlayerRole : Role
     [Tooltip("藥水效果強化比例")]
     [SerializeField]
     protected float PotionEfficiency;
+    [Tooltip("藥水掉落機率")]
+    [SerializeField]
+    protected float PotionDrop;
     const int KeyboardMoveFactor = 1;
     const int CursorMoveFactor = 40;
     [Tooltip("史萊姆跳躍速度")]
@@ -202,7 +204,7 @@ public partial class PlayerRole : Role
         GoldDrop = (float)Player.GetProperties(RoleProperty.GoldDrop);
         BloodThirsty = (float)Player.GetProperties(RoleProperty.BloodThirsty);
         PotionEfficiency = (float)Player.GetProperties(RoleProperty.PotionEfficiency);
-        BloodThirsty = (int)Player.GetProperties(RoleProperty.BloodThirsty);
+        PotionDrop = (float)Player.GetProperties(RoleProperty.PotionDrop);
     }
     void InitMoveAfterimage()
     {
@@ -489,19 +491,19 @@ public partial class PlayerRole : Role
         switch (_data.Type)
         {
             case LootType.AvataEnergy:
-                AvatarTimer += _data.Time + AvatarTimeBuff;
+                AvatarTimer += _data.Time * (1 + PotionEfficiency) + AvatarTimeBuff;
                 break;
             case LootType.DamageUp:
-                AddBuffer(RoleBuffer.DamageUp, _data.Time, _data.Value);
+                AddBuffer(RoleBuffer.DamageUp, _data.Time * (1 + PotionEfficiency), _data.Value);
                 break;
             case LootType.HPRecovery:
                 HealHP((int)(MaxHealth * _data.Value * (1 + PotionEfficiency)));
                 break;
             case LootType.Immortal:
-                AddBuffer(RoleBuffer.Immortal, _data.Time);
+                AddBuffer(RoleBuffer.Immortal, _data.Time * (1 + PotionEfficiency));
                 break;
             case LootType.SpeedUp:
-                AddBuffer(RoleBuffer.SpeedUp, _data.Time, _data.Value);
+                AddBuffer(RoleBuffer.SpeedUp, _data.Time * (1 + PotionEfficiency), _data.Value);
                 break;
         }
     }
