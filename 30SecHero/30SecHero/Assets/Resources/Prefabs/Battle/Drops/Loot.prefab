@@ -179,34 +179,29 @@ MonoBehaviour:
     Time: 0
     Value: 0.1
     LootIcon: {fileID: 21300000, guid: 549e299f332f55f4f880f4c1ad449c54, type: 3}
-    GetParticle: {fileID: 198646098838674944, guid: 1cf5b72d5901b214eb63b8f71c61a97d,
-      type: 2}
+    GetParticle: {fileID: 0}
   - Type: 1
     Time: 5
     Value: 0
     LootIcon: {fileID: 21300000, guid: 0ed44ed113e37aa48b1963e3eb445ace, type: 3}
-    GetParticle: {fileID: 198646098838674944, guid: 1cf5b72d5901b214eb63b8f71c61a97d,
-      type: 2}
+    GetParticle: {fileID: 0}
   - Type: 2
     Time: 10
     Value: 0.5
     LootIcon: {fileID: 21300000, guid: aef88ca2dfcface48966dcb4e703ba9e, type: 3}
-    GetParticle: {fileID: 198646098838674944, guid: 1cf5b72d5901b214eb63b8f71c61a97d,
-      type: 2}
+    GetParticle: {fileID: 0}
   - Type: 3
     Time: 5
     Value: 0
     LootIcon: {fileID: 21300000, guid: 6f54b1c98b21ba542b28ea2a3478a416, type: 3}
-    GetParticle: {fileID: 198646098838674944, guid: 1cf5b72d5901b214eb63b8f71c61a97d,
-      type: 2}
+    GetParticle: {fileID: 0}
   - Type: 4
     Time: 5
     Value: 300
     LootIcon: {fileID: 21300000, guid: d4116117b11f21e4fa3dad142fa6b626, type: 3}
-    GetParticle: {fileID: 198646098838674944, guid: 1cf5b72d5901b214eb63b8f71c61a97d,
-      type: 2}
+    GetParticle: {fileID: 0}
   MyIcon: {fileID: 114629167383406342}
-  DeathEffect: {fileID: 198308960938074910, guid: 6ebb3848cff528744a0ce66822bd1588,
+  DeathEffect: {fileID: 198646098838674944, guid: 1cf5b72d5901b214eb63b8f71c61a97d,
     type: 2}
 --- !u!114 &114629167383406342
 MonoBehaviour:
