@@ -22,24 +22,6 @@ public abstract class EquipData : Data
     }
     public bool IsEquiped { get; protected set; }
     public Dictionary<RoleProperty, float> Properties = new Dictionary<RoleProperty, float>();
-    //Random Attributes
-    /*
-    public int RandomStrength;
-    public int RandomHealth;
-    public int RandomShield;
-    public int RandomShieldRecovery;
-    public int RandomMoveSpeed;
-    public int RandomMaxMoveSpeed;
-    public float RandomMoveDecay;
-    public float RandomAvatarTime;
-    public float RandomAvatarDrop;
-    public float RandomSkillTime;
-    public float RandomSkillDrop;
-    public float RandomEquipDrop;
-    public int RandomGoldDrop;
-    public float RandomBloodThirsty;
-    public float RandomPotionEfficiency;
-    */
     public virtual void SetEquipStatus(bool _isEquiped,int _equipSlot)
     {
         IsEquiped = _isEquiped;

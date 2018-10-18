@@ -31,6 +31,10 @@ public class EffectEmitter : MonoBehaviour
     }
     public static ParticleSystem EmitParticle(ParticleSystem _particle, Vector3 _pos, Vector3 _dir, Transform _parent)
     {
+        if (_particle == null)
+        {
+            return null;
+        }
         ParticleSystem particle = Instantiate(_particle, Vector3.zero, Quaternion.identity) as ParticleSystem;
         if (_parent)
             particle.transform.SetParent(_parent);

@@ -52,10 +52,9 @@ public partial class PlayerRole : Role
     [SerializeField]
     protected RectTransform ShieldBar;
     float ShieldBarWidth;
-    [Tooltip("護盾充飽需求時間(秒)")]
+    [Tooltip("護盾回復(百分比/秒)")]
     [SerializeField]
-    float ShieldReGenerateTime;
-    float ShieldGenerateNum { get { return MaxShield / ShieldReGenerateTime; } }
+    float ShieldGenerateProportion;
     [Tooltip("護盾要沒受到攻擊多久時間(秒)才會開始充能")]
     [SerializeField]
     float ShieldRechargeTime;
@@ -70,8 +69,8 @@ public partial class PlayerRole : Role
         {
             if (value < 0)
                 value = 0;
-            else if (value > MaxEtraMove)
-                value = MaxEtraMove;
+            else if (value > MaxExtraMove)
+                value = MaxExtraMove;
             extraMoveSpeed = value;
         }
     }
@@ -83,7 +82,7 @@ public partial class PlayerRole : Role
     float MoveDepletedTime;
     [Tooltip("殺怪最高額外速度")]
     [SerializeField]
-    float MaxEtraMove;
+    float MaxExtraMove;
 
     [Tooltip("變身時間")]
     [SerializeField]
@@ -183,7 +182,24 @@ public partial class PlayerRole : Role
         IsAvatar = true;
         CanJump = true;
     }
-
+    void InitPlayerProperties()
+    {
+        MaxHealth = 1+(int)Player.GetProperties(RoleProperty.Health);
+        BaseDamage = 1+(int)Player.GetProperties(RoleProperty.Strength);
+        MaxShield = 1+(int)Player.GetProperties(RoleProperty.Shield);
+        BaseHealth = 1+(int)Player.GetProperties(RoleProperty.ShieldRecovery);
+        BaseMoveSpeed = 1+(int)Player.GetProperties(RoleProperty.MoveSpeed);
+        MaxExtraMove = 1+(int)Player.GetProperties(RoleProperty.MaxMoveSpeed);
+        MoveDepletedTime = 1 * (int)Player.GetProperties(RoleProperty.MoveDecay);
+        BaseHealth += (int)Player.GetProperties(RoleProperty.Health);
+        BaseHealth += (int)Player.GetProperties(RoleProperty.Health);
+        BaseHealth += (int)Player.GetProperties(RoleProperty.Health);
+        BaseHealth += (int)Player.GetProperties(RoleProperty.Health);
+        BaseHealth += (int)Player.GetProperties(RoleProperty.Health);
+        BaseHealth += (int)Player.GetProperties(RoleProperty.Health);
+        BaseHealth += (int)Player.GetProperties(RoleProperty.Health);
+        BaseMoveSpeed += (int)Player.GetProperties(RoleProperty.MoveSpeed);
+    }
     void InitMoveAfterimage()
     {
         MoveAfterimage = EffectEmitter.EmitParticle(MoveAfterimagePrefab, Vector3.zero, Vector3.zero, transform).GetComponentInChildrenExcludeSelf<ParticleSystem>();
@@ -209,7 +225,7 @@ public partial class PlayerRole : Role
     {
         if (Shield < MaxShield)
             if (StartGenerateShield)
-                Shield += ShieldGenerateNum * Time.deltaTime;
+                Shield += ShieldGenerateProportion * MaxShield * Time.deltaTime;
     }
     protected void ChangeToStopDrag()
     {

@@ -18,6 +18,8 @@ public class Purchase : MyUI
     Image Icon;
     [SerializeField]
     Text CountText;
+    [SerializeField]
+    GameObject RightPanel;
 
     List<PurchaseItem> ItemList = new List<PurchaseItem>();
 
@@ -35,6 +37,7 @@ public class Purchase : MyUI
             Destroy(ItemList[i].gameObject);
         }
         ItemList = new List<PurchaseItem>();
+        ShowInfo(null);
         KongregateAPIBehaviour.ShowItemList();
         //ShowItemListCB("1,test,test,1/2,test2,test2,5");
     }
@@ -62,15 +65,21 @@ public class Purchase : MyUI
             {
                 ItemList[i].GetComponent<Toggle>().isOn = false;
             }
-            ItemList[0].OnPress();
+            ItemList[0].OnPress();//OnPress會呼叫ShowInfo
             ItemList[0].GetComponent<Toggle>().isOn = true;
         }
+        else
+            ShowInfo(null);
     }
     public void ShowInfo(PurchaseItem _item)
     {
-        CurSelectedData = _item.MyData;
-        CurSelectedItem = _item;
-        RefreshText();
+        if (_item)
+        {
+            CurSelectedData = _item.MyData;
+            CurSelectedItem = _item;
+            RefreshText();
+        }
+        RightPanel.SetActive(_item);
     }
     public override void RefreshText()
     {
@@ -89,7 +98,7 @@ public class Purchase : MyUI
     }
     public static void ToPurchaseCB(bool _result)
     {
-        if(_result)
+        if (_result)
         {
             Player.GainEmerald(CurPurchaseData.EmeraldCount);
             PopupUI.ShowClickCancel(string.Format(StringData.GetString("PurchaseEmeraldSuccess"), CurPurchaseData.EmeraldCount));

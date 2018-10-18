@@ -35,8 +35,7 @@ public abstract class Role : MonoBehaviour
     [Tooltip("基礎血量")]
     [SerializeField]
     protected int BaseHealth;
-    public int ExtraHealth { get; protected set; }
-    public int MaxHealth { get { return BaseHealth + ExtraHealth; } }
+    public int MaxHealth { get; protected set; }
     public float HealthRatio { get { return (float)Health / (float)MaxHealth; } }
     public virtual int Damage { get {
         return (int)(BaseDamage * 
@@ -169,6 +168,8 @@ public abstract class Role : MonoBehaviour
     }
     public virtual void HealHP(int _heal)
     {
+        if (_heal == 0)
+            return;
         if (!IsAlive)
             return;
         EffectEmitter.EmitParticle(GameManager.GetOtherParticle("Heal"), Vector3.zero, Vector3.zero, transform);

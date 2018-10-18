@@ -1427,6 +1427,7 @@ MonoBehaviour:
   PriceText: {fileID: 816814151}
   Icon: {fileID: 608823393}
   CountText: {fileID: 107810478}
+  RightPanel: {fileID: 1775976172}
 --- !u!114 &115606819
 MonoBehaviour:
   m_ObjectHideFlags: 0

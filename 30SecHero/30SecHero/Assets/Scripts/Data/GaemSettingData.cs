@@ -27,7 +27,7 @@ public class GameSettingData : Data
     public static int RandomStrength;
     public static int RandomHealth;
     public static int RandomShield;
-    public static int RandomShieldRecovery;
+    public static float RandomShieldRecovery;
     public static int RandomMoveSpeed;
     public static int RandomMaxMoveSpeed;
     public static float RandomMoveDecay;
@@ -156,7 +156,7 @@ public class GameSettingData : Data
                                 RandomShield = int.Parse(item[key].ToString());
                                 break;
                             case "RandomShieldRecovery":
-                                RandomShieldRecovery = int.Parse(item[key].ToString());
+                                RandomShieldRecovery = float.Parse(item[key].ToString());
                                 break;
                             case "RandomMoveSpeed":
                                 RandomMoveSpeed = int.Parse(item[key].ToString());

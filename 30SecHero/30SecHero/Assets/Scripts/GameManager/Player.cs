@@ -13,21 +13,6 @@ public partial class Player
 
 
 
-    //PlayerRole Attributes
-    public static int BaseStrength;
-    public static int BaseHealth;
-    public static int BaseShield;
-    public static int BaseShieldRecovery;
-
-    public static int BaseMoveSpeed;
-    public static int BaseMaxMoveSpeed;
-    public static float BaseAvatarTime;
-    public static float BaseSkillTime;
-    public static float BaseSkillDrop;
-    public static int BaseGoldDrop;
-    public static float BaseEquipDrop;
-    public static float BaseBloodthirsty;
-    public static float BasePotionEfficacy;
     //Strengthen Dic
     public static Dictionary<int, StrengthenData> StrengthenDic = new Dictionary<int, StrengthenData>();
     //Properties
@@ -206,7 +191,7 @@ public partial class Player
             else
             {
                 Debug.Log("更新server玩家強化");
-                ServerRequest.StrengthenUpgrade(_data.ID, _data.LV + 1, Player.Gold);
+                ServerRequest.StrengthenUpgrade(_data.ID, _data.LV, Player.Gold);
             }
         }
     }
