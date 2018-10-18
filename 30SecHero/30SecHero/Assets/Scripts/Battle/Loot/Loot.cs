@@ -19,20 +19,37 @@ public class Loot : MonoBehaviour
     float Time;
     float Value;
     LootData Data;
+    bool IsDesignateLoot;
+
+    public void DesignateLoot(LootType _type)
+    {
+        for (int i = 0; i < LootList.Count; i++)
+        {
+            if (LootList[i].Type == _type)
+            {
+                Data = LootList[i];
+                IsDesignateLoot = true;
+                return;
+            }
+        }
+    }
 
     void Start()
     {
-        int rand = 0;
-        if (DesginateLootIndex == 0)
-            rand = Random.Range(0, LootList.Count);
-        else
-            rand = DesginateLootIndex - 1;
-        if (rand >= LootList.Count)
+        if (!IsDesignateLoot)
         {
-            rand = 0;
-            Debug.LogWarning("輸入的指定寶物超出索引值");
+            int rand = 0;
+            if (DesginateLootIndex == 0)
+                rand = Random.Range(0, LootList.Count);
+            else
+                rand = DesginateLootIndex - 1;
+            if (rand >= LootList.Count)
+            {
+                rand = 0;
+                Debug.LogWarning("輸入的指定寶物超出索引值");
+            }
+            Data = LootList[rand];
         }
-        Data = LootList[rand];
         MyIcon.sprite = Data.LootIcon;
         MyIcon.SetNativeSize();
     }
