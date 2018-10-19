@@ -254,9 +254,8 @@ MonoBehaviour:
   HealthBar: {fileID: 224792286874745482}
   DirectX: 0
   DirectY: 0
-  BaseHealth: 20
+  MaxHealth: 20
   BaseDamage: 10
-  BaseDefence: 0
   BaseMoveSpeed: 200
   DeathEffect: {fileID: 198802542160044040, guid: 8f344cf8edc65e44883dfdf0168792bd,
     type: 2}

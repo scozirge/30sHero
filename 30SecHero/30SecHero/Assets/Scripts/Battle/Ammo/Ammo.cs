@@ -168,7 +168,7 @@ public partial class Ammo : MonoBehaviour
         else
             SelfDestroy();
     }
-    void DestroyOutSideAmmos()
+    protected virtual void DestroyOutSideAmmos()
     {
         DestructMargin_Left = (BattleManage.MyCameraControler.transform.position.x - (BattleManage.ScreenSize.x / 2 + 100));
         DestructMargin_Right = (BattleManage.MyCameraControler.transform.position.x + (BattleManage.ScreenSize.x / 2 + 100));

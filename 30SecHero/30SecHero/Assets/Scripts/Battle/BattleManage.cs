@@ -31,7 +31,7 @@ public partial class BattleManage : MonoBehaviour
     [SerializeField]
     CameraController CameraControler;
     [SerializeField]
-    PlayerRole MyPlayer;
+    public PlayerRole MyPlayer;
     [SerializeField]
     GameObject SceneObject;
 
@@ -320,7 +320,9 @@ public partial class BattleManage : MonoBehaviour
                         EnemyList[i].gameObject.SetActive(false);
                     }
                     else
+                    {
                         EnemyList[i].gameObject.SetActive(true);
+                    }
                 }
             }
         }

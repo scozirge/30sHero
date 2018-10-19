@@ -342,6 +342,7 @@ public partial class PlayerRole : Role
             if (CurBeHitEffect) Destroy(CurBeHitEffect.gameObject);
             if (BeHitEffect) CurBeHitEffect = EffectEmitter.EmitParticle(BeHitEffect, Vector2.zero, Vector3.zero, transform);
             CameraController.PlayEffect("BeHitFrame");
+            CameraController.PlayMotion("Shake1");
         }
 
         ShieldTimer.StartRunTimer = true;
@@ -361,6 +362,7 @@ public partial class PlayerRole : Role
             ExtraMoveSpeed = 0;
             RemoveAllBuffer();
             IsAvatar = false;
+            RemoveAllSill();
             EffectEmitter.EmitParticle(AvatarRemoveEffect, Vector3.zero, Vector3.zero, transform);
             if (MoveAfterimage)
             {
@@ -407,63 +409,68 @@ public partial class PlayerRole : Role
                 }
             }
         }
-        else if (ControlDevice == MoveControl.Keyboard)
+        else if (ControlDevice == MoveControl.Keyboard)//鍵盤移動
         {
-            //鍵盤移動
-            if (IsAvatar)
+            if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.W)
+                || Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.DownArrow))
             {
-                float xMoveForce = 0;
-                float yMoveForce = 0;
-                xMoveForce = Input.GetAxis("Horizontal") * MoveSpeed * KeyboardMoveFactor;
-                yMoveForce = Input.GetAxis("Vertical") * MoveSpeed * KeyboardMoveFactor;
-                if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.W))
-                    DragRecovery();
-                else
-                    ChangeToStopDrag();
-                //MyRigi.velocity += new Vector2(xMoveForce, yMoveForce);
-                MyRigi.velocity = new Vector2(xMoveForce, yMoveForce);
-                //衝刺
-                if (Input.GetKeyDown(KeyCode.Space))
+                if (!DragTimer.StartRunTimer)
                 {
-                    Vector2 rushForce;
-                    if (xMoveForce == 0 && yMoveForce == 0)
+                    DragRecovery();
+                    if (IsAvatar)
                     {
-                        rushForce = new Vector2(FaceLeftOrRight, 0) * RushForce * 1000000;
+                        float xMoveForce = 0;
+                        float yMoveForce = 0;
+                        xMoveForce = Input.GetAxis("Horizontal") * MoveSpeed * KeyboardMoveFactor;
+                        yMoveForce = Input.GetAxis("Vertical") * MoveSpeed * KeyboardMoveFactor;
+                        //MyRigi.velocity += new Vector2(xMoveForce, yMoveForce);
+                        MyRigi.velocity = new Vector2(xMoveForce, yMoveForce);
+                        //衝刺
+                        if (Input.GetKeyDown(KeyCode.Space))
+                        {
+                            Vector2 rushForce;
+                            if (xMoveForce == 0 && yMoveForce == 0)
+                            {
+                                rushForce = new Vector2(FaceLeftOrRight, 0) * RushForce * 1000000;
+                            }
+                            else
+                                rushForce = new Vector2(xMoveForce, yMoveForce) * RushForce * 1000000;
+                            ChangeToKnockDrag();
+                            MyRigi.velocity = rushForce;
+                            //MyRigi.AddForce(rushForce);
+                            AudioPlayer.PlaySound(RushSound);
+                        }
                     }
                     else
-                        rushForce = new Vector2(xMoveForce, yMoveForce) * RushForce * 1000000;
-                    ChangeToKnockDrag();
-                    MyRigi.velocity = rushForce;
-                    //MyRigi.AddForce(rushForce);
-                    AudioPlayer.PlaySound(RushSound);
+                    {
+                        if (!CanJump)
+                            return;
+                        float xMoveForce = 0;
+                        float yMoveForce = 0;
+                        if (Input.GetAxis("Horizontal") == 0)
+                            xMoveForce = 0;
+                        else if (Input.GetAxis("Horizontal") > 0)
+                            xMoveForce = 1;
+                        else if (Input.GetAxis("Horizontal") < 0)
+                            xMoveForce = -1;
+                        if (Input.GetAxis("Vertical") == 0)
+                            yMoveForce = 0;
+                        else if (Input.GetAxis("Vertical") > 0)
+                            yMoveForce = 1;
+                        else if (Input.GetAxis("Vertical") < 0)
+                            yMoveForce = -1;
+                        if (xMoveForce != 0 || yMoveForce != 0)
+                            AniPlayer.PlayTrigger("Jump", 0);
+                        xMoveForce *= MoveSpeed * KeyboardJumpMoveFactor;
+                        yMoveForce *= MoveSpeed * KeyboardJumpMoveFactor;
+                        MyRigi.velocity = new Vector2(xMoveForce, yMoveForce);
+                        JumpTimer.StartRunTimer = true;
+                        CanJump = false;
+                    }
                 }
             }
             else
-            {
-                if (!CanJump)
-                    return;
-                float xMoveForce = 0;
-                float yMoveForce = 0;
-                if (Input.GetAxis("Horizontal") == 0)
-                    xMoveForce = 0;
-                else if (Input.GetAxis("Horizontal") > 0)
-                    xMoveForce = 1;
-                else if (Input.GetAxis("Horizontal") < 0)
-                    xMoveForce = -1;
-                if (Input.GetAxis("Vertical") == 0)
-                    yMoveForce = 0;
-                else if (Input.GetAxis("Vertical") > 0)
-                    yMoveForce = 1;
-                else if (Input.GetAxis("Vertical") < 0)
-                    yMoveForce = -1;
-                if (xMoveForce != 0 || yMoveForce != 0)
-                    AniPlayer.PlayTrigger("Jump", 0);
-                xMoveForce *= MoveSpeed * KeyboardJumpMoveFactor;
-                yMoveForce *= MoveSpeed * KeyboardJumpMoveFactor;
-                MyRigi.velocity = new Vector2(xMoveForce, yMoveForce);
-                JumpTimer.StartRunTimer = true;
-                CanJump = false;
-            }
+                ChangeToStopDrag();
         }
         FaceTarget();
     }

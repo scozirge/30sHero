@@ -36,15 +36,26 @@ public abstract class Role : MonoBehaviour
     [SerializeField]
     public int MaxHealth;
     public float HealthRatio { get { return (float)Health / (float)MaxHealth; } }
-    public virtual int Damage { get {
-        return (int)(BaseDamage * 
-        (1 + (Buffers.ContainsKey(RoleBuffer.DamageUp)?Buffers[RoleBuffer.DamageUp].Value:0+
-        (Buffers.ContainsKey(RoleBuffer.DamageDown)?-GameSettingData.CurseDamageReduce:0)))); } }
+    public virtual int Damage
+    {
+        get
+        {
+            return (int)(BaseDamage *
+            (1 + (Buffers.ContainsKey(RoleBuffer.DamageUp) ? Buffers[RoleBuffer.DamageUp].Value : 0 +
+            (Buffers.ContainsKey(RoleBuffer.DamageDown) ? -GameSettingData.CurseDamageReduce : 0))));
+        }
+    }
     [Tooltip("基礎傷害")]
     [SerializeField]
     protected int BaseDamage;
-    public virtual float MoveSpeed { get { return BaseMoveSpeed * (1 + (Buffers.ContainsKey(RoleBuffer.Freeze)?
-        -GameSettingData.FreezeMove:0  ))+ (Buffers.ContainsKey(RoleBuffer.SpeedUp) ? Buffers[RoleBuffer.SpeedUp].Value : 0); } }
+    public virtual float MoveSpeed
+    {
+        get
+        {
+            return BaseMoveSpeed * (1 + (Buffers.ContainsKey(RoleBuffer.Freeze) ?
+                -GameSettingData.FreezeMove : 0)) + (Buffers.ContainsKey(RoleBuffer.SpeedUp) ? Buffers[RoleBuffer.SpeedUp].Value : 0);
+        }
+    }
     [Tooltip("基礎移動速度")]
     [SerializeField]
     protected int BaseMoveSpeed;
@@ -65,6 +76,7 @@ public abstract class Role : MonoBehaviour
     [Tooltip("一般摩擦力")]
     [SerializeField]
     protected float NormalDrag;
+    [Tooltip("擊退摩擦力持續時間")]
     [SerializeField]
     protected float KnockDragDuration;
     protected MyTimer DragTimer;
@@ -101,7 +113,10 @@ public abstract class Role : MonoBehaviour
     }
     protected void DragRecovery()
     {
-        MyRigi.drag = NormalDrag;
+        if (!DragTimer.StartRunTimer)
+        {
+            MyRigi.drag = NormalDrag;
+        }
     }
     void Burn()
     {
@@ -203,10 +218,10 @@ public abstract class Role : MonoBehaviour
             Buffers.Add(_buffer.Type, _buffer);
             if (!BufferParticles.ContainsKey(_buffer.Type))
             {
-                if(GameManager.GetBufferParticle(_buffer.Type)!=null)
+                if (GameManager.GetBufferParticle(_buffer.Type) != null)
                 {
                     ParticleSystem ps = EffectEmitter.EmitParticle(GameManager.GetBufferParticle(_buffer.Type), Vector3.zero, Vector3.zero, transform);
-                    if(ps)
+                    if (ps)
                         BufferParticles.Add(_buffer.Type, ps);
                 }
             }
@@ -229,7 +244,7 @@ public abstract class Role : MonoBehaviour
     {
         if (Buffers.ContainsKey(_buffer.Type))
             Buffers.Remove(_buffer.Type);
-        if(BufferParticles.ContainsKey(_buffer.Type))
+        if (BufferParticles.ContainsKey(_buffer.Type))
         {
             if (BufferParticles[_buffer.Type])
                 Destroy(BufferParticles[_buffer.Type].gameObject);
@@ -238,6 +253,15 @@ public abstract class Role : MonoBehaviour
             BufferParticles.Remove(_buffer.Type);
         }
         BufferEffectChange(_buffer, false);
+    }
+    public bool BuffersExist(params RoleBuffer[] _buffs)
+    {
+        for (int i = 0; i < _buffs.Length; i++)
+        {
+            if (Buffers.ContainsKey(_buffs[i]))
+                return true;
+        }
+        return false;
     }
     void BufferEffectChange(BufferData _buffer, bool _add)
     {
@@ -269,13 +293,21 @@ public abstract class Role : MonoBehaviour
         }
         Buffers = new Dictionary<RoleBuffer, BufferData>();
     }
+    public void RemoveAllSill()
+    {
+        for (int i = 0; i < Skills.Count; i++)
+        {
+            Destroy(Skills[i]);
+            Skills.RemoveAt(i);
+        }
+    }
     protected virtual void SelfDestroy()
     {
         EffectEmitter.EmitParticle(DeathEffect, transform.position, Vector3.zero, null);
         AudioPlayer.PlaySound(DeathSound);
         Destroy(gameObject);
     }
-    public virtual void Attack()
+    public virtual void Attack(Skill _skill)
     {
     }
     public virtual void PreAttack()

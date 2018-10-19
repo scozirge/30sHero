@@ -84,5 +84,9 @@ public class MeleeAmmo : Ammo
             SelfDestroy();
 
     }
-
+    protected override void DestroyOutSideAmmos()
+    {
+        //肉搏技能出畫面不要移除
+        //base.DestroyOutSideAmmos();
+    }
 }

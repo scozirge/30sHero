@@ -7,5 +7,6 @@
     Immortal,
     Block,
     DamageUp,
-    SpeedUp
+    SpeedUp,
+    EnemyAttacking
 }

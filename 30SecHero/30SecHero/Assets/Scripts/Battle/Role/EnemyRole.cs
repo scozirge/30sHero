@@ -19,6 +19,7 @@ public partial class EnemyRole : Role
     protected const float FrictionDuringTime = 1;
     protected float FrictionDuringTimer = FrictionDuringTime;
     protected bool StartVelocityDecay;
+    protected RoleBuffer[] CantMoveBuff = new RoleBuffer[2] { RoleBuffer.Stun, RoleBuffer.EnemyAttacking };
 
     AIRoleMove MyAIMove;
     PlayerRole Target;
@@ -114,11 +115,13 @@ public partial class EnemyRole : Role
             RoleTrans.localScale = new Vector2(-1, 1);
         }
     }
-    public override void Attack()
+    public override void Attack(Skill _skill)
     {
-        base.Attack();
+        base.Attack(_skill);
         AniPlayer.PlayTrigger("Attack", 0);
         ToAttackMotion();
+        if (_skill.AttackStopMove)
+            AddBuffer(RoleBuffer.EnemyAttacking, _skill.StopMoveTime);
     }
     public override void PreAttack()
     {
@@ -146,16 +149,17 @@ public partial class EnemyRole : Role
     public override void AddBuffer(BufferData _buffer)
     {
         base.AddBuffer(_buffer);
-        if (_buffer.Type == RoleBuffer.Stun)
-            if (MyAIMove)
-                MyAIMove.SetCanMove(false);
+        UpdateCanMove();
     }
     public override void RemoveBuffer(BufferData _buffer)
     {
         base.RemoveBuffer(_buffer);
-        if (_buffer.Type == RoleBuffer.Stun)
-            if (MyAIMove)
-                MyAIMove.SetCanMove(true);
+        UpdateCanMove();
+    }
+    void UpdateCanMove()
+    {
+        if (MyAIMove)
+            MyAIMove.SetCanMove(!BuffersExist(CantMoveBuff));
     }
     public EnemyRole GetMemberwiseClone()
     {

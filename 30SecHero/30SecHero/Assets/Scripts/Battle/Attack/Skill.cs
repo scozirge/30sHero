@@ -17,6 +17,12 @@ public class Skill : MonoBehaviour
     [Tooltip("傷害倍率(傷害=傷害倍率x腳色攻擊力))")]
     [SerializeField]
     protected float DamagePercent = 1;
+    [Tooltip("怪物攻擊時是否不要移動")]
+    [SerializeField]
+    public bool AttackStopMove;
+    [Tooltip("停止移動時間")]
+    [SerializeField]
+    public float StopMoveTime;
 
     protected Role Myself;
     protected Dictionary<string, object> AmmoData = new Dictionary<string, object>();
@@ -27,6 +33,7 @@ public class Skill : MonoBehaviour
     public float PSkillTimer;
     protected Role Target;
     protected bool CanAttack;
+
 
     void OnDrawGizmos()
     {
@@ -59,6 +66,7 @@ public class Skill : MonoBehaviour
     {
         Awake();
         enabled = false;
+        AttackStopMove = false;
     }
     public virtual void PlayerGetSkill(float _skillTimeBuff)
     {
@@ -72,7 +80,7 @@ public class Skill : MonoBehaviour
         AmmoData.Clear();
         AmmoData.Add("Damage", (int)(Myself.Damage * DamagePercent));
         AmmoData.Add("AttackerForce", Myself.MyForce);
-        Myself.Attack();
+        Myself.Attack(this);
     }
     public void InactivePlayerSkill()
     {

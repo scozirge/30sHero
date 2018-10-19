@@ -68,7 +68,7 @@ public partial class GameManager : MonoBehaviour
     {
         if (!BufferParticles.ContainsKey(_type))
         {
-            Debug.LogWarning(string.Format("無此狀態特效:{0}", _type));
+            //Debug.LogWarning(string.Format("無此狀態特效:{0}", _type));
             return null;
         }
         return BufferParticles[_type];

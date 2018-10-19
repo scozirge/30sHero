@@ -53,21 +53,34 @@ public abstract class AIMove : MonoBehaviour {
         float randPosX = Random.Range(100, BattleManage.ScreenSize.x / 2);
         float randPosY = Random.Range(-BattleManage.ScreenSize.y / 2 + 100, BattleManage.ScreenSize.y / 2 - 100);
         RandomOffset = new Vector2(randPosX, randPosY);
-        Vector2 cameraPos = BattleManage.MyCameraControler.transform.position;
-        Destination = new Vector3(randPosX + cameraPos.x, randPosY + cameraPos.y, 0);
+        Vector2 nowPos=Vector2.zero;
+        if(BattleManage.BM.MyPlayer)
+            nowPos = BattleManage.BM.MyPlayer.transform.position;
+        else
+            nowPos = BattleManage.MyCameraControler.transform.position;
+        Destination = new Vector3(randPosX + nowPos.x, randPosY + nowPos.y, 0);
         return RandomOffset;
     }
+    bool InDestinationRange;
     protected virtual void Debut()
     {
         if (FollowCamera)
         {
             //Follow camera
-            Vector2 cameraPos = BattleManage.MyCameraControler.transform.position;
-            Destination = new Vector3(cameraPos.x, cameraPos.y, 0) + RandomOffset;
+            Vector2 playerPos = BattleManage.BM.MyPlayer.transform.position;//BattleManage.MyCameraControler.transform.position;
+            Destination = new Vector3(playerPos.x, playerPos.y, 0) + RandomOffset;
+        }
+        if (!InDestinationRange)
+        {
+            if (Mathf.Abs(Vector3.Distance(Destination, transform.position)) < 100)
+            {
+                InDestinationRange = true;
+                MyRigi.velocity *= 0.3f;
+            }
         }
 
         if (!Wander && KeepDebut)
-            if (Mathf.Abs(Vector3.Distance(Destination, transform.position)) < 30)
+            if (Mathf.Abs(Vector3.Distance(Destination, transform.position)) < 100)
             {
                 KeepDebut = false;
                 MyRigi.velocity = Vector3.zero;
