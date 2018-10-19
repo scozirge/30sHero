@@ -50,8 +50,8 @@ public abstract class AIMove : MonoBehaviour {
     }
     public Vector2 SetRandDestination()
     {
-        float randPosX = Random.Range(100, BattleManage.ScreenSize.x / 2);
-        float randPosY = Random.Range(-BattleManage.ScreenSize.y / 2 + 100, BattleManage.ScreenSize.y / 2 - 100);
+        float randPosX = Random.Range(300, 300+BattleManage.ScreenSize.x / 2);
+        float randPosY = Random.Range(-BattleManage.ScreenSize.y / 2 + 200, BattleManage.ScreenSize.y / 2 - 200);
         RandomOffset = new Vector2(randPosX, randPosY);
         Vector2 nowPos=Vector2.zero;
         if(BattleManage.BM.MyPlayer)

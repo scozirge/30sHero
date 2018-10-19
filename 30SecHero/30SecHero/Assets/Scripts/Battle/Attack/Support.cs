@@ -45,7 +45,7 @@ public class Support : Skill
 
     protected override void Update()
     {
-        base.Update();
+        TimerFunc();
         AttackExecuteFunc();
     }
     protected override void AutoDetectTarge()
@@ -55,13 +55,16 @@ public class Support : Skill
         {
             SupportTargets = new List<Role>();
             List<GameObject> gos;
-            if(SpellToSupportTarget)
-                 gos = GameobjectFinder.FindInRangeClosestGameobjectsWithTag(gameObject, Force.Enemy.ToString(), TargetCount, DetecteRadius);
+            if (SpellToSupportTarget)
+                gos = GameobjectFinder.FindInRangeClosestGameobjectsWithTag(gameObject, Force.Enemy.ToString(), TargetCount, DetecteRadius);
             else
                 gos = GameobjectFinder.FindInRangeClosestNonSupporterWithTag(gameObject, Force.Enemy.ToString(), TargetCount, DetecteRadius);
-            for (int i = 0; i < gos.Count; i++)
+            if (gos != null)
             {
-                SupportTargets.Add(gos[i].GetComponent<EnemyRole>());
+                for (int i = 0; i < gos.Count; i++)
+                {
+                    SupportTargets.Add(gos[i].GetComponent<EnemyRole>());
+                }
             }
         }
     }
@@ -86,7 +89,7 @@ public class Support : Skill
         Ammo ammo = ammoGO.GetComponent<Ammo>();
         ammo.transform.SetParent(AmmoParent);
         ammo.transform.position = transform.position;
-        ammo.Init(AmmoData);            
+        ammo.Init(AmmoData);
         CurSpawnAmmoNum++;
     }
     protected override void TimerFunc()
@@ -127,7 +130,7 @@ public class Support : Skill
         }
         else
         {
-
+            AutoDetectTarge();
             Myself.EndPreAttack();
             SepllToMyself();
             SpawnAttackPrefab();
@@ -137,7 +140,7 @@ public class Support : Skill
     {
         //對自己施放
         if (SelfTarget)
-        {            
+        {
             //Set AmmoData
             base.SpawnAttackPrefab();
             AmmoData.Add("Direction", Vector3.zero);

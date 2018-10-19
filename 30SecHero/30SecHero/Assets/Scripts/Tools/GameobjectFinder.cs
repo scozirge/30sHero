@@ -96,29 +96,28 @@ public class GameobjectFinder : MonoBehaviour
         SelfGameobject = _self;
         Vector3 position = SelfGameobject.transform.position;
         List<GameObject> goList = new List<GameObject>(gos);
-        for (int i = 0; i < goList.Count; i++)
-        {
-            Support sup = goList[i].GetComponent<Support>();
-            if (sup != null)
-                goList.RemoveAt(i);
-        }
         goList.Remove(SelfGameobject);
-        goList.Sort(SortByDistance);
-        List<GameObject> targetList = new List<GameObject>();
-        for (int i = 0; i < _count; i++)
+        goList.RemoveAll(item => item.GetComponent<Support>() != null);
+        if(goList.Count>0)
         {
-            if (i < goList.Count)
+            goList.Sort(SortByDistance);
+            List<GameObject> targetList = new List<GameObject>();
+            for (int i = 0; i < _count; i++)
             {
-                float curDistance = Vector3.Distance(goList[i].transform.position, position);
-                if (curDistance > _range)
-                    break;
+                if (i < goList.Count)
+                {
+                    float curDistance = Vector3.Distance(goList[i].transform.position, position);
+                    if (curDistance > _range)
+                        break;
+                    else
+                        targetList.Add(goList[i]);
+                }
                 else
-                    targetList.Add(goList[i]);
+                    break;
             }
-            else
-                break;
+            return targetList;
         }
-        return targetList;
+        return null;
     }
     static int SortByDistance(GameObject _go1, GameObject _go2)
     {
