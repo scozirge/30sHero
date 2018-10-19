@@ -313,4 +313,7 @@ public abstract class Role : MonoBehaviour
     public virtual void PreAttack()
     {
     }
+    public virtual void EndPreAttack()
+    {
+    }
 }

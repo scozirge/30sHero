@@ -20,6 +20,12 @@ public class Support : Skill
     [Tooltip("Supply子彈物件")]
     [SerializeField]
     Supply SupplyPrefab;
+    [Tooltip("是否可以對自己施放(對自己施放不算在目標數內)")]
+    [SerializeField]
+    bool SelfTarget;
+    [Tooltip("是否會對擁有support這個技能的目標施放")]
+    [SerializeField]
+    bool SpellToSupportTarget;
 
     protected float Timer;
     protected float AmmoIntervalTimer;
@@ -48,7 +54,11 @@ public class Support : Skill
         if (gameObject.tag == Force.Enemy.ToString())
         {
             SupportTargets = new List<Role>();
-            List<GameObject> gos = GameobjectFinder.FindInRangeClosestGameobjectsWithTag(gameObject, Force.Enemy.ToString(), TargetCount, DetecteRadius);
+            List<GameObject> gos;
+            if(SpellToSupportTarget)
+                 gos = GameobjectFinder.FindInRangeClosestGameobjectsWithTag(gameObject, Force.Enemy.ToString(), TargetCount, DetecteRadius);
+            else
+                gos = GameobjectFinder.FindInRangeClosestNonSupporterWithTag(gameObject, Force.Enemy.ToString(), TargetCount, DetecteRadius);
             for (int i = 0; i < gos.Count; i++)
             {
                 SupportTargets.Add(gos[i].GetComponent<EnemyRole>());
@@ -70,17 +80,13 @@ public class Support : Skill
         AttackDir = new Vector3(Mathf.Cos(origAngle), Mathf.Sin(origAngle), 0).normalized;
         AmmoData.Add("Direction", AttackDir);
         AmmoData.Add("Attacker", Myself);
-        if (gameObject.tag == Force.Player.ToString())
-            AmmoData.Add("TargetRoleTag", SupportTargets[CurSpawnAmmoNum].MyForce);
-        else
-            AmmoData.Add("TargetRoleTag", SupportTargets[CurSpawnAmmoNum].MyForce);
+        AmmoData.Add("TargetRoleTag", SupportTargets[CurSpawnAmmoNum].MyForce);
         AmmoData.Add("Target", SupportTargets[CurSpawnAmmoNum]);
         GameObject ammoGO = Instantiate(SupplyPrefab.gameObject, Vector3.zero, Quaternion.identity) as GameObject;
         Ammo ammo = ammoGO.GetComponent<Ammo>();
         ammo.transform.SetParent(AmmoParent);
         ammo.transform.position = transform.position;
-        ammo.Init(AmmoData);
-
+        ammo.Init(AmmoData);            
         CurSpawnAmmoNum++;
     }
     protected override void TimerFunc()
@@ -121,9 +127,33 @@ public class Support : Skill
         }
         else
         {
+
+            Myself.EndPreAttack();
+            SepllToMyself();
             SpawnAttackPrefab();
-            AmmoIntervalTimer = AmmoInterval;
         }
     }
-
+    void SepllToMyself()
+    {
+        //對自己施放
+        if (SelfTarget)
+        {            
+            //Set AmmoData
+            base.SpawnAttackPrefab();
+            AmmoData.Add("Direction", Vector3.zero);
+            AmmoData.Add("Attacker", Myself);
+            AmmoData.Add("TargetRoleTag", Myself.MyForce);
+            AmmoData.Add("Target", Myself);
+            GameObject ammoGO = Instantiate(SupplyPrefab.gameObject, Vector3.zero, Quaternion.identity) as GameObject;
+            Ammo ammo = ammoGO.GetComponent<Ammo>();
+            ammo.transform.SetParent(AmmoParent);
+            ammo.transform.position = transform.position;
+            ammo.Init(AmmoData);
+        }
+    }
+    public override void PlayerInitSkill()
+    {
+        base.PlayerInitSkill();
+        SelfTarget = true;
+    }
 }

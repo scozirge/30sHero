@@ -89,6 +89,37 @@ public class GameobjectFinder : MonoBehaviour
         }
         return targetList;
     }
+    public static List<GameObject> FindInRangeClosestNonSupporterWithTag(GameObject _self, string _tag, int _count, int _range)
+    {
+        GameObject[] gos;
+        gos = GameObject.FindGameObjectsWithTag(_tag);
+        SelfGameobject = _self;
+        Vector3 position = SelfGameobject.transform.position;
+        List<GameObject> goList = new List<GameObject>(gos);
+        for (int i = 0; i < goList.Count; i++)
+        {
+            Support sup = goList[i].GetComponent<Support>();
+            if (sup != null)
+                goList.RemoveAt(i);
+        }
+        goList.Remove(SelfGameobject);
+        goList.Sort(SortByDistance);
+        List<GameObject> targetList = new List<GameObject>();
+        for (int i = 0; i < _count; i++)
+        {
+            if (i < goList.Count)
+            {
+                float curDistance = Vector3.Distance(goList[i].transform.position, position);
+                if (curDistance > _range)
+                    break;
+                else
+                    targetList.Add(goList[i]);
+            }
+            else
+                break;
+        }
+        return targetList;
+    }
     static int SortByDistance(GameObject _go1, GameObject _go2)
     {
         float dstToA = Vector3.Distance(SelfGameobject.transform.position, _go1.transform.position);

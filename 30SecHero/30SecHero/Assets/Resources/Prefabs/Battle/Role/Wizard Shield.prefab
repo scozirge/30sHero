@@ -241,7 +241,7 @@ MonoBehaviour:
   DropProbility: 1
   DesignateLoot: 
   DropSkillProbility: 1
-  DropSkill: {fileID: 0}
+  DropSkill: {fileID: 114497804762892658}
   HealthObj: {fileID: 1610887402048710}
   PlayMotionDuration: 0.5
   InitBuffers: []
@@ -257,9 +257,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PSkillName: shield
-  PSkillDuration: 5
+  PSkillDuration: 10
   DetecteRadius: 900
   DamagePercent: 1
+  AttackStopMove: 0
+  StopMoveTime: 0
   PSkillTimer: 0
   SupportOnce: 0
   Interval: 3
@@ -267,6 +269,8 @@ MonoBehaviour:
   AmmoInterval: 0
   SupplyPrefab: {fileID: 114517049925248944, guid: ccc5f42209022814b9773d4bdc3bd65a,
     type: 2}
+  SelfTarget: 0
+  SpellToSupportTarget: 0
 --- !u!114 &114547245466536060
 MonoBehaviour:
   m_ObjectHideFlags: 1

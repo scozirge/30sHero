@@ -128,6 +128,11 @@ public partial class EnemyRole : Role
         base.PreAttack();
         AniPlayer.PlayTrigger_NoPlayback("PreAttack", 0);
     }
+    public override void EndPreAttack()
+    {
+        base.EndPreAttack();
+        AniPlayer.PlayTrigger("Idle", 0);
+    }
     public override void BeAttack(int _dmg, Vector2 _force)
     {
         AniPlayer.PlayTrigger("BeAttack", 0);
