@@ -340,10 +340,9 @@ MonoBehaviour:
   HealthBar: {fileID: 0}
   DirectX: 0
   DirectY: 0
-  BaseHealth: 30
+  MaxHealth: 10000
   BaseDamage: 10
-  BaseDefence: 0
-  BaseMoveSpeed: 1200
+  BaseMoveSpeed: 1000
   DeathEffect: {fileID: 198802542160044040, guid: 8f344cf8edc65e44883dfdf0168792bd,
     type: 2}
   AniPlayer: {fileID: 114254621464860768}
@@ -352,6 +351,7 @@ MonoBehaviour:
   KnockDrag: 10
   NormalDrag: 50
   KnockDragDuration: 0.1
+  TestMode: 1
   AvatarRemoveEffect: {fileID: 198023469444164576, guid: 4fa0c17b07dd95f4fac2c50aea787be7,
     type: 2}
   BeHitEffect_Shield: {fileID: 198853811207955838, guid: 48c7fe97ee5fbd0478fa25692681f2f2,
@@ -365,7 +365,7 @@ MonoBehaviour:
   GainMoveFromKilling: 150
   MoveDepletedTime: 10
   MaxExtraMove: 500
-  MaxAvaterTime: 120
+  MaxAvaterTime: 30
   AvatarTimerText: {fileID: 0}
   EnergyDrop: 0
   AvatarTimeBuff: 0
@@ -376,10 +376,10 @@ MonoBehaviour:
   BloodThirsty: 0
   PotionEfficiency: 0
   PotionDrop: 0
-  KeyboardJumpMoveFactor: 10
+  KeyboardJumpMoveFactor: 3
   MoveAfterimagePrefab: {fileID: 198230356777013556, guid: 4ac12026ed62f024b9bc36b2da373c93,
     type: 2}
-  DontAttackRestoreTime: 10
+  DontAttackRestoreTime: 1
   SelfKnockForce: 10000
   SelfSturnTime: 0.25
   ControlDevice: 1
@@ -388,7 +388,7 @@ MonoBehaviour:
   RushForce: 1
   RushSound: {fileID: 8300000, guid: 41b00c1ca9d97ea4796281c66b69da09, type: 3}
   AttackSound: {fileID: 8300000, guid: fc274ce0d0fd8fb40b2e7557d54975e8, type: 3}
-  JumpCDTime: 0.5
+  JumpCDTime: 0.2
   StopDrag: 800
   FaceLeftOrRight: 0
   ClosestEnemy: {fileID: 0}
@@ -473,6 +473,8 @@ MonoBehaviour:
   PSkillDuration: 999
   DetecteRadius: 2000
   DamagePercent: 0.1
+  AttackStopMove: 0
+  StopMoveTime: 0
   PSkillTimer: 0
   AttackOnce: 0
   Interval: 0.5
@@ -594,7 +596,7 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1068999873298818}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -604,7 +606,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 93.6, y: 80}
+  m_AnchoredPosition: {x: 93.600006, y: 80}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224284758445622192
@@ -649,7 +651,7 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1993803090478362}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -669,7 +671,7 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1343060699475836}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []

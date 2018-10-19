@@ -201,7 +201,7 @@ MonoBehaviour:
   DetecteRadius: 1000
   DamagePercent: 1
   AttackStopMove: 0
-  StopMoveTime: 0
+  StopMoveTime: 1
   PSkillTimer: 0
   AttackOnce: 0
   Interval: 2
