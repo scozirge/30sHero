@@ -59,7 +59,7 @@ MonoBehaviour:
   - {fileID: 198868841769053344, guid: 82f11090ccd78604b8fa5de4e77fa849, type: 2}
   GlobalParticle: []
   DeadParticles:
-  - {fileID: 19882722, guid: 557d199a6dc5c384c9310c0f11e2f8aa, type: 2}
+  - {fileID: 198483874879450868, guid: 47b80cde33f5871459e1f248d7e12920, type: 2}
   LifeTime: 5
   KnockIntensity: 0
   AmmoType: 0
