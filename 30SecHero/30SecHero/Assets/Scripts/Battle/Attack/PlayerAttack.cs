@@ -18,11 +18,11 @@ public class PlayerAttack : MonoBehaviour
     {
         if (_col.gameObject.tag == Force.Enemy.ToString())
         {
-            if(Attacker.IsAvatar)
+            if (Attacker.IsAvatar)
             {
                 Role er = _col.GetComponent<Role>();
                 Vector2 force = (er.transform.position - transform.position).normalized * KnockForce;
-                er.BeAttack(Attacker.Damage, force);
+                er.BeAttack(Attacker.MyForce, Attacker.Damage, force);
                 if (er.IsAlive)
                     Attacker.BumpingAttack();
                 Attacker.AttackMotion();

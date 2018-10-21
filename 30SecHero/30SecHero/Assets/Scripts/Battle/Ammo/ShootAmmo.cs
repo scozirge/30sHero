@@ -56,7 +56,7 @@ public class ShootAmmo : Ammo
     {
         base.TriggerTarget(_role);
         Vector2 force = (_role.transform.position - transform.position).normalized * KnockIntensity;
-        _role.BeAttack(Value, force);
+        _role.BeAttack(AttackerRoleTag,Value, force);
         if (AmmoType != ShootAmmoType.Permanent)
             SelfDestroy();
     }

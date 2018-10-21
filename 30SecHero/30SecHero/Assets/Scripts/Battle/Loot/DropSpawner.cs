@@ -5,6 +5,8 @@ using UnityEngine;
 public class DropSpawner : MonoBehaviour
 {
     [SerializeField]
+    ResourceLoot Resource;
+    [SerializeField]
     Loot Loot;
     [SerializeField]
     bool Designate;
@@ -13,6 +15,7 @@ public class DropSpawner : MonoBehaviour
 
     static Loot LootPrefab;
     static SkillLoot SkillLootPrefab;
+    static ResourceLoot ResourcePrefab;
     static Transform MyTransfrom;
     static LootType Type;
 
@@ -21,8 +24,15 @@ public class DropSpawner : MonoBehaviour
         MyTransfrom = GetComponent<Transform>();
         LootPrefab = Loot;
         SkillLootPrefab = SkillLoot;
+        ResourcePrefab = Resource;
     }
-
+    public static ResourceLoot SpawnResource(Vector3 _pos)
+    {
+        ResourceLoot loot = Instantiate(ResourcePrefab, Vector3.zero, Quaternion.identity) as ResourceLoot;
+        loot.transform.SetParent(MyTransfrom);
+        loot.transform.localPosition = _pos;
+        return loot;
+    }
     public static Loot SpawnLoot(Vector3 _pos)
     {
         Loot loot = Instantiate(LootPrefab, Vector3.zero, Quaternion.identity) as Loot;

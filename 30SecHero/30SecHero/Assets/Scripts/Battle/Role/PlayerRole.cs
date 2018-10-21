@@ -306,11 +306,11 @@ public partial class PlayerRole : Role
         else
             DirectY = Direction.Bottom;
     }
-    public override void BeAttack(int _dmg, Vector2 _force)
+    public override void BeAttack(Force _attackerForce,int _dmg, Vector2 _force)
     {
         if (IsAvatar)
         {
-            base.BeAttack(_dmg, _force);
+            base.BeAttack(_attackerForce,_dmg, _force);
         }
         else
         {
@@ -520,6 +520,18 @@ public partial class PlayerRole : Role
                 break;
         }
         AttackMotion();
+    }
+    public void GetResource(ResourceType _type,int _value)
+    {
+        switch (_type)
+        {
+            case ResourceType.Gold:
+                BattleManage.EnemyDropGoldAdd(_value);
+                break;
+            case ResourceType.Emerald:
+                BattleManage.BossDropEmeraldAdd(_value);
+                break;
+        }
     }
     public void InitMonsterSkill(string _name, Skill _skill)
     {

@@ -251,7 +251,8 @@ MonoBehaviour:
   KnockDrag: 30
   NormalDrag: 0
   KnockDragDuration: 0.9
-  DropProbility: 1
+  DropMoneyCount: 1
+  DropLootCount: 1
   DesignateLoot: 
   DropSkillProbility: 1
   DropSkill: {fileID: 0}
@@ -327,6 +328,8 @@ MonoBehaviour:
   PSkillDuration: 10
   DetecteRadius: 400
   DamagePercent: 1
+  AttackStopMove: 0
+  StopMoveTime: 0
   PSkillTimer: 0
   Suicide: 1
   PrepareParticle:

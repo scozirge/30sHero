@@ -133,10 +133,12 @@ public partial class EnemyRole : Role
         base.EndPreAttack();
         AniPlayer.PlayTrigger("Idle", 0);
     }
-    public override void BeAttack(int _dmg, Vector2 _force)
+    public override void BeAttack(Force _attackerForce, int _dmg, Vector2 _force)
     {
         AniPlayer.PlayTrigger("BeAttack", 0);
-        base.BeAttack(_dmg, _force);
+        base.BeAttack(_attackerForce,_dmg, _force);
+        if (!IsAlive && _attackerForce == Force.Player)
+            BattleManage.AddEnemyKill();
     }
     protected override void SelfDestroy()
     {

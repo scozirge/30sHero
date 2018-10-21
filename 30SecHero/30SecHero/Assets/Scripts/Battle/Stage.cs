@@ -4,24 +4,32 @@ using UnityEngine;
 
 public partial class BattleManage
 {
-
+    [SerializeField]
+    public int FloorPlate;
+    [SerializeField]
+    int PlateSizeX;
+    [SerializeField]
+    int BossDebutPlate;
     [SerializeField]
     MyText FloorText;
     [SerializeField]
     MyText MeterText;
-    [SerializeField]
-    public int FloorPlate;
     [SerializeField]
     Gate GatePrefab;
     [SerializeField]
     Gate EntrancePrefab;
     [SerializeField]
     Transform GateParent;
-    [SerializeField]
-    int PlateSizeX;
-    [SerializeField]
-    int BoosDebutPlate;
 
+
+    static bool IsFirstHalf
+    {
+        get
+        {
+            float t = CurPlate % BM.FloorPlate;
+            return t <= (BM.FloorPlate / 2);
+        }
+    }
     static int CurPlate = 0;
     void UpdateCurPlate()
     {
@@ -29,9 +37,9 @@ public partial class BattleManage
             return;
         CurPlate = (int)((BM.MyPlayer.transform.position.x + 1.5 * BM.PlateSizeX) / BM.PlateSizeX);
         BM.MeterText.text = string.Format("{0}{1}", CurPlate, StringData.GetString("Meter"));
-        if(IsDemogorgonFloor)
+        if (IsDemogorgonFloor)
         {
-            if (CurPlate == NextDemogorgonFloor * FloorPlate - BoosDebutPlate)
+            if (CurPlate == NextDemogorgonFloor * FloorPlate - BossDebutPlate)
                 SpawnDemogorgon();
         }
     }
@@ -51,9 +59,10 @@ public partial class BattleManage
     static void SpawnGate(int _floor)
     {
         Gate gate;
-        if(_floor!=0)
+        if (_floor != 0)
         {
-            gate = Instantiate(BM.GatePrefab, Vector3.zero, Quaternion.identity) as Gate;        }
+            gate = Instantiate(BM.GatePrefab, Vector3.zero, Quaternion.identity) as Gate;
+        }
         else
         {
             gate = Instantiate(BM.EntrancePrefab, Vector3.zero, Quaternion.identity) as Gate;
@@ -86,5 +95,4 @@ public partial class BattleManage
     {
         return (_floor == NextDemogorgonFloor);
     }
-
 }

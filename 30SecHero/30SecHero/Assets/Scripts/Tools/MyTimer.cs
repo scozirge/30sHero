@@ -42,6 +42,10 @@ public class MyTimer
     {
         CurTimer = MaxTime;
     }
+    public void ResetMaxTime(float _maxTime)
+    {
+        MaxTime = _maxTime;
+    }
     public void RunTimer()
     {
         if (MaxTime == 0)

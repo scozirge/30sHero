@@ -95,6 +95,16 @@ public partial class Player
             string[] strengthenData = strengthenStr.Split('/');
             GetStrengthen_CB(strengthenData);
         }
+        //擊敗BOSS清單
+        string killBossStr = PlayerPrefs.GetString("KillBossID");
+        if(killBossStr!="")
+        {
+            string[] bossID = strengthenStr.Split(',');
+            for(int i=0;i<bossID.Length;i++)
+            {
+                KillBossID.Add(int.Parse(bossID[i]));
+            }
+        }
     }
     public static void GetKongregateUserData_CB(string _name, int _kongregateID)
     {

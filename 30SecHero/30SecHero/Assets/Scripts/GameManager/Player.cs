@@ -10,6 +10,7 @@ public partial class Player
     public static string Name_K { get; private set; }
     public static int Gold { get; private set; }
     public static int Emerald { get; private set; }
+    public static List<int> KillBossID = new List<int>();
 
 
 

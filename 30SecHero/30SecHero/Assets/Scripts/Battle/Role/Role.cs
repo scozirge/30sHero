@@ -137,7 +137,7 @@ public abstract class Role : MonoBehaviour
         DragTimer.RunTimer();
     }
 
-    public virtual void BeAttack(int _dmg, Vector2 _force)
+    public virtual void BeAttack(Force _attackerForce, int _dmg, Vector2 _force)
     {
         //Add KnockForce
         ChangeToKnockDrag();

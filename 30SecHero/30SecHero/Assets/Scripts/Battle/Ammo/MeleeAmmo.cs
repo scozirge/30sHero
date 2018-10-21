@@ -57,11 +57,11 @@ public class MeleeAmmo : Ammo
         Vector2 force = (_role.transform.position - transform.position).normalized * KnockIntensity;
         if (MyMeleeType == MeleeType.Melee || MyMeleeType == MeleeType.Reflect)
         {
-            _role.BeAttack(Value, force);
+            _role.BeAttack(AttackerRoleTag, Value, force);
         }
         else if (MyMeleeType == MeleeType.Block)
         {
-            _role.BeAttack(0, force);
+            _role.BeAttack(AttackerRoleTag, 0, force);
         }
         if (AmmoType != ShootAmmoType.Permanent)
             SelfDestroy();

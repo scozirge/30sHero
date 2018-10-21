@@ -71,6 +71,37 @@ public class GameSettingData : Data
     public static float BloodThirsty;
     public static float PotionEfficiency;
     public static float PotionDrop;
+    //關卡數值
+    public static float PotionInterval;
+    public static float PotionProportion;
+    public static float EnemyFirstHalfInterval;
+    public static float EnemySecondHalfInterval;
+    public static int EnemyFirstHalfMinCount;
+    public static int EnemyFirstHalfMaxCount;
+    public static int EnemySecondHalfMinCount;
+    public static int EnemySecondHalfMaxCount;
+    public static float EnemySpawnInterval;
+    public static int FloorPassGold;
+    public static int NewFloorPassGold;
+    public static float BossEmeraldProportion;
+    public static int BossEmerald;
+    public static int NewBossEmerald;
+    public static int EnemyGold;
+    public static int NoEquipWeight;
+    public static int EquipQuality1Weight;
+    public static int EquipQuality2Weight;
+    public static int EquipQuality3Weight;
+    public static int EquipQuality4Weight;
+    public static int EquipQuality5Weight;
+    public static float EnemyDropPotionProportion;
+    public static float EnemyDropGoldProportion;
+    public static int EnemyDropGold;
+    public static float EnemyDropGoldOffset;
+    public static int MaxEnemy;
+    public static int MaxLoot;
+    public static int FloorPlate;
+    public static int BossDebutPlate;
+
 
 
 
@@ -248,7 +279,7 @@ public class GameSettingData : Data
                             case "CurseDamageReduce":
                                 CurseDamageReduce = float.Parse(item[key].ToString());
                                 break;
-                                //腳色基本數值
+                            //腳色基本數值
                             case "MaxHealth":
                                 MaxHealth = int.Parse(item[key].ToString());
                                 break;
@@ -305,6 +336,94 @@ public class GameSettingData : Data
                                 break;
                             case "PotionDrop":
                                 PotionDrop = float.Parse(item[key].ToString());
+                                break;
+                            //關卡數值
+                            case "PotionInterval":
+                                PotionInterval = float.Parse(item[key].ToString());
+                                break;
+                            case "PotionProportion":
+                                PotionProportion = float.Parse(item[key].ToString());
+                                break;
+                            case "EnemyFirstHalfInterval":
+                                EnemyFirstHalfInterval = float.Parse(item[key].ToString());
+                                break;
+                            case "EnemySecondHalfInterval":
+                                EnemySecondHalfInterval = float.Parse(item[key].ToString());
+                                break;
+                            case "EnemyFirstHalfMinCount":
+                                EnemyFirstHalfMinCount = int.Parse(item[key].ToString());
+                                break;
+                            case "EnemyFirstHalfMaxCount":
+                                EnemyFirstHalfMaxCount = int.Parse(item[key].ToString());
+                                break;
+                            case "EnemySecondHalfMinCount":
+                                EnemySecondHalfMinCount = int.Parse(item[key].ToString());
+                                break;
+                            case "EnemySecondHalfMaxCount":
+                                EnemySecondHalfMaxCount = int.Parse(item[key].ToString());
+                                break;
+                            case "EnemySpawnInterval":
+                                EnemySpawnInterval = float.Parse(item[key].ToString());
+                                break;
+                            case "FloorPassGold":
+                                FloorPassGold = int.Parse(item[key].ToString());
+                                break;
+                            case "NewFloorPassGold":
+                                NewFloorPassGold = int.Parse(item[key].ToString());
+                                break;
+                            case "BossEmeraldProportion":
+                                BossEmeraldProportion = float.Parse(item[key].ToString());
+                                break;
+                            case "BossEmerald":
+                                BossEmerald = int.Parse(item[key].ToString());
+                                break;
+                            case "NewBossEmerald":
+                                NewBossEmerald = int.Parse(item[key].ToString());
+                                break;
+                            case "EnemyGold":
+                                EnemyGold = int.Parse(item[key].ToString());
+                                break;
+                            case "NoEquipWeight":
+                                NoEquipWeight = int.Parse(item[key].ToString());
+                                break;
+                            case "EquipQuality1Weight":
+                                EquipQuality1Weight = int.Parse(item[key].ToString());
+                                break;
+                            case "EquipQuality2Weight":
+                                EquipQuality2Weight = int.Parse(item[key].ToString());
+                                break;
+                            case "EquipQuality3Weight":
+                                EquipQuality3Weight = int.Parse(item[key].ToString());
+                                break;
+                            case "EquipQuality4Weight":
+                                EquipQuality4Weight = int.Parse(item[key].ToString());
+                                break;
+                            case "EquipQuality5Weight":
+                                EquipQuality5Weight = int.Parse(item[key].ToString());
+                                break;
+                            case "EnemyDropPotionProportion":
+                                EnemyDropPotionProportion = float.Parse(item[key].ToString());
+                                break;
+                            case "EnemyDropGoldProportion":
+                                EnemyDropGoldProportion = float.Parse(item[key].ToString());
+                                break;
+                            case "EnemyDropGold":
+                                EnemyDropGold = int.Parse(item[key].ToString());
+                                break;
+                            case "EnemyDropGoldOffset":
+                                EnemyDropGoldOffset = float.Parse(item[key].ToString());
+                                break;
+                            case "MaxEnemy":
+                                MaxEnemy = int.Parse(item[key].ToString());
+                                break;
+                            case "MaxLoot":
+                                MaxLoot = int.Parse(item[key].ToString());
+                                break;
+                            case "FloorPlate":
+                                FloorPlate = int.Parse(item[key].ToString());
+                                break;
+                            case "BossDebutPlate":
+                                BossDebutPlate = int.Parse(item[key].ToString());
                                 break;
                             default:
                                 Debug.LogWarning(string.Format("{0}表有不明屬性:{1}", DataName, key));
@@ -451,5 +570,13 @@ public class GameSettingData : Data
             }
         }
         return dic;
+    }
+    public static int GetEnemyDropGold(int _floor)
+    {
+        float randOffset = UnityEngine.Random.Range(-EnemyDropGoldOffset, EnemyDropGoldOffset);
+        int gold = (int)((_floor * EnemyDropGold) * (1 - randOffset));
+        if (gold < 0)
+            gold = 0;
+        return gold;
     }
 }

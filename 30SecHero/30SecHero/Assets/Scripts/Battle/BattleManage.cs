@@ -7,25 +7,46 @@ public partial class BattleManage : MonoBehaviour
     [SerializeField]
     bool TestMode;
     [SerializeField]
-    float SpawnEnemyInterval;
+    float EnemyFirstHalfInterval;
     [SerializeField]
-    float SpawnLootInterval;
+    float EnemySecondHalfInterval;
     [SerializeField]
-    int SpawnEnemyCount;
+    float PotionInterval;
     [SerializeField]
-    int SpawnLootCount;
+    float PotionProportion;
     [SerializeField]
-    float SpawnEnemyCountInterval;
+    int EnemyFirstHalfMinCount;
     [SerializeField]
-    float SpawnLootCountInterval;
+    int EnemyFirstHalfMaxCount;
     [SerializeField]
-    int MaxEnemyCout;
+    int EnemySecondHalfMinCount;
     [SerializeField]
-    int MaxLootCout;
+    int EnemySecondHalfMaxCount;
+    [SerializeField]
+    float EnemySpawnInterval;
+    [SerializeField]
+    int MaxEnemy;
+    [SerializeField]
+    int MaxLoot;
+    public float EnemyDropPotionProportion;
     [SerializeField]
     List<EnemyRole> Enemys;
     [SerializeField]
     EnemyRole DesignatedEnemy;
+    int FloorPassGold;
+    int NewFloorPassGold;
+    float BossEmeraldProportion;
+    int BossEmerald;
+    int NewBossEmerald;
+    int EnemyGold;
+    int NoEquipWeight;
+    int EquipQuality1Weight;
+    int EquipQuality2Weight;
+    int EquipQuality3Weight;
+    int EquipQuality4Weight;
+    int EquipQuality5Weight;
+    int EnemyDropGold;
+    float EnemyDropGoldOffset;
     [SerializeField]
     Loot LootPrefab;
     [SerializeField]
@@ -38,7 +59,6 @@ public partial class BattleManage : MonoBehaviour
     static List<EnemyRole> AvailableMillions;
     static List<EnemyRole> AvailableDemonGergons;
     int CurSpawnCount;
-    int CurSpawnLootCount;
     Transform EnemyParent;
     Transform LootParetn;
     MyTimer SpawnEnemyTimer;
@@ -54,6 +74,9 @@ public partial class BattleManage : MonoBehaviour
     static int NextDemogorgonFloor;
     static bool IsDemogorgonFloor;
     bool IsInit;
+    int EnemySpawnCount;
+    public static int EnemyKill;
+    
 
     // Use this for initialization
     void Awake()
@@ -65,6 +88,7 @@ public partial class BattleManage : MonoBehaviour
     void Init()
     {
         SceneObject.SetActive(true);
+        InitBattleSetting();
         BM = this;
         EnemyParent = GameObject.FindGameObjectWithTag("EnemyParent").GetComponent<Transform>();
         LootParetn = GameObject.FindGameObjectWithTag("LootParent").GetComponent<Transform>();
@@ -87,15 +111,57 @@ public partial class BattleManage : MonoBehaviour
             AvailableMillions = EnemyData.GetAvailableMillions(Floor);
             AvailableDemonGergons = EnemyData.GetNextDemogorgon(Floor, out NextDemogorgonFloor);
         }
-        SpawnEnemyTimer = new MyTimer(SpawnEnemyInterval, SpanwEnemy, true, false);
-        SpawnLootTimer = new MyTimer(SpawnLootInterval, SpawnLoot, true, false);
-
+        SpawnEnemyTimer = new MyTimer(EnemyFirstHalfInterval, SpanwEnemy, true, false);
+        SpawnLootTimer = new MyTimer(PotionInterval, SpawnLoot, true, false);
         //Debug.Log("NextDemogorgonFloor=" + NextDemogorgonFloor);
         IsDemogorgonFloor = CheckDemogorgon(Floor);
         IsInit = true;
         Debug.Log("Init BattleManager");
     }
-
+    void InitBattleSetting()
+    {
+        PotionInterval = GameSettingData.PotionInterval;
+        PotionProportion = GameSettingData.PotionProportion;
+        EnemyFirstHalfInterval = GameSettingData.EnemyFirstHalfInterval;
+        EnemySecondHalfInterval = GameSettingData.EnemySecondHalfInterval;
+        EnemyFirstHalfMinCount = GameSettingData.EnemyFirstHalfMinCount;
+        EnemyFirstHalfMaxCount = GameSettingData.EnemyFirstHalfMaxCount;
+        EnemySecondHalfMinCount = GameSettingData.EnemySecondHalfMinCount;
+        EnemySecondHalfMaxCount = GameSettingData.EnemySecondHalfMaxCount;
+        EnemySpawnInterval = GameSettingData.EnemySpawnInterval;
+        FloorPassGold = GameSettingData.FloorPassGold;
+        NewFloorPassGold = GameSettingData.NewFloorPassGold;
+        BossEmeraldProportion = GameSettingData.BossEmeraldProportion;
+        BossEmerald = GameSettingData.BossEmerald;
+        NewBossEmerald = GameSettingData.NewBossEmerald;
+        EnemyGold = GameSettingData.EnemyGold;
+        NoEquipWeight = GameSettingData.NoEquipWeight;
+        EquipQuality1Weight = GameSettingData.EquipQuality1Weight;
+        EquipQuality2Weight = GameSettingData.EquipQuality2Weight;
+        EquipQuality3Weight = GameSettingData.EquipQuality3Weight;
+        EquipQuality4Weight = GameSettingData.EquipQuality4Weight;
+        EquipQuality5Weight = GameSettingData.EquipQuality5Weight;
+        EnemyDropPotionProportion = GameSettingData.EnemyDropPotionProportion;
+        EnemyDropGolds = GameSettingData.EnemyDropGold;
+        EnemyDropGoldOffset = GameSettingData.EnemyDropGoldOffset;
+        MaxEnemy = GameSettingData.MaxEnemy;
+        MaxLoot = GameSettingData.MaxLoot;
+        FloorPlate = GameSettingData.FloorPlate;
+        BossDebutPlate = GameSettingData.BossDebutPlate;
+    }
+    public static void AddEnemyKill()
+    {
+        EnemyKill++;
+    }
+    int GetRandomEnemySpawnfCount()
+    {
+        int spawnCount = 0;
+        if (IsFirstHalf)
+            spawnCount = Random.Range(EnemyFirstHalfMinCount, EnemyFirstHalfMaxCount);
+        else
+            spawnCount = Random.Range(EnemySecondHalfMinCount, EnemySecondHalfMaxCount);
+        return spawnCount;
+    }
     void SpawnDemogorgon()
     {
         for (int i = 0; i < AvailableDemonGergons.Count; i++)
@@ -121,6 +187,7 @@ public partial class BattleManage : MonoBehaviour
         {
             CurSpawnCount = 0;
             SpawnEnemyTimer.StartRunTimer = true;
+            UpdateSpawnEnmeyTimer();
             return;
         }
         if (AvailableMillions.Count == 0)
@@ -144,18 +211,27 @@ public partial class BattleManage : MonoBehaviour
         SetQuadrantAndNearMargin(am, ref quadrant, ref nearMargin);
         er.transform.position = GetSpawnPos(quadrant, nearMargin);
         CurSpawnCount++;
-        if (CurSpawnCount < SpawnEnemyCount)
+        if (CurSpawnCount < GetRandomEnemySpawnfCount())
             StartCoroutine(WaitToSpawnEnemy());
         else
         {
             CurSpawnCount = 0;
             SpawnEnemyTimer.StartRunTimer = true;
+            UpdateSpawnEnmeyTimer();
         }
         EnemyList.Add(er);
     }
+    void UpdateSpawnEnmeyTimer()
+    {
+        //每次出怪後重新確認出怪時間
+        if (IsFirstHalf)
+            SpawnEnemyTimer.ResetMaxTime(EnemyFirstHalfInterval);
+        else
+            SpawnEnemyTimer.ResetMaxTime(EnemySecondHalfInterval);
+    }
     bool CheckEnemySpawnLimit()
     {
-        if (MaxEnemyCout == 0)
+        if (MaxEnemy == 0)
             return true;
         int cout = 0;
         for (int i = 0; i < EnemyList.Count; i++)
@@ -163,13 +239,13 @@ public partial class BattleManage : MonoBehaviour
             if (EnemyList[i].isActiveAndEnabled)
                 cout++;
         }
-        if (cout < MaxEnemyCout)
+        if (cout < MaxEnemy)
             return true;
         return false;
     }
     bool CheckLootSpawnLimit()
     {
-        if (MaxLootCout == 0)
+        if (MaxLoot == 0)
             return true;
         int cout = 0;
         for (int i = 0; i < LootList.Count; i++)
@@ -177,7 +253,7 @@ public partial class BattleManage : MonoBehaviour
             if (LootList[i].isActiveAndEnabled)
                 cout++;
         }
-        if (cout < MaxLootCout)
+        if (cout < MaxLoot)
             return true;
         return false;
     }
@@ -185,11 +261,9 @@ public partial class BattleManage : MonoBehaviour
     {
         if (!CheckLootSpawnLimit())
         {
-            CurSpawnLootCount = 0;
             SpawnLootTimer.StartRunTimer = true;
             return;
         }
-
         Loot loot = Instantiate(LootPrefab, Vector3.zero, Quaternion.identity) as Loot;
 
         //Set SpawnPos
@@ -199,14 +273,7 @@ public partial class BattleManage : MonoBehaviour
         AIMove am = loot.GetComponent<AILootMove>();
         SetQuadrantAndNearMargin(am, ref quadrant, ref nearMargin);
         loot.transform.position = GetSpawnPos(quadrant, nearMargin);
-        CurSpawnLootCount++;
-        if (CurSpawnLootCount < SpawnLootCount)
-            StartCoroutine(WaitToSpawnLoot());
-        else
-        {
-            CurSpawnLootCount = 0;
-            SpawnLootTimer.StartRunTimer = true;
-        }
+        SpawnLootTimer.StartRunTimer = true;
         LootList.Add(loot);
     }
     void SetQuadrantAndNearMargin(AIMove _am, ref int _quadrant, ref int _nearMargin)
@@ -272,13 +339,8 @@ public partial class BattleManage : MonoBehaviour
     }
     IEnumerator WaitToSpawnEnemy()
     {
-        yield return new WaitForSeconds(SpawnEnemyCountInterval);
+        yield return new WaitForSeconds(EnemySpawnInterval);
         SpanwEnemy();
-    }
-    IEnumerator WaitToSpawnLoot()
-    {
-        yield return new WaitForSeconds(SpawnLootCountInterval);
-        SpawnLoot();
     }
     public static void RemoveEnemy(EnemyRole _er)
     {
@@ -295,8 +357,10 @@ public partial class BattleManage : MonoBehaviour
         {
             InActivityOutSideEnemysAndLoots();
             UpdateCurPlate();
-            SpawnEnemyTimer.RunTimer();
-            SpawnLootTimer.RunTimer();
+            if (SpawnEnemyTimer!=null)
+                SpawnEnemyTimer.RunTimer();
+            if (SpawnLootTimer!=null)
+                SpawnLootTimer.RunTimer();
         }
         else if (Player.IsInit)
             Init();
