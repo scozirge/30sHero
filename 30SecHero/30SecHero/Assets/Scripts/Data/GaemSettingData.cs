@@ -93,6 +93,9 @@ public class GameSettingData : Data
     public static int EquipQuality3Weight;
     public static int EquipQuality4Weight;
     public static int EquipQuality5Weight;
+    public static int DropWeaponWeight;
+    public static int DropArmorWeight;
+    public static int DropAccessoryWeight;
     public static float EnemyDropPotionProportion;
     public static float EnemyDropGoldProportion;
     public static int EnemyDropGold;
@@ -108,7 +111,9 @@ public class GameSettingData : Data
 
     //裝備可隨機的屬性類型
     static List<RoleProperty> RandomPropertyList = new List<RoleProperty>() { RoleProperty.Strength, RoleProperty.Health, RoleProperty.Shield, RoleProperty.ShieldRecovery, RoleProperty.MoveSpeed, RoleProperty.MaxMoveSpeed, RoleProperty.MoveDecay, RoleProperty.AvatarTime, RoleProperty.AvatarDrop, RoleProperty.SkillTime, RoleProperty.SkillDrop, RoleProperty.EquipDrop, RoleProperty.GoldDrop, RoleProperty.BloodThirsty, RoleProperty.PotionEfficiency };
-
+    //裝備品階權重
+    static List<int> EquipQualityWeightList = new List<int>();
+    static List<int> DropEquipWeightList = new List<int>();
 
     /// <summary>
     /// 將字典傳入，依json表設定資料
@@ -385,21 +390,40 @@ public class GameSettingData : Data
                                 break;
                             case "NoEquipWeight":
                                 NoEquipWeight = int.Parse(item[key].ToString());
+                                Debug.Log("NoEquipWeight=" + NoEquipWeight);
+                                EquipQualityWeightList.Add(NoEquipWeight);
                                 break;
                             case "EquipQuality1Weight":
                                 EquipQuality1Weight = int.Parse(item[key].ToString());
+                                EquipQualityWeightList.Add(EquipQuality1Weight);
                                 break;
                             case "EquipQuality2Weight":
                                 EquipQuality2Weight = int.Parse(item[key].ToString());
+                                EquipQualityWeightList.Add(EquipQuality2Weight);
                                 break;
                             case "EquipQuality3Weight":
                                 EquipQuality3Weight = int.Parse(item[key].ToString());
+                                EquipQualityWeightList.Add(EquipQuality3Weight);
                                 break;
                             case "EquipQuality4Weight":
                                 EquipQuality4Weight = int.Parse(item[key].ToString());
+                                EquipQualityWeightList.Add(EquipQuality4Weight);
                                 break;
                             case "EquipQuality5Weight":
                                 EquipQuality5Weight = int.Parse(item[key].ToString());
+                                EquipQualityWeightList.Add(EquipQuality5Weight);
+                                break;
+                            case "DropWeaponWeight":
+                                DropWeaponWeight = int.Parse(item[key].ToString());
+                                DropEquipWeightList.Add(DropWeaponWeight);
+                                break;
+                            case "DropArmorWeight":
+                                DropArmorWeight = int.Parse(item[key].ToString());
+                                DropEquipWeightList.Add(DropArmorWeight);
+                                break;
+                            case "DropAccessoryWeight":
+                                DropAccessoryWeight = int.Parse(item[key].ToString());
+                                DropEquipWeightList.Add(DropAccessoryWeight);
                                 break;
                             case "EnemyDropPotionProportion":
                                 EnemyDropPotionProportion = float.Parse(item[key].ToString());
@@ -578,5 +602,21 @@ public class GameSettingData : Data
         if (gold < 0)
             gold = 0;
         return gold;
+    }
+    /// <summary>
+    /// 返回0~5 0代表無掉落 5代表品階最高品階
+    /// </summary>
+    /// <returns></returns>
+    public static int GetRandomEquipQuality()
+    {
+        int quality = 0;
+        quality = ProbabilityGetter.GetFromWeigth(EquipQualityWeightList);
+        return quality;
+    }
+    public static int GetRandomEquipType()
+    {
+        int equipType = 0;
+        equipType = ProbabilityGetter.GetFromWeigth(DropEquipWeightList);
+        return equipType;
     }
 }

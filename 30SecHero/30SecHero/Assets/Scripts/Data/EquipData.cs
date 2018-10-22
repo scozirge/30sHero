@@ -22,7 +22,7 @@ public abstract class EquipData : Data
     }
     public bool IsEquiped { get; protected set; }
     public Dictionary<RoleProperty, float> Properties = new Dictionary<RoleProperty, float>();
-    public virtual void SetEquipStatus(bool _isEquiped,int _equipSlot)
+    public virtual void SetEquipStatus(bool _isEquiped, int _equipSlot)
     {
         IsEquiped = _isEquiped;
     }
@@ -65,6 +65,22 @@ public abstract class EquipData : Data
         catch (Exception ex)
         {
             Debug.LogException(ex);
+        }
+    }
+    public static EquipData GetRandomNewEquip(int _lv, int _quality)
+    {
+        int equipType = GameSettingData.GetRandomEquipType();
+        switch ((EquipType)equipType)
+        {
+            case EquipType.Weapon:
+                return WeaponData.GetRandomNewWeapon(_lv, _quality);
+            case EquipType.Armor:
+                return ArmorData.GetRandomNewArmor(_lv, _quality);
+            case EquipType.Accessory:
+                return AccessoryData.GetRandomNewAccessory(_lv, _quality);
+            default:
+                Debug.LogWarning("隨機取得亂數裝備錯誤");
+                return null;
         }
     }
     protected virtual void SetRandomProperties()

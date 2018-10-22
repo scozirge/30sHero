@@ -6,6 +6,9 @@ using System.Reflection;
 
 public partial class EnemyRole
 {
+    [Tooltip("掉落裝備數量")]
+    [SerializeField]
+    int DropEquipCount = 1;
     [Tooltip("掉落金幣數量")]
     [SerializeField]
     int DropGoldCount = 1;
@@ -29,6 +32,16 @@ public partial class EnemyRole
         if (!go)
             return;
         PlayerRole pr = go.GetComponent<PlayerRole>();
+        //DropEquip
+        for (int i = 0; i < DropEquipCount; i++)
+        {
+            int equipQuality = GameSettingData.GetRandomEquipQuality();
+            if(equipQuality!=0)//0代表隨機到沒有掉落裝備
+            {
+                EquipLoot loot = DropSpawner.SpawnEquip(transform.position);
+                if (loot) loot.Init(BattleManage.Floor, equipQuality);
+            }
+        }
         //DropGold
         for (int i = 0; i < DropGoldCount; i++)
         {

@@ -6,8 +6,8 @@ using System;
 
 public class AccessoryData : EquipData
 {
+    protected static int MaxUID;//只使用本地資料才會用到
     public override EquipType Type { get { return EquipType.Accessory; } }
-    static long MaxUID;
     public override int SellGold { get { return GameSettingData.GetAccessoryGold(LV, Quality); } }
     /// <summary>
     /// 將字典傳入，依json表設定資料
@@ -54,10 +54,31 @@ public class AccessoryData : EquipData
         : base(_item)
     {
     }
+    static int GetRandomID()
+    {
+        List<int> keys = new List<int>(GameDictionary.AccessoryDic.Keys);
+        int randIndex = UnityEngine.Random.Range(0, keys.Count);
+        return keys[randIndex];
+    }
+    public static AccessoryData GetRandomNewAccessory(int _lv,int _quality)
+    {
+        AccessoryData data = GameDictionary.AccessoryDic[GetRandomID()].MemberwiseClone() as AccessoryData;
+        if (Player.LocalData)
+        {
+            MaxUID++;
+            data.UID = MaxUID;
+        }
+        data.LV = _lv;
+        data.Quality = _quality;
+        data.SetRandomProperties();
+        return data;
+    }
     public static AccessoryData GetNewAccessory(int _uid, int _id, int _equipSlot, int _lv, int _quality)
     {
         AccessoryData data = GameDictionary.AccessoryDic[_id].MemberwiseClone() as AccessoryData;
         data.UID = _uid;
+        if (_uid > MaxUID)
+            MaxUID = _uid;
         data.LV = _lv;
         data.Quality = _quality;
         data.SetRandomProperties();

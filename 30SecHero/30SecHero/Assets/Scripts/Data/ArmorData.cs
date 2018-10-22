@@ -6,8 +6,8 @@ using System;
 
 public class ArmorData : EquipData
 {
+    protected static int MaxUID;//只使用本地資料才會用到
     public override EquipType Type { get { return EquipType.Armor; } }
-    static long MaxUID;
     public override int SellGold { get { return GameSettingData.GetArmorGold(LV, Quality); } }
     /// <summary>
     /// 將字典傳入，依json表設定資料
@@ -54,10 +54,31 @@ public class ArmorData : EquipData
         : base(_item)
     {
     }
+    static int GetRandomID()
+    {
+        List<int> keys = new List<int>(GameDictionary.ArmorDic.Keys);
+        int randIndex = UnityEngine.Random.Range(0, keys.Count);
+        return keys[randIndex];
+    }
+    public static ArmorData GetRandomNewArmor(int _lv,int _quality)
+    {
+        ArmorData data = GameDictionary.ArmorDic[GetRandomID()].MemberwiseClone() as ArmorData;
+        if (Player.LocalData)
+        {
+            MaxUID++;
+            data.UID = MaxUID;
+        }
+        data.LV = _lv;
+        data.Quality = _quality;
+        data.SetRandomProperties();
+        return data;
+    }
     public static ArmorData GetNewArmor(int _uid, int _id, int _equipSlot, int _lv, int _quality)
     {
         ArmorData data = GameDictionary.ArmorDic[_id].MemberwiseClone() as ArmorData;
         data.UID = _uid;
+        if (_uid > MaxUID)
+            MaxUID = _uid;
         data.LV = _lv;
         data.Quality = _quality;
         data.SetRandomProperties();

@@ -6,6 +6,7 @@ using System;
 
 public class WeaponData : EquipData
 {
+    protected static int MaxUID;//只使用本地資料才會用到
     public override EquipType Type { get { return EquipType.Weapon; } }
     public override int SellGold { get { return GameSettingData.GetWeaponGold(LV, Quality); } }
     /// <summary>
@@ -53,10 +54,31 @@ public class WeaponData : EquipData
         : base(_item)
     {
     }
+    static int GetRandomID()
+    {
+        List<int> keys = new List<int>(GameDictionary.WeaponDic.Keys);
+        int randIndex = UnityEngine.Random.Range(0, keys.Count);
+        return keys[randIndex];
+    }
+    public static WeaponData GetRandomNewWeapon(int _lv,int _quality)
+    {
+        WeaponData data = GameDictionary.WeaponDic[GetRandomID()].MemberwiseClone() as WeaponData;
+        if(Player.LocalData)
+        {
+            MaxUID++;
+            data.UID = MaxUID;
+        }
+        data.LV = _lv;
+        data.Quality = _quality;
+        data.SetRandomProperties();
+        return data;
+    }
     public static WeaponData GetNewWeapon(int _uid, int _id, int _equipSlot, int _lv, int _quality)
     {
         WeaponData data = GameDictionary.WeaponDic[_id].MemberwiseClone() as WeaponData;
         data.UID = _uid;
+        if (_uid > MaxUID)
+            MaxUID = _uid;
         data.LV = _lv;
         data.Quality = _quality;
         data.SetRandomProperties();

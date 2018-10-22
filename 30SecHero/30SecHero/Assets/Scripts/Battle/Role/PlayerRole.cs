@@ -533,6 +533,10 @@ public partial class PlayerRole : Role
                 break;
         }
     }
+    public void GetEquip(EquipData _data)
+    {
+        BattleManage.GainEquip(_data);
+    }
     public void InitMonsterSkill(string _name, Skill _skill)
     {
         if (!IsAvatar)

@@ -62,8 +62,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 1a1eab282e9447c42a64887da31ff094, type: 3}
   - {fileID: 21300000, guid: 169d0b401c213e146b00c3581aad50e0, type: 3}
   - {fileID: 21300000, guid: abc4ce7364d2f56419bbf8cad5a83c66, type: 3}
-  - {fileID: 21300000, guid: 50dd4fa83407fd24bbe709ca6cdcf437, type: 3}
   - {fileID: 21300000, guid: 2d5c2deb694eabe478d2460efc0f56e7, type: 3}
+  - {fileID: 21300000, guid: 50dd4fa83407fd24bbe709ca6cdcf437, type: 3}
   EquipTypBotPrefab:
   - {fileID: 21300000, guid: 4b41f9927d76548449fc00d1324961c7, type: 3}
   - {fileID: 21300000, guid: c677aefbc89bd824ba402c26dbbee633, type: 3}
