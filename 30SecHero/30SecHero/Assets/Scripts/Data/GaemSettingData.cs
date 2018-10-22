@@ -390,7 +390,6 @@ public class GameSettingData : Data
                                 break;
                             case "NoEquipWeight":
                                 NoEquipWeight = int.Parse(item[key].ToString());
-                                Debug.Log("NoEquipWeight=" + NoEquipWeight);
                                 EquipQualityWeightList.Add(NoEquipWeight);
                                 break;
                             case "EquipQuality1Weight":

@@ -170,7 +170,6 @@ public partial class PlayerRole : Role
     [HideInInspector]
     public int FaceLeftOrRight;
     Dictionary<string, Skill> MonsterSkills = new Dictionary<string, Skill>();
-    List<Skill> ActiveMonsterSkills = new List<Skill>();
     public EnemyRole ClosestEnemy;
     bool CanJump;
 
@@ -306,17 +305,20 @@ public partial class PlayerRole : Role
         else
             DirectY = Direction.Bottom;
     }
-    public override void BeAttack(Force _attackerForce,int _dmg, Vector2 _force)
+    public override void BeAttack(Force _attackerForce, int _dmg, Vector2 _force)
     {
-        if (IsAvatar)
+        if (!IsAvatar)
         {
-            base.BeAttack(_attackerForce,_dmg, _force);
+            Health = 0;
+            Shield = 0;
         }
-        else
-        {
-            IsAlive = false;
-            SelfDestroy();
-        }
+        base.BeAttack(_attackerForce, _dmg, _force);
+    }
+    public override void ReceiveDmg(int _dmg)
+    {
+        base.ReceiveDmg(_dmg);
+        if(!IsAlive)
+            BattleManage.BM.ShowSettlement();
     }
     protected override void ShieldBlock(ref int _dmg)
     {
@@ -521,7 +523,7 @@ public partial class PlayerRole : Role
         }
         AttackMotion();
     }
-    public void GetResource(ResourceType _type,int _value)
+    public void GetResource(ResourceType _type, int _value)
     {
         switch (_type)
         {
@@ -546,7 +548,6 @@ public partial class PlayerRole : Role
             Skill skill = gameObject.AddComponent(_skill.GetType()).CopySkill(_skill);
             skill.PlayerInitSkill();
             MonsterSkills.Add(_name, skill);
-            Skills.Add(_skill);
         }
     }
     public void GenerateMonsterSkill(string _name)

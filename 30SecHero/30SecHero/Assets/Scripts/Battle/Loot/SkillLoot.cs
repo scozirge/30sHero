@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SkillLoot : MonoBehaviour {
-
+public class SkillLoot : MonoBehaviour
+{
     [SerializeField]
     ParticleSystem GetEffect;
 

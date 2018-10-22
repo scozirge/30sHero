@@ -73,6 +73,7 @@ public partial class BattleManage
     }
     public static void SpawnNextGate(int _destroyedFloor)
     {
+
         if (Floor > _destroyedFloor)
         {
             SpawnGate(_destroyedFloor - 1);
@@ -90,6 +91,9 @@ public partial class BattleManage
             AvailableMillions = EnemyData.GetAvailableMillions(Floor);
             IsDemogorgonFloor = CheckDemogorgon(Floor);
         }
+        PassFloorCount++;
+        if (Floor > MaxFloor)
+            MaxFloor = Floor;
     }
     public static bool CheckDemogorgon(int _floor)
     {

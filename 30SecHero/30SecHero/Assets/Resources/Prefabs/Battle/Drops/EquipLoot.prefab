@@ -72,6 +72,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 224593079169604558}
+  - component: {fileID: 114612046629608950}
   - component: {fileID: 114403931591018312}
   - component: {fileID: 70786121786361916}
   - component: {fileID: 50081146118109540}
@@ -291,6 +292,26 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114612046629608950
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1834583185934042}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ba44017135a3df4fb4ad12647f588ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MoveToPlayer: 1
+  Wander: 0
+  FollowCamera: 0
+  DebutSpeed: 1000
+  WanderInterval: 0
+  RotateFactor: 0
+  WanderRange: 0
+  Destination: {x: 0, y: 0}
+  MoveSpeed: 0
 --- !u!114 &114735638476980208
 MonoBehaviour:
   m_ObjectHideFlags: 1

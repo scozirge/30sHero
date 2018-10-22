@@ -3,7 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public abstract class AIMove : MonoBehaviour {
+public abstract class AIMove : MonoBehaviour
+{
+    [Tooltip("是否直接移動到玩家身上，移動速度是看DebutSpeed")]
+    [SerializeField]
+    protected bool MoveToPlayer;
     [Tooltip("移動到指定座標後會不會遊蕩")]
     [SerializeField]
     protected bool Wander;
@@ -37,24 +41,31 @@ public abstract class AIMove : MonoBehaviour {
 
 
 
- 
+
 
     protected virtual void Start()
     {
         MyRigi = GetComponent<Rigidbody2D>();
-        WanderIntervalTimer = WanderInterval;
-        if (RotateFactor < 0.02f)
-            RotateFactor = 0.02f;
-        KeepDebut = true;
+        if(MoveToPlayer)
+        {
+            MyRigi.velocity = new Vector2(Random.Range(-1200, 1200), Random.Range(-1200, 1200));
+        }
+        else
+        {
+            WanderIntervalTimer = WanderInterval;
+            if (RotateFactor < 0.02f)
+                RotateFactor = 0.02f;
+            KeepDebut = true;
+        }
         CanMove = true;
     }
     public Vector2 SetRandDestination()
     {
-        float randPosX = Random.Range(300, 300+BattleManage.ScreenSize.x / 2);
+        float randPosX = Random.Range(300, 300 + BattleManage.ScreenSize.x / 2);
         float randPosY = Random.Range(-BattleManage.ScreenSize.y / 2 + 200, BattleManage.ScreenSize.y / 2 - 200);
         RandomOffset = new Vector2(randPosX, randPosY);
-        Vector2 nowPos=Vector2.zero;
-        if(BattleManage.BM.MyPlayer)
+        Vector2 nowPos = Vector2.zero;
+        if (BattleManage.BM.MyPlayer)
             nowPos = BattleManage.BM.MyPlayer.transform.position;
         else
             nowPos = BattleManage.MyCameraControler.transform.position;
@@ -111,9 +122,21 @@ public abstract class AIMove : MonoBehaviour {
     {
         if (CanMove)
         {
-            Debut();
-            WanderMovement();
+            if (MoveToPlayer)
+            {
+                MoveToPlayerFunc();
+            }
+            else
+            {
+                Debut();
+                WanderMovement();
+            }
         }
+    }
+    void MoveToPlayerFunc()
+    {
+        if (BattleManage.BM.MyPlayer)
+            MyRigi.velocity = Vector2.Lerp(MyRigi.velocity, (BattleManage.BM.MyPlayer.transform.position - transform.position).normalized * DebutSpeed, 0.1f);
     }
     public void SetCanMove(bool _bool)
     {
@@ -125,7 +148,10 @@ public abstract class AIMove : MonoBehaviour {
     {
         if (CanMove)
         {
-            WanderTimerFunc();
+            if (!MoveToPlayer)
+            {
+                WanderTimerFunc();
+            }
         }
     }
 }

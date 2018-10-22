@@ -13,8 +13,6 @@ public partial class BattleManage : MonoBehaviour
     [SerializeField]
     float PotionInterval;
     [SerializeField]
-    float PotionProportion;
-    [SerializeField]
     int EnemyFirstHalfMinCount;
     [SerializeField]
     int EnemyFirstHalfMaxCount;
@@ -28,25 +26,10 @@ public partial class BattleManage : MonoBehaviour
     int MaxEnemy;
     [SerializeField]
     int MaxLoot;
-    public float EnemyDropPotionProportion;
     [SerializeField]
     List<EnemyRole> Enemys;
     [SerializeField]
     EnemyRole DesignatedEnemy;
-    int FloorPassGold;
-    int NewFloorPassGold;
-    float BossEmeraldProportion;
-    int BossEmerald;
-    int NewBossEmerald;
-    int EnemyGold;
-    int NoEquipWeight;
-    int EquipQuality1Weight;
-    int EquipQuality2Weight;
-    int EquipQuality3Weight;
-    int EquipQuality4Weight;
-    int EquipQuality5Weight;
-    int EnemyDropGold;
-    float EnemyDropGoldOffset;
     [SerializeField]
     Loot LootPrefab;
     [SerializeField]
@@ -88,6 +71,7 @@ public partial class BattleManage : MonoBehaviour
     void Init()
     {
         SceneObject.SetActive(true);
+        InitSettlement();
         InitBattleSetting();
         BM = this;
         EnemyParent = GameObject.FindGameObjectWithTag("EnemyParent").GetComponent<Transform>();
@@ -121,7 +105,6 @@ public partial class BattleManage : MonoBehaviour
     void InitBattleSetting()
     {
         PotionInterval = GameSettingData.PotionInterval;
-        PotionProportion = GameSettingData.PotionProportion;
         EnemyFirstHalfInterval = GameSettingData.EnemyFirstHalfInterval;
         EnemySecondHalfInterval = GameSettingData.EnemySecondHalfInterval;
         EnemyFirstHalfMinCount = GameSettingData.EnemyFirstHalfMinCount;
@@ -129,21 +112,6 @@ public partial class BattleManage : MonoBehaviour
         EnemySecondHalfMinCount = GameSettingData.EnemySecondHalfMinCount;
         EnemySecondHalfMaxCount = GameSettingData.EnemySecondHalfMaxCount;
         EnemySpawnInterval = GameSettingData.EnemySpawnInterval;
-        FloorPassGold = GameSettingData.FloorPassGold;
-        NewFloorPassGold = GameSettingData.NewFloorPassGold;
-        BossEmeraldProportion = GameSettingData.BossEmeraldProportion;
-        BossEmerald = GameSettingData.BossEmerald;
-        NewBossEmerald = GameSettingData.NewBossEmerald;
-        EnemyGold = GameSettingData.EnemyGold;
-        NoEquipWeight = GameSettingData.NoEquipWeight;
-        EquipQuality1Weight = GameSettingData.EquipQuality1Weight;
-        EquipQuality2Weight = GameSettingData.EquipQuality2Weight;
-        EquipQuality3Weight = GameSettingData.EquipQuality3Weight;
-        EquipQuality4Weight = GameSettingData.EquipQuality4Weight;
-        EquipQuality5Weight = GameSettingData.EquipQuality5Weight;
-        EnemyDropPotionProportion = GameSettingData.EnemyDropPotionProportion;
-        EnemyDropGolds = GameSettingData.EnemyDropGold;
-        EnemyDropGoldOffset = GameSettingData.EnemyDropGoldOffset;
         MaxEnemy = GameSettingData.MaxEnemy;
         MaxLoot = GameSettingData.MaxLoot;
         FloorPlate = GameSettingData.FloorPlate;

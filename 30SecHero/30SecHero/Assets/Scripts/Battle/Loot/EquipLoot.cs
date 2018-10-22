@@ -13,7 +13,7 @@ public class EquipLoot : MonoBehaviour
     ParticleSystem DeathEffect;
     EquipData MyData;
 
-    public void Init(int _lv,int _quality)
+    public void Init(int _lv, int _quality)
     {
         MyData = EquipData.GetRandomNewEquip(_lv, _quality);
         for (int i = 0; i < Icons.Length; i++)
@@ -23,8 +23,6 @@ public class EquipLoot : MonoBehaviour
         }
         EquipTrans.rotation = Quaternion.Euler(new Vector3(0, 0, Random.Range(-20, 20)));
     }
-
-
     void OnTriggerEnter2D(Collider2D _col)
     {
         if (_col.gameObject.tag == Force.Player.ToString())

@@ -46,4 +46,5 @@ public class ResourceLoot : MonoBehaviour
     {
         Destroy(gameObject);
     }
+
 }

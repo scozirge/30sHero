@@ -293,13 +293,13 @@ public class Equip : MyUI
     {
         if (!SortTypeToggle.isOn)
         {
-            ItemList.Sort(SortByLV);
+            ItemList.Sort(SortByQuality);
         }
         else
         {
-            ItemList.Sort(SortByQuality);
+            ItemList.Sort(SortByLV);
         }
-        if (!SortWayToggle.isOn)
+        if (SortWayToggle.isOn)
         {
             ItemList.Reverse();
         }

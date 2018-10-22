@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 114823716900954332}
   - component: {fileID: 61888229868414704}
   m_Layer: 10
-  m_Name: BopWallPlate
+  m_Name: BotWallPlate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

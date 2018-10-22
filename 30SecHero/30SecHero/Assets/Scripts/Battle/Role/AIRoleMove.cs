@@ -12,20 +12,23 @@ public class AIRoleMove : AIMove
     protected override void Start()
     {
         base.Start();
-        ER = GetComponent<EnemyRole>();
-        //int randX = Random.Range(0, 800);
-        //int randY = Random.Range(-400, 400);
-
-        if (Destination == Vector2.zero)
+        if (!MoveToPlayer)
         {
-            SetRandDestination();
+            ER = GetComponent<EnemyRole>();
+            //int randX = Random.Range(0, 800);
+            //int randY = Random.Range(-400, 400);
+
+            if (Destination == Vector2.zero)
+            {
+                SetRandDestination();
+            }
+            else
+                RandomOffset = Destination;
+            //Vector3 rndTarget = new Vector3(randX, randY) + BattleManage.MyCameraControler.transform.position;
+            Vector3 rndTarget = new Vector3(Destination.x, Destination.y);
+            InitialVelocity = (rndTarget - transform.position).normalized * DebutSpeed;
+            MyRigi.velocity = InitialVelocity;
         }
-        else
-            RandomOffset = Destination;
-        //Vector3 rndTarget = new Vector3(randX, randY) + BattleManage.MyCameraControler.transform.position;
-        Vector3 rndTarget = new Vector3(Destination.x, Destination.y);
-        InitialVelocity = (rndTarget - transform.position).normalized * DebutSpeed;
-        MyRigi.velocity = InitialVelocity;
     }
 
     protected override void Debut()

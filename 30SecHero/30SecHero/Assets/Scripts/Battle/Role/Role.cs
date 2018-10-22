@@ -89,7 +89,7 @@ public abstract class Role : MonoBehaviour
     public bool IsAlive { get; protected set; }
     public Dictionary<RoleBuffer, BufferData> Buffers = new Dictionary<RoleBuffer, BufferData>();
     Dictionary<RoleBuffer, ParticleSystem> BufferParticles = new Dictionary<RoleBuffer, ParticleSystem>();
-    protected List<Skill> Skills = new List<Skill>();
+    protected List<Skill> ActiveMonsterSkills = new List<Skill>();
 
     protected virtual void Start()
     {
@@ -100,7 +100,7 @@ public abstract class Role : MonoBehaviour
         DragTimer = new MyTimer(KnockDragDuration, DragRecovery, false, false);
         MyRigi = GetComponent<Rigidbody2D>();
         Skill[] coms = GetComponents<Skill>();
-        Skills = coms.ToList<Skill>();
+        ActiveMonsterSkills = coms.ToList<Skill>();
         BurningTimer = new MyTimer(GameSettingData.BurnInterval, Burn, false, false);
         BurningTimer.StartRunTimer = false;
         DragRecovery();
@@ -170,8 +170,6 @@ public abstract class Role : MonoBehaviour
     }
     public virtual void ReceiveDmg(int _dmg)
     {
-        if (!IsAlive)
-            return;
         Health -= _dmg;
         DeathCheck();
     }
@@ -268,9 +266,9 @@ public abstract class Role : MonoBehaviour
         switch (_buffer.Type)
         {
             case RoleBuffer.Stun:
-                for (int i = 0; i < Skills.Count; i++)
+                for (int i = 0; i < ActiveMonsterSkills.Count; i++)
                 {
-                    Skills[i].SetCanAttack(!_add);
+                    ActiveMonsterSkills[i].SetCanAttack(!_add);
                 }
                 break;
             case RoleBuffer.Burn:
@@ -289,16 +287,17 @@ public abstract class Role : MonoBehaviour
         List<RoleBuffer> keyList = new List<RoleBuffer>(Buffers.Keys);
         for (int i = 0; i < keyList.Count; i++)
         {
-            BufferEffectChange(Buffers[keyList[i]], false);
+            RemoveBuffer(Buffers[keyList[i]]);
+            //BufferEffectChange(Buffers[keyList[i]], false);
         }
         Buffers = new Dictionary<RoleBuffer, BufferData>();
     }
     public void RemoveAllSill()
     {
-        for (int i = 0; i < Skills.Count; i++)
+        for (int i = 0; i < ActiveMonsterSkills.Count; i++)
         {
-            Destroy(Skills[i]);
-            Skills.RemoveAt(i);
+            ActiveMonsterSkills[i].InactivePlayerSkill();
+            ActiveMonsterSkills.RemoveAt(i);
         }
     }
     protected virtual void SelfDestroy()

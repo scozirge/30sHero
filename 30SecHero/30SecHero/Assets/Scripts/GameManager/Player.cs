@@ -11,6 +11,8 @@ public partial class Player
     public static int Gold { get; private set; }
     public static int Emerald { get; private set; }
     public static List<int> KillBossID = new List<int>();
+    public static int MaxFloor { get; private set; }
+    public static int MaxEnemyKills { get; private set; }
 
 
 
@@ -99,8 +101,7 @@ public partial class Player
             else
             {
                 Debug.Log("更新Loco玩家資源");
-                PlayerPrefs.SetInt(LocoData.Gold.ToString(), Player.Gold);
-                PlayerPrefs.SetInt(LocoData.Emerald.ToString(), Player.Emerald);
+                PlayerPrefs.SetInt(LocoData.Gold.ToString(), Gold);
             }
         }
     }
@@ -119,8 +120,7 @@ public partial class Player
             else
             {
                 Debug.Log("更新Loco玩家資源");
-                PlayerPrefs.SetInt(LocoData.Gold.ToString(), Player.Gold);
-                PlayerPrefs.SetInt(LocoData.Emerald.ToString(), Player.Emerald);
+                PlayerPrefs.SetInt(LocoData.Emerald.ToString(), Emerald);
             }
         }
     }
@@ -139,8 +139,7 @@ public partial class Player
             else
             {
                 Debug.Log("更新Loco玩家資源");
-                PlayerPrefs.SetInt(LocoData.Gold.ToString(), Player.Gold);
-                PlayerPrefs.SetInt(LocoData.Emerald.ToString(), Player.Emerald);
+                PlayerPrefs.SetInt(LocoData.Gold.ToString(), Gold);
             }
         }
     }
@@ -159,8 +158,7 @@ public partial class Player
             else
             {
                 Debug.Log("更新Loco玩家資源");
-                PlayerPrefs.SetInt(LocoData.Gold.ToString(), Player.Gold);
-                PlayerPrefs.SetInt(LocoData.Emerald.ToString(), Player.Emerald);
+                PlayerPrefs.SetInt(LocoData.Emerald.ToString(), Emerald);
             }
         }
     }
@@ -192,8 +190,78 @@ public partial class Player
             else
             {
                 Debug.Log("更新server玩家強化");
-                ServerRequest.StrengthenUpgrade(_data.ID, _data.LV, Player.Gold);
+                ServerRequest.StrengthenUpgrade(_data.ID, _data.LV, Gold);
             }
         }
+    }
+    public static void SetMaxFloor(int _maxFloor)
+    {
+        MaxFloor = _maxFloor;
+        //寫入資料
+        if (PlayerInfoInitDataFinish)
+        {
+            if (!LocalData)
+            {
+                Debug.Log("更新server玩家資源");
+                //ServerRequest.UpdateResource();
+            }
+            else
+            {
+                Debug.Log("更新Loco玩家資源");
+                PlayerPrefs.SetInt(LocoData.MaxFloor.ToString(), MaxFloor);
+            }
+        }
+    }
+    public static void SetMaxEnemyKills(int _maxEnemyKills)
+    {
+        MaxEnemyKills = _maxEnemyKills;
+        //寫入資料
+        if (PlayerInfoInitDataFinish)
+        {
+            if (!LocalData)
+            {
+                Debug.Log("更新server玩家資源");
+                //ServerRequest.UpdateResource();
+            }
+            else
+            {
+                Debug.Log("更新Loco玩家資源");
+                PlayerPrefs.SetInt(LocoData.MaxEnemyKills.ToString(), MaxEnemyKills);
+            }            
+        }
+    }
+    public static void GainEquip(List<EquipData> _datas)
+    {
+        //寫入資料
+        if (EquipInitDataFinish)
+        {
+            if (!LocalData)
+            {
+                Debug.Log("更新server玩家資源");
+                Debug.Log("尚未十座");
+                //ServerRequest.UpdateResource();
+            }
+            else
+            {
+                Debug.Log("更新Loco玩家資源");
+                for (int i = 0; i < _datas.Count; i++)
+                {
+                    //Debug.Log("Type=" + _datas[i].Type + "  UID=" + _datas[i].UID);
+                    if (!Itmes[_datas[i].Type].ContainsKey(_datas[i].UID))
+                    {
+                        Itmes[_datas[i].Type].Add(_datas[i].UID, _datas[i]);
+                    }
+                    else
+                    {
+                        Debug.LogWarning("重複裝備UID  Type=" + _datas[i].Type + "  UID=" + _datas[i].UID);
+                    }
+                }
+                EquipSaveLocalData();
+            }
+        }
+    }
+    public static void GainEquip_CB(int _uid)
+    {
+
     }
 }

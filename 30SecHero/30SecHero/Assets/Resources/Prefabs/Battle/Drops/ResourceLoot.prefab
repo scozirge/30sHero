@@ -154,9 +154,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ba44017135a3df4fb4ad12647f588ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Wander: 1
+  MoveToPlayer: 1
+  Wander: 0
   FollowCamera: 0
-  DebutSpeed: 0
+  DebutSpeed: 2000
   WanderInterval: 5
   RotateFactor: 0.001
   WanderRange: 100

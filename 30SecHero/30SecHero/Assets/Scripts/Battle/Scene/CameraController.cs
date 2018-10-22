@@ -21,7 +21,7 @@ public class CameraController : MonoBehaviour
     List<EffectData> EffectList;
 
     static AudioClip MyShakeSound;
-    static Dictionary<string, EffectData> EffectDic = new Dictionary<string, EffectData>();
+    static Dictionary<string, EffectData> EffectDic;
     float FaceOffsetX;
     static CameraController MySelf;
     // Use this for initialization
@@ -33,6 +33,7 @@ public class CameraController : MonoBehaviour
         FaceOffsetX = Mathf.Abs(Player.transform.position.x);
         MyPlayer = GetComponent<AnimationPlayer>();
         MyShakeSound = ShakeSound;
+        EffectDic = new Dictionary<string, EffectData>();
         for (int i = 0; i < EffectList.Count; i++)
         {
             EffectDic.Add(EffectList[i].Name, EffectList[i]);

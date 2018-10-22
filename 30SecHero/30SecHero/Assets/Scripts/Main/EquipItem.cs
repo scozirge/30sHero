@@ -39,7 +39,7 @@ public class EquipItem : Item
         }
         else
             return;
-        if (_ui.GetType() == typeof(Equip))
+        if (_ui != null && _ui.GetType() == typeof(Equip))
             ParentUI = ((Equip)_ui);
         RefreshText();
         MyText.AddRefreshFunc(RefreshText);
@@ -58,10 +58,12 @@ public class EquipItem : Item
     }
     public void SetSoldMode(bool _bool)
     {
+        if (!SoldCoverObj)
+            return;
         SoldCoverObj.SetActive(_bool);
         if (!_bool)
             IsSoldCheck = false;
-        SoldCheckObj.SetActive(IsSoldCheck);
+        if(SoldCheckObj)SoldCheckObj.SetActive(IsSoldCheck);
     }
     public override void OnPress()
     {
@@ -75,7 +77,7 @@ public class EquipItem : Item
         else
         {
             IsSoldCheck = !IsSoldCheck;
-            SoldCheckObj.SetActive(IsSoldCheck);
+            if (SoldCheckObj) SoldCheckObj.SetActive(IsSoldCheck);
         }
     }
     public override void Filter(EquipType _type)

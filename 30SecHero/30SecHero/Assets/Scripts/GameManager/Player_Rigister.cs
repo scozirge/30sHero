@@ -78,6 +78,12 @@ public partial class Player
         if (emerald != 0)
             SetEmerald(emerald);
         Debug.Log("emerald=" + emerald);
+        //最高突破關卡
+        int maxFloor = PlayerPrefs.GetInt(LocoData.MaxFloor.ToString());
+        SetMaxFloor(maxFloor);
+        //最高怪物擊殺
+        int maxEnemyKills = PlayerPrefs.GetInt(LocoData.MaxEnemyKills.ToString());
+        SetMaxFloor(maxEnemyKills);
         PlayerInfoInitDataFinish = true;
         //裝備
         string equipStr = PlayerPrefs.GetString(LocoData.Equip.ToString());
@@ -96,7 +102,7 @@ public partial class Player
             GetStrengthen_CB(strengthenData);
         }
         //擊敗BOSS清單
-        string killBossStr = PlayerPrefs.GetString("KillBossID");
+        string killBossStr = PlayerPrefs.GetString(LocoData.KillBossID.ToString());
         if(killBossStr!="")
         {
             string[] bossID = strengthenStr.Split(',');
@@ -105,6 +111,7 @@ public partial class Player
                 KillBossID.Add(int.Parse(bossID[i]));
             }
         }
+
     }
     public static void GetKongregateUserData_CB(string _name, int _kongregateID)
     {

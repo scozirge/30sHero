@@ -67,6 +67,7 @@ public abstract class EquipData : Data
             Debug.LogException(ex);
         }
     }
+
     public static EquipData GetRandomNewEquip(int _lv, int _quality)
     {
         int equipType = GameSettingData.GetRandomEquipType();
@@ -82,6 +83,10 @@ public abstract class EquipData : Data
                 Debug.LogWarning("隨機取得亂數裝備錯誤");
                 return null;
         }
+    }
+    public virtual int SetUID()
+    {
+        return UID;
     }
     protected virtual void SetRandomProperties()
     {

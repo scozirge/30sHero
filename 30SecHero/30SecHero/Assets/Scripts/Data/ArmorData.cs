@@ -60,14 +60,18 @@ public class ArmorData : EquipData
         int randIndex = UnityEngine.Random.Range(0, keys.Count);
         return keys[randIndex];
     }
+    public override int SetUID()
+    {
+        base.SetUID();
+        MaxUID++;
+        UID = MaxUID;
+        //Debug.Log("Type=" + Type + "  UID=" + UID);
+        return UID;
+    }
     public static ArmorData GetRandomNewArmor(int _lv,int _quality)
     {
         ArmorData data = GameDictionary.ArmorDic[GetRandomID()].MemberwiseClone() as ArmorData;
-        if (Player.LocalData)
-        {
-            MaxUID++;
-            data.UID = MaxUID;
-        }
+        data.SetUID();
         data.LV = _lv;
         data.Quality = _quality;
         data.SetRandomProperties();

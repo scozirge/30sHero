@@ -81,9 +81,9 @@ public partial class EnemyRole
         {
             for (int i = 0; i < DropLootCount; i++)
             {
-                if (ProbabilityGetter.GetResult(BattleManage.BM.EnemyDropPotionProportion))
+                if (ProbabilityGetter.GetResult(GameSettingData.EnemyDropPotionProportion))
                 {
-                    Loot loot = DropSpawner.SpawnLoot(transform.position);
+                    DropSpawner.SpawnLoot(transform.position);
                 }
             }
         }

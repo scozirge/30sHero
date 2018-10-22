@@ -10,12 +10,15 @@ public class AILootMove : AIMove
     protected override void Start()
     {
         base.Start();
-        if (Destination == Vector2.zero)
+        if (!MoveToPlayer)
         {
-            Destination = transform.position;
+            if (Destination == Vector2.zero)
+            {
+                Destination = transform.position;
+            }
+            else
+                RandomOffset = Destination;
         }
-        else
-            RandomOffset = Destination;
     }
     protected override void Debut()
     {

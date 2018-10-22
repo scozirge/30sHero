@@ -6,5 +6,8 @@
     Gold,
     Emerald,
     Equip,
-    Strengthen
+    Strengthen,
+    KillBossID,
+    MaxFloor,
+    MaxEnemyKills
 }
