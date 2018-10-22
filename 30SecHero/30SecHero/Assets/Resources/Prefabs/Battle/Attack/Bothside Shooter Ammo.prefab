@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 224150828886270898}
   - component: {fileID: 114962956101920240}
   - component: {fileID: 222441390583901092}
-  - component: {fileID: 58810803581975730}
+  - component: {fileID: 58036275626248820}
   m_Layer: 11
   m_Name: Bothside Shooter Ammo
   m_TagString: Untagged
@@ -29,7 +29,7 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!58 &58810803581975730
+--- !u!58 &58036275626248820
 CircleCollider2D:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -43,7 +43,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 50
+  m_Radius: 34.8
 --- !u!114 &114962956101920240
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -86,7 +86,7 @@ RectTransform:
   m_GameObject: {fileID: 1566857461941104}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.8, y: 0.8, z: 1}
+  m_LocalScale: {x: 0.9, y: 0.9, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0

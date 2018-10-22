@@ -200,6 +200,8 @@ MonoBehaviour:
   PSkillDuration: 0
   DetecteRadius: 800
   DamagePercent: 1
+  AttackStopMove: 0
+  StopMoveTime: 0
   PSkillTimer: 0
   AttackOnce: 0
   Interval: 2
@@ -270,7 +272,7 @@ MonoBehaviour:
   DropSkillProbility: 1
   DropSkill: {fileID: 0}
   HealthObj: {fileID: 1007626921543798}
-  PlayMotionDuration: 1
+  PlayMotionDuration: 0.6
   InitBuffers: []
 --- !u!114 &114452826659264042
 MonoBehaviour:

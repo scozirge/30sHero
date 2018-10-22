@@ -58,7 +58,7 @@ MonoBehaviour:
   LocalParticles: []
   GlobalParticle: []
   DeadParticles: []
-  LifeTime: 1
+  LifeTime: 0.6
   KnockIntensity: 4000
   AmmoType: 1
   DamageInterval: 0.3
