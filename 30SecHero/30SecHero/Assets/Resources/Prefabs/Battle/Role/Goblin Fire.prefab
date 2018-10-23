@@ -164,8 +164,8 @@ CapsuleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 171.1, y: 109.1}
+  m_Offset: {x: 3.7, y: 10.8}
+  m_Size: {x: 131.9, y: 106.77}
   m_Direction: 1
 --- !u!95 &95722943961312408
 Animator:
@@ -223,6 +223,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4f0a44c2e05082409ff650163011e2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MoveToPlayer: 0
   Wander: 1
   FollowCamera: 0
   DebutSpeed: 2000
@@ -377,7 +378,9 @@ MonoBehaviour:
   KnockDrag: 30
   NormalDrag: 0
   KnockDragDuration: 0.9
-  DropProbility: 1
+  DropEquipCount: 1
+  DropGoldCount: 1
+  DropLootCount: 1
   DesignateLoot: 
   DropSkillProbility: 1
   DropSkill: {fileID: 114743315219924512}

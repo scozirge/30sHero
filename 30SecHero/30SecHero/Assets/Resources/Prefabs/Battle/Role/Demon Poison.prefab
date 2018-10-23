@@ -239,7 +239,9 @@ MonoBehaviour:
   KnockDrag: 30
   NormalDrag: 0
   KnockDragDuration: 0.9
-  DropProbility: 1
+  DropEquipCount: 1
+  DropGoldCount: 1
+  DropLootCount: 1
   DesignateLoot: 
   DropSkillProbility: 1
   DropSkill: {fileID: 114016134065368028}
@@ -346,7 +348,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 71e0bad389aa1b847a0f2b4fddc24960, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 35853569c098ef74992acdb9044b1eef, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -377,6 +379,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4f0a44c2e05082409ff650163011e2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MoveToPlayer: 0
   Wander: 1
   FollowCamera: 0
   DebutSpeed: 2000

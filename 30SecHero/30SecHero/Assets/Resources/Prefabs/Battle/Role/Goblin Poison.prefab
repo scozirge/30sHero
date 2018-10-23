@@ -107,7 +107,7 @@ GameObject:
   - component: {fileID: 114743315219924512}
   - component: {fileID: 114629539098914038}
   - component: {fileID: 95722943961312408}
-  - component: {fileID: 70533001599085572}
+  - component: {fileID: 70664038223940936}
   m_Layer: 9
   m_Name: Goblin Poison
   m_TagString: Enemy
@@ -152,7 +152,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!70 &70533001599085572
+--- !u!70 &70664038223940936
 CapsuleCollider2D:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -164,8 +164,8 @@ CapsuleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 171.1, y: 109.1}
+  m_Offset: {x: 3.7, y: 10.8}
+  m_Size: {x: 131.9, y: 106.77}
   m_Direction: 1
 --- !u!95 &95722943961312408
 Animator:
@@ -223,6 +223,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4f0a44c2e05082409ff650163011e2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MoveToPlayer: 0
   Wander: 1
   FollowCamera: 0
   DebutSpeed: 2000
@@ -316,7 +317,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: a008e722c8df4ce4a943a66359c3b59a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d8e9517027ed017458ba0f516c263efa, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -377,7 +378,9 @@ MonoBehaviour:
   KnockDrag: 30
   NormalDrag: 0
   KnockDragDuration: 0.9
-  DropProbility: 1
+  DropEquipCount: 1
+  DropGoldCount: 1
+  DropLootCount: 1
   DesignateLoot: 
   DropSkillProbility: 1
   DropSkill: {fileID: 114743315219924512}
