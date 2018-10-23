@@ -85,33 +85,38 @@ public partial class Player
         //最高怪物擊殺
         int maxEnemyKills = PlayerPrefs.GetInt(LocoData.MaxEnemyKills.ToString());
         SetMaxFloor_Local(maxEnemyKills);
-        PlayerInfoInitDataFinish = true;
-        //裝備
-        string equipStr = PlayerPrefs.GetString(LocoData.Equip.ToString());
-        Debug.Log("equipStr=" + equipStr);
-        if(equipStr!="")
-        {
-            string[] equipData = equipStr.Split('/');
-            GetEquip_CB(equipData);
-        }
-        //強化
-        string strengthenStr = PlayerPrefs.GetString(LocoData.Strengthen.ToString());
-        Debug.Log("strengthenStr=" + strengthenStr);
-        if(strengthenStr!="")
-        {
-            string[] strengthenData = strengthenStr.Split('/');
-            GetStrengthen_CB(strengthenData);
-        }
         //擊敗BOSS清單
         string killBossStr = PlayerPrefs.GetString(LocoData.KillBossID.ToString());
-        if(killBossStr!="")
+        if (killBossStr != "")
         {
-            string[] bossID = strengthenStr.Split(',');
-            for(int i=0;i<bossID.Length;i++)
+            string[] bossID = killBossStr.Split(',');
+            for (int i = 0; i < bossID.Length; i++)
             {
                 KillBossID.Add(int.Parse(bossID[i]));
             }
         }
+        PlayerInfoInitDataFinish = true;
+        //裝備
+        string equipStr = PlayerPrefs.GetString(LocoData.Equip.ToString());
+        Debug.Log("equipStr=" + equipStr);
+        if (equipStr != "")
+        {
+            string[] equipData = equipStr.Split('/');
+            GetEquip_CB(equipData);
+        }
+        else
+            EquipInitDataFinish = true;
+        //強化
+        string strengthenStr = PlayerPrefs.GetString(LocoData.Strengthen.ToString());
+        Debug.Log("strengthenStr=" + strengthenStr);
+        if (strengthenStr != "")
+        {
+            string[] strengthenData = strengthenStr.Split('/');
+            GetStrengthen_CB(strengthenData);
+        }
+        else
+            StrengthenInitDataFinish = true;
+
 
     }
     public static void GetKongregateUserData_CB(string _name, int _kongregateID)

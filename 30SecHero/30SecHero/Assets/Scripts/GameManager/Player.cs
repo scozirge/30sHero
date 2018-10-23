@@ -206,7 +206,7 @@ public partial class Player
         //寫入資料
         if (PlayerInfoInitDataFinish)
         {
-            Debug.Log("更新Loco玩家資源");
+            Debug.Log("更新Loco玩家樓層");
             PlayerPrefs.SetInt(LocoData.MaxFloor.ToString(), MaxFloor);
         }
     }
@@ -218,7 +218,7 @@ public partial class Player
         //寫入資料
         if (PlayerInfoInitDataFinish)
         {
-            Debug.Log("更新Loco玩家資源");
+            Debug.Log("更新Loco玩家殺敵數");
             PlayerPrefs.SetInt(LocoData.MaxEnemyKills.ToString(), MaxEnemyKills);
         }
     }
@@ -229,7 +229,7 @@ public partial class Player
         //寫入資料
         if (EquipInitDataFinish)
         {
-            Debug.Log("更新Loco玩家資源");
+            Debug.Log("更新Loco玩家裝備");
             for (int i = 0; i < _datas.Count; i++)
             {
                 //Debug.Log("Type=" + _datas[i].Type + "  UID=" + _datas[i].UID);
@@ -248,6 +248,7 @@ public partial class Player
             CurGainEquipDatas = _equipDatas;
         else
             CurGainEquipDatas = null;
+        Debug.Log("更新Server玩家裝備");
         string addEquipStr = "";
         for (int i = 0; i < _equipDatas.Count; i++)
         {
