@@ -44,6 +44,7 @@ public partial class Player
         LocalData = _bool;
         Debug.Log("UseLocalData:" + _bool);
         Player.Init();
+        
         if (LocalData)
             GetLocalData();
         else

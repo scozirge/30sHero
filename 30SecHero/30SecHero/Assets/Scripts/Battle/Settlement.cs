@@ -95,6 +95,7 @@ partial class BattleManage
             //寶石獲得
             Player.GainEmerald(TotalEmerald);
             //裝備獲得
+            Debug.Log("GainLocalEquipData");
             Player.GainEquip_Local(GainEquipDataList);
             //顯示結果
             ShowResult();

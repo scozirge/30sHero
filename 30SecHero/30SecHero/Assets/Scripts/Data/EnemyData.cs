@@ -67,12 +67,13 @@ public class EnemyData
         List<int> keys = new List<int>(GameDictionary.EnemyDic.Keys);
         for (int i = 0; i < keys.Count; i++)
         {
-            EnemyRole er = Resources.Load<EnemyRole>(string.Format("Prefabs/Battle/Role/{0}", GameDictionary.EnemyDic[keys[i]].Name)).GetMemberwiseClone();
+            EnemyRole er = Resources.Load<EnemyRole>(string.Format("Prefabs/Battle/Role/{0}", GameDictionary.EnemyDic[keys[i]].Name));
             if (!er)
             {
                 Debug.LogWarning(string.Format("名稱為{0}的怪物Prefab不存在", GameDictionary.EnemyDic[keys[i]].Name));
                 continue;
             }
+            er = er.GetMemberwiseClone();
             er.SetEnemyData(GameDictionary.EnemyDic[keys[i]]);
             roles.Add(er);
         }
