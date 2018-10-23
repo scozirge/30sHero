@@ -4,6 +4,8 @@ $time_start = microtime(true);
 require_once('./config.php');
 //導入加密類
 require_once('./3DES.php');
+//導入Writer
+require_once('./Writer.php');
 
 //取得建立帳戶時間，格式為年份/月/日 時:分:秒(台北時區)
 date_default_timezone_set('Asia/Taipei');
@@ -49,5 +51,8 @@ if($result1 && $result2)
 	die("Success:: \nExecuteTime!=".$executeTime);
 }
 else
+{
+	WriteLastMysqlError($ownUserID,"更換裝備時更新裝備資料");
 	die("Fail:5");
+}
 ?>

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 public class Main : MonoBehaviour
 {
     bool Isinit = false;
@@ -99,7 +100,8 @@ public class Main : MonoBehaviour
     }
     public void Battle()
     {
-        ChangeScene.GoToScene(MyScene.Battle);
+        SceneManager.LoadScene("Battle");
+        //ChangeScene.GoToScene("Battle");
     }
 
 }

@@ -151,7 +151,7 @@ AnimationClip:
   m_GenerateMotionCurves: 0
   m_Events:
   - time: 2.5
-    functionName: GoToScene
+    functionName: SetNextScene
     data: Main
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

@@ -1786,12 +1786,12 @@ Prefab:
     - target: {fileID: 114529601492733476, guid: d9e47796d36fc83458ffab41aea6641e,
         type: 2}
       propertyPath: TestMode
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114529601492733476, guid: d9e47796d36fc83458ffab41aea6641e,
         type: 2}
       propertyPath: MaxAvaterTime
-      value: 15
+      value: 60
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114833855839366154, guid: d9e47796d36fc83458ffab41aea6641e, type: 2}

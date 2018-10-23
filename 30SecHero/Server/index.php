@@ -1,3 +1,5 @@
 <?php
-echo "Game2018_1";
+echo "30secHero------";
+echo 'Current PHP version: ' . phpversion();
+
 ?>

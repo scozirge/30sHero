@@ -7,7 +7,7 @@ public partial class ServerRequest : MonoBehaviour
 
     public static ServerRequest Conn;
     const string TestServerURL = "127.0.0.1/30SecHero/";
-    const string ServerURL = "http://game2018-1.000webhostapp.com/";
+    const string ServerURL = "https://30sechero.000webhostapp.com/";
     static bool IsFormal;
     static bool ShowLoading = false;//是否顯示loading
 

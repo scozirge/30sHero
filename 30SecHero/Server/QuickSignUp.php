@@ -4,7 +4,8 @@ $time_start = microtime(true);
 require_once('./config.php');
 //導入加密類
 require_once('./3DES.php');
-
+//導入Writer
+require_once('./Writer.php');
 //取得建立帳戶時間，格式為年份/月/日 時:分:秒(台北時區)
 date_default_timezone_set('Asia/Taipei');
 $signUpTime= date("Y/m/d H:i:s");
@@ -47,6 +48,7 @@ if ($numrows == 0)//找不到已經存在的Kongregate帳號就創新帳號
 	}
 	else
 	{
+		WriteLastMysqlError($userID_K,"新創帳號");
 		$time_end = microtime(true);
 		$executeTime = $time_end - $time_start;
 		die ("Fail:5: \nExecuteTime=".$executeTime."");
@@ -75,6 +77,7 @@ else//找到Kongregate帳戶就進行登入
 	}
 	else
 	{
+		WriteLastMysqlError($userID_K,"登入舊帳號時更新登入時間");
 		//計算執行時間
 		$time_end = microtime(true);
 		$executeTime = $time_end - $time_start;

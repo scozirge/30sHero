@@ -2,6 +2,8 @@
 $time_start = microtime(true);
 //導入config
 require_once('./config.php');
+//導入Writer
+require_once('./Writer.php');
 //導入加密類
 require_once('./3DES.php');
 
@@ -46,8 +48,9 @@ if($update)
 			$equipSlot=$equipData[2];
 			$lv=$equipData[3];
 			$quality=$equipData[4];
+			$ownUserID=$equipData[5];
 			//寫入資料庫
-			$insert = mysql_query("INSERT INTO  ".$db_name.".equipment (  `jid` ,`equipType` ,`equipSlot`,`lv`,`quality`) VALUES ( '".$jid."','".$equipType."','".$equipSlot."','".$lv."','".$quality."') ; ",$con_w);
+			$insert = mysql_query("INSERT INTO  ".$db_name.".equipment (  `jid` ,`equipType` ,`equipSlot`,`lv`,`quality`,`ownUserID`,`acquireTime`) VALUES ( '".$jid."','".$equipType."','".$equipSlot."','".$lv."','".$quality."','".$ownUserID."','".$now."') ; ",$con_w);
 			if($insert)
 			{
 				$uid=mysql_insert_id();
@@ -68,13 +71,14 @@ if($update)
 		}
 		else
 		{
+			WriteLastMysqlError($id,"結算時新增裝備資料");
 			die("Fail:5");
 		}
-
 	}
 }
 else
 {
+	WriteLastMysqlError($id,"結算時更新玩家資料");
 	die("Fail:5");
 }
 

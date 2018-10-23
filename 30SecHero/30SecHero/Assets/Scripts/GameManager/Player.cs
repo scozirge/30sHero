@@ -251,7 +251,7 @@ public partial class Player
             CurGainEquipDatas = _equipDatas;
         else
             CurGainEquipDatas = null;
-        Debug.Log("更新Server玩家裝備");
+        Debug.Log("更新Server玩家結算");
         string addEquipStr = "";
         for (int i = 0; i < _equipDatas.Count; i++)
         {
@@ -259,7 +259,7 @@ public partial class Player
                 addEquipStr += "/";
             addEquipStr += _equipDatas[i].ID + "," + (int)_equipDatas[i].Type + "," + _equipDatas[i].EquipSlot + "," + _equipDatas[i].LV + "," + _equipDatas[i].Quality + "," + ID;
         }
-        //Debug.Log("gold=" + _gold + " emerald=" + _emerald + " maxFloor=" + _maxFloor + " addEquipStr=" + addEquipStr);
+        Debug.Log("gold=" + _gold + " emerald=" + _emerald + " maxFloor=" + _maxFloor + " addEquipStr=" + addEquipStr);
         ServerRequest.Settlement(_gold, _emerald, _maxFloor, addEquipStr);
     }
     public static void Settlement_CB(string[] _data)
