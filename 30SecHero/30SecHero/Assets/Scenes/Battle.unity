@@ -4054,7 +4054,6 @@ MonoBehaviour:
   EnemyFirstHalfInterval: 1
   EnemySecondHalfInterval: 1
   PotionInterval: 10
-  PotionProportion: 1
   EnemyFirstHalfMinCount: 1
   EnemyFirstHalfMaxCount: 2
   EnemySecondHalfMinCount: 3
@@ -4062,7 +4061,6 @@ MonoBehaviour:
   EnemySpawnInterval: 0.3
   MaxEnemy: 7
   MaxLoot: 1
-  EnemyDropPotionProportion: 0
   Enemys:
   - {fileID: 114364750184517408, guid: 7a4fcaea190fe1341b551043fc61e7ba, type: 2}
   - {fileID: 114364750184517408, guid: 4e4608edff7362c45b106e955ca4fabe, type: 2}

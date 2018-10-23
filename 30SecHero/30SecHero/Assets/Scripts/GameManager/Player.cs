@@ -91,7 +91,7 @@ public partial class Player
         Gold = _gold;
         Main.UpdateResource();
         //寫入資料
-        if(PlayerInfoInitDataFinish)
+        if (PlayerInfoInitDataFinish)
         {
             if (!LocalData)
             {
@@ -126,6 +126,8 @@ public partial class Player
     }
     public static void GainGold(int _gold)
     {
+        if (_gold == 0)
+            return;
         Gold += _gold;
         Main.UpdateResource();
         //寫入資料
@@ -145,6 +147,8 @@ public partial class Player
     }
     public static void GainEmerald(int _emerald)
     {
+        if (_emerald == 0)
+            return;
         Emerald += _emerald;
         Main.UpdateResource();
         //寫入資料
@@ -194,74 +198,95 @@ public partial class Player
             }
         }
     }
-    public static void SetMaxFloor(int _maxFloor)
+    public static void SetMaxFloor_Local(int _maxFloor)
     {
+        if (_maxFloor == MaxFloor)
+            return;
         MaxFloor = _maxFloor;
         //寫入資料
         if (PlayerInfoInitDataFinish)
         {
-            if (!LocalData)
-            {
-                Debug.Log("更新server玩家資源");
-                //ServerRequest.UpdateResource();
-            }
-            else
-            {
-                Debug.Log("更新Loco玩家資源");
-                PlayerPrefs.SetInt(LocoData.MaxFloor.ToString(), MaxFloor);
-            }
+            Debug.Log("更新Loco玩家資源");
+            PlayerPrefs.SetInt(LocoData.MaxFloor.ToString(), MaxFloor);
         }
     }
-    public static void SetMaxEnemyKills(int _maxEnemyKills)
+    public static void SetMaxEnemyKills_Local(int _maxEnemyKills)
     {
+        if (MaxEnemyKills == _maxEnemyKills)
+            return;
         MaxEnemyKills = _maxEnemyKills;
         //寫入資料
         if (PlayerInfoInitDataFinish)
         {
-            if (!LocalData)
-            {
-                Debug.Log("更新server玩家資源");
-                //ServerRequest.UpdateResource();
-            }
-            else
-            {
-                Debug.Log("更新Loco玩家資源");
-                PlayerPrefs.SetInt(LocoData.MaxEnemyKills.ToString(), MaxEnemyKills);
-            }            
+            Debug.Log("更新Loco玩家資源");
+            PlayerPrefs.SetInt(LocoData.MaxEnemyKills.ToString(), MaxEnemyKills);
         }
     }
-    public static void GainEquip(List<EquipData> _datas)
+    public static void GainEquip_Local(List<EquipData> _datas)
     {
+        if (_datas == null || _datas.Count == 0)
+            return;
         //寫入資料
         if (EquipInitDataFinish)
         {
-            if (!LocalData)
+            Debug.Log("更新Loco玩家資源");
+            for (int i = 0; i < _datas.Count; i++)
             {
-                Debug.Log("更新server玩家資源");
-                Debug.Log("尚未十座");
-                //ServerRequest.UpdateResource();
+                //Debug.Log("Type=" + _datas[i].Type + "  UID=" + _datas[i].UID);
+                if (!Itmes[_datas[i].Type].ContainsKey(_datas[i].UID))
+                    Itmes[_datas[i].Type].Add(_datas[i].UID, _datas[i]);
+                else
+                    Debug.LogWarning("重複裝備UID  Type=" + _datas[i].Type + "  UID=" + _datas[i].UID);
             }
-            else
-            {
-                Debug.Log("更新Loco玩家資源");
-                for (int i = 0; i < _datas.Count; i++)
-                {
-                    //Debug.Log("Type=" + _datas[i].Type + "  UID=" + _datas[i].UID);
-                    if (!Itmes[_datas[i].Type].ContainsKey(_datas[i].UID))
-                    {
-                        Itmes[_datas[i].Type].Add(_datas[i].UID, _datas[i]);
-                    }
-                    else
-                    {
-                        Debug.LogWarning("重複裝備UID  Type=" + _datas[i].Type + "  UID=" + _datas[i].UID);
-                    }
-                }
-                EquipSaveLocalData();
-            }
+            EquipSaveLocalData();
         }
     }
-    public static void GainEquip_CB(int _uid)
+    static List<EquipData> CurGainEquipDatas;
+    public static void Settlement(int _gold, int _emerald, int _maxFloor, List<EquipData> _equipDatas)
     {
-
+        if (_equipDatas.Count != 0)
+            CurGainEquipDatas = _equipDatas;
+        else
+            CurGainEquipDatas = null;
+        string addEquipStr = "";
+        for (int i = 0; i < _equipDatas.Count; i++)
+        {
+            if (i != 0)
+                addEquipStr += "/";
+            addEquipStr += _equipDatas[i].ID + "," + (int)_equipDatas[i].Type + "," + _equipDatas[i].EquipSlot + "," + _equipDatas[i].LV + "," + _equipDatas[i].Quality + "," + ID;
+        }
+        //Debug.Log("gold=" + _gold + " emerald=" + _emerald + " maxFloor=" + _maxFloor + " addEquipStr=" + addEquipStr);
+        ServerRequest.Settlement(_gold, _emerald, _maxFloor, addEquipStr);
+    }
+    public static void Settlement_CB(string[] _data)
+    {
+        //設定玩家資料
+        Gold = int.Parse(_data[0]);
+        Emerald = int.Parse(_data[1]);
+        MaxFloor = int.Parse(_data[2]);
+        //設定裝備
+        if (CurGainEquipDatas != null && CurGainEquipDatas.Count != 0)
+        {
+            string[] equipUID = _data[3].Split(',');
+            if (equipUID.Length != CurGainEquipDatas.Count)
+            {
+                Debug.LogWarning("結算server回傳資料錯誤");
+                return;
+            }
+            for (int i = 0; i < CurGainEquipDatas.Count; i++)
+            {
+                if (!Itmes[CurGainEquipDatas[i].Type].ContainsKey(CurGainEquipDatas[i].UID))
+                {
+                    Itmes[CurGainEquipDatas[i].Type].Add(CurGainEquipDatas[i].UID, CurGainEquipDatas[i]);
+                    CurGainEquipDatas[i].SetUID(int.Parse(equipUID[i]));
+                }
+                else
+                {
+                    Debug.LogWarning("重複裝備UID  Type=" + CurGainEquipDatas[i].Type + "  UID=" + CurGainEquipDatas[i].UID);
+                }
+            }
+        }
+        //顯示結果在結算
+        BattleManage.BM.ShowResult();
     }
 }

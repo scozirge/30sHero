@@ -11,5 +11,5 @@ $db_host_write = '127.0.0.1';
 $db_host_load = '127.0.0.1';
 $db_user = 'scozirge';
 $db_pass = '2731';
-$db_name = 'game2018_1';
+$db_name = '30sechero';
 ?>

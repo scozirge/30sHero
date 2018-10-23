@@ -52,6 +52,12 @@ public class Main : MonoBehaviour
         GoldText.text = Player.Gold.ToString();
         EmeraldText.text = Player.Emerald.ToString();
         Isinit = true;
+        /*測試送server
+        List<EquipData> datas=new List<EquipData>();
+        datas.Add(EquipData.GetRandomNewEquip(3,5));
+        datas.Add(EquipData.GetRandomNewEquip(2,1));
+        Player.Settlement(2000, 500, 3, datas);
+         */
     }
     void OnEnable()
     {

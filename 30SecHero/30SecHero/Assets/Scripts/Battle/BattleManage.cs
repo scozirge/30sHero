@@ -79,6 +79,7 @@ public partial class BattleManage : MonoBehaviour
         InitStage();
         MyCameraControler = CameraControler;
         CurSpawnCount = 0;
+        EnemyKill = 0;
         ScreenSize = MyCameraControler.ScreenSize;
         //SpawnEnemySet
         if (TestMode)

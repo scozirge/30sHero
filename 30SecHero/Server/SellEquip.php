@@ -33,7 +33,7 @@ if($arrayCount!=0)
 		//計算執行時間
 		$time_end = microtime(true);
 		$executeTime = $time_end - $time_start;
-		die("Success:: \nExecuteTime!=".$executeTime);
+		die("Success:: \nExecuteTime=".$executeTime);
 	}
 	else
 		die("Fail:5");
@@ -43,7 +43,7 @@ else
 	//計算執行時間
 	$time_end = microtime(true);
 	$executeTime = $time_end - $time_start;
-	die("Success:: \nExecuteTime!=".$executeTime);
+	die("Success:: \nExecuteTime=".$executeTime);
 }
 
 ?>

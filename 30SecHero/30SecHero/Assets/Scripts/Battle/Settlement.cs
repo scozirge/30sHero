@@ -69,31 +69,46 @@ partial class BattleManage
         //Debug.Log("LV=" + _data.LV);
         //Debug.Log("Quaility=" + _data.Quality);
     }
-    public void ShowSettlement()
+    public void CalculateResult()
     {
         SettlementObj.SetActive(true);
-        //資料設定
-        //突破樓層
+        //獎勵計算
         if (MaxFloor > Player.MaxFloor)
         {
             PassNewFloorCount = MaxFloor - Player.MaxFloor;
-            Player.SetMaxFloor(MaxFloor);
         }
-        //敵人擊殺
-        if (EnemyKill > Player.MaxEnemyKills)
-            Player.SetMaxEnemyKills(EnemyKill);       
-        //金幣獲得
         NewFloorGolds = (PassFloorCount * GameSettingData.FloorPassGold) + (PassNewFloorCount * GameSettingData.NewFloorPassGold);
         EnemyKillGolds = EnemyKill * GameSettingData.EnemyGold;
         TotalGold = NewFloorGolds + EnemyKillGolds + EnemyDropGolds;
-        Player.GainGold(TotalGold);
-        //寶石獲得
         TotalEmerald = BossDropEmeralds;
-        Player.GainEmerald(TotalEmerald);
-        //裝備獲得
-        SpawnEquipItem();
-        Player.GainEquip(GainEquipDataList);
+
+        //寫入資料
+        if (Player.LocalData)
+        {
+            //敵人擊殺
+            if (EnemyKill > Player.MaxEnemyKills)
+                Player.SetMaxEnemyKills_Local(EnemyKill);
+            //突破樓層
+            Player.SetMaxFloor_Local(MaxFloor);
+            //金幣獲得
+            Player.GainGold(TotalGold);
+            //寶石獲得
+            Player.GainEmerald(TotalEmerald);
+            //裝備獲得
+            Player.GainEquip_Local(GainEquipDataList);
+            //顯示結果
+            ShowResult();
+        }
+        else
+        {
+            //送server處理
+            Player.Settlement(Player.Gold + TotalGold, Player.Emerald + TotalEmerald, (MaxFloor > Player.MaxFloor) ? MaxFloor : Player.MaxFloor, GainEquipDataList);
+        }
+    }
+    public void ShowResult()
+    {
         //顯示結算
+        SpawnEquipItem();
         FloorClearText.text = Floor.ToString();
         MaxFloorText.text = Player.MaxFloor.ToString();
         MonsterKillsText.text = EnemyKill.ToString();

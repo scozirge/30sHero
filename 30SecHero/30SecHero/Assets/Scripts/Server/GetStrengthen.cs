@@ -49,9 +49,12 @@ public partial class ServerRequest : MonoBehaviour
                     //////////////////成功////////////////
                     if (result[0] == ServerCBCode.Success.ToString())
                     {
-                        string[] data = result[1].Split('/');
-                        Player.GetStrengthen_CB(data);
-                        PopupUI.HideLoading();//隱藏Loading
+                        if (result[1] != "")
+                        {
+                            string[] data = result[1].Split('/');
+                            Player.GetStrengthen_CB(data);
+                            PopupUI.HideLoading();//隱藏Loading
+                        }
                     }
                     //////////////////失敗///////////////
                     else if (result[0] == ServerCBCode.Fail.ToString())

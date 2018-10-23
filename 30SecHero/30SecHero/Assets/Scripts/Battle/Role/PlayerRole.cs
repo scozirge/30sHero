@@ -262,6 +262,11 @@ public partial class PlayerRole : Role
         CameraController.PlayMotion("Shake1");
         AudioPlayer.PlaySound(AttackSound);
     }
+    protected override void SelfDestroy()
+    {
+        base.SelfDestroy();
+        BattleManage.BM.CalculateResult();
+    }
     public void BumpingAttack()
     {
         if (!IsAvatar)
@@ -317,8 +322,6 @@ public partial class PlayerRole : Role
     public override void ReceiveDmg(int _dmg)
     {
         base.ReceiveDmg(_dmg);
-        if(!IsAlive)
-            BattleManage.BM.ShowSettlement();
     }
     protected override void ShieldBlock(ref int _dmg)
     {

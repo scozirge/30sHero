@@ -88,6 +88,10 @@ public abstract class EquipData : Data
     {
         return UID;
     }
+    public void SetUID(int _uid)
+    {
+        UID = _uid;
+    }
     protected virtual void SetRandomProperties()
     {
         Properties = GameSettingData.GetNewRolePropertiesDic(0);

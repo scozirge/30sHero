@@ -80,10 +80,10 @@ public partial class Player
         Debug.Log("emerald=" + emerald);
         //最高突破關卡
         int maxFloor = PlayerPrefs.GetInt(LocoData.MaxFloor.ToString());
-        SetMaxFloor(maxFloor);
+        SetMaxFloor_Local(maxFloor);
         //最高怪物擊殺
         int maxEnemyKills = PlayerPrefs.GetInt(LocoData.MaxEnemyKills.ToString());
-        SetMaxFloor(maxEnemyKills);
+        SetMaxFloor_Local(maxEnemyKills);
         PlayerInfoInitDataFinish = true;
         //裝備
         string equipStr = PlayerPrefs.GetString(LocoData.Equip.ToString());
@@ -123,6 +123,7 @@ public partial class Player
         ID = int.Parse(_data[0]);
         SetGold(int.Parse(_data[1]));
         SetEmerald(int.Parse(_data[2]));
+        SetMaxFloor_Local(int.Parse(_data[3]));
         ServerRequest.GetEquip();
         ServerRequest.GetStrengthen();
         PlayerInfoInitDataFinish = true;

@@ -4,42 +4,46 @@ using System;
 
 public partial class ServerRequest : MonoBehaviour
 {
-    public static bool WaitCB_GetEquip { get; private set; }
+    public static bool WaitCB_Settlement { get; private set; }
     //需求重送要求給Server次數
-    static byte ReSendQuestTimes_GetEquip { get; set; }
+    static byte ReSendQuestTimes_Settlement { get; set; }
     //每次需求最大重送次數
-    const byte MaxReSendQuestTimes_GetEquip = 3;
+    const byte MaxReSendQuestTimes_Settlement = 1;
 
-    public static void GetEquip()
+    public static void Settlement(int _gold, int _emerald, int _maxFloor, string _equipDatas)
     {
-        ReSendQuestTimes_GetEquip = MaxReSendQuestTimes_GetEquip;//重置重送要求給Server的次數
-        SendGetEquipQuest();
+        ReSendQuestTimes_Settlement = MaxReSendQuestTimes_Settlement;//重置重送要求給Server的次數
+        SendSettlementQuest(_gold, _emerald, _maxFloor, _equipDatas);
     }
-    static void SendGetEquipQuest()
+    static void SendSettlementQuest(int _gold, int _emerald, int _maxFloor, string _equipStr)
     {
         if (Conn == null)
             return;
         WWWForm form = new WWWForm();
         //string requestTime = DateTime.Now.ToString("yyyy-MM-dd  HH:mm:ss");//命令時間，格式2015-11-25 15:39:36
-        form.AddField("ownUserID", Player.ID);
-        WWW w = new WWW(string.Format("{0}{1}", GetServerURL(), "GetEquip.php"), form);
+        form.AddField("id", Player.ID);
+        form.AddField("gold", _gold);
+        form.AddField("emerald", _emerald);
+        form.AddField("maxFloor", _maxFloor);
+        form.AddField("equipStr", _equipStr);
+        WWW w = new WWW(string.Format("{0}{1}", GetServerURL(), "Settlement.php"), form);
         //設定為正等待伺服器回傳
-        WaitCB_GetEquip = true;
-        Conn.StartCoroutine(Coroutine_GetEquipCB(w));
-        Conn.StartCoroutine(GetEquipTimeOutHandle(2f, 0.5f, 12));
+        WaitCB_Settlement = true;
+        Conn.StartCoroutine(Coroutine_SettlementCB(w));
+        Conn.StartCoroutine(SettlementTimeOutHandle(2f, 0.5f, 12));
     }
     /// <summary>
     /// 回傳
     /// </summary>
-    static IEnumerator Coroutine_GetEquipCB(WWW w)
+    static IEnumerator Coroutine_SettlementCB(WWW w)
     {
-        if (ReSendQuestTimes_GetEquip == MaxReSendQuestTimes_GetEquip)
-            if (ShowLoading) CaseTableData.ShowPopLog(1003);//帳號建立中
+        if (ReSendQuestTimes_Settlement == MaxReSendQuestTimes_Settlement)
+            if (true) CaseTableData.ShowPopLog(1003);
         yield return w;
         Debug.LogWarning(w.text);
-        if (WaitCB_GetEquip)
+        if (WaitCB_Settlement)
         {
-            WaitCB_GetEquip = false;
+            WaitCB_Settlement = false;
             if (w.error == null)
             {
                 try
@@ -48,23 +52,20 @@ public partial class ServerRequest : MonoBehaviour
                     //////////////////成功////////////////
                     if (result[0] == ServerCBCode.Success.ToString())
                     {
-                        if(result[1]!="")
-                        {
-                            string[] data = result[1].Split('/');
-                            Player.GetEquip_CB(data);
-                            PopupUI.HideLoading();//隱藏Loading
-                        }
+                        string[] data = result[1].Split('/');
+                        Player.Settlement_CB(data);
+                        PopupUI.HideLoading();//隱藏Loading
                     }
                     //////////////////失敗///////////////
                     else if (result[0] == ServerCBCode.Fail.ToString())
                     {
                         int caseID = int.Parse(result[1]);
-                        if (ShowLoading) CaseTableData.ShowPopLog(caseID);
+                        if (true) CaseTableData.ShowPopLog(caseID);
                         PopupUI.HideLoading();//隱藏Loading
                     }
                     else
                     {
-                        if (ShowLoading) CaseTableData.ShowPopLog(6);//錯誤的命令
+                        if (true) CaseTableData.ShowPopLog(6);//錯誤的命令
                         PopupUI.HideLoading();//隱藏Loading
                     }
                 }
@@ -72,7 +73,7 @@ public partial class ServerRequest : MonoBehaviour
                 catch (Exception ex)
                 {
                     Debug.LogException(ex);
-                    if (ShowLoading) CaseTableData.ShowPopLog(6);//錯誤的命令
+                    if (true) CaseTableData.ShowPopLog(6);//錯誤的命令
                     PopupUI.HideLoading();//隱藏Loading
                 }
             }
@@ -80,35 +81,35 @@ public partial class ServerRequest : MonoBehaviour
             else
             {
                 Debug.LogWarning(w.error);
-                if (ShowLoading) CaseTableData.ShowPopLog(2);//連線不到server
+                if (true) CaseTableData.ShowPopLog(2);//連線不到server
                 PopupUI.HideLoading();//隱藏Loading
             }
         }
     }
-    static IEnumerator GetEquipTimeOutHandle(float _firstWaitTime, float _perWaitTime, byte _checkTimes)
+    static IEnumerator SettlementTimeOutHandle(float _firstWaitTime, float _perWaitTime, byte _checkTimes)
     {
         yield return new WaitForSeconds(_firstWaitTime);
         byte checkTimes = _checkTimes;
         //經過_fristWaitTime時間後，每_perWaitTime檢查一次資料是否回傳了，若檢查checkTimes次數後還是沒回傳就重送資料
-        while (WaitCB_GetEquip && checkTimes > 0)
+        while (WaitCB_Settlement && checkTimes > 0)
         {
             checkTimes--;
             yield return new WaitForSeconds(_perWaitTime);
         }
-        if (WaitCB_GetEquip)//如果還沒接收到CB就重送需求
+        if (WaitCB_Settlement)//如果還沒接收到CB就重送需求
         {
             //若重送要求的次數達到上限次數則代表連線有嚴重問題，直接報錯
-            if (ReSendQuestTimes_GetEquip > 0)
+            if (ReSendQuestTimes_Settlement > 0)
             {
-                ReSendQuestTimes_GetEquip--;
-                if (ShowLoading) CaseTableData.ShowPopLog(1002);//連線逾時，嘗試重複連線請玩家稍待
+                ReSendQuestTimes_Settlement--;
+                //if (true) CaseTableData.ShowPopLog(1002);//連線逾時，嘗試重複連線請玩家稍待
                 //向Server重送要求
-                SendGetEquipQuest();
+                //SendSettlementQuest();
             }
             else
             {
-                WaitCB_GetEquip = false;//設定為false代表不接受回傳了
-                if (ShowLoading) CaseTableData.ShowPopLog(7); ;//連線逾時，請檢查網路是否正常
+                WaitCB_Settlement = false;//設定為false代表不接受回傳了
+                if (true) CaseTableData.ShowPopLog(7); ;//連線逾時，請檢查網路是否正常
                 PopupUI.HideLoading();//隱藏Loading
             }
         }

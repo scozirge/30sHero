@@ -22,7 +22,10 @@ $con_w = mysql_connect($db_host_write,$db_user,$db_pass,true) or ("Fail:1:"  . m
 
 if ($numrows == 0)//找不到已經存在的Kongregate帳號
 {
-	die ("Fail:2002: \nExecuteTime=".$executeTime."");
+    //計算執行時間
+    $time_end = microtime(true);
+    $executeTime = $time_end - $time_start;
+	die("Success:: \nExecuteTime=".$executeTime);
 }
 else//找到Kongregate帳戶
 {
