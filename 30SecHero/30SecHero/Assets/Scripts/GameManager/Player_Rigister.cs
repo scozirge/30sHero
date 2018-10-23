@@ -70,6 +70,8 @@ public partial class Player
     }
     public static void GetLocalData()
     {
+        //PlayerPrefs.DeleteKey(LocoData.Equip.ToString());
+        //PlayerPrefs.DeleteKey(LocoData.Strengthen.ToString());
         //資源
         int gold = PlayerPrefs.GetInt(LocoData.Gold.ToString());
         Debug.Log("gold=" + gold);
@@ -165,9 +167,9 @@ public partial class Player
                     break;
             }
         }
-        Itmes.Add(EquipType.Weapon, wlist);
-        Itmes.Add(EquipType.Armor, alist);
-        Itmes.Add(EquipType.Accessory, aclist);
+        Itmes[EquipType.Weapon] = wlist;
+        Itmes[EquipType.Armor] = alist;
+        Itmes[EquipType.Accessory] = aclist;
         EquipInitDataFinish = true;
     }
     public static void GetStrengthen_CB(string[] _data)

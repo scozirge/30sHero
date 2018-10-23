@@ -48,6 +48,9 @@ public partial class Player
             SetSound(true);
         else
             SetSound(false);
+        Itmes.Add(EquipType.Weapon, new Dictionary<long, EquipData>());
+        Itmes.Add(EquipType.Armor, new Dictionary<long, EquipData>());
+        Itmes.Add(EquipType.Accessory, new Dictionary<long, EquipData>());
         Properties = GameSettingData.GetNewRolePropertiesDic(0);
         EquipPlus = GameSettingData.GetNewRolePropertiesDic(0);
         EquipMultiple = GameSettingData.GetNewRolePropertiesDic(1);
