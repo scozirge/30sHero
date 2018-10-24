@@ -206,8 +206,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4f0a44c2e05082409ff650163011e2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MoveToPlayer: 0
   Wander: 1
-  FollowCamera: 0
+  FollowCamera: 1
   DebutSpeed: 2000
   WanderInterval: 0.5
   RotateFactor: 0.02
@@ -251,7 +252,8 @@ MonoBehaviour:
   KnockDrag: 30
   NormalDrag: 0
   KnockDragDuration: 0.9
-  DropMoneyCount: 1
+  DropEquipCount: 1
+  DropGoldCount: 1
   DropLootCount: 1
   DesignateLoot: 
   DropSkillProbility: 1

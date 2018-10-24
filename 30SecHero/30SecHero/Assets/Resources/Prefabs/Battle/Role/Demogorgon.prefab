@@ -197,6 +197,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4f0a44c2e05082409ff650163011e2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MoveToPlayer: 0
   Wander: 1
   FollowCamera: 1
   DebutSpeed: 2000
@@ -230,7 +231,9 @@ MonoBehaviour:
   KnockDrag: 30
   NormalDrag: 0
   KnockDragDuration: 0.9
-  DropProbility: 1
+  DropEquipCount: 1
+  DropGoldCount: 1
+  DropLootCount: 1
   DesignateLoot: 
   DropSkillProbility: 1
   DropSkill: {fileID: 114736416922364804}
@@ -372,6 +375,8 @@ MonoBehaviour:
   PSkillDuration: 10
   DetecteRadius: 800
   DamagePercent: 1
+  AttackStopMove: 0
+  StopMoveTime: 0
   PSkillTimer: 0
   AttackOnce: 0
   Interval: 2.5
@@ -398,6 +403,8 @@ MonoBehaviour:
   PSkillDuration: 0
   DetecteRadius: 1500
   DamagePercent: 1
+  AttackStopMove: 0
+  StopMoveTime: 0
   PSkillTimer: 0
   AttackOnce: 0
   Interval: 4
