@@ -10,7 +10,6 @@ public class MyText : Text
     public bool IsAddTextList;
     public static List<MyText> MyTextList = new List<MyText>();
     public delegate void MyFunction();
-    public MyFunction MyTextFunc;
     static List<MyFunction> MyFuncList = new List<MyFunction>();
 
     protected override void OnEnable()
@@ -36,13 +35,10 @@ public class MyText : Text
             text = "undefined";
         }
     }
-    ~MyText()
-    {
-        MyFuncList.Remove(MyTextFunc);
-        MyTextList.Remove(this);
-    }
     public static void RefreshActivityTexts()
     {
+        MyTextList.RemoveAll(item => item == null);
+        MyFuncList.RemoveAll(item => item == null);
         for (int i = 0; i < MyTextList.Count; i++)
         {
             if (MyTextList[i] != null && MyTextList[i].isActiveAndEnabled)

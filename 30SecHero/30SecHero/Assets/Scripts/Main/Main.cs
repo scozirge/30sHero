@@ -103,5 +103,12 @@ public class Main : MonoBehaviour
         SceneManager.LoadScene("Battle");
         //ChangeScene.GoToScene("Battle");
     }
-
+    public void TestBtn()
+    {
+        SceneManager.LoadScene("Main");
+    }
+    public void TestSceneBtn()
+    {
+        SceneManager.LoadScene("test");
+    }
 }
