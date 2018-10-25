@@ -1,5 +1,6 @@
 ﻿public enum LocoData
 {
+    Init,
     UseLanguage,
     MusicOn,
     SoundOn,

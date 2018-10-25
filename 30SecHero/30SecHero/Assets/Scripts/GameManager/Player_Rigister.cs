@@ -44,7 +44,7 @@ public partial class Player
         LocalData = _bool;
         Debug.Log("UseLocalData:" + _bool);
         Player.Init();
-        
+
         if (LocalData)
             GetLocalData();
         else
@@ -54,24 +54,49 @@ public partial class Player
     {
         SoundOn = _on;
         AudioPlayer.MuteSound(!SoundOn);
-        if (SoundOn)
-            PlayerPrefs.SetInt(LocoData.SoundOn.ToString(), 1);
-        else
-            PlayerPrefs.SetInt(LocoData.SoundOn.ToString(), 0);
+        if (PlayerInfoInitDataFinish)
+        {
+            if (SoundOn)
+                PlayerPrefs.SetInt(LocoData.SoundOn.ToString(), 1);
+            else
+                PlayerPrefs.SetInt(LocoData.SoundOn.ToString(), 0);
+        }
     }
     public static void SetMusic(bool _on)
     {
         MusicOn = _on;
         AudioPlayer.MuteMusic(!MusicOn);
-        if (MusicOn)
-            PlayerPrefs.SetInt(LocoData.MusicOn.ToString(), 1);
-        else
-            PlayerPrefs.SetInt(LocoData.MusicOn.ToString(), 0);
+        if (PlayerInfoInitDataFinish)
+        {
+            if (MusicOn)
+                PlayerPrefs.SetInt(LocoData.MusicOn.ToString(), 1);
+            else
+                PlayerPrefs.SetInt(LocoData.MusicOn.ToString(), 0);
+        }
+
     }
     public static void GetLocalData()
     {
         //PlayerPrefs.DeleteKey(LocoData.Equip.ToString());
         //PlayerPrefs.DeleteKey(LocoData.Strengthen.ToString());
+        //PlayerPrefs.DeleteKey(LocoData.SoundOn.ToString());
+        //PlayerPrefs.DeleteKey(LocoData.MusicOn.ToString());
+        //設定
+        SetLanguage((Language)PlayerPrefs.GetInt("UseLanguage"));
+        if (PlayerPrefs.GetInt(LocoData.Init.ToString()) == 0)
+        {
+            PlayerPrefs.SetInt(LocoData.SoundOn.ToString(), 1);
+            PlayerPrefs.SetInt(LocoData.SoundOn.ToString(), 1);
+            PlayerPrefs.SetInt(LocoData.Init.ToString(), 1);
+        }
+        if (PlayerPrefs.GetInt(LocoData.MusicOn.ToString()) == 1)
+            SetMusic(true);
+        else
+            SetMusic(false);
+        if (PlayerPrefs.GetInt(LocoData.SoundOn.ToString()) == 1)
+            SetSound(true);
+        else
+            SetSound(false);
         //資源
         int gold = PlayerPrefs.GetInt(LocoData.Gold.ToString());
         Debug.Log("gold=" + gold);

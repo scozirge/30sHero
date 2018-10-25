@@ -19,15 +19,6 @@ public partial class Player
     {
         if (IsInit)
             return;
-        SetLanguage((Language)PlayerPrefs.GetInt("UseLanguage"));
-        if (PlayerPrefs.GetInt("MusicOn") == 1)
-            SetMusic(true);
-        else
-            SetMusic(false);
-        if (PlayerPrefs.GetInt("SoundOn") == 1)
-            SetSound(true);
-        else
-            SetSound(false);
         Itmes.Add(EquipType.Weapon, new Dictionary<long, EquipData>());
         Itmes.Add(EquipType.Armor, new Dictionary<long, EquipData>());
         Itmes.Add(EquipType.Accessory, new Dictionary<long, EquipData>());

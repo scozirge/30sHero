@@ -37,11 +37,14 @@ public class Skill : MonoBehaviour
 
     void OnDrawGizmos()
     {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, DetecteRadius);
+        /*
         if (Selection.Contains(gameObject))
         {
-            Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(transform.position, DetecteRadius);
+
         }
+        */
     }
     protected virtual void Awake()
     {
