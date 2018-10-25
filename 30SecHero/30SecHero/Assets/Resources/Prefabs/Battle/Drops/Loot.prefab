@@ -158,12 +158,13 @@ MonoBehaviour:
   MoveToPlayer: 0
   Wander: 1
   FollowCamera: 0
+  FollowCameraSpeed: 1000
   DebutSpeed: 600
-  WanderInterval: 5
-  RotateFactor: 0.001
+  WanderInterval: 1
+  RotateFactor: 0.005
   WanderRange: 100
   Destination: {x: 0, y: 0}
-  MoveSpeed: 150
+  MoveSpeed: 500
 --- !u!114 &114565999483713276
 MonoBehaviour:
   m_ObjectHideFlags: 1

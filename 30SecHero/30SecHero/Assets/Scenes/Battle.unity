@@ -1793,6 +1793,10 @@ Prefab:
       propertyPath: MaxAvaterTime
       value: 60
       objectReference: {fileID: 0}
+    - target: {fileID: 1755503185363210, guid: d9e47796d36fc83458ffab41aea6641e, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114833855839366154, guid: d9e47796d36fc83458ffab41aea6641e, type: 2}
   m_SourcePrefab: {fileID: 100100000, guid: d9e47796d36fc83458ffab41aea6641e, type: 2}
