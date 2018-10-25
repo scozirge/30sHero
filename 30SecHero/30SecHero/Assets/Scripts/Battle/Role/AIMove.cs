@@ -14,6 +14,9 @@ public abstract class AIMove : MonoBehaviour
     [Tooltip("是否要跟著攝影機")]
     [SerializeField]
     protected bool FollowCamera;
+    [Tooltip("跟隨螢幕速度")]
+    [SerializeField]
+    protected int FollowCameraSpeed = 1000;
     [Tooltip("進場速度")]
     [SerializeField]
     protected int DebutSpeed;
@@ -61,14 +64,12 @@ public abstract class AIMove : MonoBehaviour
     }
     public Vector2 SetRandDestination()
     {
-        float randPosX = Random.Range(300, 300 + BattleManage.ScreenSize.x / 2);
+        float randPosX = Random.Range(-BattleManage.ScreenSize.x / 2 + 200, BattleManage.ScreenSize.x / 2 - 200);
         float randPosY = Random.Range(-BattleManage.ScreenSize.y / 2 + 200, BattleManage.ScreenSize.y / 2 - 200);
         RandomOffset = new Vector2(randPosX, randPosY);
+        Debug.Log("RandomOffset=" + RandomOffset);
         Vector2 nowPos = Vector2.zero;
-        if (BattleManage.BM.MyPlayer)
-            nowPos = BattleManage.BM.MyPlayer.transform.position;
-        else
-            nowPos = BattleManage.MyCameraControler.transform.position;
+        nowPos = BattleManage.MyCameraControler.transform.position;
         Destination = new Vector3(randPosX + nowPos.x, randPosY + nowPos.y, 0);
         return RandomOffset;
     }
@@ -78,12 +79,8 @@ public abstract class AIMove : MonoBehaviour
         if (FollowCamera)
         {
             //Follow camera
-            if(BattleManage.BM.MyPlayer)
-            {
-                Vector2 playerPos = BattleManage.BM.MyPlayer.transform.position;//BattleManage.MyCameraControler.transform.position;
-                Destination = new Vector3(playerPos.x, playerPos.y, 0) + RandomOffset;
-            }
-
+            Vector2 cameraPos = BattleManage.MyCameraControler.transform.position;
+            Destination = cameraPos + (Vector2)RandomOffset;
         }
         if (!InDestinationRange)
         {

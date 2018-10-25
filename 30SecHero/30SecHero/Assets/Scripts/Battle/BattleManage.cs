@@ -169,6 +169,10 @@ public partial class BattleManage : MonoBehaviour
         }
         CurSpawnCount++;
         er.transform.SetParent(EnemyParent);
+        AIRoleMove ai = er.GetComponent<AIRoleMove>();
+        Vector2 offset = ai.SetRandDestination();
+        er.transform.position = GetSpawnPos(offset);
+
         if (CurSpawnCount < GetRandomEnemySpawnfCount())
             StartCoroutine(WaitToSpawnEnemy());
         else
@@ -178,6 +182,30 @@ public partial class BattleManage : MonoBehaviour
             UpdateSpawnEnmeyTimer();
         }
         EnemyList.Add(er);
+    }
+    Vector2 GetSpawnPos(Vector2 _offset)
+    {
+        Vector2 pos1 = new Vector2(_offset.x, ScreenSize.y / 2);
+        Vector2 pos2 = new Vector2(_offset.x, -ScreenSize.y / 2);
+        Vector2 pos3 = new Vector2(ScreenSize.x / 2, _offset.y);
+        Vector2 pos4 = new Vector2(-ScreenSize.x / 2, _offset.y);
+        List<Vector2> posList = new List<Vector2>();
+        posList.Add(pos1);
+        posList.Add(pos2);
+        posList.Add(pos3);
+        posList.Add(pos4);
+        Vector3 resultPos = Vector2.zero;
+        float curDist = float.MaxValue;
+        for(int i=0;i<posList.Count;i++)
+        {
+            if (Vector2.Distance(_offset, posList[i]) < curDist)
+            {
+                curDist = Vector2.Distance(_offset, posList[i]);
+                resultPos = posList[i];
+            }
+        }
+        resultPos += MyCameraControler.transform.position;
+        return resultPos;
     }
     void UpdateSpawnEnmeyTimer()
     {
@@ -223,9 +251,11 @@ public partial class BattleManage : MonoBehaviour
             return;
         }
         Loot loot = Instantiate(LootPrefab, Vector3.zero, Quaternion.identity) as Loot;
-
         //Set SpawnPos
         loot.transform.SetParent(LootParetn);
+        AIMove ai = loot.GetComponent<AIMove>();
+        Vector2 offset = ai.SetRandDestination();
+        loot.transform.position = GetSpawnPos(offset);
         SpawnLootTimer.StartRunTimer = true;
         LootList.Add(loot);
     }

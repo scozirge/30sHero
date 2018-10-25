@@ -10,22 +10,13 @@ public class AILootMove : AIMove
     protected override void Start()
     {
         base.Start();
-        if (!MoveToPlayer)
-        {
-            if (Destination == Vector2.zero)
-            {
-                Destination = transform.position;
-            }
-            else
-                RandomOffset = Destination;
-        }
     }
     protected override void Debut()
     {
         base.Debut();
         if (KeepDebut || FollowCamera)
         {
-            Vector2 targetVel = (Destination - (Vector2)transform.position).normalized * DebutSpeed;
+            Vector2 targetVel = (Destination - (Vector2)transform.position).normalized * FollowCameraSpeed;
             MyRigi.velocity = Vector2.Lerp(MyRigi.velocity, targetVel, RotateFactor);
         }
     }

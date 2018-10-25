@@ -18,12 +18,6 @@ public class AIRoleMove : AIMove
             //int randX = Random.Range(0, 800);
             //int randY = Random.Range(-400, 400);
 
-            if (Destination == Vector2.zero)
-            {
-                SetRandDestination();
-            }
-            else
-                RandomOffset = Destination;
             //Vector3 rndTarget = new Vector3(randX, randY) + BattleManage.MyCameraControler.transform.position;
             Vector3 rndTarget = new Vector3(Destination.x, Destination.y);
             InitialVelocity = (rndTarget - transform.position).normalized * DebutSpeed;
@@ -37,7 +31,7 @@ public class AIRoleMove : AIMove
 
         if (KeepDebut || FollowCamera)
         {
-            Vector2 targetVel = (Destination - (Vector2)transform.position).normalized * ER.MoveSpeed;
+            Vector2 targetVel = (Destination - (Vector2)transform.position).normalized * FollowCameraSpeed;
             MyRigi.velocity = Vector2.Lerp(MyRigi.velocity, targetVel, RotateFactor);
         }
     }
