@@ -54,7 +54,6 @@ GameObject:
   - component: {fileID: 50485858130474148}
   - component: {fileID: 58083657934967348}
   - component: {fileID: 114254621464860768}
-  - component: {fileID: 114833855839366154}
   - component: {fileID: 114768325752054400}
   m_Layer: 8
   m_Name: PlayerRole
@@ -317,7 +316,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: d4116117b11f21e4fa3dad142fa6b626, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9e43a5cb429f8dd44af2fa5a60dee024, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -351,7 +350,7 @@ MonoBehaviour:
   KnockDrag: 10
   NormalDrag: 50
   KnockDragDuration: 0.1
-  TestMode: 1
+  TestMode: 0
   AvatarRemoveEffect: {fileID: 198023469444164576, guid: 4fa0c17b07dd95f4fac2c50aea787be7,
     type: 2}
   BeHitEffect_Shield: {fileID: 198853811207955838, guid: 48c7fe97ee5fbd0478fa25692681f2f2,
@@ -365,7 +364,7 @@ MonoBehaviour:
   GainMoveFromKilling: 150
   MoveDepletedTime: 10
   MaxExtraMove: 500
-  MaxAvaterTime: 30
+  MaxAvaterTime: 60
   AvatarTimerText: {fileID: 0}
   EnergyDrop: 0
   AvatarTimeBuff: 0
@@ -458,34 +457,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MyAni: {fileID: 95403725756714948}
---- !u!114 &114833855839366154
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1103968850550592}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e3283f1f3a7e6b24db127fb13fd7f595, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PSkillName: s
-  PSkillDuration: 999
-  DetecteRadius: 2000
-  DamagePercent: 0.1
-  AttackStopMove: 0
-  StopMoveTime: 0
-  PSkillTimer: 0
-  AttackOnce: 0
-  Interval: 0.5
-  AmmoNum: 3
-  AmmoInterval: 0
-  StartAngle: -90
-  AngleInterval: 90
-  Patetern: 1
-  SpawnedInSelf: 0
-  AttackPrefab: {fileID: 114962956101920240, guid: 764d9b4a6227801439c2df1cb4a677b2,
-    type: 2}
 --- !u!114 &114920939958132014
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -518,7 +489,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: +
+  m_Text: 
   UIString: PlusSymbol
   IsAddTextList: 0
 --- !u!222 &222699925237069942
@@ -717,5 +688,5 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 25, y: 0}
-  m_SizeDelta: {x: 124, y: 124}
+  m_SizeDelta: {x: 125, y: 39}
   m_Pivot: {x: 0.5, y: 0.5}
