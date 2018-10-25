@@ -150,19 +150,19 @@ public partial class Player
             int equipSlot = int.Parse(properties[3]);
             int lv = int.Parse(properties[4]);
             int quality = int.Parse(properties[5]);
-
+            string propertiesStr = properties[6];//讀取本地資料要確定欄位數不然會炸掉，不能隨便追加資料，要追加要優化程式
             switch (type)
             {
                 case EquipType.Weapon:
-                    WeaponData w = WeaponData.GetNewWeapon(uid, jid, equipSlot, lv, quality);
+                    WeaponData w = WeaponData.GetNewWeapon(uid, jid, equipSlot, lv, quality, propertiesStr);
                     wlist.Add(uid, w);
                     break;
                 case EquipType.Armor:
-                    ArmorData a = ArmorData.GetNewArmor(uid, jid, equipSlot, lv, quality);
+                    ArmorData a = ArmorData.GetNewArmor(uid, jid, equipSlot, lv, quality, propertiesStr);
                     alist.Add(uid, a);
                     break;
                 case EquipType.Accessory:
-                    AccessoryData ac = AccessoryData.GetNewAccessory(uid, jid, equipSlot, lv, quality);
+                    AccessoryData ac = AccessoryData.GetNewAccessory(uid, jid, equipSlot, lv, quality, propertiesStr);
                     aclist.Add(uid, ac);
                     break;
             }
@@ -180,7 +180,10 @@ public partial class Player
             int jid = int.Parse(properties[0]);
             int lv = int.Parse(properties[1]);
             if (StrengthenDic.ContainsKey(jid))
-                StrengthenDic[jid].SetLV(lv);
+            {
+                StrengthenDic[jid].InitSet(lv);
+                GameSettingData.RolePropertyOperate(StrengthenPlus, StrengthenDic[jid].Properties, Operator.Plus);//加上升級後的值
+            }
         }
         StrengthenInitDataFinish = true;
     }

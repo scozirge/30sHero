@@ -44,7 +44,8 @@ else//找到Kongregate帳戶
 		$equipSlot=$row['equipSlot'];
 		$lv=$row['lv'];
 		$quality=$row['quality'];
-		$currentRankStr.=$id.','.$jid.','.$type.','.$equipSlot.','.$lv.','.$quality;
+		$property=$row['property'];
+		$currentRankStr.=$id.','.$jid.','.$type.','.$equipSlot.','.$lv.','.$quality.','.$property;
 		$dataCount++;
 	}
     //計算執行時間

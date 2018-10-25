@@ -49,6 +49,7 @@ public class ArmorData : EquipData
     {
         base.SetRandomProperties();
         Properties[RoleProperty.Health] += GameSettingData.GetArmorHealth(LV);
+        PropertiesStr = GetPropertiesStr();
     }
     public ArmorData(JsonData _item)
         : base(_item)
@@ -68,7 +69,7 @@ public class ArmorData : EquipData
         //Debug.Log("Type=" + Type + "  UID=" + UID);
         return UID;
     }
-    public static ArmorData GetRandomNewArmor(int _lv,int _quality)
+    public static ArmorData GetRandomNewArmor(int _lv, int _quality)
     {
         ArmorData data = GameDictionary.ArmorDic[GetRandomID()].MemberwiseClone() as ArmorData;
         data.SetUID();
@@ -77,15 +78,16 @@ public class ArmorData : EquipData
         data.SetRandomProperties();
         return data;
     }
-    public static ArmorData GetNewArmor(int _uid, int _id, int _equipSlot, int _lv, int _quality)
+    public static ArmorData GetNewArmor(int _uid, int _id, int _equipSlot, int _lv, int _quality, string _propertiesStr)
     {
         ArmorData data = GameDictionary.ArmorDic[_id].MemberwiseClone() as ArmorData;
+        data.PropertiesStr = _propertiesStr;
+        data.SetPropertiesByStr();
         data.UID = _uid;
         if (_uid > MaxUID)
             MaxUID = _uid;
         data.LV = _lv;
         data.Quality = _quality;
-        data.SetRandomProperties();
         if (_equipSlot == 2)
             Player.Equip(data);
         return data;

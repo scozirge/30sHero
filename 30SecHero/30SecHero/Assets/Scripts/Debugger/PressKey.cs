@@ -17,18 +17,21 @@ public partial class Debugger : MonoBehaviour
 
         }
         */
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        if (Input.GetKeyDown(KeyCode.Z))
         {
-            
+            Player.ShowBaseProperties();
         }
-        else if (Input.GetKeyDown(KeyCode.RightArrow))
+        else if (Input.GetKeyDown(KeyCode.X))
         {
+            Player.ShowEquipProperties();
         }
-        else if (Input.GetKeyDown(KeyCode.UpArrow))
+        else if (Input.GetKeyDown(KeyCode.C))
         {
+            Player.ShowStrengthenProperties();
         }
-        else if (Input.GetKeyDown(KeyCode.DownArrow))
+        else if (Input.GetKeyDown(KeyCode.V))
         {
+            Player.ShowTotalProperties();
         }
     }
 }

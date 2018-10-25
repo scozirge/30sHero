@@ -22,7 +22,9 @@ public class PlayerAttack : MonoBehaviour
             {
                 Role er = _col.GetComponent<Role>();
                 Vector2 force = (er.transform.position - transform.position).normalized * KnockForce;
-                er.BeAttack(Attacker.MyForce, Attacker.Damage, force);
+                int causeDamage = Attacker.Damage;
+                er.BeAttack(Attacker.MyForce,ref causeDamage, force);
+                Attacker.HealFromCauseDamage(causeDamage);
                 if (er.IsAlive)
                     Attacker.BumpingAttack();
                 Attacker.AttackMotion();

@@ -95,7 +95,6 @@ public abstract class Role : MonoBehaviour
     {
         IsAlive = true;
         HPBarWidth = HealthBar.rect.width;
-        Health = MaxHealth;
         MyForce = MyEnum.ParseEnum<Force>(gameObject.tag);
         DragTimer = new MyTimer(KnockDragDuration, DragRecovery, false, false);
         MyRigi = GetComponent<Rigidbody2D>();
@@ -121,7 +120,8 @@ public abstract class Role : MonoBehaviour
     void Burn()
     {
         BurningTimer.StartRunTimer = true;
-        ReceiveDmg((int)(Health * GameSettingData.BurnDamage));
+        int damage = (int)(Health * GameSettingData.BurnDamage);
+        ReceiveDmg(ref damage);
     }
     protected virtual void Move()
     {
@@ -137,18 +137,18 @@ public abstract class Role : MonoBehaviour
         DragTimer.RunTimer();
     }
 
-    public virtual void BeAttack(Force _attackerForce, int _dmg, Vector2 _force)
+    public virtual void BeAttack(Force _attackerForce, ref int _dmg, Vector2 _force)
     {
         //Add KnockForce
         ChangeToKnockDrag();
         MyRigi.velocity = Vector2.zero;
         MyRigi.velocity = _force;
         if (EvitableAttack())
-            return;
+            _dmg = 0;
         //ShieldBlock
         ShieldBlock(ref _dmg);
         //take damage
-        ReceiveDmg(_dmg);
+        ReceiveDmg(ref _dmg);
     }
     protected virtual bool EvitableAttack()
     {
@@ -168,7 +168,7 @@ public abstract class Role : MonoBehaviour
     protected virtual void ShieldBlock(ref int _dmg)
     {
     }
-    public virtual void ReceiveDmg(int _dmg)
+    public virtual void ReceiveDmg(ref int _dmg)
     {
         Health -= _dmg;
         DeathCheck();

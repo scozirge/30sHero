@@ -78,8 +78,12 @@ public abstract class AIMove : MonoBehaviour
         if (FollowCamera)
         {
             //Follow camera
-            Vector2 playerPos = BattleManage.BM.MyPlayer.transform.position;//BattleManage.MyCameraControler.transform.position;
-            Destination = new Vector3(playerPos.x, playerPos.y, 0) + RandomOffset;
+            if(BattleManage.BM.MyPlayer)
+            {
+                Vector2 playerPos = BattleManage.BM.MyPlayer.transform.position;//BattleManage.MyCameraControler.transform.position;
+                Destination = new Vector3(playerPos.x, playerPos.y, 0) + RandomOffset;
+            }
+
         }
         if (!InDestinationRange)
         {

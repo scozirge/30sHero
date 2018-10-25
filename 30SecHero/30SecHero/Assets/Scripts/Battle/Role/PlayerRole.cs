@@ -92,21 +92,19 @@ public partial class PlayerRole : Role
     public float AvatarTimeRatio { get { return (float)AvatarTimer / (float)MaxAvaterTime; } }
     [SerializeField]
     Text AvatarTimerText;
-    [Tooltip("能量掉落機率")]
-    [SerializeField]
-    protected float EnergyDrop;
+
     [Tooltip("變身時間加成(秒)")]
     [SerializeField]
-    protected float AvatarTimeBuff;
+    protected float AvatarPotionBuff;
     [Tooltip("技能時間加成(秒)")]
     [SerializeField]
     protected float SkillTimeBuff;
     [Tooltip("技能掉落機率")]
     [SerializeField]
-    protected float SkillDrop;
+    public float SkillDrop;
     [Tooltip("裝備掉落機率")]
     [SerializeField]
-    protected float EquipDrop;
+    public int EquipDropWeight;
     [Tooltip("金幣掉落機率")]
     [SerializeField]
     protected float GoldDrop;
@@ -118,7 +116,7 @@ public partial class PlayerRole : Role
     protected float PotionEfficiency;
     [Tooltip("藥水掉落機率")]
     [SerializeField]
-    protected float PotionDrop;
+    public float PotionDrop;
     const int KeyboardMoveFactor = 1;
     const int CursorMoveFactor = 40;
     [Tooltip("史萊姆跳躍速度")]
@@ -183,6 +181,7 @@ public partial class PlayerRole : Role
         JumpTimer = new MyTimer(JumpCDTime, SetCanJump, false, false);
 
         ShieldBarWidth = ShieldBar.rect.width;
+        Health = MaxHealth;
         Shield = MaxShield;
         InitMoveAfterimage();
         FaceLeftOrRight = 1;
@@ -193,23 +192,24 @@ public partial class PlayerRole : Role
     {
         if (TestMode)
             return;
-        MaxHealth = GameSettingData.MaxHealth + (int)Player.GetProperties(RoleProperty.Health);
-        BaseDamage = GameSettingData.BaseDamage + (int)Player.GetProperties(RoleProperty.Strength);
-        MaxShield = GameSettingData.MaxShield + (int)Player.GetProperties(RoleProperty.Shield);
-        ShieldGenerateProportion = GameSettingData.ShieldGenerateProportion + (float)Player.GetProperties(RoleProperty.ShieldRecovery);
-        BaseMoveSpeed = GameSettingData.BaseMoveSpeed + (int)Player.GetProperties(RoleProperty.MoveSpeed);
-        MaxExtraMove = GameSettingData.MaxExtraMove + (int)Player.GetProperties(RoleProperty.MaxMoveSpeed);
-        MoveDepletedTime = GameSettingData.MoveDepletedTime * (1 - (float)Player.GetProperties(RoleProperty.MoveDecay));
-        MaxAvaterTime = GameSettingData.MaxAvaterTime + (float)Player.GetProperties(RoleProperty.AvatarTime);
-        EnergyDrop = GameSettingData.EnergyDrop + (float)Player.GetProperties(RoleProperty.AvatarDrop);
-        AvatarTimeBuff = GameSettingData.AvatarTimeBuff + (int)Player.GetProperties(RoleProperty.AvatarTime);
-        SkillTimeBuff = GameSettingData.SkillTimeBuff + (float)Player.GetProperties(RoleProperty.SkillTime);
-        SkillDrop = GameSettingData.SkillDrop + (float)Player.GetProperties(RoleProperty.SkillDrop);
-        EquipDrop = GameSettingData.EquipDrop + (float)Player.GetProperties(RoleProperty.EquipDrop);
-        GoldDrop = GameSettingData.GoldDrop + (float)Player.GetProperties(RoleProperty.GoldDrop);
-        BloodThirsty = GameSettingData.BloodThirsty + (float)Player.GetProperties(RoleProperty.BloodThirsty);
-        PotionEfficiency = GameSettingData.PotionEfficiency + (float)Player.GetProperties(RoleProperty.PotionEfficiency);
-        PotionDrop = GameSettingData.PotionDrop + (float)Player.GetProperties(RoleProperty.PotionDrop);
+        MaxHealth = (int)Player.GetProperties(RoleProperty.Health);
+        BaseDamage = (int)Player.GetProperties(RoleProperty.Strength);
+        MaxShield = (int)Player.GetProperties(RoleProperty.Shield);
+        ShieldRechargeTime = (float)Player.GetProperties(RoleProperty.ShieldReChargeTime);
+        ShieldGenerateProportion = (float)Player.GetProperties(RoleProperty.ShieldRecovery);
+        BaseMoveSpeed = (int)Player.GetProperties(RoleProperty.MoveSpeed);
+        MaxExtraMove = (int)Player.GetProperties(RoleProperty.MaxMoveSpeed);
+        MoveDepletedTime = (float)Player.GetProperties(RoleProperty.MoveDecay);
+        MaxAvaterTime = (float)Player.GetProperties(RoleProperty.AvatarTime);
+        AvatarPotionBuff = (int)Player.GetProperties(RoleProperty.AvatarPotionBuff);
+        SkillTimeBuff = (float)Player.GetProperties(RoleProperty.SkillTimeBuff);
+        SkillDrop = (float)Player.GetProperties(RoleProperty.SkillDrop);
+        EquipDropWeight = (int)Player.GetProperties(RoleProperty.EquipDrop);
+        GoldDrop = (float)Player.GetProperties(RoleProperty.GoldDrop);
+        BloodThirsty = (float)Player.GetProperties(RoleProperty.BloodThirsty);
+        PotionEfficiency = (float)Player.GetProperties(RoleProperty.PotionEfficiency);
+        PotionDrop = (float)Player.GetProperties(RoleProperty.PotionDrop);
+        GainMoveFromKilling = (int)Player.GetProperties(RoleProperty.GainMoveFromKilling);
     }
     void InitMoveAfterimage()
     {
@@ -310,18 +310,18 @@ public partial class PlayerRole : Role
         else
             DirectY = Direction.Bottom;
     }
-    public override void BeAttack(Force _attackerForce, int _dmg, Vector2 _force)
+    public override void BeAttack(Force _attackerForce, ref int _dmg, Vector2 _force)
     {
         if (!IsAvatar)
         {
             Health = 0;
             Shield = 0;
         }
-        base.BeAttack(_attackerForce, _dmg, _force);
+        base.BeAttack(_attackerForce, ref _dmg, _force);
     }
-    public override void ReceiveDmg(int _dmg)
+    public override void ReceiveDmg(ref int _dmg)
     {
-        base.ReceiveDmg(_dmg);
+        base.ReceiveDmg(ref _dmg);
     }
     protected override void ShieldBlock(ref int _dmg)
     {
@@ -509,7 +509,7 @@ public partial class PlayerRole : Role
         switch (_data.Type)
         {
             case LootType.AvataEnergy:
-                AvatarTimer += _data.Time * (1 + PotionEfficiency) + AvatarTimeBuff;
+                AvatarTimer += _data.Time * (1 + PotionEfficiency) + AvatarPotionBuff;
                 break;
             case LootType.DamageUp:
                 AddBuffer(RoleBuffer.DamageUp, _data.Time * (1 + PotionEfficiency), _data.Value);
@@ -531,7 +531,7 @@ public partial class PlayerRole : Role
         switch (_type)
         {
             case ResourceType.Gold:
-                BattleManage.EnemyDropGoldAdd(_value);
+                BattleManage.EnemyDropGoldAdd((int)(_value * (1 + GoldDrop)));
                 break;
             case ResourceType.Emerald:
                 BattleManage.BossDropEmeraldAdd(_value);
@@ -615,6 +615,12 @@ public partial class PlayerRole : Role
             MoveAfterimage_Main.startLifetime = lifeTime;
         }
     }
-
+    public void HealFromCauseDamage(int _damage)
+    {
+        if (BloodThirsty <= 0)
+            return;
+        HealHP((int)(_damage * (1 + BloodThirsty)));
+        //Debug.Log("Damage=" + Damage + ",True Damage=" + _damage + ", Vampire=" + (int)(_damage * (BloodThirsty)));
+    }
 
 }

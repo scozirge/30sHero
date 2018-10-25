@@ -22,6 +22,7 @@ public abstract class EquipData : Data
     }
     public bool IsEquiped { get; protected set; }
     public Dictionary<RoleProperty, float> Properties = new Dictionary<RoleProperty, float>();
+    public string PropertiesStr { get; protected set; }
     public virtual void SetEquipStatus(bool _isEquiped, int _equipSlot)
     {
         IsEquiped = _isEquiped;
@@ -92,6 +93,39 @@ public abstract class EquipData : Data
     {
         UID = _uid;
     }
+    protected void SetPropertiesByStr()
+    {
+        Properties = GameSettingData.GetNewRolePropertiesDic(0);
+        if (PropertiesStr == "")
+            return;
+        string[] properties = PropertiesStr.Split('&');
+        for (int i = 0; i < properties.Length; i++)
+        {
+            string[] values = properties[i].Split('=');
+            RoleProperty type = GameSettingData.RandomPropertyList[int.Parse(values[0])];
+            float value = float.Parse(values[1]);
+            Properties[type] = value;
+        }
+    }
+    public virtual string GetPropertiesStr()
+    {
+        string str = "";
+        for (int i = 0; i < GameSettingData.RandomPropertyList.Count; i++)
+        {
+            if (Properties.ContainsKey(GameSettingData.RandomPropertyList[i]) )
+            {
+                //Debug.Log(GameSettingData.RandomPropertyList[i]);
+                if (Properties[GameSettingData.RandomPropertyList[i]] != 0)
+                {
+                    if (str != "")
+                        str += "&";
+                    str += i + "=" + Properties[GameSettingData.RandomPropertyList[i]];
+                    //Debug.Log(GameSettingData.RandomPropertyList[i] + "=" + Properties[GameSettingData.RandomPropertyList[i]]);
+                }
+            }
+        }
+        return str;
+    }
     protected virtual void SetRandomProperties()
     {
         Properties = GameSettingData.GetNewRolePropertiesDic(0);
@@ -106,13 +140,12 @@ public abstract class EquipData : Data
     public List<PropertyText> GetPropertyTextList()
     {
         List<PropertyText> list = new List<PropertyText>();
-        List<RoleProperty> kes = new List<RoleProperty>(Properties.Keys);
-        for (int i = 0; i < kes.Count; i++)
+        for (int i = 0; i < GameSettingData.RandomPropertyList.Count; i++)
         {
-            if (Properties[kes[i]] == 0)
+            if (Properties[GameSettingData.RandomPropertyList[i]] == 0)
                 continue;
             PropertyText pt = new PropertyText();
-            pt.Text = string.Format("{0}+{1}", StringData.GetString(kes[i].ToString()), Properties[kes[i]]);
+            pt.Text = string.Format("{0}+{1}", StringData.GetString(GameSettingData.RandomPropertyList[i].ToString()), Properties[GameSettingData.RandomPropertyList[i]]);
             pt.Comparison = Comparator.Equal;
             pt.ColorCode = GameSettingData.NormalNumberColor;
             list.Add(pt);
@@ -122,16 +155,15 @@ public abstract class EquipData : Data
     public List<PropertyText> GetPropertyTextList(EquipData _data)
     {
         List<PropertyText> list = new List<PropertyText>();
-        List<RoleProperty> kes = new List<RoleProperty>(Properties.Keys);
-        for (int i = 0; i < kes.Count; i++)
+        for (int i = 0; i < GameSettingData.RandomPropertyList.Count; i++)
         {
-            if (Properties[kes[i]] == 0 && _data.Properties[kes[i]] == 0)
+            if (Properties[GameSettingData.RandomPropertyList[i]] == 0 && _data.Properties[GameSettingData.RandomPropertyList[i]] == 0)
                 continue;
-            float valueDiff = Properties[kes[i]] - _data.Properties[kes[i]];
+            float valueDiff = Properties[GameSettingData.RandomPropertyList[i]] - _data.Properties[GameSettingData.RandomPropertyList[i]];
             PropertyText pt = new PropertyText();
             if (valueDiff >= 0)
             {
-                pt.Text = string.Format("{0}+{1}", StringData.GetString(kes[i].ToString()), Properties[kes[i]]);
+                pt.Text = string.Format("{0}+{1}", StringData.GetString(GameSettingData.RandomPropertyList[i].ToString()), Properties[GameSettingData.RandomPropertyList[i]]);
                 if (valueDiff > 0)
                 {
                     pt.Comparison = Comparator.Greater;
@@ -145,7 +177,7 @@ public abstract class EquipData : Data
             }
             else if (valueDiff < 0)
             {
-                pt.Text = string.Format("{0}{1}", StringData.GetString(kes[i].ToString()), Properties[kes[i]]);
+                pt.Text = string.Format("{0}{1}", StringData.GetString(GameSettingData.RandomPropertyList[i].ToString()), Properties[GameSettingData.RandomPropertyList[i]]);
                 pt.Comparison = Comparator.Less;
                 pt.ColorCode = GameSettingData.DropingNumberColor;
             }

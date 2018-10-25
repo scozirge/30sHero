@@ -477,10 +477,10 @@ public class Equip : MyUI
         StrengthText.text = Player.GetProperties(RoleProperty.Strength).ToString();
         HealthText.text = Player.GetProperties(RoleProperty.Health).ToString();
         ShieldText.text = Player.GetProperties(RoleProperty.Shield).ToString();
-        ShieldRecoveryText.text = string.Format("{0}/{1}", Player.GetProperties(RoleProperty.ShieldRecovery), StringData.GetString("Second"));
+        ShieldRecoveryText.text = string.Format("{0}%/{1}", Player.GetProperties(RoleProperty.ShieldRecovery)*100, StringData.GetString("Second"));
         MoveSpeedText.text = string.Format("{0}/{1}", Player.GetProperties(RoleProperty.MoveSpeed), StringData.GetString("Second"));
-        MaxMoveText.text = string.Format("{0}/{1}", Player.GetProperties(RoleProperty.MaxMoveSpeed), StringData.GetString("Second"));
-        AvatarTimeText.text = string.Format("{0}{1}", Player.GetProperties(RoleProperty.AvatarTime), StringData.GetString("Second"));
-        SkillTimeText.text = string.Format("{0}{1}", Player.GetProperties(RoleProperty.SkillTime), StringData.GetString("Second"));
+        MaxMoveText.text = string.Format("{0}/{1}", Player.GetProperties(RoleProperty.MaxMoveSpeed)+Player.GetProperties(RoleProperty.MoveSpeed), StringData.GetString("Second"));
+        AvatarTimeText.text = string.Format("{0}{1}", Player.GetProperties(RoleProperty.AvatarPotionBuff), StringData.GetString("Second"));
+        SkillTimeText.text = string.Format("{0}{1}", Player.GetProperties(RoleProperty.SkillTimeBuff), StringData.GetString("Second"));
     }
 }

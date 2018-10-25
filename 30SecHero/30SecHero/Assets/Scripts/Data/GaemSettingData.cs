@@ -27,16 +27,17 @@ public class GameSettingData : Data
     public static int RandomStrength;
     public static int RandomHealth;
     public static int RandomShield;
+    public static float RandomShieldRecharge;
     public static float RandomShieldRecovery;
     public static int RandomMoveSpeed;
     public static int RandomMaxMoveSpeed;
     public static float RandomMoveDecay;
     public static float RandomAvatarTime;
-    public static float RandomAvatarDrop;
+    public static float RandomAvatarPotionBuff;
     public static float RandomSkillTime;
     public static float RandomSkillDrop;
     public static float RandomEquipDrop;
-    public static int RandomGoldDrop;
+    public static float RandomGoldDrop;
     public static float RandomBloodThirsty;
     public static float RandomPotionEfficiency;
     public static int MaxItemCount;
@@ -62,8 +63,7 @@ public class GameSettingData : Data
     public static float MoveDepletedTime;
     public static int MaxExtraMove;
     public static float MaxAvaterTime;
-    public static float EnergyDrop;
-    public static float AvatarTimeBuff;
+    public static float AvatarPotionBuff;
     public static float SkillTimeBuff;
     public static float SkillDrop;
     public static float EquipDrop;
@@ -108,9 +108,8 @@ public class GameSettingData : Data
 
 
 
-
-    //裝備可隨機的屬性類型
-    static List<RoleProperty> RandomPropertyList = new List<RoleProperty>() { RoleProperty.Strength, RoleProperty.Health, RoleProperty.Shield, RoleProperty.ShieldRecovery, RoleProperty.MoveSpeed, RoleProperty.MaxMoveSpeed, RoleProperty.MoveDecay, RoleProperty.AvatarTime, RoleProperty.AvatarDrop, RoleProperty.SkillTime, RoleProperty.SkillDrop, RoleProperty.EquipDrop, RoleProperty.GoldDrop, RoleProperty.BloodThirsty, RoleProperty.PotionEfficiency };
+    //裝備可隨機的屬性類型(不可變動順序，要追加要往後加，不然資料庫的資料會對錯)
+    public static List<RoleProperty> RandomPropertyList = new List<RoleProperty>() { RoleProperty.Strength, RoleProperty.Health, RoleProperty.Shield, RoleProperty.ShieldRecovery, RoleProperty.MoveSpeed, RoleProperty.MaxMoveSpeed, RoleProperty.MoveDecay, RoleProperty.AvatarTime, RoleProperty.AvatarPotionBuff, RoleProperty.SkillTimeBuff, RoleProperty.SkillDrop, RoleProperty.EquipDrop, RoleProperty.GoldDrop, RoleProperty.BloodThirsty, RoleProperty.PotionEfficiency, RoleProperty.ShieldReChargeTime };
     //裝備品階權重
     static List<int> EquipQualityWeightList = new List<int>();
     static List<int> DropEquipWeightList = new List<int>();
@@ -212,6 +211,9 @@ public class GameSettingData : Data
                             case "RandomShield":
                                 RandomShield = int.Parse(item[key].ToString());
                                 break;
+                            case "RandomShieldRecharge":
+                                RandomShieldRecharge = float.Parse(item[key].ToString());
+                                break;
                             case "RandomShieldRecovery":
                                 RandomShieldRecovery = float.Parse(item[key].ToString());
                                 break;
@@ -227,8 +229,8 @@ public class GameSettingData : Data
                             case "RandomAvatarTime":
                                 RandomAvatarTime = float.Parse(item[key].ToString());
                                 break;
-                            case "RandomAvatarDrop":
-                                RandomAvatarDrop = float.Parse(item[key].ToString());
+                            case "RandomAvatarPotionBuff":
+                                RandomAvatarPotionBuff = float.Parse(item[key].ToString());
                                 break;
                             case "RandomSkillTime":
                                 RandomSkillTime = float.Parse(item[key].ToString());
@@ -240,7 +242,7 @@ public class GameSettingData : Data
                                 RandomEquipDrop = float.Parse(item[key].ToString());
                                 break;
                             case "RandomGoldDrop":
-                                RandomGoldDrop = int.Parse(item[key].ToString());
+                                RandomGoldDrop = float.Parse(item[key].ToString());
                                 break;
                             case "RandomBloodThirsty":
                                 RandomBloodThirsty = float.Parse(item[key].ToString());
@@ -315,11 +317,8 @@ public class GameSettingData : Data
                             case "MaxAvaterTime":
                                 MaxAvaterTime = float.Parse(item[key].ToString());
                                 break;
-                            case "EnergyDrop":
-                                EnergyDrop = float.Parse(item[key].ToString());
-                                break;
-                            case "AvatarTimeBuff":
-                                AvatarTimeBuff = float.Parse(item[key].ToString());
+                            case "AvatarPotionBuff":
+                                AvatarPotionBuff = float.Parse(item[key].ToString());
                                 break;
                             case "SkillTimeBuff":
                                 SkillTimeBuff = float.Parse(item[key].ToString());
@@ -519,13 +518,15 @@ public class GameSettingData : Data
             case Operator.Plus:
                 for (int i = 0; i < keys.Count; i++)
                 {
-                    _dic1[keys[i]] += _dic2[keys[i]];
+                    if (_dic2.ContainsKey(keys[i]))
+                        _dic1[keys[i]] += _dic2[keys[i]];
                 }
                 break;
             case Operator.Minus:
                 for (int i = 0; i < keys.Count; i++)
                 {
-                    _dic1[keys[i]] -= _dic2[keys[i]];
+                    if (_dic2.ContainsKey(keys[i]))
+                        _dic1[keys[i]] -= _dic2[keys[i]];
                 }
                 break;
             default:
@@ -551,44 +552,47 @@ public class GameSettingData : Data
                 case RoleProperty.Shield:
                     dic[(RoleProperty)rand] += RandomShield * _lv;
                     break;
+                case RoleProperty.ShieldReChargeTime:
+                    dic[(RoleProperty)rand] += RandomShieldRecharge;
+                    break;
                 case RoleProperty.ShieldRecovery:
-                    dic[(RoleProperty)rand] += RandomShieldRecovery * _lv;
+                    dic[(RoleProperty)rand] += RandomShieldRecovery;
                     break;
                 case RoleProperty.MoveSpeed:
-                    dic[(RoleProperty)rand] += RandomMoveSpeed * _lv;
+                    dic[(RoleProperty)rand] += RandomMoveSpeed;
                     break;
                 case RoleProperty.MaxMoveSpeed:
-                    dic[(RoleProperty)rand] += RandomMaxMoveSpeed * _lv;
+                    dic[(RoleProperty)rand] += RandomMaxMoveSpeed;
                     break;
                 case RoleProperty.MoveDecay:
-                    dic[(RoleProperty)rand] += RandomMoveDecay * _lv;
+                    dic[(RoleProperty)rand] += RandomMoveDecay;
                     break;
                 case RoleProperty.AvatarTime:
-                    dic[(RoleProperty)rand] += RandomAvatarTime * _lv;
+                    dic[(RoleProperty)rand] += RandomAvatarTime;
                     break;
-                case RoleProperty.AvatarDrop:
-                    dic[(RoleProperty)rand] += RandomAvatarDrop * _lv;
+                case RoleProperty.AvatarPotionBuff:
+                    dic[(RoleProperty)rand] += RandomAvatarPotionBuff;
                     break;
-                case RoleProperty.SkillTime:
-                    dic[(RoleProperty)rand] += RandomSkillTime * _lv;
+                case RoleProperty.SkillTimeBuff:
+                    dic[(RoleProperty)rand] += RandomSkillTime;
                     break;
                 case RoleProperty.SkillDrop:
-                    dic[(RoleProperty)rand] += RandomSkillDrop * _lv;
+                    dic[(RoleProperty)rand] += RandomSkillDrop;
                     break;
                 case RoleProperty.EquipDrop:
-                    dic[(RoleProperty)rand] += RandomEquipDrop * _lv;
+                    dic[(RoleProperty)rand] += RandomEquipDrop;
                     break;
                 case RoleProperty.GoldDrop:
-                    dic[(RoleProperty)rand] += RandomGoldDrop * _lv;
+                    dic[(RoleProperty)rand] += RandomGoldDrop;
                     break;
                 case RoleProperty.BloodThirsty:
-                    dic[(RoleProperty)rand] += RandomBloodThirsty * _lv;
+                    dic[(RoleProperty)rand] += RandomBloodThirsty;
                     break;
                 case RoleProperty.PotionEfficiency:
-                    dic[(RoleProperty)rand] += RandomPotionEfficiency * _lv;
+                    dic[(RoleProperty)rand] += RandomPotionEfficiency;
                     break;
                 default:
-                    Debug.LogWarning(string.Format("{0}:{1}不存在", rand, (RoleProperty)rand));
+                    Debug.LogWarning(string.Format("{0}:{1}不存在", rand, RandomPropertyList[rand]));
                     break;
             }
         }
@@ -606,9 +610,12 @@ public class GameSettingData : Data
     /// 返回0~5 0代表無掉落 5代表品階最高品階
     /// </summary>
     /// <returns></returns>
-    public static int GetRandomEquipQuality()
+    public static int GetRandomEquipQuality(int _extraWeight)
     {
         int quality = 0;
+        EquipQualityWeightList[0] -= _extraWeight;
+        if (EquipQualityWeightList[0] < 0)
+            EquipQualityWeightList[0] = 0;
         quality = ProbabilityGetter.GetFromWeigth(EquipQualityWeightList);
         return quality;
     }

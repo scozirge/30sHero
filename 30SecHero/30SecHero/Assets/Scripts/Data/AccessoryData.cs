@@ -49,6 +49,7 @@ public class AccessoryData : EquipData
     {
         base.SetRandomProperties();
         Properties[RoleProperty.Shield] += GameSettingData.GetAccessoryShield(LV);
+        PropertiesStr = GetPropertiesStr();
     }
     public AccessoryData(JsonData _item)
         : base(_item)
@@ -77,15 +78,16 @@ public class AccessoryData : EquipData
         data.SetRandomProperties();
         return data;
     }
-    public static AccessoryData GetNewAccessory(int _uid, int _id, int _equipSlot, int _lv, int _quality)
+    public static AccessoryData GetNewAccessory(int _uid, int _id, int _equipSlot, int _lv, int _quality, string _propertiesStr)
     {
         AccessoryData data = GameDictionary.AccessoryDic[_id].MemberwiseClone() as AccessoryData;
+        data.PropertiesStr = _propertiesStr;
+        data.SetPropertiesByStr();
         data.UID = _uid;
         if (_uid > MaxUID)
             MaxUID = _uid;
         data.LV = _lv;
         data.Quality = _quality;
-        data.SetRandomProperties();
         if (_equipSlot == 3)
             Player.Equip(data, 0);
         else if (_equipSlot == 4)

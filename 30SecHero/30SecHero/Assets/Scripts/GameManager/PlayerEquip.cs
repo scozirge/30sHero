@@ -20,7 +20,7 @@ public partial class Player
         {
             if (i != 0)
                 dataStr += "/";
-            dataStr += Itmes[EquipType.Weapon][keys[i]].UID + "," + Itmes[EquipType.Weapon][keys[i]].ID + "," + (int)Itmes[EquipType.Weapon][keys[i]].Type + "," + Itmes[EquipType.Weapon][keys[i]].EquipSlot + "," + Itmes[EquipType.Weapon][keys[i]].LV + "," + Itmes[EquipType.Weapon][keys[i]].Quality;
+            dataStr += Itmes[EquipType.Weapon][keys[i]].UID + "," + Itmes[EquipType.Weapon][keys[i]].ID + "," + (int)Itmes[EquipType.Weapon][keys[i]].Type + "," + Itmes[EquipType.Weapon][keys[i]].EquipSlot + "," + Itmes[EquipType.Weapon][keys[i]].LV + "," + Itmes[EquipType.Weapon][keys[i]].Quality + "," + Itmes[EquipType.Weapon][keys[i]].PropertiesStr;
         }
         //防具文字
         keys = new List<long>(Itmes[EquipType.Armor].Keys);
@@ -31,7 +31,7 @@ public partial class Player
             else
                 if (dataStr != "")
                     dataStr += "/";
-            dataStr += Itmes[EquipType.Armor][keys[i]].UID + "," + Itmes[EquipType.Armor][keys[i]].ID + "," + (int)Itmes[EquipType.Armor][keys[i]].Type + "," + Itmes[EquipType.Armor][keys[i]].EquipSlot + "," + Itmes[EquipType.Armor][keys[i]].LV + "," + Itmes[EquipType.Armor][keys[i]].Quality;
+            dataStr += Itmes[EquipType.Armor][keys[i]].UID + "," + Itmes[EquipType.Armor][keys[i]].ID + "," + (int)Itmes[EquipType.Armor][keys[i]].Type + "," + Itmes[EquipType.Armor][keys[i]].EquipSlot + "," + Itmes[EquipType.Armor][keys[i]].LV + "," + Itmes[EquipType.Armor][keys[i]].Quality + "," + Itmes[EquipType.Armor][keys[i]].PropertiesStr;
         }
         //飾品文字
         keys = new List<long>(Itmes[EquipType.Accessory].Keys);
@@ -42,7 +42,7 @@ public partial class Player
             else
                 if (dataStr != "")
                     dataStr += "/";
-            dataStr += Itmes[EquipType.Accessory][keys[i]].UID + "," + Itmes[EquipType.Accessory][keys[i]].ID + "," + (int)Itmes[EquipType.Accessory][keys[i]].Type + "," + Itmes[EquipType.Accessory][keys[i]].EquipSlot + "," + Itmes[EquipType.Accessory][keys[i]].LV + "," + Itmes[EquipType.Accessory][keys[i]].Quality;
+            dataStr += Itmes[EquipType.Accessory][keys[i]].UID + "," + Itmes[EquipType.Accessory][keys[i]].ID + "," + (int)Itmes[EquipType.Accessory][keys[i]].Type + "," + Itmes[EquipType.Accessory][keys[i]].EquipSlot + "," + Itmes[EquipType.Accessory][keys[i]].LV + "," + Itmes[EquipType.Accessory][keys[i]].Quality + "," + Itmes[EquipType.Accessory][keys[i]].PropertiesStr;
         }
         PlayerPrefs.SetString(LocoData.Equip.ToString(), dataStr);
     }
@@ -51,7 +51,10 @@ public partial class Player
         //執行更換裝備
         EquipData origEquipData = MyWeapon;
         if (origEquipData != null)
+        {
+            GameSettingData.RolePropertyOperate(EquipPlus, origEquipData.Properties, Operator.Minus);
             origEquipData.SetEquipStatus(false, 0);
+        }
         MyWeapon = _data;
         MyWeapon.SetEquipStatus(true, 1);
         GameSettingData.RolePropertyOperate(EquipPlus, _data.Properties, Operator.Plus);
@@ -75,7 +78,10 @@ public partial class Player
         //執行更換裝備
         EquipData origEquipData = MyArmor;
         if (origEquipData != null)
+        {
+            GameSettingData.RolePropertyOperate(EquipPlus, origEquipData.Properties, Operator.Minus);
             origEquipData.SetEquipStatus(false, 0);
+        }
         MyArmor = _data;
         MyArmor.SetEquipStatus(true, 2);
         GameSettingData.RolePropertyOperate(EquipPlus, _data.Properties, Operator.Plus);
@@ -101,7 +107,10 @@ public partial class Player
             return;
         EquipData origEquipData = MyAccessorys[_index];
         if (origEquipData != null)
+        {
+            GameSettingData.RolePropertyOperate(EquipPlus, origEquipData.Properties, Operator.Minus);
             origEquipData.SetEquipStatus(false, 0);
+        }
         MyAccessorys[_index] = _data;
         MyAccessorys[_index].SetEquipStatus(true, 3 + _index);
         GameSettingData.RolePropertyOperate(EquipPlus, _data.Properties, Operator.Plus);

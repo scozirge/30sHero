@@ -37,7 +37,8 @@ public class StrengthenData : Data
         private set { return; }
     }
     bool ShowPercentage;
-    public string StrengthenType;
+    public RoleProperty PropertyType;
+    public Dictionary<RoleProperty, float> Properties = new Dictionary<RoleProperty, float>();
     public float BaseValue;
     public float LevelUpValue;
     public int BaseGold;
@@ -48,7 +49,6 @@ public class StrengthenData : Data
     {
         return string.Format("{0}{1}", StringData.GetString("LV"), LV + _plus);
     }
-
     /// <summary>
     /// 將字典傳入，依json表設定資料
     /// </summary>
@@ -61,6 +61,7 @@ public class StrengthenData : Data
         for (int i = 0; i < items.Count; i++)
         {
             StrengthenData data = new StrengthenData(items[i]);
+            data.Properties.Add(data.PropertyType, 0);
             int id = int.Parse(items[i]["ID"].ToString());
             _dic.Add(id, data);
         }
@@ -79,7 +80,7 @@ public class StrengthenData : Data
                         ID = int.Parse(item[key].ToString());
                         break;
                     case "StrengthenType":
-                        StrengthenType = item[key].ToString();
+                        PropertyType = (RoleProperty)Enum.Parse(typeof(RoleProperty), item[key].ToString());
                         break;
                     case "BaseValue":
                         BaseValue = float.Parse(item[key].ToString());
@@ -111,29 +112,38 @@ public class StrengthenData : Data
             Debug.LogException(ex);
         }
     }
-    public void SetLV(int _lv)
+    public void InitSet(int _lv)
     {
         if (_lv < 0)
             return;
         LV = _lv;
+        Properties[PropertyType] = GetValue();
     }
     public void LVUP()
     {
         LV++;
+        Properties[PropertyType] = GetValue();
     }
     public int GetPrice()
     {
         return BaseGold + LV * LevelUpGold;
     }
+    public float GetValue()
+    {
+        if (LV > 0)
+            return BaseValue + LV * LevelUpValue;
+        else
+            return 0;
+    }
     public Sprite GetICON()
     {
         return Resources.Load<Sprite>(string.Format(GameSettingData.StrengthenPath, IconString));
     }
-    public static Dictionary<int,StrengthenData> GetNewStrengthenDic(int _lv)
+    public static Dictionary<int, StrengthenData> GetNewStrengthenDic(int _lv)
     {
         Dictionary<int, StrengthenData> dic = new Dictionary<int, StrengthenData>();
         List<int> keys = new List<int>(GameDictionary.StrengthenDic.Keys);
-        for(int i=0;i<keys.Count;i++)
+        for (int i = 0; i < keys.Count; i++)
         {
             dic.Add(keys[i], GetNewStrengthenData(keys[i], _lv));
         }
@@ -141,8 +151,8 @@ public class StrengthenData : Data
     }
     public static StrengthenData GetNewStrengthenData(int _id, int _lv)
     {
-        StrengthenData data = GameDictionary.StrengthenDic[_id].MemberwiseClone() as StrengthenData;        
-        data.LV = _lv;
+        StrengthenData data = GameDictionary.StrengthenDic[_id].MemberwiseClone() as StrengthenData;
+        data.InitSet(_lv);
         return data;
     }
 }

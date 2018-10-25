@@ -21,6 +21,15 @@ public partial class BattleManage
     [SerializeField]
     Transform GateParent;
 
+    void InitStage()
+    {
+        if (!MyPlayer)
+            return;
+        Floor = (int)(CurPlate / BM.FloorPlate) + 1;
+        UpdateFloorText();
+        SpawnGate(Floor - 1);
+        SpawnGate(Floor);
+    }
 
     static bool IsFirstHalf
     {
@@ -43,15 +52,7 @@ public partial class BattleManage
                 SpawnDemogorgon();
         }
     }
-    void InitStage()
-    {
-        if (!MyPlayer)
-            return;
-        Floor = (int)(CurPlate / BM.FloorPlate) + 1;
-        UpdateFloorText();
-        SpawnGate(Floor - 1);
-        SpawnGate(Floor);
-    }
+
     static void UpdateFloorText()
     {
         BM.FloorText.text = string.Format("{0}{1}", Floor, StringData.GetString("Floor"));

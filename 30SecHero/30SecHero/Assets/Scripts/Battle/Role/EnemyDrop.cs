@@ -33,10 +33,11 @@ public partial class EnemyRole
             return;
         PlayerRole pr = go.GetComponent<PlayerRole>();
         //DropEquip
+        int extraWeight = (BattleManage.BM.MyPlayer != null) ? BattleManage.BM.MyPlayer.EquipDropWeight : 0;
         for (int i = 0; i < DropEquipCount; i++)
         {
-            int equipQuality = GameSettingData.GetRandomEquipQuality();
-            if(equipQuality!=0)//0代表隨機到沒有掉落裝備
+            int equipQuality = GameSettingData.GetRandomEquipQuality(extraWeight);
+            if (equipQuality != 0)//0代表隨機到沒有掉落裝備
             {
                 EquipLoot loot = DropSpawner.SpawnEquip(transform.position);
                 if (loot) loot.Init(BattleManage.Floor, equipQuality);
@@ -79,9 +80,10 @@ public partial class EnemyRole
         }
         else
         {
+            float extraPotionProbility = (BattleManage.BM.MyPlayer != null) ? BattleManage.BM.MyPlayer.PotionDrop : 0;
             for (int i = 0; i < DropLootCount; i++)
             {
-                if (ProbabilityGetter.GetResult(GameSettingData.EnemyDropPotionProportion))
+                if (ProbabilityGetter.GetResult(GameSettingData.EnemyDropPotionProportion + extraPotionProbility))
                 {
                     DropSpawner.SpawnLoot(transform.position);
                 }
@@ -90,7 +92,8 @@ public partial class EnemyRole
         //DropSkill
         if (DropSkill)
         {
-            if (ProbabilityGetter.GetResult(DropSkillProbility))
+            float extraSkillProbility = (BattleManage.BM.MyPlayer != null) ? BattleManage.BM.MyPlayer.SkillDrop : 0;
+            if (ProbabilityGetter.GetResult(DropSkillProbility + extraSkillProbility))
             {
                 pr.InitMonsterSkill(DropSkill.PSkillName, DropSkill);
                 SkillLoot drops = DropSpawner.SpawnSkill(transform.position);

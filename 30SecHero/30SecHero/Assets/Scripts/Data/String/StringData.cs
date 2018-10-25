@@ -88,6 +88,13 @@ public class StringData
     }
     public static string GetString(string _stringKey)
     {
-        return GameDictionary.String_UIDic[_stringKey].GetString(Player.UseLanguage);
+        if (GameDictionary.String_UIDic.ContainsKey(_stringKey))
+            return GameDictionary.String_UIDic[_stringKey].GetString(Player.UseLanguage);
+        else
+        {
+            Debug.LogWarning("不存在的文字字典索引:" + _stringKey + "。");
+            return "";
+        }
+
     }
 }

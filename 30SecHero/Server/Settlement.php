@@ -48,9 +48,10 @@ if($update)
 			$equipSlot=$equipData[2];
 			$lv=$equipData[3];
 			$quality=$equipData[4];
-			$ownUserID=$equipData[5];
+			$property=$equipData[5];
+			$ownUserID=$equipData[6];
 			//寫入資料庫
-			$insert = mysql_query("INSERT INTO  ".$db_name.".equipment (  `jid` ,`equipType` ,`equipSlot`,`lv`,`quality`,`ownUserID`,`acquireTime`) VALUES ( '".$jid."','".$equipType."','".$equipSlot."','".$lv."','".$quality."','".$ownUserID."','".$now."') ; ",$con_w);
+			$insert = mysql_query("INSERT INTO  ".$db_name.".equipment (  `jid` ,`equipType` ,`equipSlot`,`lv`,`quality`,`property`,`ownUserID`,`acquireTime`) VALUES ( '".$jid."','".$equipType."','".$equipSlot."','".$lv."','".$quality."','".$property."','".$ownUserID."','".$now."') ; ",$con_w);
 			if($insert)
 			{
 				$uid=mysql_insert_id();

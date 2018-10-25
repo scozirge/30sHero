@@ -15,26 +15,6 @@ public partial class Player
     public static int MaxEnemyKills { get; private set; }
 
 
-
-    //Strengthen Dic
-    public static Dictionary<int, StrengthenData> StrengthenDic = new Dictionary<int, StrengthenData>();
-    //Properties
-    static Dictionary<RoleProperty, float> Properties = new Dictionary<RoleProperty, float>();
-    static Dictionary<RoleProperty, float> EquipPlus = new Dictionary<RoleProperty, float>();
-    static Dictionary<RoleProperty, float> EquipMultiple = new Dictionary<RoleProperty, float>();
-    static Dictionary<RoleProperty, float> StrengthenPlus = new Dictionary<RoleProperty, float>();
-    static Dictionary<RoleProperty, float> StrengthenMultiple = new Dictionary<RoleProperty, float>();
-
-    public static float GetProperties(RoleProperty _property)
-    {
-        return
-            Properties[_property]
-            *
-            (EquipMultiple[_property] + StrengthenMultiple[_property])
-            +
-            (EquipPlus[_property] + StrengthenPlus[_property]);
-    }
-
     public static void Init()
     {
         if (IsInit)
@@ -51,44 +31,10 @@ public partial class Player
         Itmes.Add(EquipType.Weapon, new Dictionary<long, EquipData>());
         Itmes.Add(EquipType.Armor, new Dictionary<long, EquipData>());
         Itmes.Add(EquipType.Accessory, new Dictionary<long, EquipData>());
-        Properties = GameSettingData.GetNewRolePropertiesDic(0);
-        EquipPlus = GameSettingData.GetNewRolePropertiesDic(0);
-        EquipMultiple = GameSettingData.GetNewRolePropertiesDic(1);
-        StrengthenPlus = GameSettingData.GetNewRolePropertiesDic(0);
-        StrengthenMultiple = GameSettingData.GetNewRolePropertiesDic(1);
-        StrengthenDic = StrengthenData.GetNewStrengthenDic(0);
-        //測試用
-        /*
-        Dictionary<long, EquipData> list = new Dictionary<long, EquipData>();
-        WeaponData w = WeaponData.GetNewWeapon(1, 4, 3);
-        WeaponData w2 = WeaponData.GetNewWeapon(2, 5, 2);
-        list.Add(w.UID, w);
-        list.Add(w2.UID, w2);
-        Itmes.Add(EquipType.Weapon, list);
-
-        list = new Dictionary<long, EquipData>();
-        ArmorData a = ArmorData.GetNewArmor(2, 2, 1, false);
-        ArmorData a2 = ArmorData.GetNewArmor(3, 3, 3, false);
-        list.Add(a.UID, a);
-        list.Add(a2.UID, a2);
-        Itmes.Add(EquipType.Armor, list);
-
-        list = new Dictionary<long, EquipData>();
-        AccessoryData ad = AccessoryData.GetNewAccessory(1, 5, 1);
-        AccessoryData ad2 = AccessoryData.GetNewAccessory(2, 4, 2);
-        AccessoryData ad3 = AccessoryData.GetNewAccessory(3, 3, 3);
-        AccessoryData ad4 = AccessoryData.GetNewAccessory(1, 2, 4);
-        AccessoryData ad5 = AccessoryData.GetNewAccessory(2, 1, 5);
-        list.Add(ad.UID, ad);
-        list.Add(ad2.UID, ad2);
-        list.Add(ad3.UID, ad3);
-        list.Add(ad4.UID, ad4);
-        list.Add(ad5.UID, ad5);
-        Itmes.Add(EquipType.Accessory, list);
-        list = new Dictionary<long, EquipData>();
-         */
+        InitProperty();
         IsInit = true;
     }
+
     public static void SetGold(int _gold)
     {
         Gold = _gold;
@@ -175,7 +121,9 @@ public partial class Player
         GainGold(-_data.GetPrice());
         if (StrengthenDic.ContainsKey(_data.ID))
         {
+            GameSettingData.RolePropertyOperate(StrengthenPlus, StrengthenDic[_data.ID].Properties, Operator.Minus);//減去原本值
             StrengthenDic[_data.ID].LVUP();
+            GameSettingData.RolePropertyOperate(StrengthenPlus, StrengthenDic[_data.ID].Properties, Operator.Plus);//加上升級後的值
         }
         //寫入資料
         if (StrengthenInitDataFinish)
@@ -257,9 +205,10 @@ public partial class Player
         {
             if (i != 0)
                 addEquipStr += "/";
-            addEquipStr += _equipDatas[i].ID + "," + (int)_equipDatas[i].Type + "," + _equipDatas[i].EquipSlot + "," + _equipDatas[i].LV + "," + _equipDatas[i].Quality + "," + ID;
+            //Debug.Log("equipProperty="+_equipDatas[i].PropertiesStr);
+            addEquipStr += _equipDatas[i].ID + "," + (int)_equipDatas[i].Type + "," + _equipDatas[i].EquipSlot + "," + _equipDatas[i].LV + "," + _equipDatas[i].Quality + "," + _equipDatas[i].PropertiesStr + "," + ID;
         }
-        Debug.Log("gold=" + _gold + " emerald=" + _emerald + " maxFloor=" + _maxFloor + " addEquipStr=" + addEquipStr);
+        //Debug.Log("gold=" + _gold + " emerald=" + _emerald + " maxFloor=" + _maxFloor + " addEquipStr=" + addEquipStr);
         ServerRequest.Settlement(_gold, _emerald, _maxFloor, addEquipStr);
     }
     public static void Settlement_CB(string[] _data)

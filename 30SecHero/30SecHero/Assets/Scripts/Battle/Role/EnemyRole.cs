@@ -42,14 +42,17 @@ public partial class EnemyRole : Role
         GameObject go = GameObject.FindGameObjectWithTag("Player");
         if (go)
             Target = go.GetComponent<PlayerRole>();
-        if (Target && Health <= Target.Damage)
-            HealthObj.SetActive(false);
         InitMotionPic();
-        if(InitBuffers!=null)
-            for(int i=0;i<InitBuffers.Count;i++)
+        if (InitBuffers != null)
+            for (int i = 0; i < InitBuffers.Count; i++)
             {
                 AddBuffer(InitBuffers[i].GetMemberwiseClone());
             }
+        BaseDamage *= BattleManage.Floor;
+        MaxHealth *= BattleManage.Floor;
+        Health = MaxHealth;
+        if (Target && Health <= Target.Damage)
+            HealthObj.SetActive(false);
     }
     void InitMotionPic()
     {
@@ -133,10 +136,10 @@ public partial class EnemyRole : Role
         base.EndPreAttack();
         AniPlayer.PlayTrigger("Idle", 0);
     }
-    public override void BeAttack(Force _attackerForce, int _dmg, Vector2 _force)
+    public override void BeAttack(Force _attackerForce, ref int _dmg, Vector2 _force)
     {
         AniPlayer.PlayTrigger("BeAttack", 0);
-        base.BeAttack(_attackerForce,_dmg, _force);
+        base.BeAttack(_attackerForce, ref _dmg, _force);
         if (!IsAlive && _attackerForce == Force.Player)
             BattleManage.AddEnemyKill();
     }

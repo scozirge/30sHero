@@ -2498,7 +2498,7 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: "\u529B\u91CF"
-  UIString: SkillTime
+  UIString: SkillTimeBuff
   IsAddTextList: 0
 --- !u!222 &220617827
 CanvasRenderer:
@@ -3090,13 +3090,13 @@ MonoBehaviour:
   - {fileID: 1113712713}
   - {fileID: 1562315191}
   LeftEquipSprite:
-  - {fileID: 342661771}
-  - {fileID: 694162752}
   - {fileID: 1675594757}
+  - {fileID: 694162752}
+  - {fileID: 342661771}
   RightEquipSprite:
-  - {fileID: 971981661}
-  - {fileID: 830128012}
   - {fileID: 1028199353}
+  - {fileID: 830128012}
+  - {fileID: 971981661}
   LvText:
   - {fileID: 694162751}
   - {fileID: 615407488}

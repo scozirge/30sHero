@@ -49,6 +49,7 @@ public class WeaponData : EquipData
     {
         base.SetRandomProperties();
         Properties[RoleProperty.Strength] += GameSettingData.GetWeaponStrength(LV);
+        PropertiesStr = GetPropertiesStr();
     }
     public WeaponData(JsonData _item)
         : base(_item)
@@ -77,15 +78,16 @@ public class WeaponData : EquipData
         data.SetRandomProperties();
         return data;
     }
-    public static WeaponData GetNewWeapon(int _uid, int _id, int _equipSlot, int _lv, int _quality)
+    public static WeaponData GetNewWeapon(int _uid, int _id, int _equipSlot, int _lv, int _quality, string _propertiesStr)
     {
         WeaponData data = GameDictionary.WeaponDic[_id].MemberwiseClone() as WeaponData;
+        data.PropertiesStr = _propertiesStr;
+        data.SetPropertiesByStr();
         data.UID = _uid;
         if (_uid > MaxUID)
             MaxUID = _uid;
         data.LV = _lv;
         data.Quality = _quality;
-        data.SetRandomProperties();
         if (_equipSlot == 1)
             Player.Equip(data);
         return data;
