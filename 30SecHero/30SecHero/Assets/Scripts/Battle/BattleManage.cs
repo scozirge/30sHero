@@ -105,6 +105,8 @@ public partial class BattleManage : MonoBehaviour
     }
     void InitBattleSetting()
     {
+        if (TestMode)
+            return;
         PotionInterval = GameSettingData.PotionInterval;
         EnemyFirstHalfInterval = GameSettingData.EnemyFirstHalfInterval;
         EnemySecondHalfInterval = GameSettingData.EnemySecondHalfInterval;

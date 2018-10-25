@@ -67,7 +67,6 @@ public abstract class AIMove : MonoBehaviour
         float randPosX = Random.Range(-BattleManage.ScreenSize.x / 2 + 200, BattleManage.ScreenSize.x / 2 - 200);
         float randPosY = Random.Range(-BattleManage.ScreenSize.y / 2 + 200, BattleManage.ScreenSize.y / 2 - 200);
         RandomOffset = new Vector2(randPosX, randPosY);
-        Debug.Log("RandomOffset=" + RandomOffset);
         Vector2 nowPos = Vector2.zero;
         nowPos = BattleManage.MyCameraControler.transform.position;
         Destination = new Vector3(randPosX + nowPos.x, randPosY + nowPos.y, 0);
@@ -84,7 +83,7 @@ public abstract class AIMove : MonoBehaviour
         }
         if (!InDestinationRange)
         {
-            if (Mathf.Abs(Vector3.Distance(Destination, transform.position)) < 100)
+            if (Mathf.Abs(Vector3.Distance(Destination, transform.position)) < 200)
             {
                 InDestinationRange = true;
                 MyRigi.velocity *= 0.3f;
