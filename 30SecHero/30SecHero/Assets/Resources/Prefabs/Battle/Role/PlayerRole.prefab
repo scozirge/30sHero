@@ -130,7 +130,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1793111113313824
 GameObject:
   m_ObjectHideFlags: 1
@@ -342,7 +342,7 @@ MonoBehaviour:
   MaxHealth: 10000
   BaseDamage: 10
   BaseMoveSpeed: 1000
-  DeathEffect: {fileID: 198802542160044040, guid: 8f344cf8edc65e44883dfdf0168792bd,
+  DeathEffect: {fileID: 198802542160044040, guid: a6f36c56ed46b58408125e947b5ac7db,
     type: 2}
   AniPlayer: {fileID: 114254621464860768}
   RoleTrans: {fileID: 224651808157149892}
@@ -366,11 +366,10 @@ MonoBehaviour:
   MaxExtraMove: 500
   MaxAvaterTime: 60
   AvatarTimerText: {fileID: 0}
-  EnergyDrop: 0
-  AvatarTimeBuff: 0
+  AvatarPotionBuff: 0
   SkillTimeBuff: 0
   SkillDrop: 0
-  EquipDrop: 0
+  EquipDropWeight: 0
   GoldDrop: 0
   BloodThirsty: 0
   PotionEfficiency: 0
