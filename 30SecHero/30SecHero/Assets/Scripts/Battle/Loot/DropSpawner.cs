@@ -9,13 +9,13 @@ public class DropSpawner : MonoBehaviour
     [SerializeField]
     ResourceLoot Resource;
     [SerializeField]
-    Loot Loot;
+    PotionLoot Loot;
     [SerializeField]
     bool Designate;
     [SerializeField]
     SkillLoot SkillLoot;
 
-    static Loot LootPrefab;
+    static PotionLoot LootPrefab;
     static SkillLoot SkillLootPrefab;
     static ResourceLoot ResourcePrefab;
     static EquipLoot EquipPrefab;
@@ -44,9 +44,9 @@ public class DropSpawner : MonoBehaviour
         loot.transform.localPosition = _pos;
         return loot;
     }
-    public static Loot SpawnLoot(Vector3 _pos)
+    public static PotionLoot SpawnLoot(Vector3 _pos)
     {
-        Loot loot = Instantiate(LootPrefab, Vector3.zero, Quaternion.identity) as Loot;
+        PotionLoot loot = Instantiate(LootPrefab, Vector3.zero, Quaternion.identity) as PotionLoot;
         loot.transform.SetParent(MyTransfrom);
         loot.transform.localPosition = _pos;
         return loot;

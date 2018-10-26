@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SkillLoot : MonoBehaviour
+public class SkillLoot : Loot
 {
     [SerializeField]
     ParticleSystem GetEffect;
@@ -16,6 +16,8 @@ public class SkillLoot : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D _col)
     {
+        if (!ReadyToAcquire)
+            return;
         if (_col.gameObject.tag == Force.Player.ToString())
         {
             EffectEmitter.EmitParticle(GetEffect, transform.position, Vector3.zero, null);

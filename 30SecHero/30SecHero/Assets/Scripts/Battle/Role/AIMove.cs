@@ -41,15 +41,14 @@ public abstract class AIMove : MonoBehaviour
     protected bool StartWander;
     protected Rigidbody2D MyRigi;
     protected bool KeepDebut;
+    [HideInInspector]
+    public bool ReadyToMove = true;
 
-
-
-
-
+    
     protected virtual void Start()
     {
         MyRigi = GetComponent<Rigidbody2D>();
-        if (MoveToPlayer)
+        if (ReadyToMove && MoveToPlayer)
         {
             MyRigi.velocity = new Vector2(Random.Range(-1200, 1200), Random.Range(-1200, 1200));
         }
@@ -153,7 +152,7 @@ public abstract class AIMove : MonoBehaviour
     }
     void MoveToPlayerFunc()
     {
-        if (BattleManage.BM.MyPlayer)
+        if (BattleManage.BM.MyPlayer && ReadyToMove)
             MyRigi.velocity = Vector2.Lerp(MyRigi.velocity, (BattleManage.BM.MyPlayer.transform.position - transform.position).normalized * DebutSpeed, 0.1f);
     }
     public void SetCanMove(bool _bool)

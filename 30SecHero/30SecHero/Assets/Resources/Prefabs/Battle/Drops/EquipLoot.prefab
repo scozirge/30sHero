@@ -258,6 +258,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdc075f4dbb0b57498428372b465e8e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  WaitToBeAcquire: 1
   EquipTrans: {fileID: 224751315579743956}
   Icons:
   - {fileID: 114280876041232990}
@@ -306,11 +307,13 @@ MonoBehaviour:
   MoveToPlayer: 1
   Wander: 0
   FollowCamera: 0
+  FollowCameraSpeed: 1000
   DebutSpeed: 1000
   WanderInterval: 0
   RotateFactor: 0
   WanderRange: 0
   Destination: {x: 0, y: 0}
+  ReadyToMove: 0
   MoveSpeed: 0
 --- !u!114 &114735638476980208
 MonoBehaviour:

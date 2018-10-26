@@ -35,7 +35,7 @@ public partial class BattleManage : MonoBehaviour
     [SerializeField]
     EnemyRole DesignatedEnemy;
     [SerializeField]
-    Loot LootPrefab;
+    PotionLoot LootPrefab;
     [SerializeField]
     CameraController CameraControler;
     [SerializeField]
@@ -66,7 +66,7 @@ public partial class BattleManage : MonoBehaviour
     public static float DisableMarginLengh = 300;
     public static float DestructMarginLength = 2000;
     List<EnemyRole> EnemyList = new List<EnemyRole>();
-    List<Loot> LootList = new List<Loot>();
+    List<PotionLoot> LootList = new List<PotionLoot>();
     static int NextDemogorgonFloor;
     static bool IsDemogorgonFloor;
     bool IsInit;
@@ -161,7 +161,7 @@ public partial class BattleManage : MonoBehaviour
             SpawnLootTimer.StartRunTimer = true;
             return;
         }
-        Loot loot = Instantiate(LootPrefab, Vector3.zero, Quaternion.identity) as Loot;
+        PotionLoot loot = Instantiate(LootPrefab, Vector3.zero, Quaternion.identity) as PotionLoot;
         //Set SpawnPos
         loot.transform.SetParent(LootParetn);
         AIMove ai = loot.GetComponent<AIMove>();
@@ -175,7 +175,7 @@ public partial class BattleManage : MonoBehaviour
     {
         BM.EnemyList.Remove(_er);
     }
-    public static void RemoveLoot(Loot _loot)
+    public static void RemoveLoot(PotionLoot _loot)
     {
         BM.LootList.Remove(_loot);
     }

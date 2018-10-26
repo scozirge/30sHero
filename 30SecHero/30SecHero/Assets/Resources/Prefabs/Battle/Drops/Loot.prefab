@@ -164,6 +164,7 @@ MonoBehaviour:
   RotateFactor: 0.005
   WanderRange: 100
   Destination: {x: 0, y: 0}
+  ReadyToMove: 0
   MoveSpeed: 500
 --- !u!114 &114565999483713276
 MonoBehaviour:
@@ -176,6 +177,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4af727ee3d4bb514e839cabbe0dd2b87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  WaitToBeAcquire: 0
   DesginateLootIndex: 0
   LootList:
   - Type: 0

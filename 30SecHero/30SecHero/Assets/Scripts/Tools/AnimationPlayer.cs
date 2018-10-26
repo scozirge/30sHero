@@ -9,10 +9,10 @@ public class AnimationPlayer : MonoBehaviour
 
     public void PlayTrigger(string _motion, float _normalizedTime)
     {
-        if (Animator.StringToHash(string.Format("Base Layer.{0}", _motion)) != MyAni.GetCurrentAnimatorStateInfo(0).fullPathHash)
-            MyAni.Play(_motion, 0, _normalizedTime);
-        else
-            MyAni.StopPlayback();//重播
+        MyAni.Play(_motion, 0, _normalizedTime);
+        //if (Animator.StringToHash(string.Format("Base Layer.{0}", _motion)) != MyAni.GetCurrentAnimatorStateInfo(0).fullPathHash)
+            //MyAni.Play(_motion, 0, _normalizedTime);
+
     }
     public void PlayTrigger_NoPlayback(string _motion, float _normalizedTime)
     {

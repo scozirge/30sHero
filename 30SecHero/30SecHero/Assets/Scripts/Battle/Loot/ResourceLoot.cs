@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ResourceLoot : MonoBehaviour
+public class ResourceLoot : Loot
 {
     [SerializeField]
     Image MyIcon;
@@ -35,6 +35,8 @@ public class ResourceLoot : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D _col)
     {
+        if (!ReadyToAcquire)
+            return;
         if (_col.gameObject.tag == Force.Player.ToString())
         {
             _col.GetComponent<PlayerRole>().GetResource(MyType, ResourceValue);

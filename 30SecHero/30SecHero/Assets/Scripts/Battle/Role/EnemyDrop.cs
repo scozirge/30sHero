@@ -74,7 +74,7 @@ public partial class EnemyRole
         {
             for (int i = 0; i < DesignateLoot.Count; i++)
             {
-                Loot loot = DropSpawner.SpawnLoot(transform.position);
+                PotionLoot loot = DropSpawner.SpawnLoot(transform.position);
                 if (loot) loot.DesignateLoot(DesignateLoot[i]);
             }
         }

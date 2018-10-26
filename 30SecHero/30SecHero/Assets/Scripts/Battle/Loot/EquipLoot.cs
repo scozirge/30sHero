@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class EquipLoot : MonoBehaviour
+[RequireComponent(typeof(AILootMove))]
+public class EquipLoot : Loot
 {
     [SerializeField]
     Transform EquipTrans;
@@ -12,6 +13,8 @@ public class EquipLoot : MonoBehaviour
     [SerializeField]
     ParticleSystem DeathEffect;
     EquipData MyData;
+
+
 
     public void Init(int _lv, int _quality)
     {
@@ -25,6 +28,8 @@ public class EquipLoot : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D _col)
     {
+        if (!ReadyToAcquire)
+            return;
         if (_col.gameObject.tag == Force.Player.ToString())
         {
             _col.GetComponent<PlayerRole>().GetEquip(MyData);
