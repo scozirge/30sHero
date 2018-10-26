@@ -69,7 +69,7 @@ public partial class BattleManage
         Vector2 offset = Vector2.zero;
         for (int i = 0; i < MaxRefindTimes; i++)
         {
-            ai.SetRandDestination();
+            offset = ai.SetRandDestination();
             if (!CheckSelfDestinationCloseToOtherEnemys(ai.Destination))
                 break;
         }
@@ -89,8 +89,8 @@ public partial class BattleManage
     {
         int needForeEnemy = CheckForeEnemyNeedPawnCount();
         int needBackEnemy = CheckBackEnemyNeedPawnCount();
-        Debug.Log("needForeEnemy=" + needForeEnemy);
-        Debug.Log("needBackEnemy=" + needBackEnemy);
+        //Debug.Log("needForeEnemy=" + needForeEnemy);
+        //Debug.Log("needBackEnemy=" + needBackEnemy);
         SpawnOutSideEnemy(true, needForeEnemy);
         SpawnOutSideEnemy(false, needBackEnemy);
     }
@@ -134,14 +134,17 @@ public partial class BattleManage
         posList.Add(pos4);
         Vector3 resultPos = Vector2.zero;
         float curDist = float.MaxValue;
+        //Debug.Log("_offset=" + _offset);
         for (int i = 0; i < posList.Count; i++)
         {
+            //Debug.Log("i=" + i + "=" + posList[i]);
             if (Vector2.Distance(_offset, posList[i]) < curDist)
             {
                 curDist = Vector2.Distance(_offset, posList[i]);
                 resultPos = posList[i];
             }
         }
+        //Debug.Log("resultPos="+resultPos);
         resultPos += MyCameraControler.transform.position;
         return resultPos;
     }
