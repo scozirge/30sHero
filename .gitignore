@@ -8,6 +8,9 @@ Library/
 Designer\Art
 Designer\Questions
 Designer\Reference
+AndroidBuild
+Build
+WebBuild
 Assets/AssetStoreTools*
 Audio
 # ===================================== #
