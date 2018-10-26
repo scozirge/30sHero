@@ -185,6 +185,8 @@ public abstract class Role : MonoBehaviour
         if (Health <= 0)
         {
             IsAlive = false;
+            EffectEmitter.EmitParticle(DeathEffect, transform.position, Vector3.zero, null);
+            AudioPlayer.PlaySound(DeathSound);
             SelfDestroy();
         }
         else IsAlive = true;
@@ -300,10 +302,8 @@ public abstract class Role : MonoBehaviour
             ActiveMonsterSkills.RemoveAt(i);
         }
     }
-    protected virtual void SelfDestroy()
+    public virtual void SelfDestroy()
     {
-        EffectEmitter.EmitParticle(DeathEffect, transform.position, Vector3.zero, null);
-        AudioPlayer.PlaySound(DeathSound);
         Destroy(gameObject);
     }
     public virtual void Attack(Skill _skill)

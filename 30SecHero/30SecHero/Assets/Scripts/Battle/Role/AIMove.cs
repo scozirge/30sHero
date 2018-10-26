@@ -49,7 +49,7 @@ public abstract class AIMove : MonoBehaviour
     protected virtual void Start()
     {
         MyRigi = GetComponent<Rigidbody2D>();
-        if(MoveToPlayer)
+        if (MoveToPlayer)
         {
             MyRigi.velocity = new Vector2(Random.Range(-1200, 1200), Random.Range(-1200, 1200));
         }
@@ -72,7 +72,7 @@ public abstract class AIMove : MonoBehaviour
         Destination = new Vector3(randPosX + nowPos.x, randPosY + nowPos.y, 0);
         return RandomOffset;
     }
-    bool InDestinationRange;
+    protected bool InDestinationRange;
     protected virtual void Debut()
     {
         if (FollowCamera)
@@ -83,7 +83,7 @@ public abstract class AIMove : MonoBehaviour
         }
         if (!InDestinationRange)
         {
-            if (Mathf.Abs(Vector3.Distance(Destination, transform.position)) < 200)
+            if (Vector3.Distance(Destination, transform.position) < 50)
             {
                 InDestinationRange = true;
                 MyRigi.velocity *= 0.3f;
@@ -91,7 +91,7 @@ public abstract class AIMove : MonoBehaviour
         }
 
         if (!Wander && KeepDebut)
-            if (Mathf.Abs(Vector3.Distance(Destination, transform.position)) < 100)
+            if (Vector3.Distance(Destination, transform.position) < 100)
             {
                 KeepDebut = false;
                 MyRigi.velocity = Vector3.zero;

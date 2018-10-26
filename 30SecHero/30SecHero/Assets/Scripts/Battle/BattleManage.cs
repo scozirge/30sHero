@@ -38,6 +38,11 @@ public partial class BattleManage : MonoBehaviour
     public PlayerRole MyPlayer;
     [SerializeField]
     GameObject SceneObject;
+    [SerializeField]
+    int EnemyDistance = 200;
+    [SerializeField]
+    int MaxRefindTimes = 20;
+
 
     static List<EnemyRole> AvailableMillions;
     static List<EnemyRole> AvailableDemonGergons;
@@ -50,6 +55,8 @@ public partial class BattleManage : MonoBehaviour
     public static CameraController MyCameraControler;
     public static int Floor;
     public static Vector2 ScreenSize;
+    float DisableMargin_Left;
+    float DisableMargin_Right;
     float DestructMargin_Left;
     float DestructMargin_Right;
     List<EnemyRole> EnemyList = new List<EnemyRole>();
@@ -59,7 +66,7 @@ public partial class BattleManage : MonoBehaviour
     bool IsInit;
     int EnemySpawnCount;
     public static int EnemyKill;
-    
+
 
     // Use this for initialization
     void Awake()
@@ -124,6 +131,19 @@ public partial class BattleManage : MonoBehaviour
     {
         EnemyKill++;
     }
+    bool CheckSelfDestinationCloseToOtherEnemys(Vector2 _pos)
+    {
+        if (EnemyList.Count == 0)
+            return false;
+        bool result = false;
+        for (int i = 0; i < EnemyList.Count; i++)
+        {
+            float dist = Vector2.Distance(_pos, EnemyList[i].GetComponent<AIRoleMove>().Destination);
+            if (dist < EnemyDistance)
+                return true;
+        }
+        return result;
+    }
     int GetRandomEnemySpawnfCount()
     {
         int spawnCount = 0;
@@ -172,9 +192,15 @@ public partial class BattleManage : MonoBehaviour
         CurSpawnCount++;
         er.transform.SetParent(EnemyParent);
         AIRoleMove ai = er.GetComponent<AIRoleMove>();
-        Vector2 offset = ai.SetRandDestination();
-        er.transform.position = GetSpawnPos(offset);
-
+        Vector2 offset = Vector2.zero;
+        for (int i = 0; i < MaxRefindTimes; i++)
+        {
+            ai.SetRandDestination();
+            if (!CheckSelfDestinationCloseToOtherEnemys(ai.Destination))
+                break;
+        }
+        Vector2 spawnPos = GetSpawnPos(offset);
+        er.transform.position = spawnPos;
         if (CurSpawnCount < GetRandomEnemySpawnfCount())
             StartCoroutine(WaitToSpawnEnemy());
         else
@@ -198,7 +224,7 @@ public partial class BattleManage : MonoBehaviour
         posList.Add(pos4);
         Vector3 resultPos = Vector2.zero;
         float curDist = float.MaxValue;
-        for(int i=0;i<posList.Count;i++)
+        for (int i = 0; i < posList.Count; i++)
         {
             if (Vector2.Distance(_offset, posList[i]) < curDist)
             {
@@ -281,9 +307,9 @@ public partial class BattleManage : MonoBehaviour
         {
             InActivityOutSideEnemysAndLoots();
             UpdateCurPlate();
-            if (SpawnEnemyTimer!=null)
+            if (SpawnEnemyTimer != null)
                 SpawnEnemyTimer.RunTimer();
-            if (SpawnLootTimer!=null)
+            if (SpawnLootTimer != null)
                 SpawnLootTimer.RunTimer();
         }
         else if (Player.IsInit)
@@ -291,8 +317,10 @@ public partial class BattleManage : MonoBehaviour
     }
     void InActivityOutSideEnemysAndLoots()
     {
-        DestructMargin_Left = (MyCameraControler.transform.position.x - (ScreenSize.x / 2 + 200));
-        DestructMargin_Right = (MyCameraControler.transform.position.x + (ScreenSize.x / 2 + 200));
+        DisableMargin_Left = (MyCameraControler.transform.position.x - (ScreenSize.x / 2 + 300));
+        DisableMargin_Right = (MyCameraControler.transform.position.x + (ScreenSize.x / 2 + 300));
+        DestructMargin_Left = DisableMargin_Left - 2000;
+        DestructMargin_Right = DisableMargin_Right + 2000;
         //Enemys
         for (int i = 0; i < EnemyList.Count; i++)
         {
@@ -302,10 +330,15 @@ public partial class BattleManage : MonoBehaviour
             {
                 if (EnemyList[i].Type != EnemyType.Demogorgon)
                 {
-                    if (EnemyList[i].transform.position.x < DestructMargin_Left ||
-    EnemyList[i].transform.position.x > DestructMargin_Right)
+                    if (EnemyList[i].transform.position.x < DisableMargin_Left ||
+                        EnemyList[i].transform.position.x > DisableMargin_Right)
                     {
                         EnemyList[i].gameObject.SetActive(false);
+                        if (EnemyList[i].transform.position.x < DestructMargin_Left ||
+                            EnemyList[i].transform.position.x > DestructMargin_Right)
+                        {
+                            EnemyList[i].SelfDestroy();
+                        }
                     }
                     else
                     {

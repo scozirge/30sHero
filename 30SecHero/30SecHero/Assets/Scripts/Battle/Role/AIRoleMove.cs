@@ -31,8 +31,10 @@ public class AIRoleMove : AIMove
 
         if (KeepDebut || FollowCamera)
         {
-            Vector2 targetVel = (Destination - (Vector2)transform.position).normalized * FollowCameraSpeed;
-            MyRigi.velocity = Vector2.Lerp(MyRigi.velocity, targetVel, RotateFactor);
+            float spped = (InDestinationRange) ? FollowCameraSpeed : DebutSpeed;
+            float rotateSpeed = (InDestinationRange) ? RotateFactor : 1;
+            Vector2 targetVel = (Destination - (Vector2)transform.position).normalized * spped;
+            MyRigi.velocity = Vector2.Lerp(MyRigi.velocity, targetVel, rotateSpeed);
         }
     }
     protected override void WanderMovement()

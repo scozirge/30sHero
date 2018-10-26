@@ -4079,6 +4079,8 @@ MonoBehaviour:
   CameraControler: {fileID: 519420030}
   MyPlayer: {fileID: 371345243}
   SceneObject: {fileID: 2002856603}
+  EnemyDistance: 200
+  MaxRefindTimes: 20
   SettlementObj: {fileID: 623092008}
   FloorClearText: {fileID: 1123841256}
   MaxFloorText: {fileID: 1529749857}

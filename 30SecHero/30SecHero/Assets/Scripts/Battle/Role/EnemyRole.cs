@@ -143,11 +143,20 @@ public partial class EnemyRole : Role
         if (!IsAlive && _attackerForce == Force.Player)
             BattleManage.AddEnemyKill();
     }
-    protected override void SelfDestroy()
+    protected override bool DeathCheck()
+    {
+        if (base.DeathCheck())
+        {
+            Drop();
+            return true;
+        }
+        else
+            return false;
+    }
+    public override void SelfDestroy()
     {
         BattleManage.RemoveEnemy(this);
         base.SelfDestroy();
-        Drop();
     }
 
     protected override void Update()

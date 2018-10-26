@@ -262,7 +262,7 @@ public partial class PlayerRole : Role
         CameraController.PlayMotion("Shake1");
         AudioPlayer.PlaySound(AttackSound);
     }
-    protected override void SelfDestroy()
+    public override void SelfDestroy()
     {
         base.SelfDestroy();
         BattleManage.BM.CalculateResult();

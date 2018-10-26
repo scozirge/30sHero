@@ -77,18 +77,32 @@ public partial class Player
     }
     public static void GetLocalData()
     {
+        //PlayerPrefs.DeleteKey(LocoData.Init.ToString());
         //PlayerPrefs.DeleteKey(LocoData.Equip.ToString());
         //PlayerPrefs.DeleteKey(LocoData.Strengthen.ToString());
         //PlayerPrefs.DeleteKey(LocoData.SoundOn.ToString());
         //PlayerPrefs.DeleteKey(LocoData.MusicOn.ToString());
         //設定
-        SetLanguage((Language)PlayerPrefs.GetInt("UseLanguage"));
+        bool ClearAllLocoData = false;
+        if(ClearAllLocoData)
+        {
+            PlayerPrefs.DeleteKey(LocoData.UseLanguage.ToString());
+            PlayerPrefs.DeleteKey(LocoData.Init.ToString());
+            PlayerPrefs.DeleteKey(LocoData.Equip.ToString());
+            PlayerPrefs.DeleteKey(LocoData.Strengthen.ToString());
+            PlayerPrefs.DeleteKey(LocoData.SoundOn.ToString());
+            PlayerPrefs.DeleteKey(LocoData.MusicOn.ToString());
+        }
+
         if (PlayerPrefs.GetInt(LocoData.Init.ToString()) == 0)
         {
             PlayerPrefs.SetInt(LocoData.SoundOn.ToString(), 1);
-            PlayerPrefs.SetInt(LocoData.SoundOn.ToString(), 1);
+            PlayerPrefs.SetInt(LocoData.MusicOn.ToString(), 1);
             PlayerPrefs.SetInt(LocoData.Init.ToString(), 1);
+            PlayerPrefs.SetInt(LocoData.UseLanguage.ToString(), 0);
         }
+        //Debug.Log((Language)PlayerPrefs.GetInt(LocoData.UseLanguage.ToString()));
+        SetLanguage((Language)PlayerPrefs.GetInt(LocoData.UseLanguage.ToString()));
         if (PlayerPrefs.GetInt(LocoData.MusicOn.ToString()) == 1)
             SetMusic(true);
         else
