@@ -25,6 +25,10 @@ public partial class BattleManage : MonoBehaviour
     [SerializeField]
     int MaxEnemy;
     [SerializeField]
+    int MaxForeEnemy;
+    [SerializeField]
+    int MaxBackEnemy;
+    [SerializeField]
     int MaxLoot;
     [SerializeField]
     List<EnemyRole> Enemys;
@@ -55,10 +59,12 @@ public partial class BattleManage : MonoBehaviour
     public static CameraController MyCameraControler;
     public static int Floor;
     public static Vector2 ScreenSize;
-    float DisableMargin_Left;
-    float DisableMargin_Right;
-    float DestructMargin_Left;
-    float DestructMargin_Right;
+    static float DisableMargin_Left;
+    static float DisableMargin_Right;
+    static float DestructMargin_Left;
+    static float DestructMargin_Right;
+    public static float DisableMarginLengh = 300;
+    public static float DestructMarginLength = 2000;
     List<EnemyRole> EnemyList = new List<EnemyRole>();
     List<Loot> LootList = new List<Loot>();
     static int NextDemogorgonFloor;
@@ -66,6 +72,7 @@ public partial class BattleManage : MonoBehaviour
     bool IsInit;
     int EnemySpawnCount;
     public static int EnemyKill;
+    
 
 
     // Use this for initialization
@@ -131,132 +138,8 @@ public partial class BattleManage : MonoBehaviour
     {
         EnemyKill++;
     }
-    bool CheckSelfDestinationCloseToOtherEnemys(Vector2 _pos)
-    {
-        if (EnemyList.Count == 0)
-            return false;
-        bool result = false;
-        for (int i = 0; i < EnemyList.Count; i++)
-        {
-            float dist = Vector2.Distance(_pos, EnemyList[i].GetComponent<AIRoleMove>().Destination);
-            if (dist < EnemyDistance)
-                return true;
-        }
-        return result;
-    }
-    int GetRandomEnemySpawnfCount()
-    {
-        int spawnCount = 0;
-        if (IsFirstHalf)
-            spawnCount = Random.Range(EnemyFirstHalfMinCount, EnemyFirstHalfMaxCount);
-        else
-            spawnCount = Random.Range(EnemySecondHalfMinCount, EnemySecondHalfMaxCount);
-        return spawnCount;
-    }
-    void SpawnDemogorgon()
-    {
-        for (int i = 0; i < AvailableDemonGergons.Count; i++)
-        {
-            EnemyRole er = Instantiate(AvailableDemonGergons[i], Vector3.zero, Quaternion.identity) as EnemyRole;
-            er.SetEnemyData(GameDictionary.EnemyDic[AvailableDemonGergons[i].ID]);
-            //Set SpawnPos
-            er.transform.SetParent(EnemyParent);
-            EnemyList.Add(er);
-        }
-        AvailableDemonGergons = EnemyData.GetNextDemogorgon(Floor + 1, out NextDemogorgonFloor);
-        //Debug.Log("NextDemogorgonFloor=" + NextDemogorgonFloor);
-        IsDemogorgonFloor = false;
-    }
-    void SpanwEnemy()
-    {
-        if (!CheckEnemySpawnLimit())
-        {
-            CurSpawnCount = 0;
-            SpawnEnemyTimer.StartRunTimer = true;
-            UpdateSpawnEnmeyTimer();
-            return;
-        }
-        if (AvailableMillions.Count == 0)
-            return;
 
-        EnemyRole er;
-        if (DesignatedEnemy && TestMode)
-            er = Instantiate(DesignatedEnemy, Vector3.zero, Quaternion.identity) as EnemyRole;
-        else
-        {
-            int rndEnemy = Random.Range(0, AvailableMillions.Count);
-            er = Instantiate(AvailableMillions[rndEnemy], Vector3.zero, Quaternion.identity) as EnemyRole;
-            if (GameDictionary.EnemyDic.ContainsKey(AvailableMillions[rndEnemy].ID))
-                er.SetEnemyData(GameDictionary.EnemyDic[AvailableMillions[rndEnemy].ID]);
-        }
-        CurSpawnCount++;
-        er.transform.SetParent(EnemyParent);
-        AIRoleMove ai = er.GetComponent<AIRoleMove>();
-        Vector2 offset = Vector2.zero;
-        for (int i = 0; i < MaxRefindTimes; i++)
-        {
-            ai.SetRandDestination();
-            if (!CheckSelfDestinationCloseToOtherEnemys(ai.Destination))
-                break;
-        }
-        Vector2 spawnPos = GetSpawnPos(offset);
-        er.transform.position = spawnPos;
-        if (CurSpawnCount < GetRandomEnemySpawnfCount())
-            StartCoroutine(WaitToSpawnEnemy());
-        else
-        {
-            CurSpawnCount = 0;
-            SpawnEnemyTimer.StartRunTimer = true;
-            UpdateSpawnEnmeyTimer();
-        }
-        EnemyList.Add(er);
-    }
-    Vector2 GetSpawnPos(Vector2 _offset)
-    {
-        Vector2 pos1 = new Vector2(_offset.x, ScreenSize.y / 2);
-        Vector2 pos2 = new Vector2(_offset.x, -ScreenSize.y / 2);
-        Vector2 pos3 = new Vector2(ScreenSize.x / 2, _offset.y);
-        Vector2 pos4 = new Vector2(-ScreenSize.x / 2, _offset.y);
-        List<Vector2> posList = new List<Vector2>();
-        posList.Add(pos1);
-        posList.Add(pos2);
-        posList.Add(pos3);
-        posList.Add(pos4);
-        Vector3 resultPos = Vector2.zero;
-        float curDist = float.MaxValue;
-        for (int i = 0; i < posList.Count; i++)
-        {
-            if (Vector2.Distance(_offset, posList[i]) < curDist)
-            {
-                curDist = Vector2.Distance(_offset, posList[i]);
-                resultPos = posList[i];
-            }
-        }
-        resultPos += MyCameraControler.transform.position;
-        return resultPos;
-    }
-    void UpdateSpawnEnmeyTimer()
-    {
-        //每次出怪後重新確認出怪時間
-        if (IsFirstHalf)
-            SpawnEnemyTimer.ResetMaxTime(EnemyFirstHalfInterval);
-        else
-            SpawnEnemyTimer.ResetMaxTime(EnemySecondHalfInterval);
-    }
-    bool CheckEnemySpawnLimit()
-    {
-        if (MaxEnemy == 0)
-            return true;
-        int cout = 0;
-        for (int i = 0; i < EnemyList.Count; i++)
-        {
-            if (EnemyList[i].isActiveAndEnabled)
-                cout++;
-        }
-        if (cout < MaxEnemy)
-            return true;
-        return false;
-    }
+
     bool CheckLootSpawnLimit()
     {
         if (MaxLoot == 0)
@@ -287,11 +170,7 @@ public partial class BattleManage : MonoBehaviour
         SpawnLootTimer.StartRunTimer = true;
         LootList.Add(loot);
     }
-    IEnumerator WaitToSpawnEnemy()
-    {
-        yield return new WaitForSeconds(EnemySpawnInterval);
-        SpanwEnemy();
-    }
+
     public static void RemoveEnemy(EnemyRole _er)
     {
         BM.EnemyList.Remove(_er);
@@ -317,10 +196,10 @@ public partial class BattleManage : MonoBehaviour
     }
     void InActivityOutSideEnemysAndLoots()
     {
-        DisableMargin_Left = (MyCameraControler.transform.position.x - (ScreenSize.x / 2 + 300));
-        DisableMargin_Right = (MyCameraControler.transform.position.x + (ScreenSize.x / 2 + 300));
-        DestructMargin_Left = DisableMargin_Left - 2000;
-        DestructMargin_Right = DisableMargin_Right + 2000;
+        DisableMargin_Left = (MyCameraControler.transform.position.x - (ScreenSize.x / 2 + DisableMarginLengh));
+        DisableMargin_Right = (MyCameraControler.transform.position.x + (ScreenSize.x / 2 + DisableMarginLengh));
+        DestructMargin_Left = DisableMargin_Left - DestructMarginLength;
+        DestructMargin_Right = DisableMargin_Right + DestructMarginLength;
         //Enemys
         for (int i = 0; i < EnemyList.Count; i++)
         {
@@ -355,7 +234,7 @@ public partial class BattleManage : MonoBehaviour
             else
             {
                 if (LootList[i].transform.position.x < DestructMargin_Left ||
-LootList[i].transform.position.x > DestructMargin_Right)
+                    LootList[i].transform.position.x > DestructMargin_Right)
                 {
                     LootList[i].gameObject.SetActive(false);
                 }

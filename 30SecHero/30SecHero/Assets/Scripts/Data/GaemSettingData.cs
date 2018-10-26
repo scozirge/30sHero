@@ -101,6 +101,8 @@ public class GameSettingData : Data
     public static int EnemyDropGold;
     public static float EnemyDropGoldOffset;
     public static int MaxEnemy;
+    public static int MaxForeEnemy;
+    public static int MaxBackEnemy;
     public static int MaxLoot;
     public static int FloorPlate;
     public static int BossDebutPlate;
@@ -437,6 +439,12 @@ public class GameSettingData : Data
                                 break;
                             case "MaxEnemy":
                                 MaxEnemy = int.Parse(item[key].ToString());
+                                break;
+                            case "MaxForeEnemy":
+                                MaxForeEnemy = int.Parse(item[key].ToString());
+                                break;
+                            case "MaxBackEnemy":
+                                MaxBackEnemy = int.Parse(item[key].ToString());
                                 break;
                             case "MaxLoot":
                                 MaxLoot = int.Parse(item[key].ToString());

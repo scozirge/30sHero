@@ -64,12 +64,30 @@ public abstract class AIMove : MonoBehaviour
     }
     public Vector2 SetRandDestination()
     {
-        float randPosX = Random.Range(-BattleManage.ScreenSize.x / 2 + 200, BattleManage.ScreenSize.x / 2 - 200);
+        float randPosX = Random.Range(-BattleManage.ScreenSize.x / 2, BattleManage.ScreenSize.x / 2);
         float randPosY = Random.Range(-BattleManage.ScreenSize.y / 2 + 200, BattleManage.ScreenSize.y / 2 - 200);
         RandomOffset = new Vector2(randPosX, randPosY);
-        Vector2 nowPos = Vector2.zero;
-        nowPos = BattleManage.MyCameraControler.transform.position;
-        Destination = new Vector3(randPosX + nowPos.x, randPosY + nowPos.y, 0);
+        Vector2 camPos = Vector2.zero;
+        camPos = BattleManage.MyCameraControler.transform.position;
+        Destination = new Vector3(randPosX + camPos.x, randPosY + camPos.y, 0);
+        return RandomOffset;
+    }
+    public Vector2 SetRandOutSideDestination(bool _fore)
+    {
+
+        int dir = 1;
+        if (!_fore)
+            dir = -1;
+        float halfScreenSize = BattleManage.ScreenSize.x / 2;
+        float randPosX = Random.Range(-halfScreenSize, halfScreenSize);
+        float randPosY = Random.Range(-BattleManage.ScreenSize.y / 2 + 200, BattleManage.ScreenSize.y / 2 - 200);
+        RandomOffset = new Vector2(randPosX, randPosY);
+        Vector2 camPos = Vector2.zero;
+        float randDesX = Random.Range((halfScreenSize + BattleManage.DisableMarginLengh) * dir, halfScreenSize * 3 * dir);
+        float randDesY = Random.Range(-BattleManage.ScreenSize.y / 2 + 200, BattleManage.ScreenSize.y / 2 - 200);
+        camPos = BattleManage.MyCameraControler.transform.position;
+        Destination = new Vector3(randDesX + camPos.x, randDesY + camPos.y, 0);
+        FollowCamera = false;
         return RandomOffset;
     }
     protected bool InDestinationRange;
