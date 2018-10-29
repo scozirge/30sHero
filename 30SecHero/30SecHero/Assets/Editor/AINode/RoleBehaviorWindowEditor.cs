@@ -3,10 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEditorInternal;
-
-[CustomEditor(typeof(RoleBehavior))]
-public class RoleBehaviorEditor : Editor
+public class RoleBehaviorWindowEditor : EditorWindow
 {
+
     RoleBehavior MyRoleBehavior;
     SerializedObject GetTarget;
     SerializedProperty NodeList;
@@ -14,12 +13,43 @@ public class RoleBehaviorEditor : Editor
     GUIStyle FoldoutStyle;
     GUIStyle LabelStyle;
     ReorderableList NodeReorderableList;
+    SerializedObject MySerializedObject;
+    Vector2 ScrollPos;
+    [MenuItem("Window/RoleBehavior")]
+    public static void ShowWindow()
+    {
+        //Show existing window instance. If one doesn't exist, make one.
+        EditorWindow.GetWindow(typeof(RoleBehaviorWindowEditor));
+        RoleBehaviorWindowEditor window = (RoleBehaviorWindowEditor)EditorWindow.GetWindow(typeof(RoleBehaviorWindowEditor), true, "RoleBehavior");
+        GUIContent titleContent = new GUIContent();
+        titleContent.text = "RoleBehavior";
+        Texture icon = AssetDatabase.LoadAssetAtPath<Texture>("Assets/Editor/AINode/RoleBehaviorIcon.png");
+        titleContent.image = icon;
+        window.titleContent = titleContent;
+        window.Show();
+    }
+    void OnSelectionChange()
+    {
+        GetRoleBehaviorData();
+    }
     void OnEnable()
     {
-        MyRoleBehavior = (RoleBehavior)target;
+        GetRoleBehaviorData();
+    }
+    void GetRoleBehaviorData()
+    {
+        foreach (GameObject go in Selection.gameObjects)
+        {
+            if (go.GetComponent<RoleBehavior>() != null)
+            {
+                MyRoleBehavior = go.GetComponent<RoleBehavior>();
+            }
+        }
+        if (MyRoleBehavior == null)
+            return;
         GetTarget = new SerializedObject(MyRoleBehavior);
         NodeList = GetTarget.FindProperty("Nodes");
-        NodeReorderableList = new ReorderableList(serializedObject, NodeList, true, true, true, true);
+        NodeReorderableList = new ReorderableList(GetTarget, NodeList, true, true, true, true);
         NodeReorderableList.drawHeaderCallback = (Rect rect) =>
         {
             GUI.Label(rect, "Node List");
@@ -27,56 +57,17 @@ public class RoleBehaviorEditor : Editor
         NodeReorderableList.drawElementCallback = DrawNameElement;
         NodeReorderableList.onRemoveCallback = RemoveNode;
     }
-    void RemoveNode(ReorderableList _list)
+    void OnGUI()
     {
-        if (EditorUtility.DisplayDialog("Remove Node", "Are you sure to remove this node?", "yes", "noooo!"))
-        {
-            ReorderableList.defaultBehaviours.DoRemoveButton(_list);
-        }
-    }
-    void RemoveNode(Node _node)
-    {
-        if (EditorUtility.DisplayDialog("Remove Node", "Are you sure to remove this node?", "yes", "noooo!"))
-        {
-            MyRoleBehavior.Nodes.Remove(_node);
-        }
-    }
-    void Duplicate(Node _node)
-    {
-        if (EditorUtility.DisplayDialog("Duplicate Node", "Are you sure to duplicate this node?", "yes", "nooo!"))
-        {
-            MyRoleBehavior.Nodes.Add(_node.GetMemberwiseClone());
-        }
-    }
-    void DrawNameElement(Rect _rect, int _index, bool _selected, bool _focused)
-    {
-        SerializedProperty nodeData = NodeReorderableList.serializedProperty.GetArrayElementAtIndex(_index);
-        _rect.y += 2;
-        _rect.height = EditorGUIUtility.singleLineHeight;
-        SerializedProperty type = nodeData.FindPropertyRelative("Type");
-        SerializedProperty nodeTag = nodeData.FindPropertyRelative("NodeTag");
-        string description = nodeData.FindPropertyRelative("Description").stringValue;
-        string nodeLabel = "Action" + _index + ":" + (ActionType)type.enumValueIndex;
-        if (nodeTag.stringValue != "")
-            nodeLabel += " [" + nodeTag.stringValue + "]";
-        if (description != "")
-            nodeLabel += "(" + description + ")";
-        EditorGUI.LabelField(_rect, new GUIContent(nodeLabel, description));
-    }
-    public override void OnInspectorGUI()
-    {
+        if (MyRoleBehavior == null)
+            return;
+        GetTarget.Update();
+        ScrollPos = EditorGUILayout.BeginScrollView(ScrollPos, GUILayout.Width(position.width), GUILayout.Height(position.height));
+        NodeReorderableList.DoLayoutList();
         FoldoutStyle = new GUIStyle(EditorStyles.foldout);
         FoldoutStyle.fontStyle = FontStyle.Bold;
         ButtonStyle = new GUIStyle(GUI.skin.button);
-        GetTarget.Update();
-        if (GUILayout.Button("Open RoleBehaviorEditor", ButtonStyle))
-        {
-            EditorWindow.GetWindowWithRect(typeof(RoleBehaviorWindowEditor), new Rect(0, 0, 800, Screen.height));
-        }
-        NodeReorderableList.DoLayoutList();
 
-
-        /*
         for (int i = 0; i < NodeList.arraySize; i++)
         {
             SerializedProperty myListRef = NodeList.GetArrayElementAtIndex(i);
@@ -85,17 +76,19 @@ public class RoleBehaviorEditor : Editor
             SerializedProperty type = myListRef.FindPropertyRelative("Type");
             SerializedProperty relativeToTarget = myListRef.FindPropertyRelative("RelativeToTarget");
             SerializedProperty nodeTag = myListRef.FindPropertyRelative("NodeTag");
+            SerializedProperty description = myListRef.FindPropertyRelative("Description");
             if (nodeTag.stringValue != "")
-                expand.boolValue = EditorGUILayout.Foldout(expand.boolValue, "Action" + i + ":" + (ActionType)type.enumValueIndex + "(" + nodeTag.stringValue + ")", FoldoutStyle);
+                expand.boolValue = EditorGUILayout.Foldout(expand.boolValue, "Action" + i + ":" + (ActionType)type.enumValueIndex + " [" + nodeTag.stringValue + "]", FoldoutStyle);
             else
                 expand.boolValue = EditorGUILayout.Foldout(expand.boolValue, "Action" + i + ":" + (ActionType)type.enumValueIndex, FoldoutStyle);
             if (expand.boolValue)
             {
+                EditorGUILayout.PropertyField(description, new GUIContent("Description(註解)"));
                 EditorGUIUtility.labelWidth = 140;
                 SerializedProperty activeOnlyByEvent = myListRef.FindPropertyRelative("ActiveOnlyByEvent");
                 EditorGUILayout.PropertyField(activeOnlyByEvent);
                 EditorGUIUtility.labelWidth = 100;
-                EditorGUILayout.PropertyField(nodeTag);                
+                EditorGUILayout.PropertyField(nodeTag);
                 SerializedProperty waitTime = myListRef.FindPropertyRelative("WaitSecond");
                 EditorGUILayout.PropertyField(waitTime);
                 EditorGUILayout.PropertyField(type, new GUIContent("ActionType"));
@@ -202,7 +195,7 @@ public class RoleBehaviorEditor : Editor
                             EditorGUILayout.BeginHorizontal(GUI.skin.label);
                             EditorGUIUtility.labelWidth = 40;
                             EditorGUILayout.PropertyField(goToNodes.GetArrayElementAtIndex(j).FindPropertyRelative("Key"), new GUIContent("Tag"));
-                            EditorGUILayout.PropertyField(goToNodes.GetArrayElementAtIndex(j).FindPropertyRelative("Weight"),new GUIContent("Weit"));
+                            EditorGUILayout.PropertyField(goToNodes.GetArrayElementAtIndex(j).FindPropertyRelative("Weight"), new GUIContent("Weit"));
                             EditorGUILayout.EndHorizontal();
                         }
                     }
@@ -222,7 +215,43 @@ public class RoleBehaviorEditor : Editor
                 }
             }
         }
-         */
         GetTarget.ApplyModifiedProperties();
+        EditorGUILayout.EndScrollView();
+    }
+    void RemoveNode(ReorderableList _list)
+    {
+        if (EditorUtility.DisplayDialog("Remove Node", "Are you sure to remove this node?", "yes", "noooo!"))
+        {
+            ReorderableList.defaultBehaviours.DoRemoveButton(_list);
+        }
+    }
+    void RemoveNode(Node _node)
+    {
+        if (EditorUtility.DisplayDialog("Remove Node", "Are you sure to remove this node?", "yes", "noooo!"))
+        {
+            MyRoleBehavior.Nodes.Remove(_node);
+        }
+    }
+    void Duplicate(Node _node)
+    {
+        if (EditorUtility.DisplayDialog("Duplicate Node", "Are you sure to duplicate this node?", "yes", "nooo!"))
+        {
+            MyRoleBehavior.Nodes.Add(_node.GetMemberwiseClone());
+        }
+    }
+    void DrawNameElement(Rect _rect, int _index, bool _selected, bool _focused)
+    {
+        SerializedProperty nodeData = NodeReorderableList.serializedProperty.GetArrayElementAtIndex(_index);
+        _rect.y += 2;
+        _rect.height = EditorGUIUtility.singleLineHeight;
+        SerializedProperty type = nodeData.FindPropertyRelative("Type");
+        SerializedProperty nodeTag = nodeData.FindPropertyRelative("NodeTag");
+        string description = nodeData.FindPropertyRelative("Description").stringValue;
+        string nodeLabel = "Action" + _index + ":" + (ActionType)type.enumValueIndex;
+        if (nodeTag.stringValue != "")
+            nodeLabel += " [" + nodeTag.stringValue + "]";
+        if (description != "")
+            nodeLabel += "(" + description + ")";
+        EditorGUI.LabelField(_rect, new GUIContent(nodeLabel, description));
     }
 }

@@ -3782,6 +3782,21 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 114422440799953896, guid: 6ebb4c4b897bb714abe17e4ca528fd60,
         type: 2}
+      propertyPath: Nodes.Array.data[7].SoundList.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114422440799953896, guid: 6ebb4c4b897bb714abe17e4ca528fd60,
+        type: 2}
+      propertyPath: Nodes.Array.data[4].SkillList.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114422440799953896, guid: 6ebb4c4b897bb714abe17e4ca528fd60,
+        type: 2}
+      propertyPath: Nodes.Array.data[6].SkillList.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114422440799953896, guid: 6ebb4c4b897bb714abe17e4ca528fd60,
+        type: 2}
       propertyPath: Nodes.Array.data[11].SkillList.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -3913,7 +3928,7 @@ Prefab:
     - target: {fileID: 114422440799953896, guid: 6ebb4c4b897bb714abe17e4ca528fd60,
         type: 2}
       propertyPath: Nodes.Array.data[0].NodeTag
-      value: 
+      value: test
       objectReference: {fileID: 0}
     - target: {fileID: 114422440799953896, guid: 6ebb4c4b897bb714abe17e4ca528fd60,
         type: 2}
@@ -4279,7 +4294,7 @@ Prefab:
         type: 2}
       propertyPath: Nodes.Array.data[2].SkillList.Array.data[0]
       value: 
-      objectReference: {fileID: 749788059}
+      objectReference: {fileID: 749788069}
     - target: {fileID: 114422440799953896, guid: 6ebb4c4b897bb714abe17e4ca528fd60,
         type: 2}
       propertyPath: Nodes.Array.data[3].SoundList.Array.data[0]
@@ -4653,6 +4668,56 @@ Prefab:
       propertyPath: Nodes.Array.data[10].SkillList.Array.data[0]
       value: 
       objectReference: {fileID: 749788059}
+    - target: {fileID: 114422440799953896, guid: 6ebb4c4b897bb714abe17e4ca528fd60,
+        type: 2}
+      propertyPath: Nodes.Array.data[0].Description
+      value: "\u79FB\u52D5\u8AAA\u660E"
+      objectReference: {fileID: 0}
+    - target: {fileID: 114422440799953896, guid: 6ebb4c4b897bb714abe17e4ca528fd60,
+        type: 2}
+      propertyPath: Nodes.Array.data[7].SoundList.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 92d3259b6a9732e4ba3fb95331b2c95d, type: 3}
+    - target: {fileID: 114422440799953896, guid: 6ebb4c4b897bb714abe17e4ca528fd60,
+        type: 2}
+      propertyPath: Nodes.Array.data[4].SkillList.Array.data[0]
+      value: 
+      objectReference: {fileID: 749788068}
+    - target: {fileID: 114422440799953896, guid: 6ebb4c4b897bb714abe17e4ca528fd60,
+        type: 2}
+      propertyPath: Nodes.Array.data[6].SkillList.Array.data[0]
+      value: 
+      objectReference: {fileID: 749788069}
+    - target: {fileID: 114422440799953896, guid: 6ebb4c4b897bb714abe17e4ca528fd60,
+        type: 2}
+      propertyPath: Nodes.Array.data[5].WaitSecond
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114422440799953896, guid: 6ebb4c4b897bb714abe17e4ca528fd60,
+        type: 2}
+      propertyPath: Nodes.Array.data[6].WaitSecond
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114422440799953896, guid: 6ebb4c4b897bb714abe17e4ca528fd60,
+        type: 2}
+      propertyPath: Nodes.Array.data[4].WaitSecond
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114422440799953896, guid: 6ebb4c4b897bb714abe17e4ca528fd60,
+        type: 2}
+      propertyPath: Nodes.Array.data[3].WaitSecond
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114422440799953896, guid: 6ebb4c4b897bb714abe17e4ca528fd60,
+        type: 2}
+      propertyPath: Nodes.Array.data[2].WaitSecond
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114422440799953896, guid: 6ebb4c4b897bb714abe17e4ca528fd60,
+        type: 2}
+      propertyPath: Nodes.Array.data[1].WaitSecond
+      value: 0.3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6ebb4c4b897bb714abe17e4ca528fd60, type: 2}
   m_IsPrefabAsset: 0

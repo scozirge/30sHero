@@ -53,6 +53,9 @@ public class Node
     [Tooltip("音效清單")]
     [SerializeField]
     public List<AudioClip> SoundList;
+    [Tooltip("註解")]
+    [SerializeField]
+    public string Description;
 
     public Node GetMemberwiseClone()
     {
