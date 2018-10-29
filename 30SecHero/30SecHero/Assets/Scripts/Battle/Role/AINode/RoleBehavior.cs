@@ -60,6 +60,10 @@ public class RoleBehavior : MonoBehaviour
             case ActionType.Teleport:
                 Destination = GetRelativeDestination(_node);
                 transform.position = Destination;
+                if (Nodes[CurNodeIndex].LocoParticle != null)
+                    EffectEmitter.EmitParticle(Nodes[CurNodeIndex].LocoParticle, Vector2.zero, Vector2.zero, transform);
+                if (Nodes[CurNodeIndex].WorldPartilce != null)
+                    EffectEmitter.EmitParticle(Nodes[CurNodeIndex].WorldPartilce, transform.position, Vector2.zero, null);
                 CheckRandomNode();
                 break;
             case ActionType.Perform:

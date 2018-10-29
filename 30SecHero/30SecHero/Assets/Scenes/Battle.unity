@@ -3718,7 +3718,7 @@ Prefab:
     - target: {fileID: 114422440799953896, guid: 6ebb4c4b897bb714abe17e4ca528fd60,
         type: 2}
       propertyPath: Nodes.Array.size
-      value: 12
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 114422440799953896, guid: 6ebb4c4b897bb714abe17e4ca528fd60,
         type: 2}
@@ -3777,7 +3777,22 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 114422440799953896, guid: 6ebb4c4b897bb714abe17e4ca528fd60,
         type: 2}
+      propertyPath: Nodes.Array.data[9].GoToNodes.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114422440799953896, guid: 6ebb4c4b897bb714abe17e4ca528fd60,
+        type: 2}
       propertyPath: Nodes.Array.data[11].SkillList.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114422440799953896, guid: 6ebb4c4b897bb714abe17e4ca528fd60,
+        type: 2}
+      propertyPath: Nodes.Array.data[10].GoToNodes.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114422440799953896, guid: 6ebb4c4b897bb714abe17e4ca528fd60,
+        type: 2}
+      propertyPath: Nodes.Array.data[10].SkillList.Array.size
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224974561233012904, guid: 6ebb4c4b897bb714abe17e4ca528fd60,
@@ -3943,7 +3958,7 @@ Prefab:
     - target: {fileID: 114422440799953896, guid: 6ebb4c4b897bb714abe17e4ca528fd60,
         type: 2}
       propertyPath: Nodes.Array.data[0].RelativeToTarget
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 114422440799953896, guid: 6ebb4c4b897bb714abe17e4ca528fd60,
         type: 2}
@@ -3963,7 +3978,7 @@ Prefab:
     - target: {fileID: 114422440799953896, guid: 6ebb4c4b897bb714abe17e4ca528fd60,
         type: 2}
       propertyPath: Nodes.Array.data[6].RelativeToTarget
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 114422440799953896, guid: 6ebb4c4b897bb714abe17e4ca528fd60,
         type: 2}
@@ -4063,7 +4078,7 @@ Prefab:
     - target: {fileID: 114422440799953896, guid: 6ebb4c4b897bb714abe17e4ca528fd60,
         type: 2}
       propertyPath: Nodes.Array.data[8].Destination.x
-      value: -300
+      value: -350
       objectReference: {fileID: 0}
     - target: {fileID: 114422440799953896, guid: 6ebb4c4b897bb714abe17e4ca528fd60,
         type: 2}
@@ -4093,7 +4108,7 @@ Prefab:
     - target: {fileID: 114422440799953896, guid: 6ebb4c4b897bb714abe17e4ca528fd60,
         type: 2}
       propertyPath: Nodes.Array.data[2].RelativeToTarget
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 114422440799953896, guid: 6ebb4c4b897bb714abe17e4ca528fd60,
         type: 2}
@@ -4148,7 +4163,7 @@ Prefab:
     - target: {fileID: 114422440799953896, guid: 6ebb4c4b897bb714abe17e4ca528fd60,
         type: 2}
       propertyPath: Nodes.Array.data[4].RelativeToTarget
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 114422440799953896, guid: 6ebb4c4b897bb714abe17e4ca528fd60,
         type: 2}
@@ -4324,7 +4339,7 @@ Prefab:
     - target: {fileID: 114422440799953896, guid: 6ebb4c4b897bb714abe17e4ca528fd60,
         type: 2}
       propertyPath: Nodes.Array.data[8].NodeTag
-      value: TeleportAttack1
+      value: Teleport1
       objectReference: {fileID: 0}
     - target: {fileID: 114422440799953896, guid: 6ebb4c4b897bb714abe17e4ca528fd60,
         type: 2}
@@ -4380,7 +4395,8 @@ Prefab:
         type: 2}
       propertyPath: Nodes.Array.data[8].WorldPartilce
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 198697248839094646, guid: a2be963d537b7d14f95e421703721f1a,
+        type: 2}
     - target: {fileID: 114422440799953896, guid: 6ebb4c4b897bb714abe17e4ca528fd60,
         type: 2}
       propertyPath: Nodes.Array.data[1].SkillList.Array.data[0]
@@ -4399,7 +4415,7 @@ Prefab:
     - target: {fileID: 114422440799953896, guid: 6ebb4c4b897bb714abe17e4ca528fd60,
         type: 2}
       propertyPath: Nodes.Array.data[10].Type
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114422440799953896, guid: 6ebb4c4b897bb714abe17e4ca528fd60,
         type: 2}
@@ -4425,7 +4441,8 @@ Prefab:
         type: 2}
       propertyPath: Nodes.Array.data[9].WorldPartilce
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 198697248839094646, guid: a2be963d537b7d14f95e421703721f1a,
+        type: 2}
     - target: {fileID: 114422440799953896, guid: 6ebb4c4b897bb714abe17e4ca528fd60,
         type: 2}
       propertyPath: Nodes.Array.data[11].ExpandFolder
@@ -4469,7 +4486,7 @@ Prefab:
     - target: {fileID: 114422440799953896, guid: 6ebb4c4b897bb714abe17e4ca528fd60,
         type: 2}
       propertyPath: Nodes.Array.data[9].Destination.x
-      value: 300
+      value: 350
       objectReference: {fileID: 0}
     - target: {fileID: 114422440799953896, guid: 6ebb4c4b897bb714abe17e4ca528fd60,
         type: 2}
@@ -4479,19 +4496,18 @@ Prefab:
     - target: {fileID: 114422440799953896, guid: 6ebb4c4b897bb714abe17e4ca528fd60,
         type: 2}
       propertyPath: Nodes.Array.data[9].NodeTag
-      value: TeleportAttack2
+      value: Teleport2
       objectReference: {fileID: 0}
     - target: {fileID: 114422440799953896, guid: 6ebb4c4b897bb714abe17e4ca528fd60,
         type: 2}
       propertyPath: Nodes.Array.data[10].ActiveOnlyByEvent
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114422440799953896, guid: 6ebb4c4b897bb714abe17e4ca528fd60,
         type: 2}
       propertyPath: Nodes.Array.data[10].WorldPartilce
       value: 
-      objectReference: {fileID: 198697248839094646, guid: a2be963d537b7d14f95e421703721f1a,
-        type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 114422440799953896, guid: 6ebb4c4b897bb714abe17e4ca528fd60,
         type: 2}
       propertyPath: Nodes.Array.data[5].SkillList.Array.data[0]
@@ -4500,7 +4516,7 @@ Prefab:
     - target: {fileID: 114422440799953896, guid: 6ebb4c4b897bb714abe17e4ca528fd60,
         type: 2}
       propertyPath: Nodes.Array.data[8].ToRandomNode
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114422440799953896, guid: 6ebb4c4b897bb714abe17e4ca528fd60,
         type: 2}
@@ -4510,12 +4526,12 @@ Prefab:
     - target: {fileID: 114422440799953896, guid: 6ebb4c4b897bb714abe17e4ca528fd60,
         type: 2}
       propertyPath: Nodes.Array.data[7].GoToNodes.Array.data[0].Key
-      value: TeleportAttack1
+      value: Teleport1
       objectReference: {fileID: 0}
     - target: {fileID: 114422440799953896, guid: 6ebb4c4b897bb714abe17e4ca528fd60,
         type: 2}
       propertyPath: Nodes.Array.data[7].GoToNodes.Array.data[1].Key
-      value: TeleportAttack2
+      value: Teleport2
       objectReference: {fileID: 0}
     - target: {fileID: 114422440799953896, guid: 6ebb4c4b897bb714abe17e4ca528fd60,
         type: 2}
@@ -4535,6 +4551,106 @@ Prefab:
     - target: {fileID: 114422440799953896, guid: 6ebb4c4b897bb714abe17e4ca528fd60,
         type: 2}
       propertyPath: Nodes.Array.data[11].SkillList.Array.data[0]
+      value: 
+      objectReference: {fileID: 749788059}
+    - target: {fileID: 114422440799953896, guid: 6ebb4c4b897bb714abe17e4ca528fd60,
+        type: 2}
+      propertyPath: Nodes.Array.data[9].ToRandomNode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114422440799953896, guid: 6ebb4c4b897bb714abe17e4ca528fd60,
+        type: 2}
+      propertyPath: Nodes.Array.data[9].GoToNodes.Array.data[0].Weight
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114422440799953896, guid: 6ebb4c4b897bb714abe17e4ca528fd60,
+        type: 2}
+      propertyPath: Nodes.Array.data[9].GoToNodes.Array.data[1].Weight
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114422440799953896, guid: 6ebb4c4b897bb714abe17e4ca528fd60,
+        type: 2}
+      propertyPath: Nodes.Array.data[9].GoToNodes.Array.data[0].Key
+      value: Teleport1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114422440799953896, guid: 6ebb4c4b897bb714abe17e4ca528fd60,
+        type: 2}
+      propertyPath: Nodes.Array.data[8].GoToNodes.Array.data[1].Key
+      value: Teleport2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114422440799953896, guid: 6ebb4c4b897bb714abe17e4ca528fd60,
+        type: 2}
+      propertyPath: Nodes.Array.data[8].GoToNodes.Array.data[0].Weight
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114422440799953896, guid: 6ebb4c4b897bb714abe17e4ca528fd60,
+        type: 2}
+      propertyPath: Nodes.Array.data[8].GoToNodes.Array.data[1].Weight
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114422440799953896, guid: 6ebb4c4b897bb714abe17e4ca528fd60,
+        type: 2}
+      propertyPath: Nodes.Array.data[9].WaitSecond
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114422440799953896, guid: 6ebb4c4b897bb714abe17e4ca528fd60,
+        type: 2}
+      propertyPath: Nodes.Array.data[10].WaitSecond
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114422440799953896, guid: 6ebb4c4b897bb714abe17e4ca528fd60,
+        type: 2}
+      propertyPath: Nodes.Array.data[8].WaitSecond
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114422440799953896, guid: 6ebb4c4b897bb714abe17e4ca528fd60,
+        type: 2}
+      propertyPath: Nodes.Array.data[10].ToRandomNode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114422440799953896, guid: 6ebb4c4b897bb714abe17e4ca528fd60,
+        type: 2}
+      propertyPath: Nodes.Array.data[10].GoToNodes.Array.data[0].Weight
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114422440799953896, guid: 6ebb4c4b897bb714abe17e4ca528fd60,
+        type: 2}
+      propertyPath: Nodes.Array.data[11].NodeTag
+      value: Spell
+      objectReference: {fileID: 0}
+    - target: {fileID: 114422440799953896, guid: 6ebb4c4b897bb714abe17e4ca528fd60,
+        type: 2}
+      propertyPath: Nodes.Array.data[10].GoToNodes.Array.data[1].Weight
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114422440799953896, guid: 6ebb4c4b897bb714abe17e4ca528fd60,
+        type: 2}
+      propertyPath: Nodes.Array.data[10].GoToNodes.Array.data[2].Weight
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114422440799953896, guid: 6ebb4c4b897bb714abe17e4ca528fd60,
+        type: 2}
+      propertyPath: Nodes.Array.data[10].GoToNodes.Array.data[1].Key
+      value: TeleportAttack2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114422440799953896, guid: 6ebb4c4b897bb714abe17e4ca528fd60,
+        type: 2}
+      propertyPath: Nodes.Array.data[10].GoToNodes.Array.data[0].Key
+      value: TeleportAttack1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114422440799953896, guid: 6ebb4c4b897bb714abe17e4ca528fd60,
+        type: 2}
+      propertyPath: Nodes.Array.data[10].GoToNodes.Array.data[2].Key
+      value: Spell
+      objectReference: {fileID: 0}
+    - target: {fileID: 114422440799953896, guid: 6ebb4c4b897bb714abe17e4ca528fd60,
+        type: 2}
+      propertyPath: Nodes.Array.data[10].NodeTag
+      value: Spell
+      objectReference: {fileID: 0}
+    - target: {fileID: 114422440799953896, guid: 6ebb4c4b897bb714abe17e4ca528fd60,
+        type: 2}
+      propertyPath: Nodes.Array.data[10].SkillList.Array.data[0]
       value: 
       objectReference: {fileID: 749788059}
     m_RemovedComponents: []

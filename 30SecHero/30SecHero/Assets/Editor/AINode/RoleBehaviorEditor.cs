@@ -34,6 +34,13 @@ public class RoleBehaviorEditor : Editor
             ReorderableList.defaultBehaviours.DoRemoveButton(_list);
         }
     }
+    void RemoveNode(Node _node)
+    {
+        if (EditorUtility.DisplayDialog("Remove Node", "Are you sure to remove this node?", "yes", "noooo!"))
+        {
+            MyRoleBehavior.Nodes.Remove(_node);
+        }
+    }
     void Duplicate(Node _node)
     {
         if (EditorUtility.DisplayDialog("Duplicate Node", "Are you sure to duplicate this node?", "yes", "nooo!"))
@@ -88,6 +95,8 @@ public class RoleBehaviorEditor : Editor
                 SerializedProperty waitTime = myListRef.FindPropertyRelative("WaitSecond");
                 EditorGUILayout.PropertyField(waitTime);
                 EditorGUILayout.PropertyField(type, new GUIContent("ActionType"));
+                SerializedProperty locoParticle = myListRef.FindPropertyRelative("LocoParticle");
+                SerializedProperty worldPartilce = myListRef.FindPropertyRelative("WorldPartilce");
 
                 switch (type.enumValueIndex)
                 {
@@ -125,11 +134,12 @@ public class RoleBehaviorEditor : Editor
                         EditorGUILayout.PropertyField(relativeToTarget, new GUIContent("RelativeTo"));
                         SerializedProperty teleportPos = myListRef.FindPropertyRelative("Destination");
                         EditorGUILayout.PropertyField(teleportPos);
+                        EditorGUILayout.PropertyField(locoParticle);
+                        EditorGUILayout.PropertyField(worldPartilce);
                         break;
                     case (int)ActionType.Perform:
                         EditorGUIUtility.labelWidth = 100;
-                        SerializedProperty locoParticle = myListRef.FindPropertyRelative("LocoParticle");
-                        SerializedProperty worldPartilce = myListRef.FindPropertyRelative("WorldPartilce");
+
                         SerializedProperty roleAniTriggerName = myListRef.FindPropertyRelative("RoleAniTriggerName");
                         SerializedProperty camAniTriggerName = myListRef.FindPropertyRelative("CamAniTriggerName");
                         SerializedProperty soundList = myListRef.FindPropertyRelative("SoundList");
@@ -155,6 +165,8 @@ public class RoleBehaviorEditor : Editor
                             SerializedProperty soundRef = soundList.GetArrayElementAtIndex(j);
                             EditorGUILayout.PropertyField(soundRef);
                         }
+                        break;
+                    case (int)ActionType.RandomAction:
                         break;
                 }
                 SerializedProperty toRandomNode = myListRef.FindPropertyRelative("ToRandomNode");
@@ -184,9 +196,9 @@ public class RoleBehaviorEditor : Editor
                         for (int j = 0; j < goToNodes.arraySize; j++)
                         {
                             EditorGUILayout.BeginHorizontal(GUI.skin.label);
-                            EditorGUIUtility.labelWidth = 60;
-                            EditorGUILayout.PropertyField(goToNodes.GetArrayElementAtIndex(j).FindPropertyRelative("Key"), new GUIContent("NodeTag"));
-                            EditorGUILayout.PropertyField(goToNodes.GetArrayElementAtIndex(j).FindPropertyRelative("Weight"));
+                            EditorGUIUtility.labelWidth = 40;
+                            EditorGUILayout.PropertyField(goToNodes.GetArrayElementAtIndex(j).FindPropertyRelative("Key"), new GUIContent("Tag"));
+                            EditorGUILayout.PropertyField(goToNodes.GetArrayElementAtIndex(j).FindPropertyRelative("Weight"),new GUIContent("Weit"));
                             EditorGUILayout.EndHorizontal();
                         }
                     }
@@ -201,7 +213,7 @@ public class RoleBehaviorEditor : Editor
                 ButtonStyle.normal.textColor = Color.red;
                 if (GUILayout.Button("Remove Node(移除)", ButtonStyle))
                 {
-                    RemoveNode(NodeReorderableList);
+                    RemoveNode(MyRoleBehavior.Nodes[i]);
                     //MyRoleBehavior.Nodes.RemoveAt(i);
                 }
             }

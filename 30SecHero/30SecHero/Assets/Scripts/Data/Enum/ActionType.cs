@@ -3,5 +3,6 @@
     Move,
     Spell,
     Teleport,
-    Perform
+    Perform,
+    RandomAction
 }
