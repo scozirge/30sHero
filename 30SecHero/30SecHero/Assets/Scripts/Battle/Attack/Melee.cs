@@ -11,7 +11,7 @@ public class Melee : Attack
     [SerializeField]
     protected float AttackRadius;
 
-    protected override void SpawnAttackPrefab()
+    public override void SpawnAttackPrefab()
     {
         if (Target == null && Patetern == ShootPatetern.TowardTarget)
             return;

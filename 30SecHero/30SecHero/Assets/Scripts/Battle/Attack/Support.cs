@@ -68,7 +68,7 @@ public class Support : Skill
             }
         }
     }
-    protected override void SpawnAttackPrefab()
+    public override void SpawnAttackPrefab()
     {
         if (CurSpawnAmmoNum >= SupportTargets.Count)
         {
@@ -94,6 +94,8 @@ public class Support : Skill
     }
     protected override void TimerFunc()
     {
+        if (BehaviorSkill)
+            return;
         if (!CanAttack)
             return;
         if (SupportTargets.Count < 0)

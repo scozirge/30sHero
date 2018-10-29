@@ -53,6 +53,8 @@ public class SuicideBombing : Skill
     }
     protected override void TimerFunc()
     {
+        if (BehaviorSkill)
+            return;
         if (!CanAttack)
             return;
         if (!Target)
@@ -79,7 +81,7 @@ public class SuicideBombing : Skill
             EffectEmitter.EmitParticle(PrepareParticle[i], Vector3.zero, Vector3.zero, transform);
         }
     }
-    protected override void SpawnAttackPrefab()
+    public override void SpawnAttackPrefab()
     {
         base.SpawnAttackPrefab();
         if (gameObject.tag == Force.Player.ToString())

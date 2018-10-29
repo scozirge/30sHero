@@ -5,6 +5,9 @@ using UnityEditor;
 
 public class Skill : MonoBehaviour
 {
+    [Tooltip("RoleBehavior用腳本技能，設定為True時技能只會透過腳本來施放(玩家獲得時會自動改回false)")]
+    [SerializeField]
+    public bool BehaviorSkill;
     [Tooltip("技能名稱(一樣的技能名稱不會重複獲得)")]
     [SerializeField]
     public string PSkillName;
@@ -33,6 +36,10 @@ public class Skill : MonoBehaviour
     public float PSkillTimer;
     protected Role Target;
     protected bool CanAttack;
+    
+    public virtual void LaunchAIAttack()
+    {        
+    }
 
 
     void OnDrawGizmos()
@@ -71,6 +78,7 @@ public class Skill : MonoBehaviour
     public virtual void PlayerInitSkill()
     {
         Awake();
+        BehaviorSkill = false;
         enabled = false;
         AttackStopMove = false;
     }
@@ -80,7 +88,7 @@ public class Skill : MonoBehaviour
             AttackTimes = 0;
         PSkillTimer = PSkillDuration + _skillTimeBuff;
     }
-    protected virtual void SpawnAttackPrefab()
+    public virtual void SpawnAttackPrefab()
     {
         //Set AmmoData
         AmmoData.Clear();

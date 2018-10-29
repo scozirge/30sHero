@@ -39,6 +39,11 @@ public class Attack : Skill
     //protected float AmmoRotation;
     static protected float PreAttackTime = 1;
 
+    public override void LaunchAIAttack()
+    {
+        base.LaunchAIAttack();
+        IsAttacking = true;
+    }
     protected override void Awake()
     {
         base.Awake();
@@ -60,7 +65,7 @@ public class Attack : Skill
         AttackExecuteFunc();
     }
 
-    protected override void SpawnAttackPrefab()
+    public override void SpawnAttackPrefab()
     {
         base.SpawnAttackPrefab();
         //Set AmmoData
@@ -131,6 +136,8 @@ public class Attack : Skill
     bool InRange;
     protected override void TimerFunc()
     {
+        if (BehaviorSkill)
+            return;
         if (!CanAttack)
             return;
         if (!Target)

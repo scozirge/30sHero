@@ -9,7 +9,7 @@ public class Shoot : Attack
     ShootAmmo AttackPrefab;
 
 
-    protected override void SpawnAttackPrefab()
+    public override void SpawnAttackPrefab()
     {
         if (Target == null && Patetern == ShootPatetern.TowardTarget)
             return;
