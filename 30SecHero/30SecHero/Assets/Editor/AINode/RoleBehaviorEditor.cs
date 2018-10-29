@@ -80,13 +80,11 @@ public class RoleBehaviorEditor : Editor
                 expand.boolValue = EditorGUILayout.Foldout(expand.boolValue, "Action" + i + ":" + (ActionType)type.enumValueIndex, FoldoutStyle);
             if (expand.boolValue)
             {
-                EditorGUIUtility.labelWidth = 120;
+                EditorGUIUtility.labelWidth = 140;
                 SerializedProperty activeOnlyByEvent = myListRef.FindPropertyRelative("ActiveOnlyByEvent");
                 EditorGUILayout.PropertyField(activeOnlyByEvent);
                 EditorGUIUtility.labelWidth = 100;
-                if (activeOnlyByEvent.boolValue)
-                    EditorGUILayout.PropertyField(nodeTag);
-                
+                EditorGUILayout.PropertyField(nodeTag);                
                 SerializedProperty waitTime = myListRef.FindPropertyRelative("WaitSecond");
                 EditorGUILayout.PropertyField(waitTime);
                 EditorGUILayout.PropertyField(type, new GUIContent("ActionType"));

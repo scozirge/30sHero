@@ -3710,7 +3710,7 @@ Prefab:
     - target: {fileID: 114422440799953896, guid: 6ebb4c4b897bb714abe17e4ca528fd60,
         type: 2}
       propertyPath: Nodes.Array.data[0].ActiveOnlyByEvent
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114422440799953896, guid: 6ebb4c4b897bb714abe17e4ca528fd60,
         type: 2}
@@ -3725,12 +3725,12 @@ Prefab:
     - target: {fileID: 114422440799953896, guid: 6ebb4c4b897bb714abe17e4ca528fd60,
         type: 2}
       propertyPath: Nodes.Array.data[1].ActiveOnlyByEvent
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114422440799953896, guid: 6ebb4c4b897bb714abe17e4ca528fd60,
         type: 2}
       propertyPath: Nodes.Array.data[2].ActiveOnlyByEvent
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114422440799953896, guid: 6ebb4c4b897bb714abe17e4ca528fd60,
         type: 2}
@@ -3771,6 +3771,16 @@ Prefab:
         type: 2}
       propertyPath: Nodes.Array.data[0].MoveSpeed
       value: 600
+      objectReference: {fileID: 0}
+    - target: {fileID: 114422440799953896, guid: 6ebb4c4b897bb714abe17e4ca528fd60,
+        type: 2}
+      propertyPath: Nodes.Array.data[1].RelativeToTarget
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114422440799953896, guid: 6ebb4c4b897bb714abe17e4ca528fd60,
+        type: 2}
+      propertyPath: Nodes.Array.data[0].RelativeToTarget
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6ebb4c4b897bb714abe17e4ca528fd60, type: 2}
