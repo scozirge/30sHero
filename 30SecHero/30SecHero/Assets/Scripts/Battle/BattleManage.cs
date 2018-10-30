@@ -47,11 +47,17 @@ public partial class BattleManage : MonoBehaviour
     [SerializeField]
     int MaxRefindTimes = 20;
     [SerializeField]
+    GameObject SettingObj;
+    [SerializeField]
     GameObject SetObj;
     [SerializeField]
     MyToggle MusicToggle;
     [SerializeField]
     MyToggle SoundToggle;
+    [SerializeField]
+    GameObject GiveUpConfirmObj;
+    [SerializeField]
+    GameObject BattleBG;
 
     static List<EnemyRole> AvailableMillions;
     static List<EnemyRole> AvailableDemonGergons;
@@ -77,7 +83,7 @@ public partial class BattleManage : MonoBehaviour
     bool IsInit;
     int EnemySpawnCount;
     public static int EnemyKill;
-
+    static bool IsPause;
 
 
     // Use this for initialization
@@ -89,6 +95,7 @@ public partial class BattleManage : MonoBehaviour
     }
     void Init()
     {
+        IsPause = false;
         SceneObject.SetActive(true);
         InitSettlement();
         InitBattleSetting();
@@ -120,6 +127,7 @@ public partial class BattleManage : MonoBehaviour
         //Debug.Log("NextDemogorgonFloor=" + NextDemogorgonFloor);
         IsDemogorgonFloor = CheckDemogorgon(Floor);
         IsInit = true;
+        BattleBG.SetActive(true);
         Debug.Log("Init BattleManager");
     }
     void InitBattleSetting()
@@ -175,6 +183,13 @@ public partial class BattleManage : MonoBehaviour
         SpawnLootTimer.StartRunTimer = true;
         LootList.Add(loot);
     }
+    public void Setting(bool _active)
+    {
+        IsPause = _active;
+        MyCameraControler.enabled = !_active;
+        gameObject.SetActive(!_active);
+        SettingObj.SetActive(_active);
+    }
     public void Set(bool _active)
     {
         SetObj.SetActive(_active);
@@ -189,6 +204,10 @@ public partial class BattleManage : MonoBehaviour
             else
                 SoundToggle.isOn = false;
         }
+    }
+    public void GiveUpConfirm(bool _active)
+    {
+        GiveUpConfirmObj.SetActive(_active);
     }
     public void SetMusic()
     {
@@ -211,12 +230,15 @@ public partial class BattleManage : MonoBehaviour
     {
         if (IsInit)
         {
-            InActivityOutSideEnemysAndLoots();
-            UpdateCurPlate();
-            if (SpawnEnemyTimer != null)
-                SpawnEnemyTimer.RunTimer();
-            if (SpawnLootTimer != null)
-                SpawnLootTimer.RunTimer();
+            if (!IsPause)
+            {
+                InActivityOutSideEnemysAndLoots();
+                UpdateCurPlate();
+                if (SpawnEnemyTimer != null)
+                    SpawnEnemyTimer.RunTimer();
+                if (SpawnLootTimer != null)
+                    SpawnLootTimer.RunTimer();
+            }
         }
         else if (Player.IsInit)
             Init();

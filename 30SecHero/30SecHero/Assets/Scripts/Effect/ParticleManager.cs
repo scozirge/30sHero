@@ -2,15 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(ParticleSystem))]
 public class ParticleManager : MonoBehaviour
 {
     public bool Loop;
     public float LifeTime;
     static Dictionary<string, float> ParticleLifeTimeDic = new Dictionary<string, float>();
 
-    private ParticleSystem ps;
     void Start()
     {
+        var particleModule = GetComponent<ParticleSystem>().main;
+        particleModule.playOnAwake = false;
         if (ParticleLifeTimeDic.ContainsKey(name))
         {
             LifeTime = ParticleLifeTimeDic[name];

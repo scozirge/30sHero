@@ -71,7 +71,10 @@ partial class BattleManage
     }
     public void CalculateResult()
     {
+        IsPause = true;
         SettlementObj.SetActive(true);
+        MyCameraControler.enabled = false;
+        SceneObject.SetActive(false);
         //獎勵計算
         if (MaxFloor > Player.MaxFloor)
         {
