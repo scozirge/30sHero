@@ -13,7 +13,7 @@ public partial class BattleManage
     [SerializeField]
     MyText FloorText;
     [SerializeField]
-    MyText MeterText;
+    MyText VelocityText;
     [SerializeField]
     Gate GatePrefab;
     [SerializeField]
@@ -21,10 +21,17 @@ public partial class BattleManage
     [SerializeField]
     Transform GateParent;
 
+    [SerializeField]
+    protected RectTransform LocationCriterion;
+    [SerializeField]
+    protected RectTransform Pivot;
+    float LocationCriterionWidth;
+
     void InitStage()
     {
         if (!MyPlayer)
             return;
+        LocationCriterionWidth = LocationCriterion.rect.width - 21;
         Floor = (int)(CurPlate / BM.FloorPlate) + 1;
         UpdateFloorText();
         SpawnGate(Floor - 1);
@@ -40,12 +47,17 @@ public partial class BattleManage
         }
     }
     static int CurPlate = 0;
+    static float FloorProcessingRatio = 0;
     void UpdateCurPlate()
     {
         if (!MyPlayer)
             return;
         CurPlate = (int)((BM.MyPlayer.transform.position.x + 1.5 * BM.PlateSizeX) / BM.PlateSizeX);
-        BM.MeterText.text = string.Format("{0}{1}", CurPlate, StringData.GetString("Meter"));
+        float lastDoorPos = (float)(((Floor-1) * BM.FloorPlate * BM.PlateSizeX) - (BM.PlateSizeX * 1.5f));
+        FloorProcessingRatio = (float)(BattleManage.BM.MyPlayer.transform.position.x - lastDoorPos) / (BM.PlateSizeX * BM.FloorPlate);
+
+        Pivot.localPosition = new Vector2(FloorProcessingRatio * LocationCriterionWidth, Pivot.localPosition.y);
+        BM.VelocityText.text = string.Format("{0}{1}", (int)BM.MyPlayer.MoveSpeed, StringData.GetString("Meter"));
         if (IsDemogorgonFloor)
         {
             if (CurPlate == NextDemogorgonFloor * FloorPlate - BossDebutPlate)
