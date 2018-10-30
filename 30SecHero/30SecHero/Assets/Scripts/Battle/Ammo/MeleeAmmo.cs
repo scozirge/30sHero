@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MeleeAmmo : Ammo
 {
-    [Tooltip("Melee是一般肉搏,Block是擋子彈,Reflect是檔子彈+也可以攻擊人,Mirror是反彈ShootAmmo類型的攻擊")]
+    [Tooltip("Melee是一般肉搏,Block是擋子彈,Reflect是檔子彈+也可以攻擊人,Mirror是反彈ShootAmmo類型的攻擊，ReflectMirror是反彈ShootAmmo類型的攻擊+可以攻擊人")]
     [SerializeField]
     MeleeType MyMeleeType;
     [Tooltip("格擋強度，1是全部格擋，0.1是只檔10%傷害")]
@@ -55,15 +55,10 @@ public class MeleeAmmo : Ammo
     {
         base.TriggerTarget(_role);
         Vector2 force = (_role.transform.position - transform.position).normalized * KnockIntensity;
-        if (MyMeleeType == MeleeType.Melee || MyMeleeType == MeleeType.Reflect)
+        if (MyMeleeType == MeleeType.Melee || MyMeleeType == MeleeType.Reflect || MyMeleeType == MeleeType.ReflectMirror)
         {
             int damage = Value;
             _role.BeAttack(AttackerRoleTag, ref damage, force);
-        }
-        else if (MyMeleeType == MeleeType.Block)
-        {
-            int damage = Value;
-            _role.BeAttack(AttackerRoleTag,ref damage, force);
         }
         if (AmmoType != ShootAmmoType.Permanent)
             SelfDestroy();

@@ -46,7 +46,12 @@ public partial class BattleManage : MonoBehaviour
     int EnemyDistance = 200;
     [SerializeField]
     int MaxRefindTimes = 20;
-
+    [SerializeField]
+    GameObject SetObj;
+    [SerializeField]
+    MyToggle MusicToggle;
+    [SerializeField]
+    MyToggle SoundToggle;
 
     static List<EnemyRole> AvailableMillions;
     static List<EnemyRole> AvailableDemonGergons;
@@ -72,7 +77,7 @@ public partial class BattleManage : MonoBehaviour
     bool IsInit;
     int EnemySpawnCount;
     public static int EnemyKill;
-    
+
 
 
     // Use this for initialization
@@ -170,7 +175,29 @@ public partial class BattleManage : MonoBehaviour
         SpawnLootTimer.StartRunTimer = true;
         LootList.Add(loot);
     }
-
+    public void Set(bool _active)
+    {
+        SetObj.SetActive(_active);
+        if (_active)
+        {
+            if (Player.MusicOn)
+                MusicToggle.isOn = true;
+            else
+                MusicToggle.isOn = false;
+            if (Player.SoundOn)
+                SoundToggle.isOn = true;
+            else
+                SoundToggle.isOn = false;
+        }
+    }
+    public void SetMusic()
+    {
+        Player.SetMusic(MusicToggle.isOn);
+    }
+    public void SetSound()
+    {
+        Player.SetSound(SoundToggle.isOn);
+    }
     public static void RemoveEnemy(EnemyRole _er)
     {
         BM.EnemyList.Remove(_er);

@@ -3,5 +3,6 @@
     Melee,
     Block,
     Reflect,
-    Mirror
+    Mirror,
+    ReflectMirror
 }
