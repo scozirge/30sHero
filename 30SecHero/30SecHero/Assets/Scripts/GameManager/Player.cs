@@ -231,6 +231,6 @@ public partial class Player
             }
         }
         //顯示結果在結算
-        BattleManage.BM.ShowResult();
+        BattleManage.BM.StartCoroutine(BattleManage.BM.WaitToShowResult());
     }
 }

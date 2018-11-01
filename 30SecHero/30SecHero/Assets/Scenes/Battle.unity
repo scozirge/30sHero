@@ -6975,6 +6975,7 @@ MonoBehaviour:
   GoldText: {fileID: 320368145}
   EmeraldText: {fileID: 754975252}
   MySpanwer: {fileID: 232256112}
+  CallSettlementTime: 2
   FloorPlate: 20
   PlateSizeX: 884
   BossDebutPlate: 1

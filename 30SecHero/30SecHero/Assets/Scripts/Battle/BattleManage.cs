@@ -61,6 +61,7 @@ public partial class BattleManage : MonoBehaviour
     [SerializeField]
     GameObject SoulGo;
 
+
     static List<EnemyRole> AvailableMillions;
     static List<EnemyRole> AvailableDemonGergons;
     int CurSpawnCount;

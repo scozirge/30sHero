@@ -19,7 +19,8 @@ partial class BattleManage
     Text EmeraldText;
     [SerializeField]
     ItemSpawner MySpanwer;
-
+    [SerializeField]
+    float CallSettlementTime;
 
 
 
@@ -71,11 +72,6 @@ partial class BattleManage
     }
     public void CalculateResult()
     {
-        IsPause = true;
-        SoulGo.SetActive(false);
-        SettlementObj.SetActive(true);
-        MyCameraControler.enabled = false;
-        SceneObject.SetActive(false);
         //獎勵計算
         if (MaxFloor > Player.MaxFloor)
         {
@@ -101,7 +97,7 @@ partial class BattleManage
             //裝備獲得
             Player.GainEquip_Local(GainEquipDataList);
             //顯示結果
-            ShowResult();
+            StartCoroutine(WaitToShowResult());
         }
         else
         {
@@ -109,9 +105,20 @@ partial class BattleManage
             Player.Settlement(Player.Gold + TotalGold, Player.Emerald + TotalEmerald, (MaxFloor > Player.MaxFloor) ? MaxFloor : Player.MaxFloor, GainEquipDataList);
         }
     }
-    public void ShowResult()
+    public IEnumerator WaitToShowResult()
     {
-        //顯示結算
+        yield return new WaitForSeconds(CallSettlementTime);
+        ShowResult();
+    }
+    void ShowResult()
+    {
+        //顯示介面
+        SettlementObj.SetActive(true);
+        IsPause = true;
+        SoulGo.SetActive(false);
+        MyCameraControler.enabled = false;
+        SceneObject.SetActive(false);
+        //顯示資料
         SpawnEquipItem();
         FloorClearText.text = Floor.ToString();
         MaxFloorText.text = Player.MaxFloor.ToString();

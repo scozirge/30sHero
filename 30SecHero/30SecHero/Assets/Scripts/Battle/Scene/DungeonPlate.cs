@@ -6,8 +6,6 @@ public class DungeonPlate : Plate
 {
     int FloorPlateCount;
     [SerializeField]
-    bool RandomColor;
-    [SerializeField]
     Image BottomImage;
     [SerializeField]
     List<Color> Colors;
@@ -38,10 +36,10 @@ public class DungeonPlate : Plate
             return;
         if (Colors.Count == 0)
             return;
-        CurFloor = CurPlate / FloorPlateCount;
+        CurFloor = CurPlate / FloorPlateCount - 9999;
         if (!FloorColor.ContainsKey(CurFloor))
         {
-            FloorColor.Add(CurFloor, GetRandomColor(CurFloor));
+            FloorColor.Add(CurFloor, GetCurFloorColor(CurFloor));
         }
 
         BottomImage.color = FloorColor[CurFloor];
@@ -59,5 +57,14 @@ public class DungeonPlate : Plate
             colors.Remove(FloorColor[_floor + 1]);
         int random = Random.Range(0, colors.Count);
         return colors[random];
+    }
+    Color GetCurFloorColor(int _floor)
+    {
+        int index = _floor % Colors.Count - 1;
+        if (index < 0)
+            index = Colors.Count - 1;
+        else if (index > Colors.Count - 1)
+            index = 0;
+        return Colors[index];
     }
 }
