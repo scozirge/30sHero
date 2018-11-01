@@ -36,7 +36,7 @@ public class DungeonPlate : Plate
             return;
         if (Colors.Count == 0)
             return;
-        CurFloor = CurPlate / FloorPlateCount - 9999;
+        CurFloor = CurPlate / FloorPlateCount - 9999 + (BattleManage.StartFloor - 1);
         if (!FloorColor.ContainsKey(CurFloor))
         {
             FloorColor.Add(CurFloor, GetCurFloorColor(CurFloor));

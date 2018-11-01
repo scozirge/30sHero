@@ -84,7 +84,7 @@ public partial class Player
         //PlayerPrefs.DeleteKey(LocoData.MusicOn.ToString());
         //設定
         bool ClearAllLocoData = false;
-        if(ClearAllLocoData)
+        if (ClearAllLocoData)
         {
             PlayerPrefs.DeleteKey(LocoData.UseLanguage.ToString());
             PlayerPrefs.DeleteKey(LocoData.Init.ToString());
@@ -113,13 +113,16 @@ public partial class Player
             SetSound(false);
         //資源
         int gold = PlayerPrefs.GetInt(LocoData.Gold.ToString());
-        Debug.Log("gold=" + gold);
+
         if (gold != 0)
             SetGold(gold);
         int emerald = PlayerPrefs.GetInt(LocoData.Emerald.ToString());
         if (emerald != 0)
             SetEmerald(emerald);
-        Debug.Log("emerald=" + emerald);
+
+        //目前所在關卡
+        int curFloor = PlayerPrefs.GetInt(LocoData.CurFloor.ToString());
+        SetCurFloor_Local(curFloor);
         //最高突破關卡
         int maxFloor = PlayerPrefs.GetInt(LocoData.MaxFloor.ToString());
         SetMaxFloor_Local(maxFloor);
@@ -139,7 +142,7 @@ public partial class Player
         PlayerInfoInitDataFinish = true;
         //裝備
         string equipStr = PlayerPrefs.GetString(LocoData.Equip.ToString());
-        Debug.Log("equipStr=" + equipStr);
+
         if (equipStr != "")
         {
             string[] equipData = equipStr.Split('/');
@@ -149,7 +152,7 @@ public partial class Player
             EquipInitDataFinish = true;
         //強化
         string strengthenStr = PlayerPrefs.GetString(LocoData.Strengthen.ToString());
-        Debug.Log("strengthenStr=" + strengthenStr);
+
         if (strengthenStr != "")
         {
             string[] strengthenData = strengthenStr.Split('/');
@@ -157,8 +160,15 @@ public partial class Player
         }
         else
             StrengthenInitDataFinish = true;
-
-
+        if (true)
+        {
+            Debug.Log("CurFloor=" + CurFloor);
+            Debug.Log("MaxFloor=" + MaxFloor);
+            Debug.Log("gold=" + gold);
+            Debug.Log("emerald=" + emerald);
+            Debug.Log("equipStr=" + equipStr);
+            Debug.Log("strengthenStr=" + strengthenStr);
+        }
     }
     public static void GetKongregateUserData_CB(string _name, int _kongregateID)
     {
@@ -170,7 +180,10 @@ public partial class Player
         ID = int.Parse(_data[0]);
         SetGold(int.Parse(_data[1]));
         SetEmerald(int.Parse(_data[2]));
-        SetMaxFloor_Local(int.Parse(_data[3]));
+        SetCurFloor_Local(int.Parse(_data[3]));
+        SetMaxFloor_Local(int.Parse(_data[4]));
+        Debug.Log("CurFloor=" + int.Parse(_data[3]));
+        Debug.Log("MaxFloor=" + int.Parse(_data[4]));
         ServerRequest.GetEquip();
         ServerRequest.GetStrengthen();
         PlayerInfoInitDataFinish = true;

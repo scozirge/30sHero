@@ -4,13 +4,23 @@ using System.Collections.Generic;
 
 public partial class Player
 {
-    public static bool IsInit;
+    public static bool IsInit
+    {
+        get
+        {
+            if (PlayerInfoInitDataFinish && StrengthenInitDataFinish && EquipInitDataFinish)
+                return true;
+            else
+                return false;
+        }
+    }
     public static int ID { get; private set; }
     public static int UserID_K { get; private set; }
     public static string Name_K { get; private set; }
     public static int Gold { get; private set; }
     public static int Emerald { get; private set; }
     public static List<int> KillBossID = new List<int>();
+    public static int CurFloor { get; private set; }
     public static int MaxFloor { get; private set; }
     public static int MaxEnemyKills { get; private set; }
 
@@ -23,7 +33,6 @@ public partial class Player
         Itmes.Add(EquipType.Armor, new Dictionary<long, EquipData>());
         Itmes.Add(EquipType.Accessory, new Dictionary<long, EquipData>());
         InitProperty();
-        IsInit = true;
     }
 
     public static void SetGold(int _gold)
@@ -140,15 +149,31 @@ public partial class Player
             }
         }
     }
+    public static void SetCurFloor_Local(int _curFloor)
+    {
+        if (_curFloor == CurFloor)
+            return;
+        if (_curFloor < 1)
+            _curFloor = 1;
+        CurFloor = _curFloor;
+        //寫入資料
+        if (PlayerInfoInitDataFinish)
+        {
+            Debug.Log("更新Loco玩家目前樓層");
+            PlayerPrefs.SetInt(LocoData.CurFloor.ToString(), CurFloor);
+        }
+    }
     public static void SetMaxFloor_Local(int _maxFloor)
     {
         if (_maxFloor == MaxFloor)
             return;
+        if (_maxFloor < 1)
+            _maxFloor = 1;
         MaxFloor = _maxFloor;
         //寫入資料
         if (PlayerInfoInitDataFinish)
         {
-            Debug.Log("更新Loco玩家樓層");
+            Debug.Log("更新Loco玩家最高樓層");
             PlayerPrefs.SetInt(LocoData.MaxFloor.ToString(), MaxFloor);
         }
     }
@@ -184,7 +209,7 @@ public partial class Player
         }
     }
     static List<EquipData> CurGainEquipDatas;
-    public static void Settlement(int _gold, int _emerald, int _maxFloor, List<EquipData> _equipDatas)
+    public static void Settlement(int _gold, int _emerald,int _curFloor, int _maxFloor, List<EquipData> _equipDatas)
     {
         if (_equipDatas.Count != 0)
             CurGainEquipDatas = _equipDatas;
@@ -200,18 +225,19 @@ public partial class Player
             addEquipStr += _equipDatas[i].ID + "," + (int)_equipDatas[i].Type + "," + _equipDatas[i].EquipSlot + "," + _equipDatas[i].LV + "," + _equipDatas[i].Quality + "," + _equipDatas[i].PropertiesStr + "," + ID;
         }
         //Debug.Log("gold=" + _gold + " emerald=" + _emerald + " maxFloor=" + _maxFloor + " addEquipStr=" + addEquipStr);
-        ServerRequest.Settlement(_gold, _emerald, _maxFloor, addEquipStr);
+        ServerRequest.Settlement(_gold, _emerald, _curFloor, _maxFloor, addEquipStr);
     }
     public static void Settlement_CB(string[] _data)
     {
         //設定玩家資料
         Gold = int.Parse(_data[0]);
         Emerald = int.Parse(_data[1]);
-        MaxFloor = int.Parse(_data[2]);
+        CurFloor = int.Parse(_data[2]);
+        MaxFloor = int.Parse(_data[3]);
         //設定裝備
         if (CurGainEquipDatas != null && CurGainEquipDatas.Count != 0)
         {
-            string[] equipUID = _data[3].Split(',');
+            string[] equipUID = _data[4].Split(',');
             if (equipUID.Length != CurGainEquipDatas.Count)
             {
                 Debug.LogWarning("結算server回傳資料錯誤");

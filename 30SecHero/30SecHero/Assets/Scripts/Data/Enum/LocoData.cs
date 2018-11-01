@@ -9,6 +9,7 @@
     Equip,
     Strengthen,
     KillBossID,
+    CurFloor,
     MaxFloor,
     MaxEnemyKills
 }

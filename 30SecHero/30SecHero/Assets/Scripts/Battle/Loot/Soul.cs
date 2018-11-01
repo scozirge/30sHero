@@ -46,6 +46,8 @@ public class Soul : MonoBehaviour
     }
     void FollowTarge()
     {
+        if (!Target)
+            return;
         TargetPos = (Vector2)Target.position + TargetOffset;
         MyRigid.velocity = Vector2.Lerp(MyRigid.velocity, (TargetPos - (Vector2)transform.position).normalized * MoveSpeed, RotateFactor);
     }

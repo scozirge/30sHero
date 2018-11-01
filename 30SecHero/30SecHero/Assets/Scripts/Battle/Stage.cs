@@ -32,8 +32,7 @@ public partial class BattleManage
         if (!MyPlayer)
             return;
         LocationCriterionWidth = LocationCriterion.rect.width - 21;
-        Floor = (int)(CurPlate / BM.FloorPlate) + 1;
-        UpdateFloorText();
+        UpdateCurPlate();
         SpawnGate(Floor - 1);
         SpawnGate(Floor);
     }
@@ -53,9 +52,17 @@ public partial class BattleManage
         if (!MyPlayer)
             return;
         CurPlate = (int)((BM.MyPlayer.transform.position.x + 1.5 * BM.PlateSizeX) / BM.PlateSizeX);
-        float lastDoorPos = (float)(((Floor-1) * BM.FloorPlate * BM.PlateSizeX) - (BM.PlateSizeX * 1.5f));
-        FloorProcessingRatio = (float)(BattleManage.BM.MyPlayer.transform.position.x - lastDoorPos) / (BM.PlateSizeX * BM.FloorPlate);
-
+        float distToFirstDoor = BattleManage.BM.MyPlayer.transform.position.x + (BM.PlateSizeX * 1.5f);
+        Floor = (int)(distToFirstDoor / (BM.PlateSizeX * BM.FloorPlate)) + StartFloor;
+        if (distToFirstDoor >= 0)
+        {
+            FloorProcessingRatio = (distToFirstDoor % (BM.PlateSizeX * BM.FloorPlate)) / (BM.PlateSizeX * BM.FloorPlate);
+        }
+        else
+        {
+            Floor -= 1;
+            FloorProcessingRatio = (distToFirstDoor % (BM.PlateSizeX * BM.FloorPlate) + (BM.PlateSizeX * BM.FloorPlate)) / (BM.PlateSizeX * BM.FloorPlate);
+        }
         Pivot.localPosition = new Vector2(FloorProcessingRatio * LocationCriterionWidth, Pivot.localPosition.y);
         BM.VelocityText.text = string.Format("{0}{1}", (int)BM.MyPlayer.MoveSpeed, StringData.GetString("Meter"));
         if (IsDemogorgonFloor)
@@ -63,10 +70,6 @@ public partial class BattleManage
             if (CurPlate == NextDemogorgonFloor * FloorPlate - BossDebutPlate)
                 SpawnDemogorgon();
         }
-    }
-
-    static void UpdateFloorText()
-    {
         BM.FloorText.text = string.Format("{0}{1}", Floor, StringData.GetString("Floor"));
     }
     static void SpawnGate(int _floor)
@@ -82,7 +85,7 @@ public partial class BattleManage
         }
         gate.transform.SetParent(BM.GateParent);
         gate.Init(_floor);
-        gate.transform.position = new Vector2((_floor * BM.FloorPlate * BM.PlateSizeX) - (BM.PlateSizeX * 1.5f), 0);
+        gate.transform.position = new Vector2(((_floor + 1 - StartFloor) * BM.FloorPlate * BM.PlateSizeX) - (BM.PlateSizeX * 1.5f), 0);
     }
     public static void SpawnNextGate(int _destroyedFloor)
     {
@@ -90,19 +93,20 @@ public partial class BattleManage
         if (Floor > _destroyedFloor)
         {
             SpawnGate(_destroyedFloor - 1);
-            Floor--;
-            UpdateFloorText();
+            if (!BM.TestMode)
+            {
+                AvailableMillions = EnemyData.GetAvailableMillions(Floor - 1);
+                IsDemogorgonFloor = CheckDemogorgon(Floor - 1);
+            }
         }
         else
         {
             SpawnGate(_destroyedFloor + 1);
-            Floor++;
-            UpdateFloorText();
-        }
-        if (!BM.TestMode)
-        {
-            AvailableMillions = EnemyData.GetAvailableMillions(Floor);
-            IsDemogorgonFloor = CheckDemogorgon(Floor);
+            if (!BM.TestMode)
+            {
+                AvailableMillions = EnemyData.GetAvailableMillions(Floor + 1);
+                IsDemogorgonFloor = CheckDemogorgon(Floor + 1);
+            }
         }
         PassFloorCount++;
         if (Floor > MaxFloor)

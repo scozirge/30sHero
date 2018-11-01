@@ -2623,7 +2623,7 @@ RectTransform:
   m_Children:
   - {fileID: 596222572}
   m_Father: {fileID: 1671040068}
-  m_RootOrder: 4
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -4039,7 +4039,7 @@ RectTransform:
   - {fileID: 1794995100}
   - {fileID: 2129670446}
   m_Father: {fileID: 1671040068}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -5751,7 +5751,7 @@ RectTransform:
   - {fileID: 866350936}
   - {fileID: 488348743}
   m_Father: {fileID: 1671040068}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -6637,9 +6637,9 @@ RectTransform:
   - {fileID: 88517354}
   - {fileID: 2018220246}
   - {fileID: 2091431468}
-  - {fileID: 623092009}
   - {fileID: 1070099226}
   - {fileID: 1455549806}
+  - {fileID: 623092009}
   - {fileID: 98348685}
   m_Father: {fileID: 0}
   m_RootOrder: 4
@@ -6975,7 +6975,7 @@ MonoBehaviour:
   GoldText: {fileID: 320368145}
   EmeraldText: {fileID: 754975252}
   MySpanwer: {fileID: 232256112}
-  CallSettlementTime: 2
+  CallSettlementTime: 1
   FloorPlate: 20
   PlateSizeX: 884
   BossDebutPlate: 1

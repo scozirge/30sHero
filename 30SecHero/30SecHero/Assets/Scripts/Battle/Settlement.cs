@@ -77,18 +77,20 @@ partial class BattleManage
         {
             PassNewFloorCount = MaxFloor - Player.MaxFloor;
         }
+        MaxFloor = (MaxFloor > Player.MaxFloor) ? MaxFloor : Player.MaxFloor;
         NewFloorGolds = (PassFloorCount * GameSettingData.FloorPassGold) + (PassNewFloorCount * GameSettingData.NewFloorPassGold);
         EnemyKillGolds = EnemyKill * GameSettingData.EnemyGold;
         TotalGold = NewFloorGolds + EnemyKillGolds + EnemyDropGolds;
         TotalEmerald = BossDropEmeralds;
-
         //寫入資料
         if (Player.LocalData)
         {
             //敵人擊殺
             if (EnemyKill > Player.MaxEnemyKills)
                 Player.SetMaxEnemyKills_Local(EnemyKill);
-            //突破樓層
+            //目前樓層
+            Player.SetCurFloor_Local(Floor);
+            //最高樓層
             Player.SetMaxFloor_Local(MaxFloor);
             //金幣獲得
             Player.GainGold(TotalGold);
@@ -102,7 +104,7 @@ partial class BattleManage
         else
         {
             //送server處理
-            Player.Settlement(Player.Gold + TotalGold, Player.Emerald + TotalEmerald, (MaxFloor > Player.MaxFloor) ? MaxFloor : Player.MaxFloor, GainEquipDataList);
+            Player.Settlement(Player.Gold + TotalGold, Player.Emerald + TotalEmerald, Floor, (MaxFloor > Player.MaxFloor) ? MaxFloor : Player.MaxFloor, GainEquipDataList);
         }
     }
     public IEnumerator WaitToShowResult()

@@ -71,6 +71,7 @@ public partial class BattleManage : MonoBehaviour
     MyTimer SpawnLootTimer;
     public static BattleManage BM;
     public static CameraController MyCameraControler;
+    public static int StartFloor;
     public static int Floor;
     public static Vector2 ScreenSize;
     static float DisableMargin_Left;
@@ -100,6 +101,7 @@ public partial class BattleManage : MonoBehaviour
     {
         IsPause = false;
         SceneObject.SetActive(true);
+        StartFloor = Player.CurFloor;
         InitSettlement();
         InitBattleSetting();
         BM = this;
@@ -108,6 +110,7 @@ public partial class BattleManage : MonoBehaviour
         InitStage();
         MyCameraControler = CameraControler;
         CurSpawnCount = 0;
+
         EnemyKill = 0;
         ScreenSize = MyCameraControler.ScreenSize;
         //SpawnEnemySet
