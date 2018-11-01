@@ -160,12 +160,13 @@ MonoBehaviour:
   FollowCamera: 0
   FollowCameraSpeed: 1000
   DebutSpeed: 600
-  WanderInterval: 1
-  RotateFactor: 0.005
+  WanderInterval: 2
+  RotateFactor: 0.01
   WanderRange: 100
   Destination: {x: 0, y: 0}
+  KeepDebut: 0
   ReadyToMove: 0
-  MoveSpeed: 500
+  MoveSpeed: 100
 --- !u!114 &114565999483713276
 MonoBehaviour:
   m_ObjectHideFlags: 1

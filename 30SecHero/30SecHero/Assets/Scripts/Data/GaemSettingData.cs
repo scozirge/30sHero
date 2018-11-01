@@ -48,6 +48,7 @@ public class GameSettingData : Data
     public static string WeaponPath;
     public static string ArmorPath;
     public static string AccessoryPath;
+    public static string SoulPath;
     public static float FreezeMove;
     public static float BurnDamage;
     public static float CurseDamageReduce;
@@ -275,6 +276,9 @@ public class GameSettingData : Data
                                 break;
                             case "AccessoryPath":
                                 AccessoryPath = item[key].ToString();
+                                break;
+                            case "SoulPath":
+                                SoulPath = item[key].ToString();
                                 break;
                             case "FreezeMove":
                                 FreezeMove = float.Parse(item[key].ToString());

@@ -42,6 +42,8 @@ public partial class BattleManage
     }
     void SpanwEnemy()
     {
+        if (IsPause)
+            return;
         SpawnForeAndBackEnemy();//預產螢幕外的怪物
         if (CheckActiveEnemyReachLimit())
         {

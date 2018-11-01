@@ -98,9 +98,19 @@ public partial class EnemyRole
                 pr.InitMonsterSkill(DropSkill.PSkillName, DropSkill);
                 SkillLoot drops = DropSpawner.SpawnSkill(transform.position);
                 drops.Init(DropSkill.PSkillName);
+                drops.SetPic(GetSkillLootSpritePath());
+
             }
         }
         pr.GetExtraMoveSpeed();
     }
-
+    string GetSkillLootSpritePath()
+    {
+        string spriteName= RoleImg.sprite.name.TrimEnd("_r".ToCharArray());
+        spriteName = spriteName.TrimEnd("_a".ToCharArray());
+        spriteName = spriteName.TrimStart("char_e".ToCharArray());
+        spriteName = "mask_" + spriteName;
+        spriteName = string.Format(GameSettingData.SoulPath, spriteName);
+        return spriteName;
+    }
 }

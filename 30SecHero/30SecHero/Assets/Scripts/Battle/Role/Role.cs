@@ -294,13 +294,13 @@ public abstract class Role : MonoBehaviour
         }
         Buffers = new Dictionary<RoleBuffer, BufferData>();
     }
-    public void RemoveAllSill()
+    public virtual void RemoveAllSill()
     {
         for (int i = 0; i < ActiveMonsterSkills.Count; i++)
         {
-            ActiveMonsterSkills[i].InactivePlayerSkill();
-            ActiveMonsterSkills.RemoveAt(i);
+            ActiveMonsterSkills[i].InactivePlayerSkill();          
         }
+        ActiveMonsterSkills = new List<Skill>();
     }
     public virtual void SelfDestroy()
     {

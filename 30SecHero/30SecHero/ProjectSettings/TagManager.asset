@@ -13,6 +13,7 @@ TagManager:
   - Gate
   - EnemyParent
   - LootParent
+  - Soul
   layers:
   - Default
   - TransparentFX

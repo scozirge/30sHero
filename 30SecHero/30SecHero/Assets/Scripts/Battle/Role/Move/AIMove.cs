@@ -40,11 +40,12 @@ public abstract class AIMove : MonoBehaviour
     protected Vector3 RandDestination;
     protected bool StartWander;
     protected Rigidbody2D MyRigi;
+    [SerializeField]
     protected bool KeepDebut;
     [HideInInspector]
     public bool ReadyToMove = true;
 
-    
+
     protected virtual void Start()
     {
         MyRigi = GetComponent<Rigidbody2D>();
@@ -55,10 +56,14 @@ public abstract class AIMove : MonoBehaviour
         else
         {
             WanderIntervalTimer = WanderInterval;
-            if (RotateFactor < 0.02f)
-                RotateFactor = 0.02f;
             KeepDebut = true;
         }
+        if (Destination == Vector2.zero)
+        {
+            Destination = transform.position;
+            RandomOffset = Destination;
+        }
+
         CanMove = true;
     }
     public Vector2 SetRandDestination()
@@ -107,7 +112,7 @@ public abstract class AIMove : MonoBehaviour
             }
         }
 
-        if (!Wander && KeepDebut)
+        if (KeepDebut)
             if (Vector3.Distance(Destination, transform.position) < 100)
             {
                 KeepDebut = false;

@@ -72,6 +72,7 @@ partial class BattleManage
     public void CalculateResult()
     {
         IsPause = true;
+        SoulGo.SetActive(false);
         SettlementObj.SetActive(true);
         MyCameraControler.enabled = false;
         SceneObject.SetActive(false);

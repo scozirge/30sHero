@@ -168,6 +168,7 @@ public partial class PlayerRole : Role
     [HideInInspector]
     public int FaceLeftOrRight;
     Dictionary<string, Skill> MonsterSkills = new Dictionary<string, Skill>();
+    Dictionary<string, Soul> MonsterSouls = new Dictionary<string, Soul>();
     public EnemyRole ClosestEnemy;
     bool CanJump;
 
@@ -266,6 +267,7 @@ public partial class PlayerRole : Role
     {
         base.SelfDestroy();
         BattleManage.BM.CalculateResult();
+
     }
     public void BumpingAttack()
     {
@@ -553,7 +555,7 @@ public partial class PlayerRole : Role
             MonsterSkills.Add(_name, skill);
         }
     }
-    public void GenerateMonsterSkill(string _name)
+    public void GenerateMonsterSkill(string _name, string _spritePath)
     {
         if (!IsAvatar)
             return;
@@ -562,6 +564,12 @@ public partial class PlayerRole : Role
             MonsterSkills[_name].enabled = true;
             MonsterSkills[_name].PlayerGetSkill(SkillTimeBuff);
             ActiveMonsterSkills.Add(MonsterSkills[_name]);
+            if (!MonsterSouls.ContainsKey(_name))
+            {
+                Soul soul = SoulSpawner.SpawnSoul(transform.position);
+                soul.Init(transform, _spritePath);
+                MonsterSouls.Add(_name, soul);
+            }
         }
     }
     protected virtual void MonsterSkillTimerFunc()
@@ -571,6 +579,11 @@ public partial class PlayerRole : Role
             ActiveMonsterSkills[i].PSkillTimer -= Time.deltaTime;
             if (ActiveMonsterSkills[i].PSkillTimer <= 0)
             {
+                if (MonsterSouls.ContainsKey(ActiveMonsterSkills[i].PSkillName))
+                {
+                    MonsterSouls[ActiveMonsterSkills[i].PSkillName].SelfDestroy();
+                    MonsterSouls.Remove(ActiveMonsterSkills[i].PSkillName);
+                }
                 if (MonsterSkills.ContainsKey(ActiveMonsterSkills[i].name))
                     MonsterSkills.Remove(ActiveMonsterSkills[i].PSkillName);
                 ActiveMonsterSkills[i].InactivePlayerSkill();
@@ -621,6 +634,16 @@ public partial class PlayerRole : Role
             return;
         HealHP((int)(_damage * (1 + BloodThirsty)));
         //Debug.Log("Damage=" + Damage + ",True Damage=" + _damage + ", Vampire=" + (int)(_damage * (BloodThirsty)));
+    }
+    public override void RemoveAllSill()
+    {
+        base.RemoveAllSill();
+        List<string> keys = new List<string>(MonsterSouls.Keys);
+        for (int i = 0; i < keys.Count; i++)
+        {
+            MonsterSouls[keys[i]].SelfDestroy();
+        }
+        MonsterSouls = new Dictionary<string, Soul>();
     }
 
 }

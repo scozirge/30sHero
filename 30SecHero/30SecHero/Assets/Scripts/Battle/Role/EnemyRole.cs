@@ -60,6 +60,7 @@ public partial class EnemyRole : Role
         if (RoleImg != null)
         {
             string folderName = RoleImg.sprite.name.TrimEnd("_r".ToCharArray());
+            folderName = folderName.TrimEnd("_a".ToCharArray());
             string rPicName = folderName + "_r";
             string aPicName = folderName + "_a";
             MotionSprite[0] = Resources.Load<Sprite>(string.Format("Images/Role/{0}/{1}", folderName, rPicName));

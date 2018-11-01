@@ -58,6 +58,8 @@ public partial class BattleManage : MonoBehaviour
     GameObject GiveUpConfirmObj;
     [SerializeField]
     GameObject BattleBG;
+    [SerializeField]
+    GameObject SoulGo;
 
     static List<EnemyRole> AvailableMillions;
     static List<EnemyRole> AvailableDemonGergons;
@@ -186,6 +188,7 @@ public partial class BattleManage : MonoBehaviour
     public void Setting(bool _active)
     {
         IsPause = _active;
+        SoulGo.SetActive(!_active);
         MyCameraControler.enabled = !_active;
         gameObject.SetActive(!_active);
         SettingObj.SetActive(_active);
