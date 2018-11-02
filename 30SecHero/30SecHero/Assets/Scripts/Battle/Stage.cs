@@ -89,7 +89,7 @@ public partial class BattleManage
     }
     public static void SpawnNextGate(int _destroyedFloor)
     {
-
+        TransferToGainEquipDataList();//將目前吃到的裝備加到獲得裝備清單中
         if (Floor > _destroyedFloor)
         {
             SpawnGate(_destroyedFloor - 1);

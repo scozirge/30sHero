@@ -55,13 +55,10 @@ public class RoleBehaviorEditor : Editor
         _rect.height = EditorGUIUtility.singleLineHeight;
         SerializedProperty type = nodeData.FindPropertyRelative("Type");
         SerializedProperty nodeTag = nodeData.FindPropertyRelative("NodeTag");
-        string description = nodeData.FindPropertyRelative("Description").stringValue;
-        string nodeLabel = "Action" + _index + ":" + (ActionType)type.enumValueIndex;
         if (nodeTag.stringValue != "")
-            nodeLabel += " [" + nodeTag.stringValue + "]";
-        if (description != "")
-            nodeLabel += "(" + description + ")";
-        EditorGUI.LabelField(_rect, new GUIContent(nodeLabel, description));
+            EditorGUI.LabelField(_rect, new GUIContent("Action" + _index + ":" + (ActionType)type.enumValueIndex + " [" + nodeTag.stringValue + "]", "test"));
+        else
+            EditorGUI.LabelField(_rect, new GUIContent("Action" + _index + ":" + (ActionType)type.enumValueIndex));
     }
     public override void OnInspectorGUI()
     {

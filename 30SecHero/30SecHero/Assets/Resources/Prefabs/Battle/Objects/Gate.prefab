@@ -118,6 +118,8 @@ MonoBehaviour:
   DeathParticle: {fileID: 198697248839094646, guid: a2be963d537b7d14f95e421703721f1a,
     type: 2}
   DestroySound: {fileID: 8300000, guid: 1b25ad6116690e048bf39c1507f12bb8, type: 3}
+  PerformPrefab: {fileID: 114293770445150970, guid: 66edd9bd8dc28b74db82a9774d37ca5d,
+    type: 2}
 --- !u!114 &114772005671674446
 MonoBehaviour:
   m_ObjectHideFlags: 1

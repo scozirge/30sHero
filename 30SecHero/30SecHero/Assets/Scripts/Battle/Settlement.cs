@@ -35,6 +35,7 @@ partial class BattleManage
 
     static int TotalGold;
     static int TotalEmerald;
+    public static List<EquipData> ExpectEquipDataList;
     static List<EquipData> GainEquipDataList;
 
     static void InitSettlement()
@@ -49,6 +50,7 @@ partial class BattleManage
         TotalGold = 0;
         TotalEmerald = 0;
         GainEquipDataList = new List<EquipData>();
+        ExpectEquipDataList = new List<EquipData>();
     }
 
     public static void EnemyDropGoldAdd(int _gold)
@@ -65,10 +67,18 @@ partial class BattleManage
     }
     public static void GainEquip(EquipData _data)
     {
-        GainEquipDataList.Add(_data);
+        ExpectEquipDataList.Add(_data);
         //Debug.Log("UID=" + _data.UID);
         //Debug.Log("LV=" + _data.LV);
         //Debug.Log("Quaility=" + _data.Quality);
+    }
+    public static void TransferToGainEquipDataList()
+    {
+        for(int i=0;i<ExpectEquipDataList.Count;i++)
+        {
+            GainEquipDataList.Add(ExpectEquipDataList[i]);
+        }
+        ExpectEquipDataList = new List<EquipData>();
     }
     public void CalculateResult()
     {
