@@ -59,6 +59,8 @@ public partial class BattleManage : MonoBehaviour
     [SerializeField]
     GameObject BattleBG;
     [SerializeField]
+    GameObject ExampleBattleBG;
+    [SerializeField]
     GameObject SoulGo;
 
 
@@ -99,6 +101,7 @@ public partial class BattleManage : MonoBehaviour
     }
     void Init()
     {
+        ExampleBattleBG.SetActive(false);
         IsPause = false;
         SceneObject.SetActive(true);
         StartFloor = Player.CurFloor;
