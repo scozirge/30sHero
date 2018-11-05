@@ -44,13 +44,14 @@ public partial class BattleManage
             return;
         MyStageSpawner.Init();
         LocationCriterionWidth = LocationCriterion.rect.width - 21;
+        StageList = new List<Stage>();
+        FGList = new List<ForeGround>();
         UpdateCurPlate();
         //建立門
         SpawnGate(Floor - 1);
         SpawnGate(Floor);
         //建立地形
-        StageList = new List<Stage>();
-        FGList = new List<ForeGround>();
+
         SpawnStage(new Vector2(BM.PlateSizeX, 0), BM.FloorPlate - 2, Floor);//目前層的地形
         SpawnStage(new Vector2((BM.PlateSizeX * BM.FloorPlate) - BM.PlateSizeX, 0), BM.FloorPlate, Floor + 1);//下一層地形
         SpawnStage(new Vector2(-((BM.PlateSizeX * BM.FloorPlate) + (BM.PlateSizeX)), 0), BM.FloorPlate, Floor - 1);//上一層地形

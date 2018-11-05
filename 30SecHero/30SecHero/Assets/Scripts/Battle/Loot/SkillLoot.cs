@@ -7,6 +7,8 @@ public class SkillLoot : Loot
     [SerializeField]
     Image SoulIcon;
     [SerializeField]
+    ParticleSystem ExistEffect;
+    [SerializeField]
     ParticleSystem GetEffect;
 
     public string Name { get; private set; }
@@ -15,6 +17,7 @@ public class SkillLoot : Loot
     public void Init(string _name)
     {
         Name = _name;
+        EffectEmitter.EmitParticle(ExistEffect, Vector2.zero, Vector3.zero, transform);
     }
     public void SetPic(string _spritePath)
     {

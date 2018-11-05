@@ -273,8 +273,8 @@ public partial class PlayerRole : Role
     {
         if (!IsAvatar)
         {
-            IsAlive = false;
-            SelfDestroy();
+            int dmg = 99999999;
+            ReceiveDmg(ref dmg);
             return;
         }
         ChangeToKnockDrag();
@@ -567,7 +567,7 @@ public partial class PlayerRole : Role
             if (!MonsterSouls.ContainsKey(_name))
             {
                 Soul soul = SoulSpawner.SpawnSoul(transform.position);
-                soul.Init(transform, _spritePath);
+                soul.Init(this, _spritePath);
                 MonsterSouls.Add(_name, soul);
             }
         }

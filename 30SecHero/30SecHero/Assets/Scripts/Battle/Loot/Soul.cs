@@ -22,7 +22,7 @@ public class Soul : MonoBehaviour
     [SerializeField]
     protected float RotateFactor;
 
-    Transform Target;
+    PlayerRole Target;
     Vector2 TargetOffset;
     Vector2 TargetPos;
     MyTimer RandomPosTimer;
@@ -48,8 +48,16 @@ public class Soul : MonoBehaviour
     {
         if (!Target)
             return;
-        TargetPos = (Vector2)Target.position + TargetOffset;
-        MyRigid.velocity = Vector2.Lerp(MyRigid.velocity, (TargetPos - (Vector2)transform.position).normalized * MoveSpeed, RotateFactor);
+        TargetPos = (Vector2)Target.transform.position + TargetOffset;
+        MyRigid.velocity = Vector2.Lerp(MyRigid.velocity, (TargetPos - (Vector2)transform.position).normalized * (MoveSpeed + Target.ExtraMoveSpeed), RotateFactor);
+        if (MyRigid.velocity.x > 0)
+        {
+            transform.localScale = new Vector2(1, 1);
+        }
+        else
+        {
+            transform.localScale = new Vector2(-1, 1);
+        }
     }
     void SetRandomOffsetSurroundTarget()
     {
@@ -58,7 +66,7 @@ public class Soul : MonoBehaviour
         TargetOffset = new Vector2(randX, randY);
         RandomPosTimer.StartRunTimer = true;
     }
-    public void Init(Transform _target, string _spriteName)
+    public void Init(PlayerRole _target, string _spriteName)
     {
         Target = _target;
         if (SoulIcon != null || _spriteName == "")

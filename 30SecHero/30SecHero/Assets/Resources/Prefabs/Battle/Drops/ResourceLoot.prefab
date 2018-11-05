@@ -64,7 +64,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!50 &50034968546695924
 Rigidbody2D:
   serializedVersion: 4
@@ -164,6 +164,7 @@ MonoBehaviour:
   RotateFactor: 0.001
   WanderRange: 100
   Destination: {x: 0, y: 0}
+  KeepDebut: 0
   ReadyToMove: 0
   MoveSpeed: 150
 --- !u!114 &114629167383406342

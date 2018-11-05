@@ -104,7 +104,7 @@ public partial class BattleManage : MonoBehaviour
         ExampleBattleBG.SetActive(false);
         IsPause = false;
         SceneObject.SetActive(true);
-        StartFloor = Player.CurFloor;
+
         InitSettlement();
         InitBattleSetting();
         BM = this;
@@ -155,6 +155,9 @@ public partial class BattleManage : MonoBehaviour
         MaxLoot = GameSettingData.MaxLoot;
         FloorPlate = GameSettingData.FloorPlate;
         BossDebutPlate = GameSettingData.BossDebutPlate;
+        StartFloor = Player.CurFloor;
+        if (StartFloor < 1)
+            StartFloor = 1;
     }
     public static void AddEnemyKill()
     {

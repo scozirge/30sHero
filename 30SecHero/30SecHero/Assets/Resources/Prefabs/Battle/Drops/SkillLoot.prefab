@@ -130,7 +130,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   WaitToBeAcquire: 0
   SoulIcon: {fileID: 114515800619740280}
-  GetEffect: {fileID: 0}
+  ExistEffect: {fileID: 198796042616351790, guid: 9cee33da8b3d059458361ee2c1d444c8,
+    type: 2}
+  GetEffect: {fileID: 198646098838674944, guid: 1cf5b72d5901b214eb63b8f71c61a97d,
+    type: 2}
 --- !u!222 &222452408990536316
 CanvasRenderer:
   m_ObjectHideFlags: 1
@@ -146,7 +149,7 @@ RectTransform:
   m_GameObject: {fileID: 1102576209836190}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 15}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
