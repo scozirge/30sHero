@@ -91,8 +91,8 @@ GameObject:
   - component: {fileID: 50284349101639710}
   - component: {fileID: 58819477902178946}
   - component: {fileID: 114796498901394522}
-  - component: {fileID: 95077092610168030}
   - component: {fileID: 114014446417336624}
+  - component: {fileID: 95815077169758588}
   m_Layer: 9
   m_Name: Two Blade Melee
   m_TagString: Enemy
@@ -167,7 +167,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: -1.63}
   serializedVersion: 2
   m_Radius: 55
---- !u!95 &95077092610168030
+--- !u!95 &95815077169758588
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 1
@@ -196,6 +196,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d51ff43f4f2a15c45b55bbca6d530f8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  BehaviorSkill: 0
   PSkillName: Two Blade Melee
   PSkillDuration: 10
   DetecteRadius: 1869
@@ -260,7 +261,7 @@ MonoBehaviour:
   m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: 7c68cff7659547847b430c14e18120f1, type: 2}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
@@ -314,7 +315,7 @@ MonoBehaviour:
   m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: 7c68cff7659547847b430c14e18120f1, type: 2}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
@@ -341,7 +342,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65069269a16a89543bc9015ab9a79cf5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MyAni: {fileID: 95077092610168030}
+  MyAni: {fileID: 95815077169758588}
 --- !u!114 &114884425457605678
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -362,6 +363,8 @@ MonoBehaviour:
   RotateFactor: 0.02
   WanderRange: 25
   Destination: {x: 0, y: 0}
+  KeepDebut: 0
+  ReadyToMove: 1
 --- !u!114 &114906583810752894
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -373,7 +376,7 @@ MonoBehaviour:
   m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: 7c68cff7659547847b430c14e18120f1, type: 2}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
@@ -553,6 +556,6 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 383, y: 475}
+  m_AnchoredPosition: {x: -7, y: 51}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}

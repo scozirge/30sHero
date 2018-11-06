@@ -59,7 +59,6 @@ MonoBehaviour:
   RandomFlip: 0
   RandomRotate: 0
   Rotation: {x: 0, y: 0, z: 0}
-  RandomColor: 1
   BottomImage: {fileID: 114995762784812360}
   Colors:
   - {r: 0.3372549, g: 0.3372549, b: 0.3372549, a: 1}
@@ -80,7 +79,7 @@ MonoBehaviour:
   m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: 8283d6e384ddf9f4aaf07ebea1e2e937, type: 2}
   m_Color: {r: 0.37016436, g: 0.4339623, b: 0.36641157, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:

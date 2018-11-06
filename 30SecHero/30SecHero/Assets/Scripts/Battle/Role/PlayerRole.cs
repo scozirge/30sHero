@@ -504,7 +504,7 @@ public partial class PlayerRole : Role
                     MoveAfterimage_Main.startRotationY = 180;
             }
         }
-        RoleTrans.localScale = new Vector2(FaceLeftOrRight, 1);
+        RoleTrans.localScale = new Vector3(FaceLeftOrRight, 1, 1);
     }
     public void GetLoot(LootData _data)
     {

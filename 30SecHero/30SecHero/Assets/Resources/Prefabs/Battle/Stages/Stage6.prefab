@@ -120,6 +120,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   OccupyPlateSize: 1
+  Floor: 0
 --- !u!114 &114331083157399600
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -210,7 +211,7 @@ SpriteShapeRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: e7e0b069a4ac62a4ba1796e2c97da78b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

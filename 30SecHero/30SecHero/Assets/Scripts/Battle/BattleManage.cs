@@ -98,6 +98,7 @@ public partial class BattleManage : MonoBehaviour
         if (!GameManager.IsInit)
             GameManager.DeployGameManager();
         SceneObject.SetActive(false);
+        BattleBG.SetActive(false);
     }
     void Init()
     {
@@ -110,11 +111,11 @@ public partial class BattleManage : MonoBehaviour
         BM = this;
         EnemyParent = GameObject.FindGameObjectWithTag("EnemyParent").GetComponent<Transform>();
         LootParetn = GameObject.FindGameObjectWithTag("LootParent").GetComponent<Transform>();
+        StartFloor = 1;
+        CurSpawnCount = 0;
+        EnemyKill = 0;
         InitStage();
         MyCameraControler = CameraControler;
-        CurSpawnCount = 0;
-
-        EnemyKill = 0;
         ScreenSize = MyCameraControler.ScreenSize;
         //SpawnEnemySet
         if (TestMode)

@@ -112,11 +112,11 @@ public partial class EnemyRole : Role
             return;
         if (transform.position.x > Target.transform.position.x)
         {
-            RoleTrans.localScale = Vector2.one;
+            RoleTrans.localScale = Vector3.one;
         }
         else
         {
-            RoleTrans.localScale = new Vector2(-1, 1);
+            RoleTrans.localScale = new Vector3(-1, 1, 1);
         }
     }
     public override void Attack(Skill _skill)
