@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 53268df28c019b6438c974fbc1c5c62f
+guid: a50694108e4ba284aac745d632d8ca12
 TextureImporter:
   fileIDToRecycleName: {}
   externalObjects: {}
@@ -45,7 +45,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 1
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -108,12 +108,12 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: ae43dbe598d32d84b84c5b93299ebc13
+    spriteID: 143d1c6f18c73a9438de83f671d750b4
     vertices: []
     indices: 
     edges: []
     weights: []
-  spritePackingTag: Battle
+  spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
   userData: 

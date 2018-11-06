@@ -52,11 +52,11 @@ public class Soul : MonoBehaviour
         MyRigid.velocity = Vector2.Lerp(MyRigid.velocity, (TargetPos - (Vector2)transform.position).normalized * (MoveSpeed + Target.ExtraMoveSpeed), RotateFactor);
         if (MyRigid.velocity.x > 0)
         {
-            transform.localScale = new Vector2(1, 1);
+            transform.localScale = new Vector3(1, 1, 1);
         }
         else
         {
-            transform.localScale = new Vector2(-1, 1);
+            transform.localScale = new Vector3(-1, 1, 1);
         }
     }
     void SetRandomOffsetSurroundTarget()
