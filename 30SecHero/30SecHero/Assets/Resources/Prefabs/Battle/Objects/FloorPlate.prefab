@@ -83,7 +83,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c51025e831c7c644690d67aee351146b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RandomFlip: 1
+  RandomFlip: 0
   RandomRotate: 0
   Rotation: {x: 0, y: 0, z: 0}
 --- !u!222 &222115800569214396

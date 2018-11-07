@@ -6,7 +6,7 @@ Material:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Test
+  m_Name: Ground2
   m_Shader: {fileID: 4800000, guid: f1c332c0884ef2b4bb26584f688eac3a, type: 3}
   m_ShaderKeywords: _ALPHABLEND_ON _NORMALMAP _SPECULAR_COLOR
   m_LightmapFlags: 4
@@ -38,7 +38,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
-        m_Texture: {fileID: 2800000, guid: 48f67cde45f9658478ea9854fbc3e36d, type: 3}
+        m_Texture: {fileID: 2800000, guid: a20685ea4bbe48a45a389a68e169f5fe, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
@@ -100,7 +100,7 @@ Material:
     - _BlendAmount: 0
     - _Brightness: 1
     - _BumpIntensity: 1.09
-    - _BumpScale: 0.5
+    - _BumpScale: 39.63
     - _ColorMask: 15
     - _Cull: 0
     - _CustomRenderQueue: 0
