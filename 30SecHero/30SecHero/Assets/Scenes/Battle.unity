@@ -8755,15 +8755,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TestMode: 0
-  EnemyFirstHalfInterval: 3
-  EnemySecondHalfInterval: 3
+  EnemyFirstHalfInterval: 1
+  EnemySecondHalfInterval: 1
   PotionInterval: 0
   EnemyFirstHalfMinCount: 1
   EnemyFirstHalfMaxCount: 2
   EnemySecondHalfMinCount: 3
   EnemySecondHalfMaxCount: 4
   EnemySpawnInterval: 0.3
-  MaxEnemy: 4
+  MaxEnemy: 1
   MaxForeEnemy: 0
   MaxBackEnemy: 0
   MaxLoot: 1
@@ -8774,7 +8774,7 @@ MonoBehaviour:
   - {fileID: 114485926508205134, guid: 36509ae15283f0b4b85c7eb28f152231, type: 2}
   - {fileID: 114364750184517408, guid: fd1730034bed914409677edaf33d653c, type: 2}
   - {fileID: 114364750184517408, guid: 4d1f64498757ee445a05825a7c7257a1, type: 2}
-  DesignatedEnemy: {fileID: 114364750184517408, guid: fd1730034bed914409677edaf33d653c,
+  DesignatedEnemy: {fileID: 114965315550208914, guid: 3a2c90847d62e9447b389b92d1b838e7,
     type: 2}
   LootPrefab: {fileID: 114565999483713276, guid: 0384220ed63709741ba419f3ba98af08,
     type: 2}
@@ -11005,7 +11005,21 @@ Prefab:
     - target: {fileID: 108484094380481612, guid: d9e47796d36fc83458ffab41aea6641e,
         type: 2}
       propertyPath: m_Intensity
-      value: 40
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 114529601492733476, guid: d9e47796d36fc83458ffab41aea6641e,
+        type: 2}
+      propertyPath: MaxAvaterTime
+      value: 900
+      objectReference: {fileID: 0}
+    - target: {fileID: 4325138500020102, guid: d9e47796d36fc83458ffab41aea6641e, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -150
+      objectReference: {fileID: 0}
+    - target: {fileID: 108484094380481612, guid: d9e47796d36fc83458ffab41aea6641e,
+        type: 2}
+      propertyPath: m_Range
+      value: 900
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d9e47796d36fc83458ffab41aea6641e, type: 2}
