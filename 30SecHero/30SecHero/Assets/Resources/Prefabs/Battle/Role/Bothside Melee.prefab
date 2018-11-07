@@ -197,7 +197,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BehaviorSkill: 0
-  PSkillName: 
+  PSkillName: Bothside Melee
   PSkillDuration: 0
   DetecteRadius: 800
   DamagePercent: 1

@@ -617,7 +617,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BehaviorSkill: 1
-  PSkillName: MachineGunner
+  PSkillName: TestBoss
   PSkillDuration: 10
   DetecteRadius: 800
   DamagePercent: 1

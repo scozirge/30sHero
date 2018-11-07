@@ -327,7 +327,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BehaviorSkill: 0
-  PSkillName: Shooter
+  PSkillName: Sting Shooter
   PSkillDuration: 20
   DetecteRadius: 1000
   DamagePercent: 1

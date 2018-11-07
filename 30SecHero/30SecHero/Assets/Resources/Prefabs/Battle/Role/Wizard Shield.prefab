@@ -259,7 +259,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BehaviorSkill: 0
-  PSkillName: shield
+  PSkillName: Wizard Shield
   PSkillDuration: 10
   DetecteRadius: 900
   DamagePercent: 1

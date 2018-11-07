@@ -197,7 +197,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BehaviorSkill: 0
-  PSkillName: Shooter
+  PSkillName: Bothside Shooter
   PSkillDuration: 10
   DetecteRadius: 800
   DamagePercent: 1

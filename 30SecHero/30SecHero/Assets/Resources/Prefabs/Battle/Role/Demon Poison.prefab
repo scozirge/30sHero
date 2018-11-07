@@ -197,7 +197,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BehaviorSkill: 0
-  PSkillName: Shooter
+  PSkillName: Demon Poison
   PSkillDuration: 20
   DetecteRadius: 1000
   DamagePercent: 1

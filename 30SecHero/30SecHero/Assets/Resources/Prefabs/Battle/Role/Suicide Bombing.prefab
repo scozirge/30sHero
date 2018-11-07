@@ -330,7 +330,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BehaviorSkill: 0
-  PSkillName: FireTrap
+  PSkillName: Suicide Bombing
   PSkillDuration: 10
   DetecteRadius: 400
   DamagePercent: 1

@@ -207,7 +207,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BehaviorSkill: 0
-  PSkillName: Shooter
+  PSkillName: Trap Tower Ice
   PSkillDuration: 10
   DetecteRadius: 1000
   DamagePercent: 1

@@ -347,7 +347,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BehaviorSkill: 0
-  PSkillName: Shooter
+  PSkillName: Small Dragon Fire
   PSkillDuration: 10
   DetecteRadius: 800
   DamagePercent: 1
