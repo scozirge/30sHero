@@ -68,6 +68,7 @@ MonoBehaviour:
   - Type: 3
     Time: 5
     Value: 0.5
+  TriggerOnRushRole: 0
   Value: 0
   AmmoSpeed: 350
   TraceFactor: 0

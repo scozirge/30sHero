@@ -72,6 +72,7 @@ public class GameSettingData : Data
     public static float BloodThirsty;
     public static float PotionEfficiency;
     public static float PotionDrop;
+    public static float RushCD;
     //關卡數值
     public static float PotionInterval;
     public static float PotionProportion;
@@ -346,6 +347,9 @@ public class GameSettingData : Data
                                 break;
                             case "PotionDrop":
                                 PotionDrop = float.Parse(item[key].ToString());
+                                break;
+                            case "RushCD":
+                                RushCD = float.Parse(item[key].ToString());
                                 break;
                             //關卡數值
                             case "PotionInterval":

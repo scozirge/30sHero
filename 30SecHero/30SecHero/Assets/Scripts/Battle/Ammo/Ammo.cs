@@ -29,7 +29,9 @@ public partial class Ammo : MonoBehaviour
     [Tooltip("暈眩(秒數)、燃燒(秒數)、冰凍(秒數)、傷害Buff(秒數,增/減值)、無敵(秒數)、格檔(時間,秒數)")]
     [SerializeField]
     protected BufferData[] Buffers;
-
+    [Tooltip("是否會觸發衝刺中的玩家")]
+    [SerializeField]
+    protected bool TriggerOnRushRole = true;
 
     protected bool OutSideDestroy = true;
     protected Force AttackerRoleTag;

@@ -85,7 +85,7 @@ public abstract class Role : MonoBehaviour
     public float DamageBuff { get; protected set; }
 
     public int ExtraDefence { get; protected set; }
-
+    public bool OnRush;
     public bool IsAlive { get; protected set; }
     public Dictionary<RoleBuffer, BufferData> Buffers = new Dictionary<RoleBuffer, BufferData>();
     Dictionary<RoleBuffer, ParticleSystem> BufferParticles = new Dictionary<RoleBuffer, ParticleSystem>();

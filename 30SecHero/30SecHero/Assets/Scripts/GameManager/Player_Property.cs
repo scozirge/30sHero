@@ -39,7 +39,7 @@ public partial class Player
         Player.Properties[RoleProperty.BloodThirsty] = GameSettingData.BloodThirsty;
         Player.Properties[RoleProperty.PotionEfficiency] = GameSettingData.PotionEfficiency;
         Player.Properties[RoleProperty.PotionDrop] = GameSettingData.PotionDrop;
-
+        Player.Properties[RoleProperty.RushCD] = GameSettingData.RushCD;
     }
     public static float GetProperties(RoleProperty _property)
     {

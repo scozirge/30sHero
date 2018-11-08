@@ -17,5 +17,6 @@
     GoldDrop,
     BloodThirsty,
     PotionEfficiency,
-    PotionDrop
+    PotionDrop,
+    RushCD
 }

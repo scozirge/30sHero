@@ -161,26 +161,37 @@ public partial class PlayerRole : Role
     [Tooltip("靜止摩擦力")]
     [SerializeField]
     protected float StopDrag;
+    [Tooltip("衝刺無敵時間")]
+    [SerializeField]
+    protected float RushAntiAmooTime;
+    [Tooltip("衝刺CD")]
+    [SerializeField]
+    protected float RushCD;
 
     ParticleSystem CurBeHitEffect;
     MyTimer AttackTimer;
     MyTimer JumpTimer;
+    MyTimer RushTimer;
+    MyTimer OnRushTimer;
     [HideInInspector]
     public int FaceLeftOrRight;
     Dictionary<string, Skill> MonsterSkills = new Dictionary<string, Skill>();
     Dictionary<string, Soul> MonsterSouls = new Dictionary<string, Soul>();
     public EnemyRole ClosestEnemy;
     bool CanJump;
+    bool CanRush;
 
     protected override void Start()
     {
         InitPlayerProperties();
         base.Start();
+        OnRush = false;
         AvatarTimer = MaxAvaterTime;
         AttackTimer = new MyTimer(DontAttackRestoreTime, RestoreAttack, false, false);
         ShieldTimer = new MyTimer(ShieldRechargeTime, ShieldRestore, false, false);
         JumpTimer = new MyTimer(JumpCDTime, SetCanJump, false, false);
-
+        RushTimer= new MyTimer(RushCD, SetCanRush, false, false);
+        OnRushTimer = new MyTimer(RushAntiAmooTime, SetNotOnRush, false, false);
         ShieldBarWidth = ShieldBar.rect.width;
         Health = MaxHealth;
         Shield = MaxShield;
@@ -188,6 +199,7 @@ public partial class PlayerRole : Role
         FaceLeftOrRight = 1;
         IsAvatar = true;
         CanJump = true;
+        CanRush = true;
     }
     void InitPlayerProperties()
     {
@@ -211,6 +223,7 @@ public partial class PlayerRole : Role
         PotionEfficiency = (float)Player.GetProperties(RoleProperty.PotionEfficiency);
         PotionDrop = (float)Player.GetProperties(RoleProperty.PotionDrop);
         GainMoveFromKilling = (int)Player.GetProperties(RoleProperty.GainMoveFromKilling);
+        RushCD = (float)Player.GetProperties(RoleProperty.RushCD);
     }
     void InitMoveAfterimage()
     {
@@ -220,6 +233,14 @@ public partial class PlayerRole : Role
         MoveAfterimage_Main = MoveAfterimage.main;
         MoveAfterimage_Main.maxParticles = 0;
         MoveAfterimage_Main.startLifetime = 0;
+    }
+    void SetCanRush()
+    {
+        CanRush = true;
+    }
+    void SetNotOnRush()
+    {
+        OnRush = false;
     }
     void SetCanJump()
     {
@@ -292,6 +313,8 @@ public partial class PlayerRole : Role
         AttackTimer.RunTimer();
         ShieldTimer.RunTimer();
         JumpTimer.RunTimer();
+        RushTimer.RunTimer();
+        OnRushTimer.RunTimer();
         MonsterSkillTimerFunc();
         ShieldGenerate();
         ExtraMoveSpeedDecay();
@@ -433,8 +456,12 @@ public partial class PlayerRole : Role
                         //MyRigi.velocity += new Vector2(xMoveForce, yMoveForce);
                         MyRigi.velocity = new Vector2(xMoveForce, yMoveForce);
                         //衝刺
-                        if (Input.GetKeyDown(KeyCode.Space))
+                        if (CanRush && Input.GetKeyDown(KeyCode.Space))
                         {
+                            RushTimer.StartRunTimer = true;
+                            OnRushTimer.StartRunTimer = true;
+                            CanRush = false;
+                            OnRush = true;
                             Vector2 rushForce;
                             if (xMoveForce == 0 && yMoveForce == 0)
                             {

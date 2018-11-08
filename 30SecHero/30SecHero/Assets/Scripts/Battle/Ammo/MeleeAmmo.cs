@@ -53,6 +53,8 @@ public class MeleeAmmo : Ammo
     }
     protected override void TriggerTarget(Role _role)
     {
+        if (!TriggerOnRushRole && _role.OnRush)
+            return;
         base.TriggerTarget(_role);
         Vector2 force = (_role.transform.position - transform.position).normalized * KnockIntensity;
         if (MyMeleeType == MeleeType.Melee || MyMeleeType == MeleeType.Reflect || MyMeleeType == MeleeType.ReflectMirror)

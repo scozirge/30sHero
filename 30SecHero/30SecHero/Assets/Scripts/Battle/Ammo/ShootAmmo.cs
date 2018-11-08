@@ -40,6 +40,8 @@ public class ShootAmmo : Ammo
     }
     protected override void OnTriggerStay2D(Collider2D _col)
     {
+        if (!TriggerOnRushRole)
+            return;
         if (!Target)
             return;
         if (IsCausedDamage && AmmoType != ShootAmmoType.Permanent)
@@ -54,6 +56,8 @@ public class ShootAmmo : Ammo
     }
     protected override void TriggerTarget(Role _role)
     {
+        if (!TriggerOnRushRole && _role.OnRush)
+            return;
         base.TriggerTarget(_role);
         Vector2 force = (_role.transform.position - transform.position).normalized * KnockIntensity;
         int damage = Value;

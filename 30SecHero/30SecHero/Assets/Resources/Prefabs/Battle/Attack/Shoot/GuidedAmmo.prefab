@@ -91,6 +91,7 @@ MonoBehaviour:
   AmmoType: 1
   DamageInterval: 0.3
   Buffers: []
+  TriggerOnRushRole: 0
   Value: 0
   AmmoSpeed: 600
   TraceFactor: 0.05

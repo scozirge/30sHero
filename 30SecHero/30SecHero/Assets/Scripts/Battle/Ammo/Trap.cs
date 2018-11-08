@@ -25,6 +25,8 @@ public class Trap : Ammo
     }
     protected override void TriggerTarget(Role _role)
     {
+        if (!TriggerOnRushRole && _role.OnRush)
+            return;
         base.TriggerTarget(_role);
         Vector2 force = (_role.transform.position - transform.position).normalized * KnockIntensity;
         Value = (int)(_role.MaxHealth * DamageHPRatio);
