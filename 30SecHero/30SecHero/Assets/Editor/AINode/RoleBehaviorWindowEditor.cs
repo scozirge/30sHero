@@ -67,6 +67,10 @@ public class RoleBehaviorWindowEditor : EditorWindow
         FoldoutStyle = new GUIStyle(EditorStyles.foldout);
         FoldoutStyle.fontStyle = FontStyle.Bold;
         ButtonStyle = new GUIStyle(GUI.skin.button);
+        SerializedProperty actionRoundCount = GetTarget.FindProperty("ActionRoundCount");
+        EditorGUILayout.PropertyField(actionRoundCount);
+        SerializedProperty maxSpawnCount = GetTarget.FindProperty("MaxSpawnCount");
+        EditorGUILayout.PropertyField(maxSpawnCount);
 
         for (int i = 0; i < NodeList.arraySize; i++)
         {
@@ -133,6 +137,43 @@ public class RoleBehaviorWindowEditor : EditorWindow
                         EditorGUILayout.PropertyField(teleportPos);
                         EditorGUILayout.PropertyField(locoParticle);
                         EditorGUILayout.PropertyField(worldPartilce);
+                        break;
+                    case (int)ActionType.Spawn:
+                        SerializedProperty spawnIntervalTime = myListRef.FindPropertyRelative("SpawnIntervalTime");
+                        EditorGUILayout.PropertyField(spawnIntervalTime);
+                        SerializedProperty spawnEnemyDataList = myListRef.FindPropertyRelative("SpawnEnemyList");
+                        int spawnEnemyDataSize = spawnEnemyDataList.arraySize;
+                        spawnEnemyDataSize = EditorGUILayout.IntField("EnemyCount", spawnEnemyDataSize);
+
+                        
+                        if (spawnEnemyDataSize != spawnEnemyDataList.arraySize)
+                        {
+                            while (spawnEnemyDataSize > spawnEnemyDataList.arraySize)
+                            {
+                                spawnEnemyDataList.InsertArrayElementAtIndex(spawnEnemyDataList.arraySize);
+                            }
+                            while (spawnEnemyDataSize < spawnEnemyDataList.arraySize)
+                            {
+                                spawnEnemyDataList.DeleteArrayElementAtIndex(spawnEnemyDataList.arraySize - 1);
+                            }
+                        }
+                        for (int j = 0; j < spawnEnemyDataList.arraySize; j++)
+                        {
+                            SerializedProperty spawnEnemyDataRef = spawnEnemyDataList.GetArrayElementAtIndex(j);
+                            SerializedProperty spawnDataExpand = spawnEnemyDataRef.FindPropertyRelative("ExpandFolder");
+                            spawnDataExpand.boolValue = EditorGUILayout.Foldout(spawnDataExpand.boolValue, "Enemy" + j, FoldoutStyle);
+                            if (spawnDataExpand.boolValue)
+                            {
+                                SerializedProperty enemy = spawnEnemyDataRef.FindPropertyRelative("Enemy");
+                                SerializedProperty spawnPosRelateTo = spawnEnemyDataRef.FindPropertyRelative("SpawnPosRelateTo");
+                                SerializedProperty spawnPosition = spawnEnemyDataRef.FindPropertyRelative("SpawnPosition");
+                                SerializedProperty lifeTime = spawnEnemyDataRef.FindPropertyRelative("LifeTime");
+                                EditorGUILayout.PropertyField(enemy);
+                                EditorGUILayout.PropertyField(spawnPosRelateTo, new GUIContent("RelateTo"));
+                                EditorGUILayout.PropertyField(spawnPosition);
+                                EditorGUILayout.PropertyField(lifeTime);
+                            }                            
+                        }
                         break;
                     case (int)ActionType.Perform:
                         EditorGUIUtility.labelWidth = 100;

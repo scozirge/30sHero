@@ -26,7 +26,7 @@ public partial class EnemyRole : Role
     Sprite[] MotionSprite = new Sprite[2];
     Image RoleImg;
     MyTimer MotionTimer;
-
+    MyTimer LifeTimer;
 
     public void SetEnemyData(EnemyData _data)
     {
@@ -34,6 +34,15 @@ public partial class EnemyRole : Role
         Name = _data.Name;
         DebutFloor = _data.DebutFloor;
         Type = _data.Type;
+    }
+    public void SetLifeTime(float _time)
+    {
+        LifeTimer = new MyTimer(_time, LifeTimeOut, true, false);
+    }
+    void LifeTimeOut()
+    {
+        Health = 0;
+        DeathCheck();        
     }
     protected override void Start()
     {
@@ -165,6 +174,8 @@ public partial class EnemyRole : Role
         base.Update();
         SetEnemyDirection();
         MotionTimer.RunTimer();
+        if (LifeTimer != null)
+            LifeTimer.RunTimer();
     }
     public override void AddBuffer(BufferData _buffer)
     {

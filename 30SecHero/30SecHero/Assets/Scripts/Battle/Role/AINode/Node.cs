@@ -56,6 +56,12 @@ public class Node
     [Tooltip("註解")]
     [SerializeField]
     public string Description;
+    [Tooltip("召喚怪物")]
+    [SerializeField]
+    public List<SpawnEnemyData> SpawnEnemyList;
+    [Tooltip("召喚間隔秒數")]
+    [SerializeField]
+    public float SpawnIntervalTime;
 
     public Node GetMemberwiseClone()
     {

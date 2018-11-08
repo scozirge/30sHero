@@ -34,7 +34,7 @@ public partial class BattleManage
             er.SetEnemyData(GameDictionary.EnemyDic[AvailableDemonGergons[i].ID]);
             //Set SpawnPos
             er.transform.SetParent(EnemyParent);
-            EnemyList.Add(er);
+            AddEnemy(er);
         }
         AvailableDemonGergons = EnemyData.GetNextDemogorgon(Floor + 1, out NextDemogorgonFloor);
         //Debug.Log("NextDemogorgonFloor=" + NextDemogorgonFloor);
@@ -85,7 +85,7 @@ public partial class BattleManage
             SpawnEnemyTimer.StartRunTimer = true;
             UpdateSpawnEnmeyTimer();
         }
-        EnemyList.Add(er);
+        AddEnemy(er);
     }
     void SpawnForeAndBackEnemy()
     {
@@ -120,7 +120,7 @@ public partial class BattleManage
                     break;
             }
             er.transform.position = ai.Destination;
-            EnemyList.Add(er);
+            AddEnemy(er);
         }
     }
     Vector2 GetSpawnPos(Vector2 _offset)

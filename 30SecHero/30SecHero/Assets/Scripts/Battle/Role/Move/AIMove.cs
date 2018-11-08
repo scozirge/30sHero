@@ -60,11 +60,15 @@ public abstract class AIMove : MonoBehaviour
         }
         if (Destination == Vector2.zero)
         {
-            Destination = transform.position;
-            RandomOffset = Destination;
+            SetHereToDestination();
         }
 
         CanMove = true;
+    }
+    public void SetHereToDestination()
+    {
+        Destination = transform.position;
+        RandomOffset = Destination;
     }
     public Vector2 SetRandDestination()
     {

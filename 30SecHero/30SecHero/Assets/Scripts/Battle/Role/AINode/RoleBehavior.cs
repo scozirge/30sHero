@@ -10,16 +10,29 @@ public class RoleBehavior : MonoBehaviour
 
     Node CurNode;
     Rigidbody2D MyRigid;
+    AIRoleMove MyAIRoleMove;
     int CurNodeIndex;
     bool StartMove;
     Coroutine ForceStopCoroutine;
     Vector2 Destination = Vector2.zero;
     Vector2 SapwnPos;
+    //招怪
+    Transform EnemyParent;
+    int CurSpawnCount;
+    [Tooltip("此腳色最多可以同時在場上有幾隻召喚怪")]
+    public int MaxSpawnCount;
+    [Tooltip("動作幾輪")]
+    public int ActionRoundCount;
+    int CurRoundCount;
+    List<EnemyRole> SpawnList = new List<EnemyRole>();
+    int CurSpawnIndex;
 
     void Start()
     {
+        EnemyParent = GameObject.FindGameObjectWithTag("EnemyParent").transform;
         SapwnPos = transform.position;
         MyRigid = GetComponent<Rigidbody2D>();
+        MyAIRoleMove = GetComponent<AIRoleMove>();
         if (InitBehavior())
         {
             if (Nodes[CurNodeIndex].ActiveOnlyByEvent)
@@ -45,6 +58,7 @@ public class RoleBehavior : MonoBehaviour
     }
     void DoAction(Node _node)
     {
+
         StartMove = false;
         switch (_node.Type)
         {
@@ -55,8 +69,15 @@ public class RoleBehavior : MonoBehaviour
                 if (_node.MaxProcessingTime > 0)
                     ForceStopCoroutine = StartCoroutine(ForceDoNextAction(_node.MaxProcessingTime));
                 break;
+            case ActionType.Spawn:
+                StartSpawn(_node);
+                break;
+            case ActionType.Rush:
+
+                break;
             case ActionType.Spell:
                 Spell(_node);
+                CheckRandomNode();
                 break;
             case ActionType.Teleport:
                 Destination = GetRelativeDestination(_node);
@@ -85,6 +106,9 @@ public class RoleBehavior : MonoBehaviour
                         AudioPlayer.PlaySound(Nodes[CurNodeIndex].SoundList[i]);
                     }
                 }
+                CheckRandomNode();
+                break;
+            default:
                 CheckRandomNode();
                 break;
         }
@@ -120,7 +144,6 @@ public class RoleBehavior : MonoBehaviour
     void Spell(Node _node)
     {
         _node.Spell();
-        CheckRandomNode();
     }
     void CheckRandomNode()
     {
@@ -146,7 +169,16 @@ public class RoleBehavior : MonoBehaviour
     {
         CurNodeIndex++;
         if (CurNodeIndex > Nodes.Count - 1)
+        {
             CurNodeIndex = 0;
+            if (ActionRoundCount>0)
+            {
+                CurRoundCount++;
+                if (CurRoundCount >= ActionRoundCount)
+                    return;
+            }
+        }
+
         if (Nodes[CurNodeIndex].ActiveOnlyByEvent)
             DoNextAction();
         else
@@ -163,6 +195,7 @@ public class RoleBehavior : MonoBehaviour
         else
             MoveTo(Destination, Nodes[CurNodeIndex].MoveSpeed);
     }
+
     void MoveTo(Vector2 _pos, float _moveSpeed)
     {
         if (!StartMove)
@@ -171,6 +204,8 @@ public class RoleBehavior : MonoBehaviour
         MyRigid.velocity = Vector2.Lerp(MyRigid.velocity, targetVel, 0.1f);
         if (Vector2.Distance(transform.position, _pos) < 10)
         {
+            if (MyAIRoleMove)
+                MyAIRoleMove.SetHereToDestination();
             transform.position = _pos;
             MyRigid.velocity = Vector2.zero;
             StartMove = false;
@@ -187,6 +222,61 @@ public class RoleBehavior : MonoBehaviour
     IEnumerator ForceDoNextAction(float _time)
     {
         yield return new WaitForSeconds(_time);
+        if (MyAIRoleMove)
+            MyAIRoleMove.SetHereToDestination();
         CheckRandomNode();
+    }
+
+    void StartSpawn(Node _node)
+    {
+        CurSpawnIndex = 0;
+        SpanwEnemy(_node);
+    }
+    void SpanwEnemy(Node _node)
+    {
+        if (ReachMaxSpawnCount())
+        {
+            CheckRandomNode();
+            return;
+        }
+        CurSpawnCount++;
+        EnemyRole er = Instantiate(_node.SpawnEnemyList[CurSpawnIndex].Enemy, Vector3.zero, Quaternion.identity) as EnemyRole;
+        er.transform.SetParent(EnemyParent);
+        AIRoleMove ai = er.GetComponent<AIRoleMove>();
+        Vector2 offset = Vector2.zero;
+        switch (_node.SpawnEnemyList[CurSpawnIndex].SpawnPosRelateTo)
+        {
+            case PosRelateTo.Self:
+                er.transform.position = (Vector2)transform.position + _node.SpawnEnemyList[CurSpawnIndex].SpawnPosition;
+                break;
+            case PosRelateTo.PlayerRole:
+                er.transform.position = (Vector2)BattleManage.BM.MyPlayer.transform.position + _node.SpawnEnemyList[CurSpawnIndex].SpawnPosition;
+                break;
+            case PosRelateTo.Camera:
+                er.transform.position = (Vector2)BattleManage.MyCameraControler.transform.position + _node.SpawnEnemyList[CurSpawnIndex].SpawnPosition;
+                break;
+        }
+        if (_node.SpawnEnemyList[CurSpawnIndex].LifeTime > 0)
+            er.SetLifeTime(_node.SpawnEnemyList[CurSpawnIndex].LifeTime);
+        BattleManage.AddEnemy(er);
+        SpawnList.Add(er);
+        CurSpawnIndex++;
+        if (CurSpawnIndex < _node.SpawnEnemyList.Count)
+            StartCoroutine(WaitToSpawnEnemy(_node));
+        else
+            CheckRandomNode();
+    }
+    bool ReachMaxSpawnCount()
+    {
+        SpawnList.RemoveAll(item => item == null || !item.isActiveAndEnabled);
+        if (SpawnList.Count >= MaxSpawnCount)
+            return true;
+        else
+            return false;
+    }
+    IEnumerator WaitToSpawnEnemy(Node _node)
+    {
+        yield return new WaitForSeconds(_node.SpawnIntervalTime);
+        SpanwEnemy(_node);
     }
 }

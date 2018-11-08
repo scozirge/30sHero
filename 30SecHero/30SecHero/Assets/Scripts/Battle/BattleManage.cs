@@ -231,6 +231,10 @@ public partial class BattleManage : MonoBehaviour
     {
         Player.SetSound(SoundToggle.isOn);
     }
+    public static void AddEnemy(EnemyRole _er)
+    {
+        BM.EnemyList.Remove(_er);
+    }
     public static void RemoveEnemy(EnemyRole _er)
     {
         BM.EnemyList.Remove(_er);
