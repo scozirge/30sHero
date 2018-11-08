@@ -140,7 +140,8 @@ public abstract class Role : MonoBehaviour
     public virtual void BeAttack(Force _attackerForce, ref int _dmg, Vector2 _force)
     {
         //Add KnockForce
-        ChangeToKnockDrag();
+        if (_force != Vector2.zero)
+            ChangeToKnockDrag();
         MyRigi.velocity = Vector2.zero;
         MyRigi.velocity = _force;
         if (EvitableAttack())
@@ -298,7 +299,7 @@ public abstract class Role : MonoBehaviour
     {
         for (int i = 0; i < ActiveMonsterSkills.Count; i++)
         {
-            ActiveMonsterSkills[i].InactivePlayerSkill();          
+            ActiveMonsterSkills[i].InactivePlayerSkill();
         }
         ActiveMonsterSkills = new List<Skill>();
     }

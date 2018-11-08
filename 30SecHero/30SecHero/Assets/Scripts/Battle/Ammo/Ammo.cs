@@ -31,6 +31,7 @@ public partial class Ammo : MonoBehaviour
     protected BufferData[] Buffers;
 
 
+    protected bool OutSideDestroy = true;
     protected Force AttackerRoleTag;
     protected Force TargetRoleTag;
     protected bool IsLaunch;
@@ -66,7 +67,6 @@ public partial class Ammo : MonoBehaviour
             DamageInterval = 0.1f;
         DamageTime = new MyTimer(DamageInterval, DamageTimeOutFunc, false, false);
         DamageIntervalTimer = DamageInterval;
-
         ParticleParent = GameObject.FindGameObjectWithTag("ParticleParent").transform;
         MyRigi = GetComponentInParent<Rigidbody2D>();
         if (MyRigi == null)
@@ -155,7 +155,8 @@ public partial class Ammo : MonoBehaviour
         LIfeTimerFunc();
         if (!ReadyToDamage && !IsCausedDamage)
             DamageTime.RunTimer();
-        DestroyOutSideAmmos();
+        if(OutSideDestroy)
+            DestroyOutSideAmmos();
     }
     public virtual void SelfDestroy()
     {

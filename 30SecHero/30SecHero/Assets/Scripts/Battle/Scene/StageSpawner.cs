@@ -7,6 +7,8 @@ public class StageSpawner : MonoBehaviour
     [SerializeField]
     List<Stage> StageList;
     [SerializeField]
+    Stage DesignateStage;
+    [SerializeField]
     List<ForeGround> FGTopList;
     [SerializeField]
     List<ForeGround> FGBotList;
@@ -37,10 +39,22 @@ public class StageSpawner : MonoBehaviour
         for (int i = 0; i < 10; i++)
         {
             Vector2 spawnPos = new Vector2(_starPos.x + _offsetPosX * (originalSize - _remainPlateSize), _starPos.y);
-            Stage stagePrefab = GetRandomStage(ref _remainPlateSize);
-            if (stagePrefab == null)
-                break;
-            Stage stage = Instantiate(stagePrefab, Vector3.zero, Quaternion.identity) as Stage;
+            Stage stage = null;
+            if (MyStageSpawner.DesignateStage)
+            {
+                Stage stagePrefab = MyStageSpawner.DesignateStage;
+                _remainPlateSize -= MyStageSpawner.DesignateStage.OccupyPlateSize;
+                if (stagePrefab == null)
+                    break;
+                stage = Instantiate(stagePrefab, Vector3.zero, Quaternion.identity) as Stage;
+            }
+            else
+            {
+                Stage stagePrefab = GetRandomStage(ref _remainPlateSize);
+                if (stagePrefab == null)
+                    break;
+                stage = Instantiate(stagePrefab, Vector3.zero, Quaternion.identity) as Stage;
+            }
             stage.transform.SetParent(MyStageSpawner.transform);
             stage.transform.localPosition = spawnPos;
             stage.Init(_floor);
