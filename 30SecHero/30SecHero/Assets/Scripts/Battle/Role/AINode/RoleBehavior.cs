@@ -20,7 +20,7 @@ public class RoleBehavior : MonoBehaviour
     {
         SapwnPos = transform.position;
         MyRigid = GetComponent<Rigidbody2D>();
-        if(InitBehavior())
+        if (InitBehavior())
         {
             if (Nodes[CurNodeIndex].ActiveOnlyByEvent)
                 DoNextAction();
@@ -52,7 +52,8 @@ public class RoleBehavior : MonoBehaviour
                 MyRigid.velocity = Vector2.zero;
                 Destination = GetRelativeDestination(_node);
                 StartMove = true;
-                ForceStopCoroutine = StartCoroutine(ForceDoNextAction(_node.MaxProcessingTime));
+                if (_node.MaxProcessingTime > 0)
+                    ForceStopCoroutine = StartCoroutine(ForceDoNextAction(_node.MaxProcessingTime));
                 break;
             case ActionType.Spell:
                 Spell(_node);
@@ -161,7 +162,6 @@ public class RoleBehavior : MonoBehaviour
         }
         else
             MoveTo(Destination, Nodes[CurNodeIndex].MoveSpeed);
-
     }
     void MoveTo(Vector2 _pos, float _moveSpeed)
     {
@@ -174,7 +174,8 @@ public class RoleBehavior : MonoBehaviour
             transform.position = _pos;
             MyRigid.velocity = Vector2.zero;
             StartMove = false;
-            StopCoroutine(ForceStopCoroutine);
+            if (ForceStopCoroutine != null)
+                StopCoroutine(ForceStopCoroutine);
             CheckRandomNode();
         }
     }

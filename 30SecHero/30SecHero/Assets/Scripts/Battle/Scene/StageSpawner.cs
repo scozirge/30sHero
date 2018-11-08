@@ -44,9 +44,10 @@ public class StageSpawner : MonoBehaviour
             {
                 Stage stagePrefab = MyStageSpawner.DesignateStage;
                 _remainPlateSize -= MyStageSpawner.DesignateStage.OccupyPlateSize;
-                if (stagePrefab == null)
+                if (_remainPlateSize>=0)
+                    stage = Instantiate(stagePrefab, Vector3.zero, Quaternion.identity) as Stage;
+                if (stage == null)
                     break;
-                stage = Instantiate(stagePrefab, Vector3.zero, Quaternion.identity) as Stage;
             }
             else
             {
