@@ -92,8 +92,8 @@ GameObject:
   - component: {fileID: 114796498901394522}
   - component: {fileID: 114014446417336624}
   - component: {fileID: 95815077169758588}
-  - component: {fileID: 114344204497690412}
   - component: {fileID: 114843516818367488}
+  - component: {fileID: 114186410539134062}
   m_Layer: 9
   m_Name: Two Blade Melee_Spawn
   m_TagString: Enemy
@@ -216,7 +216,7 @@ MonoBehaviour:
   AttackPrefab: {fileID: 114280530254980642, guid: fcf9df39c8fb32746933d109f1770680,
     type: 2}
   AttackRadius: 0
---- !u!114 &114344204497690412
+--- !u!114 &114186410539134062
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -231,7 +231,7 @@ MonoBehaviour:
   Wander: 1
   FollowCamera: 0
   FollowCameraSpeed: 300
-  DebutSpeed: 1000
+  DebutSpeed: 2000
   WanderInterval: 0.5
   RotateFactor: 0.02
   WanderRange: 25
@@ -384,7 +384,7 @@ MonoBehaviour:
     RelativeToTarget: 2
     Destination: {x: 0, y: 0}
     ExpandFolder: 1
-    MoveSpeed: 0
+    MoveSpeed: 300
     ActiveOnlyByEvent: 0
     NodeTag: 
     ExpandRandomNodes: 0
@@ -400,6 +400,7 @@ MonoBehaviour:
     Description: 
     SpawnEnemyList: []
     SpawnIntervalTime: 0
+    RushForce: {x: 0, y: 0}
   MyAni: {fileID: 0}
   MaxSpawnCount: 0
   ActionRoundCount: 1

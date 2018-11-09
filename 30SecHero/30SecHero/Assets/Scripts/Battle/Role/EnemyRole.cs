@@ -153,6 +153,14 @@ public partial class EnemyRole : Role
         if (!IsAlive && _attackerForce == Force.Player)
             BattleManage.AddEnemyKill();
     }
+    public void Rush(Vector2 _force)
+    {
+        //Add KnockForce
+        if (_force != Vector2.zero)
+            ChangeToKnockDrag();
+        MyRigi.velocity = Vector2.zero;
+        MyRigi.velocity = _force;
+    }
     protected override bool DeathCheck()
     {
         if (base.DeathCheck())

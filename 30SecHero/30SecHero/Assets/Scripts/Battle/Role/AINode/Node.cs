@@ -62,6 +62,9 @@ public class Node
     [Tooltip("召喚間隔秒數")]
     [SerializeField]
     public float SpawnIntervalTime;
+    [Tooltip("衝刺力道")]
+    [SerializeField]
+    public Vector2 RushForce;
 
     public Node GetMemberwiseClone()
     {

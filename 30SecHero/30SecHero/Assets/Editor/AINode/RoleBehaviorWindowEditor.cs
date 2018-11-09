@@ -175,6 +175,10 @@ public class RoleBehaviorWindowEditor : EditorWindow
                             }                            
                         }
                         break;
+                    case (int)ActionType.Rush:
+                        SerializedProperty rushForce = myListRef.FindPropertyRelative("RushForce");
+                        EditorGUILayout.PropertyField(rushForce);
+                        break;
                     case (int)ActionType.Perform:
                         EditorGUIUtility.labelWidth = 100;
 

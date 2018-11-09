@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(EnemyRole))]
 public class RoleBehavior : MonoBehaviour
 {
     public List<Node> Nodes;
@@ -11,6 +12,7 @@ public class RoleBehavior : MonoBehaviour
     Node CurNode;
     Rigidbody2D MyRigid;
     AIRoleMove MyAIRoleMove;
+    EnemyRole MyRole;
     int CurNodeIndex;
     bool StartMove;
     Coroutine ForceStopCoroutine;
@@ -33,6 +35,7 @@ public class RoleBehavior : MonoBehaviour
         SapwnPos = transform.position;
         MyRigid = GetComponent<Rigidbody2D>();
         MyAIRoleMove = GetComponent<AIRoleMove>();
+        MyRole = GetComponent<EnemyRole>();
         if (InitBehavior())
         {
             if (Nodes[CurNodeIndex].ActiveOnlyByEvent)
@@ -73,7 +76,8 @@ public class RoleBehavior : MonoBehaviour
                 StartSpawn(_node);
                 break;
             case ActionType.Rush:
-
+                MyRole.Rush(_node.RushForce);
+                CheckRandomNode();
                 break;
             case ActionType.Spell:
                 Spell(_node);
