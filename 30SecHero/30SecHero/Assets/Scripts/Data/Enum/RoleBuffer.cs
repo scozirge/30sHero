@@ -8,5 +8,6 @@
     Block,
     DamageUp,
     SpeedUp,
-    EnemyAttacking
+    EnemyAttacking,
+    Untouch
 }

@@ -92,7 +92,9 @@ public partial class PlayerRole : Role
     public float AvatarTimeRatio { get { return (float)AvatarTimer / (float)MaxAvaterTime; } }
     [SerializeField]
     Text AvatarTimerText;
-
+    [Tooltip("變身解除無敵時間(秒)")]
+    [SerializeField]
+    protected float UntochableTime;
     [Tooltip("變身時間加成(秒)")]
     [SerializeField]
     protected float AvatarPotionBuff;
@@ -177,6 +179,7 @@ public partial class PlayerRole : Role
     public int FaceLeftOrRight;
     Dictionary<string, Skill> MonsterSkills = new Dictionary<string, Skill>();
     Dictionary<string, Soul> MonsterSouls = new Dictionary<string, Soul>();
+    [HideInInspector]
     public EnemyRole ClosestEnemy;
     bool CanJump;
     bool CanRush;
@@ -391,6 +394,7 @@ public partial class PlayerRole : Role
             AvatarTimer = 0;
             ExtraMoveSpeed = 0;
             RemoveAllBuffer();
+            AddBuffer(RoleBuffer.Untouch, UntochableTime);
             IsAvatar = false;
             RemoveAllSill();
             EffectEmitter.EmitParticle(AvatarRemoveEffect, Vector3.zero, Vector3.zero, transform);

@@ -62,7 +62,7 @@ public abstract class Role : MonoBehaviour
     [Tooltip("死亡特效")]
     [SerializeField]
     ParticleSystem DeathEffect;
-    [Tooltip("腳色動畫播放器")]
+    [Tooltip("腳色動畫播放器(舊版)")]
     [SerializeField]
     protected AnimationPlayer AniPlayer;
     [SerializeField]
@@ -80,7 +80,9 @@ public abstract class Role : MonoBehaviour
     [SerializeField]
     protected float KnockDragDuration;
     protected MyTimer DragTimer;
-
+    [Tooltip("腳色Animator")]
+    [SerializeField]
+    protected Animator RoleAni;
     MyTimer BurningTimer;
     public float DamageBuff { get; protected set; }
 
@@ -288,6 +290,12 @@ public abstract class Role : MonoBehaviour
                 {
                     ActiveMonsterSkills[i].Freeze(_add);
                 }
+                break;
+            case RoleBuffer.Untouch:
+                if(_add)
+                    RoleAni.Play("Untouchable", RoleAni.GetLayerIndex("Buffer"), 0);
+                else
+                    RoleAni.Play("Normal", RoleAni.GetLayerIndex("Buffer"), 0);
                 break;
         }
     }

@@ -11,6 +11,8 @@ public class Bomb : Ammo
     }
     protected override void TriggerTarget(Role _role)
     {
+        if (_role.BuffersExist(RoleBuffer.Untouch))
+            return;
         if (!TriggerOnRushRole && _role.OnRush)
             return;
         base.TriggerTarget(_role);

@@ -16,6 +16,8 @@ public class PlayerAttack : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D _col)
     {
+        if (Attacker.BuffersExist(RoleBuffer.Untouch))
+            return;
         if (_col.gameObject.tag == Force.Enemy.ToString())
         {
             if (Attacker.IsAvatar)

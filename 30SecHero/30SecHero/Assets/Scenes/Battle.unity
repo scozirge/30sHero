@@ -5509,6 +5509,11 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1051066092}
   m_CullTransparentMesh: 0
+--- !u!95 &1051316050 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 95215647531095050, guid: d9e47796d36fc83458ffab41aea6641e,
+    type: 2}
+  m_PrefabInternal: {fileID: 2085167284}
 --- !u!1 &1065337597
 GameObject:
   m_ObjectHideFlags: 0
@@ -11011,7 +11016,7 @@ Prefab:
     - target: {fileID: 114529601492733476, guid: d9e47796d36fc83458ffab41aea6641e,
         type: 2}
       propertyPath: MaxAvaterTime
-      value: 900
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4325138500020102, guid: d9e47796d36fc83458ffab41aea6641e, type: 2}
       propertyPath: m_LocalPosition.z
@@ -11047,6 +11052,26 @@ Prefab:
       propertyPath: BaseDamage
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 114657669388382614, guid: d9e47796d36fc83458ffab41aea6641e,
+        type: 2}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114529601492733476, guid: d9e47796d36fc83458ffab41aea6641e,
+        type: 2}
+      propertyPath: UntochableTime
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114657669388382614, guid: d9e47796d36fc83458ffab41aea6641e,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114529601492733476, guid: d9e47796d36fc83458ffab41aea6641e,
+        type: 2}
+      propertyPath: RoleAni
+      value: 
+      objectReference: {fileID: 1051316050}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d9e47796d36fc83458ffab41aea6641e, type: 2}
   m_IsPrefabAsset: 0
