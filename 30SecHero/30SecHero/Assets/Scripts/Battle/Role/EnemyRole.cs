@@ -42,7 +42,7 @@ public partial class EnemyRole : Role
     void LifeTimeOut()
     {
         Health = 0;
-        DeathCheck();        
+        DeathCheck();
     }
     protected override void Start()
     {
@@ -57,8 +57,16 @@ public partial class EnemyRole : Role
             {
                 AddBuffer(InitBuffers[i].GetMemberwiseClone());
             }
-        BaseDamage *= BattleManage.Floor;
-        MaxHealth *= BattleManage.Floor;
+        if (Type == EnemyType.Demogorgon)
+        {
+            BaseDamage += (int)(BattleManage.Floor * GameSettingData.BossDMGGrow * BaseDamage);
+            MaxHealth += (int)(BattleManage.Floor * GameSettingData.BossHPGrow * MaxHealth);
+        }
+        else
+        {
+            BaseDamage += (int)(BattleManage.Floor * GameSettingData.EnemyDMGGrow * BaseDamage);
+            MaxHealth += (int)(BattleManage.Floor * GameSettingData.EnemyHPGrow * MaxHealth);
+        }
         Health = MaxHealth;
         if (Target && Health <= Target.Damage)
             HealthObj.SetActive(false);

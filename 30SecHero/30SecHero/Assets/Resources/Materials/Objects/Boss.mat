@@ -8,7 +8,7 @@ Material:
   m_PrefabInternal: {fileID: 0}
   m_Name: Boss
   m_Shader: {fileID: 4800000, guid: f1c332c0884ef2b4bb26584f688eac3a, type: 3}
-  m_ShaderKeywords: _ALPHABLEND_ON _NORMALMAP _SPECULAR_COLOR
+  m_ShaderKeywords: _ALPHABLEND_ON _COLOR_ADJUST _NORMALMAP _SPECULAR_COLOR
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -110,11 +110,11 @@ Material:
     - _EmissionPower: 1
     - _EnableExternalAlpha: 0
     - _GlossMapScale: 1
-    - _Glossiness: 0.5
+    - _Glossiness: 0
     - _GlossinessSource: 1
     - _GlossyReflections: 1
     - _Hue: 0
-    - _Metallic: 0
+    - _Metallic: 0.234
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
@@ -122,7 +122,7 @@ Material:
     - _RimPower: 2
     - _SampleGI: 0
     - _Saturation: 1
-    - _ShadowAlphaCutoff: 0.1
+    - _ShadowAlphaCutoff: 0.046
     - _Shininess: 0.418
     - _SmoothnessTextureChannel: 0
     - _SpecSource: 0
@@ -141,7 +141,7 @@ Material:
     - _ZWrite: 0
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _EmissionColor: {r: 16, g: 16, b: 16, a: 1}
     - _FixedNormal: {r: 0, g: 0, b: 1, a: 1}
     - _Flip: {r: 1, g: 1, b: 1, a: 1}
     - _OverlayColor: {r: 0, g: 0, b: 0, a: 0}

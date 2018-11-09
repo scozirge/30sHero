@@ -92,6 +92,12 @@ public partial class Player
             PlayerPrefs.DeleteKey(LocoData.Strengthen.ToString());
             PlayerPrefs.DeleteKey(LocoData.SoundOn.ToString());
             PlayerPrefs.DeleteKey(LocoData.MusicOn.ToString());
+            PlayerPrefs.DeleteKey(LocoData.CurFloor.ToString());
+            PlayerPrefs.DeleteKey(LocoData.MaxFloor.ToString());
+            PlayerPrefs.DeleteKey(LocoData.MaxEnemyKills.ToString());
+            PlayerPrefs.DeleteKey(LocoData.KillBossID.ToString());
+            PlayerPrefs.DeleteKey(LocoData.Gold.ToString());
+            PlayerPrefs.DeleteKey(LocoData.Emerald.ToString());
         }
 
         if (PlayerPrefs.GetInt(LocoData.Init.ToString()) == 0)

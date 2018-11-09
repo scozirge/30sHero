@@ -108,6 +108,10 @@ public class GameSettingData : Data
     public static int MaxLoot;
     public static int FloorPlate;
     public static int BossDebutPlate;
+    public static float EnemyHPGrow;
+    public static float EnemyDMGGrow;
+    public static float BossHPGrow;
+    public static float BossDMGGrow;
 
 
 
@@ -462,6 +466,18 @@ public class GameSettingData : Data
                                 break;
                             case "BossDebutPlate":
                                 BossDebutPlate = int.Parse(item[key].ToString());
+                                break;
+                            case "EnemyHPGrow":
+                                EnemyHPGrow = float.Parse(item[key].ToString());
+                                break;
+                            case "EnemyDMGGrow":
+                                EnemyDMGGrow = float.Parse(item[key].ToString());
+                                break;
+                            case "BossHPGrow":
+                                BossHPGrow = float.Parse(item[key].ToString());
+                                break;
+                            case "BossDMGGrow":
+                                BossDMGGrow = float.Parse(item[key].ToString());
                                 break;
                             default:
                                 Debug.LogWarning(string.Format("{0}表有不明屬性:{1}", DataName, key));

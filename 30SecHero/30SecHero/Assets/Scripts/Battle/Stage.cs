@@ -171,6 +171,8 @@ public partial class BattleManage
         if (BM.TopFGIntervalMinMax != Vector2.zero)
         {
             List<ForeGround> list = StageSpawner.SpawnFG(_startPos, _distance, (int)BM.TopFGIntervalMinMax.x, (int)BM.TopFGIntervalMinMax.y, _floor, true);
+            if (list == null)
+                return;
             for (int i = 0; i < list.Count; i++)
             {
                 FGList.Add(list[i]);
@@ -179,6 +181,8 @@ public partial class BattleManage
         if (BM.BotFGIntervalMinMax != Vector2.zero)
         {
             List<ForeGround> list = StageSpawner.SpawnFG(_startPos, _distance, (int)BM.BotFGIntervalMinMax.x, (int)BM.BotFGIntervalMinMax.y, _floor, false);
+            if (list == null)
+                return;
             for (int i = 0; i < list.Count; i++)
             {
                 FGList.Add(list[i]);

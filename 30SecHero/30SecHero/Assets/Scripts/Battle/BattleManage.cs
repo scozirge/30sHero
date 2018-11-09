@@ -105,13 +105,12 @@ public partial class BattleManage : MonoBehaviour
         ExampleBattleBG.SetActive(false);
         IsPause = false;
         SceneObject.SetActive(true);
-
+        StartFloor = 1;
         InitSettlement();
         InitBattleSetting();
         BM = this;
         EnemyParent = GameObject.FindGameObjectWithTag("EnemyParent").GetComponent<Transform>();
         LootParetn = GameObject.FindGameObjectWithTag("LootParent").GetComponent<Transform>();
-        StartFloor = 1;
         CurSpawnCount = 0;
         EnemyKill = 0;
         InitStage();

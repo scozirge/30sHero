@@ -223,7 +223,7 @@ MonoBehaviour:
   HealthBar: {fileID: 224336085262978120}
   DirectX: 0
   DirectY: 0
-  MaxHealth: 20
+  MaxHealth: 10
   BaseDamage: 10
   BaseMoveSpeed: 200
   DeathEffect: {fileID: 0}
@@ -233,6 +233,8 @@ MonoBehaviour:
   KnockDrag: 30
   NormalDrag: 0
   KnockDragDuration: 0.9
+  RoleAni: {fileID: 0}
+  OnRush: 0
   DropEquipCount: 1
   DropGoldCount: 1
   DropLootCount: 1

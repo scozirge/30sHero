@@ -44,7 +44,7 @@ public class StageSpawner : MonoBehaviour
             {
                 Stage stagePrefab = MyStageSpawner.DesignateStage;
                 _remainPlateSize -= MyStageSpawner.DesignateStage.OccupyPlateSize;
-                if (_remainPlateSize>=0)
+                if (_remainPlateSize >= 0)
                     stage = Instantiate(stagePrefab, Vector3.zero, Quaternion.identity) as Stage;
                 if (stage == null)
                     break;
@@ -77,6 +77,21 @@ public class StageSpawner : MonoBehaviour
     }
     public static List<ForeGround> SpawnFG(Vector2 _startPos, float _distance, int _minXInterval, int _maxXInterval, int _floor, bool _top)
     {
+        if (_top)
+        {
+            if (MyStageSpawner.FGTopList.Count == 0)
+            {
+                return null;
+            }
+        }
+        else
+        {
+            if (MyStageSpawner.FGBotList.Count == 0)
+            {
+                return null;
+            }
+        }
+
         List<ForeGround> list = new List<ForeGround>();
         float curPosX = 0;
         float runDistance = 0;
