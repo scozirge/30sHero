@@ -26,7 +26,6 @@ GameObject:
   - component: {fileID: 114144235441443056}
   - component: {fileID: 114675354426893498}
   - component: {fileID: 95707261510315800}
-  - component: {fileID: 114549233746021630}
   m_Layer: 9
   m_Name: Two Blade Melee_Spawn
   m_TagString: Enemy
@@ -676,43 +675,6 @@ MonoBehaviour:
   m_ColliderDetail: 4
   m_ColliderOffset: 0
   m_ColliderCornerType: 0
---- !u!114 &114549233746021630
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1019715597526510}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 165e15557aa0a9d4792b5d75893182c6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Nodes:
-  - WaitSecond: 0
-    MaxProcessingTime: 0
-    RelativeToTarget: 2
-    Destination: {x: 0, y: 0}
-    ExpandFolder: 1
-    MoveSpeed: 300
-    ActiveOnlyByEvent: 0
-    NodeTag: 
-    ExpandRandomNodes: 0
-    ToRandomNode: 0
-    GoToNodes: []
-    SkillList: []
-    Type: 0
-    LocoParticle: {fileID: 0}
-    WorldPartilce: {fileID: 0}
-    RoleAniTriggerName: 
-    CamAniTriggerName: 
-    SoundList: []
-    Description: 
-    SpawnEnemyList: []
-    SpawnIntervalTime: 0
-    RushForce: {x: 0, y: 0}
-  MyAni: {fileID: 0}
-  MaxSpawnCount: 0
-  ActionRoundCount: 1
 --- !u!114 &114591889277136904
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -224,7 +224,7 @@ MonoBehaviour:
   DirectX: 0
   DirectY: 0
   MaxHealth: 10
-  BaseDamage: 20
+  BaseDamage: 10
   BaseMoveSpeed: 200
   DeathEffect: {fileID: 0}
   AniPlayer: {fileID: 114453156640465214}

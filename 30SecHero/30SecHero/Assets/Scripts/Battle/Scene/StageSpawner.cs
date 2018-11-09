@@ -36,7 +36,7 @@ public class StageSpawner : MonoBehaviour
     {
         List<Stage> list = new List<Stage>();
         int originalSize = _remainPlateSize;
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < originalSize; i++)
         {
             Vector2 spawnPos = new Vector2(_starPos.x + _offsetPosX * (originalSize - _remainPlateSize), _starPos.y);
             Stage stage = null;

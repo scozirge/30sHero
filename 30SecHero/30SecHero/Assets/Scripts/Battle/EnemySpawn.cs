@@ -11,7 +11,18 @@ public partial class BattleManage
         bool result = false;
         for (int i = 0; i < EnemyList.Count; i++)
         {
-            float dist = Vector2.Distance(_pos, EnemyList[i].GetComponent<AIRoleMove>().Destination);
+            if (!EnemyList[i].isActiveAndEnabled)
+                continue;
+            AIRoleMove aiMove=EnemyList[i].GetComponent<AIRoleMove>();
+            float dist = float.MaxValue;
+            if(aiMove==null)
+            {
+                dist = Vector2.Distance(_pos, EnemyList[i].transform.position);
+            }
+            else
+            {
+                dist = Vector2.Distance(_pos, aiMove.Destination);
+            }
             if (dist < EnemyDistance)
                 return true;
         }

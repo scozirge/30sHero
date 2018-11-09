@@ -6,7 +6,7 @@ public class Gate : MonoBehaviour
 {
 
     [SerializeField]
-    ParticleSystem DeathParticle;
+    List<ParticleSystem> DeathParticles;
     [Tooltip("牆壁破壞音效")]
     [SerializeField]
     AudioClip DestroySound;
@@ -31,8 +31,14 @@ public class Gate : MonoBehaviour
     void SelfDestroy()
     {
         SpawnPreformObj();
-        if (DeathParticle)
-            EffectEmitter.EmitParticle(DeathParticle, transform.position, Vector3.zero, null);
+        DeathParticles.RemoveAll(item => item == null);
+        if (DeathParticles!=null)
+        {
+            for(int i=0;i<DeathParticles.Count;i++)
+            {
+                EffectEmitter.EmitParticle(DeathParticles[i], transform.position, Vector3.zero, null);
+            }
+        }
         BattleManage.SpawnNextGate(Floor);
         CameraController.PlayMotion("Shake1");
         AudioPlayer.PlaySound(DestroySound);
