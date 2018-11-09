@@ -35,11 +35,13 @@ public class Support : Skill
     bool IsPreAttack = false;
     protected Vector3 AttackDir = Vector3.zero;
     static protected float PreAttackTime = 1;
+    float CurInterval;
 
     protected override void Awake()
     {
         base.Awake();
         SupportTargets = new List<Role>();
+        CurInterval = Interval;
         Timer = Interval;
     }
 
@@ -118,7 +120,7 @@ public class Support : Skill
         {
             IsAttacking = true;
             IsPreAttack = false;
-            Timer = Interval;
+            Timer = CurInterval;
             AttackTimes++;
         }
     }

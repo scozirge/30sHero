@@ -233,7 +233,7 @@ public partial class BattleManage : MonoBehaviour
     }
     public static void AddEnemy(EnemyRole _er)
     {
-        BM.EnemyList.Remove(_er);
+        BM.EnemyList.Add(_er);
     }
     public static void RemoveEnemy(EnemyRole _er)
     {

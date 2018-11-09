@@ -382,6 +382,7 @@ MonoBehaviour:
   KnockDrag: 30
   NormalDrag: 0
   KnockDragDuration: 0.9
+  OnRush: 0
   DropEquipCount: 1
   DropGoldCount: 1
   DropLootCount: 1

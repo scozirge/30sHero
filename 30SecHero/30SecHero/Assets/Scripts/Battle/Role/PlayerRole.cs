@@ -591,6 +591,8 @@ public partial class PlayerRole : Role
             MonsterSkills[_name].enabled = true;
             MonsterSkills[_name].PlayerGetSkill(SkillTimeBuff);
             ActiveMonsterSkills.Add(MonsterSkills[_name]);
+            if (BuffersExist(RoleBuffer.Freeze))
+                MonsterSkills[_name].Freeze(true);
             if (!MonsterSouls.ContainsKey(_name))
             {
                 Soul soul = SoulSpawner.SpawnSoul(transform.position);

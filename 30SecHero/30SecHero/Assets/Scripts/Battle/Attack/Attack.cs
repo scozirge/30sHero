@@ -38,6 +38,8 @@ public class Attack : Skill
     protected Vector3 AttackDir = Vector3.zero;
     //protected float AmmoRotation;
     static protected float PreAttackTime = 1;
+    float CurInterval;
+
 
     public override void LaunchAIAttack()
     {
@@ -47,6 +49,7 @@ public class Attack : Skill
     protected override void Awake()
     {
         base.Awake();
+        CurInterval = Interval;
         Timer = Interval;
         InRange = false;
 
@@ -81,7 +84,7 @@ public class Attack : Skill
             case ShootPatetern.LeftRight:
                 if (Myself.DirectX == Direction.Right)
                 {
-                    reverse=1;
+                    reverse = 1;
                     AttackDir = Vector2.right;
                 }
                 else
@@ -96,7 +99,7 @@ public class Attack : Skill
             case ShootPatetern.TopDown:
                 if (Myself.DirectY == Direction.Top)
                 {
-                    reverse=1;
+                    reverse = 1;
                     AttackDir = Vector2.up;
                 }
                 else
@@ -165,8 +168,24 @@ public class Attack : Skill
             IsAttacking = true;
             IsPreAttack = false;
             InRange = false;
-            Timer = Interval;
+            Timer = CurInterval;
         }
+    }
+    public override void Freeze(bool _freeze)
+    {
+        base.Freeze(_freeze);
+        if (_freeze)
+        {
+            CurInterval = Interval * (1 + GameSettingData.FreezeMove);
+            Timer *= (1 + GameSettingData.FreezeMove);
+        }
+        else
+        {
+            CurInterval = Interval;
+            Timer *= 1 / (1 + GameSettingData.FreezeMove);
+        }
+        if (Timer > CurInterval)
+            Timer = CurInterval;
     }
     protected virtual void AttackExecuteFunc()
     {

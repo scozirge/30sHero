@@ -21,28 +21,28 @@ MonoBehaviour:
   m_CornerSprites:
   - m_CornerType: 0
     m_Sprites:
-    - {fileID: 0}
+    - {fileID: 21300000, guid: d82f12e2a83ca3f4184ebde50df23199, type: 3}
   - m_CornerType: 1
     m_Sprites:
-    - {fileID: 0}
+    - {fileID: 21300000, guid: 6af7707d93bbacb429106613b8ce290d, type: 3}
   - m_CornerType: 2
     m_Sprites:
-    - {fileID: 0}
+    - {fileID: 21300000, guid: 265a655e22ef4b748b96cd32312ff2b2, type: 3}
   - m_CornerType: 3
     m_Sprites:
-    - {fileID: 0}
+    - {fileID: 21300000, guid: b73c920807d03c041ac7e2b55b0a7149, type: 3}
   - m_CornerType: 4
     m_Sprites:
-    - {fileID: 0}
+    - {fileID: 21300000, guid: d82f12e2a83ca3f4184ebde50df23199, type: 3}
   - m_CornerType: 5
     m_Sprites:
-    - {fileID: 0}
+    - {fileID: 21300000, guid: 5a2ca9391f53ef24fa80fd49b48e2800, type: 3}
   - m_CornerType: 6
     m_Sprites:
-    - {fileID: 0}
+    - {fileID: 21300000, guid: e81b5ffaad00449488f739f7d8e96946, type: 3}
   - m_CornerType: 7
     m_Sprites:
-    - {fileID: 0}
+    - {fileID: 21300000, guid: 0af4147410a6bc34d8174c9297123092, type: 3}
   m_FillPixelPerUnit: 1
   m_BevelSize: 0
   m_BevelCutoff: 0

@@ -283,6 +283,12 @@ public abstract class Role : MonoBehaviour
                     BurningTimer.StartRunTimer = false;
                 }
                 break;
+            case RoleBuffer.Freeze:
+                for (int i = 0; i < ActiveMonsterSkills.Count; i++)
+                {
+                    ActiveMonsterSkills[i].Freeze(_add);
+                }
+                break;
         }
     }
     public void RemoveAllBuffer()

@@ -246,7 +246,6 @@ public class RoleBehavior : MonoBehaviour
         CurSpawnCount++;
         EnemyRole er = Instantiate(_node.SpawnEnemyList[CurSpawnIndex].Enemy, Vector3.zero, Quaternion.identity) as EnemyRole;
         er.transform.SetParent(EnemyParent);
-        AIRoleMove ai = er.GetComponent<AIRoleMove>();
         Vector2 offset = Vector2.zero;
         switch (_node.SpawnEnemyList[CurSpawnIndex].SpawnPosRelateTo)
         {

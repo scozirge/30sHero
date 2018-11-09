@@ -125,4 +125,7 @@ public class Skill : MonoBehaviour
     protected virtual void TimerFunc()
     {
     }
+    public virtual void Freeze(bool _freeze)
+    {
+    }
 }
