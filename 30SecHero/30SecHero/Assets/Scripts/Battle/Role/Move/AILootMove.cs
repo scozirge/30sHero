@@ -23,8 +23,9 @@ public class AILootMove : AIMove
         base.Update();
         if (!MoveToPlayer && AbsorbRadius > 0)
         {
-            if (Vector2.Distance(transform.position, BattleManage.BM.MyPlayer.transform.position) <= AbsorbRadius)
-                MoveToPlayer = true;
+            if (BattleManage.BM.MyPlayer!=null)
+                if (Vector2.Distance(transform.position, BattleManage.BM.MyPlayer.transform.position) <= AbsorbRadius)
+                    MoveToPlayer = true;
         }
     }
     protected override void Start()
