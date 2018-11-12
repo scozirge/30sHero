@@ -91,7 +91,7 @@ Material:
     - _Blend: 0
     - _BlendAmount: 0
     - _Brightness: 1
-    - _BumpScale: 1
+    - _BumpScale: 0.7
     - _ColorMask: 15
     - _Cull: 0
     - _CustomRenderQueue: 0
