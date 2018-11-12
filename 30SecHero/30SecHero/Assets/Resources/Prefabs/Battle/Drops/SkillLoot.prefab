@@ -90,6 +90,7 @@ MonoBehaviour:
   KeepDebut: 0
   ReadyToMove: 0
   MoveSpeed: 100
+  AbsorbRadius: 150
 --- !u!114 &114515800619740280
 MonoBehaviour:
   m_ObjectHideFlags: 1

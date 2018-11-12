@@ -191,7 +191,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 224076595988088798}
-  m_RootOrder: 3
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &50359093130138826
 Rigidbody2D:
@@ -459,6 +459,7 @@ MonoBehaviour:
   StopDrag: 800
   RushAntiAmooTime: 0.1
   RushCD: 1.5
+  MyLight: {fileID: 108484094380481612}
   FaceLeftOrRight: 0
   ClosestEnemy: {fileID: 0}
 --- !u!114 &114657669388382614
@@ -600,10 +601,10 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 4325138500020102}
   - {fileID: 224651808157149892}
   - {fileID: 224875617985449666}
   - {fileID: 224161813215857282}
-  - {fileID: 4325138500020102}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -644,7 +645,7 @@ RectTransform:
   m_Children:
   - {fileID: 224109749752663642}
   m_Father: {fileID: 224076595988088798}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -700,7 +701,7 @@ RectTransform:
   - {fileID: 224903112769600568}
   - {fileID: 224525075834943308}
   m_Father: {fileID: 224076595988088798}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -718,7 +719,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 224076595988088798}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}

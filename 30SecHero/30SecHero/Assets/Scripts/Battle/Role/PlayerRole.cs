@@ -680,5 +680,16 @@ public partial class PlayerRole : Role
         }
         MonsterSouls = new Dictionary<string, Soul>();
     }
-
+    protected override bool DeathCheck()
+    {
+        bool death=base.DeathCheck();
+        if (death)
+        {
+            Vector3 pos = MyLight.transform.position;
+            MyLight.transform.SetParent(BattleManage.BM.transform);
+            MyLight.transform.position = pos;
+            MyLight.enabled = true;
+        }
+        return death;
+    }
 }

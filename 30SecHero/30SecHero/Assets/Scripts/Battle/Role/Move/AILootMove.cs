@@ -7,6 +7,26 @@ public class AILootMove : AIMove
     [Tooltip("移動速度")]
     [SerializeField]
     protected int MoveSpeed;
+    [Tooltip("靠近玩家自動吸過去半徑")]
+    [SerializeField]
+    protected int AbsorbRadius;
+
+    void OnDrawGizmos()
+    {
+        if (AbsorbRadius <= 0)
+            return;
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, AbsorbRadius);
+    }
+    protected override void Update()
+    {
+        base.Update();
+        if (!MoveToPlayer && AbsorbRadius > 0)
+        {
+            if (Vector2.Distance(transform.position, BattleManage.BM.MyPlayer.transform.position) <= AbsorbRadius)
+                MoveToPlayer = true;
+        }
+    }
     protected override void Start()
     {
         base.Start();
