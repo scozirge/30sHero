@@ -759,6 +759,8 @@ PolygonCollider2D:
     - - {x: 430.8525, y: 291.52103}
       - {x: 314.52954, y: 84.22742}
       - {x: 314.52954, y: 84.22742}
+      - {x: 78.35928, y: 74.33062}
+      - {x: 78.35928, y: 74.33062}
       - {x: 42.27467, y: -93.66342}
       - {x: 42.27467, y: -93.66342}
       - {x: -334.66122, y: -192.29034}
@@ -1489,7 +1491,7 @@ MonoBehaviour:
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
       height: 0.47
-      bevelCutoff: 180
+      bevelCutoff: 166
       bevelSize: 0.5
       spriteIndex: 0
       corner: 0
@@ -1498,8 +1500,17 @@ MonoBehaviour:
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
       height: 1
-      bevelCutoff: 0
+      bevelCutoff: 166
       bevelSize: 0.5
+      spriteIndex: 0
+      corner: 0
+    - position: {x: 78.35928, y: 74.33063, z: 0}
+      leftTangent: {x: 0, y: 0, z: 0}
+      rightTangent: {x: 0, y: 0, z: 0}
+      mode: 0
+      height: 1
+      bevelCutoff: 166
+      bevelSize: 0
       spriteIndex: 0
       corner: 0
     - position: {x: 42.274673, y: -93.66342, z: 0}
@@ -1507,7 +1518,7 @@ MonoBehaviour:
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
       height: 0.47
-      bevelCutoff: 180
+      bevelCutoff: 166
       bevelSize: 0.5
       spriteIndex: 0
       corner: 0
@@ -1516,7 +1527,7 @@ MonoBehaviour:
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
       height: 0.47
-      bevelCutoff: 180
+      bevelCutoff: 166
       bevelSize: 0.5
       spriteIndex: 0
       corner: 0
@@ -1525,7 +1536,7 @@ MonoBehaviour:
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
       height: 0.47
-      bevelCutoff: 180
+      bevelCutoff: 166
       bevelSize: 0.5
       spriteIndex: 0
       corner: 0
@@ -1534,7 +1545,7 @@ MonoBehaviour:
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
       height: 0.47
-      bevelCutoff: 180
+      bevelCutoff: 166
       bevelSize: 0.5
       spriteIndex: 0
       corner: 0
@@ -2252,7 +2263,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -134, y: 238}
+  m_AnchoredPosition: {x: -119, y: 228}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224242725405699354

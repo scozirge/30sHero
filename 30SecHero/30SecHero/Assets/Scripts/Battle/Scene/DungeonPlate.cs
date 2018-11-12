@@ -6,12 +6,34 @@ public class DungeonPlate : Plate
 {
     int FloorPlateCount;
     [SerializeField]
-    Image BottomImage;
+    Image FloorImage;
     [SerializeField]
-    List<Color> Colors;
+    Image WallTopImage;
+    [SerializeField]
+    Image WallTopLineImage;
+    [SerializeField]
+    Image WallTopShadowImage;
+    [SerializeField]
+    Image WallBotImage;
+    [SerializeField]
+    Image WallBotLineImage;
+    [SerializeField]
+    Image WallBotShadowImage;
+    [SerializeField]
+    Image FloorLineDraft;
+    [SerializeField]
+    Image FloorShadow;
+    [SerializeField]
+    List<Color> BotColors;
+    [SerializeField]
+    List<Color> ShadowColors;
+    [SerializeField]
+    List<Color> LineDraftColors;
 
     int CurFloor;
     static Dictionary<int, Color> FloorColor = new Dictionary<int, Color>();
+    static Dictionary<int, Color> ShadowColor = new Dictionary<int, Color>();
+    static Dictionary<int, Color> LineDraftColor = new Dictionary<int, Color>();
 
     public override void Init(int _column, int _maxColumn)
     {
@@ -32,24 +54,38 @@ public class DungeonPlate : Plate
     }
     void UpdatePlateColor()
     {
-        if (BottomImage == null)
-            return;
-        if (Colors.Count == 0)
-            return;
         CurFloor = CurPlate / FloorPlateCount - 9999 + (BattleManage.StartFloor - 1);
+        //底板
         if (!FloorColor.ContainsKey(CurFloor))
         {
             FloorColor.Add(CurFloor, GetCurFloorColor(CurFloor));
         }
-
-        BottomImage.color = FloorColor[CurFloor];
+        FloorImage.color = FloorColor[CurFloor];
+        WallTopImage.color = FloorColor[CurFloor];
+        WallBotImage.color = FloorColor[CurFloor];
+        //光影
+        if (!ShadowColor.ContainsKey(CurFloor))
+        {
+            ShadowColor.Add(CurFloor, GetCurShadowColor(CurFloor));
+        }
+        FloorShadow.color = ShadowColor[CurFloor];
+        WallTopShadowImage.color = ShadowColor[CurFloor];
+        WallBotShadowImage.color = ShadowColor[CurFloor];
+        //線搞
+        if (!LineDraftColor.ContainsKey(CurFloor))
+        {
+            LineDraftColor.Add(CurFloor, GetCurLineDraftColor(CurFloor));
+        }
+        FloorLineDraft.color = LineDraftColor[CurFloor];
+        WallTopLineImage.color = LineDraftColor[CurFloor];
+        WallBotLineImage.color = LineDraftColor[CurFloor];
     }
     Color GetRandomColor(int _floor)
     {
         List<Color> colors = new List<Color>();
-        for (int i = 0; i < Colors.Count; i++)
+        for (int i = 0; i < BotColors.Count; i++)
         {
-            colors.Add(Colors[i]);
+            colors.Add(BotColors[i]);
         }
         if (FloorColor.ContainsKey(_floor - 1))
             colors.Remove(FloorColor[_floor - 1]);
@@ -60,11 +96,29 @@ public class DungeonPlate : Plate
     }
     Color GetCurFloorColor(int _floor)
     {
-        int index = _floor % Colors.Count - 1;
+        int index = _floor % BotColors.Count - 1;
         if (index < 0)
-            index = Colors.Count - 1;
-        else if (index > Colors.Count - 1)
+            index = BotColors.Count - 1;
+        else if (index > BotColors.Count - 1)
             index = 0;
-        return Colors[index];
+        return BotColors[index];
+    }
+    Color GetCurShadowColor(int _floor)
+    {
+        int index = _floor % ShadowColors.Count - 1;
+        if (index < 0)
+            index = ShadowColors.Count - 1;
+        else if (index > ShadowColors.Count - 1)
+            index = 0;
+        return ShadowColors[index];
+    }
+    Color GetCurLineDraftColor(int _floor)
+    {
+        int index = _floor % LineDraftColors.Count - 1;
+        if (index < 0)
+            index = LineDraftColors.Count - 1;
+        else if (index > LineDraftColors.Count - 1)
+            index = 0;
+        return LineDraftColors[index];
     }
 }

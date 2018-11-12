@@ -61,6 +61,7 @@ GameObject:
   - component: {fileID: 114287811667066566}
   - component: {fileID: 95569876080273844}
   - component: {fileID: 114990997637341776}
+  - component: {fileID: 114809221526342864}
   m_Layer: 9
   m_Name: Suicide Bombing
   m_TagString: Enemy
@@ -208,7 +209,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MoveToPlayer: 0
   Wander: 1
-  FollowCamera: 1
+  FollowCamera: 0
   FollowCameraSpeed: 300
   DebutSpeed: 2000
   WanderInterval: 0.5
@@ -320,6 +321,43 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114809221526342864
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1462364942259880}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 165e15557aa0a9d4792b5d75893182c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Nodes:
+  - WaitSecond: 0
+    MaxProcessingTime: 0
+    RelativeToTarget: 3
+    Destination: {x: 0, y: 0}
+    ExpandFolder: 1
+    MoveSpeed: 400
+    ActiveOnlyByEvent: 0
+    NodeTag: 
+    ExpandRandomNodes: 0
+    ToRandomNode: 0
+    GoToNodes: []
+    SkillList: []
+    Type: 0
+    LocoParticle: {fileID: 0}
+    WorldPartilce: {fileID: 0}
+    RoleAniTriggerName: 
+    CamAniTriggerName: 
+    SoundList: []
+    Description: 
+    SpawnEnemyList: []
+    SpawnIntervalTime: 0
+    RushForce: {x: 0, y: 0}
+  MyAni: {fileID: 0}
+  MaxSpawnCount: 0
+  ActionRoundCount: 0
 --- !u!114 &114990997637341776
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -465,7 +503,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -817, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224891522536998020

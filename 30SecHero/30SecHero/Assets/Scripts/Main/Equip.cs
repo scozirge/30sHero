@@ -373,7 +373,7 @@ public class Equip : MyUI
                     {
                         itemIndex = GetIndexFromTotalItemList(Player.MyAccessorys[CurEquipAccessoryIndex].UID);
                         EquipDic[TakeOffType].Add(ItemList[itemIndex]);
-                        Player.TakeOff(TakeOffType, 0);
+                        Player.TakeOff(TakeOffType, CurEquipAccessoryIndex);
                     }
                     break;
             }
