@@ -23,13 +23,13 @@ public class Trap : Ammo
     protected override void LIfeTimerFunc()
     {
     }
-    protected override void TriggerTarget(Role _role)
+    protected override void TriggerTarget(Role _role, Collider2D _col)
     {
         if (_role.BuffersExist(RoleBuffer.Untouch))
             return;
         if (!TriggerOnRushRole && _role.OnRush)
             return;
-        base.TriggerTarget(_role);
+        base.TriggerTarget(_role,_col);
         Vector2 force = (_role.transform.position - transform.position).normalized * KnockIntensity;
         Value = (int)(_role.MaxHealth * DamageHPRatio);
         int damage = Value;

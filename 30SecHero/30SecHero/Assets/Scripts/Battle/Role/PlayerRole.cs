@@ -169,6 +169,8 @@ public partial class PlayerRole : Role
     [Tooltip("衝刺CD")]
     [SerializeField]
     protected float RushCD;
+    [SerializeField]
+    protected Light MyLight;
 
     ParticleSystem CurBeHitEffect;
     MyTimer AttackTimer;

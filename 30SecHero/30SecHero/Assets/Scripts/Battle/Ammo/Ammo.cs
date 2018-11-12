@@ -100,6 +100,7 @@ public partial class Ammo : MonoBehaviour
     }
     protected virtual void SpawnParticles()
     {
+        
         for (int i = 0; i < LocalParticles.Length; i++)
         {
             if (LocalParticles[i] == null)
@@ -113,13 +114,14 @@ public partial class Ammo : MonoBehaviour
             EffectEmitter.EmitParticle(GlobalParticle[i], transform.position, Vector3.zero, ParticleParent);
         }
     }
-    protected virtual void SpawnDeadParticles()
+    protected virtual void SpawnDeadParticles(Collider2D _col)
     {
+
         for (int i = 0; i < DeadParticles.Length; i++)
         {
             if (DeadParticles[i] == null)
                 continue;
-            EffectEmitter.EmitParticle(DeadParticles[i], transform.position, Vector3.zero, ParticleParent);
+            EffectEmitter.EmitParticle(DeadParticles[i], _col.transform.position, Vector3.zero, ParticleParent);
         }
     }
     public virtual void Launch()
@@ -131,7 +133,7 @@ public partial class Ammo : MonoBehaviour
         if (!ReadyToDamage)
             return;
         if (TargetRoleTag.ToString() == _col.tag.ToString())
-            TriggerTarget(_col.GetComponent<Role>());
+            TriggerTarget(_col.GetComponent<Role>(), _col);
 
     }
     protected virtual void OnTriggerStay2D(Collider2D _col)
@@ -139,12 +141,12 @@ public partial class Ammo : MonoBehaviour
         if (!ReadyToDamage)
             return;
         if (TargetRoleTag.ToString() == _col.tag.ToString())
-            TriggerTarget(_col.GetComponent<Role>());
+            TriggerTarget(_col.GetComponent<Role>(), _col);
         else if (TargetRoleTag.ToString() == _col.tag.ToString())
-            TriggerTarget(_col.GetComponent<Role>());
+            TriggerTarget(_col.GetComponent<Role>(), _col);
 
     }
-    protected virtual void TriggerTarget(Role _role)
+    protected virtual void TriggerTarget(Role _role,Collider2D _col)
     {
         ReadyToDamage = false;
         TriggerHitCondition(_role);
@@ -153,7 +155,7 @@ public partial class Ammo : MonoBehaviour
         DamageTime.StartRunTimer = true;
         if (HitTargetParticle != null)
             EffectEmitter.EmitParticle(HitTargetParticle, _role.transform.position, Vector3.zero, ParticleParent);
-        SpawnDeadParticles();
+        SpawnDeadParticles(_col);
     }
     protected virtual void Update()
     {
