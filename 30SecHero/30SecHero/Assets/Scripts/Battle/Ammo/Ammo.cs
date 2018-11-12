@@ -11,9 +11,12 @@ public partial class Ammo : MonoBehaviour
     [Tooltip("不跟隨的特效物件")]
     [SerializeField]
     ParticleSystem[] GlobalParticle;
-    [Tooltip("死亡特效")]
+    [Tooltip("命中特效-自身子彈")]
     [SerializeField]
     ParticleSystem[] DeadParticles;
+    [Tooltip("命中特效-目標")]
+    [SerializeField]
+    ParticleSystem HitTargetParticle;
     [Tooltip("子彈存活時間(秒)")]
     [SerializeField]
     float LifeTime;
@@ -148,6 +151,8 @@ public partial class Ammo : MonoBehaviour
         if (AmmoType != ShootAmmoType.Permanent)
             IsCausedDamage = true;
         DamageTime.StartRunTimer = true;
+        if (HitTargetParticle != null)
+            EffectEmitter.EmitParticle(HitTargetParticle, _role.transform.position, Vector3.zero, ParticleParent);
         SpawnDeadParticles();
     }
     protected virtual void Update()
