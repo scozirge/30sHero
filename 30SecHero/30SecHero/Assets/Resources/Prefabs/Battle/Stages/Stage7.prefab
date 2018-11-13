@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 60514856108117470}
   m_Layer: 10
   m_Name: SpriteShape
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -126,7 +126,7 @@ GameObject:
   - component: {fileID: 60296353835451034}
   m_Layer: 10
   m_Name: SpriteShape (1)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -177,7 +177,7 @@ GameObject:
   - component: {fileID: 60997209084286168}
   m_Layer: 10
   m_Name: SpriteShape (2)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

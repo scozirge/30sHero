@@ -8,7 +8,9 @@ public class ShootAmmo : Ammo
     protected float AmmoSpeed;
     [SerializeField]
     protected float TraceFactor;
-
+    [Tooltip("是否會被牆阻擋")]
+    [SerializeField]
+    protected bool TriggerWall = true;
 
     Role Attacker;
     protected Vector3 Ammovelocity;
@@ -36,6 +38,10 @@ public class ShootAmmo : Ammo
             {
                 base.OnTriggerEnter2D(_col);
             }
+        if (TriggerWall && _col.tag == "Wall")
+        {
+            TriggerWallTarget(transform.position);
+        }
 
     }
     protected override void OnTriggerStay2D(Collider2D _col)
@@ -54,13 +60,18 @@ public class ShootAmmo : Ammo
                 base.OnTriggerStay2D(_col);
             }
     }
-    protected override void TriggerTarget(Role _role, Collider2D _col)
+    protected virtual void TriggerWallTarget(Vector2 _pos)
+    {
+        SpawnDeadParticles(_pos);
+        SelfDestroy();
+    }
+    protected override void TriggerTarget(Role _role, Vector2 _pos)
     {
         if (_role.BuffersExist(RoleBuffer.Untouch))
             return;
         if (!TriggerOnRushRole && _role.OnRush)
             return;
-        base.TriggerTarget(_role, _col);
+        base.TriggerTarget(_role, _pos);
         Vector2 force = (_role.transform.position - transform.position).normalized * KnockIntensity;
         int damage = Value;
         _role.BeAttack(AttackerRoleTag, ref damage, force);

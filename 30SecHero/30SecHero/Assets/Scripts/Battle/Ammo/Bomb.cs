@@ -9,13 +9,13 @@ public class Bomb : Ammo
         base.Init(_dic);
         Launch();
     }
-    protected override void TriggerTarget(Role _role,Collider2D _col)
+    protected override void TriggerTarget(Role _role,Vector2 _pos)
     {
         if (_role.BuffersExist(RoleBuffer.Untouch))
             return;
         if (!TriggerOnRushRole && _role.OnRush)
             return;
-        base.TriggerTarget(_role,_col);
+        base.TriggerTarget(_role, _pos);
         Vector2 force = (_role.transform.position - transform.position).normalized * KnockIntensity;
         int damage = Value;
         _role.BeAttack(AttackerRoleTag,ref damage, force);

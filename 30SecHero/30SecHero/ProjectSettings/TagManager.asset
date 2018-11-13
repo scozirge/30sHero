@@ -15,6 +15,7 @@ TagManager:
   - LootParent
   - Soul
   - Skull
+  - Wall
   layers:
   - Default
   - TransparentFX

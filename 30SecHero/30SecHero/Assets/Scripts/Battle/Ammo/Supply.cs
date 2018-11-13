@@ -48,9 +48,9 @@ public class Supply : Ammo
                 base.OnTriggerStay2D(_col);
             }
     }
-    protected override void TriggerTarget(Role _role, Collider2D _col)
+    protected override void TriggerTarget(Role _role, Vector2 _pos)
     {
-        base.TriggerTarget(_role,_col);
+        base.TriggerTarget(_role, _pos);
         if (Value > 0)
             _role.HealHP(Value);
         if (AmmoType != ShootAmmoType.Permanent)

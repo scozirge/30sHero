@@ -2800,11 +2800,6 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 239628692}
     m_Modifications:
-    - target: {fileID: 114653323007763930, guid: 0d9785887b25ffc45b303130a6de0050,
-        type: 2}
-      propertyPath: BotColors.Array.size
-      value: 7
-      objectReference: {fileID: 0}
     - target: {fileID: 224914333135931914, guid: 0d9785887b25ffc45b303130a6de0050,
         type: 2}
       propertyPath: m_LocalPosition.x
@@ -2894,21 +2889,6 @@ Prefab:
         type: 2}
       propertyPath: m_Pivot.y
       value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 114653323007763930, guid: 0d9785887b25ffc45b303130a6de0050,
-        type: 2}
-      propertyPath: BotColors.Array.data[7].r
-      value: 0.85679054
-      objectReference: {fileID: 0}
-    - target: {fileID: 114653323007763930, guid: 0d9785887b25ffc45b303130a6de0050,
-        type: 2}
-      propertyPath: BotColors.Array.data[7].g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114653323007763930, guid: 0d9785887b25ffc45b303130a6de0050,
-        type: 2}
-      propertyPath: BotColors.Array.data[7].a
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0d9785887b25ffc45b303130a6de0050, type: 2}

@@ -134,9 +134,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LocalParticles: []
   GlobalParticle: []
-  DeadParticles:
-  - {fileID: 198308960938074910, guid: 6ebb3848cff528744a0ce66822bd1588, type: 2}
-  HitTargetParticle: {fileID: 0}
+  DeadParticles: []
+  HitTargetParticle: {fileID: 198308960938074910, guid: 6ebb3848cff528744a0ce66822bd1588,
+    type: 2}
   LifeTime: 9999
   KnockIntensity: 4000
   AmmoType: 1

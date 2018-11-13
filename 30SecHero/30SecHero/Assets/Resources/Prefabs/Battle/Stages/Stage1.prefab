@@ -64,7 +64,7 @@ GameObject:
   - component: {fileID: 60069026947131686}
   m_Layer: 10
   m_Name: SpriteShape (4)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -198,7 +198,7 @@ GameObject:
   - component: {fileID: 60870502114579760}
   m_Layer: 10
   m_Name: SpriteShape (1)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -265,7 +265,7 @@ GameObject:
   - component: {fileID: 60474316962779822}
   m_Layer: 10
   m_Name: SpriteShape (5)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -355,7 +355,7 @@ GameObject:
   - component: {fileID: 60630613197349338}
   m_Layer: 10
   m_Name: SpriteShape
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1037,6 +1037,7 @@ MonoBehaviour:
   - {fileID: 19879284, guid: b7d7bf60543d84044b7d85a126a6647f, type: 2}
   GlobalParticle: []
   DeadParticles: []
+  HitTargetParticle: {fileID: 0}
   LifeTime: 0
   KnockIntensity: 0
   AmmoType: 1
@@ -1388,6 +1389,7 @@ MonoBehaviour:
   - {fileID: 19879284, guid: b7d7bf60543d84044b7d85a126a6647f, type: 2}
   GlobalParticle: []
   DeadParticles: []
+  HitTargetParticle: {fileID: 0}
   LifeTime: 0
   KnockIntensity: 0
   AmmoType: 1
@@ -1483,7 +1485,9 @@ MonoBehaviour:
     Description: 
     SpawnEnemyList: []
     SpawnIntervalTime: 0
+    MyRushDirect: 0
     RushForce: {x: 0, y: 0}
+    RushForce2: 0
   - WaitSecond: 0
     MaxProcessingTime: 0
     RelativeToTarget: 0
@@ -1505,7 +1509,9 @@ MonoBehaviour:
     Description: 
     SpawnEnemyList: []
     SpawnIntervalTime: 0
+    MyRushDirect: 0
     RushForce: {x: 0, y: 0}
+    RushForce2: 0
   MyAni: {fileID: 0}
   MaxSpawnCount: 0
   ActionRoundCount: 0

@@ -13,7 +13,7 @@ public partial class Ammo : MonoBehaviour
     ParticleSystem[] GlobalParticle;
     [Tooltip("命中特效-自身子彈")]
     [SerializeField]
-    ParticleSystem[] DeadParticles;
+    protected ParticleSystem[] DeadParticles;
     [Tooltip("命中特效-目標")]
     [SerializeField]
     ParticleSystem HitTargetParticle;
@@ -59,8 +59,8 @@ public partial class Ammo : MonoBehaviour
     {
         if (Buffers == null)
             return;
-        
-        for (int i = 0; i < Buffers.Length;i++ )
+
+        for (int i = 0; i < Buffers.Length; i++)
         {
             _role.AddBuffer(Buffers[i].GetMemberwiseClone());
         }
@@ -100,7 +100,7 @@ public partial class Ammo : MonoBehaviour
     }
     protected virtual void SpawnParticles()
     {
-        
+
         for (int i = 0; i < LocalParticles.Length; i++)
         {
             if (LocalParticles[i] == null)
@@ -114,14 +114,14 @@ public partial class Ammo : MonoBehaviour
             EffectEmitter.EmitParticle(GlobalParticle[i], transform.position, Vector3.zero, ParticleParent);
         }
     }
-    protected virtual void SpawnDeadParticles(Collider2D _col)
+    protected virtual void SpawnDeadParticles(Vector2 _pos)
     {
 
         for (int i = 0; i < DeadParticles.Length; i++)
         {
             if (DeadParticles[i] == null)
                 continue;
-            EffectEmitter.EmitParticle(DeadParticles[i], _col.transform.position, Vector3.zero, ParticleParent);
+            EffectEmitter.EmitParticle(DeadParticles[i], _pos, Vector3.zero, ParticleParent);
         }
     }
     public virtual void Launch()
@@ -133,20 +133,19 @@ public partial class Ammo : MonoBehaviour
         if (!ReadyToDamage)
             return;
         if (TargetRoleTag.ToString() == _col.tag.ToString())
-            TriggerTarget(_col.GetComponent<Role>(), _col);
-
+        {
+            TriggerTarget(_col.GetComponent<Role>(), transform.position);
+        }
     }
     protected virtual void OnTriggerStay2D(Collider2D _col)
     {
         if (!ReadyToDamage)
             return;
         if (TargetRoleTag.ToString() == _col.tag.ToString())
-            TriggerTarget(_col.GetComponent<Role>(), _col);
-        else if (TargetRoleTag.ToString() == _col.tag.ToString())
-            TriggerTarget(_col.GetComponent<Role>(), _col);
-
+            TriggerTarget(_col.GetComponent<Role>(), transform.position);
     }
-    protected virtual void TriggerTarget(Role _role,Collider2D _col)
+
+    protected virtual void TriggerTarget(Role _role, Vector2 _pos)
     {
         ReadyToDamage = false;
         TriggerHitCondition(_role);
@@ -155,7 +154,7 @@ public partial class Ammo : MonoBehaviour
         DamageTime.StartRunTimer = true;
         if (HitTargetParticle != null)
             EffectEmitter.EmitParticle(HitTargetParticle, _role.transform.position, Vector3.zero, ParticleParent);
-        SpawnDeadParticles(_col);
+        SpawnDeadParticles(_pos);
     }
     protected virtual void Update()
     {
@@ -164,7 +163,7 @@ public partial class Ammo : MonoBehaviour
         LIfeTimerFunc();
         if (!ReadyToDamage && !IsCausedDamage)
             DamageTime.RunTimer();
-        if(OutSideDestroy)
+        if (OutSideDestroy)
             DestroyOutSideAmmos();
     }
     public virtual void SelfDestroy()
