@@ -279,11 +279,13 @@ public partial class BattleManage : MonoBehaviour
                         EnemyList[i].transform.position.x > DisableMargin_Right)
                     {
                         EnemyList[i].gameObject.SetActive(false);
+                        /*
                         if (EnemyList[i].transform.position.x < DestructMargin_Left ||
                             EnemyList[i].transform.position.x > DestructMargin_Right)
                         {
                             EnemyList[i].SelfDestroy();
                         }
+                        */
                     }
                     else
                     {

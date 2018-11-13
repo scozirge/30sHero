@@ -33,7 +33,8 @@ public class Stage : MonoBehaviour
             for (int i = 0; i < enemys.Length; i++)
             {
                 enemys[i].transform.SetParent(enemyParent.transform);
-                //BattleManage.AddEnemy(enemys[i]);
+                enemys[i].gameObject.SetActive(false);
+                BattleManage.AddEnemy(enemys[i]);
             }
         }
 
