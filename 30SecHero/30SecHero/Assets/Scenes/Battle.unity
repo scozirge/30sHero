@@ -2278,7 +2278,17 @@ MonoBehaviour:
   - {fileID: 114102499001875956, guid: 256accf974627b04e95fdc1c61c5aedb, type: 2}
   DesignateStage: {fileID: 0}
   FGTopList: []
-  FGBotList: []
+  FGBotList:
+  - {fileID: 114618649810162204, guid: 66063e45adef2f54b94c6e7b8e701a0b, type: 2}
+  - {fileID: 114636442405111862, guid: 1481b00b941f41a45a382e2ac79b0b37, type: 2}
+  - {fileID: 114344113885656514, guid: 0443cd8522e8d5d45a0bfb096a945e2a, type: 2}
+  - {fileID: 114190101511338266, guid: 50c605f7e4ac2c242beb81a7b00fb614, type: 2}
+  - {fileID: 114821136522962818, guid: 809a3d1c576f9fc45964fecbe19ad07c, type: 2}
+  - {fileID: 114162902381681638, guid: 97fd39db8bdd80541893031eecd46d35, type: 2}
+  - {fileID: 114877180408055056, guid: 98e463cc6a743ef4a96e71a1d6c25eda, type: 2}
+  - {fileID: 114263097269548964, guid: 327bbde070567e740853951ed8c236f4, type: 2}
+  - {fileID: 114591994473785542, guid: 9f3f69ecd00b7094e912e9e78e95d4ef, type: 2}
+  - {fileID: 114591994473785542, guid: 9f3f69ecd00b7094e912e9e78e95d4ef, type: 2}
 --- !u!4 &501039061
 Transform:
   m_ObjectHideFlags: 0
@@ -3767,7 +3777,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2002856604}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -5783,6 +5793,10 @@ Prefab:
       propertyPath: m_Name
       value: Floor (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 1800094159610388, guid: 0d9785887b25ffc45b303130a6de0050, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0d9785887b25ffc45b303130a6de0050, type: 2}
   m_IsPrefabAsset: 0
@@ -7559,6 +7573,10 @@ Prefab:
       propertyPath: m_Name
       value: Floor (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 1800094159610388, guid: 0d9785887b25ffc45b303130a6de0050, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0d9785887b25ffc45b303130a6de0050, type: 2}
   m_IsPrefabAsset: 0
@@ -8018,8 +8036,8 @@ RectTransform:
   m_Children:
   - {fileID: 1272262353}
   - {fileID: 592269002}
-  - {fileID: 371345236}
   - {fileID: 1033918695}
+  - {fileID: 371345236}
   - {fileID: 1123068882}
   - {fileID: 104705511}
   m_Father: {fileID: 1773075370}
