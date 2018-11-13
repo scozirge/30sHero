@@ -303,7 +303,7 @@ GameObject:
   - component: {fileID: 8633865681014825570}
   - component: {fileID: 114319316884104502}
   - component: {fileID: 60455448417640878}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: SpriteShape
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1815,5 +1815,5 @@ SpriteShapeRenderer:
   - {fileID: 0}
   - {fileID: 0}
   m_LocalAABB:
-    m_Center: {x: 232.47662, y: -497.32877, z: 0}
-    m_Extent: {x: 240.03696, y: 138.49753, z: 0}
+    m_Center: {x: 232.48175, y: -497.32114, z: 0}
+    m_Extent: {x: 240.04642, y: 138.50516, z: 0}

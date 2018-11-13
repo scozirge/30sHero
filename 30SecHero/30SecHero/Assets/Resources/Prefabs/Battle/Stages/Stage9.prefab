@@ -221,7 +221,7 @@ GameObject:
   - component: {fileID: 8633865683547620804}
   - component: {fileID: 114554917078010728}
   - component: {fileID: 60296353835451034}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: SpriteShape (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -256,7 +256,7 @@ GameObject:
   - component: {fileID: 8633865682438694184}
   - component: {fileID: 114686512242028122}
   - component: {fileID: 60285112027451248}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: SpriteShape (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 8633865681699225346}
   - component: {fileID: 114358657299435626}
   - component: {fileID: 60514856108117470}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: SpriteShape
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -124,7 +124,7 @@ GameObject:
   - component: {fileID: 8633865683547620804}
   - component: {fileID: 114554917078010728}
   - component: {fileID: 60296353835451034}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: SpriteShape (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -175,7 +175,7 @@ GameObject:
   - component: {fileID: 8633865681314873590}
   - component: {fileID: 114791748281744598}
   - component: {fileID: 60997209084286168}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: SpriteShape (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -612,6 +612,7 @@ MonoBehaviour:
   - {fileID: 19879284, guid: b7d7bf60543d84044b7d85a126a6647f, type: 2}
   GlobalParticle: []
   DeadParticles: []
+  HitTargetParticle: {fileID: 0}
   LifeTime: 0
   KnockIntensity: 0
   AmmoType: 1
@@ -1109,8 +1110,8 @@ SpriteShapeRenderer:
   - {fileID: 0}
   - {fileID: 0}
   m_LocalAABB:
-    m_Center: {x: 180.22284, y: 2.5478706, z: 0}
-    m_Extent: {x: 109.550316, y: 109.55281, z: 0}
+    m_Center: {x: 180.22092, y: 2.5477257, z: 0}
+    m_Extent: {x: 109.552246, y: 109.55296, z: 0}
 --- !u!1971053207 &8633865681699225346
 SpriteShapeRenderer:
   m_ObjectHideFlags: 1
@@ -1160,8 +1161,8 @@ SpriteShapeRenderer:
   - {fileID: 0}
   - {fileID: 0}
   m_LocalAABB:
-    m_Center: {x: 150.51054, y: -11.03056, z: 0}
-    m_Extent: {x: 79.83801, y: 95.91531, z: 0}
+    m_Center: {x: 150.51282, y: -11.01709, z: 0}
+    m_Extent: {x: 79.84415, y: 95.92902, z: 0}
 --- !u!1971053207 &8633865683547620804
 SpriteShapeRenderer:
   m_ObjectHideFlags: 1
@@ -1211,5 +1212,5 @@ SpriteShapeRenderer:
   - {fileID: 0}
   - {fileID: 0}
   m_LocalAABB:
-    m_Center: {x: 246.64842, y: -1.6220703, z: 0}
-    m_Extent: {x: 182.90746, y: 209.38385, z: 0}
+    m_Center: {x: 246.64832, y: -1.6219635, z: 0}
+    m_Extent: {x: 182.91336, y: 209.38396, z: 0}

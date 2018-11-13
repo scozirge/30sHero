@@ -340,7 +340,7 @@ GameObject:
   - component: {fileID: 8633865683547620804}
   - component: {fileID: 114554917078010728}
   - component: {fileID: 60296353835451034}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: SpriteShape (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -423,7 +423,7 @@ GameObject:
   - component: {fileID: 8633865681314873590}
   - component: {fileID: 114791748281744598}
   - component: {fileID: 60997209084286168}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: SpriteShape
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -756,7 +756,7 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 430.8525, y: 291.52103}
+    - - {x: 428.06448, y: 262.24655}
       - {x: 314.52954, y: 84.22742}
       - {x: 314.52954, y: 84.22742}
       - {x: 78.35928, y: 74.33062}
@@ -769,7 +769,7 @@ PolygonCollider2D:
       - {x: 431.20505, y: -196.8496}
       - {x: 404.70743, y: 8.5263}
       - {x: 404.70743, y: 8.5263}
-      - {x: 430.8525, y: 291.52103}
+      - {x: 428.06448, y: 262.24655}
 --- !u!60 &60997209084286168
 PolygonCollider2D:
   m_ObjectHideFlags: 1
@@ -1295,7 +1295,9 @@ MonoBehaviour:
     Description: 
     SpawnEnemyList: []
     SpawnIntervalTime: 0
+    MyRushDirect: 0
     RushForce: {x: 0, y: 0}
+    RushForce2: 0
   - WaitSecond: 0
     MaxProcessingTime: 0
     RelativeToTarget: 0
@@ -1317,7 +1319,9 @@ MonoBehaviour:
     Description: 
     SpawnEnemyList: []
     SpawnIntervalTime: 0
+    MyRushDirect: 0
     RushForce: {x: 0, y: 0}
+    RushForce2: 0
   MyAni: {fileID: 0}
   MaxSpawnCount: 0
   ActionRoundCount: 0
@@ -1486,12 +1490,12 @@ MonoBehaviour:
   m_Spline:
     m_IsOpenEnded: 0
     m_ControlPoints:
-    - position: {x: 430.8525, y: 291.52103, z: 0}
+    - position: {x: 428.06448, y: 262.24655, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
       height: 0.47
-      bevelCutoff: 166
+      bevelCutoff: 180
       bevelSize: 0.5
       spriteIndex: 0
       corner: 0
@@ -1749,7 +1753,9 @@ MonoBehaviour:
     Description: 
     SpawnEnemyList: []
     SpawnIntervalTime: 0
+    MyRushDirect: 0
     RushForce: {x: 0, y: 0}
+    RushForce2: 0
   - WaitSecond: 0
     MaxProcessingTime: 0
     RelativeToTarget: 0
@@ -1771,7 +1777,9 @@ MonoBehaviour:
     Description: 
     SpawnEnemyList: []
     SpawnIntervalTime: 0
+    MyRushDirect: 0
     RushForce: {x: 0, y: 0}
+    RushForce2: 0
   MyAni: {fileID: 0}
   MaxSpawnCount: 0
   ActionRoundCount: 0
@@ -1883,7 +1891,9 @@ MonoBehaviour:
     Description: 
     SpawnEnemyList: []
     SpawnIntervalTime: 0
+    MyRushDirect: 0
     RushForce: {x: 0, y: 0}
+    RushForce2: 0
   - WaitSecond: 0
     MaxProcessingTime: 0
     RelativeToTarget: 0
@@ -1905,7 +1915,9 @@ MonoBehaviour:
     Description: 
     SpawnEnemyList: []
     SpawnIntervalTime: 0
+    MyRushDirect: 0
     RushForce: {x: 0, y: 0}
+    RushForce2: 0
   MyAni: {fileID: 0}
   MaxSpawnCount: 0
   ActionRoundCount: 0
@@ -1954,7 +1966,9 @@ MonoBehaviour:
     Description: 
     SpawnEnemyList: []
     SpawnIntervalTime: 0
+    MyRushDirect: 0
     RushForce: {x: 0, y: 0}
+    RushForce2: 0
   - WaitSecond: 0
     MaxProcessingTime: 0
     RelativeToTarget: 0
@@ -1976,7 +1990,9 @@ MonoBehaviour:
     Description: 
     SpawnEnemyList: []
     SpawnIntervalTime: 0
+    MyRushDirect: 0
     RushForce: {x: 0, y: 0}
+    RushForce2: 0
   MyAni: {fileID: 0}
   MaxSpawnCount: 0
   ActionRoundCount: 0
@@ -2751,8 +2767,8 @@ SpriteShapeRenderer:
   - {fileID: 0}
   - {fileID: 0}
   m_LocalAABB:
-    m_Center: {x: 267.98886, y: 339.39062, z: 0}
-    m_Extent: {x: 273.082, y: 78.31238, z: 0}
+    m_Center: {x: 267.97568, y: 339.39426, z: 0}
+    m_Extent: {x: 273.0955, y: 78.31601, z: 0}
 --- !u!1971053207 &8633865683547620804
 SpriteShapeRenderer:
   m_ObjectHideFlags: 1
@@ -2802,5 +2818,5 @@ SpriteShapeRenderer:
   - {fileID: 0}
   - {fileID: 0}
   m_LocalAABB:
-    m_Center: {x: 143.00937, y: -8.245811, z: 0}
-    m_Extent: {x: 287.80902, y: 198.19028, z: 0}
+    m_Center: {x: 143.00937, y: -14.977356, z: 0}
+    m_Extent: {x: 287.80902, y: 191.45874, z: 0}

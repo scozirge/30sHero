@@ -62,10 +62,17 @@ public class Node
     [Tooltip("召喚間隔秒數")]
     [SerializeField]
     public float SpawnIntervalTime;
+    [Tooltip("衝刺方向")]
+    [SerializeField]
+    public RushDirect MyRushDirect;
     [Tooltip("衝刺力道")]
     [SerializeField]
     public Vector2 RushForce;
+    [Tooltip("衝刺力道")]
+    [SerializeField]
+    public float RushForce2;
 
+    public enum RushDirect { Custom, Player };
     public Node GetMemberwiseClone()
     {
         Node data = this.MemberwiseClone() as Node;

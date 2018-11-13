@@ -176,8 +176,19 @@ public class RoleBehaviorWindowEditor : EditorWindow
                         }
                         break;
                     case (int)ActionType.Rush:
-                        SerializedProperty rushForce = myListRef.FindPropertyRelative("RushForce");
-                        EditorGUILayout.PropertyField(rushForce);
+                        SerializedProperty myRushDirect = myListRef.FindPropertyRelative("MyRushDirect");
+                        EditorGUILayout.PropertyField(myRushDirect,new GUIContent("RushDirect"));
+                        switch(myRushDirect.enumValueIndex)
+                        {
+                            case (int)Node.RushDirect.Custom:
+                                SerializedProperty rushForce = myListRef.FindPropertyRelative("RushForce");
+                                EditorGUILayout.PropertyField(rushForce);
+                                break;
+                            case (int)Node.RushDirect.Player:
+                                SerializedProperty rushForce2 = myListRef.FindPropertyRelative("RushForce2");
+                                EditorGUILayout.PropertyField(rushForce2, new GUIContent("RushForce"));
+                                break;
+                        }
                         break;
                     case (int)ActionType.Perform:
                         EditorGUIUtility.labelWidth = 100;

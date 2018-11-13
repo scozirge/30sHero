@@ -29,6 +29,7 @@ public class RoleBehavior : MonoBehaviour
     List<EnemyRole> SpawnList = new List<EnemyRole>();
     int CurSpawnIndex;
 
+
     void Start()
     {
         EnemyParent = GameObject.FindGameObjectWithTag("EnemyParent").transform;
@@ -76,7 +77,14 @@ public class RoleBehavior : MonoBehaviour
                 StartSpawn(_node);
                 break;
             case ActionType.Rush:
-                MyRole.Rush(_node.RushForce);
+                if (_node.MyRushDirect == Node.RushDirect.Custom)
+                    MyRole.Rush(_node.RushForce);
+                else
+                {
+                    Vector2 dir = ((Vector2)BattleManage.BM.MyPlayer.transform.position - (Vector2)transform.position).normalized;
+                    Vector2 force = dir * _node.RushForce2;
+                    MyRole.Rush(force);
+                }
                 CheckRandomNode();
                 break;
             case ActionType.Spell:
@@ -175,7 +183,7 @@ public class RoleBehavior : MonoBehaviour
         if (CurNodeIndex > Nodes.Count - 1)
         {
             CurNodeIndex = 0;
-            if (ActionRoundCount>0)
+            if (ActionRoundCount > 0)
             {
                 CurRoundCount++;
                 if (CurRoundCount >= ActionRoundCount)

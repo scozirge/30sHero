@@ -86,7 +86,7 @@ GameObject:
   - component: {fileID: 8633865681683478082}
   - component: {fileID: 114759952440985742}
   - component: {fileID: 60538655115499820}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: SpriteShape
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -145,7 +145,7 @@ GameObject:
   - component: {fileID: 8633865681185662434}
   - component: {fileID: 114331083157399600}
   - component: {fileID: 60119948438675966}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: SpriteShape (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -654,6 +654,7 @@ MonoBehaviour:
   - {fileID: 19879284, guid: b7d7bf60543d84044b7d85a126a6647f, type: 2}
   GlobalParticle: []
   DeadParticles: []
+  HitTargetParticle: {fileID: 0}
   LifeTime: 0
   KnockIntensity: 0
   AmmoType: 1
@@ -998,8 +999,8 @@ SpriteShapeRenderer:
   - {fileID: 0}
   - {fileID: 0}
   m_LocalAABB:
-    m_Center: {x: 87.92073, y: -86.69104, z: 0}
-    m_Extent: {x: 356.99957, y: 115.949326, z: 0}
+    m_Center: {x: 87.93379, y: -86.69335, z: 0}
+    m_Extent: {x: 357.01263, y: 115.95164, z: 0}
 --- !u!1971053207 &8633865681683478082
 SpriteShapeRenderer:
   m_ObjectHideFlags: 1
@@ -1049,5 +1050,5 @@ SpriteShapeRenderer:
   - {fileID: 0}
   - {fileID: 0}
   m_LocalAABB:
-    m_Center: {x: 62.454712, y: 0.5937195, z: 0}
-    m_Extent: {x: 304.34872, y: 222.09291, z: 0}
+    m_Center: {x: 62.45945, y: 0.5969696, z: 0}
+    m_Extent: {x: 304.36496, y: 222.09616, z: 0}
