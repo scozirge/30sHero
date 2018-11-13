@@ -28,7 +28,7 @@ public class SkillLoot : Loot
             SoulIcon.SetNativeSize();
         }
     }
-    void OnTriggerEnter2D(Collider2D _col)
+    void OnTriggerStay2D(Collider2D _col)
     {
         if (!ReadyToAcquire)
             return;

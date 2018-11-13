@@ -26,7 +26,7 @@ public class EquipLoot : Loot
         }
         EquipTrans.rotation = Quaternion.Euler(new Vector3(0, 0, Random.Range(-20, 20)));
     }
-    void OnTriggerEnter2D(Collider2D _col)
+    void OnTriggerStay2D(Collider2D _col)
     {
         if (!ReadyToAcquire)
             return;

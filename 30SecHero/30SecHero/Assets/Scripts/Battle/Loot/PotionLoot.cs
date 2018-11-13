@@ -55,7 +55,7 @@ public class PotionLoot : Loot
         MyIcon.SetNativeSize();
     }
 
-    void OnTriggerEnter2D(Collider2D _col)
+    void OnTriggerStay2D(Collider2D _col)
     {
         if (!ReadyToAcquire)
             return;
