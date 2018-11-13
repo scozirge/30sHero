@@ -91,7 +91,6 @@ public class StageSpawner : MonoBehaviour
                 return null;
             }
         }
-
         List<ForeGround> list = new List<ForeGround>();
         float curPosX = 0;
         float runDistance = 0;

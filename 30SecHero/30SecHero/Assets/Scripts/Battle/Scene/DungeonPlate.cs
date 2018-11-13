@@ -101,7 +101,6 @@ public class DungeonPlate : Plate
             index = BotColors.Count - 1;
         else if (index > BotColors.Count - 1)
             index = 0;
-        Debug.Log(index);
         return BotColors[index];
     }
     Color GetCurShadowColor(int _floor)
