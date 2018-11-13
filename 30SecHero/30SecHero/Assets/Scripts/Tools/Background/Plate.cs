@@ -12,9 +12,9 @@ public class Plate : MonoBehaviour
     Vector3 Rotation;
 
 
-    protected int CurPlate;
-    public int ColumnRank { get; private set; }
-    int MaxColumn { get; set; }
+    protected int CurPlate;//目前的板塊是遊戲開始後第幾塊
+    public int ColumnRank { get; private set; }//目前的板塊是顯示板塊中的第幾塊
+    int MaxColumn { get; set; }//顯示幾塊板塊
     public virtual void Init(int _column, int _maxColumn)
     {
         ColumnRank = _column;

@@ -38,7 +38,7 @@ public class DungeonPlate : Plate
     public override void Init(int _column, int _maxColumn)
     {
         base.Init(_column, _maxColumn);
-        CurPlate = ColumnRank - 1 + 100000;
+        CurPlate = ColumnRank;
         FloorPlateCount = BattleManage.BM.FloorPlate;
         UpdatePlateColor();
     }
@@ -54,11 +54,11 @@ public class DungeonPlate : Plate
     }
     void UpdatePlateColor()
     {
-        CurFloor = CurPlate / FloorPlateCount - 9999 + (BattleManage.StartFloor - 1);
+        CurFloor = (CurPlate + FloorPlateCount-1) / FloorPlateCount - 1 + (BattleManage.StartFloor - 1);
         //底板
         if (!FloorColor.ContainsKey(CurFloor))
         {
-            FloorColor.Add(CurFloor, GetCurFloorColor(CurFloor));
+            FloorColor.Add(CurFloor, GetNewCurFloorColor(CurFloor));
         }
         FloorImage.color = FloorColor[CurFloor];
         WallTopImage.color = FloorColor[CurFloor];
@@ -94,31 +94,32 @@ public class DungeonPlate : Plate
         int random = Random.Range(0, colors.Count);
         return colors[random];
     }
+    Color GetNewCurFloorColor(int _floor)
+    {
+        int index = _floor % BotColors.Count;
+        if (index < 0)
+            index = BotColors.Count + index;
+        return BotColors[index];
+    }
     Color GetCurFloorColor(int _floor)
     {
-        int index = _floor % BotColors.Count - 1;
+        int index = _floor % BotColors.Count;
         if (index < 0)
-            index = BotColors.Count - 1;
-        else if (index > BotColors.Count - 1)
-            index = 0;
+            index = BotColors.Count + index;
         return BotColors[index];
     }
     Color GetCurShadowColor(int _floor)
     {
-        int index = _floor % ShadowColors.Count - 1;
+        int index = _floor % ShadowColors.Count;
         if (index < 0)
-            index = ShadowColors.Count - 1;
-        else if (index > ShadowColors.Count - 1)
-            index = 0;
+            index = ShadowColors.Count + index;
         return ShadowColors[index];
     }
     Color GetCurLineDraftColor(int _floor)
     {
-        int index = _floor % LineDraftColors.Count - 1;
+        int index = _floor % LineDraftColors.Count;
         if (index < 0)
-            index = LineDraftColors.Count - 1;
-        else if (index > LineDraftColors.Count - 1)
-            index = 0;
+            index = LineDraftColors.Count + index;
         return LineDraftColors[index];
     }
 }
