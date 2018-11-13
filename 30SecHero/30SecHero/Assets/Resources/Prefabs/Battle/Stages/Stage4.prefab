@@ -564,16 +564,14 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 242.75745, y: -360.94467}
-      - {x: -5.51611, y: -427.0124}
-      - {x: -5.51611, y: -427.0124}
-      - {x: 36.33628, y: -622.34033}
-      - {x: 36.33628, y: -622.34033}
+    - - {x: 18.36952, y: -459.06033}
+      - {x: 19.53372, y: -624.7407}
+      - {x: 19.53372, y: -624.7407}
       - {x: 397.7464, y: -626.17834}
       - {x: 397.7464, y: -626.17834}
-      - {x: 477.9493, y: -471.10107}
-      - {x: 477.9493, y: -471.10107}
-      - {x: 242.75745, y: -360.94467}
+      - {x: 398.01212, y: -455.5577}
+      - {x: 398.01212, y: -455.5577}
+      - {x: 18.36952, y: -459.06033}
 --- !u!95 &95114595520079272
 Animator:
   serializedVersion: 3
@@ -793,30 +791,21 @@ MonoBehaviour:
   m_Spline:
     m_IsOpenEnded: 0
     m_ControlPoints:
-    - position: {x: 242.75745, y: -360.94467, z: 0}
+    - position: {x: 18.369522, y: -459.06033, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
-      height: 0.47
-      bevelCutoff: 180
+      height: 1.007
+      bevelCutoff: 75.7
       bevelSize: 0
       spriteIndex: 0
       corner: 0
-    - position: {x: -5.5161133, y: -427.0124, z: 0}
+    - position: {x: 19.533722, y: -624.7407, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
-      height: 0.47
-      bevelCutoff: 180
-      bevelSize: 0
-      spriteIndex: 0
-      corner: 0
-    - position: {x: 36.33629, y: -622.34033, z: 0}
-      leftTangent: {x: 0, y: 0, z: 0}
-      rightTangent: {x: 0, y: 0, z: 0}
-      mode: 0
-      height: 0.47
-      bevelCutoff: 180
+      height: 1.007
+      bevelCutoff: 75.7
       bevelSize: 0
       spriteIndex: 0
       corner: 0
@@ -824,17 +813,17 @@ MonoBehaviour:
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
-      height: 0.47
-      bevelCutoff: 180
+      height: 1.007
+      bevelCutoff: 75.7
       bevelSize: 0
       spriteIndex: 0
       corner: 0
-    - position: {x: 477.9493, y: -471.10107, z: 0}
+    - position: {x: 398.01212, y: -455.55774, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
-      height: 0.47
-      bevelCutoff: 180
+      height: 1.007
+      bevelCutoff: 75.7
       bevelSize: 0
       spriteIndex: 0
       corner: 0
@@ -1463,7 +1452,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 313, y: -74}
+  m_AnchoredPosition: {x: 313, y: -137}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224264979051121806
@@ -1539,7 +1528,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 313, y: 320}
+  m_AnchoredPosition: {x: 313, y: 360}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224485467955515956
@@ -1577,7 +1566,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 313, y: 120}
+  m_AnchoredPosition: {x: 313, y: 135}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224536675235516294
@@ -1815,5 +1804,5 @@ SpriteShapeRenderer:
   - {fileID: 0}
   - {fileID: 0}
   m_LocalAABB:
-    m_Center: {x: 232.48175, y: -497.32114, z: 0}
-    m_Extent: {x: 240.04642, y: 138.50516, z: 0}
+    m_Center: {x: 207.99974, y: -540.36804, z: 0}
+    m_Extent: {x: 212.82906, y: 107.844025, z: 0}

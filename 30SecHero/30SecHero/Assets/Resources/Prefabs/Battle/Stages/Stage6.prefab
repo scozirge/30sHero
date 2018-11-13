@@ -226,7 +226,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1770294051699700}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -66, y: 412, z: 0}
+  m_LocalPosition: {x: -66, y: 305, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4370834106608920}
@@ -304,14 +304,14 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -252.11032, y: 8.47058}
-      - {x: -90.66238, y: -199.02132}
-      - {x: -90.66238, y: -199.02132}
-      - {x: 126.2668, y: -160.85237}
-      - {x: 126.2668, y: -160.85237}
-      - {x: 460.2874, y: 6.19937}
-      - {x: 460.2874, y: 6.19937}
-      - {x: -252.11032, y: 8.47058}
+    - - {x: -242.20103, y: -121.84143}
+      - {x: -237.7156, y: -180.98828}
+      - {x: -237.7156, y: -180.98828}
+      - {x: 276.69135, y: -175.82207}
+      - {x: 276.69135, y: -175.82207}
+      - {x: 278.29498, y: -124.29309}
+      - {x: 278.29498, y: -124.29309}
+      - {x: -242.20103, y: -121.84143}
 --- !u!60 &60538655115499820
 PolygonCollider2D:
   m_ObjectHideFlags: 1
@@ -336,18 +336,14 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 90.31833, y: 222.93976}
-      - {x: -63.32611, y: 176.84732}
-      - {x: -63.32611, y: 176.84732}
-      - {x: -100.10651, y: 8.47059}
-      - {x: -100.10651, y: 8.47059}
-      - {x: -247.99966, y: -209.68823}
-      - {x: -247.99966, y: -209.68823}
-      - {x: 376.93967, y: -211.5203}
-      - {x: 376.93967, y: -211.5203}
-      - {x: 220.28156, y: -7.13429}
-      - {x: 220.28156, y: -7.13429}
-      - {x: 90.31833, y: 222.93976}
+    - - {x: 35.43859, y: 52.1203}
+      - {x: -52.83497, y: 48.85595}
+      - {x: -52.83497, y: 48.85595}
+      - {x: -57.41195, y: -272.16235}
+      - {x: -57.41195, y: -272.16235}
+      - {x: 41.87594, y: -271.30548}
+      - {x: 41.87594, y: -271.30548}
+      - {x: 35.43859, y: 52.1203}
 --- !u!70 &70140377722919198
 CapsuleCollider2D:
   m_ObjectHideFlags: 1
@@ -462,39 +458,39 @@ MonoBehaviour:
   m_Spline:
     m_IsOpenEnded: 0
     m_ControlPoints:
-    - position: {x: -252.11032, y: 8.470581, z: 0}
+    - position: {x: -242.20105, y: -121.84143, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
-      height: 1
-      bevelCutoff: 0
+      height: 1.015
+      bevelCutoff: 37.2
       bevelSize: 0
       spriteIndex: 0
       corner: 0
-    - position: {x: -90.662384, y: -199.02132, z: 0}
+    - position: {x: -237.7156, y: -180.98828, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
-      height: 0.47
-      bevelCutoff: 180
+      height: 1.015
+      bevelCutoff: 37.2
       bevelSize: 0
       spriteIndex: 0
       corner: 0
-    - position: {x: 126.2668, y: -160.85237, z: 0}
+    - position: {x: 276.69135, y: -175.82207, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
-      height: 0.47
-      bevelCutoff: 180
+      height: 1.015
+      bevelCutoff: 37.2
       bevelSize: 0
       spriteIndex: 0
       corner: 0
-    - position: {x: 460.2874, y: 6.1993713, z: 0}
+    - position: {x: 278.29498, y: -124.29309, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
-      height: 0.47
-      bevelCutoff: 180
+      height: 1.015
+      bevelCutoff: 37.2
       bevelSize: 0
       spriteIndex: 0
       corner: 0
@@ -578,57 +574,39 @@ MonoBehaviour:
   m_Spline:
     m_IsOpenEnded: 0
     m_ControlPoints:
-    - position: {x: 90.31833, y: 222.93976, z: 0}
+    - position: {x: 35.4386, y: 52.1203, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
-      height: 0.47
-      bevelCutoff: 180
+      height: 0.862
+      bevelCutoff: 40.7
       bevelSize: 0
       spriteIndex: 0
       corner: 0
-    - position: {x: -63.32611, y: 176.84732, z: 0}
+    - position: {x: -52.834976, y: 48.855957, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
-      height: 0.47
-      bevelCutoff: 180
+      height: 0.862
+      bevelCutoff: 40.7
       bevelSize: 0
       spriteIndex: 0
       corner: 0
-    - position: {x: -100.10651, y: 8.470596, z: 0}
+    - position: {x: -57.411957, y: -272.16235, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
-      height: 1
-      bevelCutoff: 0
+      height: 0.862
+      bevelCutoff: 40.7
       bevelSize: 0
       spriteIndex: 0
       corner: 0
-    - position: {x: -247.99966, y: -209.68823, z: 0}
+    - position: {x: 41.875946, y: -271.30548, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
-      height: 0.47
-      bevelCutoff: 180
-      bevelSize: 0
-      spriteIndex: 0
-      corner: 0
-    - position: {x: 376.9397, y: -211.5203, z: 0}
-      leftTangent: {x: 0, y: 0, z: 0}
-      rightTangent: {x: 0, y: 0, z: 0}
-      mode: 0
-      height: 0.47
-      bevelCutoff: 180
-      bevelSize: 0
-      spriteIndex: 0
-      corner: 0
-    - position: {x: 220.28156, y: -7.1342926, z: 0}
-      leftTangent: {x: 0, y: 0, z: 0}
-      rightTangent: {x: 0, y: 0, z: 0}
-      mode: 0
-      height: 0.47
-      bevelCutoff: 180
+      height: 0.862
+      bevelCutoff: 40.7
       bevelSize: 0
       spriteIndex: 0
       corner: 0
@@ -663,6 +641,8 @@ MonoBehaviour:
   TriggerOnRushRole: 1
   Value: 0
   DamageHPRatio: 0.05
+  ActiveTime: 1
+  InActiveTime: 2
 --- !u!114 &114787592016019180
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -893,7 +873,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 355, y: 74}
+  m_AnchoredPosition: {x: 355, y: -55}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224649033530012614
@@ -947,7 +927,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -48, y: 79}
+  m_AnchoredPosition: {x: -48, y: 367}
   m_SizeDelta: {x: 500, y: 500}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1971053207 &8633865681185662434
@@ -999,8 +979,8 @@ SpriteShapeRenderer:
   - {fileID: 0}
   - {fileID: 0}
   m_LocalAABB:
-    m_Center: {x: 87.93379, y: -86.69335, z: 0}
-    m_Extent: {x: 357.01263, y: 115.95164, z: 0}
+    m_Center: {x: 17.59935, y: -151.91364, z: 0}
+    m_Extent: {x: 283.2235, y: 53.658897, z: 0}
 --- !u!1971053207 &8633865681683478082
 SpriteShapeRenderer:
   m_ObjectHideFlags: 1
@@ -1050,5 +1030,5 @@ SpriteShapeRenderer:
   - {fileID: 0}
   - {fileID: 0}
   m_LocalAABB:
-    m_Center: {x: 62.45945, y: 0.5969696, z: 0}
-    m_Extent: {x: 304.36496, y: 222.09616, z: 0}
+    m_Center: {x: -7.2677956, y: -109.96986, z: 0}
+    m_Extent: {x: 72.30295, y: 185.4544, z: 0}
