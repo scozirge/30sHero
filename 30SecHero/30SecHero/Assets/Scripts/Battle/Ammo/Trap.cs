@@ -32,10 +32,13 @@ public class Trap : Ammo
     {
         base.Init(_dic);
         Launch();
-        MyColliders = GetComponentsInChildren<Collider2D>();
-        MyImages = GetComponentsInChildren<Image>();
-        MyParticles = GetComponentsInChildren<ParticleSystem>();
-        ActiveTrap(true);
+        if (InActiveTime > 0 && ActiveTime > 0)
+        {
+            MyColliders = GetComponentsInChildren<Collider2D>();
+            MyImages = GetComponentsInChildren<Image>();
+            MyParticles = GetComponentsInChildren<ParticleSystem>();
+            ActiveTrap(true);
+        }
     }
     protected override void LIfeTimerFunc()
     {
