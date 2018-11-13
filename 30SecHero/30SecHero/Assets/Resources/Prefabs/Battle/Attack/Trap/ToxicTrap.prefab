@@ -43,7 +43,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 250
+  m_Radius: 150
 --- !u!114 &114072587049018722
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -59,13 +59,17 @@ MonoBehaviour:
   - {fileID: 19879284, guid: b7d7bf60543d84044b7d85a126a6647f, type: 2}
   GlobalParticle: []
   DeadParticles: []
+  HitTargetParticle: {fileID: 0}
   LifeTime: 0
   KnockIntensity: 0
   AmmoType: 1
   DamageInterval: 0.3
   Buffers: []
+  TriggerOnRushRole: 1
   Value: 0
   DamageHPRatio: 0.05
+  ActiveTime: 5
+  InActiveTime: 3
 --- !u!222 &222909830333532672
 CanvasRenderer:
   m_ObjectHideFlags: 1
@@ -88,6 +92,6 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 573, y: 0}
+  m_AnchoredPosition: {x: 202, y: 0}
   m_SizeDelta: {x: 500, y: 500}
   m_Pivot: {x: 0.5, y: 0.5}

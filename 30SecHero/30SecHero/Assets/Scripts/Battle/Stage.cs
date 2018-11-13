@@ -160,6 +160,8 @@ public partial class BattleManage
     static void SpawnStage(Vector2 _startPos, int _remainPlateSize, int _floor)
     {
         List<Stage> stageList = StageSpawner.SpawnStage(_startPos, BM.PlateSizeX, _remainPlateSize, _floor);
+        if (stageList == null)
+            return;
         for (int i = 0; i < stageList.Count; i++)
         {
             StageList.Add(stageList[i]);

@@ -51,10 +51,15 @@ public class StageSpawner : MonoBehaviour
             }
             else
             {
-                Stage stagePrefab = GetRandomStage(ref _remainPlateSize);
-                if (stagePrefab == null)
-                    break;
-                stage = Instantiate(stagePrefab, Vector3.zero, Quaternion.identity) as Stage;
+                if (MyStageSpawner.StageList.Count != 0)
+                {
+                    Stage stagePrefab = GetRandomStage(ref _remainPlateSize);
+                    if (stagePrefab == null)
+                        break;
+                    stage = Instantiate(stagePrefab, Vector3.zero, Quaternion.identity) as Stage;
+                }
+                else
+                    return null;
             }
             stage.transform.SetParent(MyStageSpawner.transform);
             stage.transform.localPosition = spawnPos;
