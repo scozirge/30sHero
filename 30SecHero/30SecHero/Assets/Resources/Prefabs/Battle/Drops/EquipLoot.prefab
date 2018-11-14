@@ -191,7 +191,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Icon: {fileID: 0}
   LVText: {fileID: 0}
-  MyType: 0
 --- !u!114 &114145141458099560
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -205,7 +204,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Icon: {fileID: 0}
   LVText: {fileID: 0}
-  MyType: 0
 --- !u!114 &114146659006968602
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -219,7 +217,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Icon: {fileID: 0}
   LVText: {fileID: 0}
-  MyType: 0
 --- !u!114 &114280876041232990
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -259,6 +256,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   WaitToBeAcquire: 1
+  RandomPosRadius: 50
   EquipTrans: {fileID: 224751315579743956}
   Icons:
   - {fileID: 114280876041232990}
@@ -316,6 +314,7 @@ MonoBehaviour:
   KeepDebut: 0
   ReadyToMove: 0
   MoveSpeed: 0
+  AbsorbRadius: 0
 --- !u!114 &114735638476980208
 MonoBehaviour:
   m_ObjectHideFlags: 1

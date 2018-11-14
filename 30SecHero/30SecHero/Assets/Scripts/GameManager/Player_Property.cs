@@ -6,12 +6,15 @@ public partial class Player
 {
     //Strengthen Dic
     public static Dictionary<int, StrengthenData> StrengthenDic = new Dictionary<int, StrengthenData>();
+    //Enchant Dic
+    public static Dictionary<int, EnchantData> EnchantDic = new Dictionary<int, EnchantData>();
     //Properties
     public static Dictionary<RoleProperty, float> Properties = new Dictionary<RoleProperty, float>();
     static Dictionary<RoleProperty, float> EquipPlus = new Dictionary<RoleProperty, float>();
     //static Dictionary<RoleProperty, float> EquipMultiple = new Dictionary<RoleProperty, float>();
     static Dictionary<RoleProperty, float> StrengthenPlus = new Dictionary<RoleProperty, float>();
     //static Dictionary<RoleProperty, float> StrengthenMultiple = new Dictionary<RoleProperty, float>();
+    static Dictionary<EnchantProperty, float> EnchantPlus = new Dictionary<EnchantProperty, float>();
 
     static void InitProperty()
     {
@@ -20,7 +23,9 @@ public partial class Player
         //EquipMultiple = GameSettingData.GetNewRolePropertiesDic(0);
         StrengthenPlus = GameSettingData.GetNewRolePropertiesDic(0);
         //StrengthenMultiple = GameSettingData.GetNewRolePropertiesDic(0);
+        EnchantPlus = GameSettingData.GetNewEnchantPropertiesDic(0);
         StrengthenDic = StrengthenData.GetNewStrengthenDic(0);
+        EnchantDic = EnchantData.GetNewEnchantDic(0);
         Player.Properties[RoleProperty.Health] = GameSettingData.MaxHealth;
         Player.Properties[RoleProperty.Strength] = GameSettingData.BaseDamage;
         Player.Properties[RoleProperty.MoveSpeed] = GameSettingData.BaseMoveSpeed;
@@ -30,7 +35,7 @@ public partial class Player
         Player.Properties[RoleProperty.GainMoveFromKilling] = GameSettingData.GainMoveFromKilling;
         Player.Properties[RoleProperty.MoveDecay] = GameSettingData.MoveDepletedTime;
         Player.Properties[RoleProperty.MaxMoveSpeed] = GameSettingData.MaxExtraMove;
-        Player.Properties[RoleProperty.AvatarTime] = GameSettingData.MaxAvaterTime; 
+        Player.Properties[RoleProperty.AvatarTime] = GameSettingData.MaxAvaterTime;
         Player.Properties[RoleProperty.AvatarPotionBuff] = GameSettingData.AvatarPotionBuff;
         Player.Properties[RoleProperty.SkillTimeBuff] = GameSettingData.SkillTimeBuff;
         Player.Properties[RoleProperty.SkillDrop] = GameSettingData.SkillDrop;
@@ -47,6 +52,14 @@ public partial class Player
             Properties[_property]
             +
             (EquipPlus[_property] + StrengthenPlus[_property]);
+    }
+    public static float GetEnchantProperty(EnchantProperty _type)
+    {
+        if (EnchantPlus.ContainsKey(_type))
+        {
+            return EnchantPlus[_type];
+        }
+        return 0;
     }
     public static void ShowBaseProperties()
     {

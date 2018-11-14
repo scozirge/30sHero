@@ -23,8 +23,6 @@ public class Supply : Ammo
     {
         if (!Target)
             return;
-        if (IsCausedDamage && AmmoType != ShootAmmoType.Permanent)
-            return;
         if (AmmoType != ShootAmmoType.LockOnTarget)
             base.OnTriggerStay2D(_col);
         else
@@ -38,8 +36,6 @@ public class Supply : Ammo
     {
         if (!Target)
             return;
-        if (IsCausedDamage && AmmoType != ShootAmmoType.Permanent)
-            return;
         if (AmmoType != ShootAmmoType.LockOnTarget)
             base.OnTriggerStay2D(_col);
         else
@@ -50,6 +46,8 @@ public class Supply : Ammo
     }
     protected override void TriggerTarget(Role _role, Vector2 _pos)
     {
+        if (!CheckReadyToDamageTarget(_role))
+            return;
         base.TriggerTarget(_role, _pos);
         if (Value > 0)
             _role.HealHP(Value);

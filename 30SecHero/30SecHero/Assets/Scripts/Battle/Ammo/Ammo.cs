@@ -17,6 +17,9 @@ public partial class Ammo : MonoBehaviour
     [Tooltip("命中特效-目標")]
     [SerializeField]
     ParticleSystem HitTargetParticle;
+    [Tooltip("命中音效")]
+    [SerializeField]
+    protected AudioClip HitTargetSound;
     [Tooltip("子彈存活時間(秒)")]
     [SerializeField]
     float LifeTime;
@@ -26,7 +29,7 @@ public partial class Ammo : MonoBehaviour
     [Tooltip("子彈類型，選擇穿透就是子彈擊中玩家後不會移除，且可能造成多次傷害(炸彈類的子彈)")]
     [SerializeField]
     protected ShootAmmoType AmmoType;
-    [Tooltip("傷害間隔，只有子彈類型是穿透(代表擊中敵方後不會消失)才需要設定")]
+    [Tooltip("傷害間隔，只有子彈類型是穿透(代表擊中敵方後不會消失)才需要設定，如果填0代表同一個目標只會命中一次")]
     [SerializeField]
     protected float DamageInterval = 0.3f;
     [Tooltip("暈眩(秒數)、燃燒(秒數)、冰凍(秒數)、傷害Buff(秒數,增/減值)、無敵(秒數)、格檔(時間,秒數)")]
@@ -36,13 +39,14 @@ public partial class Ammo : MonoBehaviour
     [SerializeField]
     protected bool TriggerOnRushRole = true;
 
+    
     protected bool OutSideDestroy = true;
     protected Force AttackerRoleTag;
     protected Force TargetRoleTag;
     protected bool IsLaunch;
-    protected bool IsCausedDamage;
     [HideInInspector]
     public int Value;
+    protected float ValuePercent;
     protected Role Target;
     float LifeTimer;
     protected Rigidbody2D MyRigi;
@@ -50,9 +54,8 @@ public partial class Ammo : MonoBehaviour
     float DestructMargin_Left;
     float DestructMargin_Right;
 
-    protected MyTimer DamageTime;
-    protected bool ReadyToDamage;
-    protected float DamageIntervalTimer;
+    protected List<MyTimer> ReadyToDamageTimers;
+    protected Dictionary<string, bool> ReadyToDamageTargets;
 
 
     public virtual void TriggerHitCondition(Role _role)
@@ -65,13 +68,17 @@ public partial class Ammo : MonoBehaviour
             _role.AddBuffer(Buffers[i].GetMemberwiseClone());
         }
     }
+    public void SetBuffersTime(float _time)
+    {
+        for (int i = 0; i < Buffers.Length; i++)
+        {
+            Buffers[i].Time = _time;
+        }
+    }
     public virtual void Init(Dictionary<string, object> _dic)
     {
-        ReadyToDamage = true;
-        if (DamageInterval <= 0)
-            DamageInterval = 0.1f;
-        DamageTime = new MyTimer(DamageInterval, DamageTimeOutFunc, false, false);
-        DamageIntervalTimer = DamageInterval;
+        ReadyToDamageTargets = new Dictionary<string, bool>();
+        ReadyToDamageTimers = new List<MyTimer>();
         ParticleParent = GameObject.FindGameObjectWithTag("ParticleParent").transform;
         MyRigi = GetComponentInParent<Rigidbody2D>();
         if (MyRigi == null)
@@ -91,12 +98,8 @@ public partial class Ammo : MonoBehaviour
             tag = AmmoForce.EnemyAmmo.ToString();
         }
         Value = int.Parse(_dic["Damage"].ToString());
+        ValuePercent = float.Parse(_dic["DamagePercent"].ToString());
         SpawnParticles();
-    }
-    protected void DamageTimeOutFunc()
-    {
-        DamageIntervalTimer = DamageInterval;
-        ReadyToDamage = true;
     }
     protected virtual void SpawnParticles()
     {
@@ -130,28 +133,53 @@ public partial class Ammo : MonoBehaviour
     }
     protected virtual void OnTriggerEnter2D(Collider2D _col)
     {
-        if (!ReadyToDamage)
-            return;
         if (TargetRoleTag.ToString() == _col.tag.ToString())
         {
-            TriggerTarget(_col.GetComponent<Role>(), transform.position);
+            Role role = _col.GetComponent<Role>();
+            TriggerTarget(role, transform.position);
         }
     }
     protected virtual void OnTriggerStay2D(Collider2D _col)
     {
-        if (!ReadyToDamage)
-            return;
         if (TargetRoleTag.ToString() == _col.tag.ToString())
-            TriggerTarget(_col.GetComponent<Role>(), transform.position);
+        {
+            Role role = _col.GetComponent<Role>();
+            TriggerTarget(role, transform.position);
+        }
     }
-
+    protected void ReadyToDamageTimeOutFunc(string _key)
+    {
+        if (ReadyToDamageTargets.ContainsKey(_key))
+        {
+            ReadyToDamageTargets[_key] = true;
+        }
+    }
+    protected bool CheckReadyToDamageTarget(Role _role)
+    {
+        string id = _role.GetInstanceID().ToString();
+        if (ReadyToDamageTargets.ContainsKey(id))
+        {
+            if (ReadyToDamageTargets[id])
+            {
+                ReadyToDamageTargets[id] = false;
+                return true;
+            }
+            else
+                return false;
+        }
+        else
+        {
+            if (DamageInterval > 0)
+                ReadyToDamageTimers.Add(new MyTimer(DamageInterval, ReadyToDamageTimeOutFunc, true, true, id));
+            ReadyToDamageTargets.Add(id, false);
+            return true;
+        }
+    }
     protected virtual void TriggerTarget(Role _role, Vector2 _pos)
     {
-        ReadyToDamage = false;
+        if (HitTargetSound)
+            AudioPlayer.PlaySound(HitTargetSound);            
         TriggerHitCondition(_role);
-        if (AmmoType != ShootAmmoType.Permanent)
-            IsCausedDamage = true;
-        DamageTime.StartRunTimer = true;
         if (HitTargetParticle != null)
             EffectEmitter.EmitParticle(HitTargetParticle, _role.transform.position, Vector3.zero, ParticleParent);
         SpawnDeadParticles(_pos);
@@ -161,8 +189,10 @@ public partial class Ammo : MonoBehaviour
         if (!IsLaunch)
             return;
         LIfeTimerFunc();
-        if (!ReadyToDamage && !IsCausedDamage)
-            DamageTime.RunTimer();
+        for (int i = 0; i < ReadyToDamageTimers.Count; i++)
+        {
+            ReadyToDamageTimers[i].RunTimer();
+        }
         if (OutSideDestroy)
             DestroyOutSideAmmos();
     }

@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 224709946835294852}
   - component: {fileID: 114324033492913230}
   - component: {fileID: 114865814273270320}
+  - component: {fileID: 114571615035738792}
   m_Layer: 5
   m_Name: StrengthenItem
   m_TagString: Untagged
@@ -177,7 +178,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: lv40
   UIString: 
-  IsInit: 0
+  IsAddTextList: 0
 --- !u!114 &114324033492913230
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -191,7 +192,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Icon: {fileID: 114349823632602738}
   LVText: {fileID: 114092712887935190}
-  MyType: 0
 --- !u!114 &114349823632602738
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -260,6 +260,17 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114571615035738792
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1253718865124768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23453e74b9a0b7b49966cca230716054, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114616229905699812
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -273,7 +284,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Icon: {fileID: 0}
   LVText: {fileID: 0}
-  MyType: 0
 --- !u!114 &114744370905368044
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -314,7 +324,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Icon: {fileID: 0}
   LVText: {fileID: 0}
-  MyType: 0
 --- !u!114 &114865814273270320
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -363,6 +372,18 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 114571615035738792}
+        m_MethodName: PlaySoundByAudioClip
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 8300000, guid: 282a1d2b82ec1ba43a13601b19c142c3,
+            type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 

@@ -149,6 +149,40 @@ public partial class Player
             }
         }
     }
+    public static void EnchantUpgrade(EnchantData _data)
+    {
+        //執行附魔
+        GainEmerald(-_data.GetPrice());
+        if (EnchantDic.ContainsKey(_data.ID))
+        {
+            GameSettingData.EnchantPropertyOperate(EnchantPlus, EnchantDic[_data.ID].Properties, Operator.Minus);//減去原本值
+            EnchantDic[_data.ID].LVUP();
+            GameSettingData.EnchantPropertyOperate(EnchantPlus, EnchantDic[_data.ID].Properties, Operator.Plus);//加上升級後的值
+        }
+        //寫入資料
+        if (EnchantInitDataFinish)
+        {
+            if (LocalData)
+            {
+                Debug.Log("更新Loco玩家附魔");
+                //附魔
+                List<int> keys = new List<int>(EnchantDic.Keys);
+                string dataStr = "";
+                for (int i = 0; i < keys.Count; i++)
+                {
+                    if (i != 0)
+                        dataStr += "/";
+                    dataStr += EnchantDic[keys[i]].ID + "," + EnchantDic[keys[i]].LV;
+                }
+                PlayerPrefs.SetString(LocoData.Enchant.ToString(), dataStr);
+            }
+            else
+            {
+                Debug.Log("更新server玩家附魔");
+                ServerRequest.EnchantUpgrade(_data.ID, _data.LV, Emerald);
+            }
+        }
+    }
     public static void SetCurFloor_Local(int _curFloor)
     {
         if (_curFloor == CurFloor)

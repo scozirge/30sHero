@@ -904,6 +904,91 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 49815876}
   m_CullTransparentMesh: 0
+--- !u!1 &52695285
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 52695286}
+  - component: {fileID: 52695289}
+  - component: {fileID: 52695288}
+  - component: {fileID: 52695287}
+  m_Layer: 5
+  m_Name: EnchantContent
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &52695286
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 52695285}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 243976672}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -0.000061035156, y: 0}
+  m_SizeDelta: {x: 23.700073, y: 47.4}
+  m_Pivot: {x: 0, y: 1}
+--- !u!114 &52695287
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 52695285}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1741964061, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_HorizontalFit: 0
+  m_VerticalFit: 2
+--- !u!114 &52695288
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 52695285}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0a21b3d336f26b44b0f2e10b4e49337, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ItemPrefab: {fileID: 114905676522147506, guid: 9da5311eab0d49340a15e9f5ce6ae65a,
+    type: 2}
+--- !u!114 &52695289
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 52695285}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -2095666955, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding:
+    m_Left: 0
+    m_Right: 0
+    m_Top: 0
+    m_Bottom: 0
+  m_ChildAlignment: 0
+  m_StartCorner: 0
+  m_StartAxis: 0
+  m_CellSize: {x: 172, y: 250}
+  m_Spacing: {x: 26.44, y: -47.4}
+  m_Constraint: 1
+  m_ConstraintCount: 5
 --- !u!1 &61841209
 GameObject:
   m_ObjectHideFlags: 0
@@ -2605,6 +2690,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1885360548}
+  - {fileID: 52695286}
   m_Father: {fileID: 1869950722}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3161,7 +3247,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Icon: {fileID: 0}
   LVText: {fileID: 0}
-  MyType: 0
 --- !u!114 &342661771
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4461,14 +4546,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77d764bae7f4927448fcab376299fcba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MySpanwer: {fileID: 1885360550}
+  StrengthenSpanwer: {fileID: 1885360550}
+  EnchantSpanwer: {fileID: 52695288}
   NameText: {fileID: 285251927}
   DescriptionText: {fileID: 1732040348}
   UpgradeButton: {fileID: 1805688322}
   PriceText: {fileID: 1911887115}
+  PriceImage: {fileID: 642418546}
   TagToggles:
   - {fileID: 1719333655}
   - {fileID: 2035297226}
+  MyScrollRect: {fileID: 1869950725}
+  StrengthenContent: {fileID: 1885360548}
+  EnchantContent: {fileID: 52695286}
 --- !u!114 &471734069
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5563,7 +5653,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Icon: {fileID: 0}
   LVText: {fileID: 0}
-  MyType: 0
 --- !u!222 &608823392
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6424,7 +6513,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Icon: {fileID: 0}
   LVText: {fileID: 0}
-  MyType: 0
 --- !u!222 &727700628
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -7258,7 +7346,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Icon: {fileID: 0}
   LVText: {fileID: 0}
-  MyType: 0
 --- !u!114 &830128012
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8249,7 +8336,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Icon: {fileID: 0}
   LVText: {fileID: 0}
-  MyType: 0
 --- !u!114 &971981661
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8476,7 +8562,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Icon: {fileID: 0}
   LVText: {fileID: 0}
-  MyType: 0
 --- !u!114 &1028199353
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13202,7 +13287,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Icon: {fileID: 0}
   LVText: {fileID: 0}
-  MyType: 0
 --- !u!114 &1675594757
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13703,6 +13787,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1719333654}
   - component: {fileID: 1719333655}
+  - component: {fileID: 1719333656}
   m_Layer: 5
   m_Name: SkillTag
   m_TagString: Untagged
@@ -13784,9 +13869,32 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1719333656}
+        m_MethodName: PlaySoundByAudioClip
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 8300000, guid: 408ade3909770f34ea34d7d72120b802,
+            type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Toggle+ToggleEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
   m_IsOn: 1
+--- !u!114 &1719333656
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1719333653}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23453e74b9a0b7b49966cca230716054, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1732040346
 GameObject:
   m_ObjectHideFlags: 0
@@ -14769,7 +14877,7 @@ GameObject:
   - component: {fileID: 1885360550}
   - component: {fileID: 1885360551}
   m_Layer: 5
-  m_Name: Content
+  m_Name: StrengthenContent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14790,7 +14898,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.000042336243}
+  m_AnchoredPosition: {x: 0, y: -0.00004151233}
   m_SizeDelta: {x: 23.7, y: 47.4}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1885360549
@@ -16092,6 +16200,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2035297225}
   - component: {fileID: 2035297226}
+  - component: {fileID: 2035297227}
   m_Layer: 5
   m_Name: EnchantmentTag
   m_TagString: Untagged
@@ -16173,9 +16282,32 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 2035297227}
+        m_MethodName: PlaySoundByAudioClip
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 8300000, guid: 408ade3909770f34ea34d7d72120b802,
+            type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Toggle+ToggleEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
   m_IsOn: 0
+--- !u!114 &2035297227
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2035297224}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23453e74b9a0b7b49966cca230716054, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2040795342
 GameObject:
   m_ObjectHideFlags: 0

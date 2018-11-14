@@ -13,13 +13,11 @@ public class StrengthenItem : Item
     public StrengthenData MyData;
     Strengthen ParentUI;
     Toggle TheToggle;
-    public StrengthenType MyType;
 
-    public void Set(StrengthenData _data, Strengthen _ui,StrengthenType _type)
+    public void Set(StrengthenData _data, Strengthen _ui)
     {
         MyData = _data;
         ParentUI = _ui;
-        MyType = _type;
         if (Player.StrengthenDic.ContainsKey(MyData.ID))
         {
             MyData = Player.StrengthenDic[MyData.ID];

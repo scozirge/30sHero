@@ -14,6 +14,8 @@ public partial class Player
     static bool PlayerInfoInitDataFinish = false;
     //強化
     static bool StrengthenInitDataFinish = false;
+    //強化
+    static bool EnchantInitDataFinish = false;
     //遊戲開始讀取玩家裝備資料，讀取完EquipInitDataFinish=true(false時玩家設定裝備不會寫入本地或雲端)
     static bool EquipInitDataFinish = false;
     /// <summary>
@@ -166,14 +168,22 @@ public partial class Player
         }
         else
             StrengthenInitDataFinish = true;
+        //附魔
+        string enchantStr = PlayerPrefs.GetString(LocoData.Enchant.ToString());
+
+        if (enchantStr != "")
+        {
+            string[] enchantData = enchantStr.Split('/');
+            GetEnchant_CB(enchantData);
+        }
+        else
+            EnchantInitDataFinish = true;
         if (true)
         {
-            Debug.Log("CurFloor=" + CurFloor);
-            Debug.Log("MaxFloor=" + MaxFloor);
-            Debug.Log("gold=" + gold);
-            Debug.Log("emerald=" + emerald);
+            Debug.Log("CurFloor=" + CurFloor+"  MaxFloor=" + MaxFloor+ "  gold=" + gold+"  emerald=" + emerald);
             Debug.Log("equipStr=" + equipStr);
             Debug.Log("strengthenStr=" + strengthenStr);
+            Debug.Log("enchantStr=" + enchantStr);
         }
     }
     public static void GetKongregateUserData_CB(string _name, int _kongregateID)
@@ -192,6 +202,7 @@ public partial class Player
         Debug.Log("MaxFloor=" + int.Parse(_data[4]));
         ServerRequest.GetEquip();
         ServerRequest.GetStrengthen();
+        ServerRequest.GetEnchant();
         PlayerInfoInitDataFinish = true;
     }
     public static void GetEquip_CB(string[] _data)
@@ -232,24 +243,51 @@ public partial class Player
     }
     public static void GetStrengthen_CB(string[] _data)
     {
-        for (int i = 0; i < _data.Length; i++)
+        if(_data!=null)
         {
-            string[] properties = _data[i].Split(',');
-            int jid = int.Parse(properties[0]);
-            int lv = int.Parse(properties[1]);
-            if (StrengthenDic.ContainsKey(jid))
+            for (int i = 0; i < _data.Length; i++)
             {
-                StrengthenDic[jid].InitSet(lv);
-                GameSettingData.RolePropertyOperate(StrengthenPlus, StrengthenDic[jid].Properties, Operator.Plus);//加上升級後的值
+                string[] properties = _data[i].Split(',');
+                int jid = int.Parse(properties[0]);
+                int lv = int.Parse(properties[1]);
+                if (StrengthenDic.ContainsKey(jid))
+                {
+                    StrengthenDic[jid].InitSet(lv);
+                    GameSettingData.RolePropertyOperate(StrengthenPlus, StrengthenDic[jid].Properties, Operator.Plus);//加上升級後的值
+                }
             }
         }
         StrengthenInitDataFinish = true;
+    }
+    public static void GetEnchant_CB(string[] _data)
+    {
+        if (_data!=null)
+        {
+            for (int i = 0; i < _data.Length; i++)
+            {
+                string[] properties = _data[i].Split(',');
+                int jid = int.Parse(properties[0]);
+                int lv = int.Parse(properties[1]);
+                if (EnchantDic.ContainsKey(jid))
+                {
+                    EnchantDic[jid].InitSet(lv);
+                    GameSettingData.EnchantPropertyOperate(EnchantPlus, EnchantDic[jid].Properties, Operator.Plus);//加上升級後的值
+                }
+            }
+        }
+        EnchantInitDataFinish = true;
     }
     public static void StrengthenUpgrade_CB(string[] _data)
     {
         Debug.Log("強化成功");
         //int jid = int.Parse(_data[0]);
         //StrengthenUpgrade(jid);
+    }
+    public static void EnchantUpgrade_CB(string[] _data)
+    {
+        Debug.Log("附魔成功");
+        //int jid = int.Parse(_data[0]);
+        //EnchantUpgrade(jid);
     }
     public static void ChangeEquip_CB(string[] _data)
     {

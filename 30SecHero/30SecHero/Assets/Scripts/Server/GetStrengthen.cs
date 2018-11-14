@@ -53,8 +53,13 @@ public partial class ServerRequest : MonoBehaviour
                         {
                             string[] data = result[1].Split('/');
                             Player.GetStrengthen_CB(data);
-                            PopupUI.HideLoading();//隱藏Loading
+
                         }
+                        else
+                        {
+                            Player.GetStrengthen_CB(null);
+                        }
+                        PopupUI.HideLoading();//隱藏Loading
                     }
                     //////////////////失敗///////////////
                     else if (result[0] == ServerCBCode.Fail.ToString())

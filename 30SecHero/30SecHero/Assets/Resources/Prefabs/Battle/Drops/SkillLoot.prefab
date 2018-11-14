@@ -130,6 +130,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   WaitToBeAcquire: 0
+  RandomPosRadius: 0
   SoulIcon: {fileID: 114515800619740280}
   ExistEffect: {fileID: 198796042616351790, guid: 9cee33da8b3d059458361ee2c1d444c8,
     type: 2}

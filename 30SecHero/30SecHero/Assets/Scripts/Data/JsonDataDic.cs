@@ -7,6 +7,7 @@ public partial class GameDictionary
     //字典
     public static Dictionary<int, PurchaseData> PurchaseDic;
     public static Dictionary<int, StrengthenData> StrengthenDic;
+    public static Dictionary<int, EnchantData> EnchantDic;
     public static Dictionary<int, WeaponData> WeaponDic;
     public static Dictionary<int, ArmorData> ArmorDic;
     public static Dictionary<int, AccessoryData> AccessoryDic;
@@ -19,6 +20,7 @@ public partial class GameDictionary
     public static Dictionary<string, StringData> String_UIDic;
     public static Dictionary<string, StringData> String_PurchaseDic;
     public static Dictionary<string, StringData> String_StrengthenDic;
+    public static Dictionary<string, StringData> String_EnchantDic;
     public static Dictionary<string, StringData> String_WeaponDic;
     public static Dictionary<string, StringData> String_ArmorDic;
     public static Dictionary<string, StringData> String_AccessoryDic;
@@ -37,6 +39,8 @@ public partial class GameDictionary
         PurchaseData.SetData(PurchaseDic, "Purchase");
         StrengthenDic = new Dictionary<int, StrengthenData>();
         StrengthenData.SetData(StrengthenDic, "Strengthen");
+        EnchantDic = new Dictionary<int, EnchantData>();
+        EnchantData.SetData(EnchantDic, "Enchant");
         WeaponDic = new Dictionary<int, WeaponData>();
         WeaponData.SetData(WeaponDic, "Weapon");
         ArmorDic = new Dictionary<int, ArmorData>();
@@ -53,6 +57,7 @@ public partial class GameDictionary
         String_UIDic = StringGetter.GetStringData("String_UI");
         String_PurchaseDic = StringGetter.GetStringData("String_Purchase");
         String_StrengthenDic = StringGetter.GetStringData("String_Strengthen");
+        String_EnchantDic = StringGetter.GetStringData("String_Enchant");
         String_WeaponDic = StringGetter.GetStringData("String_Weapon");
         String_ArmorDic = StringGetter.GetStringData("String_Armor");
         String_AccessoryDic = StringGetter.GetStringData("String_Accessory");

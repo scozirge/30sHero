@@ -8,6 +8,7 @@
     Emerald,
     Equip,
     Strengthen,
+    Enchant,
     KillBossID,
     CurFloor,
     MaxFloor,

@@ -212,7 +212,9 @@ public class RoleBehavior : MonoBehaviour
     {
         if (!StartMove)
             return;
-        Vector2 targetVel = (_pos - (Vector2)transform.position).normalized * _moveSpeed;
+        float moveSpeed = _moveSpeed * (1 + (MyRole.BuffersExist(RoleBuffer.Freeze) ?
+                -GameSettingData.FreezeMove : 0));
+        Vector2 targetVel = (_pos - (Vector2)transform.position).normalized * moveSpeed;
         MyRigid.velocity = Vector2.Lerp(MyRigid.velocity, targetVel, 0.1f);
         if (Vector2.Distance(transform.position, _pos) < 10)
         {

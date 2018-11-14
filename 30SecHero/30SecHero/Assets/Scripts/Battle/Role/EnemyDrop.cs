@@ -25,7 +25,11 @@ public partial class EnemyRole
     [SerializeField]
     Skill DropSkill;
 
-
+    public void ExtralGoldDrop()
+    {
+        ResourceLoot loot = DropSpawner.SpawnResource(transform.position);
+        if (loot) loot.Init(ResourceType.Gold, GameSettingData.GetEnemyDropGold(BattleManage.Floor));
+    }
     void Drop()
     {
         GameObject go = GameObject.FindGameObjectWithTag("Player");

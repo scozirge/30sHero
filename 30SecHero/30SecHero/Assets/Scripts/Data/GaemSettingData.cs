@@ -49,6 +49,7 @@ public class GameSettingData : Data
     public static string ArmorPath;
     public static string AccessoryPath;
     public static string SoulPath;
+    public static string EnchantPath;
     public static float FreezeMove;
     public static float BurnDamage;
     public static float CurseDamageReduce;
@@ -284,6 +285,9 @@ public class GameSettingData : Data
                                 break;
                             case "SoulPath":
                                 SoulPath = item[key].ToString();
+                                break;
+                            case "EnchantPath":
+                                EnchantPath = item[key].ToString();
                                 break;
                             case "FreezeMove":
                                 FreezeMove = float.Parse(item[key].ToString());
@@ -542,6 +546,15 @@ public class GameSettingData : Data
         }
         return dic;
     }
+    public static Dictionary<EnchantProperty, float> GetNewEnchantPropertiesDic(float _initValue)
+    {
+        Dictionary<EnchantProperty, float> dic = new Dictionary<EnchantProperty, float>();
+        for (int i = 0; i < Enum.GetValues(typeof(EnchantProperty)).Length; i++)
+        {
+            dic.Add((EnchantProperty)i, _initValue);
+        }
+        return dic;
+    }
     public static void RolePropertyOperate(Dictionary<RoleProperty, float> _dic1, Dictionary<RoleProperty, float> _dic2, Operator _operator)
     {
         List<RoleProperty> keys = new List<RoleProperty>(_dic1.Keys);
@@ -563,6 +576,30 @@ public class GameSettingData : Data
                 break;
             default:
                 Debug.LogWarning(string.Format("對兩個腳色屬性字典做運算時不應該使用{0}", _operator.ToString()));
+                break;
+        }
+    }
+    public static void EnchantPropertyOperate(Dictionary<EnchantProperty, float> _dic1, Dictionary<EnchantProperty, float> _dic2, Operator _operator)
+    {
+        List<EnchantProperty> keys = new List<EnchantProperty>(_dic1.Keys);
+        switch (_operator)
+        {
+            case Operator.Plus:
+                for (int i = 0; i < keys.Count; i++)
+                {
+                    if (_dic2.ContainsKey(keys[i]))
+                        _dic1[keys[i]] += _dic2[keys[i]];
+                }
+                break;
+            case Operator.Minus:
+                for (int i = 0; i < keys.Count; i++)
+                {
+                    if (_dic2.ContainsKey(keys[i]))
+                        _dic1[keys[i]] -= _dic2[keys[i]];
+                }
+                break;
+            default:
+                Debug.LogWarning(string.Format("對兩個腳色附魔屬性字典做運算時不應該使用{0}", _operator.ToString()));
                 break;
         }
     }

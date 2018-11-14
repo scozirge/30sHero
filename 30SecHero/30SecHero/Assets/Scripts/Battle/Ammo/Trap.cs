@@ -25,6 +25,7 @@ public class Trap : Ammo
         dataDic.Add("AttackerForce", Force.Enemy);
         dataDic.Add("TargetRoleTag", Force.Player);
         dataDic.Add("Damage", 0);
+        dataDic.Add("DamagePercent", 1);
         Init(dataDic);
         OutSideDestroy = false;
     }
@@ -48,6 +49,8 @@ public class Trap : Ammo
         if (_role.BuffersExist(RoleBuffer.Untouch))
             return;
         if (!TriggerOnRushRole && _role.OnRush)
+            return;
+        if (!CheckReadyToDamageTarget(_role))
             return;
         base.TriggerTarget(_role, _pos);
         Vector2 force = (_role.transform.position - transform.position).normalized * KnockIntensity;

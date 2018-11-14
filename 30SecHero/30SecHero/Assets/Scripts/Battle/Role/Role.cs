@@ -122,7 +122,7 @@ public abstract class Role : MonoBehaviour
     void Burn()
     {
         BurningTimer.StartRunTimer = true;
-        int damage = (int)(Health * GameSettingData.BurnDamage);
+        int damage = (int)(MaxHealth * GameSettingData.BurnDamage);
         ReceiveDmg(ref damage);
     }
     protected virtual void Move()
@@ -243,6 +243,19 @@ public abstract class Role : MonoBehaviour
             }
         }
     }
+    void OnEnable()
+    {
+        RePlayAllBufferParticle();
+    }
+    void RePlayAllBufferParticle()
+    {
+        List<RoleBuffer> keys = new List<RoleBuffer>(BufferParticles.Keys);
+        for(int i=0;i<keys.Count;i++)
+        {
+            if (BufferParticles[keys[i]])
+                BufferParticles[keys[i]].Play();
+        }
+    }
     public virtual void RemoveBuffer(BufferData _buffer)
     {
         if (Buffers.ContainsKey(_buffer.Type))
@@ -252,7 +265,7 @@ public abstract class Role : MonoBehaviour
             if (BufferParticles[_buffer.Type])
                 Destroy(BufferParticles[_buffer.Type].gameObject);
             else
-                Debug.LogWarning(string.Format("特效被非預期的移除了:{0}", _buffer.Type));
+                Debug.LogWarning(string.Format("特效被非預期的移除了，有可能是該buff特效沒有勾loop:{0}", _buffer.Type));
             BufferParticles.Remove(_buffer.Type);
         }
         BufferEffectChange(_buffer, false);

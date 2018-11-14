@@ -558,7 +558,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2002856604}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -788,7 +788,7 @@ Prefab:
     - target: {fileID: 224076595988088798, guid: d9e47796d36fc83458ffab41aea6641e,
         type: 2}
       propertyPath: m_RootOrder
-      value: 4
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 224076595988088798, guid: d9e47796d36fc83458ffab41aea6641e,
         type: 2}
@@ -860,6 +860,46 @@ Prefab:
       propertyPath: MyCamera
       value: 
       objectReference: {fileID: 519420031}
+    - target: {fileID: 114529601492733476, guid: d9e47796d36fc83458ffab41aea6641e,
+        type: 2}
+      propertyPath: RushCD
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114391171959625102, guid: d9e47796d36fc83458ffab41aea6641e,
+        type: 2}
+      propertyPath: DamagePercent
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114529601492733476, guid: d9e47796d36fc83458ffab41aea6641e,
+        type: 2}
+      propertyPath: Blizzard
+      value: 
+      objectReference: {fileID: 1362518505}
+    - target: {fileID: 114529601492733476, guid: d9e47796d36fc83458ffab41aea6641e,
+        type: 2}
+      propertyPath: BlizzardAmmoPrefab
+      value: 
+      objectReference: {fileID: 114255117710915984, guid: 5b65695814f87af46a3fc5c33d4cec5d,
+        type: 2}
+    - target: {fileID: 4325138500020102, guid: d9e47796d36fc83458ffab41aea6641e, type: 2}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224875617985449666, guid: d9e47796d36fc83458ffab41aea6641e,
+        type: 2}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 224161813215857282, guid: d9e47796d36fc83458ffab41aea6641e,
+        type: 2}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 224651808157149892, guid: d9e47796d36fc83458ffab41aea6641e,
+        type: 2}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d9e47796d36fc83458ffab41aea6641e, type: 2}
   m_IsPrefabAsset: 0
@@ -5334,6 +5374,41 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 37}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1362518504 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1103968850550592, guid: d9e47796d36fc83458ffab41aea6641e,
+    type: 2}
+  m_PrefabInternal: {fileID: 121351811}
+--- !u!114 &1362518505
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1362518504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d51ff43f4f2a15c45b55bbca6d530f8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BehaviorSkill: 1
+  PSkillName: Blizzard
+  PSkillDuration: 999
+  DetecteRadius: 1200
+  DamagePercent: 0
+  AttackStopMove: 0
+  StopMoveTime: 0
+  PSkillTimer: 0
+  AttackOnce: 0
+  Interval: 2
+  AmmoNum: 1
+  AmmoInterval: 0
+  StartAngle: 0
+  AngleInterval: 0
+  Patetern: 0
+  SpawnedInSelf: 0
+  AttackPrefab: {fileID: 114255117710915984, guid: 5b65695814f87af46a3fc5c33d4cec5d,
+    type: 2}
+  AttackRadius: 0
 --- !u!1 &1389874327
 GameObject:
   m_ObjectHideFlags: 0
@@ -8039,8 +8114,8 @@ RectTransform:
   - {fileID: 592269002}
   - {fileID: 1033918695}
   - {fileID: 1123068882}
-  - {fileID: 371345236}
   - {fileID: 104705511}
+  - {fileID: 371345236}
   m_Father: {fileID: 1773075370}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

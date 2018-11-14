@@ -17,6 +17,13 @@ public partial class GameManager : MonoBehaviour
     [SerializeField]
     ServerRequest MyServer;
 
+
+    [Tooltip("金幣圖")]
+    [SerializeField]
+    Sprite GoldSprite;
+    [Tooltip("寶石圖")]
+    [SerializeField]
+    Sprite EmeraldSprite;
     [Tooltip("暈眩特效")]
     [SerializeField]
     public ParticleSystem StunPrefab;
@@ -49,6 +56,7 @@ public partial class GameManager : MonoBehaviour
     static Sprite[] QualityBotSprites;
     static Sprite[] EquipTypBot;
     static Dictionary<RoleBuffer, ParticleSystem> BufferParticles = new Dictionary<RoleBuffer, ParticleSystem>();
+    static Dictionary<Currency, Sprite> CurrencySpriteDic = new Dictionary<Currency, Sprite>();
     static Dictionary<string, ParticleSystem> OtherParticles = new Dictionary<string, ParticleSystem>();
     KongregateAPIBehaviour KG;
 
@@ -73,10 +81,18 @@ public partial class GameManager : MonoBehaviour
         }
         return BufferParticles[_type];
     }
+    public static Sprite GetCurrencySprite(Currency _type)
+    {
+        if (!CurrencySpriteDic.ContainsKey(_type))
+            return null;
+        return CurrencySpriteDic[_type];
+    }
     void Init()
     {
         if (IsInit)
             return;
+        CurrencySpriteDic.Add(Currency.Gold, GoldSprite);
+        CurrencySpriteDic.Add(Currency.Emerald, EmeraldSprite);
         QualityBotSprites = QualityBotPrefabs;
         EquipTypBot = EquipTypBotPrefab;
         BufferParticles.Add(RoleBuffer.Stun, StunPrefab);

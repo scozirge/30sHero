@@ -70,6 +70,11 @@ public class AudioPlayer : MonoBehaviour
     }
     public static void PlaySound(AudioClip _ac)
     {
+        if (_ac == null)
+        {
+            Debug.LogWarning("要播放的音檔為null");
+            return;
+        }
         if (IsSoundMute)
             return;
         if (!IsInit)
@@ -84,6 +89,11 @@ public class AudioPlayer : MonoBehaviour
     }
     public void PlaySoundByAudioClip(AudioClip _ac)
     {
+        if (_ac == null)
+        {
+            Debug.LogWarning("要播放的音檔為null");
+            return;
+        }
         if (IsSoundMute)
             return;
         if (!IsInit)
@@ -112,6 +122,11 @@ public class AudioPlayer : MonoBehaviour
     }
     public void PlayMusicByAudioClip(AudioClip _ac)
     {
+        if (_ac == null)
+        {
+            Debug.LogWarning("要播放的音檔為null");
+            return;
+        }
         if (IsMusicMute)
             return;
         if (!IsInit)
@@ -127,6 +142,11 @@ public class AudioPlayer : MonoBehaviour
 
     public void PlayLoopSound(AudioClip _ac, string _key)
     {
+        if (_ac == null)
+        {
+            Debug.LogWarning("要播放的音檔為null");
+            return;
+        }
         if (IsSoundMute)
             return;
         if (LoopSoundDic.ContainsKey(_key))
@@ -160,6 +180,11 @@ public class AudioPlayer : MonoBehaviour
     }
     public void PlayLoopMusic(AudioClip _ac, string _key)
     {
+        if (_ac == null)
+        {
+            Debug.LogWarning("要播放的音檔為null");
+            return;
+        }
         if (IsMusicMute)
             return;
         if (LoopMusicDic.ContainsKey(_key))

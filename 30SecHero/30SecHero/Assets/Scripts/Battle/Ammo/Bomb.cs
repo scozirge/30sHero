@@ -15,6 +15,8 @@ public class Bomb : Ammo
             return;
         if (!TriggerOnRushRole && _role.OnRush)
             return;
+        if (!CheckReadyToDamageTarget(_role))
+            return;
         base.TriggerTarget(_role, _pos);
         Vector2 force = (_role.transform.position - transform.position).normalized * KnockIntensity;
         int damage = Value;

@@ -139,6 +139,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   WaitToBeAcquire: 1
+  RandomPosRadius: 100
   MyIcon: {fileID: 114629167383406342}
   GoldIcon: {fileID: 21300000, guid: ae659436bf3294e448c29693626f56c0, type: 3}
   EmeraldIcon: {fileID: 21300000, guid: 17b02e78dcf73f348a4500855832f255, type: 3}
@@ -167,6 +168,7 @@ MonoBehaviour:
   KeepDebut: 0
   ReadyToMove: 0
   MoveSpeed: 150
+  AbsorbRadius: 0
 --- !u!114 &114629167383406342
 MonoBehaviour:
   m_ObjectHideFlags: 1

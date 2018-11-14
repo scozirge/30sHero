@@ -137,6 +137,7 @@ MonoBehaviour:
   DeadParticles: []
   HitTargetParticle: {fileID: 198308960938074910, guid: 6ebb3848cff528744a0ce66822bd1588,
     type: 2}
+  HitTargetSound: {fileID: 8300000, guid: e537a103fcd1bbc45a5e291cd73bd900, type: 3}
   LifeTime: 9999
   KnockIntensity: 4000
   AmmoType: 1

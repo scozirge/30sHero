@@ -78,6 +78,11 @@ public class StringData
     }
     string GetComplexString(int _index, string _str)
     {
+        if (_str == null || _str == "")
+        {
+            Debug.LogWarning("傳入字串為空值");
+            return "";
+        }
         string[] stringArray = TextManager.StringSplitToStringArray(_str, '/');
         if (stringArray.Length - 1 < _index || _index < 0)
         {

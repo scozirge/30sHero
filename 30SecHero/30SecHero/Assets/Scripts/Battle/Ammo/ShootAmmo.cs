@@ -29,8 +29,6 @@ public class ShootAmmo : Ammo
     {
         if (!Target)
             return;
-        if (IsCausedDamage && AmmoType != ShootAmmoType.Permanent)
-            return;
         if (AmmoType != ShootAmmoType.LockOnTarget)
             base.OnTriggerStay2D(_col);
         else
@@ -50,8 +48,6 @@ public class ShootAmmo : Ammo
             return;
         if (!Target)
             return;
-        if (IsCausedDamage && AmmoType != ShootAmmoType.Permanent)
-            return;
         if (AmmoType != ShootAmmoType.LockOnTarget)
             base.OnTriggerStay2D(_col);
         else
@@ -62,6 +58,8 @@ public class ShootAmmo : Ammo
     }
     protected virtual void TriggerWallTarget(Vector2 _pos)
     {
+        if (HitTargetSound)
+            AudioPlayer.PlaySound(HitTargetSound);   
         SpawnDeadParticles(_pos);
         SelfDestroy();
     }
@@ -70,6 +68,8 @@ public class ShootAmmo : Ammo
         if (_role.BuffersExist(RoleBuffer.Untouch))
             return;
         if (!TriggerOnRushRole && _role.OnRush)
+            return;
+        if (!CheckReadyToDamageTarget(_role))
             return;
         base.TriggerTarget(_role, _pos);
         Vector2 force = (_role.transform.position - transform.position).normalized * KnockIntensity;

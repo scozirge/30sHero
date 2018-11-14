@@ -37,16 +37,12 @@ public class MeleeAmmo : Ammo
     }
     protected override void OnTriggerStay2D(Collider2D _col)
     {
-        if (IsCausedDamage && AmmoType != ShootAmmoType.Permanent)
-            return;
         base.OnTriggerStay2D(_col);
         if (TargetAmmoForce.ToString() == _col.tag.ToString())
             TriggerAmmo(_col.GetComponent<Ammo>());
     }
     protected override void OnTriggerEnter2D(Collider2D _col)
     {
-        if (IsCausedDamage && AmmoType != ShootAmmoType.Permanent)
-            return;
         base.OnTriggerEnter2D(_col);
         if (TargetAmmoForce.ToString() == _col.tag.ToString())
             TriggerAmmo(_col.GetComponent<Ammo>());
@@ -57,11 +53,15 @@ public class MeleeAmmo : Ammo
             return;
         if (!TriggerOnRushRole && _role.OnRush)
             return;
+        if (!CheckReadyToDamageTarget(_role))
+            return;
         base.TriggerTarget(_role, _pos);
         Vector2 force = (_role.transform.position - transform.position).normalized * KnockIntensity;
         if (MyMeleeType == MeleeType.Melee || MyMeleeType == MeleeType.Reflect || MyMeleeType == MeleeType.ReflectMirror)
         {
             int damage = Value;
+            if (Attacker != null)
+                damage = (int)(Attacker.Damage * ValuePercent);//使用攻擊者當下的攻擊力(不然雙刀怪這種技能不會受到詛咒而導致攻擊下降)
             _role.BeAttack(AttackerRoleTag, ref damage, force);
         }
         if (AmmoType != ShootAmmoType.Permanent)

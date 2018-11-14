@@ -5,7 +5,9 @@ using UnityEngine.UI;
 public class Strengthen : MyUI
 {
     [SerializeField]
-    ItemSpawner MySpanwer;
+    ItemSpawner StrengthenSpanwer;
+    [SerializeField]
+    ItemSpawner EnchantSpanwer;
     [SerializeField]
     MyText NameText;
     [SerializeField]
@@ -15,13 +17,24 @@ public class Strengthen : MyUI
     [SerializeField]
     MyText PriceText;
     [SerializeField]
+    Image PriceImage;
+    [SerializeField]
     Toggle[] TagToggles;
+    [SerializeField]
+    ScrollRect MyScrollRect;
+    [SerializeField]
+    RectTransform StrengthenContent;
+    [SerializeField]
+    RectTransform EnchantContent;
 
     bool IsInit;
     public static StrengthenType CurFilterType;
-    public static StrengthenData CurSelectedData;
-    public static StrengthenItem CurSelectedItem;
-    static List<StrengthenItem> ItemList = new List<StrengthenItem>();
+    public static StrengthenData CurSelectedSData;
+    public static StrengthenItem CurSelectedSItem;
+    public static EnchantData CurSelectedEData;
+    public static EnchantItem CurSelectedEItem;
+    static List<StrengthenItem> StrengthenItemList = new List<StrengthenItem>();
+    static List<EnchantItem> EnchantItemList = new List<EnchantItem>();
 
     void Start()
     {
@@ -30,14 +43,26 @@ public class Strengthen : MyUI
         List<int> keys = new List<int>(GameDictionary.StrengthenDic.Keys);
         for (int i = 0; i < keys.Count; i++)
         {
-            StrengthenItem si = (StrengthenItem)MySpanwer.Spawn();
-            si.Set(GameDictionary.StrengthenDic[keys[i]], this, StrengthenType.Strengthen);
-            ItemList.Add(si);
+            StrengthenItem si = (StrengthenItem)StrengthenSpanwer.Spawn();
+            si.Set(GameDictionary.StrengthenDic[keys[i]], this);
+            StrengthenItemList.Add(si);
         }
-        if (ItemList[0] != null)
+
+        keys = new List<int>(GameDictionary.EnchantDic.Keys);
+        for (int i = 0; i < keys.Count; i++)
         {
-            ItemList[0].OnPress();
-            ItemList[0].GetComponent<Toggle>().isOn = true;
+            EnchantItem ei = (EnchantItem)EnchantSpanwer.Spawn();
+            ei.Set(GameDictionary.EnchantDic[keys[i]], this);
+            EnchantItemList.Add(ei);
+        }
+        //預設強化分頁並選擇第一個item
+        StrengthenContent.gameObject.SetActive(true);
+        EnchantContent.gameObject.SetActive(false);
+        MyScrollRect.content = StrengthenContent;
+        if (StrengthenItemList[0] != null)
+        {
+            StrengthenItemList[0].OnPress();
+            StrengthenItemList[0].GetComponent<Toggle>().isOn = true;
             MyText.AddRefreshFunc(RefreshText);
         }
         IsInit = true;
@@ -47,60 +72,93 @@ public class Strengthen : MyUI
         if (!IsInit)
             return;
         base.OnEnable();
-        if (ItemList[0] != null)
-        {
-            for (int i = 0; i < ItemList.Count; i++)
-            {
-                ItemList[i].GetComponent<Toggle>().isOn = false;
-            }
-            ItemList[0].OnPress();
-            ItemList[0].GetComponent<Toggle>().isOn = true;
-        }
-        if (TagToggles != null)
-        {
-            for (int i = 0; i < TagToggles.Length; i++)
-            {
-                TagToggles[i].isOn = false;
-            }
-            TagToggles[0].isOn = true;
-        }
+        ToFilter((int)StrengthenType.Strengthen);
     }
     public void ShowInfo(StrengthenItem _item)
     {
-        CurSelectedData = _item.MyData;
-        CurSelectedItem = _item;
+        CurSelectedSData = _item.MyData;
+        CurSelectedSItem = _item;
         RefreshText();
-        UpgradeButton.interactable = !(Player.Gold < CurSelectedData.GetPrice());
+        UpgradeButton.interactable = !(Player.Gold < CurSelectedSData.GetPrice());
+    }
+    public void ShowInfo(EnchantItem _item)
+    {
+        CurSelectedEData = _item.MyData;
+        CurSelectedEItem = _item;
+        RefreshText();
+        UpgradeButton.interactable = !(Player.Emerald < CurSelectedEData.GetPrice());
     }
     public override void RefreshText()
     {
         base.RefreshText();
-        NameText.text = CurSelectedData.Name;
-        DescriptionText.text = CurSelectedData.Description;
-        PriceText.text = CurSelectedData.GetPrice().ToString();
+        if(CurFilterType==StrengthenType.Strengthen)
+        {
+            NameText.text = CurSelectedSData.Name;
+            DescriptionText.text = CurSelectedSData.Description;
+            PriceText.text = CurSelectedSData.GetPrice().ToString();
+        }
+        else if (CurFilterType == StrengthenType.Enchant)
+        {
+            NameText.text = CurSelectedEData.Name;
+            DescriptionText.text = CurSelectedEData.Description;
+            PriceText.text = CurSelectedEData.GetPrice().ToString();
+        }
     }
     public void ToFilter(int _typeID)
     {
+        if ((int)CurFilterType == _typeID)
+           return;
         StrengthenType type = (StrengthenType)_typeID;
-        if (CurFilterType == type)
-            return;
         CurFilterType = type;
         Filter();
     }
     void Filter()
     {
-        for (int i = 0; i < ItemList.Count; i++)
+        switch (CurFilterType)
         {
-            if (ItemList[i].MyType == CurFilterType)
-                ItemList[i].gameObject.SetActive(true);
-            else
-                ItemList[i].gameObject.SetActive(false);
+            case StrengthenType.Strengthen:
+                PriceImage.sprite = GameManager.GetCurrencySprite(Currency.Gold);
+                StrengthenContent.gameObject.SetActive(true);
+                EnchantContent.gameObject.SetActive(false);
+                MyScrollRect.content = StrengthenContent;
+                //預設強化分頁並選擇第一個item
+                if (StrengthenItemList[0] != null)
+                {
+                    StrengthenItemList[0].OnPress();
+                    StrengthenItemList[0].GetComponent<Toggle>().isOn = true;
+                    MyText.AddRefreshFunc(RefreshText);
+                }
+                break;
+            case StrengthenType.Enchant:
+                PriceImage.sprite = GameManager.GetCurrencySprite(Currency.Emerald);
+                StrengthenContent.gameObject.SetActive(false);
+                EnchantContent.gameObject.SetActive(true);
+                MyScrollRect.content = EnchantContent;
+                //預設選擇第一個item
+                if (EnchantItemList[0] != null)
+                {
+                    EnchantItemList[0].OnPress();
+                    EnchantItemList[0].GetComponent<Toggle>().isOn = true;
+                    MyText.AddRefreshFunc(RefreshText);
+                }
+                break;
         }
     }
     public void ToStrengthen()
     {
-        Player.StrengthenUpgrade(CurSelectedData);
-        CurSelectedItem.UpdateUI();
-        ShowInfo(CurSelectedItem);
+
+        if (CurFilterType == StrengthenType.Strengthen)
+        {
+            Player.StrengthenUpgrade(CurSelectedSData);
+            CurSelectedSItem.UpdateUI();
+            ShowInfo(CurSelectedSItem);
+        }
+        else if (CurFilterType == StrengthenType.Enchant)
+        {
+            Player.EnchantUpgrade(CurSelectedEData);
+            CurSelectedEItem.UpdateUI();
+            ShowInfo(CurSelectedEItem);
+        }
+ 
     }
 }

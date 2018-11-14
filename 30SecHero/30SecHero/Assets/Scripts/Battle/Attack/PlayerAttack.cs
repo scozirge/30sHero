@@ -12,6 +12,9 @@ public class PlayerAttack : MonoBehaviour
     [Tooltip("擊退力道")]
     [SerializeField]
     float KnockForce;
+    [Tooltip("傷害倍率(傷害=傷害倍率x腳色攻擊力))")]
+    [SerializeField]
+    protected float DamagePercent = 1;
 
 
     void OnTriggerEnter2D(Collider2D _col)
@@ -22,13 +25,26 @@ public class PlayerAttack : MonoBehaviour
         {
             if (Attacker.IsAvatar)
             {
-                Role er = _col.GetComponent<Role>();
+                EnemyRole er = _col.GetComponent<EnemyRole>();
                 Vector2 force = (er.transform.position - transform.position).normalized * KnockForce;
-                int causeDamage = Attacker.Damage;
-                er.BeAttack(Attacker.MyForce,ref causeDamage, force);
+                int causeDamage = (int)(Attacker.Damage * DamagePercent);
+                er.BeAttack(Attacker.MyForce, ref causeDamage, force);
                 Attacker.HealFromCauseDamage(causeDamage);
                 if (er.IsAlive)
+                {
                     Attacker.BumpingAttack();
+                    if (ProbabilityGetter.GetResult(Attacker.ElementalBladeProportion))
+                    {
+                        er.AddBuffer(GetRandomElementDebuff());
+                    }
+                }
+                else
+                {
+                    if (ProbabilityGetter.GetResult(Player.GetEnchantProperty(EnchantProperty.ExtralGoldDrop)))
+                    {
+                        er.ExtralGoldDrop();
+                    }
+                }
                 Attacker.AttackMotion();
                 //SpawnAttackEffect
                 if (!AttackEffect)
@@ -39,5 +55,23 @@ public class PlayerAttack : MonoBehaviour
             else
                 Attacker.BumpingAttack();
         }
+    }
+    BufferData GetRandomElementDebuff()
+    {
+        int rand = Random.Range(0, 3);
+        BufferData bd = new BufferData(RoleBuffer.Burn, 5);
+        switch(rand)
+        {
+            case 0:
+                bd = new BufferData(RoleBuffer.Burn, 5);
+                break;
+            case 1:
+                bd = new BufferData(RoleBuffer.Freeze, 5);
+                break;
+            case 2:
+                bd = new BufferData(RoleBuffer.DamageDown, 5);
+                break;
+        }
+        return bd;
     }
 }

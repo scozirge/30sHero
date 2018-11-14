@@ -67,6 +67,7 @@ public class Skill : MonoBehaviour
         }
         if (DamagePercent < 0)
             DamagePercent = 0;
+        PSkillTimer = PSkillDuration;
         CanAttack = !Myself.Buffers.ContainsKey(RoleBuffer.Stun);
         AmmoParent = GameObject.FindGameObjectWithTag("AmmoParent").transform;
         SubordinateAmmos = new List<Ammo>();
@@ -93,6 +94,7 @@ public class Skill : MonoBehaviour
         //Set AmmoData
         AmmoData.Clear();
         AmmoData.Add("Damage", (int)(Myself.Damage * DamagePercent));
+        AmmoData.Add("DamagePercent", DamagePercent);
         AmmoData.Add("AttackerForce", Myself.MyForce);
         Myself.Attack(this);
     }
