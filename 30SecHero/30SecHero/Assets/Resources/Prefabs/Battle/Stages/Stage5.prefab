@@ -308,7 +308,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1891786953441032}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -44, y: 148, z: 0}
+  m_LocalPosition: {x: -44, y: 127, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4000863506097606}
@@ -408,18 +408,14 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 385.36603, y: 298.0429}
-      - {x: -232.30807, y: 316.32446}
-      - {x: -232.30807, y: 316.32446}
-      - {x: -185.93866, y: 29.92863}
-      - {x: -185.93866, y: 29.92863}
-      - {x: -28.05511, y: -252.60423}
-      - {x: -28.05511, y: -252.60423}
-      - {x: 250.87384, y: -80.08992}
-      - {x: 250.87384, y: -80.08992}
-      - {x: 265.87994, y: 121.61374}
-      - {x: 265.87994, y: 121.61374}
-      - {x: 385.36603, y: 298.0429}
+    - - {x: 218.25803, y: -18.72508}
+      - {x: -205.32376, y: -13.08464}
+      - {x: -205.32376, y: -13.08464}
+      - {x: -210.23367, y: -151.49197}
+      - {x: -210.23367, y: -151.49197}
+      - {x: 223.46512, y: -154.30446}
+      - {x: 223.46512, y: -154.30446}
+      - {x: 218.25803, y: -18.72508}
 --- !u!95 &95259753382776092
 Animator:
   serializedVersion: 3
@@ -614,57 +610,39 @@ MonoBehaviour:
   m_Spline:
     m_IsOpenEnded: 0
     m_ControlPoints:
-    - position: {x: 385.36603, y: 298.0429, z: 0}
+    - position: {x: 218.25803, y: -18.725082, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
-      height: 0.47
-      bevelCutoff: 180
+      height: 0.887
+      bevelCutoff: 39.8
       bevelSize: 0
       spriteIndex: 0
       corner: 0
-    - position: {x: -232.30807, y: 316.32446, z: 0}
+    - position: {x: -205.32376, y: -13.0846405, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
-      height: 0.47
-      bevelCutoff: 180
+      height: 0.887
+      bevelCutoff: 39.8
       bevelSize: 0
       spriteIndex: 0
       corner: 0
-    - position: {x: -185.93866, y: 29.928635, z: 0}
+    - position: {x: -210.23367, y: -151.49197, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
-      height: 1
-      bevelCutoff: 0
+      height: 0.887
+      bevelCutoff: 39.8
       bevelSize: 0
       spriteIndex: 0
       corner: 0
-    - position: {x: -28.055115, y: -252.60423, z: 0}
+    - position: {x: 223.46512, y: -154.30446, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
-      height: 0.47
-      bevelCutoff: 180
-      bevelSize: 0
-      spriteIndex: 0
-      corner: 0
-    - position: {x: 250.87384, y: -80.08992, z: 0}
-      leftTangent: {x: 0, y: 0, z: 0}
-      rightTangent: {x: 0, y: 0, z: 0}
-      mode: 0
-      height: 0.47
-      bevelCutoff: 180
-      bevelSize: 0
-      spriteIndex: 0
-      corner: 0
-    - position: {x: 265.87994, y: 121.61374, z: 0}
-      leftTangent: {x: 0, y: 0, z: 0}
-      rightTangent: {x: 0, y: 0, z: 0}
-      mode: 0
-      height: 0.47
-      bevelCutoff: 180
+      height: 0.887
+      bevelCutoff: 39.8
       bevelSize: 0
       spriteIndex: 0
       corner: 0
@@ -1153,7 +1131,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -69, y: -258}
+  m_AnchoredPosition: {x: -69, y: -262}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224482681189415888
@@ -1173,7 +1151,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 288, y: -260}
+  m_AnchoredPosition: {x: 350, y: 288}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224540499022996102
@@ -1300,5 +1278,5 @@ SpriteShapeRenderer:
   - {fileID: 0}
   - {fileID: 0}
   m_LocalAABB:
-    m_Center: {x: 67.69025, y: 39.742737, z: 0}
-    m_Extent: {x: 308.7252, y: 285.4146, z: 0}
+    m_Center: {x: 7.1157074, y: -83.72125, z: 0}
+    m_Extent: {x: 239.47256, y: 93.298935, z: 0}
