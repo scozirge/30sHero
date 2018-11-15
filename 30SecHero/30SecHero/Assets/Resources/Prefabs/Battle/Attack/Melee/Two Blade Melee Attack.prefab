@@ -152,6 +152,9 @@ MonoBehaviour:
   LocalParticles: []
   GlobalParticle: []
   DeadParticles: []
+  HitTargetParticle: {fileID: 198308960938074910, guid: 6ebb3848cff528744a0ce66822bd1588,
+    type: 2}
+  HitTargetSound: {fileID: 0}
   LifeTime: 9999
   KnockIntensity: 2000
   AmmoType: 1
@@ -160,6 +163,7 @@ MonoBehaviour:
   - Type: 0
     Time: 0.1
     Value: 0
+  TriggerOnRushRole: 1
   Value: 0
   MyMeleeType: 0
   BlockIntensity: 0

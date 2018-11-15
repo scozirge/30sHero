@@ -61,6 +61,7 @@ GameObject:
   - component: {fileID: 114796498901394522}
   - component: {fileID: 95077092610168030}
   - component: {fileID: 114285072897160996}
+  - component: {fileID: 114147103853439984}
   m_Layer: 9
   m_Name: Skull
   m_TagString: Enemy
@@ -185,6 +186,35 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &114147103853439984
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1570332876556426}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3283f1f3a7e6b24db127fb13fd7f595, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BehaviorSkill: 0
+  PSkillName: Skull_P
+  PSkillDuration: 10
+  DetecteRadius: 2000
+  DamagePercent: 0.2
+  AttackStopMove: 0
+  StopMoveTime: 0
+  PSkillTimer: 0
+  AttackOnce: 0
+  Interval: 0.4
+  AmmoNum: 1
+  AmmoInterval: 0.2
+  StartAngle: 0
+  AngleInterval: 0
+  Patetern: 2
+  SpawnedInSelf: 0
+  AttackPrefab: {fileID: 114630672538787846, guid: 6a16cb5194251844da623a7b775ccc0c,
+    type: 2}
 --- !u!114 &114285072897160996
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -247,7 +277,7 @@ MonoBehaviour:
   DropLootCount: 1
   DesignateLoot: 
   DropSkillProbility: 1
-  DropSkill: {fileID: 114285072897160996}
+  DropSkill: {fileID: 114147103853439984}
   HealthObj: {fileID: 1629960410814638}
   PlayMotionDuration: 0.5
   InitBuffers: []
