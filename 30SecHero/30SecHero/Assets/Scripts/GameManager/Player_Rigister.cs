@@ -100,6 +100,7 @@ public partial class Player
             PlayerPrefs.DeleteKey(LocoData.KillBossID.ToString());
             PlayerPrefs.DeleteKey(LocoData.Gold.ToString());
             PlayerPrefs.DeleteKey(LocoData.Emerald.ToString());
+            PlayerPrefs.DeleteKey(LocoData.Enchant.ToString());
         }
 
         if (PlayerPrefs.GetInt(LocoData.Init.ToString()) == 0)
@@ -107,7 +108,7 @@ public partial class Player
             PlayerPrefs.SetInt(LocoData.SoundOn.ToString(), 1);
             PlayerPrefs.SetInt(LocoData.MusicOn.ToString(), 1);
             PlayerPrefs.SetInt(LocoData.Init.ToString(), 1);
-            PlayerPrefs.SetInt(LocoData.UseLanguage.ToString(), 0);
+            PlayerPrefs.SetInt(LocoData.UseLanguage.ToString(), 2);
         }
         PlayerPrefs.SetInt(LocoData.Emerald.ToString(),1000);
         PlayerPrefs.SetInt(LocoData.Gold.ToString(), 10000);

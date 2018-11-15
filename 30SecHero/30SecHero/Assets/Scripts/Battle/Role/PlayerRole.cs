@@ -210,9 +210,9 @@ public partial class PlayerRole : Role
         AttackTimer = new MyTimer(DontAttackRestoreTime, RestoreAttack, false, false);
         ShieldTimer = new MyTimer(ShieldRechargeTime, ShieldRestore, false, false);
         JumpTimer = new MyTimer(JumpCDTime, SetCanJump, false, false);
-        RushTimer= new MyTimer(RushCD, SetCanRush, false, false);
+        RushTimer = new MyTimer(RushCD, SetCanRush, false, false);
         OnRushTimer = new MyTimer(RushAntiAmooTime, SetNotOnRush, false, false);
-        if(SelfCureProportion>0)
+        if (SelfCureProportion > 0)
         {
             SelfCureTimer = new MyTimer(5, SetSelfCure, false, false);
             SelfCureIntervalTimer = new MyTimer(1, SelfCure, true, true);
@@ -252,7 +252,7 @@ public partial class PlayerRole : Role
         SelfCureProportion = Player.GetEnchantProperty(EnchantProperty.NoDamageRecovery);
         ElementalBladeProportion = Player.GetEnchantProperty(EnchantProperty.ElementalAttack);
         BlizzardTime = Player.GetEnchantProperty(EnchantProperty.ShockWave);
-        if(BlizzardTime>0)
+        if (BlizzardTime > 0)
         {
             BlizzardAmmoPrefab.SetBuffersTime(BlizzardTime);
         }
@@ -301,7 +301,7 @@ public partial class PlayerRole : Role
             if (StartGenerateShield)
             {
                 Shield += ShieldGenerateProportion * MaxShield * Time.deltaTime;
-                if(Shield>=MaxShield)
+                if (Shield >= MaxShield)
                     CanGenerateBlizzard = true;
             }
     }
@@ -360,8 +360,11 @@ public partial class PlayerRole : Role
         JumpTimer.RunTimer();
         RushTimer.RunTimer();
         OnRushTimer.RunTimer();
-        SelfCureTimer.RunTimer();
-        SelfCureIntervalTimer.RunTimer();
+        if (SelfCureTimer != null)
+        {
+            SelfCureTimer.RunTimer();
+            SelfCureIntervalTimer.RunTimer();
+        }
         MonsterSkillTimerFunc();
         ShieldGenerate();
         ExtraMoveSpeedDecay();
@@ -395,9 +398,12 @@ public partial class PlayerRole : Role
     {
         base.ReceiveDmg(ref _dmg);
         //受到傷害解除自癒
-        SelfCureTimer.RestartCountDown();
-        SelfCureTimer.StartRunTimer = true;
-        SelfCureIntervalTimer.StartRunTimer = false;
+        if (SelfCureTimer!=null)
+        {
+            SelfCureTimer.RestartCountDown();
+            SelfCureTimer.StartRunTimer = true;
+            SelfCureIntervalTimer.StartRunTimer = false;
+        }
     }
     void GenerateBlizzard()//破盾時釋放冰風暴(附魔技能)
     {
@@ -737,7 +743,7 @@ public partial class PlayerRole : Role
     }
     protected override bool DeathCheck()
     {
-        bool death=base.DeathCheck();
+        bool death = base.DeathCheck();
         if (death)
         {
             Vector3 pos = MyLight.transform.position;
