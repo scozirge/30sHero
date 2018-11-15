@@ -145,11 +145,11 @@ public abstract class EquipData : Data
             if (Properties[GameSettingData.RandomPropertyList[i]] == 0)
                 continue;
             PropertyText pt = new PropertyText();
-            float value=GetVealue(GameSettingData.RandomPropertyList[i], Properties[GameSettingData.RandomPropertyList[i]]);
-            if (value>=0)
-                pt.Text = string.Format("{0}+{1}{2}", StringData.GetString(GameSettingData.RandomPropertyList[i].ToString()), value, GetUnit(GameSettingData.RandomPropertyList[i]));
+            float value = GetVealue(GameSettingData.RandomPropertyList[i], Properties[GameSettingData.RandomPropertyList[i]]);
+            if (value >= 0)
+                pt.Text = string.Format("+{1}{2} {0}{3}", StringData.GetString(GameSettingData.RandomPropertyList[i].ToString()), value, GetUnit(GameSettingData.RandomPropertyList[i]), GetUnitAfterTitle(GameSettingData.RandomPropertyList[i]));
             else
-                pt.Text = string.Format("{0}{1}{2}", StringData.GetString(GameSettingData.RandomPropertyList[i].ToString()), value, GetUnit(GameSettingData.RandomPropertyList[i]));
+                pt.Text = string.Format("{1}{2} {0}{3}", StringData.GetString(GameSettingData.RandomPropertyList[i].ToString()), value, GetUnit(GameSettingData.RandomPropertyList[i]), GetUnitAfterTitle(GameSettingData.RandomPropertyList[i]));
             pt.Comparison = Comparator.Equal;
             pt.ColorCode = GameSettingData.NormalNumberColor;
             list.Add(pt);
@@ -167,9 +167,9 @@ public abstract class EquipData : Data
             PropertyText pt = new PropertyText();
             float value = GetVealue(GameSettingData.RandomPropertyList[i], Properties[GameSettingData.RandomPropertyList[i]]);
             if (value >= 0)
-                pt.Text = string.Format("{0}+{1}{2}", StringData.GetString(GameSettingData.RandomPropertyList[i].ToString()), value, GetUnit(GameSettingData.RandomPropertyList[i]));
+                pt.Text = string.Format("+{1}{2} {0}{3}", StringData.GetString(GameSettingData.RandomPropertyList[i].ToString()), value, GetUnit(GameSettingData.RandomPropertyList[i]), GetUnitAfterTitle(GameSettingData.RandomPropertyList[i]));
             else
-                pt.Text = string.Format("{0}{1}{2}", StringData.GetString(GameSettingData.RandomPropertyList[i].ToString()), value, GetUnit(GameSettingData.RandomPropertyList[i]));
+                pt.Text = string.Format("{1}{2} {0}{3}", StringData.GetString(GameSettingData.RandomPropertyList[i].ToString()), value, GetUnit(GameSettingData.RandomPropertyList[i]), GetUnitAfterTitle(GameSettingData.RandomPropertyList[i]));
             if (valueDiff > 0)
             {
                 pt.Comparison = Comparator.Greater;
@@ -189,7 +189,7 @@ public abstract class EquipData : Data
         }
         return list;
     }
-    float GetVealue(RoleProperty _type,float _value)
+    float GetVealue(RoleProperty _type, float _value)
     {
         switch (_type)
         {
@@ -217,28 +217,28 @@ public abstract class EquipData : Data
         switch (_type)
         {
             case RoleProperty.ShieldReChargeTime:
-                str = StringData.GetString("Second");
+                str = StringData.GetString("Sec");
                 break;
             case RoleProperty.ShieldRecovery:
-                str = StringData.GetString("Percent") + StringData.GetString("Divide") + StringData.GetString("Second");
+                str = StringData.GetString("Percent");
                 break;
             case RoleProperty.MoveSpeed:
-                str = StringData.GetString("Meter") + StringData.GetString("Divide") + StringData.GetString("Second");
+                //str = StringData.GetString("Meter") + StringData.GetString("Divide") + StringData.GetString("Sec");
                 break;
             case RoleProperty.MaxMoveSpeed:
-                str = StringData.GetString("Meter") + StringData.GetString("Divide") + StringData.GetString("Second");
+                //str = StringData.GetString("Meter") + StringData.GetString("Divide") + StringData.GetString("Sec");
                 break;
             case RoleProperty.MoveDecay:
-                str = StringData.GetString("Second");
+                str = StringData.GetString("Sec");
                 break;
             case RoleProperty.AvatarTime:
-                str = StringData.GetString("Second");
+                str = StringData.GetString("Sec");
                 break;
             case RoleProperty.AvatarPotionBuff:
-                str = StringData.GetString("Second");
+                str = StringData.GetString("Sec");
                 break;
             case RoleProperty.SkillTimeBuff:
-                str = StringData.GetString("Second");
+                str = StringData.GetString("Sec");
                 break;
             case RoleProperty.SkillDrop:
                 str = StringData.GetString("Percent");
@@ -251,6 +251,17 @@ public abstract class EquipData : Data
                 break;
             case RoleProperty.PotionEfficiency:
                 str = StringData.GetString("Percent");
+                break;
+        }
+        return str;
+    }
+    string GetUnitAfterTitle(RoleProperty _type)
+    {
+        string str = "";
+        switch (_type)
+        {
+            case RoleProperty.ShieldRecovery:
+                str = StringData.GetString("Per") + StringData.GetString("Sec");
                 break;
         }
         return str;
