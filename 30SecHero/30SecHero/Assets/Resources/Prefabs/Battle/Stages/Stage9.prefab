@@ -431,7 +431,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1577811935018528}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -179, y: 17, z: 0}
+  m_LocalPosition: {x: -179, y: 30, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4800434007452980}
@@ -444,7 +444,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1661222703284934}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -29, y: -265, z: 0}
+  m_LocalPosition: {x: -29, y: -285, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4800434007452980}
@@ -597,14 +597,14 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 294.50354, y: 204.38448}
-      - {x: 53.84659, y: 80.06561}
-      - {x: 53.84659, y: 80.06561}
-      - {x: 166.85974, y: -24.62454}
-      - {x: 166.85974, y: -24.62454}
-      - {x: 296.56604, y: 22.54463}
-      - {x: 296.56604, y: 22.54463}
-      - {x: 294.50354, y: 204.38448}
+    - - {x: 321.3294, y: 144.04938}
+      - {x: 182.06377, y: 146.44057}
+      - {x: 182.06377, y: 146.44057}
+      - {x: 183.27599, y: 75.04304}
+      - {x: 183.27599, y: 75.04304}
+      - {x: 323.2581, y: 72.83674}
+      - {x: 323.2581, y: 72.83674}
+      - {x: 321.3294, y: 144.04938}
 --- !u!60 &60296353835451034
 PolygonCollider2D:
   m_ObjectHideFlags: 1
@@ -629,14 +629,14 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 28.15532, y: 14.13578}
-      - {x: 108.59322, y: 146.46213}
-      - {x: 108.59322, y: 146.46213}
-      - {x: 1.04655, y: 193.098}
-      - {x: 1.04655, y: 193.098}
-      - {x: -131.39969, y: 100.86371}
-      - {x: -131.39969, y: 100.86371}
-      - {x: 28.15532, y: 14.13578}
+    - - {x: 80.89293, y: 97.60974}
+      - {x: 89.50745, y: 175.09077}
+      - {x: 89.50745, y: 175.09077}
+      - {x: -121.10239, y: 172.10362}
+      - {x: -121.10239, y: 172.10362}
+      - {x: -121.85678, y: 96.01619}
+      - {x: -121.85678, y: 96.01619}
+      - {x: 80.89293, y: 97.60974}
 --- !u!95 &95526059715279640
 Animator:
   serializedVersion: 3
@@ -1184,42 +1184,42 @@ MonoBehaviour:
   m_Spline:
     m_IsOpenEnded: 0
     m_ControlPoints:
-    - position: {x: 28.15532, y: 14.135788, z: 0}
+    - position: {x: 80.89293, y: 97.60974, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
-      height: 1
-      bevelCutoff: 0
-      bevelSize: 0.5
+      height: 1.084
+      bevelCutoff: 31
+      bevelSize: 0.31
       spriteIndex: 0
-      corner: 0
-    - position: {x: 108.593216, y: 146.46213, z: 0}
+      corner: 1
+    - position: {x: 89.50745, y: 175.09077, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
-      height: 1
-      bevelCutoff: 0
-      bevelSize: 0
+      height: 1.084
+      bevelCutoff: 31
+      bevelSize: 0.31
       spriteIndex: 0
-      corner: 0
-    - position: {x: 1.0465546, y: 193.09799, z: 0}
+      corner: 1
+    - position: {x: -121.10239, y: 172.10362, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
-      height: 0.47
-      bevelCutoff: 180
-      bevelSize: 0.5
+      height: 1.084
+      bevelCutoff: 31
+      bevelSize: 0.31
       spriteIndex: 0
-      corner: 0
-    - position: {x: -131.39969, y: 100.86371, z: 0}
+      corner: 1
+    - position: {x: -121.85678, y: 96.01619, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
-      height: 1
-      bevelCutoff: 0
-      bevelSize: 0.5
+      height: 1.084
+      bevelCutoff: 31
+      bevelSize: 0.31
       spriteIndex: 0
-      corner: 0
+      corner: 1
   m_SpriteShape: {fileID: 11400000, guid: 9029180c89733e049830be7d0ec07914, type: 2}
   m_SplineDetail: 16
   m_AdaptiveUV: 1
@@ -1241,42 +1241,42 @@ MonoBehaviour:
   m_Spline:
     m_IsOpenEnded: 0
     m_ControlPoints:
-    - position: {x: 294.50354, y: 204.38448, z: 0}
+    - position: {x: 321.3294, y: 144.04938, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
-      height: 1
-      bevelCutoff: 0
-      bevelSize: 0.5
+      height: 1.015
+      bevelCutoff: 65.6
+      bevelSize: 0.174
       spriteIndex: 0
-      corner: 0
-    - position: {x: 53.84659, y: 80.06561, z: 0}
+      corner: 1
+    - position: {x: 182.06377, y: 146.44057, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
-      height: 0.47
-      bevelCutoff: 180
-      bevelSize: 0.5
+      height: 1.015
+      bevelCutoff: 65.6
+      bevelSize: 0.174
       spriteIndex: 0
-      corner: 0
-    - position: {x: 166.85974, y: -24.624542, z: 0}
+      corner: 1
+    - position: {x: 183.27597, y: 75.043045, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
-      height: 0.47
-      bevelCutoff: 180
-      bevelSize: 0.5
+      height: 1.015
+      bevelCutoff: 65.6
+      bevelSize: 0.174
       spriteIndex: 0
-      corner: 0
-    - position: {x: 296.56604, y: 22.544632, z: 0}
+      corner: 1
+    - position: {x: 323.2581, y: 72.83675, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
-      height: 0.47
-      bevelCutoff: 180
-      bevelSize: 0.5
+      height: 1.015
+      bevelCutoff: 65.6
+      bevelSize: 0.174
       spriteIndex: 0
-      corner: 0
+      corner: 1
   m_SpriteShape: {fileID: 11400000, guid: 9029180c89733e049830be7d0ec07914, type: 2}
   m_SplineDetail: 16
   m_AdaptiveUV: 1
@@ -1690,7 +1690,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 364, y: 56}
+  m_AnchoredPosition: {x: 364, y: -5}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224402055633694230
@@ -1746,7 +1746,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 364, y: -358}
+  m_AnchoredPosition: {x: 364, y: -361}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224533153207304142
@@ -1842,7 +1842,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -27, y: 313}
+  m_AnchoredPosition: {x: 16, y: 349}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224814216363383052
@@ -1949,8 +1949,8 @@ SpriteShapeRenderer:
   - {fileID: 0}
   - {fileID: 0}
   m_LocalAABB:
-    m_Center: {x: 199.35722, y: 99.87181, z: 0}
-    m_Extent: {x: 115.932785, y: 123.6145, z: 0}
+    m_Center: {x: 252.64581, y: 109.53133, z: 0}
+    m_Extent: {x: 93.95337, y: 59.276463, z: 0}
 --- !u!1971053207 &8633865683547620804
 SpriteShapeRenderer:
   m_ObjectHideFlags: 1
@@ -2000,5 +2000,5 @@ SpriteShapeRenderer:
   - {fileID: 0}
   - {fileID: 0}
   m_LocalAABB:
-    m_Center: {x: -8.157139, y: 94.88338, z: 0}
-    m_Extent: {x: 135.12233, y: 99.63736, z: 0}
+    m_Center: {x: -15.088692, y: 136.53165, z: 0}
+    m_Extent: {x: 130.301, y: 63.99369, z: 0}

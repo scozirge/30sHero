@@ -564,14 +564,14 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 18.36952, y: -459.06033}
-      - {x: 19.53372, y: -624.7407}
-      - {x: 19.53372, y: -624.7407}
-      - {x: 397.7464, y: -626.17834}
-      - {x: 397.7464, y: -626.17834}
-      - {x: 398.01212, y: -455.5577}
-      - {x: 398.01212, y: -455.5577}
-      - {x: 18.36952, y: -459.06033}
+    - - {x: 80.64824, y: -453.87045}
+      - {x: 71.43258, y: -679.23486}
+      - {x: 71.43258, y: -679.23486}
+      - {x: 260.21414, y: -685.86224}
+      - {x: 260.21414, y: -685.86224}
+      - {x: 278.6444, y: -455.5577}
+      - {x: 278.6444, y: -455.5577}
+      - {x: 80.64824, y: -453.87045}
 --- !u!95 &95114595520079272
 Animator:
   serializedVersion: 3
@@ -791,7 +791,7 @@ MonoBehaviour:
   m_Spline:
     m_IsOpenEnded: 0
     m_ControlPoints:
-    - position: {x: 18.369522, y: -459.06033, z: 0}
+    - position: {x: 80.64824, y: -453.87042, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
@@ -800,7 +800,7 @@ MonoBehaviour:
       bevelSize: 0
       spriteIndex: 0
       corner: 0
-    - position: {x: 19.533722, y: -624.7407, z: 0}
+    - position: {x: 71.43259, y: -679.23486, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
@@ -809,7 +809,7 @@ MonoBehaviour:
       bevelSize: 0
       spriteIndex: 0
       corner: 0
-    - position: {x: 397.7464, y: -626.17834, z: 0}
+    - position: {x: 260.21414, y: -685.86224, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
@@ -818,7 +818,7 @@ MonoBehaviour:
       bevelSize: 0
       spriteIndex: 0
       corner: 0
-    - position: {x: 398.01212, y: -455.55774, z: 0}
+    - position: {x: 278.6444, y: -455.55774, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
@@ -1804,5 +1804,5 @@ SpriteShapeRenderer:
   - {fileID: 0}
   - {fileID: 0}
   m_LocalAABB:
-    m_Center: {x: 207.99974, y: -540.36804, z: 0}
-    m_Extent: {x: 212.82906, y: 107.844025, z: 0}
+    m_Center: {x: 175.37349, y: -570.21155, z: 0}
+    m_Extent: {x: 126.68724, y: 139.30765, z: 0}
