@@ -69,7 +69,7 @@ public class GameSettingData : Data
     public static float SkillTimeBuff;
     public static float SkillDrop;
     public static float EquipDrop;
-    public static float GoldDrop;
+    public static int GoldDrop;
     public static float BloodThirsty;
     public static float PotionEfficiency;
     public static float PotionDrop;
@@ -345,7 +345,7 @@ public class GameSettingData : Data
                                 EquipDrop = float.Parse(item[key].ToString());
                                 break;
                             case "GoldDrop":
-                                GoldDrop = float.Parse(item[key].ToString());
+                                GoldDrop = int.Parse(item[key].ToString());
                                 break;
                             case "BloodThirsty":
                                 BloodThirsty = float.Parse(item[key].ToString());
@@ -652,7 +652,7 @@ public class GameSettingData : Data
                     dic[(RoleProperty)rand] += RandomEquipDrop;
                     break;
                 case RoleProperty.GoldDrop:
-                    dic[(RoleProperty)rand] += RandomGoldDrop;
+                    dic[(RoleProperty)rand] += RandomGoldDrop * _lv;
                     break;
                 case RoleProperty.BloodThirsty:
                     dic[(RoleProperty)rand] += RandomBloodThirsty;

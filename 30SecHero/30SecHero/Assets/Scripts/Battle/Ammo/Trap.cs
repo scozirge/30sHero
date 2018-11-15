@@ -86,7 +86,6 @@ public class Trap : Ammo
                     MyParticles[i].Stop();
             }
         }
-        Debug.Log("MyParticles" + MyParticles.Length);
         if (_active)
             StartCoroutine(WatiToInActive());
         else

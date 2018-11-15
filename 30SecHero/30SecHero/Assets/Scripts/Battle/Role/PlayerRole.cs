@@ -107,7 +107,7 @@ public partial class PlayerRole : Role
     [Tooltip("裝備掉落機率")]
     [SerializeField]
     public int EquipDropWeight;
-    [Tooltip("金幣掉落機率")]
+    [Tooltip("金幣掉落數量追加")]
     [SerializeField]
     protected float GoldDrop;
     [Tooltip("吸血比例")]
@@ -401,6 +401,7 @@ public partial class PlayerRole : Role
     }
     void GenerateBlizzard()//破盾時釋放冰風暴(附魔技能)
     {
+        Debug.Log("CanGenerateBlizzard=" + CanGenerateBlizzard);
         if (!CanGenerateBlizzard)
             return;
         CanGenerateBlizzard = false;
@@ -414,7 +415,7 @@ public partial class PlayerRole : Role
             if (CurBeHitEffect) Destroy(CurBeHitEffect.gameObject);
             if (BeHitEffect_Shield) CurBeHitEffect = EffectEmitter.EmitParticle(BeHitEffect_Shield, Vector2.zero, Vector3.zero, transform);
             //Damage Shield
-            if (_dmg > Shield)
+            if (_dmg >= Shield)
             {
                 _dmg = (int)(_dmg - Shield);
                 Shield = 0;
@@ -620,7 +621,7 @@ public partial class PlayerRole : Role
         switch (_type)
         {
             case ResourceType.Gold:
-                BattleManage.EnemyDropGoldAdd((int)(_value * (1 + GoldDrop)));
+                BattleManage.EnemyDropGoldAdd((int)(_value + GoldDrop));
                 break;
             case ResourceType.Emerald:
                 BattleManage.BossDropEmeraldAdd(_value);

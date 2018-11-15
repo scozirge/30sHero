@@ -18,23 +18,19 @@ public class StrengthenData : Data
         }
         private set { return; }
     }
-    public string Description
+    public string Description(int _offset)
     {
-        get
+        if (!GameDictionary.String_StrengthenDic.ContainsKey(ID.ToString()))
         {
-            if (!GameDictionary.String_StrengthenDic.ContainsKey(ID.ToString()))
-            {
-                Debug.LogWarning(string.Format("{0}表不包含{1}的文字資料", DataName, ID));
-                return "NullText";
-            }
-            string valueString = "";
-            if (ShowPercentage)
-                valueString = string.Format("{0}{1}", TextManager.ToPercent(BaseValue + LV * LevelUpValue).ToString("0.0"), "%");
-            else
-                valueString = string.Format("{0}", BaseValue + LV * LevelUpValue);
-            return string.Format(GameDictionary.String_StrengthenDic[ID.ToString()].GetString(1, Player.UseLanguage), valueString);
+            Debug.LogWarning(string.Format("{0}表不包含{1}的文字資料", DataName, ID));
+            return "NullText";
         }
-        private set { return; }
+        string valueString = "";
+        if (ShowPercentage)
+            valueString = string.Format("{0}{1}", TextManager.ToPercent(BaseValue + (LV + _offset) * LevelUpValue).ToString("0.0"), "%");
+        else
+            valueString = string.Format("{0}", BaseValue + (LV + _offset) * LevelUpValue);
+        return string.Format(GameDictionary.String_StrengthenDic[ID.ToString()].GetString(1, Player.UseLanguage), valueString);
     }
     bool ShowPercentage;
     public RoleProperty PropertyType;
@@ -43,6 +39,7 @@ public class StrengthenData : Data
     public float LevelUpValue;
     public int BaseGold;
     public int LevelUpGold;
+    public int MaxLevel;
     public string IconString;
     public int LV { get; private set; }
     public string GetLVString(int _plus)
@@ -98,6 +95,9 @@ public class StrengthenData : Data
                     case "LevelUpGold":
                         LevelUpGold = int.Parse(item[key].ToString());
                         break;
+                    case "MaxLevel":
+                        MaxLevel = int.Parse(item[key].ToString());
+                        break;
                     case "Icon":
                         IconString = item[key].ToString();
                         break;
@@ -123,6 +123,13 @@ public class StrengthenData : Data
     {
         LV++;
         Properties[PropertyType] = GetValue();
+    }
+    public bool CanUpgrade()
+    {
+        if (Player.Gold < GetPrice() || LV >= MaxLevel)
+            return false;
+        else
+            return true;
     }
     public int GetPrice()
     {

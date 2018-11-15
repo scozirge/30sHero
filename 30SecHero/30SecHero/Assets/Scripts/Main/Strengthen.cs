@@ -79,35 +79,53 @@ public class Strengthen : MyUI
         CurSelectedSData = _item.MyData;
         CurSelectedSItem = _item;
         RefreshText();
-        UpgradeButton.interactable = !(Player.Gold < CurSelectedSData.GetPrice());
+        UpgradeButton.interactable = CurSelectedSData.CanUpgrade();
     }
     public void ShowInfo(EnchantItem _item)
     {
         CurSelectedEData = _item.MyData;
         CurSelectedEItem = _item;
         RefreshText();
-        UpgradeButton.interactable = !(Player.Emerald < CurSelectedEData.GetPrice());
+        UpgradeButton.interactable = CurSelectedEData.CanUpgrade();
     }
     public override void RefreshText()
     {
         base.RefreshText();
-        if(CurFilterType==StrengthenType.Strengthen)
+        if (CurFilterType == StrengthenType.Strengthen)
         {
             NameText.text = CurSelectedSData.Name;
-            DescriptionText.text = CurSelectedSData.Description;
-            PriceText.text = CurSelectedSData.GetPrice().ToString();
+            if (CurSelectedSData.CanUpgrade())
+            {
+                DescriptionText.text = CurSelectedSData.Description(0);
+                PriceText.text = CurSelectedSData.GetPrice().ToString();
+            }
+            else
+            {
+                DescriptionText.text = CurSelectedSData.Description(-1);
+                PriceText.text = StringData.GetString("MaxLevel");
+            }
+
         }
         else if (CurFilterType == StrengthenType.Enchant)
         {
             NameText.text = CurSelectedEData.Name;
-            DescriptionText.text = CurSelectedEData.Description;
-            PriceText.text = CurSelectedEData.GetPrice().ToString();
+            if (CurSelectedEData.CanUpgrade())
+            {
+                DescriptionText.text = CurSelectedEData.Description(0);
+                PriceText.text = CurSelectedEData.GetPrice().ToString();
+            }
+
+            else
+            {
+                DescriptionText.text = CurSelectedEData.Description(-1);
+                PriceText.text = StringData.GetString("MaxLevel");
+            }
         }
     }
     public void ToFilter(int _typeID)
     {
         if ((int)CurFilterType == _typeID)
-           return;
+            return;
         StrengthenType type = (StrengthenType)_typeID;
         CurFilterType = type;
         Filter();
@@ -159,6 +177,6 @@ public class Strengthen : MyUI
             CurSelectedEItem.UpdateUI();
             ShowInfo(CurSelectedEItem);
         }
- 
+
     }
 }

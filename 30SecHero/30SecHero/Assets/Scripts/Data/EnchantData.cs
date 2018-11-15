@@ -18,23 +18,19 @@ public class EnchantData : Data
         }
         private set { return; }
     }
-    public string Description
+    public string Description(int _offset)
     {
-        get
+        if (!GameDictionary.String_EnchantDic.ContainsKey(ID.ToString()))
         {
-            if (!GameDictionary.String_EnchantDic.ContainsKey(ID.ToString()))
-            {
-                Debug.LogWarning(string.Format("{0}表不包含{1}的文字資料", DataName, ID));
-                return "NullText";
-            }
-            string valueString = "";
-            if (ShowPercentage)
-                valueString = string.Format("{0}{1}", TextManager.ToPercent(BaseValue + LV * LevelUpValue).ToString("0.0"), "%");
-            else
-                valueString = string.Format("{0}", BaseValue + LV * LevelUpValue);
-            return string.Format(GameDictionary.String_EnchantDic[ID.ToString()].GetString(1, Player.UseLanguage), valueString);
+            Debug.LogWarning(string.Format("{0}表不包含{1}的文字資料", DataName, ID));
+            return "NullText";
         }
-        private set { return; }
+        string valueString = "";
+        if (ShowPercentage)
+            valueString = string.Format("{0}{1}", TextManager.ToPercent(BaseValue + (LV + _offset) * LevelUpValue).ToString("0.0"), "%");
+        else
+            valueString = string.Format("{0}", BaseValue + (LV + _offset) * LevelUpValue);
+        return string.Format(GameDictionary.String_EnchantDic[ID.ToString()].GetString(1, Player.UseLanguage), valueString);
     }
     bool ShowPercentage;
     public EnchantProperty Type;
@@ -43,6 +39,7 @@ public class EnchantData : Data
     public float LevelUpValue;
     public int BaseEmerald;
     public int LevelUpEmerald;
+    public int MaxLevel;
     public string IconString;
     public int LV { get; private set; }
     public string GetLVString(int _plus)
@@ -98,6 +95,9 @@ public class EnchantData : Data
                     case "LevelUpEmerald":
                         LevelUpEmerald = int.Parse(item[key].ToString());
                         break;
+                    case "MaxLevel":
+                        MaxLevel = int.Parse(item[key].ToString());
+                        break;
                     case "Icon":
                         IconString = item[key].ToString();
                         break;
@@ -123,6 +123,13 @@ public class EnchantData : Data
     {
         LV++;
         Properties[Type] = GetValue();
+    }
+    public bool CanUpgrade()
+    {
+        if (Player.Emerald < GetPrice() || LV >= MaxLevel)
+            return false;
+        else
+            return true;
     }
     public int GetPrice()
     {
