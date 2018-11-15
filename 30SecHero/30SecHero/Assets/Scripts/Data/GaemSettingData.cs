@@ -606,59 +606,60 @@ public class GameSettingData : Data
     public static Dictionary<RoleProperty, float> GetRandomEquipProperties(int _quality, int _lv)
     {
         Dictionary<RoleProperty, float> dic = GetNewRolePropertiesDic(0);
-
+        _quality = RandomPropertyList.Count;
         for (int i = 0; i < _quality; i++)
         {
             int rand = UnityEngine.Random.Range(0, RandomPropertyList.Count);
+            rand = i;
             switch (RandomPropertyList[rand])
             {
                 case RoleProperty.Strength:
-                    dic[(RoleProperty)rand] += RandomStrength * _lv;
+                    dic[RandomPropertyList[rand]] += RandomStrength * _lv;
                     break;
                 case RoleProperty.Health:
-                    dic[(RoleProperty)rand] += RandomHealth * _lv;
+                    dic[RandomPropertyList[rand]] += RandomHealth * _lv;
                     break;
                 case RoleProperty.Shield:
-                    dic[(RoleProperty)rand] += RandomShield * _lv;
+                    dic[RandomPropertyList[rand]] += RandomShield * _lv;
                     break;
                 case RoleProperty.ShieldReChargeTime:
-                    dic[(RoleProperty)rand] += RandomShieldRecharge;
+                    dic[RandomPropertyList[rand]] += RandomShieldRecharge;
                     break;
                 case RoleProperty.ShieldRecovery:
-                    dic[(RoleProperty)rand] += RandomShieldRecovery;
+                    dic[RandomPropertyList[rand]] += RandomShieldRecovery;
                     break;
                 case RoleProperty.MoveSpeed:
-                    dic[(RoleProperty)rand] += RandomMoveSpeed;
+                    dic[RandomPropertyList[rand]] += RandomMoveSpeed;
                     break;
                 case RoleProperty.MaxMoveSpeed:
-                    dic[(RoleProperty)rand] += RandomMaxMoveSpeed;
+                    dic[RandomPropertyList[rand]] += RandomMaxMoveSpeed;
                     break;
                 case RoleProperty.MoveDecay:
-                    dic[(RoleProperty)rand] += RandomMoveDecay;
+                    dic[RandomPropertyList[rand]] += RandomMoveDecay;
                     break;
                 case RoleProperty.AvatarTime:
-                    dic[(RoleProperty)rand] += RandomAvatarTime;
+                    dic[RandomPropertyList[rand]] += RandomAvatarTime;
                     break;
                 case RoleProperty.AvatarPotionBuff:
-                    dic[(RoleProperty)rand] += RandomAvatarPotionBuff;
+                    dic[RandomPropertyList[rand]] += RandomAvatarPotionBuff;
                     break;
                 case RoleProperty.SkillTimeBuff:
-                    dic[(RoleProperty)rand] += RandomSkillTime;
+                    dic[RandomPropertyList[rand]] += RandomSkillTime;
                     break;
                 case RoleProperty.SkillDrop:
-                    dic[(RoleProperty)rand] += RandomSkillDrop;
+                    dic[RandomPropertyList[rand]] += RandomSkillDrop;
                     break;
                 case RoleProperty.EquipDrop:
-                    dic[(RoleProperty)rand] += RandomEquipDrop;
+                    dic[RandomPropertyList[rand]] += RandomEquipDrop;
                     break;
                 case RoleProperty.GoldDrop:
-                    dic[(RoleProperty)rand] += RandomGoldDrop * _lv;
+                    dic[RandomPropertyList[rand]] += RandomGoldDrop * _lv;
                     break;
                 case RoleProperty.BloodThirsty:
-                    dic[(RoleProperty)rand] += RandomBloodThirsty;
+                    dic[RandomPropertyList[rand]] += RandomBloodThirsty;
                     break;
                 case RoleProperty.PotionEfficiency:
-                    dic[(RoleProperty)rand] += RandomPotionEfficiency;
+                    dic[RandomPropertyList[rand]] += RandomPotionEfficiency;
                     break;
                 default:
                     Debug.LogWarning(string.Format("{0}:{1}不存在", rand, RandomPropertyList[rand]));

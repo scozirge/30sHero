@@ -112,7 +112,7 @@ public abstract class EquipData : Data
         string str = "";
         for (int i = 0; i < GameSettingData.RandomPropertyList.Count; i++)
         {
-            if (Properties.ContainsKey(GameSettingData.RandomPropertyList[i]) )
+            if (Properties.ContainsKey(GameSettingData.RandomPropertyList[i]))
             {
                 //Debug.Log(GameSettingData.RandomPropertyList[i]);
                 if (Properties[GameSettingData.RandomPropertyList[i]] != 0)
@@ -145,7 +145,11 @@ public abstract class EquipData : Data
             if (Properties[GameSettingData.RandomPropertyList[i]] == 0)
                 continue;
             PropertyText pt = new PropertyText();
-            pt.Text = string.Format("{0}+{1}", StringData.GetString(GameSettingData.RandomPropertyList[i].ToString()), Properties[GameSettingData.RandomPropertyList[i]]);
+            float value=GetVealue(GameSettingData.RandomPropertyList[i], Properties[GameSettingData.RandomPropertyList[i]]);
+            if (value>=0)
+                pt.Text = string.Format("{0}+{1}{2}", StringData.GetString(GameSettingData.RandomPropertyList[i].ToString()), value, GetUnit(GameSettingData.RandomPropertyList[i]));
+            else
+                pt.Text = string.Format("{0}{1}{2}", StringData.GetString(GameSettingData.RandomPropertyList[i].ToString()), value, GetUnit(GameSettingData.RandomPropertyList[i]));
             pt.Comparison = Comparator.Equal;
             pt.ColorCode = GameSettingData.NormalNumberColor;
             list.Add(pt);
@@ -161,28 +165,94 @@ public abstract class EquipData : Data
                 continue;
             float valueDiff = Properties[GameSettingData.RandomPropertyList[i]] - _data.Properties[GameSettingData.RandomPropertyList[i]];
             PropertyText pt = new PropertyText();
-            if (valueDiff >= 0)
+            float value = GetVealue(GameSettingData.RandomPropertyList[i], Properties[GameSettingData.RandomPropertyList[i]]);
+            if (value >= 0)
+                pt.Text = string.Format("{0}+{1}{2}", StringData.GetString(GameSettingData.RandomPropertyList[i].ToString()), value, GetUnit(GameSettingData.RandomPropertyList[i]));
+            else
+                pt.Text = string.Format("{0}{1}{2}", StringData.GetString(GameSettingData.RandomPropertyList[i].ToString()), value, GetUnit(GameSettingData.RandomPropertyList[i]));
+            if (valueDiff > 0)
             {
-                pt.Text = string.Format("{0}+{1}", StringData.GetString(GameSettingData.RandomPropertyList[i].ToString()), Properties[GameSettingData.RandomPropertyList[i]]);
-                if (valueDiff > 0)
-                {
-                    pt.Comparison = Comparator.Greater;
-                    pt.ColorCode = GameSettingData.GrowingNumberColor;
-                }
-                else
-                {
-                    pt.Comparison = Comparator.Equal;
-                    pt.ColorCode = GameSettingData.NormalNumberColor;
-                }
+                pt.Comparison = Comparator.Greater;
+                pt.ColorCode = GameSettingData.GrowingNumberColor;
             }
             else if (valueDiff < 0)
             {
-                pt.Text = string.Format("{0}{1}", StringData.GetString(GameSettingData.RandomPropertyList[i].ToString()), Properties[GameSettingData.RandomPropertyList[i]]);
                 pt.Comparison = Comparator.Less;
                 pt.ColorCode = GameSettingData.DropingNumberColor;
+            }
+            else
+            {
+                pt.Comparison = Comparator.Equal;
+                pt.ColorCode = GameSettingData.NormalNumberColor;
             }
             list.Add(pt);
         }
         return list;
+    }
+    float GetVealue(RoleProperty _type,float _value)
+    {
+        switch (_type)
+        {
+            case RoleProperty.ShieldRecovery:
+                _value *= 100;
+                break;
+            case RoleProperty.ShieldReChargeTime:
+                _value *= -1;
+                break;
+            case RoleProperty.SkillDrop:
+                _value *= 100;
+                break;
+            case RoleProperty.BloodThirsty:
+                _value *= 100;
+                break;
+            case RoleProperty.PotionEfficiency:
+                _value *= 100;
+                break;
+        }
+        return _value;
+    }
+    string GetUnit(RoleProperty _type)
+    {
+        string str = "";
+        switch (_type)
+        {
+            case RoleProperty.ShieldReChargeTime:
+                str = StringData.GetString("Second");
+                break;
+            case RoleProperty.ShieldRecovery:
+                str = StringData.GetString("Percent") + StringData.GetString("Divide") + StringData.GetString("Second");
+                break;
+            case RoleProperty.MoveSpeed:
+                str = StringData.GetString("Meter") + StringData.GetString("Divide") + StringData.GetString("Second");
+                break;
+            case RoleProperty.MaxMoveSpeed:
+                str = StringData.GetString("Meter") + StringData.GetString("Divide") + StringData.GetString("Second");
+                break;
+            case RoleProperty.MoveDecay:
+                str = StringData.GetString("Second");
+                break;
+            case RoleProperty.AvatarTime:
+                str = StringData.GetString("Second");
+                break;
+            case RoleProperty.AvatarPotionBuff:
+                str = StringData.GetString("Second");
+                break;
+            case RoleProperty.SkillTimeBuff:
+                str = StringData.GetString("Second");
+                break;
+            case RoleProperty.SkillDrop:
+                str = StringData.GetString("Percent");
+                break;
+            case RoleProperty.GoldDrop:
+                str = StringData.GetString("G");
+                break;
+            case RoleProperty.BloodThirsty:
+                str = StringData.GetString("Percent");
+                break;
+            case RoleProperty.PotionEfficiency:
+                str = StringData.GetString("Percent");
+                break;
+        }
+        return str;
     }
 }
