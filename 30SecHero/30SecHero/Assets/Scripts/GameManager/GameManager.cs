@@ -51,8 +51,14 @@ public partial class GameManager : MonoBehaviour
     [Tooltip("補血特效")]
     [SerializeField]
     public ParticleSystem HealPrefab;
+    [Tooltip("玩家子彈特效")]
+    [SerializeField]
+    ParticleSystem PlayerAmmoParticle;
+    [Tooltip("敵方子彈特效")]
+    [SerializeField]
+    ParticleSystem EnemyAmmoParticle;
 
-
+    static GameManager GM;
     static Sprite[] QualityBotSprites;
     static Sprite[] EquipTypBot;
     static Dictionary<RoleBuffer, ParticleSystem> BufferParticles = new Dictionary<RoleBuffer, ParticleSystem>();
@@ -91,6 +97,7 @@ public partial class GameManager : MonoBehaviour
     {
         if (IsInit)
             return;
+        GM = this;
         CurrencySpriteDic.Add(Currency.Gold, GoldSprite);
         CurrencySpriteDic.Add(Currency.Emerald, EmeraldSprite);
         QualityBotSprites = QualityBotPrefabs;
@@ -142,11 +149,25 @@ public partial class GameManager : MonoBehaviour
     }
     public static ParticleSystem GetOtherParticle(string _key)
     {
-        if(OtherParticles.ContainsKey(_key))
+        if (OtherParticles.ContainsKey(_key))
         {
             return OtherParticles[_key];
         }
         Debug.LogWarning("不存在的特效名稱:" + _key);
         return null;
+    }
+    public static ParticleSystem GetForceAmmoParticle(Force _force)
+    {
+        if (!GM)
+            return null;
+        switch (_force)
+        {
+            case Force.Player:
+                return GM.PlayerAmmoParticle;
+            case Force.Enemy:
+                return GM.EnemyAmmoParticle;
+            default:
+                return GM.EnemyAmmoParticle;
+        }
     }
 }

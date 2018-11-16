@@ -89,6 +89,10 @@ MonoBehaviour:
     type: 2}
   HealPrefab: {fileID: 198889853383162744, guid: b416d3cbed17605439ab332417f2d379,
     type: 2}
+  PlayerAmmoParticle: {fileID: 198277715489715738, guid: 2de62376b4f5bff44baba96ec531a789,
+    type: 2}
+  EnemyAmmoParticle: {fileID: 198540771408525486, guid: 6ccbbc09d57523740b246444b87da5c9,
+    type: 2}
 --- !u!114 &114495893002156964
 MonoBehaviour:
   m_ObjectHideFlags: 1

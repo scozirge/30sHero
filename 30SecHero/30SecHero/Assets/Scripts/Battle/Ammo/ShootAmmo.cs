@@ -114,4 +114,10 @@ public class ShootAmmo : Ammo
         Target = Attacker;
         MyRigi.velocity *= -1;
     }
+    protected override void SpawnParticles()
+    {
+        base.SpawnParticles();
+        //產生勢力顏色光暈特效
+        EffectEmitter.EmitParticle(GameManager.GetForceAmmoParticle(AttackerRoleTag), Vector3.zero, Vector3.zero, transform);
+    }
 }

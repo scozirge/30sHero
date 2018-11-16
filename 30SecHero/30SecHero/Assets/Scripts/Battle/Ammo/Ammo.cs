@@ -103,7 +103,7 @@ public partial class Ammo : MonoBehaviour
     }
     protected virtual void SpawnParticles()
     {
-
+        //產生特效
         for (int i = 0; i < LocalParticles.Length; i++)
         {
             if (LocalParticles[i] == null)
@@ -116,6 +116,7 @@ public partial class Ammo : MonoBehaviour
                 continue;
             EffectEmitter.EmitParticle(GlobalParticle[i], transform.position, Vector3.zero, ParticleParent);
         }
+
     }
     protected virtual void SpawnDeadParticles(Vector2 _pos)
     {
