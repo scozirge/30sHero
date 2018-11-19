@@ -277,6 +277,7 @@ GameObject:
   - component: {fileID: 114796498901394522}
   - component: {fileID: 114014446417336624}
   - component: {fileID: 95815077169758588}
+  - component: {fileID: 582425720992500311}
   m_Layer: 9
   m_Name: Two Blade Melee
   m_TagString: Enemy
@@ -327,8 +328,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MoveToPlayer: 0
   Wander: 1
-  FollowCamera: 1
-  FollowCameraSpeed: 300
+  FollowCamera: 0
+  FollowCameraSpeed: 350
   DebutSpeed: 2000
   WanderInterval: 0.5
   RotateFactor: 0.02
@@ -444,6 +445,7 @@ MonoBehaviour:
   AttackStopMove: 0
   StopMoveTime: 0
   PSkillTimer: 0
+  IsPlayerGetSkill: 0
   AttackOnce: 1
   Interval: 0
   AmmoNum: 1
@@ -474,6 +476,22 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &582425720992500311
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1570332876556426}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 165e15557aa0a9d4792b5d75893182c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Nodes: []
+  MyAni: {fileID: 0}
+  MaxSpawnCount: 0
+  ActionRoundCount: 0
 --- !u!1 &1675029102298558
 GameObject:
   m_ObjectHideFlags: 0
