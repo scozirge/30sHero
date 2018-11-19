@@ -821,7 +821,7 @@ PrefabInstance:
     - target: {fileID: 224076595988088798, guid: d9e47796d36fc83458ffab41aea6641e,
         type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 224076595988088798, guid: d9e47796d36fc83458ffab41aea6641e,
         type: 3}
@@ -2440,6 +2440,7 @@ MonoBehaviour:
   - {fileID: 114132168462743308, guid: 219442e33a8bf164c9c0bcab6723a8f5, type: 3}
   - {fileID: 114102499001875956, guid: 2d3087bdd45e0734d8d79382058dfa2b, type: 3}
   - {fileID: 114102499001875956, guid: 256accf974627b04e95fdc1c61c5aedb, type: 3}
+  - {fileID: 8318231718720533117, guid: 4e76a26d0a922e7448c041d5b1377b88, type: 3}
   DesignateStage: {fileID: 0}
   FGTopList: []
   FGBotList:
@@ -7116,16 +7117,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf3b69d7446504f4da805d7d731903ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TestMode: 0
-  EnemyFirstHalfInterval: 0
-  EnemySecondHalfInterval: 0
-  PotionInterval: 0
-  EnemyFirstHalfMinCount: 1
-  EnemyFirstHalfMaxCount: 2
-  EnemySecondHalfMinCount: 3
-  EnemySecondHalfMaxCount: 4
+  TestMode: 1
+  EnemyFirstHalfInterval: 1
+  EnemySecondHalfInterval: 1
+  PotionInterval: 5
+  EnemyFirstHalfMinCount: 5
+  EnemyFirstHalfMaxCount: 5
+  EnemySecondHalfMinCount: 5
+  EnemySecondHalfMaxCount: 5
   EnemySpawnInterval: 0.3
-  MaxEnemy: 1
+  MaxEnemy: 5
   MaxForeEnemy: 0
   MaxBackEnemy: 0
   MaxLoot: 1
@@ -7136,7 +7137,7 @@ MonoBehaviour:
   - {fileID: 114485926508205134, guid: 36509ae15283f0b4b85c7eb28f152231, type: 3}
   - {fileID: 114364750184517408, guid: fd1730034bed914409677edaf33d653c, type: 3}
   - {fileID: 114364750184517408, guid: 4d1f64498757ee445a05825a7c7257a1, type: 3}
-  DesignatedEnemy: {fileID: 114965315550208914, guid: a6c9c18724264e742a1c4d61624e4eb0,
+  DesignatedEnemy: {fileID: 114364750184517408, guid: 7a4fcaea190fe1341b551043fc61e7ba,
     type: 3}
   LootPrefab: {fileID: 114565999483713276, guid: 0384220ed63709741ba419f3ba98af08,
     type: 3}
