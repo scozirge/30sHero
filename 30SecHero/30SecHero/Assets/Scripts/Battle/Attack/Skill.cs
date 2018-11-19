@@ -36,7 +36,8 @@ public class Skill : MonoBehaviour
     public float PSkillTimer;
     protected Role Target;
     protected bool CanAttack;
-    
+    public bool IsPlayerGetSkill;
+
     public virtual void LaunchAIAttack()
     {        
     }
@@ -82,6 +83,7 @@ public class Skill : MonoBehaviour
         BehaviorSkill = false;
         enabled = false;
         AttackStopMove = false;
+        IsPlayerGetSkill = true;
     }
     public virtual void PlayerGetSkill(float _skillTimeBuff)
     {

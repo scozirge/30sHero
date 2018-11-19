@@ -56,6 +56,7 @@ public partial class Ammo : MonoBehaviour
 
     protected List<MyTimer> ReadyToDamageTimers;
     protected Dictionary<string, bool> ReadyToDamageTargets;
+    public bool IsPlayerGetSkill;
 
 
     public virtual void TriggerHitCondition(Role _role)
@@ -100,6 +101,21 @@ public partial class Ammo : MonoBehaviour
         Value = int.Parse(_dic["Damage"].ToString());
         ValuePercent = float.Parse(_dic["DamagePercent"].ToString());
         SpawnParticles();
+        if (IsPlayerGetSkill)
+        {
+            TurnOffLight();
+        }
+    }
+    void TurnOffLight()
+    {
+        Light[] lights = GetComponentsInChildren<Light>();
+        if(lights!=null)
+        {
+            for(int i=0;i<lights.Length;i++)
+            {
+                lights[i].enabled = false;
+            }
+        }
     }
     protected virtual void SpawnParticles()
     {

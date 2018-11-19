@@ -20,6 +20,11 @@ public class ShootAmmo : Ammo
         Target = ((Role)_dic["Target"]);
         Attacker = (Role)(_dic["Attacker"]);
         Ammovelocity = (Vector3)(_dic["Direction"]) * AmmoSpeed;
+        if (IsPlayerGetSkill)
+        {
+            Ammovelocity *= GameSettingData.SkillAmmoSpeed;
+        }
+
         //transform.rotation = Quaternion.Euler(new Vector3(0, 0, (float)_dic["AmmoRotation"]));
         //transform.LookAt(MyRigi.velocity);
 

@@ -21,6 +21,8 @@ public class Shoot : Attack
         AmmoData.Add("Attacker", Myself);
         ammo.transform.SetParent(AmmoParent);
         ammo.transform.position = transform.position;
+        if (IsPlayerGetSkill)
+            ammo.IsPlayerGetSkill = true;
         ammo.Init(AmmoData);
     }
 }

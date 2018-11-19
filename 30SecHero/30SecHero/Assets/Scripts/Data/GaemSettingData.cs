@@ -74,6 +74,9 @@ public class GameSettingData : Data
     public static float PotionEfficiency;
     public static float PotionDrop;
     public static float RushCD;
+    public static float SkillAmmoInterval;
+    public static float SkillAmmoSpeed;
+
     //關卡數值
     public static float PotionInterval;
     public static float PotionProportion;
@@ -358,6 +361,12 @@ public class GameSettingData : Data
                                 break;
                             case "RushCD":
                                 RushCD = float.Parse(item[key].ToString());
+                                break;
+                            case "SkillAmmoInterval":
+                                SkillAmmoInterval = float.Parse(item[key].ToString());
+                                break;
+                            case "SkillAmmoSpeed":
+                                SkillAmmoSpeed = float.Parse(item[key].ToString());
                                 break;
                             //關卡數值
                             case "PotionInterval":

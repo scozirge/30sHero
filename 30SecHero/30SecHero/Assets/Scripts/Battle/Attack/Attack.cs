@@ -49,8 +49,6 @@ public class Attack : Skill
     protected override void Awake()
     {
         base.Awake();
-        CurInterval = Interval;
-        Timer = Interval;
         InRange = false;
 
         if (gameObject.tag == Force.Enemy.ToString())
@@ -59,6 +57,8 @@ public class Attack : Skill
             if (go != null)
                 Target = go.GetComponent<PlayerRole>();
         }
+        CurInterval = Interval;
+        Timer = Interval;
         if (SpawnedInSelf)
             AmmoParent = transform;
     }
@@ -66,6 +66,11 @@ public class Attack : Skill
     {
         base.Update();
         AttackExecuteFunc();
+    }
+    public override void PlayerInitSkill()
+    {
+        Interval *= GameSettingData.SkillAmmoInterval;//玩家子彈發射間隔縮小
+        base.PlayerInitSkill();
     }
 
     public override void SpawnAttackPrefab()
