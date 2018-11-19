@@ -66,7 +66,7 @@ public abstract class Role : MonoBehaviour
     [SerializeField]
     protected AnimationPlayer AniPlayer;
     [SerializeField]
-    protected Transform RoleTrans;
+    public Transform RoleTrans;
     [Tooltip("死亡音效")]
     [SerializeField]
     AudioClip DeathSound;
@@ -96,6 +96,8 @@ public abstract class Role : MonoBehaviour
     protected virtual void Start()
     {
         IsAlive = true;
+        Debug.Log(HealthBar);
+        Debug.Log(name);
         HPBarWidth = HealthBar.rect.width;
         MyForce = MyEnum.ParseEnum<Force>(gameObject.tag);
         DragTimer = new MyTimer(KnockDragDuration, DragRecovery, false, false);

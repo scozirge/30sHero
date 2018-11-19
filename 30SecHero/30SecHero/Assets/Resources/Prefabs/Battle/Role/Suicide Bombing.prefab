@@ -202,7 +202,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MyForce: 1
-  HealthBar: {fileID: 0}
+  HealthBar: {fileID: 226806141657433396}
   DirectX: 0
   DirectY: 0
   MaxHealth: 10
@@ -224,7 +224,7 @@ MonoBehaviour:
   DesignateLoot: 
   DropSkillProbility: 1
   DropSkill: {fileID: 0}
-  HealthObj: {fileID: 0}
+  HealthObj: {fileID: 677891679860927196}
   PlayMotionDuration: 0.5
   InitBuffers: []
 --- !u!50 &1394715988396492180
@@ -316,6 +316,7 @@ MonoBehaviour:
   AttackStopMove: 0
   StopMoveTime: 0
   PSkillTimer: 0
+  IsPlayerGetSkill: 0
   Suicide: 1
   PrepareParticle:
   - {fileID: 198962121974398558, guid: 7b5cfc2b626dfbe4d800e4a9ea706e96, type: 3}

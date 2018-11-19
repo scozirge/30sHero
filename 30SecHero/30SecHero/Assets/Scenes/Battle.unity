@@ -2437,7 +2437,7 @@ MonoBehaviour:
   - {fileID: 114102499001875956, guid: 18b09080e26c2ae4db60d3a2374d76c0, type: 3}
   - {fileID: 114711780216101444, guid: 6313fc21f7a9d2f489c11028a373f4f0, type: 3}
   - {fileID: 114993583261456872, guid: cdcbcb88a5ea7b9478ab13b20424c64b, type: 3}
-  - {fileID: 114132168462743308, guid: 219442e33a8bf164c9c0bcab6723a8f5, type: 3}
+  - {fileID: 6378420713819458009, guid: 219442e33a8bf164c9c0bcab6723a8f5, type: 3}
   - {fileID: 114102499001875956, guid: 2d3087bdd45e0734d8d79382058dfa2b, type: 3}
   - {fileID: 114102499001875956, guid: 256accf974627b04e95fdc1c61c5aedb, type: 3}
   - {fileID: 8318231718720533117, guid: 4e76a26d0a922e7448c041d5b1377b88, type: 3}
@@ -5685,6 +5685,7 @@ MonoBehaviour:
   AttackStopMove: 0
   StopMoveTime: 0
   PSkillTimer: 0
+  IsPlayerGetSkill: 0
   AttackOnce: 0
   Interval: 2
   AmmoNum: 1

@@ -122,6 +122,12 @@ public class Attack : Skill
                 AttackDir = new Vector3(Mathf.Cos(origAngle), Mathf.Sin(origAngle), 0).normalized;
                 //AmmoRotation = (Mathf.Atan2(AttackDir.y, AttackDir.x) * Mathf.Rad2Deg) + (StartAngle + CurSpawnAmmoNum * AngleInterval) * Mathf.Deg2Rad;
                 break;
+            case ShootPatetern.FaceDirection:
+                if (Myself.RoleTrans.localScale.x > 0)
+                    AttackDir = Vector2.right;
+                else
+                    AttackDir = Vector2.left;
+                break;
         }
 
         if (gameObject.tag == Force.Player.ToString())

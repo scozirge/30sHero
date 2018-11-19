@@ -3,5 +3,6 @@
     Default,
     TowardTarget,
     LeftRight,
-    TopDown
+    TopDown,
+    FaceDirection
 }
