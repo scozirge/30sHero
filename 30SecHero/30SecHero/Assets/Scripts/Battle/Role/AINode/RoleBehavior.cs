@@ -32,6 +32,8 @@ public class RoleBehavior : MonoBehaviour
 
     void Start()
     {
+        if (Nodes.Count <= 0)
+            return;
         EnemyParent = GameObject.FindGameObjectWithTag("EnemyParent").transform;
         SapwnPos = transform.position;
         MyRigid = GetComponent<Rigidbody2D>();
@@ -199,6 +201,8 @@ public class RoleBehavior : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (Nodes.Count <= 0)
+            return;
         if (Nodes[CurNodeIndex].RelativeToTarget == RelativeTo.PlayerRole_Continued ||
             Nodes[CurNodeIndex].RelativeToTarget == RelativeTo.Camera_Continued)
         {

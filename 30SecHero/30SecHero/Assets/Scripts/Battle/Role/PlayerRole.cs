@@ -195,7 +195,7 @@ public partial class PlayerRole : Role
     bool CanRush;
     float SelfCureProportion;
     [HideInInspector]
-    public float ElementalBladeProportion;
+    public float BurningWeaponProportion;
     float BlizzardTime;
     bool CanGenerateBlizzard;
 
@@ -250,7 +250,7 @@ public partial class PlayerRole : Role
         GainMoveFromKilling = (int)Player.GetProperties(RoleProperty.GainMoveFromKilling);
         RushCD = (float)Player.GetProperties(RoleProperty.RushCD) - Player.GetEnchantProperty(EnchantProperty.RushCDResuce);
         SelfCureProportion = Player.GetEnchantProperty(EnchantProperty.NoDamageRecovery);
-        ElementalBladeProportion = Player.GetEnchantProperty(EnchantProperty.ElementalAttack);
+        BurningWeaponProportion = Player.GetEnchantProperty(EnchantProperty.BurningWeapon);
         BlizzardTime = Player.GetEnchantProperty(EnchantProperty.ShockWave);
         if (BlizzardTime > 0)
         {

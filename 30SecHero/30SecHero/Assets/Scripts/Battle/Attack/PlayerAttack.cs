@@ -33,9 +33,9 @@ public class PlayerAttack : MonoBehaviour
                 if (er.IsAlive)
                 {
                     Attacker.BumpingAttack();
-                    if (ProbabilityGetter.GetResult(Attacker.ElementalBladeProportion))
+                    if (ProbabilityGetter.GetResult(Attacker.BurningWeaponProportion))
                     {
-                        er.AddBuffer(GetRandomElementDebuff());
+                        er.AddBuffer(RoleBuffer.Burn, 5);
                     }
                 }
                 else
@@ -55,23 +55,5 @@ public class PlayerAttack : MonoBehaviour
             else
                 Attacker.BumpingAttack();
         }
-    }
-    BufferData GetRandomElementDebuff()
-    {
-        int rand = Random.Range(0, 3);
-        BufferData bd = new BufferData(RoleBuffer.Burn, 5);
-        switch(rand)
-        {
-            case 0:
-                bd = new BufferData(RoleBuffer.Burn, 5);
-                break;
-            case 1:
-                bd = new BufferData(RoleBuffer.Freeze, 5);
-                break;
-            case 2:
-                bd = new BufferData(RoleBuffer.DamageDown, 5);
-                break;
-        }
-        return bd;
     }
 }

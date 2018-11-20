@@ -126,5 +126,6 @@ PrefabInstance:
       propertyPath: FollowCameraSpeed
       value: 200
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 582425720992500311, guid: fd1730034bed914409677edaf33d653c, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: fd1730034bed914409677edaf33d653c, type: 3}
