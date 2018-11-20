@@ -1,5 +1,11 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!224 &1309968945273550056 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 224382798152197656, guid: a8c950b1bab26484eb9eee4dfd885825,
+    type: 3}
+  m_PrefabInstance: {fileID: 1238730861839602416}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &6324763364881656131 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1430378770974485500, guid: 3ed098f030ae8f740a85e20e34a1f02b,
@@ -787,12 +793,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   OccupyPlateSize: 2
   Floor: 0
---- !u!224 &1309968945273550056 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 224382798152197656, guid: a8c950b1bab26484eb9eee4dfd885825,
-    type: 3}
-  m_PrefabInstance: {fileID: 1238730861839602416}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1238730861839602416
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -891,7 +891,7 @@ PrefabInstance:
     - target: {fileID: 1430378770974485500, guid: 3ed098f030ae8f740a85e20e34a1f02b,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: 52
       objectReference: {fileID: 0}
     - target: {fileID: 1430378770974485500, guid: 3ed098f030ae8f740a85e20e34a1f02b,
         type: 3}

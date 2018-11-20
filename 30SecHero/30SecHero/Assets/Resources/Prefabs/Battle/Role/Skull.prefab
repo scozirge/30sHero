@@ -353,12 +353,12 @@ MonoBehaviour:
   PSkillTimer: 0
   IsPlayerGetSkill: 0
   AttackOnce: 0
-  Interval: 2
+  Interval: 3
   AmmoNum: 1
   AmmoInterval: 0.2
   StartAngle: 0
   AngleInterval: 0
-  Patetern: 4
+  Patetern: 2
   SpawnedInSelf: 0
   AttackPrefab: {fileID: 114630672538787846, guid: 6a16cb5194251844da623a7b775ccc0c,
     type: 3}
