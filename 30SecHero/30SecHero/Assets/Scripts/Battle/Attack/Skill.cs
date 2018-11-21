@@ -5,6 +5,9 @@ using UnityEditor;
 
 public class Skill : MonoBehaviour
 {
+    [Tooltip("註解")]
+    [SerializeField]
+    public string Description;
     [Tooltip("RoleBehavior用腳本技能，設定為True時技能只會透過腳本來施放(玩家獲得時會自動改回false)")]
     [SerializeField]
     public bool BehaviorSkill;
