@@ -14,6 +14,10 @@ partial class BattleManage
     [SerializeField]
     Text MonsterKillsText;
     [SerializeField]
+    Text BossKillsText;
+    [SerializeField]
+    Text UnlockPartnerText;
+    [SerializeField]
     Text GoldText;
     [SerializeField]
     Text EmeraldText;
@@ -32,6 +36,9 @@ partial class BattleManage
     static int PassFloorCount;
     static int PassNewFloorCount;
     static int MaxFloor;
+    public static int EnemyKill;
+    static int BossKill;
+    static int UnlockPartner;
 
     static int TotalGold;
     static int TotalEmerald;
@@ -74,7 +81,7 @@ partial class BattleManage
     }
     public static void TransferToGainEquipDataList()
     {
-        for(int i=0;i<ExpectEquipDataList.Count;i++)
+        for (int i = 0; i < ExpectEquipDataList.Count; i++)
         {
             GainEquipDataList.Add(ExpectEquipDataList[i]);
         }
@@ -135,6 +142,8 @@ partial class BattleManage
         FloorClearText.text = Floor.ToString();
         MaxFloorText.text = Player.MaxFloor.ToString();
         MonsterKillsText.text = EnemyKill.ToString();
+        BossKillsText.text = BossKill.ToString();
+        UnlockPartnerText.text = UnlockPartner.ToString();
         GoldText.text = TotalGold.ToString();
         EmeraldText.text = TotalEmerald.ToString();
     }
@@ -153,5 +162,17 @@ partial class BattleManage
     public void BackToMenu()
     {
         ChangeScene.GoToScene(MyScene.Main);
+    }
+    public static void AddEnemyKill()
+    {
+        EnemyKill++;
+    }
+    public static void AddBossKill()
+    {
+        BossKill++;
+    }
+    public static void AddUnlockPartner()
+    {
+        UnlockPartner++;
     }
 }

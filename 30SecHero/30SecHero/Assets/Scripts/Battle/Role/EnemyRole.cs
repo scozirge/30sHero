@@ -164,7 +164,16 @@ public partial class EnemyRole : Role
         AniPlayer.PlayTrigger("BeAttack", 0);
         base.BeAttack(_attackerForce, ref _dmg, _force);
         if (!IsAlive && _attackerForce == Force.Player)
-            BattleManage.AddEnemyKill();
+        {
+            if(Type==EnemyType.Minion)
+            {
+                BattleManage.AddEnemyKill();
+            }
+            else if(Type==EnemyType.Demogorgon)
+            {
+                BattleManage.AddBossKill();
+            }
+        }
     }
     public void Rush(Vector2 _force)
     {

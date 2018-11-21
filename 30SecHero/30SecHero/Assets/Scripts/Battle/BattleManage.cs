@@ -88,7 +88,7 @@ public partial class BattleManage : MonoBehaviour
     static bool IsDemogorgonFloor;
     bool IsInit;
     int EnemySpawnCount;
-    public static int EnemyKill;
+
     static bool IsPause;
 
 
@@ -159,11 +159,6 @@ public partial class BattleManage : MonoBehaviour
         if (StartFloor < 1)
             StartFloor = 1;
     }
-    public static void AddEnemyKill()
-    {
-        EnemyKill++;
-    }
-
 
     bool CheckLootSpawnLimit()
     {
