@@ -52,11 +52,11 @@ public class Trap : Ammo
             return;
         if (!CheckReadyToDamageTarget(_role))
             return;
-        base.TriggerTarget(_role, _pos);
         Vector2 force = (_role.transform.position - transform.position).normalized * KnockIntensity;
         Value = (int)(_role.MaxHealth * DamageHPRatio);
         int damage = Value;
         _role.BeAttack(AttackerRoleTag, ref damage, force);
+        base.TriggerTarget(_role, _pos);
     }
     void ActiveTrap(bool _active)
     {

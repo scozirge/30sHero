@@ -19,7 +19,7 @@ public partial class EnemyRole : Role
     protected const float FrictionDuringTime = 1;
     protected float FrictionDuringTimer = FrictionDuringTime;
     protected bool StartVelocityDecay;
-    protected RoleBuffer[] CantMoveBuff = new RoleBuffer[2] { RoleBuffer.Stun, RoleBuffer.EnemyAttacking };
+
 
     AIRoleMove MyAIMove;
     PlayerRole Target;

@@ -212,7 +212,13 @@ public partial class PlayerRole : Role
     public float AttackRangeProportion;
     public float CarnivorousProportion;
     public float BerserkerProportion;
+    public float ReflectShieldProportion;
     public float ConservationOfMassProportion;
+    public float ReviveProportion;
+    public float ReflectMeleeDamageProportion;
+    public float AbsorbElementProportion;
+    public float LethalDashProportion;
+    bool IsRevive;//一場戰鬥只會觸發一次復活
 
     float BlizzardTime;
     bool CanGenerateBlizzard;
@@ -243,6 +249,7 @@ public partial class PlayerRole : Role
         IsAvatar = true;
         CanJump = true;
         CanRush = true;
+        IsRevive = false;
     }
     void InitPlayerProperties()
     {
@@ -277,6 +284,12 @@ public partial class PlayerRole : Role
         CarnivorousProportion = Player.GetEnchantProperty(EnchantProperty.Carnivorous);
         BerserkerProportion = Player.GetEnchantProperty(EnchantProperty.Berserker);
         ConservationOfMassProportion = Player.GetEnchantProperty(EnchantProperty.ConservationOfMass);
+        ReflectShieldProportion = Player.GetEnchantProperty(EnchantProperty.ReflectShield);
+        ConservationOfMassProportion = Player.GetEnchantProperty(EnchantProperty.ConservationOfMass);
+        ReviveProportion = Player.GetEnchantProperty(EnchantProperty.Revive);
+        ReflectMeleeDamageProportion = Player.GetEnchantProperty(EnchantProperty.ReflectMeleeDamage);
+        AbsorbElementProportion = Player.GetEnchantProperty(EnchantProperty.AbsorbElement);
+        LethalDashProportion = Player.GetEnchantProperty(EnchantProperty.LethalDash);
         if (Player.MyWeapon != null)
             SetEquipIcon(Player.MyWeapon);
         if (AttackRangeProportion > 0)
@@ -589,6 +602,8 @@ public partial class PlayerRole : Role
                             MyRigi.velocity = rushForce;
                             //MyRigi.AddForce(rushForce);
                             AudioPlayer.PlaySound(RushSound);
+                            if (LethalDashProportion > 0)
+                                EffectEmitter.EmitParticle(GameManager.GM.LethalDashParticle, Vector3.zero, Vector3.zero, transform);
                         }
                     }
                     else
@@ -651,8 +666,14 @@ public partial class PlayerRole : Role
     }
     public override void AddBuffer(BufferData _buffer)
     {
-        
-        base.AddBuffer(_buffer);
+        if (BuffersExist(ElementalBuff))
+        {
+            if (ShieldRatio < 0 || !ProbabilityGetter.GetResult(ConservationOfMassProportion))
+                base.AddBuffer(_buffer);
+            Shield += MaxShield * AbsorbElementProportion;
+        }
+        else
+            base.AddBuffer(_buffer);
     }
     public void Face(int _face)
     {
@@ -803,6 +824,16 @@ public partial class PlayerRole : Role
     }
     protected override bool DeathCheck()
     {
+        if (!IsRevive && Health <= 0)
+        {
+            if (ProbabilityGetter.GetResult(ReviveProportion))
+            {
+                Health = 1;
+                AddBuffer(RoleBuffer.Untouch, 1);
+                Shield = MaxShield * 0.5f;
+                IsRevive = true;
+            }
+        }
         bool death = base.DeathCheck();
         if (death)
         {

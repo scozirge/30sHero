@@ -55,17 +55,27 @@ public class MeleeAmmo : Ammo
             return;
         if (!CheckReadyToDamageTarget(_role))
             return;
-        base.TriggerTarget(_role, _pos);
         Vector2 force = (_role.transform.position - transform.position).normalized * KnockIntensity;
         if (MyMeleeType == MeleeType.Melee || MyMeleeType == MeleeType.Reflect || MyMeleeType == MeleeType.ReflectMirror)
         {
             int damage = Value;
             if (Attacker != null)
                 damage = (int)(Attacker.Damage * ValuePercent);//使用攻擊者當下的攻擊力(不然雙刀怪這種技能不會受到詛咒而導致攻擊下降)
+            if(_role.MyForce==Force.Player)
+            {
+                PlayerRole pr = (PlayerRole)_role;
+                if(pr.ReflectMeleeDamageProportion>0)
+                {
+                    int reflectDamage = (int)(pr.Damage * pr.ReflectMeleeDamageProportion);
+                    Attacker.BeAttack(Force.Player, ref reflectDamage, (_role.transform.position - transform.position).normalized * -1 * 500);
+                    EffectEmitter.EmitParticle(GameManager.GM.ReflectMeleeDamageParticle, Attacker.transform.position, Vector2.zero, null);
+                }
+            }
             _role.BeAttack(AttackerRoleTag, ref damage, force);
         }
         if (AmmoType != ShootAmmoType.Permanent)
             SelfDestroy();
+        base.TriggerTarget(_role, _pos);
     }
     protected void TriggerAmmo(Ammo _ammo)
     {

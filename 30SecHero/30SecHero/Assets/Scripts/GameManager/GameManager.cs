@@ -57,8 +57,14 @@ public partial class GameManager : MonoBehaviour
     [Tooltip("敵方子彈特效")]
     [SerializeField]
     ParticleSystem EnemyAmmoParticle;
+    [Tooltip("肉搏反彈傷害特效")]
+    [SerializeField]
+    public ParticleSystem ReflectMeleeDamageParticle;
+    [Tooltip("強化衝刺傷害特效")]
+    [SerializeField]
+    public ParticleSystem LethalDashParticle;
 
-    static GameManager GM;
+    public static GameManager GM;
     static Sprite[] QualityBotSprites;
     static Sprite[] EquipTypBot;
     static Dictionary<RoleBuffer, ParticleSystem> BufferParticles = new Dictionary<RoleBuffer, ParticleSystem>();

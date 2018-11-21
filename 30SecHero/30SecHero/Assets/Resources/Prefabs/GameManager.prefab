@@ -83,6 +83,9 @@ MonoBehaviour:
     type: 3}
   PlayerAmmoParticle: {fileID: 0}
   EnemyAmmoParticle: {fileID: 0}
+  ReflectMeleeDamageParticle: {fileID: 198308960938074910, guid: 6ebb3848cff528744a0ce66822bd1588,
+    type: 3}
+  LethalDashParticle: {fileID: 19845390, guid: 191d87ace6e57d44e9b37f5fc03dc313, type: 3}
 --- !u!114 &114495893002156964
 MonoBehaviour:
   m_ObjectHideFlags: 0

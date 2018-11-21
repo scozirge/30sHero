@@ -30,18 +30,20 @@ public class PlayerAttack : MonoBehaviour
         {
             if (Attacker.IsAvatar)
             {
-                float damageProportion = 0;
+                float extraDamageProportion = 0;
                 if (Attacker.HealthRatio<0.4f && ProbabilityGetter.GetResult(Attacker.BerserkerProportion))
                 {
-                    damageProportion+=0.5f;
+                    extraDamageProportion+=0.5f;
                     Attacker.SetBerserkerBladeLight(true);
                 }
                 else
                     Attacker.SetBerserkerBladeLight(false);
+                if (Attacker.OnRush)
+                    extraDamageProportion += Attacker.LethalDashProportion;
                 EnemyRole er = _col.GetComponent<EnemyRole>();
                 BeforeAttackAction(er);
                 Vector2 force = (er.transform.position - transform.position).normalized * KnockForce;
-                int causeDamage = (int)(Attacker.Damage * DamagePercent * (1 + damageProportion));
+                int causeDamage = (int)(Attacker.Damage * DamagePercent * (1 + extraDamageProportion));
                 er.BeAttack(Attacker.MyForce, ref causeDamage, force);
                 Attacker.HealFromCauseDamage(causeDamage);
                 if (er.IsAlive)

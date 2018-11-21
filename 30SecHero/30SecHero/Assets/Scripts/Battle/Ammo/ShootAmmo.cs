@@ -76,12 +76,25 @@ public class ShootAmmo : Ammo
             return;
         if (!CheckReadyToDamageTarget(_role))
             return;
-        base.TriggerTarget(_role, _pos);
+        if (AmmoType != ShootAmmoType.Permanent)
+        {
+            if (_role.MyForce == Force.Player)
+            {
+                PlayerRole pr = (PlayerRole)_role;           
+                if (pr.ShieldRatio>0 && ProbabilityGetter.GetResult(pr.ReflectShieldProportion))
+                {
+                    ForceReverse();
+                }
+                else
+                    SelfDestroy();
+            }
+            else
+                SelfDestroy();
+        }
         Vector2 force = (_role.transform.position - transform.position).normalized * KnockIntensity;
         int damage = Value;
         _role.BeAttack(AttackerRoleTag, ref damage, force);
-        if (AmmoType != ShootAmmoType.Permanent)
-            SelfDestroy();
+        base.TriggerTarget(_role, _pos);
     }
     protected override void Update()
     {

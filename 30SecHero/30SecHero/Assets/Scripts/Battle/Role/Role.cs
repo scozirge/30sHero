@@ -85,8 +85,8 @@ public abstract class Role : MonoBehaviour
     protected Animator RoleAni;
     MyTimer BurningTimer;
     public float DamageBuff { get; protected set; }
-
-
+    protected RoleBuffer[] CantMoveBuff = new RoleBuffer[2] { RoleBuffer.Stun, RoleBuffer.EnemyAttacking };
+    protected RoleBuffer[] ElementalBuff = new RoleBuffer[3] { RoleBuffer.Burn, RoleBuffer.Freeze, RoleBuffer.DamageDown };
     public bool IsPreAttack;
     public int ExtraDefence { get; protected set; }
     public bool OnRush;
