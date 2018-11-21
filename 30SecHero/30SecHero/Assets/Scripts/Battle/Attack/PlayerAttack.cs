@@ -74,7 +74,7 @@ public class PlayerAttack : MonoBehaviour
             _er.AddBuffer(RoleBuffer.DamageDown, 5);
         if (ProbabilityGetter.GetResult(Attacker.FrozenWeaponProportion))
             _er.AddBuffer(RoleBuffer.Freeze, 5);
-        if (ProbabilityGetter.GetResult(1))
+        if (ProbabilityGetter.GetResult(Attacker.StunningSlashProportion))
             _er.AddBuffer(RoleBuffer.Stun, 1.5f);
     }
 }

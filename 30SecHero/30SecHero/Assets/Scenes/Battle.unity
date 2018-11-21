@@ -1232,7 +1232,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 557574ff57f16d645a09a77048c9c694, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SoulPrefab: {fileID: 114859261940938524, guid: 8f56b8a1de1d94e43b71d93748a25162,
+  SoulPrefab: {fileID: 8046076555841335044, guid: 8f56b8a1de1d94e43b71d93748a25162,
     type: 3}
 --- !u!4 &186841205
 Transform:
@@ -5714,6 +5714,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d51ff43f4f2a15c45b55bbca6d530f8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Description: 
   BehaviorSkill: 1
   PSkillName: Blizzard
   PSkillDuration: 999
