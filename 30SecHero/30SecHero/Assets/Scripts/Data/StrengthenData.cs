@@ -51,13 +51,13 @@ public class StrengthenData : Data
     /// </summary>
     public static void SetData(Dictionary<int, StrengthenData> _dic, string _dataName)
     {
-        DataName = _dataName;
-        string jsonStr = Resources.Load<TextAsset>(string.Format("Json/{0}", DataName)).ToString();
+        string jsonStr = Resources.Load<TextAsset>(string.Format("Json/{0}", _dataName)).ToString();
         JsonData jd = JsonMapper.ToObject(jsonStr);
-        JsonData items = jd[DataName];
+        JsonData items = jd[_dataName];
         for (int i = 0; i < items.Count; i++)
         {
             StrengthenData data = new StrengthenData(items[i]);
+            data.DataName = _dataName;
             data.Properties.Add(data.PropertyType, 0);
             int id = int.Parse(items[i]["ID"].ToString());
             _dic.Add(id, data);

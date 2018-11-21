@@ -167,8 +167,6 @@ public abstract class AIMove : MonoBehaviour
     public void SetCanMove(bool _bool)
     {
         CanMove = _bool;
-        if (!CanMove)
-            MyRigi.velocity = Vector3.zero;
     }
     protected virtual void Update()
     {

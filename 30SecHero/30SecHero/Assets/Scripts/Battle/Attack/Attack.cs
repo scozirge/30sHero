@@ -166,7 +166,7 @@ public class Attack : Skill
         if (Timer > 0)
         {
             Timer -= Time.deltaTime;
-            if (!IsPreAttack)
+            if (!Myself.IsPreAttack)
                 if (Timer <= PreAttackTime)
                     if (Myself.MyForce == Force.Enemy)
                     {
@@ -210,6 +210,7 @@ public class Attack : Skill
         {
             SpawnAttackPrefab();
             AmmoIntervalTimer = AmmoInterval;
+            Myself.EndPreAttack();
         }
     }
 

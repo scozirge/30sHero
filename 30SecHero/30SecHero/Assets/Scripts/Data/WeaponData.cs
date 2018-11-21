@@ -14,13 +14,13 @@ public class WeaponData : EquipData
     /// </summary>
     public static void SetData(Dictionary<int, WeaponData> _dic, string _dataName)
     {
-        DataName = _dataName;
-        string jsonStr = Resources.Load<TextAsset>(string.Format("Json/{0}", DataName)).ToString();
+        string jsonStr = Resources.Load<TextAsset>(string.Format("Json/{0}", _dataName)).ToString();
         JsonData jd = JsonMapper.ToObject(jsonStr);
-        JsonData items = jd[DataName];
+        JsonData items = jd[_dataName];
         for (int i = 0; i < items.Count; i++)
         {
             WeaponData data = new WeaponData(items[i]);
+            data.DataName = _dataName;
             int id = int.Parse(items[i]["ID"].ToString());
             _dic.Add(id, data);
         }
