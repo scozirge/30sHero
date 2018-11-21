@@ -30,10 +30,18 @@ public class PlayerAttack : MonoBehaviour
         {
             if (Attacker.IsAvatar)
             {
+                float damageProportion = 0;
+                if (Attacker.HealthRatio<0.4f && ProbabilityGetter.GetResult(Attacker.BerserkerProportion))
+                {
+                    damageProportion+=0.5f;
+                    Attacker.SetBerserkerBladeLight(true);
+                }
+                else
+                    Attacker.SetBerserkerBladeLight(false);
                 EnemyRole er = _col.GetComponent<EnemyRole>();
                 BeforeAttackAction(er);
                 Vector2 force = (er.transform.position - transform.position).normalized * KnockForce;
-                int causeDamage = (int)(Attacker.Damage * DamagePercent);
+                int causeDamage = (int)(Attacker.Damage * DamagePercent * (1 + damageProportion));
                 er.BeAttack(Attacker.MyForce, ref causeDamage, force);
                 Attacker.HealFromCauseDamage(causeDamage);
                 if (er.IsAlive)
@@ -43,10 +51,7 @@ public class PlayerAttack : MonoBehaviour
                 }
                 else
                 {
-                    if (ProbabilityGetter.GetResult(Player.GetEnchantProperty(EnchantProperty.ExtralGoldDrop)))
-                    {
-                        er.ExtralGoldDrop();
-                    }
+                    TargetDieAction(er);
                 }
                 int faceDir = 1;
                 if ((Attacker.transform.position.x - er.transform.position.x) > 0)
@@ -76,5 +81,14 @@ public class PlayerAttack : MonoBehaviour
             _er.AddBuffer(RoleBuffer.Freeze, 5);
         if (ProbabilityGetter.GetResult(Attacker.StunningSlashProportion))
             _er.AddBuffer(RoleBuffer.Stun, 1.5f);
+    }
+    void TargetDieAction(EnemyRole _er)
+    {
+        if (ProbabilityGetter.GetResult(Player.GetEnchantProperty(EnchantProperty.ExtralGoldDrop)))
+        {
+            _er.ExtralGoldDrop();
+        }
+        if (Attacker.CarnivorousProportion > 0)
+            Attacker.ExtendMaxHP((int)(Attacker.CarnivorousProportion * Attacker.MaxHealth));
     }
 }

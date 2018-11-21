@@ -108,6 +108,7 @@ GameObject:
   - component: {fileID: 114254621464860768}
   - component: {fileID: 114768325752054400}
   - component: {fileID: 1362518505}
+  - component: {fileID: 3275657168001055663}
   m_Layer: 8
   m_Name: PlayerRole
   m_TagString: Player
@@ -166,6 +167,7 @@ MonoBehaviour:
   NormalDrag: 50
   KnockDragDuration: 0.1
   RoleAni: {fileID: 95215647531095050}
+  IsPreAttack: 0
   OnRush: 0
   TestMode: 0
   AvatarRemoveEffect: {fileID: 198023469444164576, guid: 4fa0c17b07dd95f4fac2c50aea787be7,
@@ -209,10 +211,12 @@ MonoBehaviour:
   RushAntiAmooTime: 0.1
   RushCD: 3
   MyLight: {fileID: 108484094380481612}
-  Blizzard: {fileID: 1362518505}
+  Blizzard: {fileID: 3275657168001055663}
   BlizzardAmmoPrefab: {fileID: 114255117710915984, guid: 5b65695814f87af46a3fc5c33d4cec5d,
     type: 3}
   MyAttack: {fileID: 114391171959625102}
+  BladeLight: {fileID: 114729129931036052}
+  BladeLightColor: E06B66
   FaceLeftOrRight: 0
   ClosestEnemy: {fileID: 0}
   BurningWeaponProportion: 0
@@ -220,6 +224,7 @@ MonoBehaviour:
   FrozenWeaponProportion: 0
   StunningSlashProportion: 0
   AttackRangeProportion: 0
+  CarnivorousProportion: 0
 --- !u!50 &50485858130474148
 Rigidbody2D:
   serializedVersion: 4
@@ -295,6 +300,40 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d51ff43f4f2a15c45b55bbca6d530f8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Description: 
+  BehaviorSkill: 1
+  PSkillName: Blizzard
+  PSkillDuration: 999
+  DetecteRadius: 1200
+  DamagePercent: 0
+  AttackStopMove: 0
+  StopMoveTime: 0
+  PSkillTimer: 0
+  IsPlayerGetSkill: 0
+  AttackOnce: 0
+  Interval: 2
+  AmmoNum: 1
+  AmmoInterval: 0
+  StartAngle: 0
+  AngleInterval: 0
+  Patetern: 0
+  SpawnedInSelf: 0
+  AttackPrefab: {fileID: 114255117710915984, guid: 5b65695814f87af46a3fc5c33d4cec5d,
+    type: 3}
+  AttackRadius: 0
+--- !u!114 &3275657168001055663
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1103968850550592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d51ff43f4f2a15c45b55bbca6d530f8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Description: 
   BehaviorSkill: 1
   PSkillName: Blizzard
   PSkillDuration: 999
@@ -511,7 +550,7 @@ MonoBehaviour:
   AttackEffect: {fileID: 198308960938074910, guid: 6ebb3848cff528744a0ce66822bd1588,
     type: 3}
   Attacker: {fileID: 114529601492733476}
-  KnockForce: 5000
+  KnockForce: 3000
   DamagePercent: 1
   RangeCol: {fileID: 58315650398947288}
 --- !u!50 &50359093130138826
@@ -609,7 +648,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.8773585, g: 0.41770387, b: 0.4014329, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:

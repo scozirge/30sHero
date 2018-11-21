@@ -179,7 +179,12 @@ public partial class PlayerRole : Role
     protected MeleeAmmo BlizzardAmmoPrefab;
     [SerializeField]
     PlayerAttack MyAttack;
-
+    [Tooltip("刀光Prefab")]
+    [SerializeField]
+    Image BladeLight;
+    [Tooltip("刀光色調")]
+    [SerializeField]
+    string BladeLightColor;
     ParticleSystem CurBeHitEffect;
     MyTimer AttackTimer;
     MyTimer JumpTimer;
@@ -202,6 +207,10 @@ public partial class PlayerRole : Role
     public float FrozenWeaponProportion;
     public float StunningSlashProportion;
     public float AttackRangeProportion;
+    public float CarnivorousProportion;
+    public float BerserkerProportion;
+    public float ConservationOfMassProportion;
+
     float BlizzardTime;
     bool CanGenerateBlizzard;
 
@@ -262,6 +271,9 @@ public partial class PlayerRole : Role
         FrozenWeaponProportion = Player.GetEnchantProperty(EnchantProperty.FrozenWeapon);
         StunningSlashProportion = Player.GetEnchantProperty(EnchantProperty.StunningSlash);
         AttackRangeProportion = Player.GetEnchantProperty(EnchantProperty.AttackRange);
+        CarnivorousProportion = Player.GetEnchantProperty(EnchantProperty.Carnivorous);
+        BerserkerProportion = Player.GetEnchantProperty(EnchantProperty.Berserker);
+        ConservationOfMassProportion = Player.GetEnchantProperty(EnchantProperty.ConservationOfMass);
         if (AttackRangeProportion > 0)
             MyAttack.SetRange();
 
@@ -307,6 +319,19 @@ public partial class PlayerRole : Role
     void SelfCure()
     {
         HealHP((int)(MaxHealth * SelfCureProportion));
+    }
+    public void SetBerserkerBladeLight(bool _bool)
+    {
+        if (_bool)
+        {
+            Color newCol;
+            if (ColorUtility.TryParseHtmlString("#" + BladeLightColor, out newCol))
+                BladeLight.color = newCol;
+        }
+        else
+        {
+            BladeLight.color = Color.white;
+        }
     }
     void ShieldGenerate()
     {
@@ -411,7 +436,7 @@ public partial class PlayerRole : Role
     {
         base.ReceiveDmg(ref _dmg);
         //受到傷害解除自癒
-        if (SelfCureTimer!=null)
+        if (SelfCureTimer != null)
         {
             SelfCureTimer.RestartCountDown();
             SelfCureTimer.StartRunTimer = true;
@@ -420,7 +445,6 @@ public partial class PlayerRole : Role
     }
     void GenerateBlizzard()//破盾時釋放冰風暴(附魔技能)
     {
-        Debug.Log("CanGenerateBlizzard=" + CanGenerateBlizzard);
         if (!CanGenerateBlizzard)
             return;
         CanGenerateBlizzard = false;

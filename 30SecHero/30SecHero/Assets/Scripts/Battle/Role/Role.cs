@@ -185,6 +185,11 @@ public abstract class Role : MonoBehaviour
         EffectEmitter.EmitParticle(GameManager.GetOtherParticle("Heal"), Vector3.zero, Vector3.zero, transform);
         Health += _heal;
     }
+    public virtual void ExtendMaxHP(int _value)
+    {
+        MaxHealth += _value;
+        HealHP(_value);
+    }
     protected virtual bool DeathCheck()
     {
         if (Health <= 0)
@@ -225,9 +230,12 @@ public abstract class Role : MonoBehaviour
             {
                 if (GameManager.GetBufferParticle(_buffer.Type) != null)
                 {
-                    ParticleSystem ps = EffectEmitter.EmitParticle(GameManager.GetBufferParticle(_buffer.Type), Vector3.zero, Vector3.zero, transform);
-                    if (ps)
-                        BufferParticles.Add(_buffer.Type, ps);
+                    if (_buffer.Time >= 0.5f)//如果效果時間低於0.5秒就不要播特效
+                    {
+                        ParticleSystem ps = EffectEmitter.EmitParticle(GameManager.GetBufferParticle(_buffer.Type), Vector3.zero, Vector3.zero, transform);
+                        if (ps)
+                            BufferParticles.Add(_buffer.Type, ps);
+                    }
                 }
             }
             BufferEffectChange(_buffer, true);
@@ -252,7 +260,7 @@ public abstract class Role : MonoBehaviour
     void RePlayAllBufferParticle()
     {
         List<RoleBuffer> keys = new List<RoleBuffer>(BufferParticles.Keys);
-        for(int i=0;i<keys.Count;i++)
+        for (int i = 0; i < keys.Count; i++)
         {
             if (BufferParticles[keys[i]])
                 BufferParticles[keys[i]].Play();
@@ -307,7 +315,7 @@ public abstract class Role : MonoBehaviour
                 }
                 break;
             case RoleBuffer.Untouch:
-                if(_add)
+                if (_add)
                     RoleAni.Play("Untouchable", RoleAni.GetLayerIndex("Buffer"), 0);
                 else
                     RoleAni.Play("Normal", RoleAni.GetLayerIndex("Buffer"), 0);
