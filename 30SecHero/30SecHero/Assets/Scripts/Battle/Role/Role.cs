@@ -96,8 +96,6 @@ public abstract class Role : MonoBehaviour
     protected virtual void Start()
     {
         IsAlive = true;
-        Debug.Log(HealthBar);
-        Debug.Log(name);
         HPBarWidth = HealthBar.rect.width;
         MyForce = MyEnum.ParseEnum<Force>(gameObject.tag);
         DragTimer = new MyTimer(KnockDragDuration, DragRecovery, false, false);

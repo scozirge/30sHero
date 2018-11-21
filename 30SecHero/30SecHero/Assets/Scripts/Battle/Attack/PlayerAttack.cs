@@ -15,8 +15,13 @@ public class PlayerAttack : MonoBehaviour
     [Tooltip("傷害倍率(傷害=傷害倍率x腳色攻擊力))")]
     [SerializeField]
     protected float DamagePercent = 1;
+    [SerializeField]
+    CircleCollider2D RangeCol;
 
-
+    public void SetRange()
+    {
+        RangeCol.radius = RangeCol.radius * (1 + Attacker.AttackRangeProportion);
+    }
     void OnTriggerEnter2D(Collider2D _col)
     {
         if (Attacker.BuffersExist(RoleBuffer.Untouch))
@@ -26,6 +31,7 @@ public class PlayerAttack : MonoBehaviour
             if (Attacker.IsAvatar)
             {
                 EnemyRole er = _col.GetComponent<EnemyRole>();
+                BeforeAttackAction(er);
                 Vector2 force = (er.transform.position - transform.position).normalized * KnockForce;
                 int causeDamage = (int)(Attacker.Damage * DamagePercent);
                 er.BeAttack(Attacker.MyForce, ref causeDamage, force);
@@ -33,10 +39,7 @@ public class PlayerAttack : MonoBehaviour
                 if (er.IsAlive)
                 {
                     Attacker.BumpingAttack();
-                    if (ProbabilityGetter.GetResult(Attacker.BurningWeaponProportion))
-                    {
-                        er.AddBuffer(RoleBuffer.Burn, 5);
-                    }
+                    AfterAttackAction(er);
                 }
                 else
                 {
@@ -45,6 +48,10 @@ public class PlayerAttack : MonoBehaviour
                         er.ExtralGoldDrop();
                     }
                 }
+                int faceDir = 1;
+                if ((Attacker.transform.position.x - er.transform.position.x) > 0)
+                    faceDir = -1;
+                Attacker.Face(faceDir);
                 Attacker.AttackMotion();
                 //SpawnAttackEffect
                 if (!AttackEffect)
@@ -55,5 +62,19 @@ public class PlayerAttack : MonoBehaviour
             else
                 Attacker.BumpingAttack();
         }
+    }
+    void BeforeAttackAction(EnemyRole _er)
+    {
+    }
+    void AfterAttackAction(EnemyRole _er)
+    {
+        if (ProbabilityGetter.GetResult(Attacker.BurningWeaponProportion))
+            _er.AddBuffer(RoleBuffer.Burn, 5);
+        if (ProbabilityGetter.GetResult(Attacker.PoisonedWeaponProportion))
+            _er.AddBuffer(RoleBuffer.DamageDown, 5);
+        if (ProbabilityGetter.GetResult(Attacker.FrozenWeaponProportion))
+            _er.AddBuffer(RoleBuffer.Freeze, 5);
+        if (ProbabilityGetter.GetResult(1))
+            _er.AddBuffer(RoleBuffer.Stun, 1.5f);
     }
 }

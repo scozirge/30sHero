@@ -177,6 +177,8 @@ public partial class PlayerRole : Role
     [Tooltip("破盾冰風暴Prefab")]
     [SerializeField]
     protected MeleeAmmo BlizzardAmmoPrefab;
+    [SerializeField]
+    PlayerAttack MyAttack;
 
     ParticleSystem CurBeHitEffect;
     MyTimer AttackTimer;
@@ -196,6 +198,10 @@ public partial class PlayerRole : Role
     float SelfCureProportion;
     [HideInInspector]
     public float BurningWeaponProportion;
+    public float PoisonedWeaponProportion;
+    public float FrozenWeaponProportion;
+    public float StunningSlashProportion;
+    public float AttackRangeProportion;
     float BlizzardTime;
     bool CanGenerateBlizzard;
 
@@ -250,8 +256,15 @@ public partial class PlayerRole : Role
         GainMoveFromKilling = (int)Player.GetProperties(RoleProperty.GainMoveFromKilling);
         RushCD = (float)Player.GetProperties(RoleProperty.RushCD) - Player.GetEnchantProperty(EnchantProperty.RushCDResuce);
         SelfCureProportion = Player.GetEnchantProperty(EnchantProperty.NoDamageRecovery);
-        BurningWeaponProportion = Player.GetEnchantProperty(EnchantProperty.BurningWeapon);
         BlizzardTime = Player.GetEnchantProperty(EnchantProperty.ShockWave);
+        BurningWeaponProportion = Player.GetEnchantProperty(EnchantProperty.BurningWeapon);
+        PoisonedWeaponProportion = Player.GetEnchantProperty(EnchantProperty.PoisonedWeapon);
+        FrozenWeaponProportion = Player.GetEnchantProperty(EnchantProperty.FrozenWeapon);
+        StunningSlashProportion = Player.GetEnchantProperty(EnchantProperty.StunningSlash);
+        AttackRangeProportion = Player.GetEnchantProperty(EnchantProperty.AttackRange);
+        if (AttackRangeProportion > 0)
+            MyAttack.SetRange();
+
         if (BlizzardTime > 0)
         {
             BlizzardAmmoPrefab.SetBuffersTime(BlizzardTime);
@@ -598,7 +611,13 @@ public partial class PlayerRole : Role
                     MoveAfterimage_Main.startRotationY = 180;
             }
         }
-        RoleTrans.localScale = new Vector3(FaceLeftOrRight, 1, 1);
+        Face(FaceLeftOrRight);
+    }
+    public void Face(int _face)
+    {
+        if (_face != 1 || _face != -1)
+            return;
+        RoleTrans.localScale = new Vector3(_face, 1, 1);
     }
     public void GetLoot(LootData _data)
     {
