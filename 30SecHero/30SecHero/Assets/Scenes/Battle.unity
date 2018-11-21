@@ -912,40 +912,6 @@ PrefabInstance:
       propertyPath: MyCamera
       value: 
       objectReference: {fileID: 519420031}
-    - target: {fileID: 114729129931036052, guid: d9e47796d36fc83458ffab41aea6641e,
-        type: 3}
-      propertyPath: m_Color.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114729129931036052, guid: d9e47796d36fc83458ffab41aea6641e,
-        type: 3}
-      propertyPath: m_Color.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114729129931036052, guid: d9e47796d36fc83458ffab41aea6641e,
-        type: 3}
-      propertyPath: m_Color.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114529601492733476, guid: d9e47796d36fc83458ffab41aea6641e,
-        type: 3}
-      propertyPath: TestMode
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114529601492733476, guid: d9e47796d36fc83458ffab41aea6641e,
-        type: 3}
-      propertyPath: MaxHealth
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 1626159785292282, guid: d9e47796d36fc83458ffab41aea6641e, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114529601492733476, guid: d9e47796d36fc83458ffab41aea6641e,
-        type: 3}
-      propertyPath: BladeLightColor
-      value: C0332E
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d9e47796d36fc83458ffab41aea6641e, type: 3}
 --- !u!1 &135074929

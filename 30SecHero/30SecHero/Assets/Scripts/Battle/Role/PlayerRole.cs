@@ -185,6 +185,9 @@ public partial class PlayerRole : Role
     [Tooltip("刀光色調")]
     [SerializeField]
     string BladeLightColor;
+    [Tooltip("武器icon")]
+    [SerializeField]
+    Image[] WeaponIcons;
     ParticleSystem CurBeHitEffect;
     MyTimer AttackTimer;
     MyTimer JumpTimer;
@@ -274,6 +277,8 @@ public partial class PlayerRole : Role
         CarnivorousProportion = Player.GetEnchantProperty(EnchantProperty.Carnivorous);
         BerserkerProportion = Player.GetEnchantProperty(EnchantProperty.Berserker);
         ConservationOfMassProportion = Player.GetEnchantProperty(EnchantProperty.ConservationOfMass);
+        if (Player.MyWeapon != null)
+            SetEquipIcon(Player.MyWeapon);
         if (AttackRangeProportion > 0)
             MyAttack.SetRange();
 
@@ -290,6 +295,13 @@ public partial class PlayerRole : Role
         MoveAfterimage_Main = MoveAfterimage.main;
         MoveAfterimage_Main.maxParticles = 0;
         MoveAfterimage_Main.startLifetime = 0;
+    }
+    void SetEquipIcon(EquipData _data)
+    {
+        for (int i = 0; i < WeaponIcons.Length; i++)
+        {
+            WeaponIcons[i].sprite = _data.Icons[i];
+        }
     }
     void SetCanRush()
     {
@@ -637,9 +649,14 @@ public partial class PlayerRole : Role
         }
         Face(FaceLeftOrRight);
     }
+    public override void AddBuffer(BufferData _buffer)
+    {
+        
+        base.AddBuffer(_buffer);
+    }
     public void Face(int _face)
     {
-        if (_face != 1 || _face != -1)
+        if (_face != 1 && _face != -1)
             return;
         RoleTrans.localScale = new Vector3(_face, 1, 1);
     }

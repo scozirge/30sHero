@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: bf43e29ff618fd14e9a00fc3df63f1e7
+guid: 48223aa8b55dea642bfa3567818b7491
 TextureImporter:
   fileIDToRecycleName: {}
   externalObjects: {}
@@ -80,40 +80,18 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
-  - serializedVersion: 2
-    buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-  - serializedVersion: 2
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
   spriteSheet:
     serializedVersion: 2
     sprites: []
     outline: []
     physicsShape: []
     bones: []
-    spriteID: e2a3286189655994c8338474707b5517
+    spriteID: 6981554352485ec488fff3737b7212b4
     vertices: []
     indices: 
     edges: []
     weights: []
-  spritePackingTag: Battle
+  spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
   userData: 
