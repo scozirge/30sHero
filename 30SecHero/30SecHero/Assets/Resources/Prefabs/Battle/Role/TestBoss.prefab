@@ -392,7 +392,7 @@ MonoBehaviour:
     MyRushDirect: 0
     RushForce: {x: 0, y: 0}
     RushForce2: 0
-  - WaitSecond: 0.3
+  - WaitSecond: 1
     MaxProcessingTime: 0
     RelativeToTarget: 0
     Destination: {x: 0, y: 0}
@@ -441,7 +441,7 @@ MonoBehaviour:
     MyRushDirect: 0
     RushForce: {x: 0, y: 0}
     RushForce2: 0
-  - WaitSecond: 0.3
+  - WaitSecond: 1
     MaxProcessingTime: 0
     RelativeToTarget: 0
     Destination: {x: 0, y: 0}
@@ -490,7 +490,7 @@ MonoBehaviour:
     MyRushDirect: 0
     RushForce: {x: 0, y: 0}
     RushForce2: 0
-  - WaitSecond: 0.3
+  - WaitSecond: 2
     MaxProcessingTime: 0
     RelativeToTarget: 0
     Destination: {x: 0, y: 0}
@@ -627,7 +627,7 @@ MonoBehaviour:
     MyRushDirect: 0
     RushForce: {x: 0, y: 0}
     RushForce2: 0
-  - WaitSecond: 0
+  - WaitSecond: 2
     MaxProcessingTime: 0
     RelativeToTarget: 0
     Destination: {x: 0, y: 0}
@@ -774,6 +774,7 @@ MonoBehaviour:
   NormalDrag: 0
   KnockDragDuration: 0.9
   RoleAni: {fileID: 0}
+  IsPreAttack: 0
   OnRush: 0
   DropEquipCount: 1
   DropGoldCount: 1

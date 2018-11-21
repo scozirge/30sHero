@@ -42,7 +42,7 @@ public class Skill : MonoBehaviour
     public bool IsPlayerGetSkill;
 
     public virtual void LaunchAIAttack()
-    {        
+    {
     }
 
 

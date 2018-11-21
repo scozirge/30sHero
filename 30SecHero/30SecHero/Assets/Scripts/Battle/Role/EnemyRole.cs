@@ -32,6 +32,7 @@ public partial class EnemyRole : Role
     {
         ID = _data.ID;
         Name = _data.Name;
+        IsPreAttack = false;
         DebutFloor = _data.DebutFloor;
         Type = _data.Type;
     }
@@ -93,6 +94,8 @@ public partial class EnemyRole : Role
         if (MotionSprite[0] == null)
             return;
         RoleImg.sprite = MotionSprite[0];
+        if (IsPreAttack)
+            PreAttack();
     }
     void ToAttackMotion()
     {
@@ -147,11 +150,13 @@ public partial class EnemyRole : Role
     public override void PreAttack()
     {
         base.PreAttack();
+        IsPreAttack = true;
         AniPlayer.PlayTrigger_NoPlayback("PreAttack", 0);
     }
     public override void EndPreAttack()
     {
         base.EndPreAttack();
+        IsPreAttack = false;
         AniPlayer.PlayTrigger("Idle", 0);
     }
     public override void BeAttack(Force _attackerForce, ref int _dmg, Vector2 _force)

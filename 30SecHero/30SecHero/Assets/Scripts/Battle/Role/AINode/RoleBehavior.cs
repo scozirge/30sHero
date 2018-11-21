@@ -234,6 +234,11 @@ public class RoleBehavior : MonoBehaviour
     }
     IEnumerator WaitToAction(Node _node)
     {
+        if (_node.Type==ActionType.Spell)
+        {
+            if (!MyRole.IsPreAttack)
+                MyRole.PreAttack();
+        }
         yield return new WaitForSeconds(_node.WaitSecond);
         DoAction(_node);
     }

@@ -86,6 +86,8 @@ public abstract class Role : MonoBehaviour
     MyTimer BurningTimer;
     public float DamageBuff { get; protected set; }
 
+
+    public bool IsPreAttack;
     public int ExtraDefence { get; protected set; }
     public bool OnRush;
     public bool IsAlive { get; protected set; }
