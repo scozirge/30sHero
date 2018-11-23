@@ -97,6 +97,7 @@ public partial class EnemyRole
         if (DropSkill)
         {
             float extraSkillProbility = (BattleManage.BM.MyPlayer != null) ? BattleManage.BM.MyPlayer.SkillDrop : 0;
+            extraSkillProbility += BattleManage.BM.MyPlayer.HarvesterProportion * BattleManage.BM.MyPlayer.ActiveMonsterSkillCount;
             if (ProbabilityGetter.GetResult(DropSkillProbility + extraSkillProbility))
             {
                 pr.InitMonsterSkill(DropSkill.PSkillName, DropSkill);

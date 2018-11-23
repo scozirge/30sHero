@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
 public partial class PlayerRole : Role
 {
     [Tooltip("使用測試模式，非測試模式時，玩家數值為讀表")]
@@ -63,7 +64,23 @@ public partial class PlayerRole : Role
     float ShieldRechargeTime;
     bool StartGenerateShield;
     MyTimer ShieldTimer;
-    public override float MoveSpeed { get { return base.MoveSpeed + ExtraMoveSpeed; } }
+    public override int Damage
+    {
+        get
+        {
+            return (int)(BaseDamage *
+            (1 + (Buffers.ContainsKey(RoleBuffer.DamageUp) ? Buffers[RoleBuffer.DamageUp].Value : 0 +
+            (Buffers.ContainsKey(RoleBuffer.DamageDown) ? -GameSettingData.CurseDamageReduce * (1 - PoisonResistantProportion) : 0))));
+        }
+    }
+    public virtual float MoveSpeed
+    {
+        get
+        {
+            return (BaseMoveSpeed + (Buffers.ContainsKey(RoleBuffer.SpeedUp) ? Buffers[RoleBuffer.SpeedUp].Value : 0) + ExtraMoveSpeed) * (1 + (Buffers.ContainsKey(RoleBuffer.Freeze) ?
+                -GameSettingData.FreezeMove * (1 - FreezeResistanceProportion) : 0)) + (Buffers.ContainsKey(RoleBuffer.DamageDown) ? DrugAddictionPlus : 0);
+        }
+    }
     private float extraMoveSpeed;
     public float ExtraMoveSpeed
     {
@@ -219,6 +236,61 @@ public partial class PlayerRole : Role
     public float AbsorbElementProportion;
     public float LethalDashProportion;
     bool IsRevive;//一場戰鬥只會觸發一次復活
+    public float InertiaPlus;
+    public float ReversalImpactProportion;
+    public float DashForLifeProportion;
+    public float PharmacistProportion;
+    public float AllergyPlus;
+    public float DrugFeverProportion;
+    int DrugFeverSpeedUp = 50;
+    public float AlchemyProportion;
+    public float CollectorProportion;
+    public float BloodyGoldProportion;
+    public float HangOnProportion;
+    public float SpeedyJumpProportion;
+    public float BreakDoorGoldProportion;
+    public float ReAvatarProportion;
+    public float TriumphPlus;
+    public float ShepherdProportion;
+    public float OnFireProportion;
+    public float HarvesterProportion;
+    public float GhostShelterProportion;
+    public float GhostArmorProportion;
+    public float FireResistanceProportion;
+    public float FireBladeProportion;
+    public float FreezeResistanceProportion;
+    public float IceArmorProportion;
+    public float PoisonResistantProportion;
+    public float DrugAddictionPlus;
+    public float FortitudeProportion;
+    public float NeutralizationProportion;
+    public float CowerProportion;
+    public float EliteHuntingProportion;
+    public struct LastTargeData
+    {
+        public Role Target;
+        public int HitCount;
+        public bool Hit(Role _target)
+        {
+            if (Target && Target.GetInstanceID() == _target.GetInstanceID())
+            {
+                HitCount++;
+                if(HitCount>=3)
+                {
+                    HitCount = 0;
+                    return true;
+                }
+            }
+            else
+            {
+                Target = _target;
+                HitCount = 1;                
+            }
+            return false;
+        }
+    }
+    public LastTargeData LastTarget;
+
 
     float BlizzardTime;
     bool CanGenerateBlizzard;
@@ -290,6 +362,40 @@ public partial class PlayerRole : Role
         ReflectMeleeDamageProportion = Player.GetEnchantProperty(EnchantProperty.ReflectMeleeDamage);
         AbsorbElementProportion = Player.GetEnchantProperty(EnchantProperty.AbsorbElement);
         LethalDashProportion = Player.GetEnchantProperty(EnchantProperty.LethalDash);
+        InertiaPlus = Player.GetEnchantProperty(EnchantProperty.Inertia);
+        ReversalImpactProportion = Player.GetEnchantProperty(EnchantProperty.ReversalImpact);
+        DashForLifeProportion = Player.GetEnchantProperty(EnchantProperty.DashForLife);
+        PharmacistProportion = Player.GetEnchantProperty(EnchantProperty.Pharmacist);
+        AllergyPlus = Player.GetEnchantProperty(EnchantProperty.Allergy);
+        DrugFeverProportion = Player.GetEnchantProperty(EnchantProperty.DrugFever);
+        AlchemyProportion = Player.GetEnchantProperty(EnchantProperty.Alchemy);
+        CollectorProportion = Player.GetEnchantProperty(EnchantProperty.Collector);
+        BloodyGoldProportion = Player.GetEnchantProperty(EnchantProperty.BloodyGold);
+        HangOnProportion = Player.GetEnchantProperty(EnchantProperty.HangOn);
+        if (HangOnProportion > 0)
+            UntochableTime *= (1 + HangOnProportion);
+        SpeedyJumpProportion = Player.GetEnchantProperty(EnchantProperty.SpeedyJump);
+        if (SpeedyJumpProportion > 0)
+            JumpCDTime *= (1 - SpeedyJumpProportion);
+        BreakDoorGoldProportion = Player.GetEnchantProperty(EnchantProperty.BreakDoorGold);
+        ReAvatarProportion = Player.GetEnchantProperty(EnchantProperty.ReAvatar);
+        TriumphPlus = Player.GetEnchantProperty(EnchantProperty.Triumph);
+        ShepherdProportion = Player.GetEnchantProperty(EnchantProperty.Shepherd);
+        OnFireProportion = Player.GetEnchantProperty(EnchantProperty.OnFire);
+        HarvesterProportion = Player.GetEnchantProperty(EnchantProperty.Harvester);
+        GhostShelterProportion = Player.GetEnchantProperty(EnchantProperty.GhostShelter);
+        GhostArmorProportion = Player.GetEnchantProperty(EnchantProperty.GhostArmor);
+        FireResistanceProportion = Player.GetEnchantProperty(EnchantProperty.FireResistance);
+        FireBladeProportion = Player.GetEnchantProperty(EnchantProperty.FireBlade);
+        FreezeResistanceProportion = Player.GetEnchantProperty(EnchantProperty.FreezeResistance);
+        IceArmorProportion = Player.GetEnchantProperty(EnchantProperty.IceArmor);
+        PoisonResistantProportion = Player.GetEnchantProperty(EnchantProperty.PoisonResistant);
+        DrugAddictionPlus = Player.GetEnchantProperty(EnchantProperty.DrugAddiction);
+        FortitudeProportion = Player.GetEnchantProperty(EnchantProperty.Fortitude);
+        NeutralizationProportion = Player.GetEnchantProperty(EnchantProperty.Neutralization);
+        CowerProportion = Player.GetEnchantProperty(EnchantProperty.Cower);
+        EliteHuntingProportion = Player.GetEnchantProperty(EnchantProperty.Cower);
+
         if (Player.MyWeapon != null)
             SetEquipIcon(Player.MyWeapon);
         if (AttackRangeProportion > 0)
@@ -336,6 +442,13 @@ public partial class PlayerRole : Role
     {
         StartGenerateShield = true;
     }
+    protected override void Burn()
+    {
+        BurningTimer.StartRunTimer = true;
+        int damage = (int)(MaxHealth * GameSettingData.BurnDamage);
+        damage = (int)(damage * (1 - FireResistanceProportion));
+        ReceiveDmg(ref damage);
+    }
     void SetSelfCure()
     {
         SelfCureIntervalTimer.RestartCountDown();
@@ -374,6 +487,14 @@ public partial class PlayerRole : Role
         {
             MyRigi.drag = StopDrag;
         }
+    }
+    //重新化身為英雄ReAvatarProportion
+    public void ReAvatar()
+    {
+        IsAvatar = true;
+        AvatarTimer = 30;
+        AniPlayer.PlayTrigger("Idle", 0);
+        EffectEmitter.EmitParticle(AvatarRemoveEffect, Vector3.zero, Vector3.zero, transform);
     }
     public void AttackMotion()
     {
@@ -455,6 +576,12 @@ public partial class PlayerRole : Role
             Health = 0;
             Shield = 0;
         }
+        //寒冰甲(冰凍時減少受到的傷害)
+        if (IceArmorProportion > 0 && BuffersExist(RoleBuffer.Freeze))
+            _dmg = (int)(_dmg * (1 - IceArmorProportion));
+        //堅毅(暈眩時減少受到的傷害)
+        if (FortitudeProportion > 0 && BuffersExist(RoleBuffer.Stun))
+            _dmg = (int)(_dmg * (1 - FortitudeProportion));
         base.BeAttack(_attackerForce, ref _dmg, _force);
     }
     public override void ReceiveDmg(ref int _dmg)
@@ -481,7 +608,8 @@ public partial class PlayerRole : Role
         if (Shield != 0)
         {
             if (CurBeHitEffect) Destroy(CurBeHitEffect.gameObject);
-            if (BeHitEffect_Shield) CurBeHitEffect = EffectEmitter.EmitParticle(BeHitEffect_Shield, Vector2.zero, Vector3.zero, transform);
+            if (_dmg > 0)
+                if (BeHitEffect_Shield) CurBeHitEffect = EffectEmitter.EmitParticle(BeHitEffect_Shield, Vector2.zero, Vector3.zero, transform);
             //Damage Shield
             if (_dmg >= Shield)
             {
@@ -589,8 +717,17 @@ public partial class PlayerRole : Role
                         {
                             RushTimer.StartRunTimer = true;
                             OnRushTimer.StartRunTimer = true;
+                            //寫少時衝刺CD減少
+                            if (DashForLifeProportion > 0)
+                            {
+                                if (HealthRatio < DashForLifeProportion)
+                                    RushTimer.ResetMaxTime(RushCD - 0.5f);
+                                else
+                                    RushTimer.ResetMaxTime(RushCD);
+                            }
                             CanRush = false;
                             OnRush = true;
+                            ExtraMoveSpeed += InertiaPlus;
                             Vector2 rushForce;
                             if (xMoveForce == 0 && yMoveForce == 0)
                             {
@@ -602,6 +739,7 @@ public partial class PlayerRole : Role
                             MyRigi.velocity = rushForce;
                             //MyRigi.AddForce(rushForce);
                             AudioPlayer.PlaySound(RushSound);
+                            //衝刺傷害增加特效
                             if (LethalDashProportion > 0)
                                 EffectEmitter.EmitParticle(GameManager.GM.LethalDashParticle, Vector3.zero, Vector3.zero, transform);
                         }
@@ -666,14 +804,34 @@ public partial class PlayerRole : Role
     }
     public override void AddBuffer(BufferData _buffer)
     {
-        if (BuffersExist(ElementalBuff))
+        if (MyEnum.CheckEnumExistInArray<RoleBuffer>(ElementalBuff, _buffer.Type))
         {
-            if (ShieldRatio < 0 || !ProbabilityGetter.GetResult(ConservationOfMassProportion))
-                base.AddBuffer(_buffer);
-            Shield += MaxShield * AbsorbElementProportion;
+            //護盾存在時有機率免除負面元素效果
+            if (ShieldRatio > 0 && ProbabilityGetter.GetResult(ConservationOfMassProportion))
+            {
+            }
+            else
+            {
+                //在無護盾狀態下受元素攻擊有機率免除效果並恢復護盾
+                if (ShieldRatio <= 0 && ProbabilityGetter.GetResult(AbsorbElementProportion))
+                    Shield += MaxShield * 0.3f;
+                else
+                {
+                    //受到負面元素效果時如果自身已經有其他負面元素狀態時，有機率移除所有的負面元素效果
+                    if (ProbabilityGetter.GetResult(NeutralizationProportion) && BuffersExistExcept(_buffer.Type,ElementalBuff))
+                    {
+                        RemoveBufferByType(ElementalBuff);
+                        EffectEmitter.EmitParticle(GameManager.GM.PurifyParticle, Vector3.zero, Vector3.zero, transform);
+                    }
+                    else
+                        base.AddBuffer(_buffer);
+                }
+            }
         }
         else
+        {
             base.AddBuffer(_buffer);
+        }
     }
     public void Face(int _face)
     {
@@ -683,22 +841,56 @@ public partial class PlayerRole : Role
     }
     public void GetLoot(LootData _data)
     {
+        //煉金術
+        if (ProbabilityGetter.GetResult(AlchemyProportion))
+        {
+            BattleManage.ExtraDropGoldAdd(GameSettingData.GetEnemyDropGold(BattleManage.Floor));
+        }
+        //喝藥水隨機解除元素
+        if (ProbabilityGetter.GetResult(PharmacistProportion))
+        {
+            List<RoleBuffer> keys = new List<RoleBuffer>(Buffers.Keys);
+            for (int i = 0; i < keys.Count; i++)
+            {
+                for (int j = 0; j < ElementalBuff.Length; j++)
+                {
+                    if (Buffers[keys[i]].Type == ElementalBuff[j])
+                    {
+                        RemoveBuffer(Buffers[keys[i]]);
+                        i = keys.Count;
+                        EffectEmitter.EmitParticle(GameManager.GM.PurifyParticle, Vector3.zero, Vector3.zero, transform);
+                        break;
+                    }
+                }
+            }
+        }
+        //喝藥水加速
+        if (ProbabilityGetter.GetResult(DrugFeverProportion))
+        {
+            ExtraMoveSpeed += DrugFeverSpeedUp;
+            EffectEmitter.EmitParticle(GameManager.GM.PotionSpeedUpParticle, Vector3.zero, Vector3.zero, transform);
+        }
         switch (_data.Type)
         {
             case LootType.AvataEnergy:
-                AvatarTimer += _data.Time * (1 + PotionEfficiency) + AvatarPotionBuff;
+                AvatarTimer += _data.Time * (1 + PotionEfficiency) + AvatarPotionBuff + AllergyPlus;
                 break;
             case LootType.DamageUp:
-                AddBuffer(RoleBuffer.DamageUp, _data.Time * (1 + PotionEfficiency), _data.Value);
+                AddBuffer(RoleBuffer.DamageUp, _data.Time * (1 + PotionEfficiency) + AllergyPlus, _data.Value);
                 break;
             case LootType.HPRecovery:
+                if (HealthRatio == 1)
+                {
+                    if (BloodyGoldProportion > 0)
+                        BattleManage.ExtraDropGoldAdd((int)(BloodyGoldProportion * (int)(MaxHealth * _data.Value * (1 + PotionEfficiency))));
+                }
                 HealHP((int)(MaxHealth * _data.Value * (1 + PotionEfficiency)));
                 break;
             case LootType.Immortal:
-                AddBuffer(RoleBuffer.Immortal, _data.Time * (1 + PotionEfficiency));
+                AddBuffer(RoleBuffer.Immortal, _data.Time * (1 + PotionEfficiency) + AllergyPlus);
                 break;
             case LootType.SpeedUp:
-                AddBuffer(RoleBuffer.SpeedUp, _data.Time * (1 + PotionEfficiency), _data.Value);
+                AddBuffer(RoleBuffer.SpeedUp, _data.Time * (1 + PotionEfficiency) + AllergyPlus, _data.Value);
                 break;
         }
         AttackMotion();
@@ -738,7 +930,8 @@ public partial class PlayerRole : Role
         {
             MonsterSkills[_name].enabled = true;
             MonsterSkills[_name].PlayerGetSkill(SkillTimeBuff);
-            ActiveMonsterSkills.Add(MonsterSkills[_name]);
+            if (!ActiveMonsterSkills.Contains(MonsterSkills[_name]))
+                ActiveMonsterSkills.Add(MonsterSkills[_name]);
             if (BuffersExist(RoleBuffer.Freeze))
                 MonsterSkills[_name].Freeze(true);
             if (!MonsterSouls.ContainsKey(_name))
@@ -843,5 +1036,11 @@ public partial class PlayerRole : Role
             MyLight.enabled = true;
         }
         return death;
+    }
+    public void AddAvarTime(float _time)
+    {
+        if (!IsAvatar)
+            return;
+        AvatarTimer += _time;
     }
 }

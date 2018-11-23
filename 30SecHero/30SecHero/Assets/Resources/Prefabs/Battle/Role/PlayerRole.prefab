@@ -108,7 +108,6 @@ GameObject:
   - component: {fileID: 114254621464860768}
   - component: {fileID: 114768325752054400}
   - component: {fileID: 1362518505}
-  - component: {fileID: 3275657168001055663}
   m_Layer: 8
   m_Name: PlayerRole
   m_TagString: Player
@@ -155,7 +154,7 @@ MonoBehaviour:
   HealthBar: {fileID: 0}
   DirectX: 0
   DirectY: 0
-  MaxHealth: 9999999
+  MaxHealth: 1
   BaseDamage: 20
   BaseMoveSpeed: 1000
   DeathEffect: {fileID: 198802542160044040, guid: a6f36c56ed46b58408125e947b5ac7db,
@@ -176,7 +175,7 @@ MonoBehaviour:
     type: 3}
   BeHitEffect: {fileID: 0}
   ExtraAniPlayer: {fileID: 114768325752054400}
-  MaxShield: 1
+  MaxShield: 20
   ShieldBar: {fileID: 0}
   ShieldGenerateProportion: 0.1
   ShieldRechargeTime: 5
@@ -211,7 +210,7 @@ MonoBehaviour:
   RushAntiAmooTime: 0.1
   RushCD: 3
   MyLight: {fileID: 108484094380481612}
-  Blizzard: {fileID: 3275657168001055663}
+  Blizzard: {fileID: 0}
   BlizzardAmmoPrefab: {fileID: 114255117710915984, guid: 5b65695814f87af46a3fc5c33d4cec5d,
     type: 3}
   MyAttack: {fileID: 114391171959625102}
@@ -230,7 +229,29 @@ MonoBehaviour:
   AttackRangeProportion: 0
   CarnivorousProportion: 0
   BerserkerProportion: 0
+  ReflectShieldProportion: 0
   ConservationOfMassProportion: 0
+  ReviveProportion: 0
+  ReflectMeleeDamageProportion: 0
+  AbsorbElementProportion: 0
+  LethalDashProportion: 0
+  InertiaPlus: 0
+  ReversalImpactProportion: 0
+  DashForLifeProportion: 0
+  PharmacistProportion: 0
+  AllergyPlus: 0
+  DrugFeverProportion: 0
+  AlchemyProportion: 0
+  CollectorProportion: 0
+  BloodyGoldProportion: 0
+  HangOnProportion: 0
+  SpeedyJumpProportion: 0
+  BreakDoorGoldProportion: 0
+  ReAvatarProportion: 0
+  TriumphPlus: 0
+  ShepherdProportion: 0
+  OnFireProportion: 0
+  HarvesterProportion: 0
 --- !u!50 &50485858130474148
 Rigidbody2D:
   serializedVersion: 4
@@ -295,39 +316,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MyAni: {fileID: 95403725756714948}
 --- !u!114 &1362518505
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1103968850550592}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d51ff43f4f2a15c45b55bbca6d530f8f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Description: 
-  BehaviorSkill: 1
-  PSkillName: Blizzard
-  PSkillDuration: 999
-  DetecteRadius: 1200
-  DamagePercent: 0
-  AttackStopMove: 0
-  StopMoveTime: 0
-  PSkillTimer: 0
-  IsPlayerGetSkill: 0
-  AttackOnce: 0
-  Interval: 2
-  AmmoNum: 1
-  AmmoInterval: 0
-  StartAngle: 0
-  AngleInterval: 0
-  Patetern: 0
-  SpawnedInSelf: 0
-  AttackPrefab: {fileID: 114255117710915984, guid: 5b65695814f87af46a3fc5c33d4cec5d,
-    type: 3}
-  AttackRadius: 0
---- !u!114 &3275657168001055663
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

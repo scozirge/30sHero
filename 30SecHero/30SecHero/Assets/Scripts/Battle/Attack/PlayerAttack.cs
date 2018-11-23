@@ -30,17 +30,34 @@ public class PlayerAttack : MonoBehaviour
         {
             if (Attacker.IsAvatar)
             {
+                EnemyRole er = _col.GetComponent<EnemyRole>();
                 float extraDamageProportion = 0;
-                if (Attacker.HealthRatio<0.4f && ProbabilityGetter.GetResult(Attacker.BerserkerProportion))
+                //生命低時機率強化傷害
+                if (Attacker.HealthRatio < 0.4f && ProbabilityGetter.GetResult(Attacker.BerserkerProportion))
                 {
-                    extraDamageProportion+=0.5f;
+                    extraDamageProportion += 0.5f;
                     Attacker.SetBerserkerBladeLight(true);
                 }
                 else
                     Attacker.SetBerserkerBladeLight(false);
+                //衝刺加傷害
                 if (Attacker.OnRush)
                     extraDamageProportion += Attacker.LethalDashProportion;
-                EnemyRole er = _col.GetComponent<EnemyRole>();
+                //火焰刀增加傷害&特效
+                if (Attacker.BuffersExist(RoleBuffer.Burn))
+                {
+                    extraDamageProportion += Attacker.FireBladeProportion;
+                    EffectEmitter.EmitParticle(GameManager.GM.FireBladeParticle, er.transform.position, Vector3.zero, null);
+                }
+                //菁英獵殺
+                if(Attacker.EliteHuntingProportion>0)
+                {
+                    if (Attacker.LastTarget.Hit(er))
+                    {
+                        extraDamageProportion += Attacker.EliteHuntingProportion;
+                        EffectEmitter.EmitParticle(GameManager.GM.ClawParticle, Vector3.zero, Vector3.zero, er.transform);
+                    }
+                }
                 BeforeAttackAction(er);
                 Vector2 force = (er.transform.position - transform.position).normalized * KnockForce;
                 int causeDamage = (int)(Attacker.Damage * DamagePercent * (1 + extraDamageProportion));
@@ -49,7 +66,7 @@ public class PlayerAttack : MonoBehaviour
                 if (er.IsAlive)
                 {
                     Attacker.BumpingAttack();
-                    AfterAttackAction(er);
+                    AfterAttackAction_TargetAlive(er);
                 }
                 else
                 {
@@ -60,11 +77,12 @@ public class PlayerAttack : MonoBehaviour
                     faceDir = -1;
                 Attacker.Face(faceDir);
                 Attacker.AttackMotion();
-                //SpawnAttackEffect
-                if (!AttackEffect)
-                    return;
-                Vector2 pos = Vector2.Lerp(er.transform.position, Attacker.transform.position, 0.5f);
-                EffectEmitter.EmitParticle(AttackEffect, pos, Vector3.zero, null);
+                //刀子特效
+                if (AttackEffect)
+                {
+                    Vector2 pos = Vector2.Lerp(er.transform.position, Attacker.transform.position, 0.5f);
+                    EffectEmitter.EmitParticle(AttackEffect, pos, Vector3.zero, null);
+                }
             }
             else
                 Attacker.BumpingAttack();
@@ -73,7 +91,7 @@ public class PlayerAttack : MonoBehaviour
     void BeforeAttackAction(EnemyRole _er)
     {
     }
-    void AfterAttackAction(EnemyRole _er)
+    void AfterAttackAction_TargetAlive(EnemyRole _er)
     {
         if (ProbabilityGetter.GetResult(Attacker.BurningWeaponProportion))
             _er.AddBuffer(RoleBuffer.Burn, 5);
@@ -83,6 +101,7 @@ public class PlayerAttack : MonoBehaviour
             _er.AddBuffer(RoleBuffer.Freeze, 5);
         if (ProbabilityGetter.GetResult(Attacker.StunningSlashProportion))
             _er.AddBuffer(RoleBuffer.Stun, 1.5f);
+
     }
     void TargetDieAction(EnemyRole _er)
     {

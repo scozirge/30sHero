@@ -63,6 +63,28 @@ public partial class GameManager : MonoBehaviour
     [Tooltip("強化衝刺傷害特效")]
     [SerializeField]
     public ParticleSystem LethalDashParticle;
+    [Tooltip("子彈反彈特效")]
+    [SerializeField]
+    public ParticleSystem AmmoReverseParticle;
+    [Tooltip("淨化(消除負面)特效")]
+    [SerializeField]
+    public ParticleSystem PurifyParticle;
+    [Tooltip("吃藥水加速特效")]
+    [SerializeField]
+    public ParticleSystem PotionSpeedUpParticle;
+    [Tooltip("火焰刀特效")]
+    [SerializeField]
+    public ParticleSystem FireBladeParticle;
+    [Tooltip("爪子特效")]
+    [SerializeField]
+    public ParticleSystem ClawParticle;
+
+
+
+    [Tooltip("獲得金幣聲音")]
+    [SerializeField]
+    public AudioClip CoinSound;
+
 
     public static GameManager GM;
     static Sprite[] QualityBotSprites;

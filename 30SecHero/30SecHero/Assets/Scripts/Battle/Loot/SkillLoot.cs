@@ -19,6 +19,17 @@ public class SkillLoot : Loot
         Name = _name;
         EffectEmitter.EmitParticle(ExistEffect, Vector2.zero, Vector3.zero, transform);
     }
+    protected override void Start()
+    {
+        base.Start();
+        //牧羊人
+        if (BattleManage.BM.MyPlayer.CollectorProportion > 0)
+        {
+            AILootMove alm = GetComponent<AILootMove>();
+            if (alm != null)
+                alm.AbsorbRadius = (int)(alm.AbsorbRadius * (1 + BattleManage.BM.MyPlayer.ShepherdProportion));
+        }
+    }
     public void SetPic(string _spritePath)
     {
         if (SoulIcon != null || _spritePath == "")

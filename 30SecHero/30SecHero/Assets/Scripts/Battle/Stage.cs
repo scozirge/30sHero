@@ -124,6 +124,22 @@ public partial class BattleManage
     }
     public static void SpawnNextGate(int _destroyedFloor)
     {
+        //史萊姆狀態衝撞城門有機會獲得額外金幣
+        if (!BM.MyPlayer.IsAvatar && ProbabilityGetter.GetResult(BM.MyPlayer.BreakDoorGoldProportion))
+        {
+            ExtraDropGoldAdd(GameSettingData.FloorPassGold * Floor);
+        }
+        //史萊姆衝撞城門有機會變回英雄
+        if (!BM.MyPlayer.IsAvatar && ProbabilityGetter.GetResult(BM.MyPlayer.ReAvatarProportion))
+        {
+            BM.MyPlayer.ReAvatar();
+        }
+        //英雄衝撞城門獲得變身時間
+        if (BM.MyPlayer.IsAvatar)
+        {
+            BM.MyPlayer.AddAvarTime(BM.MyPlayer.TriumphPlus);
+        }
+
         TransferToGainEquipDataList();//將目前吃到的裝備加到獲得裝備清單中
         if (Floor > _destroyedFloor)//上一層
         {

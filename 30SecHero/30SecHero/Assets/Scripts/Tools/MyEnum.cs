@@ -1,11 +1,37 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 using System;
 public class MyEnum : MonoBehaviour
 {
     public static T ParseEnum<T>(string value)
     {
         return (T)Enum.Parse(typeof(T), value, true);
+    }
+    public static bool CheckEnumExistInArray<T>(T[] _array, params T[] _check) where T : struct, IConvertible
+    {
+        for (int i = 0; i < _array.Length; i++)
+        {
+            for (int j = 0; j < _check.Length; j++)
+            {
+                if (_array[i].GetType() == _check[j].GetType())
+                    return true;
+            }
+        }
+        return false;
+    }
+    public static bool CheckEnumExistInDicKeys<T,U>(Dictionary<T,U> _dic, params T[] _check) where T : struct, IConvertible
+    {
+        T[] array = _dic.Keys.ToArray();
+        for (int i = 0; i < array.Length; i++)
+        {
+            for (int j = 0; j < _check.Length; j++)
+            {
+                if (array[i].GetType() == _check[j].GetType())
+                    return true;
+            }
+        }
+        return false;
     }
 }

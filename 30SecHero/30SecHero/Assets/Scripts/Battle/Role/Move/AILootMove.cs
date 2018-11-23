@@ -9,7 +9,7 @@ public class AILootMove : AIMove
     protected int MoveSpeed;
     [Tooltip("靠近玩家自動吸過去半徑")]
     [SerializeField]
-    protected int AbsorbRadius;
+    public int AbsorbRadius;
 
     void OnDrawGizmos()
     {

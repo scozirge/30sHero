@@ -71,6 +71,8 @@ public class MeleeAmmo : Ammo
                     EffectEmitter.EmitParticle(GameManager.GM.ReflectMeleeDamageParticle, Attacker.transform.position, Vector2.zero, null);
                 }
             }
+            //幽靈護甲抵抗近戰傷害
+            damage = (int)(damage * (1 - BattleManage.BM.MyPlayer.GhostArmorProportion * BattleManage.BM.MyPlayer.ActiveMonsterSkillCount));
             _role.BeAttack(AttackerRoleTag, ref damage, force);
         }
         if (AmmoType != ShootAmmoType.Permanent)

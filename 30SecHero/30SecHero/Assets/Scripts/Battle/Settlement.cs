@@ -32,6 +32,7 @@ partial class BattleManage
     static int NewFloorGolds;
     static int EnemyKillGolds;
     static int EnemyDropGolds;
+    static int ExtraDropGolds;
     static int BossDropEmeralds;
     static int PassFloorCount;
     static int PassNewFloorCount;
@@ -50,6 +51,7 @@ partial class BattleManage
         NewFloorGolds = 0;
         EnemyKillGolds = 0;
         EnemyDropGolds = 0;
+        ExtraDropGolds = 0;
         BossDropEmeralds = 0;
         PassFloorCount = 0;
         MaxFloor = 0;
@@ -62,9 +64,15 @@ partial class BattleManage
 
     public static void EnemyDropGoldAdd(int _gold)
     {
+        AudioPlayer.PlaySound(GameManager.GM.CoinSound);
         EnemyDropGolds += _gold;
         //Debug.Log("_gold=" + _gold);
         //Debug.Log("EnemyKillGolds=" + EnemyKillGolds);
+    }
+    public static void ExtraDropGoldAdd(int _gold)
+    {
+        AudioPlayer.PlaySound(GameManager.GM.CoinSound);
+        ExtraDropGolds += _gold;
     }
     public static void BossDropEmeraldAdd(int _emerald)
     {
@@ -95,9 +103,9 @@ partial class BattleManage
             PassNewFloorCount = MaxFloor - Player.MaxFloor;
         }
         MaxFloor = (MaxFloor > Player.MaxFloor) ? MaxFloor : Player.MaxFloor;
-        NewFloorGolds = (PassFloorCount * GameSettingData.FloorPassGold) + (PassNewFloorCount * GameSettingData.NewFloorPassGold);
+        NewFloorGolds = (PassFloorCount * GameSettingData.FloorPassGold * Floor) + (PassNewFloorCount * GameSettingData.NewFloorPassGold * Floor);
         EnemyKillGolds = EnemyKill * GameSettingData.EnemyGold;
-        TotalGold = NewFloorGolds + EnemyKillGolds + EnemyDropGolds;
+        TotalGold = NewFloorGolds + EnemyKillGolds + EnemyDropGolds + ExtraDropGolds;
         TotalEmerald = BossDropEmeralds;
         //寫入資料
         if (Player.LocalData)

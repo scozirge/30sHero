@@ -86,6 +86,18 @@ MonoBehaviour:
   ReflectMeleeDamageParticle: {fileID: 198308960938074910, guid: 6ebb3848cff528744a0ce66822bd1588,
     type: 3}
   LethalDashParticle: {fileID: 19845390, guid: 191d87ace6e57d44e9b37f5fc03dc313, type: 3}
+  AmmoReverseParticle: {fileID: 198308960938074910, guid: 6ebb3848cff528744a0ce66822bd1588,
+    type: 3}
+  PurifyParticle: {fileID: 19853170, guid: aeae11348bcbbd14085146e7eada4934, type: 3}
+  PotionSpeedUpParticle: {fileID: 8478956299372493332, guid: 407c3f78e47699c43ad723613d60c933,
+    type: 3}
+  FireBladeParticle: {fileID: 5032451727838045151, guid: d0ea89a2a61b1554c93065b484456298,
+    type: 3}
+  AimParticle: {fileID: 198308960938074910, guid: 0b1d0f6dcabc68d4fac4b535d7ab60d7,
+    type: 3}
+  ClawParticle: {fileID: 198308960938074910, guid: 88993d5df4c3dcc4484c5bec248776dd,
+    type: 3}
+  CoinSound: {fileID: 8300000, guid: 7657e4ce488f6ea47bff3bf74ef0b31e, type: 3}
 --- !u!114 &114495893002156964
 MonoBehaviour:
   m_ObjectHideFlags: 0

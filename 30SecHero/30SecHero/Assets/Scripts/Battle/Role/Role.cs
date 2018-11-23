@@ -52,8 +52,8 @@ public abstract class Role : MonoBehaviour
     {
         get
         {
-            return BaseMoveSpeed * (1 + (Buffers.ContainsKey(RoleBuffer.Freeze) ?
-                -GameSettingData.FreezeMove : 0)) + (Buffers.ContainsKey(RoleBuffer.SpeedUp) ? Buffers[RoleBuffer.SpeedUp].Value : 0);
+            return (BaseMoveSpeed + (Buffers.ContainsKey(RoleBuffer.SpeedUp) ? Buffers[RoleBuffer.SpeedUp].Value : 0)) * (1 + (Buffers.ContainsKey(RoleBuffer.Freeze) ?
+                -GameSettingData.FreezeMove : 0));
         }
     }
     [Tooltip("基礎移動速度")]
@@ -83,10 +83,11 @@ public abstract class Role : MonoBehaviour
     [Tooltip("腳色Animator")]
     [SerializeField]
     protected Animator RoleAni;
-    MyTimer BurningTimer;
+    protected MyTimer BurningTimer;
     public float DamageBuff { get; protected set; }
     protected RoleBuffer[] CantMoveBuff = new RoleBuffer[2] { RoleBuffer.Stun, RoleBuffer.EnemyAttacking };
     protected RoleBuffer[] ElementalBuff = new RoleBuffer[3] { RoleBuffer.Burn, RoleBuffer.Freeze, RoleBuffer.DamageDown };
+    protected RoleBuffer[] NegativeBuff = new RoleBuffer[4] { RoleBuffer.Burn, RoleBuffer.Freeze, RoleBuffer.DamageDown, RoleBuffer.Stun };
     public bool IsPreAttack;
     public int ExtraDefence { get; protected set; }
     public bool OnRush;
@@ -94,6 +95,7 @@ public abstract class Role : MonoBehaviour
     public Dictionary<RoleBuffer, BufferData> Buffers = new Dictionary<RoleBuffer, BufferData>();
     Dictionary<RoleBuffer, ParticleSystem> BufferParticles = new Dictionary<RoleBuffer, ParticleSystem>();
     protected List<Skill> ActiveMonsterSkills = new List<Skill>();
+    public int ActiveMonsterSkillCount { get { return ActiveMonsterSkills.Count; } }
 
     protected virtual void Start()
     {
@@ -104,6 +106,7 @@ public abstract class Role : MonoBehaviour
         MyRigi = GetComponent<Rigidbody2D>();
         Skill[] coms = GetComponents<Skill>();
         ActiveMonsterSkills = coms.ToList<Skill>();
+        ActiveMonsterSkills.RemoveAll(item => item.BehaviorSkill == true);
         BurningTimer = new MyTimer(GameSettingData.BurnInterval, Burn, false, false);
         BurningTimer.StartRunTimer = false;
         DragRecovery();
@@ -121,7 +124,7 @@ public abstract class Role : MonoBehaviour
             MyRigi.drag = NormalDrag;
         }
     }
-    void Burn()
+    protected virtual void Burn()
     {
         BurningTimer.StartRunTimer = true;
         int damage = (int)(MaxHealth * GameSettingData.BurnDamage);
@@ -280,10 +283,33 @@ public abstract class Role : MonoBehaviour
         }
         BufferEffectChange(_buffer, false);
     }
+    public void RemoveBufferByType(params RoleBuffer[] _buffers)
+    {
+        List<RoleBuffer> keyList = new List<RoleBuffer>(Buffers.Keys);
+        for (int i = 0; i < _buffers.Length; i++)
+        {
+            for (int j = 0; j < keyList.Count; j++)
+            {
+                if (keyList[j] == _buffers[i])
+                    RemoveBuffer(Buffers[keyList[j]]);
+            }
+        }
+    }
     public bool BuffersExist(params RoleBuffer[] _buffs)
     {
         for (int i = 0; i < _buffs.Length; i++)
         {
+            if (Buffers.ContainsKey(_buffs[i]))
+                return true;
+        }
+        return false;
+    }
+    public bool BuffersExistExcept(RoleBuffer _except, params RoleBuffer[] _buffs)
+    {        
+        for (int i = 0; i < _buffs.Length; i++)
+        {
+            if (_buffs[i] == _except)
+                continue;
             if (Buffers.ContainsKey(_buffs[i]))
                 return true;
         }

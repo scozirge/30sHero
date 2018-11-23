@@ -949,21 +949,15 @@ PrefabInstance:
       propertyPath: MyCamera
       value: 
       objectReference: {fileID: 519420031}
-    - target: {fileID: 114529601492733476, guid: d9e47796d36fc83458ffab41aea6641e,
-        type: 3}
-      propertyPath: TestMode
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114529601492733476, guid: d9e47796d36fc83458ffab41aea6641e,
-        type: 3}
-      propertyPath: MaxHealth
+    - target: {fileID: 1362518505, guid: d9e47796d36fc83458ffab41aea6641e, type: 3}
+      propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114529601492733476, guid: d9e47796d36fc83458ffab41aea6641e,
         type: 3}
-      propertyPath: MaxShield
-      value: 20
-      objectReference: {fileID: 0}
+      propertyPath: Blizzard
+      value: 
+      objectReference: {fileID: 2056349459}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d9e47796d36fc83458ffab41aea6641e, type: 3}
 --- !u!1 &135074929
@@ -7431,7 +7425,7 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 2
-  m_Camera: {fileID: 0}
+  m_Camera: {fileID: 519420031}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -7475,8 +7469,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TestMode: 0
-  EnemyFirstHalfInterval: 0
-  EnemySecondHalfInterval: 0
+  EnemyFirstHalfInterval: 1
+  EnemySecondHalfInterval: 1
   PotionInterval: 5
   EnemyFirstHalfMinCount: 5
   EnemyFirstHalfMaxCount: 5
@@ -7494,7 +7488,7 @@ MonoBehaviour:
   - {fileID: 114485926508205134, guid: 36509ae15283f0b4b85c7eb28f152231, type: 3}
   - {fileID: 114364750184517408, guid: fd1730034bed914409677edaf33d653c, type: 3}
   - {fileID: 114364750184517408, guid: 4d1f64498757ee445a05825a7c7257a1, type: 3}
-  DesignatedEnemy: {fileID: 114364750184517408, guid: 7a4fcaea190fe1341b551043fc61e7ba,
+  DesignatedEnemy: {fileID: 114965315550208914, guid: 3bde61012c7d5b0439d50cb63c0e7f2f,
     type: 3}
   LootPrefab: {fileID: 114565999483713276, guid: 0384220ed63709741ba419f3ba98af08,
     type: 3}
@@ -9135,6 +9129,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2040757047}
   m_CullTransparentMesh: 0
+--- !u!114 &2056349459 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1362518505, guid: d9e47796d36fc83458ffab41aea6641e,
+    type: 3}
+  m_PrefabInstance: {fileID: 121351811}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d51ff43f4f2a15c45b55bbca6d530f8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2091431467
 GameObject:
   m_ObjectHideFlags: 0
