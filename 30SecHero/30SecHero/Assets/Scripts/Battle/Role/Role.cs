@@ -105,8 +105,8 @@ public abstract class Role : MonoBehaviour
         DragTimer = new MyTimer(KnockDragDuration, DragRecovery, false, false);
         MyRigi = GetComponent<Rigidbody2D>();
         Skill[] coms = GetComponents<Skill>();
-        ActiveMonsterSkills = coms.ToList<Skill>();
-        ActiveMonsterSkills.RemoveAll(item => item.BehaviorSkill == true);
+        //ActiveMonsterSkills = coms.ToList<Skill>();
+        //ActiveMonsterSkills.RemoveAll(item => item.BehaviorSkill == true);
         BurningTimer = new MyTimer(GameSettingData.BurnInterval, Burn, false, false);
         BurningTimer.StartRunTimer = false;
         DragRecovery();

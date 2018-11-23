@@ -30,6 +30,11 @@ public partial class EnemyRole
         ResourceLoot loot = DropSpawner.SpawnResource(transform.position);
         if (loot) loot.Init(ResourceType.Gold, GameSettingData.GetEnemyDropGold(BattleManage.Floor));
     }
+    public void ExtraEmeralddDrop()
+    {
+        ResourceLoot loot = DropSpawner.SpawnResource(transform.position);
+        if (loot) loot.Init(ResourceType.Emerald, GameSettingData.BossEmerald);
+    }
     void Drop()
     {
         GameObject go = GameObject.FindGameObjectWithTag("Player");
@@ -59,18 +64,23 @@ public partial class EnemyRole
         //DropEmerald
         if (Type == EnemyType.Demogorgon)
         {
+            //弒王者(擊殺BOSS有機率獲得寶石)
+            if (ProbabilityGetter.GetResult(BattleManage.BM.MyPlayer.KingKillerProportion))
+            {
+                ExtraEmeralddDrop();
+            }
             if (Player.KillBossID.Contains(ID))
             {
                 if (ProbabilityGetter.GetResult(GameSettingData.BossEmeraldProportion))
                 {
                     ResourceLoot loot = DropSpawner.SpawnResource(transform.position);
-                    if (loot) loot.Init(ResourceType.Emerald, GameSettingData.BossEmerald + BattleManage.Floor);
+                    if (loot) loot.Init(ResourceType.Emerald, GameSettingData.BossEmerald);
                 }
             }
             else
             {
                 ResourceLoot loot = DropSpawner.SpawnResource(transform.position);
-                if (loot) loot.Init(ResourceType.Emerald, GameSettingData.NewBossEmerald * BattleManage.Floor);
+                if (loot) loot.Init(ResourceType.Emerald, GameSettingData.NewBossEmerald);
             }
         }
         //DropLoot;

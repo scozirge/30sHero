@@ -33,6 +33,7 @@ partial class BattleManage
     static int EnemyKillGolds;
     static int EnemyDropGolds;
     static int ExtraDropGolds;
+    static float GoldsMultiple;
     static int BossDropEmeralds;
     static int PassFloorCount;
     static int PassNewFloorCount;
@@ -52,9 +53,11 @@ partial class BattleManage
         EnemyKillGolds = 0;
         EnemyDropGolds = 0;
         ExtraDropGolds = 0;
+        GoldsMultiple = 0;
         BossDropEmeralds = 0;
         PassFloorCount = 0;
         MaxFloor = 0;
+
 
         TotalGold = 0;
         TotalEmerald = 0;
@@ -76,6 +79,7 @@ partial class BattleManage
     }
     public static void BossDropEmeraldAdd(int _emerald)
     {
+        AudioPlayer.PlaySound(GameManager.GM.CoinSound);
         BossDropEmeralds += _emerald;
         //Debug.Log("_emerald=" + _emerald);
         //Debug.Log("BossDropEmeralds=" + BossDropEmeralds);
@@ -102,10 +106,12 @@ partial class BattleManage
         {
             PassNewFloorCount = MaxFloor - Player.MaxFloor;
         }
+        //尋寶專家(根據撞碰的城門增加獲得金幣百分比)
+        GoldsMultiple = PassFloorCount * MyPlayer.TreasureHuntingProportion;
         MaxFloor = (MaxFloor > Player.MaxFloor) ? MaxFloor : Player.MaxFloor;
         NewFloorGolds = (PassFloorCount * GameSettingData.FloorPassGold * Floor) + (PassNewFloorCount * GameSettingData.NewFloorPassGold * Floor);
         EnemyKillGolds = EnemyKill * GameSettingData.EnemyGold;
-        TotalGold = NewFloorGolds + EnemyKillGolds + EnemyDropGolds + ExtraDropGolds;
+        TotalGold = (int)((NewFloorGolds + EnemyKillGolds + EnemyDropGolds + ExtraDropGolds) * (1 + GoldsMultiple));
         TotalEmerald = BossDropEmeralds;
         //寫入資料
         if (Player.LocalData)
@@ -178,6 +184,9 @@ partial class BattleManage
     public static void AddBossKill()
     {
         BossKill++;
+        //不屈勇者(擊殺BOSS獲得額外變身秒數)
+        BM.MyPlayer.AvatarTimer += BM.MyPlayer.CouragePlus;
+        BattleManage.BM.MyPlayer.AvatarTimer += BattleManage.BM.MyPlayer.CouragePlus;
     }
     public static void AddUnlockPartner()
     {

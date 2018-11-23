@@ -15,7 +15,7 @@ public partial class EnemyRole : Role
     public int ID { get; protected set; }
     public string Name { get; protected set; }
     public int DebutFloor { get; protected set; }
-    public EnemyType Type { get; protected set; }
+    public EnemyType Type;
     protected const float FrictionDuringTime = 1;
     protected float FrictionDuringTimer = FrictionDuringTime;
     protected bool StartVelocityDecay;

@@ -108,6 +108,7 @@ GameObject:
   - component: {fileID: 114254621464860768}
   - component: {fileID: 114768325752054400}
   - component: {fileID: 1362518505}
+  - component: {fileID: 6962039934583892858}
   m_Layer: 8
   m_Name: PlayerRole
   m_TagString: Player
@@ -210,7 +211,7 @@ MonoBehaviour:
   RushAntiAmooTime: 0.1
   RushCD: 3
   MyLight: {fileID: 108484094380481612}
-  Blizzard: {fileID: 0}
+  Blizzard: {fileID: 1362518505}
   BlizzardAmmoPrefab: {fileID: 114255117710915984, guid: 5b65695814f87af46a3fc5c33d4cec5d,
     type: 3}
   MyAttack: {fileID: 114391171959625102}
@@ -222,6 +223,8 @@ MonoBehaviour:
   - {fileID: 3502190818260683149}
   FaceLeftOrRight: 0
   ClosestEnemy: {fileID: 0}
+  ExtralGoldDropProportion: 0
+  SelfCureProportion: 0
   BurningWeaponProportion: 0
   PoisonedWeaponProportion: 0
   FrozenWeaponProportion: 0
@@ -252,6 +255,23 @@ MonoBehaviour:
   ShepherdProportion: 0
   OnFireProportion: 0
   HarvesterProportion: 0
+  GhostShelterProportion: 0
+  GhostArmorProportion: 0
+  FireResistanceProportion: 0
+  FireBladeProportion: 0
+  FreezeResistanceProportion: 0
+  IceArmorProportion: 0
+  PoisonResistantProportion: 0
+  DrugAddictionPlus: 0
+  FortitudeProportion: 0
+  NeutralizationProportion: 0
+  CowerProportion: 0
+  EliteHuntingProportion: 0
+  LightHouseProportion: 0
+  TreasureHuntingProportion: 0
+  CouragePlus: 0
+  KingKillerProportion: 0
+  RuleBreakerPlus: 0
 --- !u!50 &50485858130474148
 Rigidbody2D:
   serializedVersion: 4
@@ -327,8 +347,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d51ff43f4f2a15c45b55bbca6d530f8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Description: 
-  BehaviorSkill: 1
+  Description: "\u5BD2\u51B0\u885D\u64CA"
+  BehaviorSkill: 0
   PSkillName: Blizzard
   PSkillDuration: 999
   DetecteRadius: 1200
@@ -348,6 +368,35 @@ MonoBehaviour:
   AttackPrefab: {fileID: 114255117710915984, guid: 5b65695814f87af46a3fc5c33d4cec5d,
     type: 3}
   AttackRadius: 0
+--- !u!114 &6962039934583892858
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1103968850550592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93af7bc91be862f449479503ac62bdc8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Description: "\u518D\u751F"
+  BehaviorSkill: 0
+  PSkillName: 
+  PSkillDuration: 0
+  DetecteRadius: 100
+  DamagePercent: 1
+  AttackStopMove: 0
+  StopMoveTime: 0
+  PSkillTimer: 0
+  IsPlayerGetSkill: 0
+  SupportOnce: 0
+  Interval: 10
+  TargetCount: 1
+  AmmoInterval: 1
+  SupplyPrefab: {fileID: 0}
+  SelfTarget: 1
+  SpellToSupportTarget: 1
 --- !u!1 &1131648973560484
 GameObject:
   m_ObjectHideFlags: 0

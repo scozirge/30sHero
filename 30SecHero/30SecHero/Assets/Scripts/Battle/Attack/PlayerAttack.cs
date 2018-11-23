@@ -105,10 +105,12 @@ public class PlayerAttack : MonoBehaviour
     }
     void TargetDieAction(EnemyRole _er)
     {
-        if (ProbabilityGetter.GetResult(Player.GetEnchantProperty(EnchantProperty.ExtralGoldDrop)))
+        //點石成金(刀子擊殺有機率掉落金幣)
+        if (ProbabilityGetter.GetResult(Attacker.ExtralGoldDropProportion))
         {
             _er.ExtralGoldDrop();
         }
+        //肉食(刀子殺怪增加最大血量)
         if (Attacker.CarnivorousProportion > 0)
             Attacker.ExtendMaxHP((int)(Attacker.CarnivorousProportion * Attacker.MaxHealth));
     }

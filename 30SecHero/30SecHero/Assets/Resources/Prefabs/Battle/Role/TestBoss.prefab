@@ -785,6 +785,7 @@ MonoBehaviour:
   HealthObj: {fileID: 1597795968977402}
   PlayMotionDuration: 0.5
   InitBuffers: []
+  Type: 1
 --- !u!50 &50786333864482318
 Rigidbody2D:
   serializedVersion: 4

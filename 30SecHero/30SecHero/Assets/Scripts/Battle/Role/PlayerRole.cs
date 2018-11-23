@@ -210,8 +210,6 @@ public partial class PlayerRole : Role
     MyTimer JumpTimer;
     MyTimer RushTimer;
     MyTimer OnRushTimer;
-    MyTimer SelfCureTimer;
-    MyTimer SelfCureIntervalTimer;
     [HideInInspector]
     public int FaceLeftOrRight;
     Dictionary<string, Skill> MonsterSkills = new Dictionary<string, Skill>();
@@ -220,8 +218,12 @@ public partial class PlayerRole : Role
     public EnemyRole ClosestEnemy;
     bool CanJump;
     bool CanRush;
-    float SelfCureProportion;
-    [HideInInspector]
+
+    //附魔
+    public float ExtralGoldDropProportion;
+    public float NoDamageRecoveryProportion;
+    MyTimer NoDamageRecoveryTimer;
+    MyTimer NoDamageRecoveryIntervalTimer;
     public float BurningWeaponProportion;
     public float PoisonedWeaponProportion;
     public float FrozenWeaponProportion;
@@ -235,7 +237,7 @@ public partial class PlayerRole : Role
     public float ReflectMeleeDamageProportion;
     public float AbsorbElementProportion;
     public float LethalDashProportion;
-    bool IsRevive;//一場戰鬥只會觸發一次復活
+    bool IsTriggerRevive;//一場戰鬥只會觸發一次復活
     public float InertiaPlus;
     public float ReversalImpactProportion;
     public float DashForLifeProportion;
@@ -290,7 +292,15 @@ public partial class PlayerRole : Role
         }
     }
     public LastTargeData LastTarget;
-
+    public float LightHouseProportion;
+    public float TreasureHuntingProportion;
+    public float CouragePlus;
+    public float KingKillerProportion;
+    public float RuleBreakerPlus;
+    bool IsTriggerRuleBreaker;//一場戰鬥只會觸發一次無敵
+    public float SelfCureProportion;
+    public Support SelfCureSkill;
+    public Support SelfCureAmmo;
 
     float BlizzardTime;
     bool CanGenerateBlizzard;
@@ -308,10 +318,10 @@ public partial class PlayerRole : Role
         JumpTimer = new MyTimer(JumpCDTime, SetCanJump, false, false);
         RushTimer = new MyTimer(RushCD, SetCanRush, false, false);
         OnRushTimer = new MyTimer(RushAntiAmooTime, SetNotOnRush, false, false);
-        if (SelfCureProportion > 0)
+        if (NoDamageRecoveryProportion > 0)
         {
-            SelfCureTimer = new MyTimer(5, SetSelfCure, false, false);
-            SelfCureIntervalTimer = new MyTimer(1, SelfCure, true, true);
+            NoDamageRecoveryTimer = new MyTimer(5, SetSelfCure, false, false);
+            NoDamageRecoveryIntervalTimer = new MyTimer(1, NoDamageRecovery, true, true);
         }
         ShieldBarWidth = ShieldBar.rect.width;
         Health = MaxHealth;
@@ -321,7 +331,8 @@ public partial class PlayerRole : Role
         IsAvatar = true;
         CanJump = true;
         CanRush = true;
-        IsRevive = false;
+        IsTriggerRevive = false;
+        IsTriggerRuleBreaker = false;
     }
     void InitPlayerProperties()
     {
@@ -345,8 +356,11 @@ public partial class PlayerRole : Role
         PotionEfficiency = (float)Player.GetProperties(RoleProperty.PotionEfficiency);
         PotionDrop = (float)Player.GetProperties(RoleProperty.PotionDrop);
         GainMoveFromKilling = (int)Player.GetProperties(RoleProperty.GainMoveFromKilling);
+
+        //附魔
+        ExtralGoldDropProportion = Player.GetEnchantProperty(EnchantProperty.ExtralGoldDrop);
         RushCD = (float)Player.GetProperties(RoleProperty.RushCD) - Player.GetEnchantProperty(EnchantProperty.RushCDResuce);
-        SelfCureProportion = Player.GetEnchantProperty(EnchantProperty.NoDamageRecovery);
+        NoDamageRecoveryProportion = Player.GetEnchantProperty(EnchantProperty.NoDamageRecovery);
         BlizzardTime = Player.GetEnchantProperty(EnchantProperty.ShockWave);
         BurningWeaponProportion = Player.GetEnchantProperty(EnchantProperty.BurningWeapon);
         PoisonedWeaponProportion = Player.GetEnchantProperty(EnchantProperty.PoisonedWeapon);
@@ -394,7 +408,19 @@ public partial class PlayerRole : Role
         FortitudeProportion = Player.GetEnchantProperty(EnchantProperty.Fortitude);
         NeutralizationProportion = Player.GetEnchantProperty(EnchantProperty.Neutralization);
         CowerProportion = Player.GetEnchantProperty(EnchantProperty.Cower);
-        EliteHuntingProportion = Player.GetEnchantProperty(EnchantProperty.Cower);
+        EliteHuntingProportion = Player.GetEnchantProperty(EnchantProperty.EliteHunting);
+        LightHouseProportion = Player.GetEnchantProperty(EnchantProperty.LightHouse);
+        if (LightHouseProportion > 0)
+            MyLight.range = MyLight.range * (1 + LightHouseProportion);
+        TreasureHuntingProportion = Player.GetEnchantProperty(EnchantProperty.TreasureHunting);
+        CouragePlus = Player.GetEnchantProperty(EnchantProperty.Courage);
+        KingKillerProportion = Player.GetEnchantProperty(EnchantProperty.KingKiller);
+        RuleBreakerPlus = Player.GetEnchantProperty(EnchantProperty.RuleBreaker);
+        SelfCureProportion = Player.GetEnchantProperty(EnchantProperty.SelfCure);
+        if (SelfCureProportion>0)
+        {
+            SelfCureSkill.BehaviorSkill = false;
+        }
 
         if (Player.MyWeapon != null)
             SetEquipIcon(Player.MyWeapon);
@@ -451,12 +477,12 @@ public partial class PlayerRole : Role
     }
     void SetSelfCure()
     {
-        SelfCureIntervalTimer.RestartCountDown();
-        SelfCureIntervalTimer.StartRunTimer = true;
+        NoDamageRecoveryIntervalTimer.RestartCountDown();
+        NoDamageRecoveryIntervalTimer.StartRunTimer = true;
     }
-    void SelfCure()
+    void NoDamageRecovery()
     {
-        HealHP((int)(MaxHealth * SelfCureProportion));
+        HealHP((int)(MaxHealth * NoDamageRecoveryProportion));
     }
     public void SetBerserkerBladeLight(bool _bool)
     {
@@ -544,10 +570,10 @@ public partial class PlayerRole : Role
         JumpTimer.RunTimer();
         RushTimer.RunTimer();
         OnRushTimer.RunTimer();
-        if (SelfCureTimer != null)
+        if (NoDamageRecoveryTimer != null)
         {
-            SelfCureTimer.RunTimer();
-            SelfCureIntervalTimer.RunTimer();
+            NoDamageRecoveryTimer.RunTimer();
+            NoDamageRecoveryIntervalTimer.RunTimer();
         }
         MonsterSkillTimerFunc();
         ShieldGenerate();
@@ -588,11 +614,11 @@ public partial class PlayerRole : Role
     {
         base.ReceiveDmg(ref _dmg);
         //受到傷害解除自癒
-        if (SelfCureTimer != null)
+        if (NoDamageRecoveryTimer != null)
         {
-            SelfCureTimer.RestartCountDown();
-            SelfCureTimer.StartRunTimer = true;
-            SelfCureIntervalTimer.StartRunTimer = false;
+            NoDamageRecoveryTimer.RestartCountDown();
+            NoDamageRecoveryTimer.StartRunTimer = true;
+            NoDamageRecoveryIntervalTimer.StartRunTimer = false;
         }
     }
     void GenerateBlizzard()//破盾時釋放冰風暴(附魔技能)
@@ -615,7 +641,14 @@ public partial class PlayerRole : Role
             {
                 _dmg = (int)(_dmg - Shield);
                 Shield = 0;
+                //護盾破碎釋放冰凍衝擊
                 GenerateBlizzard();
+                //護盾破碎時短暫無敵(一場戰鬥只會觸發一次)
+                if (RuleBreakerPlus > 0 && !IsTriggerRuleBreaker)
+                {
+                    IsTriggerRuleBreaker = true;
+                    AddBuffer(RoleBuffer.Immortal, RuleBreakerPlus);
+                }
             }
             else
             {
@@ -1017,14 +1050,14 @@ public partial class PlayerRole : Role
     }
     protected override bool DeathCheck()
     {
-        if (!IsRevive && Health <= 0)
+        if (!IsTriggerRevive && Health <= 0)
         {
             if (ProbabilityGetter.GetResult(ReviveProportion))
             {
                 Health = 1;
                 AddBuffer(RoleBuffer.Untouch, 1);
                 Shield = MaxShield * 0.5f;
-                IsRevive = true;
+                IsTriggerRevive = true;
             }
         }
         bool death = base.DeathCheck();
