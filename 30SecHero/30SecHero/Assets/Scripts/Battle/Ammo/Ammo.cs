@@ -34,12 +34,12 @@ public partial class Ammo : MonoBehaviour
     protected float DamageInterval = 0.3f;
     [Tooltip("暈眩(秒數)、燃燒(秒數)、冰凍(秒數)、傷害Buff(秒數,增/減值)、無敵(秒數)、格檔(時間,秒數)")]
     [SerializeField]
-    protected BufferData[] Buffers;
+    protected List<BufferData> Buffers;
     [Tooltip("是否會觸發衝刺中的玩家")]
     [SerializeField]
     protected bool TriggerOnRushRole = true;
 
-    
+
     protected bool OutSideDestroy = true;
     protected Force AttackerRoleTag;
     protected Force TargetRoleTag;
@@ -64,16 +64,31 @@ public partial class Ammo : MonoBehaviour
         if (Buffers == null)
             return;
 
-        for (int i = 0; i < Buffers.Length; i++)
+        for (int i = 0; i < Buffers.Count; i++)
         {
             _role.AddBuffer(Buffers[i].GetMemberwiseClone());
         }
     }
     public void SetBuffersTime(float _time)
     {
-        for (int i = 0; i < Buffers.Length; i++)
+        for (int i = 0; i < Buffers.Count; i++)
         {
             Buffers[i].Time = _time;
+        }
+    }
+    public void AddBuffer(params BufferData[] _datas)
+    {
+        for (int j = 0; j < _datas.Length; j++)
+        {
+            for (int i = 0; i < Buffers.Count; i++)
+            {
+                if (Buffers[i].Type == _datas[j].Type)
+                {
+                    Buffers[i] = _datas[j];
+                    break;
+                }
+            }
+            Buffers.Add(_datas[j]);
         }
     }
     public virtual void Init(Dictionary<string, object> _dic)
@@ -109,9 +124,9 @@ public partial class Ammo : MonoBehaviour
     void TurnOffLight()
     {
         Light[] lights = GetComponentsInChildren<Light>();
-        if(lights!=null)
+        if (lights != null)
         {
-            for(int i=0;i<lights.Length;i++)
+            for (int i = 0; i < lights.Length; i++)
             {
                 lights[i].enabled = false;
             }
@@ -195,7 +210,7 @@ public partial class Ammo : MonoBehaviour
     protected virtual void TriggerTarget(Role _role, Vector2 _pos)
     {
         if (HitTargetSound)
-            AudioPlayer.PlaySound(HitTargetSound);            
+            AudioPlayer.PlaySound(HitTargetSound);
         TriggerHitCondition(_role);
         if (HitTargetParticle != null)
             EffectEmitter.EmitParticle(HitTargetParticle, _role.transform.position, Vector3.zero, ParticleParent);

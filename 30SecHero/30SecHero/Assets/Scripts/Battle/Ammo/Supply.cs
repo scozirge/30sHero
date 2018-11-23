@@ -8,6 +8,9 @@ public class Supply : Ammo
     protected float AmmoSpeed;
     [SerializeField]
     protected float TraceFactor;
+    [Tooltip("治癒目標血量百分比")]
+    [SerializeField]
+    public float CureProportion;
 
     protected Vector3 Ammovelocity;
     public override void Init(Dictionary<string, object> _dic)
@@ -48,6 +51,9 @@ public class Supply : Ammo
     {
         if (!CheckReadyToDamageTarget(_role))
             return;
+        if (CureProportion > 0)
+            _role.HealHP((int)(_role.MaxHealth * CureProportion));
+
         if (Value > 0)
             _role.HealHP(Value);
         if (AmmoType != ShootAmmoType.Permanent)

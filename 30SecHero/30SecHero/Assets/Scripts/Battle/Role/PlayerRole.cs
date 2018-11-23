@@ -300,7 +300,7 @@ public partial class PlayerRole : Role
     bool IsTriggerRuleBreaker;//一場戰鬥只會觸發一次無敵
     public float SelfCureProportion;
     public Support SelfCureSkill;
-    public Support SelfCureAmmo;
+    public Supply SelfCureAmmo;
 
     float BlizzardTime;
     bool CanGenerateBlizzard;
@@ -420,6 +420,7 @@ public partial class PlayerRole : Role
         if (SelfCureProportion>0)
         {
             SelfCureSkill.BehaviorSkill = false;
+            SelfCureAmmo.CureProportion = SelfCureProportion;
         }
 
         if (Player.MyWeapon != null)

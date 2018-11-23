@@ -982,6 +982,17 @@ PrefabInstance:
       propertyPath: DamagePercent
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114529601492733476, guid: d9e47796d36fc83458ffab41aea6641e,
+        type: 3}
+      propertyPath: SelfCureSkill
+      value: 
+      objectReference: {fileID: 2056349458}
+    - target: {fileID: 114529601492733476, guid: d9e47796d36fc83458ffab41aea6641e,
+        type: 3}
+      propertyPath: SelfCureAmmo
+      value: 
+      objectReference: {fileID: 114517049925248944, guid: 56c1890e39e69224b90838eb20d5ca32,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d9e47796d36fc83458ffab41aea6641e, type: 3}
 --- !u!1 &135074929
@@ -9153,6 +9164,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2040757047}
   m_CullTransparentMesh: 0
+--- !u!114 &2056349458 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6962039934583892858, guid: d9e47796d36fc83458ffab41aea6641e,
+    type: 3}
+  m_PrefabInstance: {fileID: 121351811}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93af7bc91be862f449479503ac62bdc8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2091431467
 GameObject:
   m_ObjectHideFlags: 0
