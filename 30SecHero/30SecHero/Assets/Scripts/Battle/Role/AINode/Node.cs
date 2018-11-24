@@ -82,7 +82,7 @@ public class Node
     {
         for (int i = 0; i < SkillList.Count; i++)
         {
-            SkillList[i].LaunchAIAttack();
+            SkillList[i].LaunchAISpell();
         }
     }
     public string GetNodeKeyFromWeight()

@@ -32,6 +32,12 @@ public class PlayerAttack : MonoBehaviour
             {
                 EnemyRole er = _col.GetComponent<EnemyRole>();
                 float extraDamageProportion = 0;
+                //衝擊斬(攻擊有機率施放)
+                if (ProbabilityGetter.GetResult(Attacker.ChopStrikeProportion))
+                {
+                    Attacker.ChopStrikeSkill.SetLockDirection(er);
+                    Attacker.ChopStrikeSkill.LaunchAISpell();
+                }
                 //生命低時機率強化傷害
                 if (Attacker.HealthRatio < 0.4f && ProbabilityGetter.GetResult(Attacker.BerserkerProportion))
                 {
@@ -101,7 +107,6 @@ public class PlayerAttack : MonoBehaviour
             _er.AddBuffer(RoleBuffer.Freeze, 5);
         if (ProbabilityGetter.GetResult(Attacker.StunningSlashProportion))
             _er.AddBuffer(RoleBuffer.Stun, 1.5f);
-
     }
     void TargetDieAction(EnemyRole _er)
     {
@@ -113,5 +118,33 @@ public class PlayerAttack : MonoBehaviour
         //肉食(刀子殺怪增加最大血量)
         if (Attacker.CarnivorousProportion > 0)
             Attacker.ExtendMaxHP((int)(Attacker.CarnivorousProportion * Attacker.MaxHealth));
+        //元素擊殺產生爆炸
+        if(_er.BuffersExist(RoleBuffer.Burn))
+        {
+            if (ProbabilityGetter.GetResult(Attacker.FireChopProportion))
+            {
+                Attacker.FireChopSkil.LaunchAISpell();
+            }
+        }
+        else if(_er.BuffersExist(RoleBuffer.Freeze))
+        {
+            if (ProbabilityGetter.GetResult(Attacker.FrozenChopProportion))
+            {
+                Attacker.FrozenChopSkil.LaunchAISpell();
+            }
+        }
+        else if (_er.BuffersExist(RoleBuffer.DamageDown))
+        {
+            if (ProbabilityGetter.GetResult(Attacker.PoisonChopProportion))
+            {
+                Attacker.PoisonChopSkil.LaunchAISpell();
+            }
+        }
+        //機率產生衝擊波
+        if(ProbabilityGetter.GetResult(Attacker.DashImpactProportion))
+        {
+            Attacker.DashImpactSkil.LaunchAISpell();
+        }
+
     }
 }

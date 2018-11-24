@@ -109,6 +109,12 @@ GameObject:
   - component: {fileID: 114768325752054400}
   - component: {fileID: 1362518505}
   - component: {fileID: 6962039934583892858}
+  - component: {fileID: 435051386195516395}
+  - component: {fileID: 1407483692069984467}
+  - component: {fileID: 1699951291}
+  - component: {fileID: 1699951292}
+  - component: {fileID: 1699951293}
+  - component: {fileID: 1699951294}
   m_Layer: 8
   m_Name: PlayerRole
   m_TagString: Player
@@ -224,7 +230,7 @@ MonoBehaviour:
   FaceLeftOrRight: 0
   ClosestEnemy: {fileID: 0}
   ExtralGoldDropProportion: 0
-  SelfCureProportion: 0
+  NoDamageRecoveryProportion: 0
   BurningWeaponProportion: 0
   PoisonedWeaponProportion: 0
   FrozenWeaponProportion: 0
@@ -272,6 +278,22 @@ MonoBehaviour:
   CouragePlus: 0
   KingKillerProportion: 0
   RuleBreakerPlus: 0
+  SelfCureProportion: 0
+  SelfCureSkill: {fileID: 6962039934583892858}
+  SelfCureAmmo: {fileID: 114517049925248944, guid: 56c1890e39e69224b90838eb20d5ca32,
+    type: 3}
+  ChopStrikeProportion: 0
+  ChopStrikeSkill: {fileID: 435051386195516395}
+  FireChopProportion: 0
+  FireChopSkil: {fileID: 1407483692069984467}
+  PoisonChopProportion: 0
+  PoisonChopSkil: {fileID: 1699951292}
+  FrozenChopProportion: 0
+  FrozenChopSkil: {fileID: 1699951291}
+  DashImpactProportion: 0
+  DashImpactSkil: {fileID: 1699951293}
+  SplashThornProportion: 0
+  SplashThornSkil: {fileID: 1699951294}
 --- !u!50 &50485858130474148
 Rigidbody2D:
   serializedVersion: 4
@@ -348,13 +370,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Description: "\u5BD2\u51B0\u885D\u64CA"
-  BehaviorSkill: 0
+  BehaviorSkill: 1
   PSkillName: Blizzard
-  PSkillDuration: 999
+  PSkillDuration: 0
   DetecteRadius: 1200
   DamagePercent: 0
   AttackStopMove: 0
   StopMoveTime: 0
+  SpellSound: {fileID: 0}
   PSkillTimer: 0
   IsPlayerGetSkill: 0
   AttackOnce: 0
@@ -363,6 +386,7 @@ MonoBehaviour:
   AmmoInterval: 0
   StartAngle: 0
   AngleInterval: 0
+  RandomAngle: 0
   Patetern: 0
   SpawnedInSelf: 0
   AttackPrefab: {fileID: 114255117710915984, guid: 5b65695814f87af46a3fc5c33d4cec5d,
@@ -381,22 +405,204 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Description: "\u518D\u751F"
-  BehaviorSkill: 0
+  BehaviorSkill: 1
   PSkillName: 
   PSkillDuration: 0
   DetecteRadius: 100
-  DamagePercent: 1
+  DamagePercent: 0
   AttackStopMove: 0
   StopMoveTime: 0
+  SpellSound: {fileID: 0}
   PSkillTimer: 0
   IsPlayerGetSkill: 0
   SupportOnce: 0
   Interval: 10
   TargetCount: 1
   AmmoInterval: 1
-  SupplyPrefab: {fileID: 0}
+  SupplyPrefab: {fileID: 114517049925248944, guid: 56c1890e39e69224b90838eb20d5ca32,
+    type: 3}
   SelfTarget: 1
   SpellToSupportTarget: 1
+--- !u!114 &435051386195516395
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1103968850550592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3283f1f3a7e6b24db127fb13fd7f595, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Description: "\u885D\u64CA\u65AC"
+  BehaviorSkill: 1
+  PSkillName: 
+  PSkillDuration: 0
+  DetecteRadius: 0
+  DamagePercent: 1.2
+  AttackStopMove: 0
+  StopMoveTime: 0
+  SpellSound: {fileID: 0}
+  PSkillTimer: 0
+  IsPlayerGetSkill: 0
+  AttackOnce: 0
+  Interval: 0
+  AmmoNum: 1
+  AmmoInterval: 0
+  StartAngle: 0
+  AngleInterval: 0
+  RandomAngle: 0
+  Patetern: 5
+  SpawnedInSelf: 0
+  AttackPrefab: {fileID: 114630672538787846, guid: 62675298d0fe1154e99d6ddbf139c374,
+    type: 3}
+--- !u!114 &1407483692069984467
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1103968850550592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91622d248ee865744a5de227b5ecb88a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Description: "\u706B\u7130\u65AC\u64CA"
+  BehaviorSkill: 1
+  PSkillName: 
+  PSkillDuration: 0
+  DetecteRadius: 0
+  DamagePercent: 0.5
+  AttackStopMove: 0
+  StopMoveTime: 0
+  SpellSound: {fileID: 0}
+  PSkillTimer: 0
+  IsPlayerGetSkill: 0
+  Suicide: 0
+  PrepareParticle: []
+  AttackPrefab: {fileID: 114836237506999114, guid: 2fa1f8049a341054fab22931bbd10276,
+    type: 3}
+  PrepareTime: 0
+--- !u!114 &1699951291
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1103968850550592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91622d248ee865744a5de227b5ecb88a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Description: "\u51B0\u971C\u65AC\u64CA"
+  BehaviorSkill: 1
+  PSkillName: 
+  PSkillDuration: 0
+  DetecteRadius: 0
+  DamagePercent: 0.5
+  AttackStopMove: 0
+  StopMoveTime: 0
+  SpellSound: {fileID: 0}
+  PSkillTimer: 0
+  IsPlayerGetSkill: 0
+  Suicide: 0
+  PrepareParticle: []
+  AttackPrefab: {fileID: 114836237506999114, guid: f5eb26b6a3c3476408591e7b9198bb10,
+    type: 3}
+  PrepareTime: 0
+--- !u!114 &1699951292
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1103968850550592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91622d248ee865744a5de227b5ecb88a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Description: "\u5287\u6BD2\u65AC\u64CA"
+  BehaviorSkill: 1
+  PSkillName: 
+  PSkillDuration: 0
+  DetecteRadius: 0
+  DamagePercent: 0.5
+  AttackStopMove: 0
+  StopMoveTime: 0
+  SpellSound: {fileID: 0}
+  PSkillTimer: 0
+  IsPlayerGetSkill: 0
+  Suicide: 0
+  PrepareParticle: []
+  AttackPrefab: {fileID: 114836237506999114, guid: 3d57514312e1634448710b2aa99dc770,
+    type: 3}
+  PrepareTime: 0
+--- !u!114 &1699951293
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1103968850550592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91622d248ee865744a5de227b5ecb88a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Description: DashImpact
+  BehaviorSkill: 1
+  PSkillName: 
+  PSkillDuration: 0
+  DetecteRadius: 0
+  DamagePercent: 0
+  AttackStopMove: 0
+  StopMoveTime: 0
+  SpellSound: {fileID: 0}
+  PSkillTimer: 0
+  IsPlayerGetSkill: 0
+  Suicide: 0
+  PrepareParticle: []
+  AttackPrefab: {fileID: 114836237506999114, guid: 33f22833ebf5c074088347580fa71ead,
+    type: 3}
+  PrepareTime: 0
+--- !u!114 &1699951294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1103968850550592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3283f1f3a7e6b24db127fb13fd7f595, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Description: SplashThorn
+  BehaviorSkill: 1
+  PSkillName: 
+  PSkillDuration: 20
+  DetecteRadius: 1000
+  DamagePercent: 1
+  AttackStopMove: 0
+  StopMoveTime: 0
+  SpellSound: {fileID: 8300000, guid: 23679567866092d4699c3877d21420b9, type: 3}
+  PSkillTimer: 0
+  IsPlayerGetSkill: 0
+  AttackOnce: 0
+  Interval: 0
+  AmmoNum: 10
+  AmmoInterval: 0.001
+  StartAngle: 0
+  AngleInterval: 0
+  RandomAngle: 1
+  Patetern: 0
+  SpawnedInSelf: 0
+  AttackPrefab: {fileID: 114630672538787846, guid: 4dd1b0e6b19d6994683837907aa36334,
+    type: 3}
 --- !u!1 &1131648973560484
 GameObject:
   m_ObjectHideFlags: 0

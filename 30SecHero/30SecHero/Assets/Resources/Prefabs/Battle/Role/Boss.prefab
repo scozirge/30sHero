@@ -178,16 +178,18 @@ MonoBehaviour:
   NormalDrag: 0
   KnockDragDuration: 0.9
   RoleAni: {fileID: 0}
+  IsPreAttack: 0
   OnRush: 0
   DropEquipCount: 1
   DropGoldCount: 1
   DropLootCount: 1
   DesignateLoot: 
-  DropSkillProbility: 1
+  DropSkillProbility: 0.2
   DropSkill: {fileID: 114736416922364804}
   HealthObj: {fileID: 1766157516029884}
   PlayMotionDuration: 0.5
   InitBuffers: []
+  Type: 0
 --- !u!50 &50240295783364808
 Rigidbody2D:
   serializedVersion: 4

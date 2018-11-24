@@ -780,7 +780,7 @@ MonoBehaviour:
   DropGoldCount: 1
   DropLootCount: 1
   DesignateLoot: 
-  DropSkillProbility: 1
+  DropSkillProbility: 0.2
   DropSkill: {fileID: 0}
   HealthObj: {fileID: 1597795968977402}
   PlayMotionDuration: 0.5

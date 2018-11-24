@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-
 public partial class PlayerRole : Role
 {
     [Tooltip("使用測試模式，非測試模式時，玩家數值為讀表")]
     [SerializeField]
     bool TestMode;
+    [LabelOverride("解除變身特效")]
     [Tooltip("解除變身特效")]
     [SerializeField]
     ParticleSystem AvatarRemoveEffect;
@@ -301,6 +301,20 @@ public partial class PlayerRole : Role
     public float SelfCureProportion;
     public Support SelfCureSkill;
     public Supply SelfCureAmmo;
+    public float ChopStrikeProportion;
+    public Shoot ChopStrikeSkill;
+    public float FireChopProportion;
+    public SuicideBombing FireChopSkil;
+    public float PoisonChopProportion;
+    public SuicideBombing PoisonChopSkil;
+    public float FrozenChopProportion;
+    public SuicideBombing FrozenChopSkil;
+    public float DashImpactProportion;
+    public SuicideBombing DashImpactSkil;
+    public float SplashThornProportion;
+    public Shoot SplashThornSkil;
+    
+
 
     float BlizzardTime;
     bool CanGenerateBlizzard;
@@ -422,6 +436,14 @@ public partial class PlayerRole : Role
             SelfCureSkill.BehaviorSkill = false;
             SelfCureAmmo.CureProportion = SelfCureProportion;
         }
+        ChopStrikeProportion = Player.GetEnchantProperty(EnchantProperty.ChopStrike);
+        FireChopProportion = Player.GetEnchantProperty(EnchantProperty.FireChop);
+        PoisonChopProportion = Player.GetEnchantProperty(EnchantProperty.PoisonChop);
+        FrozenChopProportion = Player.GetEnchantProperty(EnchantProperty.FrozenChop);
+        DashImpactProportion = Player.GetEnchantProperty(EnchantProperty.DashImpact);
+        SplashThornProportion = Player.GetEnchantProperty(EnchantProperty.SplashThorn);
+        SplashThornSkil.DamagePercent = SplashThornProportion;
+
 
         if (Player.MyWeapon != null)
             SetEquipIcon(Player.MyWeapon);
@@ -627,7 +649,7 @@ public partial class PlayerRole : Role
         if (!CanGenerateBlizzard)
             return;
         CanGenerateBlizzard = false;
-        Blizzard.LaunchAIAttack();
+        Blizzard.LaunchAISpell();
     }
     protected override void ShieldBlock(ref int _dmg)
     {
@@ -684,6 +706,9 @@ public partial class PlayerRole : Role
             AddBuffer(RoleBuffer.Untouch, UntochableTime);
             IsAvatar = false;
             RemoveAllSill();
+            //飛濺針刺
+            if(SplashThornProportion>0)
+                SplashThornSkil.LaunchAISpell();
             EffectEmitter.EmitParticle(AvatarRemoveEffect, Vector3.zero, Vector3.zero, transform);
             if (MoveAfterimage)
             {

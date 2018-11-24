@@ -949,50 +949,6 @@ PrefabInstance:
       propertyPath: MyCamera
       value: 
       objectReference: {fileID: 519420031}
-    - target: {fileID: 6962039934583892858, guid: d9e47796d36fc83458ffab41aea6641e,
-        type: 3}
-      propertyPath: SupplyPrefab
-      value: 
-      objectReference: {fileID: 114517049925248944, guid: 56c1890e39e69224b90838eb20d5ca32,
-        type: 3}
-    - target: {fileID: 1362518505, guid: d9e47796d36fc83458ffab41aea6641e, type: 3}
-      propertyPath: BehaviorSkill
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1362518505, guid: d9e47796d36fc83458ffab41aea6641e, type: 3}
-      propertyPath: PSkillDuration
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1362518505, guid: d9e47796d36fc83458ffab41aea6641e, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6962039934583892858, guid: d9e47796d36fc83458ffab41aea6641e,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6962039934583892858, guid: d9e47796d36fc83458ffab41aea6641e,
-        type: 3}
-      propertyPath: BehaviorSkill
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6962039934583892858, guid: d9e47796d36fc83458ffab41aea6641e,
-        type: 3}
-      propertyPath: DamagePercent
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114529601492733476, guid: d9e47796d36fc83458ffab41aea6641e,
-        type: 3}
-      propertyPath: SelfCureSkill
-      value: 
-      objectReference: {fileID: 2056349458}
-    - target: {fileID: 114529601492733476, guid: d9e47796d36fc83458ffab41aea6641e,
-        type: 3}
-      propertyPath: SelfCureAmmo
-      value: 
-      objectReference: {fileID: 114517049925248944, guid: 56c1890e39e69224b90838eb20d5ca32,
-        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d9e47796d36fc83458ffab41aea6641e, type: 3}
 --- !u!1 &135074929
@@ -7503,9 +7459,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf3b69d7446504f4da805d7d731903ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TestMode: 0
-  EnemyFirstHalfInterval: 1
-  EnemySecondHalfInterval: 1
+  TestMode: 1
+  EnemyFirstHalfInterval: 0
+  EnemySecondHalfInterval: 0
   PotionInterval: 5
   EnemyFirstHalfMinCount: 5
   EnemyFirstHalfMaxCount: 5
@@ -9164,18 +9120,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2040757047}
   m_CullTransparentMesh: 0
---- !u!114 &2056349458 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6962039934583892858, guid: d9e47796d36fc83458ffab41aea6641e,
-    type: 3}
-  m_PrefabInstance: {fileID: 121351811}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 93af7bc91be862f449479503ac62bdc8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2091431467
 GameObject:
   m_ObjectHideFlags: 0

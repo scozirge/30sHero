@@ -4,5 +4,6 @@
     TowardTarget,
     LeftRight,
     TopDown,
-    FaceDirection
+    FaceDirection,
+    LockDirect
 }

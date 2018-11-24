@@ -46,6 +46,11 @@ public class SuicideBombing : Skill
         base.PlayerGetSkill(_skillTimeBuff);
         Detected = false;
     }
+    public override void LaunchAISpell()
+    {
+        base.LaunchAISpell();
+        Detected = true;
+    }
     protected override void Update()
     {
         base.Update();

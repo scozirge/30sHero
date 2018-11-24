@@ -29,7 +29,7 @@ public class Support : Skill
 
     protected float Timer;
     protected float AmmoIntervalTimer;
-    protected bool IsAttacking;
+    protected bool WaitingToSpawnNextAmmo;
     protected int CurSpawnAmmoNum;
     protected List<Role> SupportTargets;
     bool IsPreAttack = false;
@@ -44,7 +44,10 @@ public class Support : Skill
         CurInterval = Interval;
         Timer = Interval;
     }
-
+    public override void LaunchAISpell()
+    {
+        base.LaunchAISpell();
+    }
     protected override void Update()
     {
         TimerFunc();
@@ -72,12 +75,8 @@ public class Support : Skill
     }
     public override void SpawnAttackPrefab()
     {
-        if (CurSpawnAmmoNum >= SupportTargets.Count)
-        {
-            IsAttacking = false;
-            CurSpawnAmmoNum = 0;
+        if (SupportTargets.Count == 0)
             return;
-        }
         base.SpawnAttackPrefab();
         //Set AmmoData
         AttackDir = (SupportTargets[CurSpawnAmmoNum].transform.position - Myself.transform.position);
@@ -93,6 +92,13 @@ public class Support : Skill
         ammo.transform.position = transform.position;
         ammo.Init(AmmoData);
         CurSpawnAmmoNum++;
+        if (AmmoInterval > 0)
+        {
+            if (CurSpawnAmmoNum < TargetCount)
+            {
+                WaitingToSpawnNextAmmo = true;
+            }
+        }
     }
     protected override void TimerFunc()
     {
@@ -118,15 +124,33 @@ public class Support : Skill
         }
         else
         {
-            IsAttacking = true;
-            IsPreAttack = false;
-            Timer = CurInterval;
-            AttackTimes++;
+            Spell();
         }
+    }
+    public override void Spell()
+    {
+        base.Spell();
+        AutoDetectTarge();
+        SepllToMyself();
+        IsPreAttack = false;
+        Timer = CurInterval;
+        CurSpawnAmmoNum = 0;
+        if (AmmoInterval > 0)//如果子彈間隔時間大於0用計時器去各別創造子彈
+        {
+            SpawnAttackPrefab();
+        }
+        else//如果子彈間隔時間小於等於0就不跑計時器，直接用回圈創造子彈(避免子彈不會同時產生的問題)
+        {
+            for (int i = 0; i < SupportTargets.Count; i++)
+            {
+                SpawnAttackPrefab();
+            }
+        }
+        AttackTimes++;
     }
     protected virtual void AttackExecuteFunc()
     {
-        if (!IsAttacking)
+        if (!WaitingToSpawnNextAmmo)
             return;
         if (AmmoIntervalTimer > 0)
         {
@@ -134,7 +158,7 @@ public class Support : Skill
         }
         else
         {
-            AutoDetectTarge();
+            WaitingToSpawnNextAmmo = false;
             Myself.EndPreAttack();
             SepllToMyself();
             SpawnAttackPrefab();

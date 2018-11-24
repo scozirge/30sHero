@@ -22,13 +22,17 @@ public class Skill : MonoBehaviour
     protected int DetecteRadius = 800;
     [Tooltip("傷害倍率(傷害=傷害倍率x腳色攻擊力))")]
     [SerializeField]
-    protected float DamagePercent = 1;
+    public float DamagePercent = 1;
     [Tooltip("怪物攻擊時是否不要移動")]
     [SerializeField]
     public bool AttackStopMove;
     [Tooltip("停止移動時間")]
     [SerializeField]
     public float StopMoveTime;
+    [Tooltip("施法音效(不管一次施法有幾發子彈都還是只會觸發一次聲音)")]
+    [LabelOverride("施法音效")]
+    [SerializeField]
+    public AudioClip SpellSound;
 
     protected Role Myself;
     protected Dictionary<string, object> AmmoData = new Dictionary<string, object>();
@@ -41,9 +45,11 @@ public class Skill : MonoBehaviour
     protected bool CanAttack;
     public bool IsPlayerGetSkill;
 
-    public virtual void LaunchAIAttack()
+    public virtual void LaunchAISpell()
     {
+        Spell();
     }
+
 
 
     void OnDrawGizmos()
@@ -102,6 +108,11 @@ public class Skill : MonoBehaviour
         AmmoData.Add("DamagePercent", DamagePercent);
         AmmoData.Add("AttackerForce", Myself.MyForce);
         Myself.Attack(this);
+    }
+    public virtual void Spell()
+    {
+        if (SpellSound)
+            AudioPlayer.PlaySound(SpellSound);
     }
     public void InactivePlayerSkill()
     {

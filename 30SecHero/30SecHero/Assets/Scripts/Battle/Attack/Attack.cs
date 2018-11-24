@@ -23,6 +23,10 @@ public class Attack : Skill
     [Tooltip("若子彈數不只一發，每發間隔的角度")]
     [SerializeField]
     protected float AngleInterval;
+     [Tooltip("(Pattern為Default時才有效)若亂數角度為true，就忽略StartAngle跟AngleInterval採用隨機角度")]
+    [LabelOverride("亂數角度")]
+    [SerializeField]
+    protected bool RandomAngle;
     [Tooltip("射擊模式")]
     [SerializeField]
     protected ShootPatetern Patetern;
@@ -32,7 +36,7 @@ public class Attack : Skill
 
     protected float Timer;
     protected float AmmoIntervalTimer;
-    protected bool IsAttacking;
+    protected bool WaitingToSpawnNextAmmo;
     protected int CurSpawnAmmoNum;
     bool IsPreAttack = false;
     protected Vector3 AttackDir = Vector3.zero;
@@ -41,11 +45,6 @@ public class Attack : Skill
     float CurInterval;
 
 
-    public override void LaunchAIAttack()
-    {
-        base.LaunchAIAttack();
-        IsAttacking = true;
-    }
     protected override void Awake()
     {
         base.Awake();
@@ -74,7 +73,14 @@ public class Attack : Skill
         Interval *= (1 - BattleManage.BM.MyPlayer.OnFireProportion);
         base.PlayerInitSkill();
     }
-
+    public void SetLockDirection(Role _role)
+    {
+        float origAngle;
+        Target = _role;
+        AttackDir = (Target.transform.position - Myself.transform.position);
+        origAngle = ((Mathf.Atan2(AttackDir.y, AttackDir.x) * Mathf.Rad2Deg) + (StartAngle + CurSpawnAmmoNum * AngleInterval)) * Mathf.Deg2Rad;
+        AttackDir = new Vector3(Mathf.Cos(origAngle), Mathf.Sin(origAngle), 0).normalized;        
+    }
     public override void SpawnAttackPrefab()
     {
         base.SpawnAttackPrefab();
@@ -84,7 +90,11 @@ public class Attack : Skill
         switch (Patetern)
         {
             case ShootPatetern.Default:
-                float angle = (StartAngle + CurSpawnAmmoNum * AngleInterval) * Mathf.Deg2Rad;
+                float angle;
+                if (RandomAngle)
+                    angle = Random.Range(0, 360) * Mathf.Deg2Rad;
+                else
+                    angle = (StartAngle + CurSpawnAmmoNum * AngleInterval) * Mathf.Deg2Rad;
                 AttackDir = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0).normalized;
                 //AmmoRotation = (Mathf.Atan2(AttackDir.y, AttackDir.x) * Mathf.Rad2Deg) + (StartAngle + CurSpawnAmmoNum * AngleInterval)* Mathf.Deg2Rad;
                 break;
@@ -130,6 +140,8 @@ public class Attack : Skill
                 else
                     AttackDir = Vector2.left;
                 break;
+            case ShootPatetern.LockDirect:
+                break;
         }
 
         if (gameObject.tag == Force.Player.ToString())
@@ -142,11 +154,12 @@ public class Attack : Skill
         AmmoData.Add("Target", Target);
         //AmmoData.Add("AmmoRotation", AmmoRotation);
         CurSpawnAmmoNum++;
-        if (CurSpawnAmmoNum >= AmmoNum)
+        if(AmmoInterval>0)
         {
-            IsAttacking = false;
-            CurSpawnAmmoNum = 0;
-            AttackTimes++;
+            if (CurSpawnAmmoNum < AmmoNum)
+            {
+                WaitingToSpawnNextAmmo = true;
+            }
         }
     }
     bool InRange;
@@ -178,11 +191,28 @@ public class Attack : Skill
         }
         else
         {
-            IsAttacking = true;
-            IsPreAttack = false;
-            InRange = false;
-            Timer = CurInterval;
+            Spell();
         }
+    }
+    public override void Spell()
+    {
+        base.Spell();
+        IsPreAttack = false;
+        InRange = false;
+        Timer = CurInterval;
+        CurSpawnAmmoNum = 0;
+        if (AmmoInterval > 0)//如果子彈間隔時間大於0用計時器去各別創造子彈
+        {
+            SpawnAttackPrefab();
+        }
+        else//如果子彈間隔時間小於等於0就不跑計時器，直接用回圈創造子彈(避免子彈不會同時產生的問題)
+        {
+            for (int i = 0; i < AmmoNum; i++)
+            {
+                SpawnAttackPrefab();
+            }
+        }
+        AttackTimes++;
     }
     public override void Freeze(bool _freeze)
     {
@@ -202,7 +232,7 @@ public class Attack : Skill
     }
     protected virtual void AttackExecuteFunc()
     {
-        if (!IsAttacking)
+        if (!WaitingToSpawnNextAmmo)
             return;
         if (AmmoIntervalTimer > 0)
         {
@@ -210,6 +240,7 @@ public class Attack : Skill
         }
         else
         {
+            WaitingToSpawnNextAmmo = false;
             SpawnAttackPrefab();
             AmmoIntervalTimer = AmmoInterval;
             Myself.EndPreAttack();
