@@ -128,7 +128,7 @@ public class PlayerAttack : MonoBehaviour
         }
         else if(_er.BuffersExist(RoleBuffer.Freeze))
         {
-            if (ProbabilityGetter.GetResult(Attacker.FrozenChopProportion))
+            if (ProbabilityGetter.GetResult(1))//Attacker.FrozenChopProportion
             {
                 Attacker.FrozenChopSkil.LaunchAISpell();
             }

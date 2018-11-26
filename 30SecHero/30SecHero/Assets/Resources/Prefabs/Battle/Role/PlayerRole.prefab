@@ -115,6 +115,8 @@ GameObject:
   - component: {fileID: 1699951292}
   - component: {fileID: 1699951293}
   - component: {fileID: 1699951294}
+  - component: {fileID: 8674507488945032181}
+  - component: {fileID: 5781173221670371357}
   m_Layer: 8
   m_Name: PlayerRole
   m_TagString: Player
@@ -175,7 +177,7 @@ MonoBehaviour:
   RoleAni: {fileID: 95215647531095050}
   IsPreAttack: 0
   OnRush: 0
-  TestMode: 0
+  TestMode: 1
   AvatarRemoveEffect: {fileID: 198023469444164576, guid: 4fa0c17b07dd95f4fac2c50aea787be7,
     type: 3}
   BeHitEffect_Shield: {fileID: 198853811207955838, guid: 48c7fe97ee5fbd0478fa25692681f2f2,
@@ -294,6 +296,10 @@ MonoBehaviour:
   DashImpactSkil: {fileID: 1699951293}
   SplashThornProportion: 0
   SplashThornSkil: {fileID: 1699951294}
+  OverloadProportion: 0
+  OverloadSkil: {fileID: 8674507488945032181}
+  FuryTime: 0
+  FurySkil: {fileID: 5781173221670371357}
 --- !u!50 &50485858130474148
 Rigidbody2D:
   serializedVersion: 4
@@ -533,7 +539,7 @@ MonoBehaviour:
   DamagePercent: 0.5
   AttackStopMove: 0
   StopMoveTime: 0
-  SpellSound: {fileID: 0}
+  SpellSound: {fileID: 8300000, guid: df0ec39bb7429284fb2f1c3413e68098, type: 3}
   PSkillTimer: 0
   IsPlayerGetSkill: 0
   Suicide: 0
@@ -603,6 +609,62 @@ MonoBehaviour:
   SpawnedInSelf: 0
   AttackPrefab: {fileID: 114630672538787846, guid: 4dd1b0e6b19d6994683837907aa36334,
     type: 3}
+--- !u!114 &8674507488945032181
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1103968850550592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91622d248ee865744a5de227b5ecb88a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Description: Overload
+  BehaviorSkill: 1
+  PSkillName: 
+  PSkillDuration: 0
+  DetecteRadius: 0
+  DamagePercent: 0
+  AttackStopMove: 0
+  StopMoveTime: 0.5
+  SpellSound: {fileID: 0}
+  PSkillTimer: 0
+  IsPlayerGetSkill: 0
+  Suicide: 0
+  PrepareParticle: []
+  AttackPrefab: {fileID: 114836237506999114, guid: 98a07e460d461da45b4644de6ac4d838,
+    type: 3}
+  PrepareTime: 0
+--- !u!114 &5781173221670371357
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1103968850550592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91622d248ee865744a5de227b5ecb88a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Description: Fury
+  BehaviorSkill: 1
+  PSkillName: 
+  PSkillDuration: 0
+  DetecteRadius: 0
+  DamagePercent: 0
+  AttackStopMove: 0
+  StopMoveTime: 0
+  SpellSound: {fileID: 0}
+  PSkillTimer: 0
+  IsPlayerGetSkill: 0
+  Suicide: 0
+  PrepareParticle: []
+  AttackPrefab: {fileID: 114836237506999114, guid: e67b73739a98db844a90168d155bb20c,
+    type: 3}
+  PrepareTime: 0
 --- !u!1 &1131648973560484
 GameObject:
   m_ObjectHideFlags: 0

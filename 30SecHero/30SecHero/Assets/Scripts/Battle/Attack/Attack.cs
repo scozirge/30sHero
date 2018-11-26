@@ -183,11 +183,13 @@ public class Attack : Skill
             Timer -= Time.deltaTime;
             if (!Myself.IsPreAttack)
                 if (Timer <= PreAttackTime)
+                {
                     if (Myself.MyForce == Force.Enemy)
                     {
                         Myself.PreAttack();
                         IsPreAttack = true;
                     }
+                }
         }
         else
         {
@@ -201,6 +203,7 @@ public class Attack : Skill
         InRange = false;
         Timer = CurInterval;
         CurSpawnAmmoNum = 0;
+        Myself.EndPreAttack();
         if (AmmoInterval > 0)//如果子彈間隔時間大於0用計時器去各別創造子彈
         {
             SpawnAttackPrefab();
@@ -243,7 +246,6 @@ public class Attack : Skill
             WaitingToSpawnNextAmmo = false;
             SpawnAttackPrefab();
             AmmoIntervalTimer = AmmoInterval;
-            Myself.EndPreAttack();
         }
     }
 
