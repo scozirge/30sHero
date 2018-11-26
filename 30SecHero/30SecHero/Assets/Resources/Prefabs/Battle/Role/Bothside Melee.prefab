@@ -539,14 +539,16 @@ MonoBehaviour:
   DamagePercent: 1
   AttackStopMove: 0
   StopMoveTime: 0
+  SpellSound: {fileID: 0}
   PSkillTimer: 0
   IsPlayerGetSkill: 0
   AttackOnce: 0
-  Interval: 3
+  Interval: 2.5
   AmmoNum: 2
   AmmoInterval: 0
   StartAngle: 0
   AngleInterval: 180
+  RandomAngle: 0
   Patetern: 0
   SpawnedInSelf: 1
   AttackPrefab: {fileID: 114280530254980642, guid: 98920b54e1a38f644afa93ee1f5f025f,
