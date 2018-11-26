@@ -332,7 +332,7 @@ MonoBehaviour:
   DropGoldCount: 1
   DropLootCount: 1
   DesignateLoot: 
-  DropSkillProbility: 0.2
+  DropSkillProbility: 1
   DropSkill: {fileID: 114016134065368028}
   HealthObj: {fileID: 1840667909936370}
   PlayMotionDuration: 0.5
@@ -379,6 +379,7 @@ MonoBehaviour:
   DamagePercent: 1
   AttackStopMove: 0
   StopMoveTime: 1
+  SpellSound: {fileID: 0}
   PSkillTimer: 0
   IsPlayerGetSkill: 0
   AttackOnce: 0
@@ -387,6 +388,7 @@ MonoBehaviour:
   AmmoInterval: 0.2
   StartAngle: 0
   AngleInterval: 0
+  RandomAngle: 0
   Patetern: 1
   SpawnedInSelf: 0
   AttackPrefab: {fileID: 114962956101920240, guid: cdb230a6efc22e241a995ba0f5fbb34c,

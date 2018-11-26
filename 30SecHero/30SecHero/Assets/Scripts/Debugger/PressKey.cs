@@ -33,5 +33,18 @@ public partial class Debugger : MonoBehaviour
         {
             Player.ShowTotalProperties();
         }
+        else if (Input.GetKeyDown(KeyCode.E))
+        {
+            BattleManage.BM.MyPlayer.AddBuffer(RoleBuffer.Freeze,5);
+        }
+        else if (Input.GetKeyDown(KeyCode.R))
+        {
+            BattleManage.BM.MyPlayer.AddBuffer(RoleBuffer.Burn,5);
+        }
+        else if (Input.GetKeyDown(KeyCode.T))
+        {
+            int damage = 10;
+            BattleManage.BM.MyPlayer.BeAttack(Force.Enemy, ref damage, Vector2.zero);
+        }
     }
 }

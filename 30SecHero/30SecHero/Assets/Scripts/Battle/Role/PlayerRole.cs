@@ -313,7 +313,13 @@ public partial class PlayerRole : Role
     public SuicideBombing DashImpactSkil;
     public float SplashThornProportion;
     public Shoot SplashThornSkil;
-    
+    public float OverloadProportion;
+    public SuicideBombing OverloadSkil;
+    public float FuryTime;
+    int FuryBeAttackTImes;
+    public SuicideBombing FurySkil;
+    MyTimer FuryTimer;
+
 
 
     float BlizzardTime;
@@ -443,6 +449,12 @@ public partial class PlayerRole : Role
         DashImpactProportion = Player.GetEnchantProperty(EnchantProperty.DashImpact);
         SplashThornProportion = Player.GetEnchantProperty(EnchantProperty.SplashThorn);
         SplashThornSkil.DamagePercent = SplashThornProportion;
+        OverloadProportion = Player.GetEnchantProperty(EnchantProperty.Overload);
+        FuryTime = Player.GetEnchantProperty(EnchantProperty.Fury);
+        Debug.Log("FuryTime=" + FuryTime);
+        if (FuryTime > 0)
+            FuryTimer = new MyTimer(FuryTime, FuryTimeUp, false, false);
+
 
 
         if (Player.MyWeapon != null)
@@ -454,6 +466,10 @@ public partial class PlayerRole : Role
         {
             BlizzardAmmoPrefab.SetBuffersTime(BlizzardTime);
         }
+    }
+    void FuryTimeUp()
+    {
+        FuryBeAttackTImes = 0;
     }
     void InitMoveAfterimage()
     {
@@ -592,6 +608,7 @@ public partial class PlayerRole : Role
         ShieldTimer.RunTimer();
         JumpTimer.RunTimer();
         RushTimer.RunTimer();
+        FuryTimer.RunTimer();
         OnRushTimer.RunTimer();
         if (NoDamageRecoveryTimer != null)
         {
@@ -632,6 +649,21 @@ public partial class PlayerRole : Role
         if (FortitudeProportion > 0 && BuffersExist(RoleBuffer.Stun))
             _dmg = (int)(_dmg * (1 - FortitudeProportion));
         base.BeAttack(_attackerForce, ref _dmg, _force);
+        //被攻擊觸發累積怒火次數，時間內滿3次發動怒火沖天
+        if (FuryTime > 0 && _dmg > 0)
+        {
+            FuryTimer.StartRunTimer = true;
+            FuryBeAttackTImes++;            
+            if (FuryBeAttackTImes >= 3)
+            {
+                FuryBeAttackTImes = 0;
+                FurySkil.LaunchAISpell();
+            }
+            else
+            {
+                FuryTimer.RestartCountDown();
+            }
+        }
     }
     public override void ReceiveDmg(ref int _dmg)
     {
@@ -876,13 +908,24 @@ public partial class PlayerRole : Role
                     Shield += MaxShield * 0.3f;
                 else
                 {
-                    //受到負面元素效果時如果自身已經有其他負面元素狀態時，有機率移除所有的負面元素效果
-                    if (ProbabilityGetter.GetResult(NeutralizationProportion) && BuffersExistExcept(_buffer.Type,ElementalBuff))
+                    bool addBuff = true;
+                    //受到負面元素效果時如果自身已經有其他負面元素狀態時
+                    if (BuffersExistExcept(_buffer.Type, ElementalBuff))
                     {
-                        RemoveBufferByType(ElementalBuff);
-                        EffectEmitter.EmitParticle(GameManager.GM.PurifyParticle, Vector3.zero, Vector3.zero, transform);
+                        //有機率移除所有的負面元素效果
+                        if (ProbabilityGetter.GetResult(NeutralizationProportion))
+                        {
+                            RemoveBufferByType(ElementalBuff);
+                            EffectEmitter.EmitParticle(GameManager.GM.PurifyParticle, Vector3.zero, Vector3.zero, transform);
+                            addBuff = false;                            
+                        }
+                        //有機率施放元素過載
+                        if(ProbabilityGetter.GetResult(OverloadProportion))
+                        {
+                            OverloadSkil.LaunchAISpell();
+                        }
                     }
-                    else
+                    if (addBuff)
                         base.AddBuffer(_buffer);
                 }
             }
