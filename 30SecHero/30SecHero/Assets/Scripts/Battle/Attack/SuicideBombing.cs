@@ -94,11 +94,15 @@ public class SuicideBombing : Skill
         else
             AmmoData.Add("TargetRoleTag", Force.Player);
         AmmoData.Add("Target", Target);
-        GameObject go = Instantiate(AttackPrefab.gameObject, Vector3.zero, Quaternion.identity) as GameObject;
-        Ammo ammo = go.GetComponent<Ammo>();
-        go.transform.SetParent(AmmoParent);
-        go.transform.position = transform.position;
-        ammo.Init(AmmoData);
+        //自身子彈
+        if(AttackPrefab)
+        {
+            GameObject go = Instantiate(AttackPrefab.gameObject, Vector3.zero, Quaternion.identity) as GameObject;
+            Ammo ammo = go.GetComponent<Ammo>();
+            go.transform.SetParent(AmmoParent);
+            go.transform.position = transform.position;
+            ammo.Init(AmmoData);
+        }
         if (Suicide)
         {
             if (Myself.MyForce != Force.Player)

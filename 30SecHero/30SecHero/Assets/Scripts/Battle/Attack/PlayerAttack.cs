@@ -54,11 +54,11 @@ public class PlayerAttack : MonoBehaviour
                 {
                     extraDamageProportion += Attacker.FireBladeProportion;
                     EffectEmitter.EmitParticle(GameManager.GM.FireBladeParticle, er.transform.position, Vector3.zero, null);
-                }
-                //菁英獵殺
-                if(Attacker.EliteHuntingProportion>0)
+                }                
+                if (Attacker.LastTarget.Hit(er))
                 {
-                    if (Attacker.LastTarget.Hit(er))
+                    //菁英獵殺
+                    if(Attacker.EliteHuntingProportion>0)
                     {
                         extraDamageProportion += Attacker.EliteHuntingProportion;
                         EffectEmitter.EmitParticle(GameManager.GM.ClawParticle, Vector3.zero, Vector3.zero, er.transform);
@@ -128,7 +128,7 @@ public class PlayerAttack : MonoBehaviour
         }
         else if(_er.BuffersExist(RoleBuffer.Freeze))
         {
-            if (ProbabilityGetter.GetResult(1))//Attacker.FrozenChopProportion
+            if (ProbabilityGetter.GetResult(Attacker.FrozenChopProportion))
             {
                 Attacker.FrozenChopSkil.LaunchAISpell();
             }

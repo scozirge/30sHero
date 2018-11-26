@@ -76,7 +76,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LocalParticles: []
   GlobalParticle:
-  - {fileID: 198466921542759630, guid: e77354340c4749646b37a0d627136175, type: 3}
+  - {fileID: 6041661006643458155, guid: 96e2a9b1af58f9741baf5fb3b50ec256, type: 3}
   DeadParticles: []
   HitTargetParticle: {fileID: 0}
   HitTargetSound: {fileID: 0}

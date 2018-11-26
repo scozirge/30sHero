@@ -279,7 +279,7 @@ public partial class PlayerRole : Role
                 HitCount++;
                 if(HitCount>=3)
                 {
-                    HitCount = 0;
+                    HitCount = 0;                    
                     return true;
                 }
             }
@@ -451,7 +451,6 @@ public partial class PlayerRole : Role
         SplashThornSkil.DamagePercent = SplashThornProportion;
         OverloadProportion = Player.GetEnchantProperty(EnchantProperty.Overload);
         FuryTime = Player.GetEnchantProperty(EnchantProperty.Fury);
-        Debug.Log("FuryTime=" + FuryTime);
         if (FuryTime > 0)
             FuryTimer = new MyTimer(FuryTime, FuryTimeUp, false, false);
 

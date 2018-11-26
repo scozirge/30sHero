@@ -951,19 +951,59 @@ PrefabInstance:
       objectReference: {fileID: 519420031}
     - target: {fileID: 114529601492733476, guid: d9e47796d36fc83458ffab41aea6641e,
         type: 3}
-      propertyPath: OverloadSkil
-      value: 
-      objectReference: {fileID: 1699951291}
-    - target: {fileID: 114529601492733476, guid: d9e47796d36fc83458ffab41aea6641e,
-        type: 3}
-      propertyPath: FurySkil
-      value: 
-      objectReference: {fileID: 1699951292}
-    - target: {fileID: 114529601492733476, guid: d9e47796d36fc83458ffab41aea6641e,
-        type: 3}
       propertyPath: TestMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114529601492733476, guid: d9e47796d36fc83458ffab41aea6641e,
+        type: 3}
+      propertyPath: BaseDamage
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1699951291, guid: d9e47796d36fc83458ffab41aea6641e, type: 3}
+      propertyPath: SpellSound
+      value: 
+      objectReference: {fileID: 8300000, guid: df0ec39bb7429284fb2f1c3413e68098, type: 3}
+    - target: {fileID: 1407483692069984467, guid: d9e47796d36fc83458ffab41aea6641e,
+        type: 3}
+      propertyPath: SpellSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 64fb9477894fa2e4a997518fbb1c2f15, type: 3}
+    - target: {fileID: 1699951292, guid: d9e47796d36fc83458ffab41aea6641e, type: 3}
+      propertyPath: SpellSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 4027915a7025bf14fa1be528e0a0dfd7, type: 3}
+    - target: {fileID: 1407483692069984467, guid: d9e47796d36fc83458ffab41aea6641e,
+        type: 3}
+      propertyPath: TargetAttackPrefab
+      value: 
+      objectReference: {fileID: 114836237506999114, guid: 2fa1f8049a341054fab22931bbd10276,
+        type: 3}
+    - target: {fileID: 1407483692069984467, guid: d9e47796d36fc83458ffab41aea6641e,
+        type: 3}
+      propertyPath: AttackPrefab
+      value: 
+      objectReference: {fileID: 114836237506999114, guid: 2fa1f8049a341054fab22931bbd10276,
+        type: 3}
+    - target: {fileID: 1699951291, guid: d9e47796d36fc83458ffab41aea6641e, type: 3}
+      propertyPath: TargetAttackPrefab
+      value: 
+      objectReference: {fileID: 114836237506999114, guid: f5eb26b6a3c3476408591e7b9198bb10,
+        type: 3}
+    - target: {fileID: 1699951291, guid: d9e47796d36fc83458ffab41aea6641e, type: 3}
+      propertyPath: AttackPrefab
+      value: 
+      objectReference: {fileID: 114836237506999114, guid: f5eb26b6a3c3476408591e7b9198bb10,
+        type: 3}
+    - target: {fileID: 1699951292, guid: d9e47796d36fc83458ffab41aea6641e, type: 3}
+      propertyPath: TargetAttackPrefab
+      value: 
+      objectReference: {fileID: 114836237506999114, guid: 3d57514312e1634448710b2aa99dc770,
+        type: 3}
+    - target: {fileID: 1699951292, guid: d9e47796d36fc83458ffab41aea6641e, type: 3}
+      propertyPath: AttackPrefab
+      value: 
+      objectReference: {fileID: 114836237506999114, guid: 3d57514312e1634448710b2aa99dc770,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d9e47796d36fc83458ffab41aea6641e, type: 3}
 --- !u!1 &135074929
@@ -2059,7 +2099,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 121351811}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1699951290}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe8c4e8b2626e6243bdbd98c9f19b933, type: 3}
@@ -7132,68 +7172,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 73}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &1699951290 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1103968850550592, guid: d9e47796d36fc83458ffab41aea6641e,
-    type: 3}
-  m_PrefabInstance: {fileID: 121351811}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1699951291
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1699951290}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 91622d248ee865744a5de227b5ecb88a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Description: Overload
-  BehaviorSkill: 1
-  PSkillName: 
-  PSkillDuration: 0
-  DetecteRadius: 0
-  DamagePercent: 0
-  AttackStopMove: 0
-  StopMoveTime: 0.5
-  SpellSound: {fileID: 0}
-  PSkillTimer: 0
-  IsPlayerGetSkill: 0
-  Suicide: 0
-  PrepareParticle: []
-  AttackPrefab: {fileID: 114836237506999114, guid: 98a07e460d461da45b4644de6ac4d838,
-    type: 3}
-  PrepareTime: 0
---- !u!114 &1699951292
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1699951290}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 91622d248ee865744a5de227b5ecb88a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Description: Fury
-  BehaviorSkill: 1
-  PSkillName: 
-  PSkillDuration: 0
-  DetecteRadius: 0
-  DamagePercent: 0
-  AttackStopMove: 0
-  StopMoveTime: 0
-  SpellSound: {fileID: 0}
-  PSkillTimer: 0
-  IsPlayerGetSkill: 0
-  Suicide: 0
-  PrepareParticle: []
-  AttackPrefab: {fileID: 114836237506999114, guid: e67b73739a98db844a90168d155bb20c,
-    type: 3}
-  PrepareTime: 0
 --- !u!1 &1727492178
 GameObject:
   m_ObjectHideFlags: 0
@@ -7537,8 +7515,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TestMode: 1
-  EnemyFirstHalfInterval: 1
-  EnemySecondHalfInterval: 1
+  EnemyFirstHalfInterval: 0
+  EnemySecondHalfInterval: 0
   PotionInterval: 5
   EnemyFirstHalfMinCount: 5
   EnemyFirstHalfMaxCount: 5
