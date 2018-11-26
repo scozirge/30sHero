@@ -76,15 +76,15 @@ MonoBehaviour:
   Wander: 1
   FollowCamera: 0
   FollowCameraSpeed: 2000
-  DebutSpeed: 600
-  WanderInterval: 2
+  DebutSpeed: 1500
+  WanderInterval: 0.5
   RotateFactor: 0.01
   WanderRange: 100
   Destination: {x: 0, y: 0}
   KeepDebut: 0
   ReadyToMove: 0
   MoveSpeed: 100
-  AbsorbRadius: 200
+  AbsorbRadius: 250
 --- !u!222 &222452408990536316
 CanvasRenderer:
   m_ObjectHideFlags: 0
