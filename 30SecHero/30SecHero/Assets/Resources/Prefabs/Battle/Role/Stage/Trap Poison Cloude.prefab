@@ -425,18 +425,20 @@ MonoBehaviour:
   BehaviorSkill: 0
   PSkillName: 0
   PSkillDuration: 20
-  DetecteRadius: 1000
+  DetecteRadius: 1500
   DamagePercent: 1
   AttackStopMove: 0
   StopMoveTime: 1
+  SpellSound: {fileID: 0}
   PSkillTimer: 0
   IsPlayerGetSkill: 0
   AttackOnce: 0
-  Interval: 4
+  Interval: 3.5
   AmmoNum: 1
   AmmoInterval: 0
   StartAngle: 0
   AngleInterval: 0
+  RandomAngle: 0
   Patetern: 0
   SpawnedInSelf: 0
   AttackPrefab: {fileID: 7038527885862775504, guid: 550bb922219e8e34bb61537725d02ad7,
