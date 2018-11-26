@@ -439,7 +439,7 @@ MonoBehaviour:
   MoveToPlayer: 0
   Wander: 1
   FollowCamera: 1
-  FollowCameraSpeed: 300
+  FollowCameraSpeed: 200
   DebutSpeed: 2000
   WanderInterval: 0.5
   RotateFactor: 0.02

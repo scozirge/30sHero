@@ -290,7 +290,7 @@ MonoBehaviour:
   MoveToPlayer: 0
   Wander: 1
   FollowCamera: 1
-  FollowCameraSpeed: 300
+  FollowCameraSpeed: 200
   DebutSpeed: 2000
   WanderInterval: 0.5
   RotateFactor: 0.02
@@ -379,6 +379,7 @@ MonoBehaviour:
   DamagePercent: 1
   AttackStopMove: 0
   StopMoveTime: 0
+  SpellSound: {fileID: 0}
   PSkillTimer: 0
   IsPlayerGetSkill: 0
   AttackOnce: 0
@@ -387,6 +388,7 @@ MonoBehaviour:
   AmmoInterval: 0
   StartAngle: 0
   AngleInterval: 90
+  RandomAngle: 0
   Patetern: 0
   SpawnedInSelf: 0
   AttackPrefab: {fileID: 114410831443672240, guid: 8d45ab05a4bf58841a91038676fb90d8,
