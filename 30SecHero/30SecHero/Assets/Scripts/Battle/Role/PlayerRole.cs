@@ -608,7 +608,8 @@ public partial class PlayerRole : Role
         ShieldTimer.RunTimer();
         JumpTimer.RunTimer();
         RushTimer.RunTimer();
-        FuryTimer.RunTimer();
+        if (FuryTime>0)
+            FuryTimer.RunTimer();
         OnRushTimer.RunTimer();
         if (NoDamageRecoveryTimer != null)
         {

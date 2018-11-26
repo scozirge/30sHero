@@ -959,6 +959,11 @@ PrefabInstance:
       propertyPath: FurySkil
       value: 
       objectReference: {fileID: 1699951292}
+    - target: {fileID: 114529601492733476, guid: d9e47796d36fc83458ffab41aea6641e,
+        type: 3}
+      propertyPath: TestMode
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d9e47796d36fc83458ffab41aea6641e, type: 3}
 --- !u!1 &135074929
@@ -7548,7 +7553,7 @@ MonoBehaviour:
   - {fileID: 114364750184517408, guid: 7a4fcaea190fe1341b551043fc61e7ba, type: 3}
   - {fileID: 114364750184517408, guid: 4e4608edff7362c45b106e955ca4fabe, type: 3}
   - {fileID: 114364750184517408, guid: 7f6edaf36c640654db036ad9e0a0a0d2, type: 3}
-  - {fileID: 114485926508205134, guid: 36509ae15283f0b4b85c7eb28f152231, type: 3}
+  - {fileID: 114965315550208914, guid: 3bde61012c7d5b0439d50cb63c0e7f2f, type: 3}
   - {fileID: 114364750184517408, guid: fd1730034bed914409677edaf33d653c, type: 3}
   - {fileID: 114364750184517408, guid: 4d1f64498757ee445a05825a7c7257a1, type: 3}
   DesignatedEnemy: {fileID: 114364750184517408, guid: 4e4608edff7362c45b106e955ca4fabe,
