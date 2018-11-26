@@ -384,6 +384,7 @@ MonoBehaviour:
   AttackStopMove: 0
   StopMoveTime: 0
   SpellSound: {fileID: 0}
+  SpawnedInSelf: 0
   PSkillTimer: 0
   IsPlayerGetSkill: 0
   AttackOnce: 0
@@ -394,7 +395,6 @@ MonoBehaviour:
   AngleInterval: 0
   RandomAngle: 0
   Patetern: 0
-  SpawnedInSelf: 0
   AttackPrefab: {fileID: 114255117710915984, guid: 5b65695814f87af46a3fc5c33d4cec5d,
     type: 3}
   AttackRadius: 0
@@ -419,6 +419,7 @@ MonoBehaviour:
   AttackStopMove: 0
   StopMoveTime: 0
   SpellSound: {fileID: 0}
+  SpawnedInSelf: 0
   PSkillTimer: 0
   IsPlayerGetSkill: 0
   SupportOnce: 0
@@ -450,6 +451,7 @@ MonoBehaviour:
   AttackStopMove: 0
   StopMoveTime: 0
   SpellSound: {fileID: 0}
+  SpawnedInSelf: 0
   PSkillTimer: 0
   IsPlayerGetSkill: 0
   AttackOnce: 0
@@ -460,7 +462,6 @@ MonoBehaviour:
   AngleInterval: 0
   RandomAngle: 0
   Patetern: 5
-  SpawnedInSelf: 0
   AttackPrefab: {fileID: 114630672538787846, guid: 62675298d0fe1154e99d6ddbf139c374,
     type: 3}
 --- !u!114 &1407483692069984467
@@ -484,6 +485,7 @@ MonoBehaviour:
   AttackStopMove: 0
   StopMoveTime: 0
   SpellSound: {fileID: 8300000, guid: 64fb9477894fa2e4a997518fbb1c2f15, type: 3}
+  SpawnedInSelf: 0
   PSkillTimer: 0
   IsPlayerGetSkill: 0
   Suicide: 0
@@ -512,6 +514,7 @@ MonoBehaviour:
   AttackStopMove: 0
   StopMoveTime: 0
   SpellSound: {fileID: 8300000, guid: df0ec39bb7429284fb2f1c3413e68098, type: 3}
+  SpawnedInSelf: 0
   PSkillTimer: 0
   IsPlayerGetSkill: 0
   Suicide: 0
@@ -540,6 +543,7 @@ MonoBehaviour:
   AttackStopMove: 0
   StopMoveTime: 0
   SpellSound: {fileID: 8300000, guid: 4027915a7025bf14fa1be528e0a0dfd7, type: 3}
+  SpawnedInSelf: 0
   PSkillTimer: 0
   IsPlayerGetSkill: 0
   Suicide: 0
@@ -568,6 +572,7 @@ MonoBehaviour:
   AttackStopMove: 0
   StopMoveTime: 0
   SpellSound: {fileID: 8300000, guid: 041736f305b42af428b789b1db67e901, type: 3}
+  SpawnedInSelf: 0
   PSkillTimer: 0
   IsPlayerGetSkill: 0
   Suicide: 0
@@ -596,6 +601,7 @@ MonoBehaviour:
   AttackStopMove: 0
   StopMoveTime: 0
   SpellSound: {fileID: 8300000, guid: 23679567866092d4699c3877d21420b9, type: 3}
+  SpawnedInSelf: 0
   PSkillTimer: 0
   IsPlayerGetSkill: 0
   AttackOnce: 0
@@ -606,7 +612,6 @@ MonoBehaviour:
   AngleInterval: 0
   RandomAngle: 1
   Patetern: 0
-  SpawnedInSelf: 0
   AttackPrefab: {fileID: 114630672538787846, guid: 4dd1b0e6b19d6994683837907aa36334,
     type: 3}
 --- !u!114 &8674507488945032181
@@ -630,6 +635,7 @@ MonoBehaviour:
   AttackStopMove: 0
   StopMoveTime: 0.5
   SpellSound: {fileID: 8300000, guid: 264e9a30ad39b33429396e8cc83a5f0a, type: 3}
+  SpawnedInSelf: 1
   PSkillTimer: 0
   IsPlayerGetSkill: 0
   Suicide: 0
@@ -654,10 +660,11 @@ MonoBehaviour:
   PSkillName: 
   PSkillDuration: 0
   DetecteRadius: 0
-  DamagePercent: 0
+  DamagePercent: 0.5
   AttackStopMove: 0
   StopMoveTime: 0
-  SpellSound: {fileID: 0}
+  SpellSound: {fileID: 8300000, guid: 264e9a30ad39b33429396e8cc83a5f0a, type: 3}
+  SpawnedInSelf: 1
   PSkillTimer: 0
   IsPlayerGetSkill: 0
   Suicide: 0

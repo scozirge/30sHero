@@ -61,7 +61,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 300
+  m_Radius: 400
 --- !u!114 &114836237506999114
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -76,18 +76,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LocalParticles: []
   GlobalParticle:
-  - {fileID: 198466921542759630, guid: e77354340c4749646b37a0d627136175, type: 3}
+  - {fileID: 0}
+  LocalAttackerParticles:
+  - {fileID: 4940383841678665022, guid: d06888cbddeea7643a7e0869cb43d4ec, type: 3}
   DeadParticles: []
-  HitTargetParticle: {fileID: 0}
+  HitTargetParticle: {fileID: 198308960938074910, guid: 6ebb3848cff528744a0ce66822bd1588,
+    type: 3}
   HitTargetSound: {fileID: 0}
   LifeTime: 0.2
   KnockIntensity: 4000
   AmmoType: 1
-  DamageInterval: 0.5
-  Buffers:
-  - Type: 1
-    Time: 5
-    Value: 0
+  DamageInterval: 0
+  Buffers: []
   TriggerOnRushRole: 1
   Value: 0
   IsPlayerGetSkill: 0

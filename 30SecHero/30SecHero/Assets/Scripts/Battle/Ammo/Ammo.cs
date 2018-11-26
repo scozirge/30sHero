@@ -11,6 +11,9 @@ public partial class Ammo : MonoBehaviour
     [Tooltip("不跟隨的特效物件")]
     [SerializeField]
     ParticleSystem[] GlobalParticle;
+    [Tooltip("攻擊者跟隨特效物件")]
+    [SerializeField]
+    ParticleSystem[] LocalAttackerParticles;
     [Tooltip("命中特效-自身子彈")]
     [SerializeField]
     protected ParticleSystem[] DeadParticles;
@@ -53,7 +56,7 @@ public partial class Ammo : MonoBehaviour
     protected Transform ParticleParent;
     float DestructMargin_Left;
     float DestructMargin_Right;
-
+    protected Role Attacker;
     protected List<MyTimer> ReadyToDamageTimers;
     protected Dictionary<string, bool> ReadyToDamageTargets;
     public bool IsPlayerGetSkill;
@@ -115,6 +118,7 @@ public partial class Ammo : MonoBehaviour
         }
         Value = int.Parse(_dic["Damage"].ToString());
         ValuePercent = float.Parse(_dic["DamagePercent"].ToString());
+        Attacker = (Role)(_dic["Attacker"]);
         SpawnParticles();
         if (IsPlayerGetSkill)
         {
@@ -146,6 +150,15 @@ public partial class Ammo : MonoBehaviour
             if (GlobalParticle[i] == null)
                 continue;
             EffectEmitter.EmitParticle(GlobalParticle[i], transform.position, Vector3.zero, ParticleParent);
+        }
+        if(Attacker)
+        {
+            for (int i = 0; i < LocalAttackerParticles.Length; i++)
+            {
+                if (LocalAttackerParticles[i] == null)
+                    continue;
+                EffectEmitter.EmitParticle(LocalAttackerParticles[i], Vector3.zero, Vector3.zero, Attacker.transform);
+            }
         }
 
     }

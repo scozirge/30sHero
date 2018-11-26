@@ -12,13 +12,12 @@ public class ShootAmmo : Ammo
     [SerializeField]
     protected bool TriggerWall = true;
 
-    Role Attacker;
+
     protected Vector3 Ammovelocity;
     public override void Init(Dictionary<string, object> _dic)
     {
         base.Init(_dic);
         Target = ((Role)_dic["Target"]);
-        Attacker = (Role)(_dic["Attacker"]);
         Ammovelocity = (Vector3)(_dic["Direction"]) * AmmoSpeed;
         if (IsPlayerGetSkill)
         {

@@ -30,9 +30,6 @@ public class Attack : Skill
     [Tooltip("射擊模式")]
     [SerializeField]
     protected ShootPatetern Patetern;
-    [Tooltip("子彈是否跟隨腳色本身跑")]
-    [SerializeField]
-    protected bool SpawnedInSelf;
 
     protected float Timer;
     protected float AmmoIntervalTimer;
