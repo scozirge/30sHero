@@ -1004,6 +1004,15 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 114836237506999114, guid: 3d57514312e1634448710b2aa99dc770,
         type: 3}
+    - target: {fileID: 1699951293, guid: d9e47796d36fc83458ffab41aea6641e, type: 3}
+      propertyPath: SpellSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 041736f305b42af428b789b1db67e901, type: 3}
+    - target: {fileID: 8674507488945032181, guid: d9e47796d36fc83458ffab41aea6641e,
+        type: 3}
+      propertyPath: SpellSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 264e9a30ad39b33429396e8cc83a5f0a, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d9e47796d36fc83458ffab41aea6641e, type: 3}
 --- !u!1 &135074929

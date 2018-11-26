@@ -141,7 +141,7 @@ public class PlayerAttack : MonoBehaviour
             }
         }
         //機率產生衝擊波
-        if(ProbabilityGetter.GetResult(Attacker.DashImpactProportion))
+        if(Attacker.OnRush && ProbabilityGetter.GetResult(Attacker.DashImpactProportion))
         {
             Attacker.DashImpactSkil.LaunchAISpell();
         }

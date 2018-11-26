@@ -164,7 +164,7 @@ MonoBehaviour:
   DirectX: 0
   DirectY: 0
   MaxHealth: 1
-  BaseDamage: 20
+  BaseDamage: 1
   BaseMoveSpeed: 1000
   DeathEffect: {fileID: 198802542160044040, guid: a6f36c56ed46b58408125e947b5ac7db,
     type: 3}
@@ -177,7 +177,7 @@ MonoBehaviour:
   RoleAni: {fileID: 95215647531095050}
   IsPreAttack: 0
   OnRush: 0
-  TestMode: 1
+  TestMode: 0
   AvatarRemoveEffect: {fileID: 198023469444164576, guid: 4fa0c17b07dd95f4fac2c50aea787be7,
     type: 3}
   BeHitEffect_Shield: {fileID: 198853811207955838, guid: 48c7fe97ee5fbd0478fa25692681f2f2,
@@ -483,7 +483,7 @@ MonoBehaviour:
   DamagePercent: 0.5
   AttackStopMove: 0
   StopMoveTime: 0
-  SpellSound: {fileID: 0}
+  SpellSound: {fileID: 8300000, guid: 64fb9477894fa2e4a997518fbb1c2f15, type: 3}
   PSkillTimer: 0
   IsPlayerGetSkill: 0
   Suicide: 0
@@ -511,7 +511,7 @@ MonoBehaviour:
   DamagePercent: 0.5
   AttackStopMove: 0
   StopMoveTime: 0
-  SpellSound: {fileID: 0}
+  SpellSound: {fileID: 8300000, guid: df0ec39bb7429284fb2f1c3413e68098, type: 3}
   PSkillTimer: 0
   IsPlayerGetSkill: 0
   Suicide: 0
@@ -539,7 +539,7 @@ MonoBehaviour:
   DamagePercent: 0.5
   AttackStopMove: 0
   StopMoveTime: 0
-  SpellSound: {fileID: 8300000, guid: df0ec39bb7429284fb2f1c3413e68098, type: 3}
+  SpellSound: {fileID: 8300000, guid: 4027915a7025bf14fa1be528e0a0dfd7, type: 3}
   PSkillTimer: 0
   IsPlayerGetSkill: 0
   Suicide: 0
@@ -567,7 +567,7 @@ MonoBehaviour:
   DamagePercent: 0
   AttackStopMove: 0
   StopMoveTime: 0
-  SpellSound: {fileID: 0}
+  SpellSound: {fileID: 8300000, guid: 041736f305b42af428b789b1db67e901, type: 3}
   PSkillTimer: 0
   IsPlayerGetSkill: 0
   Suicide: 0
@@ -629,7 +629,7 @@ MonoBehaviour:
   DamagePercent: 0
   AttackStopMove: 0
   StopMoveTime: 0.5
-  SpellSound: {fileID: 0}
+  SpellSound: {fileID: 8300000, guid: 264e9a30ad39b33429396e8cc83a5f0a, type: 3}
   PSkillTimer: 0
   IsPlayerGetSkill: 0
   Suicide: 0

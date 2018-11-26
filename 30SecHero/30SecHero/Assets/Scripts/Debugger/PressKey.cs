@@ -46,5 +46,21 @@ public partial class Debugger : MonoBehaviour
             int damage = 10;
             BattleManage.BM.MyPlayer.BeAttack(Force.Enemy, ref damage, Vector2.zero);
         }
+        else if (Input.GetKeyDown(KeyCode.P))
+        {
+            PlayerPrefs.DeleteKey(LocoData.UseLanguage.ToString());
+            PlayerPrefs.DeleteKey(LocoData.Init.ToString());
+            PlayerPrefs.DeleteKey(LocoData.Equip.ToString());
+            PlayerPrefs.DeleteKey(LocoData.Strengthen.ToString());
+            PlayerPrefs.DeleteKey(LocoData.SoundOn.ToString());
+            PlayerPrefs.DeleteKey(LocoData.MusicOn.ToString());
+            PlayerPrefs.DeleteKey(LocoData.CurFloor.ToString());
+            PlayerPrefs.DeleteKey(LocoData.MaxFloor.ToString());
+            PlayerPrefs.DeleteKey(LocoData.MaxEnemyKills.ToString());
+            PlayerPrefs.DeleteKey(LocoData.KillBossID.ToString());
+            PlayerPrefs.DeleteKey(LocoData.Gold.ToString());
+            PlayerPrefs.DeleteKey(LocoData.Emerald.ToString());
+            PlayerPrefs.DeleteKey(LocoData.Enchant.ToString());
+        }
     }
 }
