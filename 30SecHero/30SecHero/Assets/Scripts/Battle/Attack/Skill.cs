@@ -33,6 +33,9 @@ public class Skill : MonoBehaviour
     [LabelOverride("施法音效")]
     [SerializeField]
     public AudioClip SpellSound;
+    [Tooltip("子彈是否跟隨腳色本身跑")]
+    [SerializeField]
+    protected bool SpawnedInSelf;
 
     protected Role Myself;
     protected Dictionary<string, object> AmmoData = new Dictionary<string, object>();
@@ -80,6 +83,8 @@ public class Skill : MonoBehaviour
         PSkillTimer = PSkillDuration;
         CanAttack = !Myself.Buffers.ContainsKey(RoleBuffer.Stun);
         AmmoParent = GameObject.FindGameObjectWithTag("AmmoParent").transform;
+        if (SpawnedInSelf)
+            AmmoParent = transform;
         SubordinateAmmos = new List<Ammo>();
     }
     public virtual void SetCanAttack(bool _bool)
@@ -107,6 +112,7 @@ public class Skill : MonoBehaviour
         AmmoData.Add("Damage", (int)(Myself.Damage * DamagePercent));
         AmmoData.Add("DamagePercent", DamagePercent);
         AmmoData.Add("AttackerForce", Myself.MyForce);
+        AmmoData.Add("Attacker", Myself);
         Myself.Attack(this);
     }
     public virtual void Spell()

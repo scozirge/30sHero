@@ -172,7 +172,6 @@ public class Support : Skill
             //Set AmmoData
             base.SpawnAttackPrefab();
             AmmoData.Add("Direction", Vector3.zero);
-            AmmoData.Add("Attacker", Myself);
             AmmoData.Add("TargetRoleTag", Myself.MyForce);
             AmmoData.Add("Target", Myself);
             GameObject ammoGO = Instantiate(SupplyPrefab.gameObject, Vector3.zero, Quaternion.identity) as GameObject;

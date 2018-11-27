@@ -27,7 +27,6 @@ public class SuicideBombing : Skill
     protected override void Awake()
     {
         base.Awake();
-        AmmoParent = GameObject.FindGameObjectWithTag("AmmoParent").transform;
         if (Myself.tag.ToString() == Force.Player.ToString())
             TargetForce = Force.Enemy;
         else
@@ -37,7 +36,6 @@ public class SuicideBombing : Skill
                 Target = go.GetComponent<PlayerRole>();
             TargetForce = Force.Player;
         }
-
         PrepareTimer = PrepareTime;
         //Dector = transform.GetComponentInChildrenExcludeSelf<Collider2D>();
     }

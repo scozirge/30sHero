@@ -18,7 +18,6 @@ public class Shoot : Attack
         base.SpawnAttackPrefab();
         GameObject ammoGO = Instantiate(AttackPrefab.gameObject, Vector3.zero, Quaternion.identity) as GameObject;
         Ammo ammo = ammoGO.GetComponent<Ammo>();
-        AmmoData.Add("Attacker", Myself);
         ammo.transform.SetParent(AmmoParent);
         ammo.transform.position = transform.position;
         if (IsPlayerGetSkill)

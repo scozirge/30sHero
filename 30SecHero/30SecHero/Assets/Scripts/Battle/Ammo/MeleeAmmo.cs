@@ -12,7 +12,6 @@ public class MeleeAmmo : Ammo
     protected float BlockIntensity;
 
 
-    Role Attacker;
     protected AmmoForce TargetAmmoForce;
 
     public override void Init(Dictionary<string, object> _dic)
@@ -26,7 +25,6 @@ public class MeleeAmmo : Ammo
                 TargetAmmoForce = AmmoForce.PlayerAmmo;
         }
         Vector3 dir = (Vector3)(_dic["Direction"]);
-        Attacker = (Role)(_dic["Attacker"]);
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
         if (BlockIntensity > 1)
