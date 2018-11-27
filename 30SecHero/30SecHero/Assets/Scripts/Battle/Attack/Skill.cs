@@ -6,7 +6,7 @@ using UnityEditor;
 public class Skill : MonoBehaviour
 {
     [Tooltip("註解")]
-    [SerializeField]
+    [TextArea]
     public string Description;
     [Tooltip("RoleBehavior用腳本技能，設定為True時技能只會透過腳本來施放(玩家獲得時會自動改回false)")]
     [SerializeField]
@@ -36,6 +36,10 @@ public class Skill : MonoBehaviour
     [Tooltip("子彈是否跟隨腳色本身跑")]
     [SerializeField]
     protected bool SpawnedInSelf;
+    [LabelOverride("吸血比例")]
+    [Tooltip("每發攻擊的吸血比例")]
+    [SerializeField]
+    protected float VampireProportion;
 
     protected Role Myself;
     protected Dictionary<string, object> AmmoData = new Dictionary<string, object>();
@@ -113,6 +117,7 @@ public class Skill : MonoBehaviour
         AmmoData.Add("DamagePercent", DamagePercent);
         AmmoData.Add("AttackerForce", Myself.MyForce);
         AmmoData.Add("Attacker", Myself);
+        AmmoData.Add("VampireProportion", VampireProportion);
         Myself.Attack(this);
     }
     public virtual void Spell()

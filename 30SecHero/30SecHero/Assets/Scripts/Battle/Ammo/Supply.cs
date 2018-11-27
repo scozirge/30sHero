@@ -56,6 +56,8 @@ public class Supply : Ammo
 
         if (Value > 0)
             _role.HealHP(Value);
+        if (Attacker && VampireProportion > 0 && Value > 0)
+            Attacker.HealHP((int)(Value * VampireProportion));
         if (AmmoType != ShootAmmoType.Permanent)
             SelfDestroy();
         base.TriggerTarget(_role, _pos);

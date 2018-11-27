@@ -20,6 +20,8 @@ public class Bomb : Ammo
         Vector2 force = (_role.transform.position - transform.position).normalized * KnockIntensity;
         int damage = Value;
         _role.BeAttack(AttackerRoleTag,ref damage, force);
+        if (Attacker && VampireProportion > 0 && damage > 0)
+            Attacker.HealHP((int)(damage * VampireProportion));
         base.TriggerTarget(_role, _pos);
     }
 }

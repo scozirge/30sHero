@@ -60,6 +60,18 @@
     Courage,
     KingKiller,
     RuleBreaker,
-    SelfCure
+    SelfCure,
+    CrossNail,
+    SplashNail,
+    Shuriken,
+    Bat,
+    FrozenBall,
+    ShockBall,
+    PoisonedBall,
+    FireBall,
+    FireArmor,
+    FrozenArmor,
+    PoisonedArmor,
+    WindArmor
 
 }
