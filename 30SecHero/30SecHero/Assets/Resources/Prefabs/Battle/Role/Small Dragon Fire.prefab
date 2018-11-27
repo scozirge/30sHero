@@ -388,6 +388,7 @@ GameObject:
   - component: {fileID: 114106683085062742}
   - component: {fileID: 95928670742424868}
   - component: {fileID: 70659222590057068}
+  - component: {fileID: 4962433006343292385}
   m_Layer: 9
   m_Name: Small Dragon Fire
   m_TagString: Enemy
@@ -482,7 +483,7 @@ MonoBehaviour:
   DropLootCount: 1
   DesignateLoot: 
   DropSkillProbility: 0.2
-  DropSkill: {fileID: 114543851470131534}
+  DropSkill: {fileID: 4962433006343292385}
   HealthObj: {fileID: 1031751305146364}
   PlayMotionDuration: 0.5
   InitBuffers: []
@@ -529,6 +530,7 @@ MonoBehaviour:
   AttackStopMove: 0
   StopMoveTime: 0
   SpellSound: {fileID: 0}
+  SpawnedInSelf: 0
   PSkillTimer: 0
   IsPlayerGetSkill: 0
   AttackOnce: 0
@@ -539,7 +541,6 @@ MonoBehaviour:
   AngleInterval: -45
   RandomAngle: 0
   Patetern: 2
-  SpawnedInSelf: 0
   AttackPrefab: {fileID: 114891869535078406, guid: 153da99d9bb42d94a929eb8fec028bc1,
     type: 3}
 --- !u!114 &114106683085062742
@@ -590,6 +591,40 @@ CapsuleCollider2D:
   m_Offset: {x: 1.7, y: -4.7}
   m_Size: {x: 267.7, y: 158.79}
   m_Direction: 1
+--- !u!114 &4962433006343292385
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1893100348938658}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3283f1f3a7e6b24db127fb13fd7f595, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Description: 
+  BehaviorSkill: 0
+  PSkillName: Small Dragon Fire
+  PSkillDuration: 10
+  DetecteRadius: 800
+  DamagePercent: 1
+  AttackStopMove: 0
+  StopMoveTime: 0
+  SpellSound: {fileID: 0}
+  SpawnedInSelf: 0
+  PSkillTimer: 0
+  IsPlayerGetSkill: 0
+  AttackOnce: 0
+  Interval: 2.5
+  AmmoNum: 3
+  AmmoInterval: 0
+  StartAngle: 45
+  AngleInterval: -45
+  RandomAngle: 0
+  Patetern: 4
+  AttackPrefab: {fileID: 114891869535078406, guid: 153da99d9bb42d94a929eb8fec028bc1,
+    type: 3}
 --- !u!1 &5117556849762095581
 GameObject:
   m_ObjectHideFlags: 0
@@ -655,7 +690,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 1edbffdc8c4a3ef4eb7b5ebf4ae07d86, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8bad5ca28d332f34ca03ddd31c78a7ae, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

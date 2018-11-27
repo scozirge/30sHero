@@ -301,12 +301,13 @@ MonoBehaviour:
   Description: 
   BehaviorSkill: 0
   PSkillName: Sting Shooter
-  PSkillDuration: 20
+  PSkillDuration: 10
   DetecteRadius: 1000
   DamagePercent: 1
   AttackStopMove: 0
   StopMoveTime: 0
   SpellSound: {fileID: 0}
+  SpawnedInSelf: 0
   PSkillTimer: 0
   IsPlayerGetSkill: 0
   AttackOnce: 0
@@ -317,7 +318,6 @@ MonoBehaviour:
   AngleInterval: 90
   RandomAngle: 0
   Patetern: 0
-  SpawnedInSelf: 0
   AttackPrefab: {fileID: 114630672538787846, guid: 452a0f984f3dafa45b132458b3f81a1d,
     type: 3}
 --- !u!114 &114955760919791174
@@ -655,7 +655,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 5abedfd535268d8438ce7bbd398c1472, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 64c9d54234332f843882c0f3f63cfde3, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

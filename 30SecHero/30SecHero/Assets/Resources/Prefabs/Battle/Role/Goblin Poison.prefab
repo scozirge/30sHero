@@ -314,6 +314,7 @@ GameObject:
   - component: {fileID: 114629539098914038}
   - component: {fileID: 95722943961312408}
   - component: {fileID: 70664038223940936}
+  - component: {fileID: 8461468428782680058}
   m_Layer: 9
   m_Name: Goblin Poison
   m_TagString: Enemy
@@ -408,7 +409,7 @@ MonoBehaviour:
   DropLootCount: 1
   DesignateLoot: 
   DropSkillProbility: 0.2
-  DropSkill: {fileID: 114743315219924512}
+  DropSkill: {fileID: 8461468428782680058}
   HealthObj: {fileID: 1283845278005316}
   PlayMotionDuration: 0.8
   InitBuffers: []
@@ -449,12 +450,13 @@ MonoBehaviour:
   Description: 
   BehaviorSkill: 0
   PSkillName: Goblin Poison
-  PSkillDuration: 20
+  PSkillDuration: 10
   DetecteRadius: 1000
   DamagePercent: 1
   AttackStopMove: 0
   StopMoveTime: 1
   SpellSound: {fileID: 0}
+  SpawnedInSelf: 0
   PSkillTimer: 0
   IsPlayerGetSkill: 0
   AttackOnce: 0
@@ -465,7 +467,6 @@ MonoBehaviour:
   AngleInterval: 0
   RandomAngle: 0
   Patetern: 2
-  SpawnedInSelf: 0
   AttackPrefab: {fileID: 114962956101920240, guid: 33767ae2347d4e149b86ad81c07a0030,
     type: 3}
 --- !u!114 &114629539098914038
@@ -516,6 +517,40 @@ CapsuleCollider2D:
   m_Offset: {x: 3.7, y: 10.8}
   m_Size: {x: 131.9, y: 106.77}
   m_Direction: 1
+--- !u!114 &8461468428782680058
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1971309510753736}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3283f1f3a7e6b24db127fb13fd7f595, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Description: 
+  BehaviorSkill: 0
+  PSkillName: Goblin Poison_P
+  PSkillDuration: 10
+  DetecteRadius: 1000
+  DamagePercent: 1
+  AttackStopMove: 0
+  StopMoveTime: 1
+  SpellSound: {fileID: 0}
+  SpawnedInSelf: 0
+  PSkillTimer: 0
+  IsPlayerGetSkill: 0
+  AttackOnce: 0
+  Interval: 2
+  AmmoNum: 1
+  AmmoInterval: 0.2
+  StartAngle: 0
+  AngleInterval: 0
+  RandomAngle: 0
+  Patetern: 4
+  AttackPrefab: {fileID: 114962956101920240, guid: 33767ae2347d4e149b86ad81c07a0030,
+    type: 3}
 --- !u!1 &1976215754139816
 GameObject:
   m_ObjectHideFlags: 0
@@ -655,7 +690,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: d8e9517027ed017458ba0f516c263efa, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5888763fa3eb47241b2bbbd8c3a08450, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
