@@ -456,6 +456,7 @@ MonoBehaviour:
   AttackStopMove: 0
   StopMoveTime: 1
   SpellSound: {fileID: 0}
+  SpawnedInSelf: 0
   PSkillTimer: 0
   IsPlayerGetSkill: 0
   AttackOnce: 0
@@ -466,7 +467,6 @@ MonoBehaviour:
   AngleInterval: 0
   RandomAngle: 0
   Patetern: 2
-  SpawnedInSelf: 0
   AttackPrefab: {fileID: 114962956101920240, guid: bebea7f0b397ab842b561febea7726fa,
     type: 3}
 --- !u!114 &114629539098914038
@@ -538,6 +538,7 @@ MonoBehaviour:
   AttackStopMove: 0
   StopMoveTime: 1
   SpellSound: {fileID: 0}
+  SpawnedInSelf: 0
   PSkillTimer: 0
   IsPlayerGetSkill: 0
   AttackOnce: 0
@@ -548,7 +549,6 @@ MonoBehaviour:
   AngleInterval: 0
   RandomAngle: 0
   Patetern: 4
-  SpawnedInSelf: 0
   AttackPrefab: {fileID: 114962956101920240, guid: bebea7f0b397ab842b561febea7726fa,
     type: 3}
 --- !u!1 &1976215754139816
@@ -690,7 +690,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: a008e722c8df4ce4a943a66359c3b59a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9b34bfb53524d7b4f9bd1bb43610c30d, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
