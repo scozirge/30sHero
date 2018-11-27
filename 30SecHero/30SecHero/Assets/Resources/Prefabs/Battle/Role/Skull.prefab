@@ -165,6 +165,7 @@ GameObject:
   - component: {fileID: 114796498901394522}
   - component: {fileID: 95077092610168030}
   - component: {fileID: 114285072897160996}
+  - component: {fileID: 7087408382995523787}
   m_Layer: 9
   m_Name: Skull
   m_TagString: Enemy
@@ -259,7 +260,7 @@ MonoBehaviour:
   DropLootCount: 1
   DesignateLoot: 
   DropSkillProbility: 0.2
-  DropSkill: {fileID: 114285072897160996}
+  DropSkill: {fileID: 7087408382995523787}
   HealthObj: {fileID: 1629960410814638}
   PlayMotionDuration: 0.5
   InitBuffers: []
@@ -348,7 +349,7 @@ MonoBehaviour:
   Description: 
   BehaviorSkill: 0
   PSkillName: Skull
-  PSkillDuration: 20
+  PSkillDuration: 10
   DetecteRadius: 1000
   DamagePercent: 1
   AttackStopMove: 0
@@ -364,6 +365,40 @@ MonoBehaviour:
   AngleInterval: 0
   RandomAngle: 0
   Patetern: 2
+  SpawnedInSelf: 0
+  AttackPrefab: {fileID: 114630672538787846, guid: 6a16cb5194251844da623a7b775ccc0c,
+    type: 3}
+--- !u!114 &7087408382995523787
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1570332876556426}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3283f1f3a7e6b24db127fb13fd7f595, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Description: 
+  BehaviorSkill: 0
+  PSkillName: Skull_P
+  PSkillDuration: 10
+  DetecteRadius: 1000
+  DamagePercent: 1
+  AttackStopMove: 0
+  StopMoveTime: 1
+  SpellSound: {fileID: 0}
+  PSkillTimer: 0
+  IsPlayerGetSkill: 0
+  AttackOnce: 0
+  Interval: 2
+  AmmoNum: 1
+  AmmoInterval: 0.2
+  StartAngle: 0
+  AngleInterval: 0
+  RandomAngle: 0
+  Patetern: 4
   SpawnedInSelf: 0
   AttackPrefab: {fileID: 114630672538787846, guid: 6a16cb5194251844da623a7b775ccc0c,
     type: 3}

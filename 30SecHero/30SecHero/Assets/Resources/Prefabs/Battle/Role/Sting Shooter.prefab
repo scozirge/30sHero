@@ -301,7 +301,7 @@ MonoBehaviour:
   Description: 
   BehaviorSkill: 0
   PSkillName: Sting Shooter
-  PSkillDuration: 20
+  PSkillDuration: 10
   DetecteRadius: 1000
   DamagePercent: 1
   AttackStopMove: 0

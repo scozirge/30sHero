@@ -27,7 +27,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1042334139845562}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.64, y: 0.64, z: 1}
   m_Children: []
@@ -65,7 +65,8 @@ MonoBehaviour:
   Buffers: []
   TriggerOnRushRole: 0
   Value: 0
-  AmmoSpeed: 600
+  IsPlayerGetSkill: 0
+  AmmoSpeed: 500
   TraceFactor: 0
   TriggerWall: 1
 --- !u!222 &222836414818298276
