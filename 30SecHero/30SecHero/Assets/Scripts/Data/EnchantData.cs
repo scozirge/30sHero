@@ -43,6 +43,9 @@ public class EnchantData : Data
     public int MaxLevel;
     public string IconString;
     public int LV { get; private set; }
+    static List<int> WeaponEnchantList = new List<int>();
+    static List<int> ArmorEnchantList = new List<int>();
+
     public string GetLVString(int _plus)
     {
         return string.Format("{0}{1}", StringData.GetString("LV"), LV + _plus);
@@ -63,7 +66,6 @@ public class EnchantData : Data
             int id = int.Parse(items[i]["ID"].ToString());
             _dic.Add(id, data);
         }
-
     }
     EnchantData(JsonData _item)
     {
@@ -104,6 +106,10 @@ public class EnchantData : Data
                         break;
                     case "Type":
                         MyEnchantType = MyEnum.ParseEnum<EnchantType>(item[key].ToString());
+                        if (MyEnchantType == EnchantType.Weapon)
+                            WeaponEnchantList.Add(ID);
+                        else if (MyEnchantType == EnchantType.Armor)
+                            ArmorEnchantList.Add(ID);
                         break;
                     default:
                         Debug.LogWarning(string.Format("{0}表有不明屬性:{1}", DataName, key));
@@ -115,6 +121,19 @@ public class EnchantData : Data
         {
             Debug.LogException(ex);
         }
+    }
+    public static int GetRandomEquipEnchant(EnchantType _type)
+    {
+        int enchantID = 0;
+        if(_type==EnchantType.Weapon)
+        {
+            enchantID = UnityEngine.Random.Range(0, WeaponEnchantList.Count);
+        }
+        else if(_type==EnchantType.Armor)
+        {
+            enchantID = UnityEngine.Random.Range(0, ArmorEnchantList.Count);
+        }
+        return enchantID;
     }
     public void InitSet(int _lv)
     {
