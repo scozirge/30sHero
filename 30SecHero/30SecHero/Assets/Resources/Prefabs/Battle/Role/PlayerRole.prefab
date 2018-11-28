@@ -190,6 +190,7 @@ MonoBehaviour:
   IsPreAttack: 0
   OnRush: 0
   TestMode: 0
+  RushEffect: {fileID: 19845390, guid: 191d87ace6e57d44e9b37f5fc03dc313, type: 3}
   AvatarRemoveEffect: {fileID: 198023469444164576, guid: 4fa0c17b07dd95f4fac2c50aea787be7,
     type: 3}
   BeHitEffect_Shield: {fileID: 198853811207955838, guid: 48c7fe97ee5fbd0478fa25692681f2f2,
