@@ -118,6 +118,8 @@ public class ShootAmmo : Ammo
             }
         }
         _role.BeAttack(AttackerRoleTag, ref damage, force);
+        if (Attacker && VampireProportion > 0 && damage>0)
+            Attacker.HealHP((int)(damage * VampireProportion));
         base.TriggerTarget(_role, _pos);
     }
     protected override void Update()

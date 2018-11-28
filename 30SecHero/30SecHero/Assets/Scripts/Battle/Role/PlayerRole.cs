@@ -319,6 +319,30 @@ public partial class PlayerRole : Role
     int FuryBeAttackTImes;
     public SuicideBombing FurySkil;
     MyTimer FuryTimer;
+    public float CrossNailProportion;
+    public Shoot CrossNailSkill;
+    public float SplashNailProportion;
+    public Shoot SplashNailSkill;
+    public float ShurikenProportion;
+    public Shoot ShurikenSkill;
+    public float BatProportion;
+    public Shoot BatSkill;
+    public float FrozenBallProportion;
+    public Shoot FrozenBallSkill;
+    public float ShockBallProportion;
+    public Shoot ShockBallSkill;
+    public float PoisonedBallProportion;
+    public Shoot PoisonedBallSkill;
+    public float FireBallProportion;
+    public Shoot FireBallSkill;
+    public float FireArmorProportion;
+    public SuicideBombing FireArmorSkill;
+    public float FrozenArmorProportion;
+    public SuicideBombing FrozenArmorSkill;
+    public float PoisonedArmorProportion;
+    public SuicideBombing PoisonedArmorSkill;
+    public float WindArmorProportion;
+    public SuicideBombing WindArmorSkill;
 
 
 
@@ -453,7 +477,49 @@ public partial class PlayerRole : Role
         FuryTime = Player.GetEnchantProperty(EnchantProperty.Fury);
         if (FuryTime > 0)
             FuryTimer = new MyTimer(FuryTime, FuryTimeUp, false, false);
+        CrossNailProportion = Player.GetEnchantProperty(EnchantProperty.CrossNail);
+        if(CrossNailProportion>0)
+        {
+            CrossNailSkill.DamagePercent = CrossNailProportion;
+            CrossNailSkill.BehaviorSkill = false;
+        }
+        SplashNailProportion = Player.GetEnchantProperty(EnchantProperty.SplashNail);
+        if (SplashNailProportion > 0)
+        {
+            SplashNailSkill.DamagePercent = SplashNailProportion;
+            SplashNailSkill.BehaviorSkill = false;
+        }
+        ShurikenProportion = Player.GetEnchantProperty(EnchantProperty.Shuriken);
+        if (ShurikenProportion > 0)
+        {
+            ShurikenSkill.DamagePercent = ShurikenProportion;
+            ShurikenSkill.BehaviorSkill = false;
+        }
 
+        FireArmorProportion = Player.GetEnchantProperty(EnchantProperty.FireArmor);
+        if (FireArmorProportion > 0)
+        {
+            FireArmorSkill.DamagePercent = FireArmorProportion;
+            FireArmorSkill.BehaviorSkill = false;
+        }
+        FrozenArmorProportion = Player.GetEnchantProperty(EnchantProperty.FrozenArmor);
+        if (FrozenArmorProportion > 0)
+        {
+            FrozenArmorSkill.DamagePercent = FrozenArmorProportion;
+            FrozenArmorSkill.BehaviorSkill = false;
+        }
+        PoisonedArmorProportion = Player.GetEnchantProperty(EnchantProperty.PoisonedArmor);
+        if (PoisonedArmorProportion > 0)
+        {
+            PoisonedArmorSkill.DamagePercent = PoisonedArmorProportion;
+            PoisonedArmorSkill.BehaviorSkill = false;
+        }
+        WindArmorProportion = Player.GetEnchantProperty(EnchantProperty.WindArmor);
+        if (WindArmorProportion > 0)
+        {
+            WindArmorSkill.DamagePercent = WindArmorProportion;
+            WindArmorSkill.BehaviorSkill = false;
+        }
 
 
         if (Player.MyWeapon != null)
@@ -649,19 +715,42 @@ public partial class PlayerRole : Role
         if (FortitudeProportion > 0 && BuffersExist(RoleBuffer.Stun))
             _dmg = (int)(_dmg * (1 - FortitudeProportion));
         base.BeAttack(_attackerForce, ref _dmg, _force);
-        //被攻擊觸發累積怒火次數，時間內滿3次發動怒火沖天
-        if (FuryTime > 0 && _dmg > 0)
+        if(_dmg>0)
         {
-            FuryTimer.StartRunTimer = true;
-            FuryBeAttackTImes++;            
-            if (FuryBeAttackTImes >= 3)
+            //被攻擊觸發累積怒火次數，時間內滿3次發動怒火沖天
+            if (FuryTime > 0)
             {
-                FuryBeAttackTImes = 0;
-                FurySkil.LaunchAISpell();
+                FuryTimer.StartRunTimer = true;
+                FuryBeAttackTImes++;
+                if (FuryBeAttackTImes >= 3)
+                {
+                    FuryBeAttackTImes = 0;
+                    FurySkil.LaunchAISpell();
+                }
+                else
+                {
+                    FuryTimer.RestartCountDown();
+                }
             }
-            else
+            //被攻擊觸發火焰新星
+            if(FireArmorProportion>0 && ProbabilityGetter.GetResult(0.2f))
             {
-                FuryTimer.RestartCountDown();
+                FireArmorSkill.LaunchAISpell();
+            }
+            //被攻擊觸發寒霜新星
+            if (FrozenArmorProportion > 0 && ProbabilityGetter.GetResult(0.2f))
+            {
+                FrozenArmorSkill.LaunchAISpell();
+            }
+            //被攻擊觸發劇毒新星
+            if (PoisonedArmorProportion > 0 && ProbabilityGetter.GetResult(0.2f))
+            {
+                PoisonedArmorSkill.LaunchAISpell();
+            }
+            //被攻擊觸發颶風新星
+            if (WindArmorProportion > 0 && ProbabilityGetter.GetResult(0.2f))
+            {
+                WindArmorSkill.LaunchAISpell();
             }
         }
     }

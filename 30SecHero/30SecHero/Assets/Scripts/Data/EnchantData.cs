@@ -33,7 +33,8 @@ public class EnchantData : Data
         return string.Format(GameDictionary.String_EnchantDic[ID.ToString()].GetString(1, Player.UseLanguage), valueString);
     }
     bool ShowPercentage;
-    public EnchantProperty Type;
+    public EnchantProperty PropertyType;
+    public EnchantType MyEnchantType;
     public Dictionary<EnchantProperty, float> Properties = new Dictionary<EnchantProperty, float>();
     public float BaseValue;
     public float LevelUpValue;
@@ -58,7 +59,7 @@ public class EnchantData : Data
         {
             EnchantData data = new EnchantData(items[i]);
             data.DataName = _dataName;
-            data.Properties.Add(data.Type, 0);
+            data.Properties.Add(data.PropertyType, 0);
             int id = int.Parse(items[i]["ID"].ToString());
             _dic.Add(id, data);
         }
@@ -77,7 +78,7 @@ public class EnchantData : Data
                         ID = int.Parse(item[key].ToString());
                         break;
                     case "EnchantType":
-                        Type = (EnchantProperty)Enum.Parse(typeof(EnchantProperty), item[key].ToString());
+                        PropertyType = (EnchantProperty)Enum.Parse(typeof(EnchantProperty), item[key].ToString());
                         break;
                     case "BaseValue":
                         BaseValue = float.Parse(item[key].ToString());
@@ -101,6 +102,9 @@ public class EnchantData : Data
                     case "Icon":
                         IconString = item[key].ToString();
                         break;
+                    case "Type":
+                        MyEnchantType = MyEnum.ParseEnum<EnchantType>(item[key].ToString());
+                        break;
                     default:
                         Debug.LogWarning(string.Format("{0}表有不明屬性:{1}", DataName, key));
                         break;
@@ -117,12 +121,12 @@ public class EnchantData : Data
         if (_lv < 0)
             return;
         LV = _lv;
-        Properties[Type] = GetValue();
+        Properties[PropertyType] = GetValue();
     }
     public void LVUP()
     {
         LV++;
-        Properties[Type] = GetValue();
+        Properties[PropertyType] = GetValue();
     }
     public bool CanUpgrade()
     {

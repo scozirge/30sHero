@@ -72,6 +72,8 @@ public class MeleeAmmo : Ammo
             //幽靈護甲抵抗近戰傷害
             damage = (int)(damage * (1 - BattleManage.BM.MyPlayer.GhostArmorProportion * BattleManage.BM.MyPlayer.ActiveMonsterSkillCount));
             _role.BeAttack(AttackerRoleTag, ref damage, force);
+            if (Attacker && VampireProportion > 0 && damage > 0)
+                Attacker.HealHP((int)(damage * VampireProportion));
         }
         if (AmmoType != ShootAmmoType.Permanent)
             SelfDestroy();

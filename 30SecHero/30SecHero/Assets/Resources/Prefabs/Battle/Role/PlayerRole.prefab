@@ -117,6 +117,18 @@ GameObject:
   - component: {fileID: 1699951294}
   - component: {fileID: 8674507488945032181}
   - component: {fileID: 5781173221670371357}
+  - component: {fileID: 5511798855038421899}
+  - component: {fileID: 3290497538085040505}
+  - component: {fileID: 1699951297}
+  - component: {fileID: 1699951298}
+  - component: {fileID: 1699951299}
+  - component: {fileID: 1854052404694572665}
+  - component: {fileID: 5904946093466798333}
+  - component: {fileID: 3889418733401809973}
+  - component: {fileID: 7400705641803449881}
+  - component: {fileID: 7530781475277062003}
+  - component: {fileID: 1699951301}
+  - component: {fileID: 1699951302}
   m_Layer: 8
   m_Name: PlayerRole
   m_TagString: Player
@@ -205,7 +217,7 @@ MonoBehaviour:
   KeyboardJumpMoveFactor: 3
   MoveAfterimagePrefab: {fileID: 198230356777013556, guid: 4ac12026ed62f024b9bc36b2da373c93,
     type: 3}
-  DontAttackRestoreTime: 1
+  DontAttackRestoreTime: 2
   SelfKnockForce: 10000
   SelfSturnTime: 0.25
   ControlDevice: 1
@@ -300,6 +312,30 @@ MonoBehaviour:
   OverloadSkil: {fileID: 8674507488945032181}
   FuryTime: 0
   FurySkil: {fileID: 5781173221670371357}
+  CrossNailProportion: 0
+  CrossNailSkill: {fileID: 5511798855038421899}
+  SplashNailProportion: 0
+  SplashNailSkill: {fileID: 3290497538085040505}
+  ShurikenProportion: 0
+  ShurikenSkill: {fileID: 1699951297}
+  BatProportion: 0
+  BatSkill: {fileID: 1699951298}
+  FrozenBallProportion: 0
+  FrozenBallSkill: {fileID: 1699951299}
+  ShockBallProportion: 0
+  ShockBallSkill: {fileID: 1854052404694572665}
+  PoisonedBallProportion: 0
+  PoisonedBallSkill: {fileID: 1699951301}
+  FireBallProportion: 0
+  FireBallSkill: {fileID: 1699951302}
+  FireArmorProportion: 0
+  FireArmorSkill: {fileID: 7530781475277062003}
+  FrozenArmorProportion: 0
+  FrozenArmorSkill: {fileID: 7400705641803449881}
+  PoisonedArmorProportion: 0
+  PoisonedArmorSkill: {fileID: 3889418733401809973}
+  WindArmorProportion: 0
+  WindArmorSkill: {fileID: 5904946093466798333}
 --- !u!50 &50485858130474148
 Rigidbody2D:
   serializedVersion: 4
@@ -385,6 +421,7 @@ MonoBehaviour:
   StopMoveTime: 0
   SpellSound: {fileID: 0}
   SpawnedInSelf: 0
+  VampireProportion: 0
   PSkillTimer: 0
   IsPlayerGetSkill: 0
   AttackOnce: 0
@@ -420,6 +457,7 @@ MonoBehaviour:
   StopMoveTime: 0
   SpellSound: {fileID: 0}
   SpawnedInSelf: 0
+  VampireProportion: 0
   PSkillTimer: 0
   IsPlayerGetSkill: 0
   SupportOnce: 0
@@ -452,6 +490,7 @@ MonoBehaviour:
   StopMoveTime: 0
   SpellSound: {fileID: 0}
   SpawnedInSelf: 0
+  VampireProportion: 0
   PSkillTimer: 0
   IsPlayerGetSkill: 0
   AttackOnce: 0
@@ -486,6 +525,7 @@ MonoBehaviour:
   StopMoveTime: 0
   SpellSound: {fileID: 8300000, guid: 64fb9477894fa2e4a997518fbb1c2f15, type: 3}
   SpawnedInSelf: 0
+  VampireProportion: 0
   PSkillTimer: 0
   IsPlayerGetSkill: 0
   Suicide: 0
@@ -515,6 +555,7 @@ MonoBehaviour:
   StopMoveTime: 0
   SpellSound: {fileID: 8300000, guid: df0ec39bb7429284fb2f1c3413e68098, type: 3}
   SpawnedInSelf: 0
+  VampireProportion: 0
   PSkillTimer: 0
   IsPlayerGetSkill: 0
   Suicide: 0
@@ -544,6 +585,7 @@ MonoBehaviour:
   StopMoveTime: 0
   SpellSound: {fileID: 8300000, guid: 4027915a7025bf14fa1be528e0a0dfd7, type: 3}
   SpawnedInSelf: 0
+  VampireProportion: 0
   PSkillTimer: 0
   IsPlayerGetSkill: 0
   Suicide: 0
@@ -573,6 +615,7 @@ MonoBehaviour:
   StopMoveTime: 0
   SpellSound: {fileID: 8300000, guid: 041736f305b42af428b789b1db67e901, type: 3}
   SpawnedInSelf: 0
+  VampireProportion: 0
   PSkillTimer: 0
   IsPlayerGetSkill: 0
   Suicide: 0
@@ -602,6 +645,7 @@ MonoBehaviour:
   StopMoveTime: 0
   SpellSound: {fileID: 8300000, guid: 23679567866092d4699c3877d21420b9, type: 3}
   SpawnedInSelf: 0
+  VampireProportion: 0
   PSkillTimer: 0
   IsPlayerGetSkill: 0
   AttackOnce: 0
@@ -636,6 +680,7 @@ MonoBehaviour:
   StopMoveTime: 0.5
   SpellSound: {fileID: 8300000, guid: 264e9a30ad39b33429396e8cc83a5f0a, type: 3}
   SpawnedInSelf: 1
+  VampireProportion: 0
   PSkillTimer: 0
   IsPlayerGetSkill: 0
   Suicide: 0
@@ -665,6 +710,7 @@ MonoBehaviour:
   StopMoveTime: 0
   SpellSound: {fileID: 8300000, guid: 264e9a30ad39b33429396e8cc83a5f0a, type: 3}
   SpawnedInSelf: 1
+  VampireProportion: 0
   PSkillTimer: 0
   IsPlayerGetSkill: 0
   Suicide: 0
@@ -672,6 +718,406 @@ MonoBehaviour:
   AttackPrefab: {fileID: 114836237506999114, guid: e67b73739a98db844a90168d155bb20c,
     type: 3}
   PrepareTime: 0
+--- !u!114 &5511798855038421899
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1103968850550592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3283f1f3a7e6b24db127fb13fd7f595, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Description: CrossNail
+  BehaviorSkill: 1
+  PSkillName: 
+  PSkillDuration: 20
+  DetecteRadius: 1000
+  DamagePercent: 0.5
+  AttackStopMove: 0
+  StopMoveTime: 0
+  SpellSound: {fileID: 8300000, guid: 23679567866092d4699c3877d21420b9, type: 3}
+  SpawnedInSelf: 0
+  VampireProportion: 0
+  PSkillTimer: 0
+  IsPlayerGetSkill: 0
+  AttackOnce: 0
+  Interval: 6
+  AmmoNum: 4
+  AmmoInterval: 0
+  StartAngle: 0
+  AngleInterval: 90
+  RandomAngle: 0
+  Patetern: 0
+  AttackPrefab: {fileID: 114630672538787846, guid: f2e9517c70174fa41a592ed661cf8f43,
+    type: 3}
+--- !u!114 &3290497538085040505
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1103968850550592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3283f1f3a7e6b24db127fb13fd7f595, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Description: SplashNail
+  BehaviorSkill: 1
+  PSkillName: 
+  PSkillDuration: 20
+  DetecteRadius: 1000
+  DamagePercent: 0.4
+  AttackStopMove: 0
+  StopMoveTime: 0
+  SpellSound: {fileID: 8300000, guid: 23679567866092d4699c3877d21420b9, type: 3}
+  SpawnedInSelf: 0
+  VampireProportion: 0
+  PSkillTimer: 0
+  IsPlayerGetSkill: 0
+  AttackOnce: 0
+  Interval: 6
+  AmmoNum: 3
+  AmmoInterval: 0
+  StartAngle: -10
+  AngleInterval: 10
+  RandomAngle: 0
+  Patetern: 1
+  AttackPrefab: {fileID: 114630672538787846, guid: e1a992b528542bc4bbd36f18c4440c15,
+    type: 3}
+--- !u!114 &1699951297
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1103968850550592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3283f1f3a7e6b24db127fb13fd7f595, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Description: Shuriken
+  BehaviorSkill: 1
+  PSkillName: 
+  PSkillDuration: 20
+  DetecteRadius: 1000
+  DamagePercent: 0.4
+  AttackStopMove: 0
+  StopMoveTime: 0
+  SpellSound: {fileID: 8300000, guid: 23679567866092d4699c3877d21420b9, type: 3}
+  SpawnedInSelf: 0
+  VampireProportion: 0
+  PSkillTimer: 0
+  IsPlayerGetSkill: 0
+  AttackOnce: 0
+  Interval: 6
+  AmmoNum: 1
+  AmmoInterval: 0
+  StartAngle: 0
+  AngleInterval: 0
+  RandomAngle: 0
+  Patetern: 1
+  AttackPrefab: {fileID: 3493921463868163088, guid: 3a714551f4af63b4c8951e45321ccee6,
+    type: 3}
+--- !u!114 &1699951298
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1103968850550592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3283f1f3a7e6b24db127fb13fd7f595, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Description: Bat
+  BehaviorSkill: 1
+  PSkillName: 
+  PSkillDuration: 20
+  DetecteRadius: 1000
+  DamagePercent: 0.1
+  AttackStopMove: 0
+  StopMoveTime: 0
+  SpellSound: {fileID: 8300000, guid: 4c924f11eb5f6ca4f8cf60b1d9e596cb, type: 3}
+  SpawnedInSelf: 0
+  VampireProportion: 1
+  PSkillTimer: 0
+  IsPlayerGetSkill: 0
+  AttackOnce: 0
+  Interval: 6
+  AmmoNum: 3
+  AmmoInterval: 0.03
+  StartAngle: 0
+  AngleInterval: 120
+  RandomAngle: 0
+  Patetern: 1
+  AttackPrefab: {fileID: 3493921463868163088, guid: efa54ced923b36a4fad51f307a67a13e,
+    type: 3}
+--- !u!114 &1699951299
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1103968850550592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3283f1f3a7e6b24db127fb13fd7f595, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Description: FrozenBall
+  BehaviorSkill: 1
+  PSkillName: 
+  PSkillDuration: 20
+  DetecteRadius: 1000
+  DamagePercent: 1
+  AttackStopMove: 0
+  StopMoveTime: 0
+  SpellSound: {fileID: 0}
+  SpawnedInSelf: 0
+  VampireProportion: 0
+  PSkillTimer: 0
+  IsPlayerGetSkill: 0
+  AttackOnce: 0
+  Interval: 6
+  AmmoNum: 1
+  AmmoInterval: 0
+  StartAngle: 0
+  AngleInterval: 0
+  RandomAngle: 0
+  Patetern: 4
+  AttackPrefab: {fileID: 114962956101920240, guid: f6cab0a6f37f27945a23ed04ef0daae7,
+    type: 3}
+--- !u!114 &1854052404694572665
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1103968850550592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3283f1f3a7e6b24db127fb13fd7f595, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Description: ShockBall
+  BehaviorSkill: 1
+  PSkillName: 
+  PSkillDuration: 20
+  DetecteRadius: 1000
+  DamagePercent: 1
+  AttackStopMove: 0
+  StopMoveTime: 0
+  SpellSound: {fileID: 0}
+  SpawnedInSelf: 0
+  VampireProportion: 0
+  PSkillTimer: 0
+  IsPlayerGetSkill: 0
+  AttackOnce: 0
+  Interval: 6
+  AmmoNum: 1
+  AmmoInterval: 0
+  StartAngle: 0
+  AngleInterval: 0
+  RandomAngle: 0
+  Patetern: 4
+  AttackPrefab: {fileID: 114962956101920240, guid: 54719d61992253c4daee109e697c6f43,
+    type: 3}
+--- !u!114 &5904946093466798333
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1103968850550592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91622d248ee865744a5de227b5ecb88a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Description: WindArmor
+  BehaviorSkill: 1
+  PSkillName: 
+  PSkillDuration: 0
+  DetecteRadius: 0
+  DamagePercent: 0
+  AttackStopMove: 0
+  StopMoveTime: 0
+  SpellSound: {fileID: 8300000, guid: 041736f305b42af428b789b1db67e901, type: 3}
+  SpawnedInSelf: 0
+  VampireProportion: 0
+  PSkillTimer: 0
+  IsPlayerGetSkill: 0
+  Suicide: 0
+  PrepareParticle: []
+  AttackPrefab: {fileID: 114836237506999114, guid: 33f22833ebf5c074088347580fa71ead,
+    type: 3}
+  PrepareTime: 0
+--- !u!114 &3889418733401809973
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1103968850550592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91622d248ee865744a5de227b5ecb88a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Description: PoisonedArmor
+  BehaviorSkill: 1
+  PSkillName: 
+  PSkillDuration: 0
+  DetecteRadius: 0
+  DamagePercent: 0.5
+  AttackStopMove: 0
+  StopMoveTime: 0
+  SpellSound: {fileID: 8300000, guid: 4027915a7025bf14fa1be528e0a0dfd7, type: 3}
+  SpawnedInSelf: 0
+  VampireProportion: 0
+  PSkillTimer: 0
+  IsPlayerGetSkill: 0
+  Suicide: 0
+  PrepareParticle: []
+  AttackPrefab: {fileID: 114836237506999114, guid: 3d57514312e1634448710b2aa99dc770,
+    type: 3}
+  PrepareTime: 0
+--- !u!114 &7400705641803449881
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1103968850550592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91622d248ee865744a5de227b5ecb88a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Description: FrozenArmor
+  BehaviorSkill: 1
+  PSkillName: 
+  PSkillDuration: 0
+  DetecteRadius: 0
+  DamagePercent: 0.5
+  AttackStopMove: 0
+  StopMoveTime: 0
+  SpellSound: {fileID: 8300000, guid: df0ec39bb7429284fb2f1c3413e68098, type: 3}
+  SpawnedInSelf: 0
+  VampireProportion: 0
+  PSkillTimer: 0
+  IsPlayerGetSkill: 0
+  Suicide: 0
+  PrepareParticle: []
+  AttackPrefab: {fileID: 114836237506999114, guid: f5eb26b6a3c3476408591e7b9198bb10,
+    type: 3}
+  PrepareTime: 0
+--- !u!114 &7530781475277062003
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1103968850550592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91622d248ee865744a5de227b5ecb88a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Description: FireArmor
+  BehaviorSkill: 1
+  PSkillName: 
+  PSkillDuration: 0
+  DetecteRadius: 0
+  DamagePercent: 0.5
+  AttackStopMove: 0
+  StopMoveTime: 0
+  SpellSound: {fileID: 8300000, guid: 64fb9477894fa2e4a997518fbb1c2f15, type: 3}
+  SpawnedInSelf: 0
+  VampireProportion: 0
+  PSkillTimer: 0
+  IsPlayerGetSkill: 0
+  Suicide: 0
+  PrepareParticle: []
+  AttackPrefab: {fileID: 114836237506999114, guid: 2fa1f8049a341054fab22931bbd10276,
+    type: 3}
+  PrepareTime: 0
+--- !u!114 &1699951301
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1103968850550592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3283f1f3a7e6b24db127fb13fd7f595, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Description: PoisonedBall
+  BehaviorSkill: 1
+  PSkillName: 
+  PSkillDuration: 20
+  DetecteRadius: 1000
+  DamagePercent: 1
+  AttackStopMove: 0
+  StopMoveTime: 0
+  SpellSound: {fileID: 0}
+  SpawnedInSelf: 0
+  VampireProportion: 0
+  PSkillTimer: 0
+  IsPlayerGetSkill: 0
+  AttackOnce: 0
+  Interval: 6
+  AmmoNum: 1
+  AmmoInterval: 0
+  StartAngle: 0
+  AngleInterval: 0
+  RandomAngle: 0
+  Patetern: 4
+  AttackPrefab: {fileID: 114962956101920240, guid: 48e47be9eacda6747934618a9cf429b0,
+    type: 3}
+--- !u!114 &1699951302
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1103968850550592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3283f1f3a7e6b24db127fb13fd7f595, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Description: FireBall
+  BehaviorSkill: 1
+  PSkillName: 
+  PSkillDuration: 20
+  DetecteRadius: 1000
+  DamagePercent: 1
+  AttackStopMove: 0
+  StopMoveTime: 0
+  SpellSound: {fileID: 0}
+  SpawnedInSelf: 0
+  VampireProportion: 0
+  PSkillTimer: 0
+  IsPlayerGetSkill: 0
+  AttackOnce: 0
+  Interval: 6
+  AmmoNum: 1
+  AmmoInterval: 0
+  StartAngle: 0
+  AngleInterval: 0
+  RandomAngle: 0
+  Patetern: 4
+  AttackPrefab: {fileID: 114962956101920240, guid: 09dfc36365da6064dbdb0bb6a1c54ab9,
+    type: 3}
 --- !u!1 &1131648973560484
 GameObject:
   m_ObjectHideFlags: 0

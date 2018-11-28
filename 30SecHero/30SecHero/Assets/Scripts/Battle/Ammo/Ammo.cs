@@ -60,7 +60,7 @@ public partial class Ammo : MonoBehaviour
     protected List<MyTimer> ReadyToDamageTimers;
     protected Dictionary<string, bool> ReadyToDamageTargets;
     public bool IsPlayerGetSkill;
-
+    protected float VampireProportion;
 
     public virtual void TriggerHitCondition(Role _role)
     {
@@ -119,6 +119,7 @@ public partial class Ammo : MonoBehaviour
         Value = int.Parse(_dic["Damage"].ToString());
         ValuePercent = float.Parse(_dic["DamagePercent"].ToString());
         Attacker = (Role)(_dic["Attacker"]);
+        VampireProportion = float.Parse(_dic["VampireProportion"].ToString());
         SpawnParticles();
         if (IsPlayerGetSkill)
         {

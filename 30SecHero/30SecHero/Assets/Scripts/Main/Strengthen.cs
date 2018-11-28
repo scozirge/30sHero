@@ -51,9 +51,12 @@ public class Strengthen : MyUI
         keys = new List<int>(GameDictionary.EnchantDic.Keys);
         for (int i = 0; i < keys.Count; i++)
         {
-            EnchantItem ei = (EnchantItem)EnchantSpanwer.Spawn();
-            ei.Set(GameDictionary.EnchantDic[keys[i]], this);
-            EnchantItemList.Add(ei);
+            if(GameDictionary.EnchantDic[keys[i]].MyEnchantType==EnchantType.Enchant)
+            {
+                EnchantItem ei = (EnchantItem)EnchantSpanwer.Spawn();
+                ei.Set(GameDictionary.EnchantDic[keys[i]], this);
+                EnchantItemList.Add(ei);
+            }
         }
         //預設強化分頁並選擇第一個item
         StrengthenContent.gameObject.SetActive(true);
