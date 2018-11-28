@@ -25,6 +25,10 @@ public partial class Debugger : MonoBehaviour
         {
             Player.ShowEquipProperties();
         }
+        else if (Input.GetKeyDown(KeyCode.N))
+        {
+            BattleManage.BM.MyPlayer.ShowMyEnchantInfo();
+        }
         else if (Input.GetKeyDown(KeyCode.C))
         {
             Player.ShowStrengthenProperties();

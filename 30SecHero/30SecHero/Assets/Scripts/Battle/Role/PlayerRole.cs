@@ -282,7 +282,16 @@ public partial class PlayerRole : Role
     bool CanGenerateShockWave;
 
 
-
+    public void ShowMyEnchantInfo()
+    {
+        Debug.Log("顯示戰鬥中附魔資訊");
+        List<EnchantProperty> keys = new List<EnchantProperty>(MyEnchant.Keys);
+        for (int i = 0; i < keys.Count; i++)
+        {
+            if (MyEnchant[keys[i]] != 0)
+                Debug.Log(keys[i] + "=" + MyEnchant[keys[i]]);
+        }
+    }
 
     protected override void Start()
     {
@@ -478,7 +487,7 @@ public partial class PlayerRole : Role
             if (StartGenerateShield)
             {
                 Shield += ShieldGenerateProportion * MaxShield * Time.deltaTime;
-                if (Shield >= MaxShield)
+                if (Shield >= MaxShield && MyEnchant[EnchantProperty.ShockWave] > 0)
                     CanGenerateShockWave = true;
             }
     }

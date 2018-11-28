@@ -36,7 +36,7 @@ public class KongregateAPIBehaviour : MonoBehaviour
         {
             InitTimer = new MyTimer(0.1f, EndKongregateLogin, true, false);
         }
-        OnKongregateUserInfo("1|scozirge");
+        //OnKongregateUserInfo("1|scozirge");
     }
     void Update()
     {
