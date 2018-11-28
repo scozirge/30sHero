@@ -35,11 +35,11 @@ public partial class Debugger : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.E))
         {
-            BattleManage.BM.MyPlayer.AddBuffer(RoleBuffer.Freeze,5);
+            BattleManage.BM.MyPlayer.AddBuffer(RoleBuffer.Freeze, 5);
         }
         else if (Input.GetKeyDown(KeyCode.R))
         {
-            BattleManage.BM.MyPlayer.AddBuffer(RoleBuffer.Burn,5);
+            BattleManage.BM.MyPlayer.AddBuffer(RoleBuffer.Burn, 5);
         }
         else if (Input.GetKeyDown(KeyCode.T))
         {
@@ -69,7 +69,11 @@ public partial class Debugger : MonoBehaviour
             GainEquipDataList.Add(ArmorData.GetRandomNewArmor(99, 5));
             GainEquipDataList.Add(AccessoryData.GetRandomNewAccessory(99, 5));
             //裝備獲得
-            Player.GainEquip_Local(GainEquipDataList);
+            if (Player.LocalData)
+                Player.GainEquip_Local(GainEquipDataList);
+            else
+                //送server處理
+                Player.Settlement(Player.Gold, Player.Emerald, Player.CurFloor, Player.MaxFloor, GainEquipDataList);
         }
     }
 }

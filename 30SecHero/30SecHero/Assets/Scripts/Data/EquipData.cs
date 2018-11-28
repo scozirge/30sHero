@@ -289,7 +289,7 @@ public abstract class EquipData : Data
         switch (_type)
         {
             case RoleProperty.ShieldRecovery:
-                str = StringData.GetString("Per") + StringData.GetString("Sec");
+                //str = StringData.GetString("Per") + StringData.GetString("Sec");
                 break;
         }
         return str;

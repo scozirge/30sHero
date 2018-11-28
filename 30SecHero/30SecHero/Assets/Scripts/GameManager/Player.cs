@@ -276,7 +276,8 @@ public partial class Player
             if (i != 0)
                 addEquipStr += "/";
             //Debug.Log("equipProperty="+_equipDatas[i].PropertiesStr);
-            addEquipStr += _equipDatas[i].ID + "," + (int)_equipDatas[i].Type + "," + _equipDatas[i].EquipSlot + "," + _equipDatas[i].LV + "," + _equipDatas[i].Quality + "," + _equipDatas[i].PropertiesStr + "," + _equipDatas[i].MyEnchant + "," + ID;
+            addEquipStr += _equipDatas[i].ID + "," + (int)_equipDatas[i].Type + "," + _equipDatas[i].EquipSlot + "," + _equipDatas[i].LV + "," + _equipDatas[i].Quality + "," + _equipDatas[i].PropertiesStr + "," + ((_equipDatas[i].MyEnchant!=null)?_equipDatas[i].MyEnchant.ID:0) + "," + ID;
+
         }
         //Debug.Log("gold=" + _gold + " emerald=" + _emerald + " maxFloor=" + _maxFloor + " addEquipStr=" + addEquipStr);
         ServerRequest.Settlement(_gold, _emerald, _curFloor, _maxFloor, addEquipStr);
@@ -311,6 +312,7 @@ public partial class Player
             }
         }
         //顯示結果在結算
-        BattleManage.BM.StartCoroutine(BattleManage.BM.WaitToShowResult());
+        if (BattleManage.BM)
+            BattleManage.BM.StartCoroutine(BattleManage.BM.WaitToShowResult());
     }
 }
