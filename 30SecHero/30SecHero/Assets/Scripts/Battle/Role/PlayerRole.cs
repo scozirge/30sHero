@@ -8,6 +8,9 @@ public partial class PlayerRole : Role
     [Tooltip("使用測試模式，非測試模式時，玩家數值為讀表")]
     [SerializeField]
     bool TestMode;
+    [LabelOverride("衝刺特效")]
+    [SerializeField]
+    ParticleSystem RushEffect;
     [LabelOverride("解除變身特效")]
     [Tooltip("解除變身特效")]
     [SerializeField]
@@ -919,6 +922,8 @@ public partial class PlayerRole : Role
                             MyRigi.velocity = rushForce;
                             //MyRigi.AddForce(rushForce);
                             AudioPlayer.PlaySound(RushSound);
+                            //衝刺特效RushEffect
+                            EffectEmitter.EmitParticle(RushEffect, Vector3.zero, Vector3.zero, transform);
                             //衝刺傷害增加特效
                             if (LethalDashProportion > 0)
                                 EffectEmitter.EmitParticle(GameManager.GM.LethalDashParticle, Vector3.zero, Vector3.zero, transform);

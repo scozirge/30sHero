@@ -52,11 +52,15 @@ public partial class BattleManage
         SpawnGate(Floor);
         //建立地形
         SpawnStage(new Vector2(BM.PlateSizeX, 0), BM.FloorPlate - 2, Floor);//目前層的地形
-        SpawnStage(new Vector2((BM.PlateSizeX * BM.FloorPlate) - BM.PlateSizeX, 0), BM.FloorPlate, Floor + 1);//下一層地形
-        SpawnStage(new Vector2(-((BM.PlateSizeX * BM.FloorPlate) + (BM.PlateSizeX)), 0), BM.FloorPlate, Floor - 1);//上一層地形
         SpawnFG(new Vector2(-(BM.PlateSizeX * 1.5f), 0), (BM.PlateSizeX * BM.FloorPlate), Floor);//目前層的前景
+        SpawnStage(new Vector2((BM.PlateSizeX * BM.FloorPlate) - BM.PlateSizeX, 0), BM.FloorPlate, Floor + 1);//下一層地形
         SpawnFG(new Vector2(-(BM.PlateSizeX * 1.5f) + (BM.PlateSizeX * BM.FloorPlate), 0), (BM.PlateSizeX * BM.FloorPlate), Floor + 1);//下一層的前景
-        SpawnFG(new Vector2(-(BM.PlateSizeX * 1.5f) - (BM.PlateSizeX * BM.FloorPlate), 0), (BM.PlateSizeX * BM.FloorPlate), Floor - 1);//上一層的前景
+        if ((Floor - 1) > 0)
+        {
+            SpawnStage(new Vector2(-((BM.PlateSizeX * BM.FloorPlate) + (BM.PlateSizeX)), 0), BM.FloorPlate, Floor - 1);//上一層地形
+            SpawnFG(new Vector2(-(BM.PlateSizeX * 1.5f) - (BM.PlateSizeX * BM.FloorPlate), 0), (BM.PlateSizeX * BM.FloorPlate), Floor - 1);//上一層的前景
+        }
+
     }
 
     static bool IsFirstHalf
