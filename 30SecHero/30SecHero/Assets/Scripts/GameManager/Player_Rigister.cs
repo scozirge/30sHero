@@ -110,7 +110,7 @@ public partial class Player
             PlayerPrefs.SetInt(LocoData.Init.ToString(), 1);
             PlayerPrefs.SetInt(LocoData.UseLanguage.ToString(), 2);
         }
-        PlayerPrefs.SetInt(LocoData.Emerald.ToString(),1000);
+        PlayerPrefs.SetInt(LocoData.Emerald.ToString(), 1000);
         PlayerPrefs.SetInt(LocoData.Gold.ToString(), 10000);
         //Debug.Log((Language)PlayerPrefs.GetInt(LocoData.UseLanguage.ToString()));
         SetLanguage((Language)PlayerPrefs.GetInt(LocoData.UseLanguage.ToString()));
@@ -183,7 +183,7 @@ public partial class Player
             EnchantInitDataFinish = true;
         if (true)
         {
-            Debug.Log("CurFloor=" + CurFloor+"  MaxFloor=" + MaxFloor+ "  gold=" + gold+"  emerald=" + emerald);
+            Debug.Log("CurFloor=" + CurFloor + "  MaxFloor=" + MaxFloor + "  gold=" + gold + "  emerald=" + emerald);
             Debug.Log("equipStr=" + equipStr);
             Debug.Log("strengthenStr=" + strengthenStr);
             Debug.Log("enchantStr=" + enchantStr);
@@ -222,19 +222,24 @@ public partial class Player
             int equipSlot = int.Parse(properties[3]);
             int lv = int.Parse(properties[4]);
             int quality = int.Parse(properties[5]);
-            string propertiesStr = properties[6];//讀取本地資料要確定欄位數不然會炸掉，不能隨便追加資料，要追加要優化程式
+            string propertiesStr = "";
+            if (properties.Length > 6)
+                propertiesStr = properties[6];//讀取本地資料要確定欄位數不然會炸掉，不能隨便追加資料，要追加要優化程式
+            int enchantID = 0;
+            if (properties.Length > 7)
+                enchantID = int.Parse(properties[7]);//讀取本地資料要確定欄位數不然會炸掉，不能隨便追加資料，要追加要優化程式
             switch (type)
             {
                 case EquipType.Weapon:
-                    WeaponData w = WeaponData.GetNewWeapon(uid, jid, equipSlot, lv, quality, propertiesStr);
+                    WeaponData w = WeaponData.GetNewWeapon(uid, jid, equipSlot, lv, quality, propertiesStr, enchantID);
                     wlist.Add(uid, w);
                     break;
                 case EquipType.Armor:
-                    ArmorData a = ArmorData.GetNewArmor(uid, jid, equipSlot, lv, quality, propertiesStr);
+                    ArmorData a = ArmorData.GetNewArmor(uid, jid, equipSlot, lv, quality, propertiesStr, enchantID);
                     alist.Add(uid, a);
                     break;
                 case EquipType.Accessory:
-                    AccessoryData ac = AccessoryData.GetNewAccessory(uid, jid, equipSlot, lv, quality, propertiesStr);
+                    AccessoryData ac = AccessoryData.GetNewAccessory(uid, jid, equipSlot, lv, quality, propertiesStr, enchantID);
                     aclist.Add(uid, ac);
                     break;
             }
@@ -246,7 +251,7 @@ public partial class Player
     }
     public static void GetStrengthen_CB(string[] _data)
     {
-        if(_data!=null)
+        if (_data != null)
         {
             for (int i = 0; i < _data.Length; i++)
             {
@@ -264,7 +269,7 @@ public partial class Player
     }
     public static void GetEnchant_CB(string[] _data)
     {
-        if (_data!=null)
+        if (_data != null)
         {
             for (int i = 0; i < _data.Length; i++)
             {

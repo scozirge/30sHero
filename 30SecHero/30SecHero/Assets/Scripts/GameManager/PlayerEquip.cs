@@ -21,6 +21,8 @@ public partial class Player
             if (i != 0)
                 dataStr += "/";
             dataStr += Itmes[EquipType.Weapon][keys[i]].UID + "," + Itmes[EquipType.Weapon][keys[i]].ID + "," + (int)Itmes[EquipType.Weapon][keys[i]].Type + "," + Itmes[EquipType.Weapon][keys[i]].EquipSlot + "," + Itmes[EquipType.Weapon][keys[i]].LV + "," + Itmes[EquipType.Weapon][keys[i]].Quality + "," + Itmes[EquipType.Weapon][keys[i]].PropertiesStr;
+            if (Itmes[EquipType.Weapon][keys[i]].MyEnchant != null)
+                dataStr += "," + Itmes[EquipType.Weapon][keys[i]].MyEnchant.ID;
         }
         //防具文字
         keys = new List<long>(Itmes[EquipType.Armor].Keys);
@@ -32,6 +34,8 @@ public partial class Player
                 if (dataStr != "")
                     dataStr += "/";
             dataStr += Itmes[EquipType.Armor][keys[i]].UID + "," + Itmes[EquipType.Armor][keys[i]].ID + "," + (int)Itmes[EquipType.Armor][keys[i]].Type + "," + Itmes[EquipType.Armor][keys[i]].EquipSlot + "," + Itmes[EquipType.Armor][keys[i]].LV + "," + Itmes[EquipType.Armor][keys[i]].Quality + "," + Itmes[EquipType.Armor][keys[i]].PropertiesStr;
+            if (Itmes[EquipType.Armor][keys[i]].MyEnchant != null)
+                dataStr += "," + Itmes[EquipType.Armor][keys[i]].MyEnchant.ID;
         }
         //飾品文字
         keys = new List<long>(Itmes[EquipType.Accessory].Keys);
@@ -43,6 +47,8 @@ public partial class Player
                 if (dataStr != "")
                     dataStr += "/";
             dataStr += Itmes[EquipType.Accessory][keys[i]].UID + "," + Itmes[EquipType.Accessory][keys[i]].ID + "," + (int)Itmes[EquipType.Accessory][keys[i]].Type + "," + Itmes[EquipType.Accessory][keys[i]].EquipSlot + "," + Itmes[EquipType.Accessory][keys[i]].LV + "," + Itmes[EquipType.Accessory][keys[i]].Quality + "," + Itmes[EquipType.Accessory][keys[i]].PropertiesStr;
+            if (Itmes[EquipType.Accessory][keys[i]].MyEnchant != null)
+                dataStr += "," + Itmes[EquipType.Accessory][keys[i]].MyEnchant.ID;
         }
         PlayerPrefs.SetString(LocoData.Equip.ToString(), dataStr);
     }
@@ -72,6 +78,7 @@ public partial class Player
                 EquipSaveLocalData();
             }
         }
+        RefreshEquipEnchant();
     }
     public static void Equip(ArmorData _data)
     {
@@ -99,6 +106,7 @@ public partial class Player
                 EquipSaveLocalData();
             }
         }
+        RefreshEquipEnchant();
     }
     public static void Equip(AccessoryData _data, int _index)
     {
@@ -128,6 +136,7 @@ public partial class Player
                 EquipSaveLocalData();
             }
         }
+        RefreshEquipEnchant();
     }
     public static void TakeOff(EquipType _type, int _index)
     {
@@ -135,7 +144,7 @@ public partial class Player
         if (_index < 0 || _index > MyAccessorys.Length)
             return;
         EquipData originalEquip = null;
-        switch(_type)
+        switch (_type)
         {
             case EquipType.Weapon:
                 originalEquip = Player.MyWeapon;
@@ -150,24 +159,26 @@ public partial class Player
                 Player.MyAccessorys[_index] = null;
                 break;
         }
-        if (originalEquip == null)
-            return;
-        originalEquip.SetEquipStatus(false, 0);
-        GameSettingData.RolePropertyOperate(EquipPlus, originalEquip.Properties, Operator.Minus);
-        //寫入資料
-        if (EquipInitDataFinish)
+        if (originalEquip != null)
         {
-            if (!LocalData)
+            originalEquip.SetEquipStatus(false, 0);
+            GameSettingData.RolePropertyOperate(EquipPlus, originalEquip.Properties, Operator.Minus);
+            //寫入資料
+            if (EquipInitDataFinish)
             {
-                Debug.Log("更新Server玩家裝備");
-                ServerRequest.ChangeEquip(originalEquip.UID, 0, 0, 0);
-            }
-            else
-            {
-                Debug.Log("更新Loco玩家裝備");
-                EquipSaveLocalData();
+                if (!LocalData)
+                {
+                    Debug.Log("更新Server玩家裝備");
+                    ServerRequest.ChangeEquip(originalEquip.UID, 0, 0, 0);
+                }
+                else
+                {
+                    Debug.Log("更新Loco玩家裝備");
+                    EquipSaveLocalData();
+                }
             }
         }
+        RefreshEquipEnchant();
     }
     public static void SellEquip(EquipData _data)
     {

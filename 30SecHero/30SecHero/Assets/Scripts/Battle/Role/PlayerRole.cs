@@ -73,7 +73,7 @@ public partial class PlayerRole : Role
         {
             return (int)(BaseDamage *
             (1 + (Buffers.ContainsKey(RoleBuffer.DamageUp) ? Buffers[RoleBuffer.DamageUp].Value : 0 +
-            (Buffers.ContainsKey(RoleBuffer.DamageDown) ? -GameSettingData.CurseDamageReduce * (1 - PoisonResistantProportion) : 0))));
+            (Buffers.ContainsKey(RoleBuffer.DamageDown) ? -GameSettingData.CurseDamageReduce * (1 - MyEnchant[EnchantProperty.PoisonResistant]) : 0))));
         }
     }
     public virtual float MoveSpeed
@@ -81,7 +81,7 @@ public partial class PlayerRole : Role
         get
         {
             return (BaseMoveSpeed + (Buffers.ContainsKey(RoleBuffer.SpeedUp) ? Buffers[RoleBuffer.SpeedUp].Value : 0) + ExtraMoveSpeed) * (1 + (Buffers.ContainsKey(RoleBuffer.Freeze) ?
-                -GameSettingData.FreezeMove * (1 - FreezeResistanceProportion) : 0)) + (Buffers.ContainsKey(RoleBuffer.DamageDown) ? DrugAddictionPlus : 0);
+                -GameSettingData.FreezeMove * (1 - MyEnchant[EnchantProperty.FreezeResistance]) : 0)) + (Buffers.ContainsKey(RoleBuffer.DamageDown) ? MyEnchant[EnchantProperty.DrugAddiction] : 0);
         }
     }
     private float extraMoveSpeed;
@@ -223,54 +223,13 @@ public partial class PlayerRole : Role
     bool CanRush;
 
     //附魔
-    public float ExtralGoldDropProportion;
-    public float NoDamageRecoveryProportion;
+    public Dictionary<EnchantProperty, float> MyEnchant = new Dictionary<EnchantProperty, float>();
+
+
     MyTimer NoDamageRecoveryTimer;
     MyTimer NoDamageRecoveryIntervalTimer;
-    public float BurningWeaponProportion;
-    public float PoisonedWeaponProportion;
-    public float FrozenWeaponProportion;
-    public float StunningSlashProportion;
-    public float AttackRangeProportion;
-    public float CarnivorousProportion;
-    public float BerserkerProportion;
-    public float ReflectShieldProportion;
-    public float ConservationOfMassProportion;
-    public float ReviveProportion;
-    public float ReflectMeleeDamageProportion;
-    public float AbsorbElementProportion;
-    public float LethalDashProportion;
     bool IsTriggerRevive;//一場戰鬥只會觸發一次復活
-    public float InertiaPlus;
-    public float ReversalImpactProportion;
-    public float DashForLifeProportion;
-    public float PharmacistProportion;
-    public float AllergyPlus;
-    public float DrugFeverProportion;
     int DrugFeverSpeedUp = 50;
-    public float AlchemyProportion;
-    public float CollectorProportion;
-    public float BloodyGoldProportion;
-    public float HangOnProportion;
-    public float SpeedyJumpProportion;
-    public float BreakDoorGoldProportion;
-    public float ReAvatarProportion;
-    public float TriumphPlus;
-    public float ShepherdProportion;
-    public float OnFireProportion;
-    public float HarvesterProportion;
-    public float GhostShelterProportion;
-    public float GhostArmorProportion;
-    public float FireResistanceProportion;
-    public float FireBladeProportion;
-    public float FreezeResistanceProportion;
-    public float IceArmorProportion;
-    public float PoisonResistantProportion;
-    public float DrugAddictionPlus;
-    public float FortitudeProportion;
-    public float NeutralizationProportion;
-    public float CowerProportion;
-    public float EliteHuntingProportion;
     public struct LastTargeData
     {
         public Role Target;
@@ -280,84 +239,57 @@ public partial class PlayerRole : Role
             if (Target && Target.GetInstanceID() == _target.GetInstanceID())
             {
                 HitCount++;
-                if(HitCount>=3)
+                if (HitCount >= 3)
                 {
-                    HitCount = 0;                    
+                    HitCount = 0;
                     return true;
                 }
             }
             else
             {
                 Target = _target;
-                HitCount = 1;                
+                HitCount = 1;
             }
             return false;
         }
     }
     public LastTargeData LastTarget;
-    public float LightHouseProportion;
-    public float TreasureHuntingProportion;
-    public float CouragePlus;
-    public float KingKillerProportion;
-    public float RuleBreakerPlus;
     bool IsTriggerRuleBreaker;//一場戰鬥只會觸發一次無敵
-    public float SelfCureProportion;
     public Support SelfCureSkill;
     public Supply SelfCureAmmo;
-    public float ChopStrikeProportion;
     public Shoot ChopStrikeSkill;
-    public float FireChopProportion;
     public SuicideBombing FireChopSkil;
-    public float PoisonChopProportion;
     public SuicideBombing PoisonChopSkil;
-    public float FrozenChopProportion;
     public SuicideBombing FrozenChopSkil;
-    public float DashImpactProportion;
     public SuicideBombing DashImpactSkil;
-    public float SplashThornProportion;
     public Shoot SplashThornSkil;
-    public float OverloadProportion;
     public SuicideBombing OverloadSkil;
-    public float FuryTime;
     int FuryBeAttackTImes;
     public SuicideBombing FurySkil;
     MyTimer FuryTimer;
-    public float CrossNailProportion;
     public Shoot CrossNailSkill;
-    public float SplashNailProportion;
     public Shoot SplashNailSkill;
-    public float ShurikenProportion;
     public Shoot ShurikenSkill;
-    public float BatProportion;
     public Shoot BatSkill;
-    public float FrozenBallProportion;
     public Shoot FrozenBallSkill;
-    public float ShockBallProportion;
     public Shoot ShockBallSkill;
-    public float PoisonedBallProportion;
     public Shoot PoisonedBallSkill;
-    public float FireBallProportion;
     public Shoot FireBallSkill;
-    public float FireArmorProportion;
     public SuicideBombing FireArmorSkill;
-    public float FrozenArmorProportion;
     public SuicideBombing FrozenArmorSkill;
-    public float PoisonedArmorProportion;
     public SuicideBombing PoisonedArmorSkill;
-    public float WindArmorProportion;
     public SuicideBombing WindArmorSkill;
+    bool CanGenerateShockWave;
 
 
 
-    float BlizzardTime;
-    bool CanGenerateBlizzard;
 
     protected override void Start()
     {
         InitPlayerProperties();
         base.Start();
-        if (BlizzardTime > 0)
-            CanGenerateBlizzard = true;
+        if (MyEnchant[EnchantProperty.ShockWave] > 0)
+            CanGenerateShockWave = true;
         OnRush = false;
         AvatarTimer = MaxAvaterTime;
         AttackTimer = new MyTimer(DontAttackRestoreTime, RestoreAttack, false, false);
@@ -365,7 +297,7 @@ public partial class PlayerRole : Role
         JumpTimer = new MyTimer(JumpCDTime, SetCanJump, false, false);
         RushTimer = new MyTimer(RushCD, SetCanRush, false, false);
         OnRushTimer = new MyTimer(RushAntiAmooTime, SetNotOnRush, false, false);
-        if (NoDamageRecoveryProportion > 0)
+        if (MyEnchant[EnchantProperty.NoDamageRecovery] > 0)
         {
             NoDamageRecoveryTimer = new MyTimer(5, SetSelfCure, false, false);
             NoDamageRecoveryIntervalTimer = new MyTimer(1, NoDamageRecovery, true, true);
@@ -404,136 +336,72 @@ public partial class PlayerRole : Role
         PotionDrop = (float)Player.GetProperties(RoleProperty.PotionDrop);
         GainMoveFromKilling = (int)Player.GetProperties(RoleProperty.GainMoveFromKilling);
 
-        //附魔
-        ExtralGoldDropProportion = Player.GetEnchantProperty(EnchantProperty.ExtralGoldDrop);
-        RushCD = (float)Player.GetProperties(RoleProperty.RushCD) - Player.GetEnchantProperty(EnchantProperty.RushCDResuce);
-        NoDamageRecoveryProportion = Player.GetEnchantProperty(EnchantProperty.NoDamageRecovery);
-        BlizzardTime = Player.GetEnchantProperty(EnchantProperty.ShockWave);
-        BurningWeaponProportion = Player.GetEnchantProperty(EnchantProperty.BurningWeapon);
-        PoisonedWeaponProportion = Player.GetEnchantProperty(EnchantProperty.PoisonedWeapon);
-        FrozenWeaponProportion = Player.GetEnchantProperty(EnchantProperty.FrozenWeapon);
-        StunningSlashProportion = Player.GetEnchantProperty(EnchantProperty.StunningSlash);
-        AttackRangeProportion = Player.GetEnchantProperty(EnchantProperty.AttackRange);
-        CarnivorousProportion = Player.GetEnchantProperty(EnchantProperty.Carnivorous);
-        BerserkerProportion = Player.GetEnchantProperty(EnchantProperty.Berserker);
-        ConservationOfMassProportion = Player.GetEnchantProperty(EnchantProperty.ConservationOfMass);
-        ReflectShieldProportion = Player.GetEnchantProperty(EnchantProperty.ReflectShield);
-        ConservationOfMassProportion = Player.GetEnchantProperty(EnchantProperty.ConservationOfMass);
-        ReviveProportion = Player.GetEnchantProperty(EnchantProperty.Revive);
-        ReflectMeleeDamageProportion = Player.GetEnchantProperty(EnchantProperty.ReflectMeleeDamage);
-        AbsorbElementProportion = Player.GetEnchantProperty(EnchantProperty.AbsorbElement);
-        LethalDashProportion = Player.GetEnchantProperty(EnchantProperty.LethalDash);
-        InertiaPlus = Player.GetEnchantProperty(EnchantProperty.Inertia);
-        ReversalImpactProportion = Player.GetEnchantProperty(EnchantProperty.ReversalImpact);
-        DashForLifeProportion = Player.GetEnchantProperty(EnchantProperty.DashForLife);
-        PharmacistProportion = Player.GetEnchantProperty(EnchantProperty.Pharmacist);
-        AllergyPlus = Player.GetEnchantProperty(EnchantProperty.Allergy);
-        DrugFeverProportion = Player.GetEnchantProperty(EnchantProperty.DrugFever);
-        AlchemyProportion = Player.GetEnchantProperty(EnchantProperty.Alchemy);
-        CollectorProportion = Player.GetEnchantProperty(EnchantProperty.Collector);
-        BloodyGoldProportion = Player.GetEnchantProperty(EnchantProperty.BloodyGold);
-        HangOnProportion = Player.GetEnchantProperty(EnchantProperty.HangOn);
-        if (HangOnProportion > 0)
-            UntochableTime *= (1 + HangOnProportion);
-        SpeedyJumpProportion = Player.GetEnchantProperty(EnchantProperty.SpeedyJump);
-        if (SpeedyJumpProportion > 0)
-            JumpCDTime *= (1 - SpeedyJumpProportion);
-        BreakDoorGoldProportion = Player.GetEnchantProperty(EnchantProperty.BreakDoorGold);
-        ReAvatarProportion = Player.GetEnchantProperty(EnchantProperty.ReAvatar);
-        TriumphPlus = Player.GetEnchantProperty(EnchantProperty.Triumph);
-        ShepherdProportion = Player.GetEnchantProperty(EnchantProperty.Shepherd);
-        OnFireProportion = Player.GetEnchantProperty(EnchantProperty.OnFire);
-        HarvesterProportion = Player.GetEnchantProperty(EnchantProperty.Harvester);
-        GhostShelterProportion = Player.GetEnchantProperty(EnchantProperty.GhostShelter);
-        GhostArmorProportion = Player.GetEnchantProperty(EnchantProperty.GhostArmor);
-        FireResistanceProportion = Player.GetEnchantProperty(EnchantProperty.FireResistance);
-        FireBladeProportion = Player.GetEnchantProperty(EnchantProperty.FireBlade);
-        FreezeResistanceProportion = Player.GetEnchantProperty(EnchantProperty.FreezeResistance);
-        IceArmorProportion = Player.GetEnchantProperty(EnchantProperty.IceArmor);
-        PoisonResistantProportion = Player.GetEnchantProperty(EnchantProperty.PoisonResistant);
-        DrugAddictionPlus = Player.GetEnchantProperty(EnchantProperty.DrugAddiction);
-        FortitudeProportion = Player.GetEnchantProperty(EnchantProperty.Fortitude);
-        NeutralizationProportion = Player.GetEnchantProperty(EnchantProperty.Neutralization);
-        CowerProportion = Player.GetEnchantProperty(EnchantProperty.Cower);
-        EliteHuntingProportion = Player.GetEnchantProperty(EnchantProperty.EliteHunting);
-        LightHouseProportion = Player.GetEnchantProperty(EnchantProperty.LightHouse);
-        if (LightHouseProportion > 0)
-            MyLight.range = MyLight.range * (1 + LightHouseProportion);
-        TreasureHuntingProportion = Player.GetEnchantProperty(EnchantProperty.TreasureHunting);
-        CouragePlus = Player.GetEnchantProperty(EnchantProperty.Courage);
-        KingKillerProportion = Player.GetEnchantProperty(EnchantProperty.KingKiller);
-        RuleBreakerPlus = Player.GetEnchantProperty(EnchantProperty.RuleBreaker);
-        SelfCureProportion = Player.GetEnchantProperty(EnchantProperty.SelfCure);
-        if (SelfCureProportion>0)
-        {
-            SelfCureSkill.BehaviorSkill = false;
-            SelfCureAmmo.CureProportion = SelfCureProportion;
-        }
-        ChopStrikeProportion = Player.GetEnchantProperty(EnchantProperty.ChopStrike);
-        FireChopProportion = Player.GetEnchantProperty(EnchantProperty.FireChop);
-        PoisonChopProportion = Player.GetEnchantProperty(EnchantProperty.PoisonChop);
-        FrozenChopProportion = Player.GetEnchantProperty(EnchantProperty.FrozenChop);
-        DashImpactProportion = Player.GetEnchantProperty(EnchantProperty.DashImpact);
-        SplashThornProportion = Player.GetEnchantProperty(EnchantProperty.SplashThorn);
-        SplashThornSkil.DamagePercent = SplashThornProportion;
-        OverloadProportion = Player.GetEnchantProperty(EnchantProperty.Overload);
-        FuryTime = Player.GetEnchantProperty(EnchantProperty.Fury);
-        if (FuryTime > 0)
-            FuryTimer = new MyTimer(FuryTime, FuryTimeUp, false, false);
-        CrossNailProportion = Player.GetEnchantProperty(EnchantProperty.CrossNail);
-        if(CrossNailProportion>0)
-        {
-            CrossNailSkill.DamagePercent = CrossNailProportion;
-            CrossNailSkill.BehaviorSkill = false;
-        }
-        SplashNailProportion = Player.GetEnchantProperty(EnchantProperty.SplashNail);
-        if (SplashNailProportion > 0)
-        {
-            SplashNailSkill.DamagePercent = SplashNailProportion;
-            SplashNailSkill.BehaviorSkill = false;
-        }
-        ShurikenProportion = Player.GetEnchantProperty(EnchantProperty.Shuriken);
-        if (ShurikenProportion > 0)
-        {
-            ShurikenSkill.DamagePercent = ShurikenProportion;
-            ShurikenSkill.BehaviorSkill = false;
-        }
-
-        FireArmorProportion = Player.GetEnchantProperty(EnchantProperty.FireArmor);
-        if (FireArmorProportion > 0)
-        {
-            FireArmorSkill.DamagePercent = FireArmorProportion;
-            FireArmorSkill.BehaviorSkill = false;
-        }
-        FrozenArmorProportion = Player.GetEnchantProperty(EnchantProperty.FrozenArmor);
-        if (FrozenArmorProportion > 0)
-        {
-            FrozenArmorSkill.DamagePercent = FrozenArmorProportion;
-            FrozenArmorSkill.BehaviorSkill = false;
-        }
-        PoisonedArmorProportion = Player.GetEnchantProperty(EnchantProperty.PoisonedArmor);
-        if (PoisonedArmorProportion > 0)
-        {
-            PoisonedArmorSkill.DamagePercent = PoisonedArmorProportion;
-            PoisonedArmorSkill.BehaviorSkill = false;
-        }
-        WindArmorProportion = Player.GetEnchantProperty(EnchantProperty.WindArmor);
-        if (WindArmorProportion > 0)
-        {
-            WindArmorSkill.DamagePercent = WindArmorProportion;
-            WindArmorSkill.BehaviorSkill = false;
-        }
-
-
+        //武器紙娃娃
         if (Player.MyWeapon != null)
             SetEquipIcon(Player.MyWeapon);
-        if (AttackRangeProportion > 0)
+
+        //附魔
+        for (int i = 0; i < MyEnum.GetTypeCount<EnchantProperty>(); i++)
+        {
+            MyEnchant.Add((EnchantProperty)i, Player.GetEnchantProperty((EnchantProperty)i));
+        }
+        RushCD = (float)Player.GetProperties(RoleProperty.RushCD) - MyEnchant[EnchantProperty.RushCDResuce];
+        UntochableTime *= (1 + MyEnchant[EnchantProperty.HangOn]);
+        JumpCDTime *= (1 - MyEnchant[EnchantProperty.SpeedyJump]);
+        MyLight.range = MyLight.range * (1 + MyEnchant[EnchantProperty.LightHouse]);
+        if (MyEnchant[EnchantProperty.SelfCure] > 0)
+        {
+            SelfCureSkill.BehaviorSkill = false;
+            SelfCureAmmo.CureProportion = MyEnchant[EnchantProperty.SelfCure];
+        }
+        SplashThornSkil.DamagePercent = MyEnchant[EnchantProperty.SplashThorn];
+        if (MyEnchant[EnchantProperty.Fury] > 0)
+            FuryTimer = new MyTimer(MyEnchant[EnchantProperty.Fury], FuryTimeUp, false, false);
+        if (MyEnchant[EnchantProperty.CrossNail] > 0)
+        {
+            CrossNailSkill.DamagePercent = MyEnchant[EnchantProperty.CrossNail];
+            CrossNailSkill.BehaviorSkill = false;
+        }
+        if (MyEnchant[EnchantProperty.SplashNail] > 0)
+        {
+            SplashNailSkill.DamagePercent = MyEnchant[EnchantProperty.SplashNail];
+            SplashNailSkill.BehaviorSkill = false;
+        }
+        if (MyEnchant[EnchantProperty.Shuriken] > 0)
+        {
+            ShurikenSkill.DamagePercent = MyEnchant[EnchantProperty.Shuriken];
+            ShurikenSkill.BehaviorSkill = false;
+        }
+        if (MyEnchant[EnchantProperty.FireArmor] > 0)
+        {
+            FireArmorSkill.DamagePercent = MyEnchant[EnchantProperty.FireArmor];
+            FireArmorSkill.BehaviorSkill = false;
+        }
+        if (MyEnchant[EnchantProperty.FrozenArmor] > 0)
+        {
+            FrozenArmorSkill.DamagePercent = MyEnchant[EnchantProperty.FrozenArmor];
+            FrozenArmorSkill.BehaviorSkill = false;
+        }
+        if (MyEnchant[EnchantProperty.PoisonedArmor] > 0)
+        {
+            PoisonedArmorSkill.DamagePercent = MyEnchant[EnchantProperty.PoisonedArmor];
+            PoisonedArmorSkill.BehaviorSkill = false;
+        }
+        if (MyEnchant[EnchantProperty.WindArmor] > 0)
+        {
+            WindArmorSkill.DamagePercent = MyEnchant[EnchantProperty.WindArmor];
+            WindArmorSkill.BehaviorSkill = false;
+        }
+        if (MyEnchant[EnchantProperty.AttackRange] > 0)
             MyAttack.SetRange();
 
-        if (BlizzardTime > 0)
+        if (MyEnchant[EnchantProperty.ShockWave] > 0)
         {
-            BlizzardAmmoPrefab.SetBuffersTime(BlizzardTime);
+            BlizzardAmmoPrefab.SetBuffersTime(MyEnchant[EnchantProperty.ShockWave]);
         }
+
+
+
     }
     void FuryTimeUp()
     {
@@ -579,7 +447,7 @@ public partial class PlayerRole : Role
     {
         BurningTimer.StartRunTimer = true;
         int damage = (int)(MaxHealth * GameSettingData.BurnDamage);
-        damage = (int)(damage * (1 - FireResistanceProportion));
+        damage = (int)(damage * (1 - MyEnchant[EnchantProperty.FireResistance]));
         ReceiveDmg(ref damage);
     }
     void SetSelfCure()
@@ -589,7 +457,7 @@ public partial class PlayerRole : Role
     }
     void NoDamageRecovery()
     {
-        HealHP((int)(MaxHealth * NoDamageRecoveryProportion));
+        HealHP((int)(MaxHealth * MyEnchant[EnchantProperty.NoDamageRecovery]));
     }
     public void SetBerserkerBladeLight(bool _bool)
     {
@@ -611,7 +479,7 @@ public partial class PlayerRole : Role
             {
                 Shield += ShieldGenerateProportion * MaxShield * Time.deltaTime;
                 if (Shield >= MaxShield)
-                    CanGenerateBlizzard = true;
+                    CanGenerateShockWave = true;
             }
     }
     protected void ChangeToStopDrag()
@@ -676,7 +544,7 @@ public partial class PlayerRole : Role
         ShieldTimer.RunTimer();
         JumpTimer.RunTimer();
         RushTimer.RunTimer();
-        if (FuryTime>0)
+        if (MyEnchant[EnchantProperty.Fury] > 0)
             FuryTimer.RunTimer();
         OnRushTimer.RunTimer();
         if (NoDamageRecoveryTimer != null)
@@ -712,16 +580,16 @@ public partial class PlayerRole : Role
             Shield = 0;
         }
         //寒冰甲(冰凍時減少受到的傷害)
-        if (IceArmorProportion > 0 && BuffersExist(RoleBuffer.Freeze))
-            _dmg = (int)(_dmg * (1 - IceArmorProportion));
+        if (MyEnchant[EnchantProperty.IceArmor] > 0 && BuffersExist(RoleBuffer.Freeze))
+            _dmg = (int)(_dmg * (1 - MyEnchant[EnchantProperty.IceArmor]));
         //堅毅(暈眩時減少受到的傷害)
-        if (FortitudeProportion > 0 && BuffersExist(RoleBuffer.Stun))
-            _dmg = (int)(_dmg * (1 - FortitudeProportion));
+        if (MyEnchant[EnchantProperty.Fortitude] > 0 && BuffersExist(RoleBuffer.Stun))
+            _dmg = (int)(_dmg * (1 - MyEnchant[EnchantProperty.Fortitude]));
         base.BeAttack(_attackerForce, ref _dmg, _force);
-        if(_dmg>0)
+        if (_dmg > 0)
         {
             //被攻擊觸發累積怒火次數，時間內滿3次發動怒火沖天
-            if (FuryTime > 0)
+            if (MyEnchant[EnchantProperty.Fury] > 0)
             {
                 FuryTimer.StartRunTimer = true;
                 FuryBeAttackTImes++;
@@ -736,22 +604,22 @@ public partial class PlayerRole : Role
                 }
             }
             //被攻擊觸發火焰新星
-            if(FireArmorProportion>0 && ProbabilityGetter.GetResult(0.2f))
+            if (MyEnchant[EnchantProperty.FireArmor] > 0 && ProbabilityGetter.GetResult(0.2f))
             {
                 FireArmorSkill.LaunchAISpell();
             }
             //被攻擊觸發寒霜新星
-            if (FrozenArmorProportion > 0 && ProbabilityGetter.GetResult(0.2f))
+            if (MyEnchant[EnchantProperty.FrozenArmor] > 0 && ProbabilityGetter.GetResult(0.2f))
             {
                 FrozenArmorSkill.LaunchAISpell();
             }
             //被攻擊觸發劇毒新星
-            if (PoisonedArmorProportion > 0 && ProbabilityGetter.GetResult(0.2f))
+            if (MyEnchant[EnchantProperty.PoisonedArmor] > 0 && ProbabilityGetter.GetResult(0.2f))
             {
                 PoisonedArmorSkill.LaunchAISpell();
             }
             //被攻擊觸發颶風新星
-            if (WindArmorProportion > 0 && ProbabilityGetter.GetResult(0.2f))
+            if (MyEnchant[EnchantProperty.WindArmor] > 0 && ProbabilityGetter.GetResult(0.2f))
             {
                 WindArmorSkill.LaunchAISpell();
             }
@@ -770,9 +638,9 @@ public partial class PlayerRole : Role
     }
     void GenerateBlizzard()//破盾時釋放冰風暴(附魔技能)
     {
-        if (!CanGenerateBlizzard)
+        if (!CanGenerateShockWave)
             return;
-        CanGenerateBlizzard = false;
+        CanGenerateShockWave = false;
         Blizzard.LaunchAISpell();
     }
     protected override void ShieldBlock(ref int _dmg)
@@ -791,10 +659,10 @@ public partial class PlayerRole : Role
                 //護盾破碎釋放冰凍衝擊
                 GenerateBlizzard();
                 //護盾破碎時短暫無敵(一場戰鬥只會觸發一次)
-                if (RuleBreakerPlus > 0 && !IsTriggerRuleBreaker)
+                if (MyEnchant[EnchantProperty.RuleBreaker] > 0 && !IsTriggerRuleBreaker)
                 {
                     IsTriggerRuleBreaker = true;
-                    AddBuffer(RoleBuffer.Immortal, RuleBreakerPlus);
+                    AddBuffer(RoleBuffer.Immortal, MyEnchant[EnchantProperty.RuleBreaker]);
                 }
             }
             else
@@ -831,7 +699,7 @@ public partial class PlayerRole : Role
             IsAvatar = false;
             RemoveAllSill();
             //飛濺針刺
-            if(SplashThornProportion>0)
+            if (MyEnchant[EnchantProperty.SplashThorn] > 0)
                 SplashThornSkil.LaunchAISpell();
             EffectEmitter.EmitParticle(AvatarRemoveEffect, Vector3.zero, Vector3.zero, transform);
             if (MoveAfterimage)
@@ -901,16 +769,16 @@ public partial class PlayerRole : Role
                             RushTimer.StartRunTimer = true;
                             OnRushTimer.StartRunTimer = true;
                             //寫少時衝刺CD減少
-                            if (DashForLifeProportion > 0)
+                            if (MyEnchant[EnchantProperty.DashForLife] > 0)
                             {
-                                if (HealthRatio < DashForLifeProportion)
+                                if (HealthRatio < MyEnchant[EnchantProperty.DashForLife])
                                     RushTimer.ResetMaxTime(RushCD - 0.5f);
                                 else
                                     RushTimer.ResetMaxTime(RushCD);
                             }
                             CanRush = false;
                             OnRush = true;
-                            ExtraMoveSpeed += InertiaPlus;
+                            ExtraMoveSpeed += MyEnchant[EnchantProperty.Inertia];
                             Vector2 rushForce;
                             if (xMoveForce == 0 && yMoveForce == 0)
                             {
@@ -925,7 +793,7 @@ public partial class PlayerRole : Role
                             //衝刺特效RushEffect
                             EffectEmitter.EmitParticle(RushEffect, Vector3.zero, Vector3.zero, transform);
                             //衝刺傷害增加特效
-                            if (LethalDashProportion > 0)
+                            if (MyEnchant[EnchantProperty.LethalDash] > 0)
                                 EffectEmitter.EmitParticle(GameManager.GM.LethalDashParticle, Vector3.zero, Vector3.zero, transform);
                         }
                     }
@@ -992,13 +860,13 @@ public partial class PlayerRole : Role
         if (MyEnum.CheckEnumExistInArray<RoleBuffer>(ElementalBuff, _buffer.Type))
         {
             //護盾存在時有機率免除負面元素效果
-            if (ShieldRatio > 0 && ProbabilityGetter.GetResult(ConservationOfMassProportion))
+            if (ShieldRatio > 0 && ProbabilityGetter.GetResult(MyEnchant[EnchantProperty.ConservationOfMass]))
             {
             }
             else
             {
                 //在無護盾狀態下受元素攻擊有機率免除效果並恢復護盾
-                if (ShieldRatio <= 0 && ProbabilityGetter.GetResult(AbsorbElementProportion))
+                if (ShieldRatio <= 0 && ProbabilityGetter.GetResult(MyEnchant[EnchantProperty.AbsorbElement]))
                     Shield += MaxShield * 0.3f;
                 else
                 {
@@ -1007,14 +875,14 @@ public partial class PlayerRole : Role
                     if (BuffersExistExcept(_buffer.Type, ElementalBuff))
                     {
                         //有機率移除所有的負面元素效果
-                        if (ProbabilityGetter.GetResult(NeutralizationProportion))
+                        if (ProbabilityGetter.GetResult(MyEnchant[EnchantProperty.Neutralization]))
                         {
                             RemoveBufferByType(ElementalBuff);
                             EffectEmitter.EmitParticle(GameManager.GM.PurifyParticle, Vector3.zero, Vector3.zero, transform);
-                            addBuff = false;                            
+                            addBuff = false;
                         }
                         //有機率施放元素過載
-                        if(ProbabilityGetter.GetResult(OverloadProportion))
+                        if (ProbabilityGetter.GetResult(MyEnchant[EnchantProperty.Overload]))
                         {
                             OverloadSkil.LaunchAISpell();
                         }
@@ -1038,12 +906,12 @@ public partial class PlayerRole : Role
     public void GetLoot(LootData _data)
     {
         //煉金術
-        if (ProbabilityGetter.GetResult(AlchemyProportion))
+        if (ProbabilityGetter.GetResult(MyEnchant[EnchantProperty.Alchemy]))
         {
             BattleManage.ExtraDropGoldAdd(GameSettingData.GetEnemyDropGold(BattleManage.Floor));
         }
         //喝藥水隨機解除元素
-        if (ProbabilityGetter.GetResult(PharmacistProportion))
+        if (ProbabilityGetter.GetResult(MyEnchant[EnchantProperty.Pharmacist]))
         {
             List<RoleBuffer> keys = new List<RoleBuffer>(Buffers.Keys);
             for (int i = 0; i < keys.Count; i++)
@@ -1061,7 +929,7 @@ public partial class PlayerRole : Role
             }
         }
         //喝藥水加速
-        if (ProbabilityGetter.GetResult(DrugFeverProportion))
+        if (ProbabilityGetter.GetResult(MyEnchant[EnchantProperty.DrugFever]))
         {
             ExtraMoveSpeed += DrugFeverSpeedUp;
             EffectEmitter.EmitParticle(GameManager.GM.PotionSpeedUpParticle, Vector3.zero, Vector3.zero, transform);
@@ -1069,24 +937,24 @@ public partial class PlayerRole : Role
         switch (_data.Type)
         {
             case LootType.AvataEnergy:
-                AvatarTimer += _data.Time * (1 + PotionEfficiency) + AvatarPotionBuff + AllergyPlus;
+                AvatarTimer += _data.Time * (1 + PotionEfficiency) + AvatarPotionBuff + MyEnchant[EnchantProperty.Allergy];
                 break;
             case LootType.DamageUp:
-                AddBuffer(RoleBuffer.DamageUp, _data.Time * (1 + PotionEfficiency) + AllergyPlus, _data.Value);
+                AddBuffer(RoleBuffer.DamageUp, _data.Time * (1 + PotionEfficiency) + MyEnchant[EnchantProperty.Allergy], _data.Value);
                 break;
             case LootType.HPRecovery:
                 if (HealthRatio == 1)
                 {
-                    if (BloodyGoldProportion > 0)
-                        BattleManage.ExtraDropGoldAdd((int)(BloodyGoldProportion * (int)(MaxHealth * _data.Value * (1 + PotionEfficiency))));
+                    if (MyEnchant[EnchantProperty.BloodyGold] > 0)
+                        BattleManage.ExtraDropGoldAdd((int)(MyEnchant[EnchantProperty.BloodyGold] * (int)(MaxHealth * _data.Value * (1 + PotionEfficiency))));
                 }
                 HealHP((int)(MaxHealth * _data.Value * (1 + PotionEfficiency)));
                 break;
             case LootType.Immortal:
-                AddBuffer(RoleBuffer.Immortal, _data.Time * (1 + PotionEfficiency) + AllergyPlus);
+                AddBuffer(RoleBuffer.Immortal, _data.Time * (1 + PotionEfficiency) + MyEnchant[EnchantProperty.Allergy]);
                 break;
             case LootType.SpeedUp:
-                AddBuffer(RoleBuffer.SpeedUp, _data.Time * (1 + PotionEfficiency) + AllergyPlus, _data.Value);
+                AddBuffer(RoleBuffer.SpeedUp, _data.Time * (1 + PotionEfficiency) + MyEnchant[EnchantProperty.Allergy], _data.Value);
                 break;
         }
         AttackMotion();
@@ -1215,7 +1083,7 @@ public partial class PlayerRole : Role
     {
         if (!IsTriggerRevive && Health <= 0)
         {
-            if (ProbabilityGetter.GetResult(ReviveProportion))
+            if (ProbabilityGetter.GetResult(MyEnchant[EnchantProperty.Revive]))
             {
                 Health = 1;
                 AddBuffer(RoleBuffer.Untouch, 1);

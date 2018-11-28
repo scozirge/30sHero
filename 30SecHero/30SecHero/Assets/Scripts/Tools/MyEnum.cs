@@ -9,6 +9,10 @@ public class MyEnum : MonoBehaviour
     {
         return (T)Enum.Parse(typeof(T), value, true);
     }
+    public static int GetTypeCount<T>() where T : struct, IConvertible
+    {
+        return Enum.GetValues(typeof(T)).Length;
+    }
     public static bool CheckEnumExistInArray<T>(T[] _array, params T[] _check) where T : struct, IConvertible
     {
         for (int i = 0; i < _array.Length; i++)

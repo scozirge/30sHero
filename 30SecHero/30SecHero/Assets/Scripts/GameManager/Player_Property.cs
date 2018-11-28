@@ -78,6 +78,16 @@ public partial class Player
         {
             Debug.Log(keys[i] + "_Plus=" + EquipPlus[keys[i]]);
         }
+
+        Debug.Log("附魔資訊");
+        bool showZeroData = false;
+        List<EnchantProperty> keys2 = new List<EnchantProperty>(EnchantPlus.Keys);
+        for (int i = 0; i < keys2.Count; i++)
+        {
+            if (!showZeroData && EnchantPlus[keys2[i]] != 0)
+                Debug.Log(keys2[i] + "=" + EnchantPlus[keys2[i]]);
+        }
+
         /*
         List<RoleProperty> keys2 = new List<RoleProperty>(EquipMultiple.Keys);
         for (int i = 0; i < keys.Count; i++)

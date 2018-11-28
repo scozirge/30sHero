@@ -24,9 +24,9 @@ public class GameSettingData : Data
     public static float GoldQuality4;
     public static float GoldQuality5;
     public static Dictionary<int, float> GoldQualityDic = new Dictionary<int, float>();
-    public static int RandomStrength;
-    public static int RandomHealth;
-    public static int RandomShield;
+    public static float RandomStrength;
+    public static float RandomHealth;
+    public static float RandomShield;
     public static float RandomShieldRecharge;
     public static float RandomShieldRecovery;
     public static int RandomMoveSpeed;
@@ -215,13 +215,13 @@ public class GameSettingData : Data
                                 GoldQualityDic.Add(5, GoldQuality5);
                                 break;
                             case "RandomStrength":
-                                RandomStrength = int.Parse(item[key].ToString());
+                                RandomStrength = float.Parse(item[key].ToString());
                                 break;
                             case "RandomHealth":
-                                RandomHealth = int.Parse(item[key].ToString());
+                                RandomHealth = float.Parse(item[key].ToString());
                                 break;
                             case "RandomShield":
-                                RandomShield = int.Parse(item[key].ToString());
+                                RandomShield = float.Parse(item[key].ToString());
                                 break;
                             case "RandomShieldRecharge":
                                 RandomShieldRecharge = float.Parse(item[key].ToString());

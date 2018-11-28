@@ -149,6 +149,26 @@ public partial class Player
             }
         }
     }
+    public static void RefreshEquipEnchant()
+    {
+        List<int> keys = new List<int>(EnchantDic.Keys);
+        for (int i = 0; i < keys.Count; i++)
+        {
+            if (EnchantDic[keys[i]].MyEnchantType != EnchantType.Enchant)
+            {
+                if (EnchantPlus.ContainsKey(EnchantDic[keys[i]].PropertyType))
+                    EnchantPlus[EnchantDic[keys[i]].PropertyType] = 0;
+            }
+        }
+        if (MyWeapon != null && MyWeapon.MyEnchant!=null)
+            EnchantPlus[MyWeapon.MyEnchant.PropertyType] = MyWeapon.MyEnchant.GetValue();
+        if (MyArmor != null && MyArmor.MyEnchant != null)
+            EnchantPlus[MyArmor.MyEnchant.PropertyType] = MyArmor.MyEnchant.GetValue();
+        if (MyAccessorys[0] != null && MyAccessorys[0].MyEnchant != null)
+            EnchantPlus[MyAccessorys[0].MyEnchant.PropertyType] = MyAccessorys[0].MyEnchant.GetValue();
+        if (MyAccessorys[1] != null && MyAccessorys[1].MyEnchant != null)
+            EnchantPlus[MyAccessorys[1].MyEnchant.PropertyType] = MyAccessorys[1].MyEnchant.GetValue();
+    }
     public static void EnchantUpgrade(EnchantData _data)
     {
         //執行附魔
@@ -243,7 +263,7 @@ public partial class Player
         }
     }
     static List<EquipData> CurGainEquipDatas;
-    public static void Settlement(int _gold, int _emerald,int _curFloor, int _maxFloor, List<EquipData> _equipDatas)
+    public static void Settlement(int _gold, int _emerald, int _curFloor, int _maxFloor, List<EquipData> _equipDatas)
     {
         if (_equipDatas.Count != 0)
             CurGainEquipDatas = _equipDatas;
@@ -256,7 +276,7 @@ public partial class Player
             if (i != 0)
                 addEquipStr += "/";
             //Debug.Log("equipProperty="+_equipDatas[i].PropertiesStr);
-            addEquipStr += _equipDatas[i].ID + "," + (int)_equipDatas[i].Type + "," + _equipDatas[i].EquipSlot + "," + _equipDatas[i].LV + "," + _equipDatas[i].Quality + "," + _equipDatas[i].PropertiesStr + "," + ID;
+            addEquipStr += _equipDatas[i].ID + "," + (int)_equipDatas[i].Type + "," + _equipDatas[i].EquipSlot + "," + _equipDatas[i].LV + "," + _equipDatas[i].Quality + "," + _equipDatas[i].PropertiesStr + "," + _equipDatas[i].MyEnchant + "," + ID;
         }
         //Debug.Log("gold=" + _gold + " emerald=" + _emerald + " maxFloor=" + _maxFloor + " addEquipStr=" + addEquipStr);
         ServerRequest.Settlement(_gold, _emerald, _curFloor, _maxFloor, addEquipStr);

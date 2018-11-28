@@ -69,6 +69,12 @@ public class ArmorData : EquipData
         //Debug.Log("Type=" + Type + "  UID=" + UID);
         return UID;
     }
+    protected override void SetRandomEnchant()
+    {
+        base.SetRandomEnchant();
+        int enchantID = EnchantData.GetRandomEquipEnchant(EnchantType.Armor);
+        MyEnchant = GameDictionary.EnchantDic[enchantID];
+    }
     public static ArmorData GetRandomNewArmor(int _lv, int _quality)
     {
         ArmorData data = GameDictionary.ArmorDic[GetRandomID()].MemberwiseClone() as ArmorData;
@@ -76,9 +82,10 @@ public class ArmorData : EquipData
         data.LV = _lv;
         data.Quality = _quality;
         data.SetRandomProperties();
+        data.SetRandomEnchant();
         return data;
     }
-    public static ArmorData GetNewArmor(int _uid, int _id, int _equipSlot, int _lv, int _quality, string _propertiesStr)
+    public static ArmorData GetNewArmor(int _uid, int _id, int _equipSlot, int _lv, int _quality, string _propertiesStr,int _enchantID)
     {
         ArmorData data = GameDictionary.ArmorDic[_id].MemberwiseClone() as ArmorData;
         data.PropertiesStr = _propertiesStr;
@@ -88,6 +95,8 @@ public class ArmorData : EquipData
             MaxUID = _uid;
         data.LV = _lv;
         data.Quality = _quality;
+        if (GameDictionary.EnchantDic.ContainsKey(_enchantID))
+            data.MyEnchant = GameDictionary.EnchantDic[_enchantID];
         if (_equipSlot == 2)
             Player.Equip(data);
         return data;

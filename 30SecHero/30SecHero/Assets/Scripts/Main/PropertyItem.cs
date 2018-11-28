@@ -13,11 +13,17 @@ public class PropertyItem : Item
     Sprite UpwardArrow;
     [SerializeField]
     Sprite DownwardArrow;
-
+    [SerializeField]
+    ContentSizeFitter MySizeFilter;
 
     public void SetString(PropertyText _data)
     {
         PropertyText.text = _data.Text;
+        MySizeFilter.enabled = !_data.DisableSizeFilter;
+        RectTransform rt = PropertyText.rectTransform;
+        rt.sizeDelta = new Vector2((_data.Width > 0) ? _data.Width : rt.sizeDelta.x, (_data.Height > 0) ? _data.Height : rt.sizeDelta.y);
+        if (_data.AutoHeighWithLineCount)
+            rt.sizeDelta = new Vector2(rt.sizeDelta.x, TextUITool.GetLineHeight(PropertyText) + 20);
         Arrow.gameObject.SetActive(true);
         switch (_data.Comparison)
         {

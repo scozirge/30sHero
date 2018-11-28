@@ -107,7 +107,7 @@ partial class BattleManage
             PassNewFloorCount = MaxFloor - Player.MaxFloor;
         }
         //尋寶專家(根據撞碰的城門增加獲得金幣百分比)
-        GoldsMultiple = PassFloorCount * MyPlayer.TreasureHuntingProportion;
+        GoldsMultiple = PassFloorCount * MyPlayer.MyEnchant[EnchantProperty.TreasureHunting];
         MaxFloor = (MaxFloor > Player.MaxFloor) ? MaxFloor : Player.MaxFloor;
         NewFloorGolds = (PassFloorCount * GameSettingData.FloorPassGold * Floor) + (PassNewFloorCount * GameSettingData.NewFloorPassGold * Floor);
         EnemyKillGolds = EnemyKill * GameSettingData.EnemyGold;
@@ -185,8 +185,8 @@ partial class BattleManage
     {
         BossKill++;
         //不屈勇者(擊殺BOSS獲得額外變身秒數)
-        BM.MyPlayer.AvatarTimer += BM.MyPlayer.CouragePlus;
-        BattleManage.BM.MyPlayer.AvatarTimer += BattleManage.BM.MyPlayer.CouragePlus;
+        BM.MyPlayer.AvatarTimer += BM.MyPlayer.MyEnchant[EnchantProperty.Courage];
+        BattleManage.BM.MyPlayer.AvatarTimer += BattleManage.BM.MyPlayer.MyEnchant[EnchantProperty.Courage];
     }
     public static void AddUnlockPartner()
     {

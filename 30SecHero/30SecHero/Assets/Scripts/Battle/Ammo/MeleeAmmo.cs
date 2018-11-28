@@ -62,15 +62,15 @@ public class MeleeAmmo : Ammo
             if(_role.MyForce==Force.Player)
             {
                 PlayerRole pr = (PlayerRole)_role;
-                if(pr.ReflectMeleeDamageProportion>0)
+                if(pr.MyEnchant[EnchantProperty.ReflectMeleeDamage]>0)
                 {
-                    int reflectDamage = (int)(pr.Damage * pr.ReflectMeleeDamageProportion);
+                    int reflectDamage = (int)(pr.Damage * pr.MyEnchant[EnchantProperty.ReflectMeleeDamage]);
                     Attacker.BeAttack(Force.Player, ref reflectDamage, (_role.transform.position - transform.position).normalized * -1 * 500);
                     EffectEmitter.EmitParticle(GameManager.GM.ReflectMeleeDamageParticle, Attacker.transform.position, Vector2.zero, null);
                 }
             }
             //幽靈護甲抵抗近戰傷害
-            damage = (int)(damage * (1 - BattleManage.BM.MyPlayer.GhostArmorProportion * BattleManage.BM.MyPlayer.ActiveMonsterSkillCount));
+            damage = (int)(damage * (1 - BattleManage.BM.MyPlayer.MyEnchant[EnchantProperty.GhostArmor] * BattleManage.BM.MyPlayer.ActiveMonsterSkillCount));
             _role.BeAttack(AttackerRoleTag, ref damage, force);
             if (Attacker && VampireProportion > 0 && damage > 0)
                 Attacker.HealHP((int)(damage * VampireProportion));

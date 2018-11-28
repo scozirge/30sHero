@@ -45,7 +45,8 @@ else//找到Kongregate帳戶
 		$lv=$row['lv'];
 		$quality=$row['quality'];
 		$property=$row['property'];
-		$currentRankStr.=$id.','.$jid.','.$type.','.$equipSlot.','.$lv.','.$quality.','.$property;
+		$enchant=$row['enchant'];
+		$currentRankStr.=$id.','.$jid.','.$type.','.$equipSlot.','.$lv.','.$quality.','.$property.','.$enchant;
 		$dataCount++;
 	}
     //計算執行時間

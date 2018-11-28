@@ -26,10 +26,20 @@ public class EnchantData : Data
             return "NullText";
         }
         string valueString = "";
-        if (ShowPercentage)
-            valueString = string.Format("{0}{1}", TextManager.ToPercent(BaseValue + (LV + _offset) * LevelUpValue).ToString("0.0"), "%");
+        if (MyEnchantType == EnchantType.Enchant)
+        {
+            if (ShowPercentage)
+                valueString = string.Format("{0}{1}", TextManager.ToPercent(BaseValue + (LV + _offset) * LevelUpValue).ToString("0.0"), "%");
+            else
+                valueString = string.Format("{0}", BaseValue + (LV + _offset) * LevelUpValue);
+        }
         else
-            valueString = string.Format("{0}", BaseValue + (LV + _offset) * LevelUpValue);
+        {
+            if (ShowPercentage)
+                valueString = string.Format("{0}{1}", TextManager.ToPercent(GetValue()).ToString("0.0"), "%");
+            else
+                valueString = string.Format("{0}", GetValue());
+        }
         return string.Format(GameDictionary.String_EnchantDic[ID.ToString()].GetString(1, Player.UseLanguage), valueString);
     }
     bool ShowPercentage;
@@ -125,13 +135,13 @@ public class EnchantData : Data
     public static int GetRandomEquipEnchant(EnchantType _type)
     {
         int enchantID = 0;
-        if(_type==EnchantType.Weapon)
+        if (_type == EnchantType.Weapon)
         {
-            enchantID = UnityEngine.Random.Range(0, WeaponEnchantList.Count);
+            enchantID = WeaponEnchantList[UnityEngine.Random.Range(0, WeaponEnchantList.Count)];
         }
-        else if(_type==EnchantType.Armor)
+        else if (_type == EnchantType.Armor)
         {
-            enchantID = UnityEngine.Random.Range(0, ArmorEnchantList.Count);
+            enchantID = ArmorEnchantList[UnityEngine.Random.Range(0, ArmorEnchantList.Count)];
         }
         return enchantID;
     }
@@ -160,10 +170,17 @@ public class EnchantData : Data
     }
     public float GetValue()
     {
-        if (LV > 0)
-            return BaseValue + (LV - 1) * LevelUpValue;
+        if (MyEnchantType == EnchantType.Enchant)
+        {
+            if (LV > 0)
+                return BaseValue + (LV - 1) * LevelUpValue;
+            else
+                return 0;
+        }
         else
-            return 0;
+        {
+            return BaseValue;
+        }
     }
     public Sprite GetICON()
     {

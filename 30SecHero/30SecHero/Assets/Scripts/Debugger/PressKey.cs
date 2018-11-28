@@ -62,5 +62,14 @@ public partial class Debugger : MonoBehaviour
             PlayerPrefs.DeleteKey(LocoData.Emerald.ToString());
             PlayerPrefs.DeleteKey(LocoData.Enchant.ToString());
         }
+        else if (Input.GetKeyDown(KeyCode.U))
+        {
+            List<EquipData> GainEquipDataList = new List<EquipData>();
+            GainEquipDataList.Add(WeaponData.GetRandomNewWeapon(99, 5));
+            GainEquipDataList.Add(ArmorData.GetRandomNewArmor(99, 5));
+            GainEquipDataList.Add(AccessoryData.GetRandomNewAccessory(99, 5));
+            //裝備獲得
+            Player.GainEquip_Local(GainEquipDataList);
+        }
     }
 }

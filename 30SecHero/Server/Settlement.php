@@ -50,9 +50,10 @@ if($update)
 			$lv=$equipData[3];
 			$quality=$equipData[4];
 			$property=$equipData[5];
-			$ownUserID=$equipData[6];
+			$enchant=$equipData[6];
+			$ownUserID=$equipData[7];
 			//寫入資料庫
-			$insert = mysql_query("INSERT INTO  ".$db_name.".equipment (  `jid` ,`equipType` ,`equipSlot`,`lv`,`quality`,`property`,`ownUserID`,`acquireTime`) VALUES ( '".$jid."','".$equipType."','".$equipSlot."','".$lv."','".$quality."','".$property."','".$ownUserID."','".$now."') ; ",$con_w);
+			$insert = mysql_query("INSERT INTO  ".$db_name.".equipment (  `jid` ,`equipType` ,`equipSlot`,`lv`,`quality`,`property`,`enchant`,`ownUserID`,`acquireTime`) VALUES ( '".$jid."','".$equipType."','".$equipSlot."','".$lv."','".$quality."','".$property."','".$enchant."','".$ownUserID."','".$now."') ; ",$con_w);
 			if($insert)
 			{
 				$uid=mysql_insert_id();

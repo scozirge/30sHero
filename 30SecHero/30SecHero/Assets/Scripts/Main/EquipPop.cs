@@ -44,8 +44,6 @@ public class EquipPop : MonoBehaviour
         {
             textList = _data.GetPropertyTextList();
         }
-
-
         if (textList.Count <= _itemList.Count)
         {
             for (int i = 0; i < _itemList.Count; i++)

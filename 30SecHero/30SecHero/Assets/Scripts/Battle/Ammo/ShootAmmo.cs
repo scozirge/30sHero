@@ -76,7 +76,7 @@ public class ShootAmmo : Ammo
             if (_role.MyForce == Force.Player)
             {
                 PlayerRole pr = (PlayerRole)_role;
-                if (ProbabilityGetter.GetResult(pr.ReversalImpactProportion))
+                if (ProbabilityGetter.GetResult(pr.MyEnchant[EnchantProperty.ReversalImpact]))
                 {
                     MyRigi.velocity *= 3f;
                     EffectEmitter.EmitParticle(GameManager.GM.AmmoReverseParticle, transform.position, Vector3.zero, null);
@@ -92,7 +92,7 @@ public class ShootAmmo : Ammo
             if (_role.MyForce == Force.Player)
             {
                 PlayerRole pr = (PlayerRole)_role;
-                if (pr.ShieldRatio > 0 && ProbabilityGetter.GetResult(pr.ReflectShieldProportion))
+                if (pr.ShieldRatio > 0 && ProbabilityGetter.GetResult(pr.MyEnchant[EnchantProperty.ReflectShield]))
                 {
                     ForceReverse();
                 }
@@ -107,13 +107,13 @@ public class ShootAmmo : Ammo
         if (_role.MyForce == Force.Player)//如果目標是玩家
         {
             //幽靈抵抗飛射子彈傷害
-            damage = (int)(damage * (1 - BattleManage.BM.MyPlayer.GhostShelterProportion * BattleManage.BM.MyPlayer.ActiveMonsterSkillCount));
+            damage = (int)(damage * (1 - BattleManage.BM.MyPlayer.MyEnchant[EnchantProperty.GhostShelter] * BattleManage.BM.MyPlayer.ActiveMonsterSkillCount));
             //縮頭烏龜，降低來自腳色面向反方向的子彈傷害
-            if (BattleManage.BM.MyPlayer.CowerProportion>0)
+            if (BattleManage.BM.MyPlayer.MyEnchant[EnchantProperty.Cower]>0)
             {
                 if (((transform.position.x - _role.transform.position.x) > 0) == (_role.RoleTrans.transform.localScale.x < 0))
                 {
-                    damage = (int)(damage * (1 - BattleManage.BM.MyPlayer.CowerProportion));
+                    damage = (int)(damage * (1 - BattleManage.BM.MyPlayer.MyEnchant[EnchantProperty.Cower]));
                 }
             }
         }

@@ -23,11 +23,11 @@ public class SkillLoot : Loot
     {
         base.Start();
         //牧羊人
-        if (BattleManage.BM.MyPlayer.CollectorProportion > 0)
+        if (BattleManage.BM.MyPlayer.MyEnchant[EnchantProperty.Shepherd] > 0)
         {
             AILootMove alm = GetComponent<AILootMove>();
             if (alm != null)
-                alm.AbsorbRadius = (int)(alm.AbsorbRadius * (1 + BattleManage.BM.MyPlayer.ShepherdProportion));
+                alm.AbsorbRadius = (int)(alm.AbsorbRadius * (1 + BattleManage.BM.MyPlayer.MyEnchant[EnchantProperty.Shepherd]));
         }
     }
     public void SetPic(string _spritePath)

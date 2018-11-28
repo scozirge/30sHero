@@ -69,6 +69,12 @@ public class WeaponData : EquipData
         //Debug.Log("Type=" + Type + "  UID=" + UID);
         return UID;
     }
+    protected override void SetRandomEnchant()
+    {
+        base.SetRandomEnchant();
+        int enchantID = EnchantData.GetRandomEquipEnchant(EnchantType.Weapon);
+        MyEnchant = GameDictionary.EnchantDic[enchantID];
+    }
     public static WeaponData GetRandomNewWeapon(int _lv, int _quality)
     {
         WeaponData data = GameDictionary.WeaponDic[GetRandomID()].MemberwiseClone() as WeaponData;
@@ -76,9 +82,10 @@ public class WeaponData : EquipData
         data.LV = _lv;
         data.Quality = _quality;
         data.SetRandomProperties();
+        data.SetRandomEnchant();
         return data;
     }
-    public static WeaponData GetNewWeapon(int _uid, int _id, int _equipSlot, int _lv, int _quality, string _propertiesStr)
+    public static WeaponData GetNewWeapon(int _uid, int _id, int _equipSlot, int _lv, int _quality, string _propertiesStr, int _enchantID)
     {
         WeaponData data = GameDictionary.WeaponDic[_id].MemberwiseClone() as WeaponData;
         data.PropertiesStr = _propertiesStr;
@@ -88,6 +95,8 @@ public class WeaponData : EquipData
             MaxUID = _uid;
         data.LV = _lv;
         data.Quality = _quality;
+        if (GameDictionary.EnchantDic.ContainsKey(_enchantID))
+            data.MyEnchant = GameDictionary.EnchantDic[_enchantID];
         if (_equipSlot == 1)
             Player.Equip(data);
         return data;

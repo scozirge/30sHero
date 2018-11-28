@@ -10,6 +10,7 @@ public abstract class EquipData : Data
     public int EquipSlot { get; protected set; }
     public virtual EquipType Type { get; protected set; }
     public virtual string Name { get; protected set; }
+    public EnchantData MyEnchant;
 
     //string[] IconStrings = new string[3];
     public Sprite[] Icons = new Sprite[3];
@@ -120,16 +121,18 @@ public abstract class EquipData : Data
                     if (str != "")
                         str += "&";
                     str += i + "=" + Properties[GameSettingData.RandomPropertyList[i]];
-                    //Debug.Log(GameSettingData.RandomPropertyList[i] + "=" + Properties[GameSettingData.RandomPropertyList[i]]);
                 }
             }
         }
         return str;
     }
+    protected virtual void SetRandomEnchant()
+    {
+    }
     protected virtual void SetRandomProperties()
     {
         Properties = GameSettingData.GetNewRolePropertiesDic(0);
-
+        
         Dictionary<RoleProperty, float> dic = GameSettingData.GetRandomEquipProperties(Quality, LV);
         List<RoleProperty> kes = new List<RoleProperty>(Properties.Keys);
         for (int i = 0; i < kes.Count; i++)
@@ -140,11 +143,23 @@ public abstract class EquipData : Data
     public List<PropertyText> GetPropertyTextList()
     {
         List<PropertyText> list = new List<PropertyText>();
+        if (MyEnchant != null)
+        {
+            PropertyText enchantPT = new PropertyText();
+            enchantPT.Text = MyEnchant.Name + "\r\n" + MyEnchant.Description(0);
+            enchantPT.Comparison = Comparator.Equal;
+            enchantPT.ColorCode = GameSettingData.NormalNumberColor;
+            enchantPT.DisableSizeFilter = true;
+            enchantPT.AutoHeighWithLineCount = true;
+            enchantPT.Width = 550;
+            list.Add(enchantPT);
+        }
         for (int i = 0; i < GameSettingData.RandomPropertyList.Count; i++)
         {
             if (Properties[GameSettingData.RandomPropertyList[i]] == 0)
                 continue;
             PropertyText pt = new PropertyText();
+            pt.Height = 60;
             float value = GetVealue(GameSettingData.RandomPropertyList[i], Properties[GameSettingData.RandomPropertyList[i]]);
             if (value >= 0)
                 pt.Text = string.Format("+{1}{2} {0}{3}", StringData.GetString(GameSettingData.RandomPropertyList[i].ToString()), value, GetUnit(GameSettingData.RandomPropertyList[i]), GetUnitAfterTitle(GameSettingData.RandomPropertyList[i]));
@@ -159,12 +174,25 @@ public abstract class EquipData : Data
     public List<PropertyText> GetPropertyTextList(EquipData _data)
     {
         List<PropertyText> list = new List<PropertyText>();
+        if(MyEnchant!=null)
+        {
+            PropertyText enchantPT = new PropertyText();
+            enchantPT.Text = MyEnchant.Name + "\r\n" + MyEnchant.Description(0);
+            enchantPT.Comparison = Comparator.Equal;
+            enchantPT.ColorCode = GameSettingData.NormalNumberColor;
+            enchantPT.DisableSizeFilter = true;
+            enchantPT.AutoHeighWithLineCount = true;
+            enchantPT.Width = 550;
+            list.Add(enchantPT);
+        }
+
         for (int i = 0; i < GameSettingData.RandomPropertyList.Count; i++)
         {
             if (Properties[GameSettingData.RandomPropertyList[i]] == 0 && _data.Properties[GameSettingData.RandomPropertyList[i]] == 0)
                 continue;
             float valueDiff = Properties[GameSettingData.RandomPropertyList[i]] - _data.Properties[GameSettingData.RandomPropertyList[i]];
             PropertyText pt = new PropertyText();
+            pt.Height = 60;
             float value = GetVealue(GameSettingData.RandomPropertyList[i], Properties[GameSettingData.RandomPropertyList[i]]);
             if (value >= 0)
                 pt.Text = string.Format("+{1}{2} {0}{3}", StringData.GetString(GameSettingData.RandomPropertyList[i].ToString()), value, GetUnit(GameSettingData.RandomPropertyList[i]), GetUnitAfterTitle(GameSettingData.RandomPropertyList[i]));

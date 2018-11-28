@@ -65,7 +65,7 @@ public partial class EnemyRole
         if (Type == EnemyType.Demogorgon)
         {
             //弒王者(擊殺BOSS有機率獲得寶石)
-            if (ProbabilityGetter.GetResult(BattleManage.BM.MyPlayer.KingKillerProportion))
+            if (ProbabilityGetter.GetResult(BattleManage.BM.MyPlayer.MyEnchant[EnchantProperty.KingKiller]))
             {
                 ExtraEmeralddDrop();
             }
@@ -107,7 +107,7 @@ public partial class EnemyRole
         if (DropSkill)
         {
             float extraSkillProbility = (BattleManage.BM.MyPlayer != null) ? BattleManage.BM.MyPlayer.SkillDrop : 0;
-            extraSkillProbility += BattleManage.BM.MyPlayer.HarvesterProportion * BattleManage.BM.MyPlayer.ActiveMonsterSkillCount;
+            extraSkillProbility += BattleManage.BM.MyPlayer.MyEnchant[EnchantProperty.Harvester] * BattleManage.BM.MyPlayer.ActiveMonsterSkillCount;
             if (ProbabilityGetter.GetResult(DropSkillProbility + extraSkillProbility))
             {
                 pr.InitMonsterSkill(DropSkill.PSkillName, DropSkill);

@@ -54,11 +54,11 @@ public class PotionLoot : Loot
         MyIcon.sprite = Data.LootIcon;
         MyIcon.SetNativeSize();
         //藥水蒐集者
-        if(BattleManage.BM.MyPlayer.CollectorProportion>0)
+        if(BattleManage.BM.MyPlayer.MyEnchant[EnchantProperty.Collector]>0)
         {
             AILootMove alm = GetComponent<AILootMove>();
             if (alm!=null)
-                alm.AbsorbRadius = (int)(alm.AbsorbRadius * (1 + BattleManage.BM.MyPlayer.CollectorProportion));
+                alm.AbsorbRadius = (int)(alm.AbsorbRadius * (1 + BattleManage.BM.MyPlayer.MyEnchant[EnchantProperty.Collector]));
         }
     }
 

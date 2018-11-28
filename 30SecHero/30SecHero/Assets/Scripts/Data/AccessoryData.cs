@@ -78,7 +78,7 @@ public class AccessoryData : EquipData
         data.SetRandomProperties();
         return data;
     }
-    public static AccessoryData GetNewAccessory(int _uid, int _id, int _equipSlot, int _lv, int _quality, string _propertiesStr)
+    public static AccessoryData GetNewAccessory(int _uid, int _id, int _equipSlot, int _lv, int _quality, string _propertiesStr,int _enchantID)
     {
         AccessoryData data = GameDictionary.AccessoryDic[_id].MemberwiseClone() as AccessoryData;
         data.PropertiesStr = _propertiesStr;
@@ -88,6 +88,8 @@ public class AccessoryData : EquipData
             MaxUID = _uid;
         data.LV = _lv;
         data.Quality = _quality;
+        if (GameDictionary.EnchantDic.ContainsKey(_enchantID))
+            data.MyEnchant = GameDictionary.EnchantDic[_enchantID];
         if (_equipSlot == 3)
             Player.Equip(data, 0);
         else if (_equipSlot == 4)

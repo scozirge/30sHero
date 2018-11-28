@@ -20,7 +20,7 @@ public class PlayerAttack : MonoBehaviour
 
     public void SetRange()
     {
-        RangeCol.radius = RangeCol.radius * (1 + Attacker.AttackRangeProportion);
+        RangeCol.radius = RangeCol.radius * (1 + Attacker.MyEnchant[EnchantProperty.AttackRange]);
     }
     void OnTriggerEnter2D(Collider2D _col)
     {
@@ -33,13 +33,13 @@ public class PlayerAttack : MonoBehaviour
                 EnemyRole er = _col.GetComponent<EnemyRole>();
                 float extraDamageProportion = 0;
                 //衝擊斬(攻擊有機率施放)
-                if (ProbabilityGetter.GetResult(Attacker.ChopStrikeProportion))
+                if (ProbabilityGetter.GetResult(Attacker.MyEnchant[EnchantProperty.ChopStrike]))
                 {
                     Attacker.ChopStrikeSkill.SetLockDirection(er);
                     Attacker.ChopStrikeSkill.LaunchAISpell();
                 }
                 //生命低時機率強化傷害
-                if (Attacker.HealthRatio < 0.4f && ProbabilityGetter.GetResult(Attacker.BerserkerProportion))
+                if (Attacker.HealthRatio < 0.4f && ProbabilityGetter.GetResult(Attacker.MyEnchant[EnchantProperty.Berserker]))
                 {
                     extraDamageProportion += 0.5f;
                     Attacker.SetBerserkerBladeLight(true);
@@ -48,19 +48,19 @@ public class PlayerAttack : MonoBehaviour
                     Attacker.SetBerserkerBladeLight(false);
                 //衝刺加傷害
                 if (Attacker.OnRush)
-                    extraDamageProportion += Attacker.LethalDashProportion;
+                    extraDamageProportion += Attacker.MyEnchant[EnchantProperty.LethalDash];
                 //火焰刀增加傷害&特效
                 if (Attacker.BuffersExist(RoleBuffer.Burn))
                 {
-                    extraDamageProportion += Attacker.FireBladeProportion;
+                    extraDamageProportion += Attacker.MyEnchant[EnchantProperty.FireBlade];
                     EffectEmitter.EmitParticle(GameManager.GM.FireBladeParticle, er.transform.position, Vector3.zero, null);
-                }                
+                }
                 if (Attacker.LastTarget.Hit(er))
                 {
                     //菁英獵殺
-                    if(Attacker.EliteHuntingProportion>0)
+                    if (Attacker.MyEnchant[EnchantProperty.EliteHunting] > 0)
                     {
-                        extraDamageProportion += Attacker.EliteHuntingProportion;
+                        extraDamageProportion += Attacker.MyEnchant[EnchantProperty.EliteHunting];
                         EffectEmitter.EmitParticle(GameManager.GM.ClawParticle, Vector3.zero, Vector3.zero, er.transform);
                     }
                 }
@@ -99,49 +99,49 @@ public class PlayerAttack : MonoBehaviour
     }
     void AfterAttackAction_TargetAlive(EnemyRole _er)
     {
-        if (ProbabilityGetter.GetResult(Attacker.BurningWeaponProportion))
+        if (ProbabilityGetter.GetResult(Attacker.MyEnchant[EnchantProperty.BurningWeapon]))
             _er.AddBuffer(RoleBuffer.Burn, 5);
-        if (ProbabilityGetter.GetResult(Attacker.PoisonedWeaponProportion))
+        if (ProbabilityGetter.GetResult(Attacker.MyEnchant[EnchantProperty.PoisonedWeapon]))
             _er.AddBuffer(RoleBuffer.DamageDown, 5);
-        if (ProbabilityGetter.GetResult(Attacker.FrozenWeaponProportion))
+        if (ProbabilityGetter.GetResult(Attacker.MyEnchant[EnchantProperty.FrozenWeapon]))
             _er.AddBuffer(RoleBuffer.Freeze, 5);
-        if (ProbabilityGetter.GetResult(Attacker.StunningSlashProportion))
+        if (ProbabilityGetter.GetResult(Attacker.MyEnchant[EnchantProperty.StunningSlash]))
             _er.AddBuffer(RoleBuffer.Stun, 1.5f);
     }
     void TargetDieAction(EnemyRole _er)
     {
         //點石成金(刀子擊殺有機率掉落金幣)
-        if (ProbabilityGetter.GetResult(Attacker.ExtralGoldDropProportion))
+        if (ProbabilityGetter.GetResult(Attacker.MyEnchant[EnchantProperty.ExtralGoldDrop]))
         {
             _er.ExtralGoldDrop();
         }
         //肉食(刀子殺怪增加最大血量)
-        if (Attacker.CarnivorousProportion > 0)
-            Attacker.ExtendMaxHP((int)(Attacker.CarnivorousProportion * Attacker.MaxHealth));
+        if (Attacker.MyEnchant[EnchantProperty.Carnivorous] > 0)
+            Attacker.ExtendMaxHP((int)(Attacker.MyEnchant[EnchantProperty.Carnivorous] * Attacker.MaxHealth));
         //元素擊殺產生爆炸
-        if(_er.BuffersExist(RoleBuffer.Burn))
+        if (_er.BuffersExist(RoleBuffer.Burn))
         {
-            if (ProbabilityGetter.GetResult(Attacker.FireChopProportion))
+            if (ProbabilityGetter.GetResult(Attacker.MyEnchant[EnchantProperty.FireChop]))
             {
                 Attacker.FireChopSkil.LaunchAISpell();
             }
         }
-        else if(_er.BuffersExist(RoleBuffer.Freeze))
+        else if (_er.BuffersExist(RoleBuffer.Freeze))
         {
-            if (ProbabilityGetter.GetResult(Attacker.FrozenChopProportion))
+            if (ProbabilityGetter.GetResult(Attacker.MyEnchant[EnchantProperty.FrozenChop]))
             {
                 Attacker.FrozenChopSkil.LaunchAISpell();
             }
         }
         else if (_er.BuffersExist(RoleBuffer.DamageDown))
         {
-            if (ProbabilityGetter.GetResult(Attacker.PoisonChopProportion))
+            if (ProbabilityGetter.GetResult(Attacker.MyEnchant[EnchantProperty.PoisonChop]))
             {
                 Attacker.PoisonChopSkil.LaunchAISpell();
             }
         }
         //機率產生衝擊波
-        if(Attacker.OnRush && ProbabilityGetter.GetResult(Attacker.DashImpactProportion))
+        if (Attacker.OnRush && ProbabilityGetter.GetResult(Attacker.MyEnchant[EnchantProperty.DashImpact]))
         {
             Attacker.DashImpactSkil.LaunchAISpell();
         }
