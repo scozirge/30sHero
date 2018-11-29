@@ -858,7 +858,7 @@ PrefabInstance:
     - target: {fileID: 224076595988088798, guid: d9e47796d36fc83458ffab41aea6641e,
         type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 224076595988088798, guid: d9e47796d36fc83458ffab41aea6641e,
         type: 3}
@@ -949,25 +949,6 @@ PrefabInstance:
       propertyPath: MyCamera
       value: 
       objectReference: {fileID: 519420031}
-    - target: {fileID: 114529601492733476, guid: d9e47796d36fc83458ffab41aea6641e,
-        type: 3}
-      propertyPath: RushEffect
-      value: 
-      objectReference: {fileID: 5754142759658177653, guid: a6e767ebd6d3ffb48a966c7faebed0dc,
-        type: 3}
-    - target: {fileID: 435051386195516395, guid: d9e47796d36fc83458ffab41aea6641e,
-        type: 3}
-      propertyPath: TriggerWall
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1699951297, guid: d9e47796d36fc83458ffab41aea6641e, type: 3}
-      propertyPath: TriggerWall
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1699951298, guid: d9e47796d36fc83458ffab41aea6641e, type: 3}
-      propertyPath: TriggerWall
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d9e47796d36fc83458ffab41aea6641e, type: 3}
 --- !u!1 &135074929
