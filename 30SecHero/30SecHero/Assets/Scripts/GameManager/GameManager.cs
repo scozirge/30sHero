@@ -24,6 +24,12 @@ public partial class GameManager : MonoBehaviour
     [Tooltip("寶石圖")]
     [SerializeField]
     Sprite EmeraldSprite;
+    [Tooltip("Kongregate幣圖")]
+    [SerializeField]
+    public Sprite KredSprite;
+    [Tooltip("廣告")]
+    [SerializeField]
+    public Sprite ADSprite;
     [Tooltip("暈眩特效")]
     [SerializeField]
     public ParticleSystem StunPrefab;
@@ -85,6 +91,13 @@ public partial class GameManager : MonoBehaviour
     [SerializeField]
     public AudioClip CoinSound;
 
+    [Tooltip("金幣顏色")]
+    [SerializeField]
+    public Color GoldColor;
+    [Tooltip("寶石顏色")]
+    [SerializeField]
+    public Color EmeraldColor;
+
 
     public static GameManager GM;
     static Sprite[] QualityBotSprites;
@@ -128,6 +141,8 @@ public partial class GameManager : MonoBehaviour
         GM = this;
         CurrencySpriteDic.Add(Currency.Gold, GoldSprite);
         CurrencySpriteDic.Add(Currency.Emerald, EmeraldSprite);
+        CurrencySpriteDic.Add(Currency.Kred, KredSprite);
+        CurrencySpriteDic.Add(Currency.AD, ADSprite);
         QualityBotSprites = QualityBotPrefabs;
         EquipTypBot = EquipTypBotPrefab;
         BufferParticles.Add(RoleBuffer.Stun, StunPrefab);

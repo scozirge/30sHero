@@ -19,7 +19,14 @@ public class PurchaseItem : Item
         MyData = _data;
         ParentUI = _ui;
         CountText.text = MyData.Gain.ToString();
+        if (_data.MyType == PurchaseType.TradeGold)
+            CountText.color = GameManager.GM.GoldColor;
+        else
+        {
+            CountText.color = GameManager.GM.EmeraldColor;
+        }
         Icon.sprite = MyData.GetICON();
+        Icon.SetNativeSize();
         TheToggle = GetComponent<Toggle>();
         TheToggle.group = ParentUI.GetComponent<ToggleGroup>();
     }

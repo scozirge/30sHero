@@ -52,6 +52,7 @@ public partial class Debugger : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.P))
         {
+            Debug.Log("清空玩家本基資料");
             PlayerPrefs.DeleteKey(LocoData.UseLanguage.ToString());
             PlayerPrefs.DeleteKey(LocoData.Init.ToString());
             PlayerPrefs.DeleteKey(LocoData.Equip.ToString());
@@ -65,6 +66,16 @@ public partial class Debugger : MonoBehaviour
             PlayerPrefs.DeleteKey(LocoData.Gold.ToString());
             PlayerPrefs.DeleteKey(LocoData.Emerald.ToString());
             PlayerPrefs.DeleteKey(LocoData.Enchant.ToString());
+        }
+        else if (Input.GetKeyDown(KeyCode.O))
+        {
+            Debug.Log("Gain GOld 1000");
+            Player.GainGold(1000);
+        }
+        else if (Input.GetKeyDown(KeyCode.I))
+        {
+            Debug.Log("Gain Emerald 10");
+            Player.GainEmerald(10);
         }
         else if (Input.GetKeyDown(KeyCode.U))
         {
