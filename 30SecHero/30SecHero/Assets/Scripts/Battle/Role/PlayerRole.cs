@@ -224,6 +224,7 @@ public partial class PlayerRole : Role
 
     //附魔
     public Dictionary<EnchantProperty, float> MyEnchant = new Dictionary<EnchantProperty, float>();
+    List<Skill> MyEnchantSkill = new List<Skill>();
 
 
     MyTimer NoDamageRecoveryTimer;
@@ -306,6 +307,11 @@ public partial class PlayerRole : Role
         JumpTimer = new MyTimer(JumpCDTime, SetCanJump, false, false);
         RushTimer = new MyTimer(RushCD, SetCanRush, false, false);
         OnRushTimer = new MyTimer(RushAntiAmooTime, SetNotOnRush, false, false);
+        Skill[] skills = GetComponents<Skill>();
+        for (int i = 0; i < skills.Length; i++)
+        {
+            MyEnchantSkill.Add(skills[i]);
+        }
         if (MyEnchant[EnchantProperty.NoDamageRecovery] > 0)
         {
             NoDamageRecoveryTimer = new MyTimer(5, SetSelfCure, false, false);
@@ -380,6 +386,31 @@ public partial class PlayerRole : Role
         {
             ShurikenSkill.DamagePercent = MyEnchant[EnchantProperty.Shuriken];
             ShurikenSkill.BehaviorSkill = false;
+        }
+        if (MyEnchant[EnchantProperty.Bat] > 0)
+        {
+            BatSkill.DamagePercent = MyEnchant[EnchantProperty.Bat];
+            BatSkill.BehaviorSkill = false;
+        }
+        if (MyEnchant[EnchantProperty.FrozenBall] > 0)
+        {
+            FrozenBallSkill.DamagePercent = MyEnchant[EnchantProperty.FrozenBall];
+            FrozenBallSkill.BehaviorSkill = false;
+        }
+        if (MyEnchant[EnchantProperty.ShockBall] > 0)
+        {
+            ShockBallSkill.DamagePercent = MyEnchant[EnchantProperty.ShockBall];
+            ShockBallSkill.BehaviorSkill = false;
+        }
+        if (MyEnchant[EnchantProperty.PoisonedBall] > 0)
+        {
+            PoisonedBallSkill.DamagePercent = MyEnchant[EnchantProperty.PoisonedBall];
+            PoisonedBallSkill.BehaviorSkill = false;
+        }
+        if (MyEnchant[EnchantProperty.FireBall] > 0)
+        {
+            FireBallSkill.DamagePercent = MyEnchant[EnchantProperty.FireBall];
+            FireBallSkill.BehaviorSkill = false;
         }
         if (MyEnchant[EnchantProperty.FireArmor] > 0)
         {
@@ -505,6 +536,7 @@ public partial class PlayerRole : Role
         AvatarTimer = 30;
         AniPlayer.PlayTrigger("Idle", 0);
         EffectEmitter.EmitParticle(AvatarRemoveEffect, Vector3.zero, Vector3.zero, transform);
+        ActiveEnchantSkill(true);
     }
     public void AttackMotion()
     {
@@ -716,6 +748,7 @@ public partial class PlayerRole : Role
                 MoveAfterimage_Main.maxParticles = 0;
                 MoveAfterimage_Main.startLifetime = 0;
             }
+            ActiveEnchantSkill(false);
         }
         AvatarTimerText.text = Mathf.Round(AvatarTimer).ToString();
     }
@@ -1115,5 +1148,12 @@ public partial class PlayerRole : Role
         if (!IsAvatar)
             return;
         AvatarTimer += _time;
+    }
+    void ActiveEnchantSkill(bool _bool)
+    {
+        for(int i=0;i<MyEnchantSkill.Count;i++)
+        {
+            MyEnchantSkill[i].enabled = _bool;
+        }
     }
 }

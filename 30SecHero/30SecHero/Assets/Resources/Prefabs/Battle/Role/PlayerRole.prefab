@@ -793,10 +793,10 @@ MonoBehaviour:
   IsPlayerGetSkill: 0
   AttackOnce: 0
   Interval: 6
-  AmmoNum: 3
+  AmmoNum: 4
   AmmoInterval: 0.03
   StartAngle: 0
-  AngleInterval: 120
+  AngleInterval: 90
   RandomAngle: 0
   Patetern: 1
   FirstAttackNoWait: 0
