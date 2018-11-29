@@ -7,6 +7,9 @@ public class Shoot : Attack
     [Tooltip("飛射子彈物件")]
     [SerializeField]
     ShootAmmo AttackPrefab;
+    [Tooltip("是否會被牆阻擋")]
+    [SerializeField]
+    protected bool TriggerWall = true;
 
 
     public override void SpawnAttackPrefab()
@@ -22,6 +25,7 @@ public class Shoot : Attack
         ammo.transform.position = transform.position;
         if (IsPlayerGetSkill)
             ammo.IsPlayerGetSkill = true;
+        AmmoData.Add("TriggerWall", TriggerWall);
         ammo.Init(AmmoData);
     }
 }
