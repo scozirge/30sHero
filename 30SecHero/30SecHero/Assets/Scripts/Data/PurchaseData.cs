@@ -31,8 +31,10 @@ public class PurchaseData : Data
         }
         private set { return; }
     }
-    public int EmeraldCount { get; private set; }
-    public int Price { get; private set; }
+    public int Gain { get; private set; }
+    public int PayEmerald { get; private set; }
+    public int PayKreds { get; private set; }
+    public PurchaseType MyType;
     public string IconString;
     const string ImagePath = "Images/Main/{0}";
 
@@ -54,7 +56,7 @@ public class PurchaseData : Data
     }
     public void SetPurchasePrice(int _price)
     {
-        Price = _price;
+        PayKreds = _price;
     }
     PurchaseData(JsonData _item)
     {
@@ -68,8 +70,14 @@ public class PurchaseData : Data
                     case "ID":
                         ID = int.Parse(item[key].ToString());
                         break;
-                    case "EmeraldCount":
-                        EmeraldCount = int.Parse(item[key].ToString());
+                    case "Gain":
+                        Gain = int.Parse(item[key].ToString());
+                        break;
+                    case "PayEmerald":
+                        PayEmerald = int.Parse(item[key].ToString());
+                        break;
+                    case "Type":
+                        MyType = MyEnum.ParseEnum<PurchaseType>(item[key].ToString());
                         break;
                     case "Icon":
                         IconString = item[key].ToString();

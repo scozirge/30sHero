@@ -41,6 +41,7 @@ public class Skill : MonoBehaviour
     [SerializeField]
     protected float VampireProportion;
 
+
     protected Role Myself;
     protected Dictionary<string, object> AmmoData = new Dictionary<string, object>();
     protected Transform AmmoParent;

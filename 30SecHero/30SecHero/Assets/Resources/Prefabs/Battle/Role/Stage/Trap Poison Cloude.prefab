@@ -426,12 +426,13 @@ MonoBehaviour:
   BehaviorSkill: 0
   PSkillName: 0
   PSkillDuration: 20
-  DetecteRadius: 1500
+  DetecteRadius: 800
   DamagePercent: 1
   AttackStopMove: 0
   StopMoveTime: 1
   SpellSound: {fileID: 0}
   SpawnedInSelf: 0
+  VampireProportion: 0
   PSkillTimer: 0
   IsPlayerGetSkill: 0
   AttackOnce: 0
@@ -442,6 +443,7 @@ MonoBehaviour:
   AngleInterval: 0
   RandomAngle: 0
   Patetern: 0
+  FirstAttackNoWait: 1
   AttackPrefab: {fileID: 7038527885862775504, guid: 550bb922219e8e34bb61537725d02ad7,
     type: 3}
 --- !u!114 &114022675983671600

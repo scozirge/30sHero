@@ -18,7 +18,7 @@ public class PurchaseItem : Item
     {
         MyData = _data;
         ParentUI = _ui;
-        CountText.text = MyData.EmeraldCount.ToString();
+        CountText.text = MyData.Gain.ToString();
         Icon.sprite = MyData.GetICON();
         TheToggle = GetComponent<Toggle>();
         TheToggle.group = ParentUI.GetComponent<ToggleGroup>();

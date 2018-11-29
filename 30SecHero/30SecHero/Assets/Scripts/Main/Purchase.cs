@@ -86,9 +86,9 @@ public class Purchase : MyUI
         base.RefreshText();
         NameText.text = CurSelectedData.Name;
         DescriptionText.text = CurSelectedData.Description;
-        PriceText.text = CurSelectedData.Price.ToString();
+        PriceText.text = CurSelectedData.PayKreds.ToString();
         Icon.sprite = CurSelectedData.GetICON();
-        CountText.text = CurSelectedData.EmeraldCount.ToString();
+        CountText.text = CurSelectedData.Gain.ToString();
     }
     static PurchaseData CurPurchaseData;
     public void ToPurchase()
@@ -100,8 +100,8 @@ public class Purchase : MyUI
     {
         if (_result)
         {
-            Player.GainEmerald(CurPurchaseData.EmeraldCount);
-            PopupUI.ShowClickCancel(string.Format(StringData.GetString("PurchaseEmeraldSuccess"), CurPurchaseData.EmeraldCount));
+            Player.GainEmerald(CurPurchaseData.Gain);
+            PopupUI.ShowClickCancel(string.Format(StringData.GetString("PurchaseEmeraldSuccess"), CurPurchaseData.Gain));
             ServerRequest.PurchaseEmerald(Player.Emerald);
         }
         else

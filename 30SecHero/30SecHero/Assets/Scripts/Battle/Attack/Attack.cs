@@ -30,6 +30,10 @@ public class Attack : Skill
     [Tooltip("射擊模式")]
     [SerializeField]
     protected ShootPatetern Patetern;
+    [LabelOverride("第一次攻擊不等待")]
+    [Tooltip("第一次攻擊時不等待攻擊間隔")]
+    [SerializeField]
+    protected bool FirstAttackNoWait;
 
     protected float Timer;
     protected float AmmoIntervalTimer;
@@ -54,9 +58,12 @@ public class Attack : Skill
                 Target = go.GetComponent<PlayerRole>();
         }
         CurInterval = Interval;
-        Timer = Interval;
         if (SpawnedInSelf)
             AmmoParent = transform;
+        if (FirstAttackNoWait)
+            Timer = 0;
+        else
+            Timer = Interval;
     }
     protected override void Update()
     {
