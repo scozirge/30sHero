@@ -2636,7 +2636,8 @@ MonoBehaviour:
   - {fileID: 114349592024013982, guid: 7c5ac367971698944950f6bf51f4a08b, type: 3}
   - {fileID: 114349592024013982, guid: 6bbddd0706beb9148af9e370754c9f14, type: 3}
   - {fileID: 8318231718720533117, guid: cae8799dda12b274da82740450d11309, type: 3}
-  DesignateStage: {fileID: 0}
+  DesignateStage: {fileID: 114349592024013982, guid: 9acf505aee5c0db48aa2a88515e34387,
+    type: 3}
   FGTopList: []
   FGBotList:
   - {fileID: 114618649810162204, guid: 66063e45adef2f54b94c6e7b8e701a0b, type: 3}
