@@ -5,29 +5,37 @@ using UnityEngine;
 public class StageSpawner : MonoBehaviour
 {
     [SerializeField]
-    List<Stage> StageList;
+    bool TestMode;
     [SerializeField]
-    Stage DesignateStage;
+    List<Stage> StageList;
     [SerializeField]
     List<ForeGround> FGTopList;
     [SerializeField]
     List<ForeGround> FGBotList;
 
-    static StageSpawner MyStageSpawner;
+    static StageSpawner Myself;
 
     public void Init()
     {
-        MyStageSpawner = this;
+        Myself = this;
+    }
+    static void ReallocateStageList(int _floor)
+    {
+        if (Myself.TestMode)
+            return;
+        Myself.StageList.Clear();
+        Myself.StageList = StageData.GetAvailableStages(_floor);
+        Debug.Log(Myself.StageList.Count);
     }
     static Stage GetRandomStage(ref int _remainPlateSize)
     {
         for (int i = 0; i < 30; i++)
         {
-            int random = Random.Range(0, MyStageSpawner.StageList.Count);
-            if (_remainPlateSize >= MyStageSpawner.StageList[random].OccupyPlateSize)
+            int random = Random.Range(0, Myself.StageList.Count);
+            if (_remainPlateSize >= Myself.StageList[random].OccupyPlateSize)
             {
-                _remainPlateSize -= MyStageSpawner.StageList[random].OccupyPlateSize;
-                return MyStageSpawner.StageList[random];
+                _remainPlateSize -= Myself.StageList[random].OccupyPlateSize;
+                return Myself.StageList[random];
             }
         }
         return null;
@@ -35,33 +43,22 @@ public class StageSpawner : MonoBehaviour
     public static List<Stage> SpawnStage(Vector2 _starPos, int _offsetPosX, int _remainPlateSize, int _floor)
     {
         List<Stage> list = new List<Stage>();
+        ReallocateStageList(_floor);
         int originalSize = _remainPlateSize;
         for (int i = 0; i < originalSize; i++)
         {
             Vector2 spawnPos = new Vector2(_starPos.x + _offsetPosX * (originalSize - _remainPlateSize), _starPos.y);
             Stage stage = null;
-            if (MyStageSpawner.DesignateStage)
+            if (Myself.StageList.Count != 0)
             {
-                Stage stagePrefab = MyStageSpawner.DesignateStage;
-                _remainPlateSize -= MyStageSpawner.DesignateStage.OccupyPlateSize;
-                if (_remainPlateSize >= 0)
-                    stage = Instantiate(stagePrefab, Vector3.zero, Quaternion.identity) as Stage;
-                if (stage == null)
+                Stage stagePrefab = GetRandomStage(ref _remainPlateSize);
+                if (stagePrefab == null)
                     break;
+                stage = Instantiate(stagePrefab, Vector3.zero, Quaternion.identity) as Stage;
             }
             else
-            {
-                if (MyStageSpawner.StageList.Count != 0)
-                {
-                    Stage stagePrefab = GetRandomStage(ref _remainPlateSize);
-                    if (stagePrefab == null)
-                        break;
-                    stage = Instantiate(stagePrefab, Vector3.zero, Quaternion.identity) as Stage;
-                }
-                else
-                    return null;
-            }
-            stage.transform.SetParent(MyStageSpawner.transform);
+                return null;
+            stage.transform.SetParent(Myself.transform);
             stage.transform.localPosition = spawnPos;
             stage.Init(_floor);
             list.Add(stage);
@@ -72,26 +69,26 @@ public class StageSpawner : MonoBehaviour
     }
     static ForeGround GetRandomTopFG()
     {
-        int rand = Random.Range(0, MyStageSpawner.FGTopList.Count);
-        return MyStageSpawner.FGTopList[rand];
+        int rand = Random.Range(0, Myself.FGTopList.Count);
+        return Myself.FGTopList[rand];
     }
     static ForeGround GetRandomBotFG()
     {
-        int rand = Random.Range(0, MyStageSpawner.FGBotList.Count);
-        return MyStageSpawner.FGBotList[rand];
+        int rand = Random.Range(0, Myself.FGBotList.Count);
+        return Myself.FGBotList[rand];
     }
     public static List<ForeGround> SpawnFG(Vector2 _startPos, float _distance, int _minXInterval, int _maxXInterval, int _floor, bool _top)
     {
         if (_top)
         {
-            if (MyStageSpawner.FGTopList.Count == 0)
+            if (Myself.FGTopList.Count == 0)
             {
                 return null;
             }
         }
         else
         {
-            if (MyStageSpawner.FGBotList.Count == 0)
+            if (Myself.FGBotList.Count == 0)
             {
                 return null;
             }
@@ -119,7 +116,7 @@ public class StageSpawner : MonoBehaviour
                 if (stagePrefab == null)
                     break;
                 ForeGround fg = Instantiate(stagePrefab, Vector3.zero, Quaternion.identity) as ForeGround;
-                fg.transform.SetParent(MyStageSpawner.transform);
+                fg.transform.SetParent(Myself.transform);
                 fg.transform.localPosition = spawnPos;
                 fg.Init(_floor);
                 list.Add(fg);

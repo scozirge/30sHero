@@ -13,6 +13,7 @@ public partial class GameDictionary
     public static Dictionary<int, AccessoryData> AccessoryDic;
     public static Dictionary<string, GameSettingData> GameSettingDic;
     public static Dictionary<int, EnemyData> EnemyDic;
+    public static Dictionary<int, StageData> StageDic;
     //Case表
     public static Dictionary<int, CaseTableData> CaseTableDic;
 
@@ -49,6 +50,8 @@ public partial class GameDictionary
         AccessoryData.SetData(AccessoryDic, "Accessory");
         EnemyDic = new Dictionary<int, EnemyData>();
         EnemyData.SetData(EnemyDic, "Enemy");
+        StageDic = new Dictionary<int, StageData>();
+        StageData.SetData(StageDic, "Stage");
         //Case
         CaseTableDic = new Dictionary<int, CaseTableData>();
         CaseTableData.SetData(CaseTableDic);
