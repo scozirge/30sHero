@@ -90,8 +90,8 @@ SpriteShapeRenderer:
   - {fileID: 0}
   - {fileID: 0}
   m_LocalAABB:
-    m_Center: {x: -6.8602467, y: -176.9081, z: -0.002}
-    m_Extent: {x: 59.41478, y: 170.03065, z: 0.002}
+    m_Center: {x: -11.888376, y: -134.73135, z: -0.002}
+    m_Extent: {x: 54.146927, y: 212.2074, z: 0.002}
 --- !u!114 &4285073102844324641
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -116,7 +116,7 @@ MonoBehaviour:
       bevelSize: 0.31
       spriteIndex: 0
       corner: 1
-    - position: {x: 28.457092, y: -30.74672, z: 0}
+    - position: {x: 15.764343, y: 53.025314, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
@@ -125,7 +125,7 @@ MonoBehaviour:
       bevelSize: 0.31
       spriteIndex: 0
       corner: 1
-    - position: {x: -37.933533, y: -32.470993, z: 0}
+    - position: {x: -40.472076, y: 53.839584, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
@@ -176,10 +176,10 @@ PolygonCollider2D:
   m_Points:
     m_Paths:
     - - {x: 18.22598, y: -322.61438}
-      - {x: 28.45709, y: -30.74672}
-      - {x: 28.45709, y: -30.74672}
-      - {x: -37.93353, y: -32.47099}
-      - {x: -37.93353, y: -32.47099}
+      - {x: 15.76434, y: 53.02531}
+      - {x: 15.76434, y: 53.02531}
+      - {x: -40.47207, y: 53.83958}
+      - {x: -40.47207, y: 53.83958}
       - {x: -42.59878, y: -319.85516}
       - {x: -42.59878, y: -319.85516}
       - {x: 18.22598, y: -322.61438}
@@ -273,8 +273,8 @@ SpriteShapeRenderer:
   - {fileID: 0}
   - {fileID: 0}
   m_LocalAABB:
-    m_Center: {x: -13.107277, y: -235.29182, z: -0.002}
-    m_Extent: {x: 52.953888, y: 164.99199, z: 0.002}
+    m_Center: {x: -9.598644, y: -274.61566, z: -0.002}
+    m_Extent: {x: 54.79012, y: 204.31581, z: 0.002}
 --- !u!114 &8319255876643931361
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -290,7 +290,7 @@ MonoBehaviour:
   m_Spline:
     m_IsOpenEnded: 0
     m_ControlPoints:
-    - position: {x: 13.953873, y: -376.40674, z: 0}
+    - position: {x: 21.569504, y: -455.1017, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
@@ -317,7 +317,7 @@ MonoBehaviour:
       bevelSize: 0.31
       spriteIndex: 0
       corner: 1
-    - position: {x: -42.598785, y: -374.98486, z: 0}
+    - position: {x: -40.06018, y: -453.67987, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
@@ -358,14 +358,14 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 13.95387, y: -376.4067}
+    - - {x: 21.5695, y: -455.1017}
       - {x: 16.34642, y: -94.26004}
       - {x: 16.34642, y: -94.26004}
       - {x: -40.69494, y: -95.98434}
       - {x: -40.69494, y: -95.98434}
-      - {x: -42.59878, y: -374.9849}
-      - {x: -42.59878, y: -374.9849}
-      - {x: 13.95387, y: -376.4067}
+      - {x: -40.06018, y: -453.67987}
+      - {x: -40.06018, y: -453.67987}
+      - {x: 21.5695, y: -455.1017}
 --- !u!1 &8278464453080547847
 GameObject:
   m_ObjectHideFlags: 0
@@ -430,7 +430,7 @@ PrefabInstance:
     - target: {fileID: 224382798152197656, guid: 46dd08cd41c475f45999ef0a5b4d8a23,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 316
+      value: 240
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 46dd08cd41c475f45999ef0a5b4d8a23, type: 3}
@@ -468,7 +468,7 @@ PrefabInstance:
     - target: {fileID: 224382798152197656, guid: 46dd08cd41c475f45999ef0a5b4d8a23,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -309
+      value: -251
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 46dd08cd41c475f45999ef0a5b4d8a23, type: 3}
