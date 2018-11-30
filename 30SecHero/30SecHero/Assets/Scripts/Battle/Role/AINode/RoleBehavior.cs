@@ -90,8 +90,7 @@ public class RoleBehavior : MonoBehaviour
                 CheckRandomNode();
                 break;
             case ActionType.Spell:
-                Spell(_node);
-                CheckRandomNode();
+                LaunchSpell(_node);
                 break;
             case ActionType.Teleport:
                 Destination = GetRelativeDestination(_node);
@@ -155,9 +154,28 @@ public class RoleBehavior : MonoBehaviour
         }
         return pos;
     }
+    int SpellIndex = 0;
+    void LaunchSpell(Node _node)
+    {
+        SpellIndex = 0;
+        StartCoroutine(WaitForSpell(_node));
+    }
     void Spell(Node _node)
     {
-        _node.Spell();
+        _node.SkillList[SpellIndex].LaunchAISpell();
+        SpellIndex++;
+        if (SpellIndex >= _node.SkillList.Count)
+        {
+            CheckRandomNode();
+        }
+        else
+            StartCoroutine(WaitForSpell(_node));
+
+    }
+    IEnumerator WaitForSpell(Node _node)
+    {
+        yield return new WaitForSeconds(_node.SpellInterval);
+        Spell(_node);
     }
     void CheckRandomNode()
     {
@@ -234,7 +252,7 @@ public class RoleBehavior : MonoBehaviour
     }
     IEnumerator WaitToAction(Node _node)
     {
-        if (_node.Type==ActionType.Spell)
+        if (_node.Type == ActionType.Spell)
         {
             if (!MyRole.IsPreAttack)
                 MyRole.PreAttack();

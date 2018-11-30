@@ -375,7 +375,12 @@ MonoBehaviour:
     ExpandRandomNodes: 1
     ToRandomNode: 0
     GoToNodes: []
+    SpellInterval: 0.5
     SkillList:
+    - {fileID: 114494556845548676}
+    - {fileID: 114494556845548676}
+    - {fileID: 114494556845548676}
+    - {fileID: 114494556845548676}
     - {fileID: 114494556845548676}
     Type: 1
     LocoParticle: {fileID: 0}
@@ -418,6 +423,7 @@ MonoBehaviour:
     ExpandRandomNodes: 1
     ToRandomNode: 0
     GoToNodes: []
+    SpellInterval: 0.5
     SkillList:
     - {fileID: 8218340063564704566}
     Type: 1
@@ -461,6 +467,7 @@ MonoBehaviour:
     ExpandRandomNodes: 1
     ToRandomNode: 0
     GoToNodes: []
+    SpellInterval: 0.5
     SkillList: []
     Type: 0
     LocoParticle: {fileID: 0}
@@ -485,6 +492,7 @@ MonoBehaviour:
     ExpandRandomNodes: 1
     ToRandomNode: 0
     GoToNodes: []
+    SpellInterval: 0.5
     SkillList:
     - {fileID: 114494556845548676}
     Type: 1
@@ -528,6 +536,7 @@ MonoBehaviour:
     ExpandRandomNodes: 1
     ToRandomNode: 0
     GoToNodes: []
+    SpellInterval: 0.5
     SkillList: []
     Type: 0
     LocoParticle: {fileID: 0}
@@ -552,6 +561,7 @@ MonoBehaviour:
     ExpandRandomNodes: 1
     ToRandomNode: 0
     GoToNodes: []
+    SpellInterval: 0.5
     SkillList:
     - {fileID: 114494556845548676}
     Type: 1
@@ -595,6 +605,7 @@ MonoBehaviour:
     ExpandRandomNodes: 1
     ToRandomNode: 0
     GoToNodes: []
+    SpellInterval: 0.5
     SkillList: []
     Type: 0
     LocoParticle: {fileID: 0}

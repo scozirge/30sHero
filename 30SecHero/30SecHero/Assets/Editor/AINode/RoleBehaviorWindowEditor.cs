@@ -125,6 +125,11 @@ public class RoleBehaviorWindowEditor : EditorWindow
                                 skillList.DeleteArrayElementAtIndex(skillList.arraySize - 1);
                             }
                         }
+                        if (skillSize>1)
+                        {
+                            SerializedProperty MySpellInterval = myListRef.FindPropertyRelative("SpellInterval");
+                            EditorGUILayout.PropertyField(MySpellInterval);
+                        }
                         for (int j = 0; j < skillList.arraySize; j++)
                         {
                             SerializedProperty skillRef = skillList.GetArrayElementAtIndex(j);

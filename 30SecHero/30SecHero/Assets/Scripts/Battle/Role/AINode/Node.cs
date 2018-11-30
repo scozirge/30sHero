@@ -32,7 +32,9 @@ public class Node
     [SerializeField]
     public bool ToRandomNode;
     public List<KeyWeight> GoToNodes = new List<KeyWeight>();
-
+    [Tooltip("多個技能施放的間隔")]
+    [SerializeField]
+    public float SpellInterval = 0.5f;
     public List<Skill> SkillList = new List<Skill>();
 
     [Tooltip("動作類型")]
@@ -77,13 +79,6 @@ public class Node
     {
         Node data = this.MemberwiseClone() as Node;
         return data;
-    }
-    public void Spell()
-    {
-        for (int i = 0; i < SkillList.Count; i++)
-        {
-            SkillList[i].LaunchAISpell();
-        }
     }
     public string GetNodeKeyFromWeight()
     {
