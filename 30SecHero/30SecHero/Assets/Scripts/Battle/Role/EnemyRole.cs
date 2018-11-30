@@ -10,7 +10,8 @@ public partial class EnemyRole : Role
     float PlayMotionDuration = 0.5f;
     [SerializeField]
     List<BufferData> InitBuffers;
-
+    [SerializeField]
+    float KillAvatarTime = 1;
 
     public int ID { get; protected set; }
     public string Name { get; protected set; }
@@ -19,6 +20,7 @@ public partial class EnemyRole : Role
     protected const float FrictionDuringTime = 1;
     protected float FrictionDuringTimer = FrictionDuringTime;
     protected bool StartVelocityDecay;
+
 
 
     AIRoleMove MyAIMove;
@@ -202,6 +204,7 @@ public partial class EnemyRole : Role
     public override void SelfDestroy()
     {
         BattleManage.RemoveEnemy(this);
+        BattleManage.BM.MyPlayer.AvatarTimer += KillAvatarTime;
         base.SelfDestroy();
     }
 
