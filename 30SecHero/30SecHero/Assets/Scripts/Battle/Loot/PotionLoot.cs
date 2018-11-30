@@ -5,9 +5,12 @@ using UnityEngine.UI;
 
 public class PotionLoot : Loot
 {
-    [Tooltip("指定要出第幾個道具")]
+    [Tooltip("指定要出的藥水類型")]
     [SerializeField]
-    int DesginateLootIndex;
+    LootType DesginateLootType;
+    [Tooltip("指定出藥水")]
+    [SerializeField]
+    bool Designate = false;
     [Tooltip("HPRecovery(Value:回血百分比) \nAvataEnergy(Time:秒) \nDamageBuff(Time:秒、Value:傷害百分比) \nImmortal(Time:秒) \nMove(Time:秒、Value:移動值)")]
     [SerializeField]
     List<LootData> LootList;
@@ -39,25 +42,23 @@ public class PotionLoot : Loot
         base.Start();
         if (!IsDesignateLoot)
         {
-            int rand = 0;
-            if (DesginateLootIndex == 0)
-                rand = Random.Range(0, LootList.Count);
-            else
-                rand = DesginateLootIndex - 1;
-            if (rand >= LootList.Count)
+            if (Designate)
             {
-                rand = 0;
-                Debug.LogWarning("輸入的指定寶物超出索引值");
+                DesignateLoot(DesginateLootType);
             }
-            Data = LootList[rand];
+            else
+            {
+                int rand = Random.Range(0, LootList.Count);
+                Data = LootList[rand];
+            }
         }
         MyIcon.sprite = Data.LootIcon;
         MyIcon.SetNativeSize();
         //藥水蒐集者
-        if(BattleManage.BM.MyPlayer.MyEnchant[EnchantProperty.Collector]>0)
+        if (BattleManage.BM.MyPlayer.MyEnchant[EnchantProperty.Collector] > 0)
         {
             AILootMove alm = GetComponent<AILootMove>();
-            if (alm!=null)
+            if (alm != null)
                 alm.AbsorbRadius = (int)(alm.AbsorbRadius * (1 + BattleManage.BM.MyPlayer.MyEnchant[EnchantProperty.Collector]));
         }
     }

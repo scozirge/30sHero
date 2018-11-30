@@ -110,8 +110,8 @@ public partial class Player
             PlayerPrefs.SetInt(LocoData.Init.ToString(), 1);
             PlayerPrefs.SetInt(LocoData.UseLanguage.ToString(), 2);
         }
-        PlayerPrefs.SetInt(LocoData.Emerald.ToString(), 1000);
-        PlayerPrefs.SetInt(LocoData.Gold.ToString(), 10000);
+        //PlayerPrefs.SetInt(LocoData.Emerald.ToString(), 1000);
+        //PlayerPrefs.SetInt(LocoData.Gold.ToString(), 10000);
         //Debug.Log((Language)PlayerPrefs.GetInt(LocoData.UseLanguage.ToString()));
         SetLanguage((Language)PlayerPrefs.GetInt(LocoData.UseLanguage.ToString()));
         if (PlayerPrefs.GetInt(LocoData.MusicOn.ToString()) == 1)

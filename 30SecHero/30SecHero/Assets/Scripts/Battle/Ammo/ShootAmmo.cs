@@ -8,9 +8,7 @@ public class ShootAmmo : Ammo
     protected float AmmoSpeed;
     [SerializeField]
     protected float TraceFactor;
-    [Tooltip("是否會被牆阻擋")]
-    [SerializeField]
-    protected bool TriggerWall = true;
+    protected bool TriggerWall;
 
 
     protected Vector3 Ammovelocity;
@@ -18,6 +16,7 @@ public class ShootAmmo : Ammo
     {
         base.Init(_dic);
         Target = ((Role)_dic["Target"]);
+        TriggerWall = (bool)_dic["TriggerWall"];
         Ammovelocity = (Vector3)(_dic["Direction"]) * AmmoSpeed;
         if (IsPlayerGetSkill)
         {

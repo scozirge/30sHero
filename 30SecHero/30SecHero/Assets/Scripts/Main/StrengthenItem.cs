@@ -34,6 +34,10 @@ public class StrengthenItem : Item
         base.RefreshText();
         LVText.text = MyData.GetLVString(0);
     }
+    void OnDestroy()
+    {
+        MyText.RemoveRefreshFunc(RefreshText);
+    }
     public void UpdateUI()
     {
         RefreshText();

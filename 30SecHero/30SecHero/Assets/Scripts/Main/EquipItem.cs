@@ -51,6 +51,10 @@ public class EquipItem : Item
         QualityBottom.sprite = GameManager.GetItemQualityBotSprite(MyData.Quality);
         SetSoldMode(false);
     }
+    void OnDestroy()
+    {
+        MyText.RemoveRefreshFunc(RefreshText);
+    }
     public override void RefreshText()
     {
         base.RefreshText();

@@ -29,7 +29,10 @@ public class EnchantItem : Item
         TheToggle = GetComponent<Toggle>();
         TheToggle.group = ParentUI.GetComponent<ToggleGroup>();
     }
-
+    void OnDestroy()
+    {
+        MyText.RemoveRefreshFunc(RefreshText);
+    }
     public override void RefreshText()
     {
         base.RefreshText();

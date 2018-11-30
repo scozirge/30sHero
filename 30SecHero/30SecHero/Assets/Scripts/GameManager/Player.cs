@@ -94,6 +94,29 @@ public partial class Player
             }
         }
     }
+    public static void TradeEmeraldForGold(int _emerald, int _gold)
+    {
+        if (_gold == 0)
+            return;
+        Gold += _gold;
+        Emerald -= _emerald;
+        Main.UpdateResource();
+        //寫入資料
+        if (PlayerInfoInitDataFinish)
+        {
+            if (!LocalData)
+            {
+                Debug.Log("更新server玩家資源");
+                ServerRequest.UpdateResource();
+            }
+            else
+            {
+                Debug.Log("更新Loco玩家資源");
+                PlayerPrefs.SetInt(LocoData.Gold.ToString(), Gold);
+                PlayerPrefs.SetInt(LocoData.Emerald.ToString(), Emerald);
+            }
+        }
+    }
     public static void GainEmerald(int _emerald)
     {
         if (_emerald == 0)

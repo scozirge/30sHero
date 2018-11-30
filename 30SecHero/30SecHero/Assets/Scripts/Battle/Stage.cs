@@ -102,8 +102,10 @@ public partial class BattleManage
             if (CurPlate == NextDemogorgonFloor * FloorPlate - BossDebutPlate)
                 SpawnDemogorgon();
         }
+        //樓層改變
         if (Floor != LastFloor)
         {
+            //更新介面
             BM.FloorText.text = string.Format("{0}{1}", Floor, StringData.GetString("Floor"));
             //把距離太遠的地形隱藏
             BM.InActiveOutSideStage();

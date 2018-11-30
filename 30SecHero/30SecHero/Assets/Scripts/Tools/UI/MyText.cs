@@ -54,5 +54,8 @@ public class MyText : Text
     {
         MyFuncList.Add(_func);
     }
-
+    public static void RemoveRefreshFunc(MyFunction _func)
+    {
+        MyFuncList.Remove(_func);
+    }
 }

@@ -245,98 +245,28 @@ MonoBehaviour:
   - {fileID: 3502190818260683149}
   FaceLeftOrRight: 0
   ClosestEnemy: {fileID: 0}
-  ExtralGoldDropProportion: 0
-  NoDamageRecoveryProportion: 0
-  BurningWeaponProportion: 0
-  PoisonedWeaponProportion: 0
-  FrozenWeaponProportion: 0
-  StunningSlashProportion: 0
-  AttackRangeProportion: 0
-  CarnivorousProportion: 0
-  BerserkerProportion: 0
-  ReflectShieldProportion: 0
-  ConservationOfMassProportion: 0
-  ReviveProportion: 0
-  ReflectMeleeDamageProportion: 0
-  AbsorbElementProportion: 0
-  LethalDashProportion: 0
-  InertiaPlus: 0
-  ReversalImpactProportion: 0
-  DashForLifeProportion: 0
-  PharmacistProportion: 0
-  AllergyPlus: 0
-  DrugFeverProportion: 0
-  AlchemyProportion: 0
-  CollectorProportion: 0
-  BloodyGoldProportion: 0
-  HangOnProportion: 0
-  SpeedyJumpProportion: 0
-  BreakDoorGoldProportion: 0
-  ReAvatarProportion: 0
-  TriumphPlus: 0
-  ShepherdProportion: 0
-  OnFireProportion: 0
-  HarvesterProportion: 0
-  GhostShelterProportion: 0
-  GhostArmorProportion: 0
-  FireResistanceProportion: 0
-  FireBladeProportion: 0
-  FreezeResistanceProportion: 0
-  IceArmorProportion: 0
-  PoisonResistantProportion: 0
-  DrugAddictionPlus: 0
-  FortitudeProportion: 0
-  NeutralizationProportion: 0
-  CowerProportion: 0
-  EliteHuntingProportion: 0
-  LightHouseProportion: 0
-  TreasureHuntingProportion: 0
-  CouragePlus: 0
-  KingKillerProportion: 0
-  RuleBreakerPlus: 0
-  SelfCureProportion: 0
   SelfCureSkill: {fileID: 6962039934583892858}
   SelfCureAmmo: {fileID: 114517049925248944, guid: 56c1890e39e69224b90838eb20d5ca32,
     type: 3}
-  ChopStrikeProportion: 0
   ChopStrikeSkill: {fileID: 435051386195516395}
-  FireChopProportion: 0
   FireChopSkil: {fileID: 1407483692069984467}
-  PoisonChopProportion: 0
   PoisonChopSkil: {fileID: 1699951292}
-  FrozenChopProportion: 0
   FrozenChopSkil: {fileID: 1699951291}
-  DashImpactProportion: 0
   DashImpactSkil: {fileID: 1699951293}
-  SplashThornProportion: 0
   SplashThornSkil: {fileID: 1699951294}
-  OverloadProportion: 0
   OverloadSkil: {fileID: 8674507488945032181}
-  FuryTime: 0
   FurySkil: {fileID: 5781173221670371357}
-  CrossNailProportion: 0
   CrossNailSkill: {fileID: 5511798855038421899}
-  SplashNailProportion: 0
   SplashNailSkill: {fileID: 3290497538085040505}
-  ShurikenProportion: 0
   ShurikenSkill: {fileID: 1699951297}
-  BatProportion: 0
   BatSkill: {fileID: 1699951298}
-  FrozenBallProportion: 0
   FrozenBallSkill: {fileID: 1699951299}
-  ShockBallProportion: 0
   ShockBallSkill: {fileID: 1854052404694572665}
-  PoisonedBallProportion: 0
   PoisonedBallSkill: {fileID: 1699951301}
-  FireBallProportion: 0
   FireBallSkill: {fileID: 1699951302}
-  FireArmorProportion: 0
   FireArmorSkill: {fileID: 7530781475277062003}
-  FrozenArmorProportion: 0
   FrozenArmorSkill: {fileID: 7400705641803449881}
-  PoisonedArmorProportion: 0
   PoisonedArmorSkill: {fileID: 3889418733401809973}
-  WindArmorProportion: 0
   WindArmorSkill: {fileID: 5904946093466798333}
 --- !u!50 &50485858130474148
 Rigidbody2D:
@@ -434,6 +364,7 @@ MonoBehaviour:
   AngleInterval: 0
   RandomAngle: 0
   Patetern: 0
+  FirstAttackNoWait: 0
   AttackPrefab: {fileID: 114255117710915984, guid: 5b65695814f87af46a3fc5c33d4cec5d,
     type: 3}
   AttackRadius: 0
@@ -503,8 +434,10 @@ MonoBehaviour:
   AngleInterval: 0
   RandomAngle: 0
   Patetern: 5
+  FirstAttackNoWait: 0
   AttackPrefab: {fileID: 114630672538787846, guid: 62675298d0fe1154e99d6ddbf139c374,
     type: 3}
+  TriggerWall: 0
 --- !u!114 &1407483692069984467
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -658,8 +591,10 @@ MonoBehaviour:
   AngleInterval: 0
   RandomAngle: 1
   Patetern: 0
+  FirstAttackNoWait: 0
   AttackPrefab: {fileID: 114630672538787846, guid: 4dd1b0e6b19d6994683837907aa36334,
     type: 3}
+  TriggerWall: 1
 --- !u!114 &8674507488945032181
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -753,8 +688,10 @@ MonoBehaviour:
   AngleInterval: 90
   RandomAngle: 0
   Patetern: 0
+  FirstAttackNoWait: 0
   AttackPrefab: {fileID: 114630672538787846, guid: f2e9517c70174fa41a592ed661cf8f43,
     type: 3}
+  TriggerWall: 1
 --- !u!114 &3290497538085040505
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -788,8 +725,10 @@ MonoBehaviour:
   AngleInterval: 10
   RandomAngle: 0
   Patetern: 1
+  FirstAttackNoWait: 0
   AttackPrefab: {fileID: 114630672538787846, guid: e1a992b528542bc4bbd36f18c4440c15,
     type: 3}
+  TriggerWall: 1
 --- !u!114 &1699951297
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -823,8 +762,10 @@ MonoBehaviour:
   AngleInterval: 0
   RandomAngle: 0
   Patetern: 1
+  FirstAttackNoWait: 0
   AttackPrefab: {fileID: 3493921463868163088, guid: 3a714551f4af63b4c8951e45321ccee6,
     type: 3}
+  TriggerWall: 0
 --- !u!114 &1699951298
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -852,14 +793,16 @@ MonoBehaviour:
   IsPlayerGetSkill: 0
   AttackOnce: 0
   Interval: 6
-  AmmoNum: 3
+  AmmoNum: 4
   AmmoInterval: 0.03
   StartAngle: 0
-  AngleInterval: 120
+  AngleInterval: 90
   RandomAngle: 0
   Patetern: 1
+  FirstAttackNoWait: 0
   AttackPrefab: {fileID: 3493921463868163088, guid: efa54ced923b36a4fad51f307a67a13e,
     type: 3}
+  TriggerWall: 0
 --- !u!114 &1699951299
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -893,8 +836,10 @@ MonoBehaviour:
   AngleInterval: 0
   RandomAngle: 0
   Patetern: 4
+  FirstAttackNoWait: 0
   AttackPrefab: {fileID: 114962956101920240, guid: f6cab0a6f37f27945a23ed04ef0daae7,
     type: 3}
+  TriggerWall: 1
 --- !u!114 &1854052404694572665
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -928,8 +873,10 @@ MonoBehaviour:
   AngleInterval: 0
   RandomAngle: 0
   Patetern: 4
+  FirstAttackNoWait: 0
   AttackPrefab: {fileID: 114962956101920240, guid: 54719d61992253c4daee109e697c6f43,
     type: 3}
+  TriggerWall: 1
 --- !u!114 &5904946093466798333
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1083,8 +1030,10 @@ MonoBehaviour:
   AngleInterval: 0
   RandomAngle: 0
   Patetern: 4
+  FirstAttackNoWait: 0
   AttackPrefab: {fileID: 114962956101920240, guid: 48e47be9eacda6747934618a9cf429b0,
     type: 3}
+  TriggerWall: 1
 --- !u!114 &1699951302
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1118,8 +1067,10 @@ MonoBehaviour:
   AngleInterval: 0
   RandomAngle: 0
   Patetern: 4
+  FirstAttackNoWait: 0
   AttackPrefab: {fileID: 114962956101920240, guid: 09dfc36365da6064dbdb0bb6a1c54ab9,
     type: 3}
+  TriggerWall: 1
 --- !u!1 &1131648973560484
 GameObject:
   m_ObjectHideFlags: 0

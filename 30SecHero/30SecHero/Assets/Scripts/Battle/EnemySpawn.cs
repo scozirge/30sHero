@@ -45,6 +45,7 @@ public partial class BattleManage
             er.SetEnemyData(GameDictionary.EnemyDic[AvailableDemonGergons[i].ID]);
             //Set SpawnPos
             er.transform.SetParent(EnemyParent);
+            er.transform.position = GetSpawnPos(new Vector2(600, 0));
             AddEnemy(er);
         }
         AvailableDemonGergons = EnemyData.GetNextDemogorgon(Floor + 1, out NextDemogorgonFloor);

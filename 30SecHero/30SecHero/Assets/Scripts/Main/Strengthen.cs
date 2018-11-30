@@ -70,6 +70,10 @@ public class Strengthen : MyUI
         }
         IsInit = true;
     }
+    void OnDestroy()
+    {
+        MyText.RemoveRefreshFunc(RefreshText);
+    }
     public override void OnEnable()
     {
         if (!IsInit)

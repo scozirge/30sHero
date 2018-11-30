@@ -17,9 +17,13 @@ public class Purchase : MyUI
     [SerializeField]
     Image Icon;
     [SerializeField]
-    Text CountText;
+    Image BtnIcon;
+    [SerializeField]
+    Text ItemCountText;
     [SerializeField]
     GameObject RightPanel;
+    [SerializeField]
+    Button UpgradeButton;
 
     List<PurchaseItem> ItemList = new List<PurchaseItem>();
 
@@ -38,8 +42,19 @@ public class Purchase : MyUI
         }
         ItemList = new List<PurchaseItem>();
         ShowInfo(null);
+        ShowItemList();
         KongregateAPIBehaviour.ShowItemList();
         //ShowItemListCB("1,test,test,1/2,test2,test2,5");
+    }
+    void ShowItemList()
+    {
+        List<int> keys = new List<int>(GameDictionary.PurchaseDic.Keys);
+        for (int i = 0; i < keys.Count; i++)
+        {
+            PurchaseItem pi = (PurchaseItem)MySpanwer.Spawn();
+            pi.Set(GameDictionary.PurchaseDic[keys[i]], this);
+            ItemList.Add(pi);
+        }
     }
     public void ShowItemListCB(string _datas)
     {
@@ -51,14 +66,16 @@ public class Purchase : MyUI
             int id = int.Parse(itemData[0]);
             int price = int.Parse(itemData[3]);
             //Debug.Log(string.Format("iden={0},namte={1},desc={2},price={3}", itemData[0], itemData[1], itemData[2], itemData[3]));
-            if (GameDictionary.PurchaseDic.ContainsKey(id))
+            for (int j = 0; j < ItemList.Count; j++)
             {
-                GameDictionary.PurchaseDic[id].SetPurchasePrice(price);
-                PurchaseItem pi = (PurchaseItem)MySpanwer.Spawn();
-                pi.Set(GameDictionary.PurchaseDic[id], this);
-                ItemList.Add(pi);
+                if (ItemList[j].MyData.ID == id)
+                {
+                    ItemList[j].MyData.SetPurchasePrice(price);
+                    break;
+                }
             }
         }
+        Debug.Log(ItemList[0].MyData.Name);
         if (ItemList[0] != null)
         {
             for (int i = 0; i < ItemList.Count; i++)
@@ -86,15 +103,50 @@ public class Purchase : MyUI
         base.RefreshText();
         NameText.text = CurSelectedData.Name;
         DescriptionText.text = CurSelectedData.Description;
-        PriceText.text = CurSelectedData.PayKreds.ToString();
         Icon.sprite = CurSelectedData.GetICON();
-        CountText.text = CurSelectedData.Gain.ToString();
+        Icon.SetNativeSize();
+        ItemCountText.text = CurSelectedData.Gain.ToString();
+        if (CurSelectedData.MyType == PurchaseType.TradeGold)
+            ItemCountText.color = GameManager.GM.GoldColor;
+        else
+        {
+            ItemCountText.color = GameManager.GM.EmeraldColor;
+        }
+        UpgradeButton.interactable = true;
+        switch (CurSelectedData.MyType)
+        {
+            case PurchaseType.BuyEmerald:
+                BtnIcon.sprite = GameManager.GetCurrencySprite(Currency.Kred);
+                PriceText.text = CurSelectedData.PayKreds.ToString();
+                break;
+            case PurchaseType.TradeGold:
+                if (Player.Emerald < CurSelectedData.PayEmerald)
+                {
+                    UpgradeButton.interactable = false;
+                }
+                BtnIcon.sprite = GameManager.GetCurrencySprite(Currency.Emerald);
+                PriceText.text = CurSelectedData.PayEmerald.ToString();
+                break;
+            case PurchaseType.WatchingAD:
+                BtnIcon.sprite = GameManager.GetCurrencySprite(Currency.AD);
+                break;
+        }
     }
     static PurchaseData CurPurchaseData;
     public void ToPurchase()
     {
         CurPurchaseData = CurSelectedData;
-        KongregateAPIBehaviour.PurchaseItem(CurPurchaseData.ID);
+        switch (CurPurchaseData.MyType)
+        {
+            case PurchaseType.BuyEmerald:
+                KongregateAPIBehaviour.PurchaseItem(CurPurchaseData.ID);
+                break;
+            case PurchaseType.TradeGold:
+                Player.TradeEmeraldForGold(CurSelectedData.PayEmerald, CurSelectedData.Gain);
+                break;
+            case PurchaseType.WatchingAD:
+                break;
+        }
     }
     public static void ToPurchaseCB(bool _result)
     {

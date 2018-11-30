@@ -949,12 +949,6 @@ PrefabInstance:
       propertyPath: MyCamera
       value: 
       objectReference: {fileID: 519420031}
-    - target: {fileID: 114529601492733476, guid: d9e47796d36fc83458ffab41aea6641e,
-        type: 3}
-      propertyPath: RushEffect
-      value: 
-      objectReference: {fileID: 5754142759658177653, guid: a6e767ebd6d3ffb48a966c7faebed0dc,
-        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d9e47796d36fc83458ffab41aea6641e, type: 3}
 --- !u!1 &135074929
@@ -2615,6 +2609,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68cced6f17b43dd48b6ae802d9f37371, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TestMode: 0
   StageList:
   - {fileID: 114349592024013982, guid: 9acf505aee5c0db48aa2a88515e34387, type: 3}
   - {fileID: 114102499001875956, guid: 58c0d54d561236d449ada6bd7f10311f, type: 3}
@@ -2642,7 +2637,6 @@ MonoBehaviour:
   - {fileID: 114349592024013982, guid: 7c5ac367971698944950f6bf51f4a08b, type: 3}
   - {fileID: 114349592024013982, guid: 6bbddd0706beb9148af9e370754c9f14, type: 3}
   - {fileID: 8318231718720533117, guid: cae8799dda12b274da82740450d11309, type: 3}
-  DesignateStage: {fileID: 0}
   FGTopList: []
   FGBotList:
   - {fileID: 114618649810162204, guid: 66063e45adef2f54b94c6e7b8e701a0b, type: 3}
