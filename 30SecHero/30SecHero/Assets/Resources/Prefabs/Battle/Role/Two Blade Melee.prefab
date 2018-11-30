@@ -353,8 +353,8 @@ MonoBehaviour:
   HealthBar: {fileID: 224116466118426486}
   DirectX: 0
   DirectY: 0
-  MaxHealth: 10
-  BaseDamage: 10
+  MaxHealth: 15
+  BaseDamage: 60
   BaseMoveSpeed: 200
   DeathEffect: {fileID: 198802542160044040, guid: 8f344cf8edc65e44883dfdf0168792bd,
     type: 3}
@@ -377,6 +377,7 @@ MonoBehaviour:
   PlayMotionDuration: 0.5
   InitBuffers: []
   Type: 0
+  StemFromFloor: 0
 --- !u!50 &50284349101639710
 Rigidbody2D:
   serializedVersion: 4
@@ -448,6 +449,8 @@ MonoBehaviour:
   AttackStopMove: 0
   StopMoveTime: 0
   SpellSound: {fileID: 0}
+  SpawnedInSelf: 1
+  VampireProportion: 0
   PSkillTimer: 0
   IsPlayerGetSkill: 0
   AttackOnce: 1
@@ -458,7 +461,7 @@ MonoBehaviour:
   AngleInterval: 0
   RandomAngle: 0
   Patetern: 0
-  SpawnedInSelf: 1
+  FirstAttackNoWait: 0
   AttackPrefab: {fileID: 114280530254980642, guid: fcf9df39c8fb32746933d109f1770680,
     type: 3}
   AttackRadius: 0

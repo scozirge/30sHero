@@ -33,6 +33,7 @@ public class Stage : MonoBehaviour
             EnemyRole[] enemys = GetComponentsInChildren<EnemyRole>();
             for (int i = 0; i < enemys.Length; i++)
             {
+                enemys[i].SetStemFromFloor(Floor);
                 enemys[i].transform.SetParent(enemyParent.transform);
                 enemys[i].gameObject.SetActive(false);
                 BattleManage.AddEnemy(enemys[i]);

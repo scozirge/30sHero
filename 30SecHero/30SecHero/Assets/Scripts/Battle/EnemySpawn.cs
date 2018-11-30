@@ -46,6 +46,7 @@ public partial class BattleManage
             //Set SpawnPos
             er.transform.SetParent(EnemyParent);
             er.transform.position = GetSpawnPos(new Vector2(600, 0));
+            er.SetStemFromFloor(Floor);
             AddEnemy(er);
         }
         AvailableDemonGergons = EnemyData.GetNextDemogorgon(Floor + 1, out NextDemogorgonFloor);
@@ -79,6 +80,7 @@ public partial class BattleManage
         }
         CurSpawnCount++;
         er.transform.SetParent(EnemyParent);
+        er.SetStemFromFloor(Floor);
         AIRoleMove ai = er.GetComponent<AIRoleMove>();
         Vector2 offset = Vector2.zero;
         for (int i = 0; i < MaxRefindTimes; i++)

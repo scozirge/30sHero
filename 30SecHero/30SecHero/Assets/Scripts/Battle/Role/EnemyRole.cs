@@ -27,6 +27,7 @@ public partial class EnemyRole : Role
     Image RoleImg;
     MyTimer MotionTimer;
     MyTimer LifeTimer;
+    public int StemFromFloor;
 
     public void SetEnemyData(EnemyData _data)
     {
@@ -35,6 +36,20 @@ public partial class EnemyRole : Role
         IsPreAttack = false;
         DebutFloor = _data.DebutFloor;
         Type = _data.Type;
+    }
+    public void SetStemFromFloor(int _floor)
+    {
+        StemFromFloor = _floor;
+        if (Type == EnemyType.Demogorgon)
+        {
+            BaseDamage += (int)(StemFromFloor * GameSettingData.BossDMGGrow * BaseDamage);
+            MaxHealth += (int)(StemFromFloor * GameSettingData.BossHPGrow * MaxHealth);
+        }
+        else
+        {
+            BaseDamage += (int)(StemFromFloor * GameSettingData.EnemyDMGGrow * BaseDamage);
+            MaxHealth += (int)(StemFromFloor * GameSettingData.EnemyHPGrow * MaxHealth);
+        }
     }
     public void SetLifeTime(float _time)
     {
@@ -58,16 +73,7 @@ public partial class EnemyRole : Role
             {
                 AddBuffer(InitBuffers[i].GetMemberwiseClone());
             }
-        if (Type == EnemyType.Demogorgon)
-        {
-            BaseDamage += (int)(BattleManage.Floor * GameSettingData.BossDMGGrow * BaseDamage);
-            MaxHealth += (int)(BattleManage.Floor * GameSettingData.BossHPGrow * MaxHealth);
-        }
-        else
-        {
-            BaseDamage += (int)(BattleManage.Floor * GameSettingData.EnemyDMGGrow * BaseDamage);
-            MaxHealth += (int)(BattleManage.Floor * GameSettingData.EnemyHPGrow * MaxHealth);
-        }
+
         Health = MaxHealth;
         if (Target && Health <= Target.Damage)
             HealthObj.SetActive(false);
@@ -165,11 +171,11 @@ public partial class EnemyRole : Role
         base.BeAttack(_attackerForce, ref _dmg, _force);
         if (!IsAlive && _attackerForce == Force.Player)
         {
-            if(Type==EnemyType.Minion)
+            if (Type == EnemyType.Minion)
             {
                 BattleManage.AddEnemyKill();
             }
-            else if(Type==EnemyType.Demogorgon)
+            else if (Type == EnemyType.Demogorgon)
             {
                 BattleManage.AddBossKill();
             }

@@ -427,7 +427,7 @@ MonoBehaviour:
   DirectX: 0
   DirectY: 0
   MaxHealth: 30
-  BaseDamage: 30
+  BaseDamage: 60
   BaseMoveSpeed: 200
   DeathEffect: {fileID: 198802542160044040, guid: 8f344cf8edc65e44883dfdf0168792bd,
     type: 3}
@@ -450,6 +450,7 @@ MonoBehaviour:
   PlayMotionDuration: 0.6
   InitBuffers: []
   Type: 0
+  StemFromFloor: 0
 --- !u!50 &50284349101639710
 Rigidbody2D:
   serializedVersion: 4
@@ -552,6 +553,7 @@ MonoBehaviour:
   AngleInterval: 180
   RandomAngle: 0
   Patetern: 0
+  FirstAttackNoWait: 0
   AttackPrefab: {fileID: 114280530254980642, guid: 98920b54e1a38f644afa93ee1f5f025f,
     type: 3}
   AttackRadius: 105
