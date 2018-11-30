@@ -25,7 +25,6 @@ public class StageSpawner : MonoBehaviour
             return;
         Myself.StageList.Clear();
         Myself.StageList = StageData.GetAvailableStages(_floor);
-        Debug.Log(Myself.StageList.Count);
     }
     static Stage GetRandomStage(ref int _remainPlateSize)
     {
