@@ -763,8 +763,8 @@ MonoBehaviour:
   HealthBar: {fileID: 224701992108307940}
   DirectX: 0
   DirectY: 0
-  MaxHealth: 400
-  BaseDamage: 100
+  MaxHealth: 220
+  BaseDamage: 60
   BaseMoveSpeed: 200
   DeathEffect: {fileID: 0}
   AniPlayer: {fileID: 114741223747471740}

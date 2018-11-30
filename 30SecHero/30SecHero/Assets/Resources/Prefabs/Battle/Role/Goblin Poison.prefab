@@ -391,7 +391,7 @@ MonoBehaviour:
   DirectX: 0
   DirectY: 0
   MaxHealth: 10
-  BaseDamage: 10
+  BaseDamage: 60
   BaseMoveSpeed: 200
   DeathEffect: {fileID: 198802542160044040, guid: 8f344cf8edc65e44883dfdf0168792bd,
     type: 3}
@@ -414,6 +414,7 @@ MonoBehaviour:
   PlayMotionDuration: 0.8
   InitBuffers: []
   Type: 0
+  StemFromFloor: 0
 --- !u!50 &50654837008924256
 Rigidbody2D:
   serializedVersion: 4
@@ -457,6 +458,7 @@ MonoBehaviour:
   StopMoveTime: 1
   SpellSound: {fileID: 0}
   SpawnedInSelf: 0
+  VampireProportion: 0
   PSkillTimer: 0
   IsPlayerGetSkill: 0
   AttackOnce: 0
@@ -467,8 +469,10 @@ MonoBehaviour:
   AngleInterval: 0
   RandomAngle: 0
   Patetern: 2
+  FirstAttackNoWait: 0
   AttackPrefab: {fileID: 114962956101920240, guid: 33767ae2347d4e149b86ad81c07a0030,
     type: 3}
+  TriggerWall: 1
 --- !u!114 &114629539098914038
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -539,6 +543,7 @@ MonoBehaviour:
   StopMoveTime: 1
   SpellSound: {fileID: 0}
   SpawnedInSelf: 0
+  VampireProportion: 0
   PSkillTimer: 0
   IsPlayerGetSkill: 0
   AttackOnce: 0
@@ -549,8 +554,10 @@ MonoBehaviour:
   AngleInterval: 0
   RandomAngle: 0
   Patetern: 4
+  FirstAttackNoWait: 0
   AttackPrefab: {fileID: 114962956101920240, guid: 33767ae2347d4e149b86ad81c07a0030,
     type: 3}
+  TriggerWall: 1
 --- !u!1 &1976215754139816
 GameObject:
   m_ObjectHideFlags: 0
