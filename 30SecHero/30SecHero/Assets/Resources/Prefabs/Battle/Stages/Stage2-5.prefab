@@ -1,5 +1,23 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!224 &6837110935505723375 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 2688914496415984082, guid: cddff58d505421748b96989e7b552ec5,
+    type: 3}
+  m_PrefabInstance: {fileID: 8913394794794071613}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &3067320318498283868 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 224382798152197656, guid: 46dd08cd41c475f45999ef0a5b4d8a23,
+    type: 3}
+  m_PrefabInstance: {fileID: 2993879329747519300}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &6113550442961625223 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 224382798152197656, guid: 46dd08cd41c475f45999ef0a5b4d8a23,
+    type: 3}
+  m_PrefabInstance: {fileID: 6326039377125901983}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1482467914647223282
 GameObject:
   m_ObjectHideFlags: 0
@@ -177,24 +195,6 @@ PolygonCollider2D:
       - {x: -187.39613, y: -322.461}
       - {x: -187.39613, y: -322.461}
       - {x: -126.70697, y: -328.21332}
---- !u!224 &3067320318498283868 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 224382798152197656, guid: 46dd08cd41c475f45999ef0a5b4d8a23,
-    type: 3}
-  m_PrefabInstance: {fileID: 2993879329747519300}
-  m_PrefabAsset: {fileID: 0}
---- !u!224 &6113550442961625223 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 224382798152197656, guid: 46dd08cd41c475f45999ef0a5b4d8a23,
-    type: 3}
-  m_PrefabInstance: {fileID: 6326039377125901983}
-  m_PrefabAsset: {fileID: 0}
---- !u!224 &6837110935505723375 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 2688914496415984082, guid: cddff58d505421748b96989e7b552ec5,
-    type: 3}
-  m_PrefabInstance: {fileID: 8913394794794071613}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &8277773558385242537
 GameObject:
   m_ObjectHideFlags: 0
@@ -420,7 +420,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 307e061c5b9ef304191d0ef96f7ad338, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OccupyPlateSize: 1
+  OccupyPlateSize: 2
   Floor: 0
 --- !u!1001 &2993879329747519300
 PrefabInstance:
