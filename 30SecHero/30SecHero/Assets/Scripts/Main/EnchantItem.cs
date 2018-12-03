@@ -16,14 +16,17 @@ public class EnchantItem : Item
 
     public void Set(EnchantData _data, Strengthen _ui)
     {
-        MyData = _data;
         ParentUI = _ui;
-        if (Player.EnchantDic.ContainsKey(MyData.ID))
+        MyData = _data;
+        if (MyData != null)
         {
-            MyData = Player.EnchantDic[MyData.ID];
+            if (Player.EnchantDic.ContainsKey(MyData.ID))
+            {
+                MyData = Player.EnchantDic[MyData.ID];
+            }
+            else
+                return;
         }
-        else
-            return;
         UpdateUI();
         MyText.AddRefreshFunc(RefreshText);
         TheToggle = GetComponent<Toggle>();
@@ -36,13 +39,27 @@ public class EnchantItem : Item
     public override void RefreshText()
     {
         base.RefreshText();
-        LVText.text = MyData.GetLVString(0);
+        if (MyData != null)
+        {
+            LVText.text = MyData.GetLVString(0);
+            LVText.enabled = true;
+        }
+        else
+            LVText.enabled = false;
     }
     public void UpdateUI()
     {
         RefreshText();
-        Icon.sprite = MyData.GetICON();
-        Icon.SetNativeSize();
+        if(MyData!=null)
+        {
+            Icon.sprite = MyData.GetICON();
+            Icon.SetNativeSize();
+        }
+        else
+        {
+            Icon.sprite = GameManager.GM.UnknownIcon;
+            Icon.SetNativeSize();
+        }
     }
     public override void OnPress()
     {

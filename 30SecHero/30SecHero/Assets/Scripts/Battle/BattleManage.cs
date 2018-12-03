@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public partial class BattleManage : MonoBehaviour
 {
@@ -62,6 +63,14 @@ public partial class BattleManage : MonoBehaviour
     GameObject ExampleBattleBG;
     [SerializeField]
     GameObject SoulGo;
+    [SerializeField]
+    GameObject GetEnchantObj;
+    [SerializeField]
+    MyText GetEnchant_Name;
+    [SerializeField]
+    MyText GetEnchant_Description;
+    [SerializeField]
+    Image GetEnchant_Icon;
 
 
     static List<EnemyRole> AvailableMillions;
@@ -305,5 +314,13 @@ public partial class BattleManage : MonoBehaviour
                     LootList[i].gameObject.SetActive(true);
             }
         }
+    }
+    public void CallGetEnchantUI(bool _active)
+    {
+        IsPause = _active;
+        SoulGo.SetActive(!_active);
+        MyCameraControler.enabled = !_active;
+        gameObject.SetActive(!_active);
+        GetEnchantObj.SetActive(_active);        
     }
 }

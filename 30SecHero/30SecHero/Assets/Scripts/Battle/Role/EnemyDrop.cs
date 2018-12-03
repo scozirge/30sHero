@@ -77,10 +77,11 @@ public partial class EnemyRole
                     if (loot) loot.Init(ResourceType.Emerald, GameSettingData.BossEmerald);
                 }
             }
-            else
-            {
+            else//擊殺尚未擊殺過的新BOSS
+            {                
                 ResourceLoot loot = DropSpawner.SpawnResource(transform.position);
                 if (loot) loot.Init(ResourceType.Emerald, GameSettingData.NewBossEmerald);
+                BattleManage.GetEnchant();
             }
         }
         //DropLoot;

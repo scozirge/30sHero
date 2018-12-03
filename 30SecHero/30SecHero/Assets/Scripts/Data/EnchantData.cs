@@ -159,7 +159,7 @@ public class EnchantData : Data
     }
     public bool CanUpgrade()
     {
-        if (Player.Emerald < GetPrice() || LV >= MaxLevel)
+        if (LV >= MaxLevel)
             return false;
         else
             return true;
@@ -201,5 +201,38 @@ public class EnchantData : Data
         EnchantData data = GameDictionary.EnchantDic[_id].MemberwiseClone() as EnchantData;
         data.InitSet(_lv);
         return data;
+    }
+    public static EnchantData GetAvailableRandomEnchant()
+    {
+        for (int i = 1; i < 4; i++)
+        {
+            EnchantData ed = GetRandomEnchant(i);
+            if (ed != null)
+            {
+                return ed;
+            }
+        }
+        return null;
+    }
+    static EnchantData GetRandomEnchant(int _lv)
+    {
+        List<EnchantData> availableEnchant = new List<EnchantData>();
+        List<int> keys = new List<int>(Player.EnchantDic.Keys);
+        for (int i = 0; i < keys.Count; i++)
+        {
+            if (Player.EnchantDic[keys[i]].MyEnchantType == EnchantType.Enchant && Player.EnchantDic[keys[i]].LV < _lv)
+            {
+                availableEnchant.Add(Player.EnchantDic[keys[i]]);
+            }
+        }
+        if (availableEnchant.Count != 0)
+        {
+            int random = UnityEngine.Random.Range(0, availableEnchant.Count);
+            return availableEnchant[random];
+        }
+        else
+        {
+            return null;
+        }
     }
 }

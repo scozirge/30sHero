@@ -40,6 +40,7 @@ public class Strengthen : MyUI
     {
         if (IsInit)
             return;
+        //Strengthen
         List<int> keys = new List<int>(GameDictionary.StrengthenDic.Keys);
         for (int i = 0; i < keys.Count; i++)
         {
@@ -47,17 +48,23 @@ public class Strengthen : MyUI
             si.Set(GameDictionary.StrengthenDic[keys[i]], this);
             StrengthenItemList.Add(si);
         }
-
-        keys = new List<int>(GameDictionary.EnchantDic.Keys);
+        //Enchant
+        keys = new List<int>(Player.EnchantDic.Keys);
         for (int i = 0; i < keys.Count; i++)
         {
-            if(GameDictionary.EnchantDic[keys[i]].MyEnchantType==EnchantType.Enchant)
+            if (Player.EnchantDic[keys[i]].MyEnchantType == EnchantType.Enchant)
             {
-                EnchantItem ei = (EnchantItem)EnchantSpanwer.Spawn();
-                ei.Set(GameDictionary.EnchantDic[keys[i]], this);
-                EnchantItemList.Add(ei);
+                if(Player.EnchantDic[keys[i]].LV>0)
+                {
+                    EnchantItem ei = (EnchantItem)EnchantSpanwer.Spawn();
+                    ei.Set(Player.EnchantDic[keys[i]], this);
+                    EnchantItemList.Add(ei);
+                }
             }
         }
+        EnchantItem unknown = (EnchantItem)EnchantSpanwer.Spawn();
+        unknown.Set(null, this);
+        EnchantItemList.Add(unknown);
         //預設強化分頁並選擇第一個item
         StrengthenContent.gameObject.SetActive(true);
         EnchantContent.gameObject.SetActive(false);
@@ -86,14 +93,26 @@ public class Strengthen : MyUI
         CurSelectedSData = _item.MyData;
         CurSelectedSItem = _item;
         RefreshText();
+        UpgradeButton.gameObject.SetActive(true);
         UpgradeButton.interactable = CurSelectedSData.CanUpgrade();
     }
     public void ShowInfo(EnchantItem _item)
     {
-        CurSelectedEData = _item.MyData;
-        CurSelectedEItem = _item;
-        RefreshText();
-        UpgradeButton.interactable = CurSelectedEData.CanUpgrade();
+        if(_item.MyData!=null)
+        {
+            CurSelectedEData = _item.MyData;
+            CurSelectedEItem = _item;
+            RefreshText();
+            UpgradeButton.gameObject.SetActive(true);
+            UpgradeButton.interactable = CurSelectedEData.CanUpgrade();
+        }
+        else
+        {
+            CurSelectedEData = null;
+            CurSelectedEItem = null;
+            RefreshText();
+            UpgradeButton.gameObject.SetActive(false);
+        }
     }
     public override void RefreshText()
     {
@@ -101,31 +120,49 @@ public class Strengthen : MyUI
         if (CurFilterType == StrengthenType.Strengthen)
         {
             NameText.text = CurSelectedSData.Name;
-            if (CurSelectedSData.CanUpgrade())
+            if (!CurSelectedSData.CanUpgrade())
+            {
+                DescriptionText.text = CurSelectedSData.Description(-1);
+                PriceText.text = StringData.GetString("MaxLevel");
+
+            }
+            else if(Player.Gold < CurSelectedSData.GetPrice())
+            {
+                DescriptionText.text = CurSelectedSData.Description(0);
+                PriceText.text = StringData.GetString("Unaffordable");
+            }
+            else
             {
                 DescriptionText.text = CurSelectedSData.Description(0);
                 PriceText.text = CurSelectedSData.GetPrice().ToString();
             }
-            else
-            {
-                DescriptionText.text = CurSelectedSData.Description(-1);
-                PriceText.text = StringData.GetString("MaxLevel");
-            }
-
         }
         else if (CurFilterType == StrengthenType.Enchant)
         {
-            NameText.text = CurSelectedEData.Name;
-            if (CurSelectedEData.CanUpgrade())
+            if (CurSelectedEData!=null)
             {
-                DescriptionText.text = CurSelectedEData.Description(0);
-                PriceText.text = CurSelectedEData.GetPrice().ToString();
-            }
+                NameText.text = CurSelectedEData.Name;
+                if (!CurSelectedEData.CanUpgrade())
+                {
+                    DescriptionText.text = CurSelectedEData.Description(-1);
+                    PriceText.text = StringData.GetString("MaxLevel");
 
+                }
+                else if(Player.Emerald < CurSelectedEData.GetPrice())
+                {
+                    DescriptionText.text = CurSelectedEData.Description(0);
+                    PriceText.text = StringData.GetString("Unaffordable");
+                }
+                else
+                {
+                    DescriptionText.text = CurSelectedEData.Description(0);
+                    PriceText.text = CurSelectedEData.GetPrice().ToString();
+                }
+            }
             else
             {
-                DescriptionText.text = CurSelectedEData.Description(-1);
-                PriceText.text = StringData.GetString("MaxLevel");
+                NameText.text = StringData.GetString("UnknownEnchant");
+                DescriptionText.text = StringData.GetString("UnknownEnchantInfo");
             }
         }
     }

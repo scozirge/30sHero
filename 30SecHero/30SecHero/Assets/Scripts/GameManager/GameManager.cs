@@ -30,6 +30,11 @@ public partial class GameManager : MonoBehaviour
     [Tooltip("廣告")]
     [SerializeField]
     public Sprite ADSprite;
+    [Tooltip("未知圖示")]
+    [SerializeField]
+    public Sprite UnknownIcon;
+
+
     [Tooltip("暈眩特效")]
     [SerializeField]
     public ParticleSystem StunPrefab;

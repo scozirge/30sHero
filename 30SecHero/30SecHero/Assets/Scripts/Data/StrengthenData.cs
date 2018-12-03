@@ -126,7 +126,7 @@ public class StrengthenData : Data
     }
     public bool CanUpgrade()
     {
-        if (Player.Gold < GetPrice() || LV >= MaxLevel)
+        if (LV >= MaxLevel)
             return false;
         else
             return true;

@@ -23,11 +23,15 @@ public partial class Debugger : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.X))
         {
-            Player.ShowEquipProperties();
+            BattleManage.GetEnchant();
         }
         else if (Input.GetKeyDown(KeyCode.N))
         {
             BattleManage.BM.MyPlayer.ShowMyEnchantInfo();
+        }
+        else if (Input.GetKeyDown(KeyCode.M))
+        {
+            Player.ShowEquipProperties();
         }
         else if (Input.GetKeyDown(KeyCode.C))
         {
@@ -89,6 +93,19 @@ public partial class Debugger : MonoBehaviour
             else
                 //送server處理
                 Player.Settlement(Player.Gold, Player.Emerald, Player.CurFloor, Player.MaxFloor, GainEquipDataList);
+        }
+        else if (Input.GetKeyDown(KeyCode.L))
+        {
+            EnchantData ed = EnchantData.GetAvailableRandomEnchant();
+            if (ed != null)
+            {
+                Player.EnchantUpgrade(ed);
+                Debug.Log("Unlock Enchant:" + ed.Name + " LV:" + ed.LV);
+            }
+            else
+            {
+                Debug.Log("沒有可以獲得的附魔了");
+            }
         }
     }
 }

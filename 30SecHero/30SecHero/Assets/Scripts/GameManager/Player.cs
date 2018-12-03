@@ -159,9 +159,12 @@ public partial class Player
                 string dataStr = "";
                 for (int i = 0; i < keys.Count; i++)
                 {
-                    if (i != 0)
-                        dataStr += "/";
-                    dataStr += StrengthenDic[keys[i]].ID + "," + StrengthenDic[keys[i]].LV;
+                    if (StrengthenDic[keys[i]].LV > 0)
+                    {
+                        if (dataStr != "")
+                            dataStr += "/";
+                        dataStr += StrengthenDic[keys[i]].ID + "," + StrengthenDic[keys[i]].LV;
+                    }
                 }
                 PlayerPrefs.SetString(LocoData.Strengthen.ToString(), dataStr);
             }
@@ -183,7 +186,7 @@ public partial class Player
                     EnchantPlus[EnchantDic[keys[i]].PropertyType] = 0;
             }
         }
-        if (MyWeapon != null && MyWeapon.MyEnchant!=null)
+        if (MyWeapon != null && MyWeapon.MyEnchant != null)
             EnchantPlus[MyWeapon.MyEnchant.PropertyType] = MyWeapon.MyEnchant.GetValue();
         if (MyArmor != null && MyArmor.MyEnchant != null)
             EnchantPlus[MyArmor.MyEnchant.PropertyType] = MyArmor.MyEnchant.GetValue();
@@ -196,12 +199,9 @@ public partial class Player
     {
         //執行附魔
         GainEmerald(-_data.GetPrice());
-        if (EnchantDic.ContainsKey(_data.ID))
-        {
-            GameSettingData.EnchantPropertyOperate(EnchantPlus, EnchantDic[_data.ID].Properties, Operator.Minus);//減去原本值
-            EnchantDic[_data.ID].LVUP();
-            GameSettingData.EnchantPropertyOperate(EnchantPlus, EnchantDic[_data.ID].Properties, Operator.Plus);//加上升級後的值
-        }
+        GameSettingData.EnchantPropertyOperate(EnchantPlus, _data.Properties, Operator.Minus);//減去原本值
+        _data.LVUP();
+        GameSettingData.EnchantPropertyOperate(EnchantPlus, _data.Properties, Operator.Plus);//加上升級後的值
         //寫入資料
         if (EnchantInitDataFinish)
         {
@@ -213,9 +213,12 @@ public partial class Player
                 string dataStr = "";
                 for (int i = 0; i < keys.Count; i++)
                 {
-                    if (i != 0)
-                        dataStr += "/";
-                    dataStr += EnchantDic[keys[i]].ID + "," + EnchantDic[keys[i]].LV;
+                    if (EnchantDic[keys[i]].LV > 0)
+                    {
+                        if (dataStr != "")
+                            dataStr += "/";
+                        dataStr += EnchantDic[keys[i]].ID + "," + EnchantDic[keys[i]].LV;
+                    } 
                 }
                 PlayerPrefs.SetString(LocoData.Enchant.ToString(), dataStr);
             }
@@ -299,7 +302,7 @@ public partial class Player
             if (i != 0)
                 addEquipStr += "/";
             //Debug.Log("equipProperty="+_equipDatas[i].PropertiesStr);
-            addEquipStr += _equipDatas[i].ID + "," + (int)_equipDatas[i].Type + "," + _equipDatas[i].EquipSlot + "," + _equipDatas[i].LV + "," + _equipDatas[i].Quality + "," + _equipDatas[i].PropertiesStr + "," + ((_equipDatas[i].MyEnchant!=null)?_equipDatas[i].MyEnchant.ID:0) + "," + ID;
+            addEquipStr += _equipDatas[i].ID + "," + (int)_equipDatas[i].Type + "," + _equipDatas[i].EquipSlot + "," + _equipDatas[i].LV + "," + _equipDatas[i].Quality + "," + _equipDatas[i].PropertiesStr + "," + ((_equipDatas[i].MyEnchant != null) ? _equipDatas[i].MyEnchant.ID : 0) + "," + ID;
 
         }
         //Debug.Log("gold=" + _gold + " emerald=" + _emerald + " maxFloor=" + _maxFloor + " addEquipStr=" + addEquipStr);

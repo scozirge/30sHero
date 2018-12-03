@@ -192,4 +192,16 @@ partial class BattleManage
     {
         UnlockPartner++;
     }
+    public static void GetEnchant()
+    {
+        EnchantData ed = EnchantData.GetAvailableRandomEnchant();
+        if (ed != null)
+        {
+            Player.EnchantUpgrade(ed);
+            BM.GetEnchant_Name.text = ed.Name;
+            BM.GetEnchant_Icon.sprite = ed.GetICON();
+            BM.GetEnchant_Description.text = ed.Description(0);
+            BM.CallGetEnchantUI(true);
+        }
+    }
 }
