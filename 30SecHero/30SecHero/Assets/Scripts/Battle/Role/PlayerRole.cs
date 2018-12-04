@@ -330,8 +330,16 @@ public partial class PlayerRole : Role
     }
     void InitPlayerProperties()
     {
+        //附魔
+        for (int i = 0; i < MyEnum.GetTypeCount<EnchantProperty>(); i++)
+        {
+            MyEnchant.Add((EnchantProperty)i, 0);
+        }
         if (TestMode)
+        {
             return;
+        }
+
         MaxHealth = (int)Player.GetProperties(RoleProperty.Health);
         BaseDamage = (int)Player.GetProperties(RoleProperty.Strength);
         MaxShield = (int)Player.GetProperties(RoleProperty.Shield);
@@ -351,15 +359,12 @@ public partial class PlayerRole : Role
         PotionDrop = (float)Player.GetProperties(RoleProperty.PotionDrop);
         GainMoveFromKilling = (int)Player.GetProperties(RoleProperty.GainMoveFromKilling);
 
+
         //武器紙娃娃
         if (Player.MyWeapon != null)
             SetEquipIcon(Player.MyWeapon);
 
-        //附魔
-        for (int i = 0; i < MyEnum.GetTypeCount<EnchantProperty>(); i++)
-        {
-            MyEnchant.Add((EnchantProperty)i, Player.GetEnchantProperty((EnchantProperty)i));
-        }
+
         RushCD = (float)Player.GetProperties(RoleProperty.RushCD) - MyEnchant[EnchantProperty.RushCDResuce];
         UntochableTime *= (1 + MyEnchant[EnchantProperty.HangOn]);
         JumpCDTime *= (1 - MyEnchant[EnchantProperty.SpeedyJump]);
