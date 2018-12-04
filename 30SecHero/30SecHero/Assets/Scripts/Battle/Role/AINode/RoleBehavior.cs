@@ -158,11 +158,15 @@ public class RoleBehavior : MonoBehaviour
     void LaunchSpell(Node _node)
     {
         SpellIndex = 0;
-        StartCoroutine(WaitForSpell(_node));
+        Spell(_node);
     }
     void Spell(Node _node)
     {
-        _node.SkillList[SpellIndex].LaunchAISpell();
+        if (SpellIndex < _node.SkillList.Count)
+        {
+            if (_node.SkillList[SpellIndex] != null)
+                _node.SkillList[SpellIndex].LaunchAISpell();
+        }
         SpellIndex++;
         if (SpellIndex >= _node.SkillList.Count)
         {
