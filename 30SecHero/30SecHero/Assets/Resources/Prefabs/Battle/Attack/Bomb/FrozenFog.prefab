@@ -82,7 +82,7 @@ MonoBehaviour:
   DeadParticles: []
   HitTargetParticle: {fileID: 0}
   HitTargetSound: {fileID: 0}
-  LifeTime: 3
+  LifeTime: 1
   KnockIntensity: 0
   AmmoType: 1
   DamageInterval: 0.5
