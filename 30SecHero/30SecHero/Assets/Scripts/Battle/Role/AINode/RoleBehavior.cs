@@ -93,12 +93,12 @@ public class RoleBehavior : MonoBehaviour
                 LaunchSpell(_node);
                 break;
             case ActionType.Teleport:
-                Destination = GetRelativeDestination(_node);
-                transform.position = Destination;
                 if (Nodes[CurNodeIndex].LocoParticle != null)
                     EffectEmitter.EmitParticle(Nodes[CurNodeIndex].LocoParticle, Vector2.zero, Vector2.zero, transform);
                 if (Nodes[CurNodeIndex].WorldPartilce != null)
                     EffectEmitter.EmitParticle(Nodes[CurNodeIndex].WorldPartilce, transform.position, Vector2.zero, null);
+                Destination = GetRelativeDestination(_node);
+                transform.position = Destination;
                 CheckRandomNode();
                 break;
             case ActionType.Perform:
@@ -181,9 +181,12 @@ public class RoleBehavior : MonoBehaviour
         yield return new WaitForSeconds(_node.SpellInterval);
         Spell(_node);
     }
+    bool SkipCheckRandNode;
     void CheckRandomNode()
     {
-        if (Nodes[CurNodeIndex].ToRandomNode)
+        if (SkipCheckRandNode)
+            SkipCheckRandNode = false;
+        else if (Nodes[CurNodeIndex].ToRandomNode)
         {
             string nodeTag = Nodes[CurNodeIndex].GetNodeKeyFromWeight();
             if (nodeTag != "")
@@ -192,8 +195,11 @@ public class RoleBehavior : MonoBehaviour
                 {
                     if (Nodes[i].NodeTag == nodeTag)
                     {
-                        CurNodeIndex = i;
-                        StartCoroutine(WaitToAction(Nodes[CurNodeIndex]));
+                        if (!Nodes[CurNodeIndex].KeepNextNode)
+                            CurNodeIndex = i;
+                        else
+                            SkipCheckRandNode = true;
+                        StartCoroutine(WaitToAction(Nodes[i]));
                         return;
                     }
                 }

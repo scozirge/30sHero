@@ -235,6 +235,8 @@ public class RoleBehaviorWindowEditor : EditorWindow
                     expandRandomNodes.boolValue = EditorGUILayout.Foldout(expandRandomNodes.boolValue, "RandomNodes");
                     if (expandRandomNodes.boolValue)
                     {
+                        SerializedProperty nyKeepNextNode = myListRef.FindPropertyRelative("KeepNextNode");
+                        EditorGUILayout.PropertyField(nyKeepNextNode, new GUIContent("KeepGoNextNode"));
                         SerializedProperty goToNodes = myListRef.FindPropertyRelative("GoToNodes");
                         int randNodeDicSize = goToNodes.arraySize;
                         randNodeDicSize = EditorGUILayout.IntField("RandomNodesCount", randNodeDicSize);

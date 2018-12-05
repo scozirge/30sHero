@@ -68,6 +68,8 @@ public class Node
     [Tooltip("是否開啟隨機動作事件，可以依造權重跳轉至隨機的動作標籤")]
     [SerializeField]
     public bool ToRandomNode;
+    [Tooltip("執行隨機動作事件後，是否繼續執行當前動作順序")]
+    public bool KeepNextNode;
     public enum RushDirect { Custom, Player };
 
 
