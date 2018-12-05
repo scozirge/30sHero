@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 58933309655901766}
   - component: {fileID: 111644423042396050}
   m_Layer: 11
-  m_Name: Shock Wave
+  m_Name: Knock Wave
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -91,17 +91,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LocalParticles: []
   GlobalParticle: []
+  LocalAttackerParticles: []
   DeadParticles: []
   HitTargetParticle: {fileID: 198308960938074910, guid: 6ebb3848cff528744a0ce66822bd1588,
     type: 3}
   HitTargetSound: {fileID: 0}
   LifeTime: 1
-  KnockIntensity: 3000
+  KnockIntensity: 6000
   AmmoType: 1
   DamageInterval: 1
   Buffers:
   - Type: 0
-    Time: 1
+    Time: 0.3
     Value: 0
   TriggerOnRushRole: 1
   Value: 0
@@ -121,7 +122,7 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.8, y: -0.57}
   serializedVersion: 2
   m_Radius: 36.81
 --- !u!111 &111644423042396050
