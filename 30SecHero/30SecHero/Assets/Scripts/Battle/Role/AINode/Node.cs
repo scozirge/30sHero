@@ -28,14 +28,11 @@ public class Node
     [SerializeField]
     public string NodeTag;
     public bool ExpandRandomNodes = true;
-    [Tooltip("是否開啟隨機動作事件，可以依造權重跳轉至隨機的動作標籤")]
-    [SerializeField]
-    public bool ToRandomNode;
-    public List<KeyWeight> GoToNodes = new List<KeyWeight>();
+
     [Tooltip("多個技能施放的間隔")]
     [SerializeField]
     public float SpellInterval = 0.5f;
-    public List<Skill> SkillList = new List<Skill>();
+
 
     [Tooltip("動作類型")]
     [SerializeField]
@@ -52,15 +49,10 @@ public class Node
     [Tooltip("填攝影機Animation Trigger名稱(沒用到就不用填)")]
     [SerializeField]
     public string CamAniTriggerName;
-    [Tooltip("音效清單")]
-    [SerializeField]
-    public List<AudioClip> SoundList;
+
     [Tooltip("註解")]
     [SerializeField]
     public string Description;
-    [Tooltip("召喚怪物")]
-    [SerializeField]
-    public List<SpawnEnemyData> SpawnEnemyList;
     [Tooltip("召喚間隔秒數")]
     [SerializeField]
     public float SpawnIntervalTime;
@@ -73,11 +65,29 @@ public class Node
     [Tooltip("衝刺力道")]
     [SerializeField]
     public float RushForce2;
-
+    [Tooltip("是否開啟隨機動作事件，可以依造權重跳轉至隨機的動作標籤")]
+    [SerializeField]
+    public bool ToRandomNode;
     public enum RushDirect { Custom, Player };
+
+
+    //以下需深複製
+    public List<KeyWeight> GoToNodes = new List<KeyWeight>();
+    public List<Skill> SkillList = new List<Skill>();
+    [Tooltip("召喚怪物")]
+    [SerializeField]
+    public List<SpawnEnemyData> SpawnEnemyList;
+    [Tooltip("音效清單")]
+    [SerializeField]
+    public List<AudioClip> SoundList;
+
     public Node GetMemberwiseClone()
     {
         Node data = this.MemberwiseClone() as Node;
+        data.GoToNodes = new List<KeyWeight>(this.GoToNodes);
+        data.SkillList = new List<Skill>(this.SkillList);
+        SpawnEnemyList = new List<SpawnEnemyData>(this.SpawnEnemyList);
+        SoundList = new List<AudioClip>(this.SoundList);
         return data;
     }
     public string GetNodeKeyFromWeight()

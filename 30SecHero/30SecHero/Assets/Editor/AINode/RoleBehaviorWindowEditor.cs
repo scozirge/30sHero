@@ -281,17 +281,23 @@ public class RoleBehaviorWindowEditor : EditorWindow
     }
     void RemoveNode(ReorderableList _list)
     {
+        ReorderableList.defaultBehaviours.DoRemoveButton(_list);
+        /*
         if (EditorUtility.DisplayDialog("Remove Node", "Are you sure to remove this node?", "yes", "noooo!"))
         {
-            ReorderableList.defaultBehaviours.DoRemoveButton(_list);
+            
         }
+        */
     }
     void RemoveNode(Node _node)
     {
+        MyRoleBehavior.Nodes.Remove(_node);
+        /*
         if (EditorUtility.DisplayDialog("Remove Node", "Are you sure to remove this node?", "yes", "noooo!"))
         {
-            MyRoleBehavior.Nodes.Remove(_node);
+
         }
+        */
     }
     void Duplicate(Node _node)
     {
