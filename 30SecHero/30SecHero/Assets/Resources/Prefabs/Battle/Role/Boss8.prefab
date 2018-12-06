@@ -529,7 +529,7 @@ MonoBehaviour:
     ActiveOnlyByEvent: 0
     NodeTag: 
     ExpandRandomNodes: 0
-    SpellInterval: 2
+    SpellInterval: 3
     Type: 1
     LocoParticle: {fileID: 4170924274321524025, guid: 9332440e9265fbc45b0362de5ab4fa62,
       type: 3}

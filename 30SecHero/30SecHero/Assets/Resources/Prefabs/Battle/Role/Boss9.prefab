@@ -234,7 +234,7 @@ MonoBehaviour:
     KeepNextNode: 0
     GoToNodes: []
     SkillList:
-    - {fileID: 974920269, guid: 03a7311ba3bb9164589ddc61692f368f, type: 3}
+    - {fileID: 0}
     SpawnEnemyList: []
     SoundList: []
   - WaitSecond: 2
@@ -723,7 +723,7 @@ MonoBehaviour:
   Interval: 0
   AmmoNum: 35
   AmmoInterval: 0.2
-  StartAngle: -30
+  StartAngle: -40
   AngleInterval: 0
   RandomAngle: 0
   Patetern: 3
@@ -760,7 +760,7 @@ MonoBehaviour:
   Interval: 0
   AmmoNum: 35
   AmmoInterval: 0.2
-  StartAngle: 30
+  StartAngle: 40
   AngleInterval: 0
   RandomAngle: 0
   Patetern: 3
