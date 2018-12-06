@@ -206,6 +206,7 @@ public class Attack : Skill
         IsPreAttack = false;
         InRange = false;
         Timer = CurInterval;
+        AmmoIntervalTimer = AmmoInterval;
         CurSpawnAmmoNum = 0;
         Myself.EndPreAttack();
         if (AmmoInterval > 0)//如果子彈間隔時間大於0用計時器去各別創造子彈
