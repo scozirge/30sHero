@@ -151,6 +151,24 @@ public class RoleBehavior : MonoBehaviour
             case RelativeTo.Camera:
                 pos = (Vector2)BattleManage.MyCameraControler.transform.position + _node.Destination;
                 break;
+            case RelativeTo.TrackPlayer:
+                if (_node.MaxProcessingTime <= 0)
+                {
+                    _node.MaxProcessingTime = 1;
+                    Debug.Log("移動模式為TrackPlayer時，MaxProcessingTime不可設定為0");
+                }
+                if (BattleManage.BM.MyPlayer)
+                    pos = (Vector2)BattleManage.BM.MyPlayer.transform.position + _node.Destination;
+                break;
+            case RelativeTo.TrackCamera:
+                if (_node.MaxProcessingTime <= 0)
+                {
+                    _node.MaxProcessingTime = 1;
+                    Debug.Log("移動模式為TrackCamera時，MaxProcessingTime不可設定為0");
+                }
+                pos = (Vector2)BattleManage.MyCameraControler.transform.position + _node.Destination;
+                break;
+
         }
         return pos;
     }
@@ -232,7 +250,9 @@ public class RoleBehavior : MonoBehaviour
         if (Nodes.Count <= 0)
             return;
         if (Nodes[CurNodeIndex].RelativeToTarget == RelativeTo.PlayerRole_Continued ||
-            Nodes[CurNodeIndex].RelativeToTarget == RelativeTo.Camera_Continued)
+            Nodes[CurNodeIndex].RelativeToTarget == RelativeTo.Camera_Continued ||
+        Nodes[CurNodeIndex].RelativeToTarget == RelativeTo.TrackCamera ||
+            Nodes[CurNodeIndex].RelativeToTarget == RelativeTo.TrackPlayer)
         {
             MoveTo(GetRelativeDestination(Nodes[CurNodeIndex]), Nodes[CurNodeIndex].MoveSpeed);
         }
@@ -244,20 +264,26 @@ public class RoleBehavior : MonoBehaviour
     {
         if (!StartMove)
             return;
-        float moveSpeed = _moveSpeed * (1 + (MyRole.BuffersExist(RoleBuffer.Freeze) ?
-                -GameSettingData.FreezeMove : 0));
-        Vector2 targetVel = (_pos - (Vector2)transform.position).normalized * moveSpeed;
-        MyRigid.velocity = Vector2.Lerp(MyRigid.velocity, targetVel, 0.1f);
         if (Vector2.Distance(transform.position, _pos) < 10)
         {
-            if (MyAIRoleMove)
-                MyAIRoleMove.SetHereToDestination();
-            transform.position = _pos;
-            MyRigid.velocity = Vector2.zero;
-            StartMove = false;
-            if (ForceStopCoroutine != null)
-                StopCoroutine(ForceStopCoroutine);
-            CheckRandomNode();
+            if (Nodes[CurNodeIndex].RelativeToTarget != RelativeTo.TrackCamera && Nodes[CurNodeIndex].RelativeToTarget != RelativeTo.TrackPlayer)
+            {
+                if (MyAIRoleMove)
+                    MyAIRoleMove.SetHereToDestination();
+                transform.position = _pos;
+                MyRigid.velocity = Vector2.zero;
+                StartMove = false;
+                if (ForceStopCoroutine != null)
+                    StopCoroutine(ForceStopCoroutine);
+                CheckRandomNode();
+            }
+        }
+        else
+        {
+            float moveSpeed = _moveSpeed * (1 + (MyRole.BuffersExist(RoleBuffer.Freeze) ?
+        -GameSettingData.FreezeMove : 0));
+            Vector2 targetVel = (_pos - (Vector2)transform.position).normalized * moveSpeed;
+            MyRigid.velocity = Vector2.Lerp(MyRigid.velocity, targetVel, 0.1f);
         }
     }
     IEnumerator WaitToAction(Node _node)
@@ -273,8 +299,13 @@ public class RoleBehavior : MonoBehaviour
     IEnumerator ForceDoNextAction(float _time)
     {
         yield return new WaitForSeconds(_time);
-        if (MyAIRoleMove)
-            MyAIRoleMove.SetHereToDestination();
+        if (Nodes[CurNodeIndex].Type == ActionType.Move)
+        {
+            MyRigid.velocity = Vector2.zero;
+            StartMove = false;
+            if (MyAIRoleMove)
+                MyAIRoleMove.SetHereToDestination();
+        }
         CheckRandomNode();
     }
 

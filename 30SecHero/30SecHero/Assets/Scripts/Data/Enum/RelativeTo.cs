@@ -5,5 +5,7 @@
     PlayerRole,
     PlayerRole_Continued,
     Camera,
-    Camera_Continued
+    Camera_Continued,
+    TrackPlayer,
+    TrackCamera
 }
