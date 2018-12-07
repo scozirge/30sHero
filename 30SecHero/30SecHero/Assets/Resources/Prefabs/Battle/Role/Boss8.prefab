@@ -340,8 +340,8 @@ MonoBehaviour:
     SoundList: []
   - WaitSecond: 1.5
     MaxProcessingTime: 2
-    RelativeToTarget: 2
-    Destination: {x: 0, y: 400}
+    RelativeToTarget: 4
+    Destination: {x: 0, y: 550}
     ExpandFolder: 1
     MoveSpeed: 1200
     ActiveOnlyByEvent: 0
@@ -431,8 +431,8 @@ MonoBehaviour:
     SoundList: []
   - WaitSecond: 0
     MaxProcessingTime: 5
-    RelativeToTarget: 6
-    Destination: {x: 0, y: 400}
+    RelativeToTarget: 7
+    Destination: {x: 0, y: 550}
     ExpandFolder: 1
     MoveSpeed: 1200
     ActiveOnlyByEvent: 0
@@ -622,7 +622,7 @@ MonoBehaviour:
   DropSkillProbility: 0.2
   DropSkill: {fileID: 0}
   HealthObj: {fileID: 8544255361026079648}
-  PlayMotionDuration: 0.5
+  PlayMotionDuration: 1
   InitBuffers: []
   KillAvatarTime: 30
   Type: 1

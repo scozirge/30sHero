@@ -146,7 +146,7 @@ MonoBehaviour:
   Nodes:
   - WaitSecond: 1
     MaxProcessingTime: 2
-    RelativeToTarget: 5
+    RelativeToTarget: 4
     Destination: {x: 800, y: 600}
     ExpandFolder: 1
     MoveSpeed: 800
@@ -656,7 +656,7 @@ MonoBehaviour:
   DropSkillProbility: 0.2
   DropSkill: {fileID: 0}
   HealthObj: {fileID: 8544255361026079648}
-  PlayMotionDuration: 0.5
+  PlayMotionDuration: 1
   InitBuffers: []
   KillAvatarTime: 30
   Type: 1
@@ -907,7 +907,7 @@ MonoBehaviour:
   PrepareParticle: []
   AttackPrefab: {fileID: 114836237506999114, guid: 56b2f6b10c96f894797a1573261512af,
     type: 3}
-  PrepareTime: 0.2
+  PrepareTime: 2
 --- !u!1 &8543528110529840288
 GameObject:
   m_ObjectHideFlags: 0

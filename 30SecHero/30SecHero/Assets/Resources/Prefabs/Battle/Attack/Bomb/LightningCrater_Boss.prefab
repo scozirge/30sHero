@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 58810803581975730}
   - component: {fileID: 114836237506999114}
   m_Layer: 11
-  m_Name: FrozenFog
+  m_Name: LightningCrater_Boss
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -27,7 +27,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1566857461941104}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -90}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -35,7 +35,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 548, y: 0}
   m_SizeDelta: {x: 500, y: 500}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &222441390583901092
@@ -74,21 +74,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c4d461c796feba4ea6762325f5d39f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LocalParticles:
-  - {fileID: 8504683837739179068, guid: 00d6b44ec2b27a54ca0159fd09d2b9c1, type: 3}
+  LocalParticles: []
   GlobalParticle:
-  - {fileID: 0}
+  - {fileID: 19885512, guid: 8a789f8043035f3468d2eba6948e7fa2, type: 3}
   LocalAttackerParticles: []
   DeadParticles: []
   HitTargetParticle: {fileID: 0}
   HitTargetSound: {fileID: 0}
-  LifeTime: 2
-  KnockIntensity: 0
+  LifeTime: 0.2
+  KnockIntensity: 2000
   AmmoType: 1
-  DamageInterval: 0.5
+  DamageInterval: 0
   Buffers:
-  - Type: 2
-    Time: 2
+  - Type: 0
+    Time: 0.5
     Value: 0
   TriggerOnRushRole: 1
   Value: 0

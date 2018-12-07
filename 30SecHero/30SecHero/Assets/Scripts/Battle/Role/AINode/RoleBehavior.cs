@@ -152,7 +152,7 @@ public class RoleBehavior : MonoBehaviour
                 pos = (Vector2)BattleManage.MyCameraControler.transform.position + _node.Destination;
                 break;
             case RelativeTo.TrackPlayer:
-                if (_node.MaxProcessingTime <= 0)
+                if (_node.Type==ActionType.Move && _node.MaxProcessingTime <= 0)
                 {
                     _node.MaxProcessingTime = 1;
                     Debug.Log("移動模式為TrackPlayer時，MaxProcessingTime不可設定為0");
@@ -161,7 +161,7 @@ public class RoleBehavior : MonoBehaviour
                     pos = (Vector2)BattleManage.BM.MyPlayer.transform.position + _node.Destination;
                 break;
             case RelativeTo.TrackCamera:
-                if (_node.MaxProcessingTime <= 0)
+                if (_node.Type == ActionType.Move && _node.MaxProcessingTime <= 0)
                 {
                     _node.MaxProcessingTime = 1;
                     Debug.Log("移動模式為TrackCamera時，MaxProcessingTime不可設定為0");
@@ -316,6 +316,8 @@ public class RoleBehavior : MonoBehaviour
     }
     void SpanwEnemy(Node _node)
     {
+        if (!BattleManage.BM.MyPlayer)
+            return;
         if (ReachMaxSpawnCount())
         {
             CheckRandomNode();
