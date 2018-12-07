@@ -123,7 +123,7 @@ public class ShootAmmo : Ammo
     }
     protected override void Update()
     {
-        base.Update();
+        base.Update();        
         if (TraceFactor > 0 && Target)
         {
             Vector2 targetVel = (Target.transform.position - transform.position).normalized * AmmoSpeed;

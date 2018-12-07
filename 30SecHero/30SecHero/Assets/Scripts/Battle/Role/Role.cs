@@ -96,6 +96,28 @@ public abstract class Role : MonoBehaviour
     Dictionary<RoleBuffer, ParticleSystem> BufferParticles = new Dictionary<RoleBuffer, ParticleSystem>();
     protected List<Skill> ActiveMonsterSkills = new List<Skill>();
     public int ActiveMonsterSkillCount { get { return ActiveMonsterSkills.Count; } }
+    ParticleSystem[] MyParticles;
+
+    protected Vector3 SaveVelocity;
+
+    protected virtual void OnDisable()
+    {
+        if (MyRigi != null)
+            SaveVelocity = MyRigi.velocity;
+        MyParticles = GetComponentsInChildren<ParticleSystem>();
+    }
+    protected virtual void OnEnable()
+    {
+        if (MyRigi != null)
+            MyRigi.velocity = SaveVelocity;
+        if (MyParticles != null && MyParticles.Length > 0)
+        {
+            for (int i = 0; i < MyParticles.Length; i++)
+            {
+                MyParticles[i].Play();
+            }
+        }
+    }
 
     protected virtual void Start()
     {
@@ -254,19 +276,6 @@ public abstract class Role : MonoBehaviour
             {
                 RemoveBuffer(Buffers[keyList[i]]);
             }
-        }
-    }
-    void OnEnable()
-    {
-        RePlayAllBufferParticle();
-    }
-    void RePlayAllBufferParticle()
-    {
-        List<RoleBuffer> keys = new List<RoleBuffer>(BufferParticles.Keys);
-        for (int i = 0; i < keys.Count; i++)
-        {
-            if (BufferParticles[keys[i]])
-                BufferParticles[keys[i]].Play();
         }
     }
     public virtual void RemoveBuffer(BufferData _buffer)

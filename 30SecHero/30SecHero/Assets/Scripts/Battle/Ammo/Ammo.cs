@@ -61,6 +61,27 @@ public partial class Ammo : MonoBehaviour
     protected Dictionary<string, bool> ReadyToDamageTargets;
     public bool IsPlayerGetSkill;
     protected float VampireProportion;
+    protected Vector3 SaveVelocity;
+    ParticleSystem[] MyParticles;
+
+    protected virtual void OnDisable()
+    {
+        if (MyRigi != null)
+            SaveVelocity = MyRigi.velocity;
+        MyParticles = GetComponentsInChildren<ParticleSystem>();
+    }
+    protected virtual void OnEnable()
+    {
+        if (MyRigi != null)
+            MyRigi.velocity = SaveVelocity;
+        if (MyParticles != null && MyParticles.Length > 0)
+        {
+            for (int i = 0; i < MyParticles.Length; i++)
+            {
+                MyParticles[i].Play();
+            }
+        }
+    }
 
     public virtual void TriggerHitCondition(Role _role)
     {
@@ -152,7 +173,7 @@ public partial class Ammo : MonoBehaviour
                 continue;
             EffectEmitter.EmitParticle(GlobalParticle[i], transform.position, Vector3.zero, ParticleParent);
         }
-        if(Attacker)
+        if (Attacker)
         {
             for (int i = 0; i < LocalAttackerParticles.Length; i++)
             {
@@ -161,7 +182,6 @@ public partial class Ammo : MonoBehaviour
                 EffectEmitter.EmitParticle(LocalAttackerParticles[i], Vector3.zero, Vector3.zero, Attacker.transform);
             }
         }
-
     }
     protected virtual void SpawnDeadParticles(Vector2 _pos)
     {
