@@ -1170,12 +1170,12 @@ MonoBehaviour:
   IsPlayerGetSkill: 0
   AttackOnce: 0
   Interval: 0
-  AmmoNum: 5
-  AmmoInterval: 2
+  AmmoNum: 4
+  AmmoInterval: 3
   StartAngle: 0
   AngleInterval: 0
-  RandomAngle: 1
-  Patetern: 0
+  RandomAngle: 0
+  Patetern: 1
   FirstAttackNoWait: 0
   AttackPrefab: {fileID: 114962956101920240, guid: 764d9b4a6227801439c2df1cb4a677b2,
     type: 3}

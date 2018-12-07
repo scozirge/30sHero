@@ -27,6 +27,7 @@ public partial class EnemyRole : Role
     PlayerRole Target;
     Sprite[] MotionSprite = new Sprite[2];
     Image RoleImg;
+    SpriteRenderer RoleSR;
     MyTimer MotionTimer;
     MyTimer LifeTimer;
     public int StemFromFloor;
@@ -83,6 +84,7 @@ public partial class EnemyRole : Role
     void InitMotionPic()
     {
         RoleImg = transform.Find("Role/body").GetComponent<Image>();
+        RoleSR = transform.Find("Role/body").GetComponent<SpriteRenderer>();
         if (RoleImg != null)
         {
             string folderName = RoleImg.sprite.name.TrimEnd("_r".ToCharArray());
@@ -94,25 +96,46 @@ public partial class EnemyRole : Role
             MotionTimer = new MyTimer(PlayMotionDuration, ToReadyMotion, false, false);
             ToReadyMotion();
         }
+        if (RoleSR != null)
+        {
+            string folderName = RoleSR.sprite.name.TrimEnd("_r".ToCharArray());
+            folderName = folderName.TrimEnd("_a".ToCharArray());
+            string rPicName = folderName + "_r";
+            string aPicName = folderName + "_a";
+            MotionSprite[0] = Resources.Load<Sprite>(string.Format("Images/Role/{0}/{1}", folderName, rPicName));
+            MotionSprite[1] = Resources.Load<Sprite>(string.Format("Images/Role/{0}/{1}", folderName, aPicName));
+            MotionTimer = new MyTimer(PlayMotionDuration, ToReadyMotion, false, false);
+            ToReadyMotion();
+        }
     }
     void ToReadyMotion()
     {
-        if (RoleImg == null)
-            return;
         if (MotionSprite[0] == null)
             return;
-        RoleImg.sprite = MotionSprite[0];
+        if (RoleImg != null)
+        {
+            RoleImg.sprite = MotionSprite[0];
+        }
+        if (RoleSR != null)
+        {
+            RoleSR.sprite = MotionSprite[0];
+        }
         if (IsPreAttack)
             PreAttack();
     }
     void ToAttackMotion()
     {
         MotionTimer.StartRunTimer = true;
-        if (RoleImg == null)
-            return;
         if (MotionSprite[1] == null)
             return;
-        RoleImg.sprite = MotionSprite[1];
+        if (RoleImg != null)
+        {
+            RoleImg.sprite = MotionSprite[1];
+        }
+        if (RoleSR != null)
+        {
+            RoleSR.sprite = MotionSprite[1];
+        }
     }
     void SetEnemyDirection()
     {
