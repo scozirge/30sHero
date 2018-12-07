@@ -713,7 +713,7 @@ MonoBehaviour:
   DropSkillProbility: 0.2
   DropSkill: {fileID: 0}
   HealthObj: {fileID: 6141787278161278624}
-  PlayMotionDuration: 0.5
+  PlayMotionDuration: 1
   InitBuffers: []
   KillAvatarTime: 30
   Type: 1

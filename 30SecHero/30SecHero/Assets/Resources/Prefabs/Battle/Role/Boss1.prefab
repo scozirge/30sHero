@@ -459,6 +459,7 @@ MonoBehaviour:
     RushForce: {x: 0, y: 0}
     RushForce2: 0
     ToRandomNode: 0
+    KeepNextNode: 0
     GoToNodes: []
     SkillList:
     - {fileID: 6102214645639666654}
@@ -505,6 +506,7 @@ MonoBehaviour:
     RushForce: {x: 0, y: 0}
     RushForce2: 0
     ToRandomNode: 0
+    KeepNextNode: 0
     GoToNodes: []
     SkillList: []
     SpawnEnemyList: []
@@ -530,6 +532,7 @@ MonoBehaviour:
     RushForce: {x: 0, y: 0}
     RushForce2: 0
     ToRandomNode: 0
+    KeepNextNode: 0
     GoToNodes: []
     SkillList:
     - {fileID: 2825102133774636140}
@@ -574,6 +577,7 @@ MonoBehaviour:
     RushForce: {x: 0, y: 0}
     RushForce2: 0
     ToRandomNode: 0
+    KeepNextNode: 0
     GoToNodes: []
     SkillList: []
     SpawnEnemyList: []
@@ -599,6 +603,7 @@ MonoBehaviour:
     RushForce: {x: 0, y: 0}
     RushForce2: 0
     ToRandomNode: 0
+    KeepNextNode: 0
     GoToNodes: []
     SkillList:
     - {fileID: 6102214645639666654}
@@ -645,6 +650,7 @@ MonoBehaviour:
     RushForce: {x: 0, y: 0}
     RushForce2: 0
     ToRandomNode: 0
+    KeepNextNode: 0
     GoToNodes: []
     SkillList: []
     SpawnEnemyList: []
@@ -670,6 +676,7 @@ MonoBehaviour:
     RushForce: {x: 0, y: 0}
     RushForce2: 0
     ToRandomNode: 0
+    KeepNextNode: 0
     GoToNodes: []
     SkillList:
     - {fileID: 2825102133774636140}
@@ -714,6 +721,7 @@ MonoBehaviour:
     RushForce: {x: 0, y: 0}
     RushForce2: 0
     ToRandomNode: 0
+    KeepNextNode: 0
     GoToNodes: []
     SkillList: []
     SpawnEnemyList: []
@@ -739,6 +747,7 @@ MonoBehaviour:
     RushForce: {x: 0, y: 0}
     RushForce2: 0
     ToRandomNode: 0
+    KeepNextNode: 0
     GoToNodes: []
     SkillList:
     - {fileID: 6102214645639666654}
@@ -785,6 +794,7 @@ MonoBehaviour:
     RushForce: {x: 0, y: 0}
     RushForce2: 0
     ToRandomNode: 0
+    KeepNextNode: 0
     GoToNodes: []
     SkillList:
     - {fileID: 2825102133774636140}
@@ -829,6 +839,7 @@ MonoBehaviour:
     RushForce: {x: 0, y: 0}
     RushForce2: 0
     ToRandomNode: 0
+    KeepNextNode: 0
     GoToNodes: []
     SkillList:
     - {fileID: 2825102133774636140}
@@ -873,6 +884,7 @@ MonoBehaviour:
     RushForce: {x: 0, y: 0}
     RushForce2: 0
     ToRandomNode: 0
+    KeepNextNode: 0
     GoToNodes: []
     SkillList: []
     SpawnEnemyList: []
@@ -898,6 +910,7 @@ MonoBehaviour:
     RushForce: {x: 0, y: 0}
     RushForce2: 0
     ToRandomNode: 0
+    KeepNextNode: 0
     GoToNodes: []
     SkillList:
     - {fileID: 6102214645639666654}
@@ -944,6 +957,7 @@ MonoBehaviour:
     RushForce: {x: 0, y: 0}
     RushForce2: 0
     ToRandomNode: 0
+    KeepNextNode: 0
     GoToNodes: []
     SkillList: []
     SpawnEnemyList: []
@@ -969,6 +983,7 @@ MonoBehaviour:
     RushForce: {x: 0, y: 0}
     RushForce2: 0
     ToRandomNode: 0
+    KeepNextNode: 0
     GoToNodes: []
     SkillList:
     - {fileID: 2825102133774636140}
@@ -1013,6 +1028,7 @@ MonoBehaviour:
     RushForce: {x: 0, y: 0}
     RushForce2: 0
     ToRandomNode: 0
+    KeepNextNode: 0
     GoToNodes: []
     SkillList: []
     SpawnEnemyList: []
@@ -1056,7 +1072,7 @@ MonoBehaviour:
   DropSkillProbility: 0.2
   DropSkill: {fileID: 0}
   HealthObj: {fileID: 6141787278161278624}
-  PlayMotionDuration: 0.5
+  PlayMotionDuration: 1
   InitBuffers: []
   KillAvatarTime: 30
   Type: 1
