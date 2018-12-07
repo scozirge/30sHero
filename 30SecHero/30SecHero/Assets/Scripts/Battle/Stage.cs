@@ -48,7 +48,10 @@ public partial class BattleManage
         FGList = new List<ForeGround>();
         UpdateCurPlate();
         //建立門
-        SpawnGate(Floor - 1);
+        if (Floor <= 1)
+            SpawnGate(Floor - 1);
+        else
+            SpawnGate(Floor - 2);
         SpawnGate(Floor);
         //建立地形
         SpawnStage(new Vector2(BM.PlateSizeX, 0), BM.FloorPlate - 2, Floor);//目前層的地形

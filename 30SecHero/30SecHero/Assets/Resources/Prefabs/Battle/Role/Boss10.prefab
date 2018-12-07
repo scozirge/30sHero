@@ -1170,7 +1170,7 @@ MonoBehaviour:
   IsPlayerGetSkill: 0
   AttackOnce: 0
   Interval: 0
-  AmmoNum: 4
+  AmmoNum: 3
   AmmoInterval: 3
   StartAngle: 0
   AngleInterval: 0
