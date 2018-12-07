@@ -53,6 +53,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LocalParticles: []
   GlobalParticle: []
+  LocalAttackerParticles: []
   DeadParticles:
   - {fileID: 198809433350172102, guid: ab4a4457b56853b4fbf8fb746a73af84, type: 3}
   HitTargetParticle: {fileID: 0}
@@ -67,7 +68,6 @@ MonoBehaviour:
   IsPlayerGetSkill: 0
   AmmoSpeed: 3000
   TraceFactor: 0
-  TriggerWall: 1
 --- !u!222 &222836414818298276
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -89,7 +89,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.4191088, g: 0.5471698, b: 0, a: 1}
+  m_Color: {r: 0.5178405, g: 0.6792453, b: 0, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
