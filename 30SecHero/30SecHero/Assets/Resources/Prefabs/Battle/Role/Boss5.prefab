@@ -653,6 +653,38 @@ MonoBehaviour:
     SpawnEnemyList: []
     SoundList: []
   - WaitSecond: 0
+    MaxProcessingTime: 0.3
+    RelativeToTarget: 3
+    Destination: {x: 0, y: 0}
+    ExpandFolder: 1
+    MoveSpeed: 2000
+    ActiveOnlyByEvent: 0
+    NodeTag: 
+    ExpandRandomNodes: 1
+    SpellInterval: 0.5
+    Type: 0
+    LocoParticle: {fileID: 198483874879450868, guid: 47b80cde33f5871459e1f248d7e12920,
+      type: 3}
+    WorldPartilce: {fileID: 0}
+    RoleAniTriggerName: 
+    CamAniTriggerName: 
+    Description: "\u671D\u73A9\u5BB6\u4F4D\u7F6E\u79FB\u52D5"
+    SpawnIntervalTime: 0
+    MyRushDirect: 1
+    RushForce: {x: 0, y: 0}
+    RushForce2: 100000
+    ToRandomNode: 0
+    KeepNextNode: 0
+    GoToNodes: []
+    SkillList: []
+    SpawnEnemyList:
+    - Enemy: {fileID: 0}
+      SpawnPosRelateTo: 0
+      SpawnPosition: {x: 0, y: 350}
+      LifeTime: 0
+      ExpandFolder: 1
+    SoundList: []
+  - WaitSecond: 0
     MaxProcessingTime: 1
     RelativeToTarget: 5
     Destination: {x: 0, y: 350}
