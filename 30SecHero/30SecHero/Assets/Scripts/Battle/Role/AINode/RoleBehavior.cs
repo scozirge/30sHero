@@ -83,9 +83,12 @@ public class RoleBehavior : MonoBehaviour
                     MyRole.Rush(_node.RushForce);
                 else
                 {
-                    Vector2 dir = ((Vector2)BattleManage.BM.MyPlayer.transform.position - (Vector2)transform.position).normalized;
-                    Vector2 force = dir * _node.RushForce2;
-                    MyRole.Rush(force);
+                    if(BattleManage.BM.MyPlayer)
+                    {
+                        Vector2 dir = ((Vector2)BattleManage.BM.MyPlayer.transform.position - (Vector2)transform.position).normalized;
+                        Vector2 force = dir * _node.RushForce2;
+                        MyRole.Rush(force);
+                    }
                 }
                 CheckRandomNode();
                 break;

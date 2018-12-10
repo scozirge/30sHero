@@ -107,6 +107,23 @@ public partial class EnemyRole : Role
             MotionTimer = new MyTimer(PlayMotionDuration, ToReadyMotion, false, false);
             ToReadyMotion();
         }
+        /*
+if (RoleAni)
+{
+AnimatorOverrideController aoc = new AnimatorOverrideController(RoleAni.runtimeAnimatorController);
+var anims = new List<KeyValuePair<AnimationClip, AnimationClip>>();
+
+foreach (var a in aoc.animationClips)
+{
+    if(a.)
+}
+ 
+    //anims.Add(new KeyValuePair<AnimationClip, AnimationClip>(a, anim));
+//aoc.ApplyOverrides(anims);
+RoleAni.runtimeAnimatorController = aoc;
+
+}
+         *                       */
     }
     void ToReadyMotion()
     {
