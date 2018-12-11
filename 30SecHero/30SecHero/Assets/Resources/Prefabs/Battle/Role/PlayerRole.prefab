@@ -175,7 +175,7 @@ MonoBehaviour:
   HealthBar: {fileID: 0}
   DirectX: 0
   DirectY: 0
-  MaxHealth: 1
+  MaxHealth: 1000
   BaseDamage: 1
   BaseMoveSpeed: 1000
   DeathEffect: {fileID: 198802542160044040, guid: a6f36c56ed46b58408125e947b5ac7db,
@@ -205,7 +205,7 @@ MonoBehaviour:
   GainMoveFromKilling: 150
   MoveDepletedTime: 10
   MaxExtraMove: 500
-  MaxAvaterTime: 5
+  MaxAvaterTime: 999
   AvatarTimerText: {fileID: 0}
   UntochableTime: 2
   AvatarPotionBuff: 0

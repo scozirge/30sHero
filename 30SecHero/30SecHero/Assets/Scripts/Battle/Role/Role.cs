@@ -129,6 +129,8 @@ public abstract class Role : MonoBehaviour
         MyForce = MyEnum.ParseEnum<Force>(gameObject.tag);
         DragTimer = new MyTimer(KnockDragDuration, DragRecovery, false, false);
         MyRigi = GetComponent<Rigidbody2D>();
+        if (RoleAni == null)
+            RoleAni = GetComponent<Animator>();
         Skill[] coms = GetComponents<Skill>();
         //ActiveMonsterSkills = coms.ToList<Skill>();
         //ActiveMonsterSkills.RemoveAll(item => item.BehaviorSkill == true);
@@ -317,7 +319,7 @@ public abstract class Role : MonoBehaviour
         return false;
     }
     public bool BuffersExistExcept(RoleBuffer _except, params RoleBuffer[] _buffs)
-    {        
+    {
         for (int i = 0; i < _buffs.Length; i++)
         {
             if (_buffs[i] == _except)
@@ -353,10 +355,11 @@ public abstract class Role : MonoBehaviour
                 }
                 break;
             case RoleBuffer.Untouch:
-                if (_add)
-                    RoleAni.Play("Untouchable", RoleAni.GetLayerIndex("Buffer"), 0);
-                else
-                    RoleAni.Play("Normal", RoleAni.GetLayerIndex("Buffer"), 0);
+                if (RoleAni != null)
+                    if (_add)
+                        RoleAni.Play("Untouchable", RoleAni.GetLayerIndex("Buffer"), 0);
+                    else
+                        RoleAni.Play("Normal", RoleAni.GetLayerIndex("Buffer"), 0);
                 break;
         }
     }

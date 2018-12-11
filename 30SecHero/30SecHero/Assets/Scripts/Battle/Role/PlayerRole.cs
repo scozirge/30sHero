@@ -296,7 +296,6 @@ public partial class PlayerRole : Role
     protected override void OnEnable()
     {
         base.OnEnable();
-        Debug.Log("IsAvatar=" + IsAvatar);
         if (IsAvatar)
             AniPlayer.PlayTrigger("Idle1", 0);
         else

@@ -85,7 +85,7 @@ public partial class EnemyRole : Role
     {
         RoleImg = transform.Find("Role/body").GetComponent<Image>();
         RoleSR = transform.Find("Role/body").GetComponent<SpriteRenderer>();
-        if (RoleImg != null)
+        if (RoleImg != null)//Image版本
         {
             string folderName = RoleImg.sprite.name.TrimEnd("_r".ToCharArray());
             folderName = folderName.TrimEnd("_a".ToCharArray());
@@ -96,34 +96,29 @@ public partial class EnemyRole : Role
             MotionTimer = new MyTimer(PlayMotionDuration, ToReadyMotion, false, false);
             ToReadyMotion();
         }
-        if (RoleSR != null)
+        if (RoleSR != null)//SpriteRenderer版本
         {
-            string folderName = RoleSR.sprite.name.TrimEnd("_r".ToCharArray());
+            string folderName = RoleSR.sprite.name;
+            folderName = folderName.TrimEnd("_r".ToCharArray());
             folderName = folderName.TrimEnd("_a".ToCharArray());
+            AnimationClip ac = Resources.Load<AnimationClip>(string.Format("Animator/EnemyRole/{0}", folderName));
             string rPicName = folderName + "_r";
             string aPicName = folderName + "_a";
             MotionSprite[0] = Resources.Load<Sprite>(string.Format("Images/Role/{0}/{1}", folderName, rPicName));
             MotionSprite[1] = Resources.Load<Sprite>(string.Format("Images/Role/{0}/{1}", folderName, aPicName));
             MotionTimer = new MyTimer(PlayMotionDuration, ToReadyMotion, false, false);
+            //改變怪物專屬待機ani
+            if (RoleAni)
+            {
+                if (ac != null)
+                {
+                    AnimatorOverrideController aoc = new AnimatorOverrideController(RoleAni.runtimeAnimatorController);
+                    RoleAni.runtimeAnimatorController = aoc;
+                    aoc["Idle"] = ac;
+                }
+            }
             ToReadyMotion();
         }
-        /*
-if (RoleAni)
-{
-AnimatorOverrideController aoc = new AnimatorOverrideController(RoleAni.runtimeAnimatorController);
-var anims = new List<KeyValuePair<AnimationClip, AnimationClip>>();
-
-foreach (var a in aoc.animationClips)
-{
-    if(a.)
-}
- 
-    //anims.Add(new KeyValuePair<AnimationClip, AnimationClip>(a, anim));
-//aoc.ApplyOverrides(anims);
-RoleAni.runtimeAnimatorController = aoc;
-
-}
-         *                       */
     }
     void ToReadyMotion()
     {
