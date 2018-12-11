@@ -120,7 +120,8 @@ public abstract class Role : MonoBehaviour
         }
         */
     }
-
+    protected virtual void Awake()
+    { }
     protected virtual void Start()
     {
         IsAlive = true;

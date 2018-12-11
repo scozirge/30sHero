@@ -293,7 +293,20 @@ public partial class PlayerRole : Role
                 Debug.Log(keys[i] + "=" + MyEnchant[keys[i]]);
         }
     }
-
+    protected override void OnEnable()
+    {
+        base.OnEnable();
+        Debug.Log("IsAvatar=" + IsAvatar);
+        if (IsAvatar)
+            AniPlayer.PlayTrigger("Idle1", 0);
+        else
+            AniPlayer.PlayTrigger("Idle2", 0);
+    }
+    protected override void Awake()
+    {
+        base.Awake();
+        IsAvatar = true;
+    }
     protected override void Start()
     {
         InitPlayerProperties();
@@ -322,7 +335,6 @@ public partial class PlayerRole : Role
         Shield = MaxShield;
         InitMoveAfterimage();
         FaceLeftOrRight = 1;
-        IsAvatar = true;
         CanJump = true;
         CanRush = true;
         IsTriggerRevive = false;
