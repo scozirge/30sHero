@@ -201,6 +201,8 @@ public partial class BattleManage : MonoBehaviour
     }
     public void Setting(bool _active)
     {
+        if (MyPlayer == null)
+            return;
         IsPause = _active;
         SoulGo.SetActive(!_active);
         MyCameraControler.enabled = !_active;
@@ -321,6 +323,6 @@ public partial class BattleManage : MonoBehaviour
         SoulGo.SetActive(!_active);
         MyCameraControler.enabled = !_active;
         gameObject.SetActive(!_active);
-        GetEnchantObj.SetActive(_active);        
+        GetEnchantObj.SetActive(_active);
     }
 }
