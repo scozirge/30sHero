@@ -68,12 +68,13 @@ public partial class Ammo : MonoBehaviour
     {
         if (MyRigi != null)
             SaveVelocity = MyRigi.velocity;
-        MyParticles = GetComponentsInChildren<ParticleSystem>();
+        //MyParticles = GetComponentsInChildren<ParticleSystem>();
     }
     protected virtual void OnEnable()
     {
         if (MyRigi != null)
             MyRigi.velocity = SaveVelocity;
+        /*
         if (MyParticles != null && MyParticles.Length > 0)
         {
             for (int i = 0; i < MyParticles.Length; i++)
@@ -81,6 +82,7 @@ public partial class Ammo : MonoBehaviour
                 MyParticles[i].Play();
             }
         }
+         */
     }
 
     public virtual void TriggerHitCondition(Role _role)

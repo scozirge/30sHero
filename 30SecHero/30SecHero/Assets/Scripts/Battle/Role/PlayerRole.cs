@@ -696,7 +696,7 @@ public partial class PlayerRole : Role
         {
             if (CurBeHitEffect) Destroy(CurBeHitEffect.gameObject);
             if (_dmg > 0)
-                if (BeHitEffect_Shield) CurBeHitEffect = EffectEmitter.EmitParticle(BeHitEffect_Shield, Vector2.zero, Vector3.zero, transform);
+                if (BeHitEffect_Shield) CurBeHitEffect = EffectEmitter.EmitParticle(BeHitEffect_Shield, Vector2.zero, Vector3.zero, transform).MyParticle;
             //Damage Shield
             if (_dmg >= Shield)
             {
@@ -720,7 +720,7 @@ public partial class PlayerRole : Role
         else
         {
             if (CurBeHitEffect) Destroy(CurBeHitEffect.gameObject);
-            if (BeHitEffect) CurBeHitEffect = EffectEmitter.EmitParticle(BeHitEffect, Vector2.zero, Vector3.zero, transform);
+            if (BeHitEffect) CurBeHitEffect = EffectEmitter.EmitParticle(BeHitEffect, Vector2.zero, Vector3.zero, transform).MyParticle;
             CameraController.PlayEffect("BeHitFrame");
             CameraController.PlayMotion("Shake1");
         }
@@ -1156,7 +1156,7 @@ public partial class PlayerRole : Role
     }
     void ActiveEnchantSkill(bool _bool)
     {
-        for(int i=0;i<MyEnchantSkill.Count;i++)
+        for (int i = 0; i < MyEnchantSkill.Count; i++)
         {
             MyEnchantSkill[i].enabled = _bool;
         }

@@ -189,7 +189,7 @@ MonoBehaviour:
   RoleAni: {fileID: 95215647531095050}
   IsPreAttack: 0
   OnRush: 0
-  TestMode: 0
+  TestMode: 1
   RushEffect: {fileID: 5754142759658177653, guid: a6e767ebd6d3ffb48a966c7faebed0dc,
     type: 3}
   AvatarRemoveEffect: {fileID: 198023469444164576, guid: 4fa0c17b07dd95f4fac2c50aea787be7,
@@ -205,7 +205,7 @@ MonoBehaviour:
   GainMoveFromKilling: 150
   MoveDepletedTime: 10
   MaxExtraMove: 500
-  MaxAvaterTime: 60
+  MaxAvaterTime: 5
   AvatarTimerText: {fileID: 0}
   UntochableTime: 2
   AvatarPotionBuff: 0
@@ -232,7 +232,7 @@ MonoBehaviour:
   StopDrag: 800
   RushAntiAmooTime: 0.1
   RushCD: 3
-  MyLight: {fileID: 108484094380481612}
+  MyLight: {fileID: 0}
   Blizzard: {fileID: 1362518505}
   BlizzardAmmoPrefab: {fileID: 114255117710915984, guid: 5b65695814f87af46a3fc5c33d4cec5d,
     type: 3}
@@ -1161,7 +1161,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4325138500020102
 Transform:
   m_ObjectHideFlags: 0

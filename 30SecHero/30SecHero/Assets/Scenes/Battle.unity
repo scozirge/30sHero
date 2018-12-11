@@ -954,10 +954,6 @@ PrefabInstance:
       propertyPath: MyLight
       value: 
       objectReference: {fileID: 2074361672}
-    - target: {fileID: 1298599359244992, guid: d9e47796d36fc83458ffab41aea6641e, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d9e47796d36fc83458ffab41aea6641e, type: 3}
 --- !u!1 &135074929
@@ -2127,7 +2123,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 121351811}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1031601026}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe8c4e8b2626e6243bdbd98c9f19b933, type: 3}
@@ -4709,6 +4705,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1012859544}
   m_CullTransparentMesh: 0
+--- !u!1 &1031601026 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1103968850550592, guid: d9e47796d36fc83458ffab41aea6641e,
+    type: 3}
+  m_PrefabInstance: {fileID: 121351811}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1033918694
 GameObject:
   m_ObjectHideFlags: 0
@@ -8077,9 +8079,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf3b69d7446504f4da805d7d731903ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TestMode: 0
-  EnemyFirstHalfInterval: 1
-  EnemySecondHalfInterval: 1
+  TestMode: 1
+  EnemyFirstHalfInterval: 0
+  EnemySecondHalfInterval: 0
   PotionInterval: 5
   EnemyFirstHalfMinCount: 5
   EnemyFirstHalfMaxCount: 5
@@ -9971,6 +9973,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2074361673}
   - component: {fileID: 2074361672}
+  - component: {fileID: 2074361674}
   m_Layer: 0
   m_Name: pointLight
   m_TagString: Untagged
@@ -10030,6 +10033,23 @@ Transform:
   m_Father: {fileID: 533026733}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2074361674
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2074361671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3b8d63ae1ae2654b9167b44ec809117, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Target: {fileID: 1031601026}
+  LerpFactor: 1
+  FixX: 0
+  FixY: 0
+  FixZ: 1
 --- !u!1 &2091431467
 GameObject:
   m_ObjectHideFlags: 0

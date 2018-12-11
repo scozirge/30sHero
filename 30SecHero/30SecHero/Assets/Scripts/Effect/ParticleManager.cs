@@ -5,12 +5,14 @@ using UnityEngine;
 [RequireComponent(typeof(ParticleSystem))]
 public class ParticleManager : MonoBehaviour
 {
+    public ParticleSystem MyParticle;
     public bool Loop;
     public float LifeTime;
     static Dictionary<string, float> ParticleLifeTimeDic = new Dictionary<string, float>();
 
-    void Start()
+    public void Init()
     {
+        MyParticle = GetComponent<ParticleSystem>();
         var particleModule = GetComponent<ParticleSystem>().main;
         particleModule.playOnAwake = false;
         if (ParticleLifeTimeDic.ContainsKey(name))
@@ -35,13 +37,33 @@ public class ParticleManager : MonoBehaviour
                 if (LifeTime < time)
                     LifeTime = time;
             }
-            if(Loop)
+            if (Loop)
                 ParticleLifeTimeDic.Add(name, 1000);
             else
                 ParticleLifeTimeDic.Add(name, LifeTime);
         }
         if (!Loop)
             StartCoroutine(WaitToDestroy(LifeTime));
+    }
+    float CurParticleTime = 0;
+    void OnDisable()
+    {
+        if (MyParticle == null)
+            return;
+        CurParticleTime = MyParticle.time;
+        if (!Loop)
+            if (CurParticleTime > LifeTime)
+                CurParticleTime = LifeTime;
+    }
+    void OnEnable()
+    {
+        if (MyParticle == null)
+            return;
+        if (Loop || CurParticleTime < LifeTime)
+        {
+            MyParticle.Simulate(CurParticleTime);
+            MyParticle.Play();
+        }
     }
     IEnumerator WaitToDestroy(float _time)
     {

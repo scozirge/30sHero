@@ -104,12 +104,13 @@ public abstract class Role : MonoBehaviour
     {
         if (MyRigi != null)
             SaveVelocity = MyRigi.velocity;
-        MyParticles = GetComponentsInChildren<ParticleSystem>();
+        //MyParticles = GetComponentsInChildren<ParticleSystem>();
     }
     protected virtual void OnEnable()
     {
         if (MyRigi != null)
             MyRigi.velocity = SaveVelocity;
+        /*
         if (MyParticles != null && MyParticles.Length > 0)
         {
             for (int i = 0; i < MyParticles.Length; i++)
@@ -117,6 +118,7 @@ public abstract class Role : MonoBehaviour
                 MyParticles[i].Play();
             }
         }
+        */
     }
 
     protected virtual void Start()
@@ -257,7 +259,7 @@ public abstract class Role : MonoBehaviour
                 {
                     if (_buffer.Time >= 0.5f)//如果效果時間低於0.5秒就不要播特效
                     {
-                        ParticleSystem ps = EffectEmitter.EmitParticle(GameManager.GetBufferParticle(_buffer.Type), Vector3.zero, Vector3.zero, transform);
+                        ParticleSystem ps = EffectEmitter.EmitParticle(GameManager.GetBufferParticle(_buffer.Type), Vector3.zero, Vector3.zero, transform).MyParticle;
                         if (ps)
                             BufferParticles.Add(_buffer.Type, ps);
                     }

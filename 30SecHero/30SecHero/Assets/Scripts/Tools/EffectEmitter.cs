@@ -5,11 +5,12 @@ using UnityEngine;
 public class EffectEmitter : MonoBehaviour
 {
     static Transform MySelf;
+
     void Awake()
     {
         MySelf = transform;
     }
-    public static ParticleSystem EmitParticle(string _effectName, Vector3 _pos, Vector3 _dir, Transform _parent)
+    public static ParticleManager EmitParticle(string _effectName, Vector3 _pos, Vector3 _dir, Transform _parent)
     {
         GameObject particlePrefab = Resources.Load<ParticleSystem>(string.Format("Particles/{0}/{0}", _effectName)).gameObject;
         if (particlePrefab == null)
@@ -25,11 +26,11 @@ public class EffectEmitter : MonoBehaviour
 
         particleGo.transform.localPosition = _pos;
         particleGo.transform.localRotation = Quaternion.Euler(_dir);
-        particleGo.AddComponent<ParticleManager>();
-        ParticleSystem ps= particleGo.GetComponent<ParticleSystem>();
-        return ps;
+        ParticleManager pm = particleGo.AddComponent<ParticleManager>();
+        pm.Init();
+        return pm;
     }
-    public static ParticleSystem EmitParticle(ParticleSystem _particle, Vector3 _pos, Vector3 _dir, Transform _parent)
+    public static ParticleManager EmitParticle(ParticleSystem _particle, Vector3 _pos, Vector3 _dir, Transform _parent)
     {
         if (_particle == null)
         {
@@ -43,8 +44,8 @@ public class EffectEmitter : MonoBehaviour
 
         particle.transform.localPosition = _pos;
         particle.transform.localRotation = Quaternion.Euler(_dir);
-        particle.gameObject.AddComponent<ParticleManager>();
-        return particle;
+        ParticleManager pm = particle.gameObject.AddComponent<ParticleManager>();
+        pm.Init();
+        return pm;
     }
-
 }
