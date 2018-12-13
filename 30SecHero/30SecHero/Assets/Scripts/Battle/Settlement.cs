@@ -86,6 +86,7 @@ partial class BattleManage
     }
     public static void GainEquip(EquipData _data)
     {
+        Debug.Log("GainEquip=" + _data.Name);
         ExpectEquipDataList.Add(_data);
         //Debug.Log("UID=" + _data.UID);
         //Debug.Log("LV=" + _data.LV);
@@ -93,6 +94,7 @@ partial class BattleManage
     }
     public static void TransferToGainEquipDataList()
     {
+        Debug.Log("TransferToGainEquipDataList");
         for (int i = 0; i < ExpectEquipDataList.Count; i++)
         {
             GainEquipDataList.Add(ExpectEquipDataList[i]);
