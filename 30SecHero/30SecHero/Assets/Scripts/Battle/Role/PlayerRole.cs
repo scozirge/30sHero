@@ -840,10 +840,11 @@ public partial class PlayerRole : Role
                             Vector2 rushForce;
                             if (xMoveForce == 0 && yMoveForce == 0)
                             {
-                                rushForce = new Vector2(FaceLeftOrRight, 0) * RushForce * 1000000;
+                                rushForce = new Vector2(FaceLeftOrRight, 0) * RushForce;
                             }
                             else
-                                rushForce = new Vector2(xMoveForce, yMoveForce) * RushForce * 1000000;
+                                rushForce = new Vector2(xMoveForce, yMoveForce) * RushForce;
+                            Debug.Log("RushForce=" + RushForce);
                             ChangeToKnockDrag();
                             MyRigi.velocity = rushForce;
                             //MyRigi.AddForce(rushForce);

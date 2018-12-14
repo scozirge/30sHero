@@ -183,13 +183,13 @@ MonoBehaviour:
   AniPlayer: {fileID: 114254621464860768}
   RoleTrans: {fileID: 224651808157149892}
   DeathSound: {fileID: 8300000, guid: fc274ce0d0fd8fb40b2e7557d54975e8, type: 3}
-  KnockDrag: 10
+  KnockDrag: 20
   NormalDrag: 50
   KnockDragDuration: 0.1
   RoleAni: {fileID: 95215647531095050}
   IsPreAttack: 0
   OnRush: 0
-  TestMode: 1
+  TestMode: 0
   RushEffect: {fileID: 5754142759658177653, guid: a6e767ebd6d3ffb48a966c7faebed0dc,
     type: 3}
   AvatarRemoveEffect: {fileID: 198023469444164576, guid: 4fa0c17b07dd95f4fac2c50aea787be7,
@@ -225,7 +225,7 @@ MonoBehaviour:
   ControlDevice: 1
   CursorLimitDist: 200
   MyCamera: {fileID: 0}
-  RushForce: 1
+  RushForce: 10
   RushSound: {fileID: 8300000, guid: 41b00c1ca9d97ea4796281c66b69da09, type: 3}
   AttackSound: {fileID: 8300000, guid: fc274ce0d0fd8fb40b2e7557d54975e8, type: 3}
   JumpCDTime: 0.2
