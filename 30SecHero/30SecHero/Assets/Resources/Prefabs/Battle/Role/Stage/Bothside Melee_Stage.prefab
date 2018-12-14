@@ -13,18 +13,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 114884425457605678, guid: 7f6edaf36c640654db036ad9e0a0a0d2,
         type: 3}
-      propertyPath: Wander
+      propertyPath: FollowCamera
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114884425457605678, guid: 7f6edaf36c640654db036ad9e0a0a0d2,
         type: 3}
-      propertyPath: FollowCamera
-      value: 0
+      propertyPath: RotateFactor
+      value: 0.04
       objectReference: {fileID: 0}
-    - target: {fileID: 4657740854597865152, guid: 7f6edaf36c640654db036ad9e0a0a0d2,
+    - target: {fileID: 114884425457605678, guid: 7f6edaf36c640654db036ad9e0a0a0d2,
         type: 3}
-      propertyPath: m_Name
-      value: white
+      propertyPath: WanderRange
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7f6edaf36c640654db036ad9e0a0a0d2, type: 3}

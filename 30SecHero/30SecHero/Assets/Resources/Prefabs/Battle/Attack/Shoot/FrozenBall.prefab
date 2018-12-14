@@ -58,7 +58,7 @@ MonoBehaviour:
   - {fileID: 198538159042021980, guid: 7472e55f19b681f45a56bf9522490220, type: 3}
   HitTargetParticle: {fileID: 0}
   HitTargetSound: {fileID: 0}
-  LifeTime: 3
+  LifeTime: 2
   KnockIntensity: 0
   AmmoType: 0
   DamageInterval: 0
@@ -71,7 +71,6 @@ MonoBehaviour:
   IsPlayerGetSkill: 0
   AmmoSpeed: 1500
   TraceFactor: 0
-  TriggerWall: 1
 --- !u!222 &222441390583901092
 CanvasRenderer:
   m_ObjectHideFlags: 0

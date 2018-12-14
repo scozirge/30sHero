@@ -54,11 +54,12 @@ MonoBehaviour:
   LocalParticles:
   - {fileID: 356741279183097906, guid: ce0740618aa24ef4993b34b10889cde2, type: 3}
   GlobalParticle: []
+  LocalAttackerParticles: []
   DeadParticles:
   - {fileID: 198809433350172102, guid: ab4a4457b56853b4fbf8fb746a73af84, type: 3}
   HitTargetParticle: {fileID: 0}
   HitTargetSound: {fileID: 0}
-  LifeTime: 3
+  LifeTime: 2
   KnockIntensity: 0
   AmmoType: 0
   DamageInterval: 0.3
@@ -68,7 +69,6 @@ MonoBehaviour:
   IsPlayerGetSkill: 0
   AmmoSpeed: 500
   TraceFactor: 0
-  TriggerWall: 1
 --- !u!222 &222836414818298276
 CanvasRenderer:
   m_ObjectHideFlags: 0
