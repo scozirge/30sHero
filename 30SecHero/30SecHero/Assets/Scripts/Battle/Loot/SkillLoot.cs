@@ -35,8 +35,16 @@ public class SkillLoot : Loot
         if (SoulIcon != null || _spritePath == "")
         {
             SpritePath = _spritePath;
-            SoulIcon.sprite = Resources.Load<Sprite>(SpritePath);
-            SoulIcon.SetNativeSize();
+            Sprite sprite = Resources.Load<Sprite>(SpritePath);
+            if (sprite!=null)
+            {
+                SoulIcon.sprite = sprite;
+                SoulIcon.SetNativeSize();
+            }
+            else
+            {
+                Debug.LogWarning(string.Format("找不到Sprite路徑:{0}", SpritePath));
+            }
         }
     }
     void OnTriggerStay2D(Collider2D _col)
