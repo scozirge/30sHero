@@ -75,7 +75,6 @@ public class Purchase : MyUI
                 }
             }
         }
-        Debug.Log(ItemList[0].MyData.Name);
         if (ItemList[0] != null)
         {
             for (int i = 0; i < ItemList.Count; i++)

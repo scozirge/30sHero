@@ -344,7 +344,7 @@ public partial class PlayerRole : Role
         //附魔
         for (int i = 0; i < MyEnum.GetTypeCount<EnchantProperty>(); i++)
         {
-            MyEnchant.Add((EnchantProperty)i, 0);
+            MyEnchant.Add((EnchantProperty)i, Player.GetEnchantProperty((EnchantProperty)i));
         }
         if (TestMode)
         {

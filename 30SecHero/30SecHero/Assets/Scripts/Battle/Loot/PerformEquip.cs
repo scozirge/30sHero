@@ -43,6 +43,8 @@ public class PerformEquip : MonoBehaviour
     {
         if (!MyRigid)
             return;
+        if (TargetTrans == null)
+            return;
         Vector2 targetVol = (TargetTrans.position - transform.position).normalized * MoveSpeed;
         MyRigid.velocity = Vector2.Lerp(MyRigid.velocity, targetVol, RotateFactor);
     }

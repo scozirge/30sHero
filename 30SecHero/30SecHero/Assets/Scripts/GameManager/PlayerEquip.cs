@@ -10,7 +10,20 @@ public partial class Player
     public static AccessoryData[] MyAccessorys = new AccessoryData[2] { null, null };
     //Items
     public static Dictionary<EquipType, Dictionary<long, EquipData>> Itmes = new Dictionary<EquipType, Dictionary<long, EquipData>>();
-
+    public static int ItemCout
+    {
+        get
+        {
+            int count = 0;
+            if (Itmes.ContainsKey(EquipType.Weapon))
+                count += Itmes[EquipType.Weapon].Count;
+            if (Itmes.ContainsKey(EquipType.Armor))
+                count += Itmes[EquipType.Armor].Count;
+            if (Itmes.ContainsKey(EquipType.Accessory))
+                count += Itmes[EquipType.Accessory].Count;
+            return count;
+        }
+    }
     public static void EquipSaveLocalData()
     {
         //武器文字
@@ -79,6 +92,11 @@ public partial class Player
             }
         }
         RefreshEquipEnchant();
+        if (EquipPlus[RoleProperty.EquipDrop] > 20)
+        {
+            Debug.LogError("測試");
+            Debug.Log("EquipPlus[RoleProperty.EquipDrop]=" + EquipPlus[RoleProperty.EquipDrop]);
+        }
     }
     public static void Equip(ArmorData _data)
     {
@@ -107,6 +125,11 @@ public partial class Player
             }
         }
         RefreshEquipEnchant();
+        if (EquipPlus[RoleProperty.EquipDrop] > 20)
+        {
+            Debug.LogError("測試");
+            Debug.Log("EquipPlus[RoleProperty.EquipDrop]=" + EquipPlus[RoleProperty.EquipDrop]);
+        }
     }
     public static void Equip(AccessoryData _data, int _index)
     {
@@ -137,6 +160,11 @@ public partial class Player
             }
         }
         RefreshEquipEnchant();
+        if (EquipPlus[RoleProperty.EquipDrop] > 20)
+        {
+            Debug.LogError("測試");
+            Debug.Log("EquipPlus[RoleProperty.EquipDrop]=" + EquipPlus[RoleProperty.EquipDrop]);
+        }
     }
     public static void TakeOff(EquipType _type, int _index)
     {

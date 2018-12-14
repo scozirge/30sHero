@@ -22,10 +22,13 @@ public class GainEquipPerform : MonoBehaviour
 
     void SpawnEquip(EquipData _data)
     {
-        PerformEquip equip = Instantiate(PerformEquipPrefab, Vector3.zero, Quaternion.identity) as PerformEquip;
-        equip.transform.SetParent(transform);
-        equip.transform.position = BattleManage.BM.MyPlayer.transform.position;
-        equip.Init(_data, Target);
+        if(BattleManage.BM.MyPlayer!=null)
+        {
+            PerformEquip equip = Instantiate(PerformEquipPrefab, Vector3.zero, Quaternion.identity) as PerformEquip;
+            equip.transform.SetParent(transform);
+            equip.transform.position = BattleManage.BM.MyPlayer.transform.position;
+            equip.Init(_data, Target);
+        }
     }
     public void SelfDestroy()
     {
