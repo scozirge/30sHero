@@ -82,10 +82,11 @@ public class ArmorData : EquipData
         data.LV = _lv;
         data.Quality = _quality;
         data.SetRandomProperties();
-        data.SetRandomEnchant();
+        if (_quality == 5)
+            data.SetRandomEnchant();
         return data;
     }
-    public static ArmorData GetNewArmor(int _uid, int _id, int _equipSlot, int _lv, int _quality, string _propertiesStr,int _enchantID)
+    public static ArmorData GetNewArmor(int _uid, int _id, int _equipSlot, int _lv, int _quality, string _propertiesStr, int _enchantID)
     {
         ArmorData data = GameDictionary.ArmorDic[_id].MemberwiseClone() as ArmorData;
         data.PropertiesStr = _propertiesStr;

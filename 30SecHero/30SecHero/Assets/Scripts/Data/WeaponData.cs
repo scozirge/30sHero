@@ -82,7 +82,8 @@ public class WeaponData : EquipData
         data.LV = _lv;
         data.Quality = _quality;
         data.SetRandomProperties();
-        data.SetRandomEnchant();
+        if (_quality == 5)
+            data.SetRandomEnchant();
         return data;
     }
     public static WeaponData GetNewWeapon(int _uid, int _id, int _equipSlot, int _lv, int _quality, string _propertiesStr, int _enchantID)

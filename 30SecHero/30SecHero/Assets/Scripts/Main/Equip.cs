@@ -179,13 +179,14 @@ public class Equip : MyUI
     {
         SelectedEquip = _data;
         EquipPop.gameObject.SetActive(true);
+        bool showRightSelect = (EquipDic[CurFilterType].Count > 1) ? true : false;
         switch (CurFilterType)
         {
             case EquipType.Weapon:
-                EquipPop.SetEquipData(Player.MyWeapon, SelectedEquip);
+                EquipPop.SetEquipData(Player.MyWeapon, SelectedEquip, showRightSelect);
                 break;
             case EquipType.Armor:
-                EquipPop.SetEquipData(Player.MyArmor, SelectedEquip);
+                EquipPop.SetEquipData(Player.MyArmor, SelectedEquip, showRightSelect);
                 break;
             case EquipType.Accessory:
                 if (Player.MyAccessorys[0] != null && Player.MyAccessorys[1] == null)
@@ -196,7 +197,7 @@ public class Equip : MyUI
                 {
                     CurEquipAccessoryIndex = 0;
                 }
-                EquipPop.SetEquipData(Player.MyAccessorys[CurEquipAccessoryIndex], SelectedEquip);
+                EquipPop.SetEquipData(Player.MyAccessorys[CurEquipAccessoryIndex], SelectedEquip, showRightSelect);
                 break;
         }
         CurItemIndex = GetIndex(_data.UID);
@@ -263,12 +264,12 @@ public class Equip : MyUI
             case EquipType.Weapon:
                 if (Player.MyWeapon == null)
                     return;
-                EquipPop.SetEquipData(Player.MyWeapon, null);
+                EquipPop.SetEquipData(Player.MyWeapon, null, false);
                 break;
             case EquipType.Armor:
                 if (Player.MyArmor == null)
                     return;
-                EquipPop.SetEquipData(Player.MyArmor, null);
+                EquipPop.SetEquipData(Player.MyArmor, null, false);
                 break;
         }
         EquipPop.gameObject.SetActive(true);
@@ -281,7 +282,7 @@ public class Equip : MyUI
         CurEquipAccessoryIndex = _index;
         if (Player.MyAccessorys[CurEquipAccessoryIndex] != null)
         {
-            EquipPop.SetEquipData(Player.MyAccessorys[CurEquipAccessoryIndex], null);
+            EquipPop.SetEquipData(Player.MyAccessorys[CurEquipAccessoryIndex], null, false);
             EquipPop.gameObject.SetActive(true);
         }
     }
@@ -327,7 +328,7 @@ public class Equip : MyUI
                     if (Player.MyWeapon != null)
                     {
                         int index = GetIndexFromTotalItemList(Player.MyWeapon.UID);
-                        EquipDic[CurFilterType].Add(ItemList[index]);
+                        EquipDic[SelectedEquip.Type].Add(ItemList[index]);
                     }
                     Player.Equip((WeaponData)SelectedEquip);
                     break;
@@ -335,7 +336,7 @@ public class Equip : MyUI
                     if (Player.MyArmor != null)
                     {
                         int index = GetIndexFromTotalItemList(Player.MyArmor.UID);
-                        EquipDic[CurFilterType].Add(ItemList[index]);
+                        EquipDic[SelectedEquip.Type].Add(ItemList[index]);
                     }
                     Player.Equip((ArmorData)SelectedEquip);
                     break;
@@ -345,13 +346,13 @@ public class Equip : MyUI
                         if (Player.MyAccessorys[CurEquipAccessoryIndex] != null)
                         {
                             int index = GetIndexFromTotalItemList(Player.MyAccessorys[CurEquipAccessoryIndex].UID);
-                            EquipDic[CurFilterType].Add(ItemList[index]);
+                            EquipDic[SelectedEquip.Type].Add(ItemList[index]);
                         }
                         Player.Equip((AccessoryData)SelectedEquip, CurEquipAccessoryIndex);
                     }
                     break;
             }
-            EquipDic[CurFilterType].RemoveAt(CurItemIndex);
+            EquipDic[SelectedEquip.Type].RemoveAt(CurItemIndex);
         }
         else
         {
@@ -477,9 +478,9 @@ public class Equip : MyUI
         StrengthText.text = Player.GetProperties(RoleProperty.Strength).ToString();
         HealthText.text = Player.GetProperties(RoleProperty.Health).ToString();
         ShieldText.text = Player.GetProperties(RoleProperty.Shield).ToString();
-        ShieldRecoveryText.text = string.Format("{0}%/{1}", Player.GetProperties(RoleProperty.ShieldRecovery)*100, StringData.GetString("Second"));
+        ShieldRecoveryText.text = string.Format("{0}%/{1}", Player.GetProperties(RoleProperty.ShieldRecovery) * 100, StringData.GetString("Second"));
         MoveSpeedText.text = string.Format("{0}/{1}", Player.GetProperties(RoleProperty.MoveSpeed), StringData.GetString("Second"));
-        MaxMoveText.text = string.Format("{0}/{1}", Player.GetProperties(RoleProperty.MaxMoveSpeed)+Player.GetProperties(RoleProperty.MoveSpeed), StringData.GetString("Second"));
+        MaxMoveText.text = string.Format("{0}/{1}", Player.GetProperties(RoleProperty.MaxMoveSpeed) + Player.GetProperties(RoleProperty.MoveSpeed), StringData.GetString("Second"));
         AvatarTimeText.text = string.Format("{0}{1}", Player.GetProperties(RoleProperty.AvatarPotionBuff), StringData.GetString("Second"));
         SkillTimeText.text = string.Format("{0}{1}", Player.GetProperties(RoleProperty.SkillTimeBuff), StringData.GetString("Second"));
     }

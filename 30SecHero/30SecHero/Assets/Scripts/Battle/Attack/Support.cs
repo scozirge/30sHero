@@ -83,7 +83,6 @@ public class Support : Skill
         float origAngle = (Mathf.Atan2(AttackDir.y, AttackDir.x) * Mathf.Rad2Deg) * Mathf.Deg2Rad;
         AttackDir = new Vector3(Mathf.Cos(origAngle), Mathf.Sin(origAngle), 0).normalized;
         AmmoData.Add("Direction", AttackDir);
-        AmmoData.Add("Attacker", Myself);
         AmmoData.Add("TargetRoleTag", SupportTargets[CurSpawnAmmoNum].MyForce);
         AmmoData.Add("Target", SupportTargets[CurSpawnAmmoNum]);
         GameObject ammoGO = Instantiate(SupplyPrefab.gameObject, Vector3.zero, Quaternion.identity) as GameObject;

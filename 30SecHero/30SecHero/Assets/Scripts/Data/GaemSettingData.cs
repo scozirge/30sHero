@@ -615,8 +615,11 @@ public class GameSettingData : Data
     public static Dictionary<RoleProperty, float> GetRandomEquipProperties(int _quality, int _lv)
     {
         Dictionary<RoleProperty, float> dic = GetNewRolePropertiesDic(0);
+        int qualityPropertyCount = _quality - 1;
+        if (qualityPropertyCount < 0)
+            qualityPropertyCount = 0;
         //_quality = RandomPropertyList.Count;
-        for (int i = 0; i < _quality; i++)
+        for (int i = 0; i < qualityPropertyCount; i++)
         {
             int rand = UnityEngine.Random.Range(0, RandomPropertyList.Count);
             //rand = i;

@@ -86,14 +86,14 @@ public class EquipPop : MonoBehaviour
 
 
 
-    public void SetEquipData(EquipData _leftData, EquipData _rightData)
+    public void SetEquipData(EquipData _leftData, EquipData _rightData,bool _leftSelect)
     {
         LeftData = _leftData;
         RightData = _rightData;
         if (LeftData == null && RightData != null)
         {
             ArrowObj.SetActive(false);
-            RightSelectObj.SetActive(true);
+            RightSelectObj.SetActive(_leftSelect);
             ExchangeText.text = StringData.GetString("Equip");
             Condition = EquipCondition.Equip;
             EquipObjs[0].SetActive(false);
@@ -108,7 +108,7 @@ public class EquipPop : MonoBehaviour
         else if (LeftData != null && RightData == null)
         {
             ArrowObj.SetActive(false);
-            RightSelectObj.SetActive(false);
+            RightSelectObj.SetActive(_leftSelect);
             ExchangeText.text = StringData.GetString("TakeOff");
             Condition = EquipCondition.TakeOff;
             EquipObjs[0].SetActive(false);
@@ -123,7 +123,8 @@ public class EquipPop : MonoBehaviour
         else
         {
             LeftSelectObj.SetActive((_leftData.Type == EquipType.Accessory));
-            RightSelectObj.SetActive(true);
+            //if(_rightData.Type)
+            RightSelectObj.SetActive(_leftSelect);
             EquipObjs[0].SetActive(true);
             ArrowObj.SetActive(true);
             ExchangeText.text = StringData.GetString("Exchange");

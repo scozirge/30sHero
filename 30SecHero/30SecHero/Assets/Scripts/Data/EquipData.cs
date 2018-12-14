@@ -146,7 +146,7 @@ public abstract class EquipData : Data
         if (MyEnchant != null)
         {
             PropertyText enchantPT = new PropertyText();
-            enchantPT.Text = MyEnchant.Name + "\r\n" + MyEnchant.Description(0);
+            enchantPT.Text = MyEnchant.Description(0);//MyEnchant.Name + "\r\n" + MyEnchant.Description(0)
             enchantPT.Comparison = Comparator.Equal;
             enchantPT.ColorCode = GameSettingData.NormalNumberColor;
             enchantPT.DisableSizeFilter = true;
@@ -177,7 +177,7 @@ public abstract class EquipData : Data
         if(MyEnchant!=null)
         {
             PropertyText enchantPT = new PropertyText();
-            enchantPT.Text = MyEnchant.Name + "\r\n" + MyEnchant.Description(0);
+            enchantPT.Text = MyEnchant.Description(0);//MyEnchant.Name + "\r\n" + MyEnchant.Description(0)
             enchantPT.Comparison = Comparator.Equal;
             enchantPT.ColorCode = GameSettingData.NormalNumberColor;
             enchantPT.DisableSizeFilter = true;
@@ -200,13 +200,13 @@ public abstract class EquipData : Data
                 pt.Text = string.Format("{1}{2} {0}{3}", StringData.GetString(GameSettingData.RandomPropertyList[i].ToString()), value, GetUnit(GameSettingData.RandomPropertyList[i]), GetUnitAfterTitle(GameSettingData.RandomPropertyList[i]));
             if (valueDiff > 0)
             {
-                pt.Comparison = Comparator.Greater;
-                pt.ColorCode = GameSettingData.GrowingNumberColor;
+                pt.Comparison = Comparator.Equal;//Comparator.Greater;
+                pt.ColorCode = GameSettingData.NormalNumberColor; //GameSettingData.GrowingNumberColor;
             }
             else if (valueDiff < 0)
             {
-                pt.Comparison = Comparator.Less;
-                pt.ColorCode = GameSettingData.DropingNumberColor;
+                pt.Comparison = Comparator.Equal; //Comparator.Less;
+                pt.ColorCode = GameSettingData.NormalNumberColor; //GameSettingData.DropingNumberColor;
             }
             else
             {
