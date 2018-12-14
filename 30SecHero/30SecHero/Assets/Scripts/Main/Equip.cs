@@ -110,6 +110,20 @@ public class Equip : MyUI
         ItemCoutText.text = string.Format("{0}/{1}", ItemList.Count, GameSettingData.MaxItemCount);
         Filter();
         Sort();
+        //ID重複檢測
+        List<int> test = new List<int>();
+        for(int i=0;i<ItemList.Count;i++)
+        {
+            for (int j = 0; j < test.Count; j++)
+            {
+                if (ItemList[i].MyData.UID == test[j])
+                {
+                    Debug.LogError("裝備ID重複:" + test[j]);
+                    break;
+                }                
+            }
+            test.Add(ItemList[i].MyData.UID);
+        }
     }
     public override void OnEnable()
     {

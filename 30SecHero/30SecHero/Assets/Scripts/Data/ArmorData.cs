@@ -6,7 +6,6 @@ using System;
 
 public class ArmorData : EquipData
 {
-    protected static int MaxUID;//只使用本地資料才會用到
     public override EquipType Type { get { return EquipType.Armor; } }
     public override int SellGold { get { return GameSettingData.GetArmorGold(LV, Quality); } }
     /// <summary>
@@ -92,8 +91,7 @@ public class ArmorData : EquipData
         data.PropertiesStr = _propertiesStr;
         data.SetPropertiesByStr();
         data.UID = _uid;
-        if (_uid > MaxUID)
-            MaxUID = _uid;
+        EquipData.UpdateMaxUID(data.UID);
         data.LV = _lv;
         data.Quality = _quality;
         if (GameDictionary.EnchantDic.ContainsKey(_enchantID))

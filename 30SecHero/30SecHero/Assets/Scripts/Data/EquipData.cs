@@ -7,6 +7,7 @@ using System;
 public abstract class EquipData : Data
 {
     public int UID;
+    protected static int MaxUID;//只使用本地資料才會用到
     public int EquipSlot { get; protected set; }
     public virtual EquipType Type { get; protected set; }
     public virtual string Name { get; protected set; }
@@ -90,9 +91,15 @@ public abstract class EquipData : Data
     {
         return UID;
     }
+    //server回傳UID時使用
     public void SetUID(int _uid)
     {
         UID = _uid;
+    }
+    protected static void UpdateMaxUID(int _uid)
+    {
+        if (_uid > MaxUID)
+            MaxUID = _uid;
     }
     protected void SetPropertiesByStr()
     {
@@ -188,7 +195,8 @@ public abstract class EquipData : Data
 
         for (int i = 0; i < GameSettingData.RandomPropertyList.Count; i++)
         {
-            if (Properties[GameSettingData.RandomPropertyList[i]] == 0 && _data.Properties[GameSettingData.RandomPropertyList[i]] == 0)
+            
+            if (Properties[GameSettingData.RandomPropertyList[i]] == 0)//if (Properties[GameSettingData.RandomPropertyList[i]] == 0 && _data.Properties[GameSettingData.RandomPropertyList[i]] == 0)比較兩個裝備的數值
                 continue;
             float valueDiff = Properties[GameSettingData.RandomPropertyList[i]] - _data.Properties[GameSettingData.RandomPropertyList[i]];
             PropertyText pt = new PropertyText();
