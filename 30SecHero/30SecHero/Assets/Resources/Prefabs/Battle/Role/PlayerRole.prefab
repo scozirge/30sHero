@@ -104,7 +104,6 @@ GameObject:
   - component: {fileID: 224076595988088798}
   - component: {fileID: 114529601492733476}
   - component: {fileID: 50485858130474148}
-  - component: {fileID: 58083657934967348}
   - component: {fileID: 114254621464860768}
   - component: {fileID: 114768325752054400}
   - component: {fileID: 1362518505}
@@ -129,6 +128,7 @@ GameObject:
   - component: {fileID: 7530781475277062003}
   - component: {fileID: 1699951301}
   - component: {fileID: 1699951302}
+  - component: {fileID: 312703066730111843}
   m_Layer: 8
   m_Name: PlayerRole
   m_TagString: Player
@@ -289,22 +289,6 @@ Rigidbody2D:
   m_SleepingMode: 0
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!58 &58083657934967348
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1103968850550592}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.91, y: 6.32}
-  serializedVersion: 2
-  m_Radius: 61
 --- !u!114 &114254621464860768
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1071,6 +1055,22 @@ MonoBehaviour:
   AttackPrefab: {fileID: 114962956101920240, guid: 09dfc36365da6064dbdb0bb6a1c54ab9,
     type: 3}
   TriggerWall: 1
+--- !u!70 &312703066730111843
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1103968850550592}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 5, y: -1.5}
+  m_Size: {x: 82.03, y: 49.64}
+  m_Direction: 1
 --- !u!1 &1131648973560484
 GameObject:
   m_ObjectHideFlags: 0

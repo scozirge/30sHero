@@ -185,7 +185,7 @@ MonoBehaviour:
   DropLootCount: 1
   DesignateLoot: 
   DropSkillProbility: 0.2
-  DropSkill: {fileID: 114497804762892658}
+  DropSkill: {fileID: 0}
   HealthObj: {fileID: 1610887402048710}
   PlayMotionDuration: 0.5
   InitBuffers: []
@@ -278,7 +278,7 @@ MonoBehaviour:
   PSkillName: Wizard Shield
   PSkillDuration: 10
   DetecteRadius: 900
-  DamagePercent: 1
+  DamagePercent: 0
   AttackStopMove: 0
   StopMoveTime: 0
   SpellSound: {fileID: 0}

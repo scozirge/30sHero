@@ -205,7 +205,7 @@ MonoBehaviour:
   HealthBar: {fileID: 226806141657433396}
   DirectX: 0
   DirectY: 0
-  MaxHealth: 40
+  MaxHealth: 20
   BaseDamage: 60
   BaseMoveSpeed: 200
   DeathEffect: {fileID: 198802542160044040, guid: 8f344cf8edc65e44883dfdf0168792bd,
@@ -353,21 +353,23 @@ MonoBehaviour:
     ActiveOnlyByEvent: 0
     NodeTag: 
     ExpandRandomNodes: 0
-    ToRandomNode: 0
-    GoToNodes: []
-    SkillList: []
+    SpellInterval: 0.5
     Type: 0
     LocoParticle: {fileID: 0}
     WorldPartilce: {fileID: 0}
     RoleAniTriggerName: 
     CamAniTriggerName: 
-    SoundList: []
     Description: 
-    SpawnEnemyList: []
     SpawnIntervalTime: 0
     MyRushDirect: 0
     RushForce: {x: 0, y: 0}
     RushForce2: 0
+    ToRandomNode: 0
+    KeepNextNode: 0
+    GoToNodes: []
+    SkillList: []
+    SpawnEnemyList: []
+    SoundList: []
   MyAni: {fileID: 0}
   MaxSpawnCount: 0
   ActionRoundCount: 0
