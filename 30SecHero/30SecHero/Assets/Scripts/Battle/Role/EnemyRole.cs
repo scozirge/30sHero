@@ -253,6 +253,13 @@ public partial class EnemyRole : Role
     }
     public override void AddBuffer(BufferData _buffer)
     {
+        if (BuffersExist(RoleBuffer.Immortal))
+        {
+            if (MyEnum.CheckEnumExistInArray<RoleBuffer>(ElementalBuff, _buffer.Type))
+            {
+                return;
+            }
+        }
         base.AddBuffer(_buffer);
         UpdateCanMove();
     }

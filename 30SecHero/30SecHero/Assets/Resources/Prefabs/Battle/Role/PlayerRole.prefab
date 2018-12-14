@@ -216,7 +216,7 @@ MonoBehaviour:
   BloodThirsty: 0
   PotionEfficiency: 0
   PotionDrop: 0
-  KeyboardJumpMoveFactor: 3
+  KeyboardJumpMoveFactor: 4
   MoveAfterimagePrefab: {fileID: 198230356777013556, guid: 4ac12026ed62f024b9bc36b2da373c93,
     type: 3}
   DontAttackRestoreTime: 2
@@ -240,8 +240,8 @@ MonoBehaviour:
   BladeLight: {fileID: 114729129931036052}
   BladeLightColor: E06B66
   WeaponIcons:
-  - {fileID: 1418294075371303170}
   - {fileID: 5991177029721776225}
+  - {fileID: 1418294075371303170}
   - {fileID: 3502190818260683149}
   FaceLeftOrRight: 0
   ClosestEnemy: {fileID: 0}
@@ -1635,7 +1635,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5445407189859192516}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1884,8 +1884,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 549333539911986600}
-  - {fileID: 4834207853965091387}
   - {fileID: 3553719647424960760}
+  - {fileID: 4834207853965091387}
   m_Father: {fileID: 224651808157149892}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 36.3}
@@ -1925,7 +1925,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5445407189859192516}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}

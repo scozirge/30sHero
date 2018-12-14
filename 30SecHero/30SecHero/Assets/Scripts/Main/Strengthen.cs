@@ -94,7 +94,12 @@ public class Strengthen : MyUI
         CurSelectedSItem = _item;
         RefreshText();
         UpgradeButton.gameObject.SetActive(true);
-        UpgradeButton.interactable = CurSelectedSData.CanUpgrade();
+        if (Player.Gold < CurSelectedSData.GetPrice() || !CurSelectedSData.CanUpgrade())
+        {
+            UpgradeButton.interactable = false;
+        }
+        else
+            UpgradeButton.interactable = true;
     }
     public void ShowInfo(EnchantItem _item)
     {
@@ -104,7 +109,12 @@ public class Strengthen : MyUI
             CurSelectedEItem = _item;
             RefreshText();
             UpgradeButton.gameObject.SetActive(true);
-            UpgradeButton.interactable = CurSelectedEData.CanUpgrade();
+            if (Player.Emerald < CurSelectedEData.GetPrice() || !CurSelectedEData.CanUpgrade())
+            {
+                UpgradeButton.interactable = false;
+            }
+            else
+                UpgradeButton.interactable = true;
         }
         else
         {
@@ -129,7 +139,7 @@ public class Strengthen : MyUI
             else if(Player.Gold < CurSelectedSData.GetPrice())
             {
                 DescriptionText.text = CurSelectedSData.Description(0);
-                PriceText.text = StringData.GetString("Unaffordable");
+                PriceText.text = CurSelectedSData.GetPrice().ToString(); //PriceText.text = StringData.GetString("Unaffordable");
             }
             else
             {
@@ -151,7 +161,7 @@ public class Strengthen : MyUI
                 else if(Player.Emerald < CurSelectedEData.GetPrice())
                 {
                     DescriptionText.text = CurSelectedEData.Description(0);
-                    PriceText.text = StringData.GetString("Unaffordable");
+                    PriceText.text = CurSelectedEData.GetPrice().ToString(); //PriceText.text = StringData.GetString("Unaffordable");
                 }
                 else
                 {

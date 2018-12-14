@@ -361,6 +361,9 @@ public abstract class Role : MonoBehaviour
                     else
                         RoleAni.Play("Normal", RoleAni.GetLayerIndex("Buffer"), 0);
                 break;
+            case RoleBuffer.Immortal:
+                RemoveBufferByType(NegativeBuff);
+                break;
         }
     }
     public void RemoveAllBuffer()

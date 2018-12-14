@@ -916,6 +916,13 @@ public partial class PlayerRole : Role
     }
     public override void AddBuffer(BufferData _buffer)
     {
+        if (BuffersExist(RoleBuffer.Immortal))
+        {
+            if (MyEnum.CheckEnumExistInArray<RoleBuffer>(ElementalBuff, _buffer.Type))
+            {
+                return;
+            }
+        }
         if (MyEnum.CheckEnumExistInArray<RoleBuffer>(ElementalBuff, _buffer.Type))
         {
             //護盾存在時有機率免除負面元素效果

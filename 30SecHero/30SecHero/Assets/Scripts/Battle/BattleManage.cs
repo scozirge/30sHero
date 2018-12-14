@@ -144,7 +144,6 @@ public partial class BattleManage : MonoBehaviour
         SpawnLootTimer = new MyTimer(PotionInterval, SpawnLoot, true, false);
         //Debug.Log("NextDemogorgonFloor=" + NextDemogorgonFloor);
         IsDemogorgonFloor = CheckDemogorgon(Floor);
-        Debug.Log("IsDemogorgonFloor=" + IsDemogorgonFloor);
         IsInit = true;
         BattleBG.SetActive(true);
         Debug.Log("Init BattleManager");
