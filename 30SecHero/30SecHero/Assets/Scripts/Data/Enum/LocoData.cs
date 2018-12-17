@@ -12,5 +12,6 @@
     KillBossID,
     CurFloor,
     MaxFloor,
-    MaxEnemyKills
+    MaxEnemyKills,
+    Tutorial
 }

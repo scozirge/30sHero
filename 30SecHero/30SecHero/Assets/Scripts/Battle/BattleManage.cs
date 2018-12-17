@@ -71,6 +71,8 @@ public partial class BattleManage : MonoBehaviour
     MyText GetEnchant_Description;
     [SerializeField]
     Image GetEnchant_Icon;
+    [SerializeField]
+    GameObject TutorialGo;
 
 
     static List<EnemyRole> AvailableMillions;
@@ -146,6 +148,17 @@ public partial class BattleManage : MonoBehaviour
         IsDemogorgonFloor = CheckDemogorgon(Floor);
         IsInit = true;
         BattleBG.SetActive(true);
+        //第一次進戰鬥跳教學
+        if (Player.Tutorial)
+        {
+            Setting(true);
+            Tutorial(true);
+            IsPause = true;
+            SoulGo.SetActive(false);
+            MyCameraControler.enabled = false;
+            gameObject.SetActive(false);
+            PlayerPrefs.SetInt(LocoData.Tutorial.ToString(), 1);
+        }
         Debug.Log("Init BattleManager");
     }
     void InitBattleSetting()
@@ -198,6 +211,10 @@ public partial class BattleManage : MonoBehaviour
         loot.transform.position = GetSpawnPos(offset);
         SpawnLootTimer.StartRunTimer = true;
         LootList.Add(loot);
+    }
+    public void Tutorial(bool _bool)
+    {
+        TutorialGo.SetActive(_bool);
     }
     public void Setting(bool _active)
     {

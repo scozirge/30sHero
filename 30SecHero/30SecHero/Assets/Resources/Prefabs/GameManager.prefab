@@ -65,7 +65,7 @@ MonoBehaviour:
   EmeraldSprite: {fileID: 21300000, guid: 17b02e78dcf73f348a4500855832f255, type: 3}
   KredSprite: {fileID: 21300000, guid: 7e16041d099241a4989927f2d77f8b36, type: 3}
   ADSprite: {fileID: 21300000, guid: baf283f143cb2824a8d5afb573acea9d, type: 3}
-  UnknownIcon: {fileID: 21300000, guid: 09966b07cbfeb7a46b4f57865c9c0814, type: 3}
+  UnknownIcon: {fileID: 21300000, guid: 6f8625e168c33ca47b3582cb6010a619, type: 3}
   StunPrefab: {fileID: 198063869068057178, guid: edffd9c1784edc94989a833933ba67b4,
     type: 3}
   FreezePrefab: {fileID: 198176649790183064, guid: 8a0d6a69b57aaff408ae8bdecc61c0ca,
