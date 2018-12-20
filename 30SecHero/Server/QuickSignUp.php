@@ -32,8 +32,9 @@ if ($numrows == 0)//找不到已經存在的Kongregate帳號就創新帳號
 	$emerald=0;
 	$curFloor=1;
 	$maxFloor=1;
+	$killBoss="";
 	//寫入資料庫
-    $signUpResult = mysql_query("INSERT INTO  ".$db_name.".playeraccount (  `ac_K` ,`userID_K` ,`gold` ,`emerald` ,`maxFloor`,`signUpTime`,`signInTime`) VALUES ( '".$ac_K."','".$userID_K."','".$gold."','".$emerald."','".$maxFloor."' ,'".$signUpTime."','".$signUpTime."') ; ",$con_w);
+    $signUpResult = mysql_query("INSERT INTO  ".$db_name.".playeraccount (  `ac_K` ,`userID_K` ,`gold` ,`emerald` ,`maxFloor`,`killBoss`,`signUpTime`,`signInTime`) VALUES ( '".$ac_K."','".$userID_K."','".$gold."','".$emerald."','".$maxFloor."','".$killBoss."' ,'".$signUpTime."','".$signUpTime."') ; ",$con_w);
 	if ($signUpResult)
 	{
 		//流水號
@@ -67,6 +68,7 @@ else//找到Kongregate帳戶就進行登入
 		$emerald=$row['emerald'];
 		$curFloor=$row['curFloor'];
 		$maxFloor=$row['maxFloor'];
+		$killBoss=$row['killBoss'];
 	}
 	$set = mysql_query("UPDATE ".$db_name.".playeraccount SET `signInTime` = '".$signUpTime."' WHERE `userID_K` = '".$userID_K."' ",$con_w);
 	if ($set)
@@ -75,7 +77,7 @@ else//找到Kongregate帳戶就進行登入
 		$time_end = microtime(true);
 		$executeTime = $time_end - $time_start;
 		//送回client
-		die("Success:".$id.",".$gold.",".$emerald.",".$curFloor.",".$maxFloor.": \nExecuteTime=".$executeTime);
+		die("Success:".$id.",".$gold.",".$emerald.",".$curFloor.",".$maxFloor.",".$killBoss.": \nExecuteTime=".$executeTime);
 	}
 	else
 	{

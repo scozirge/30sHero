@@ -37,21 +37,38 @@ public partial class BattleManage
             spawnCount = Random.Range(EnemySecondHalfMinCount, EnemySecondHalfMaxCount);
         return spawnCount;
     }
-    void SpawnDemogorgon()
+    void SpawnDemogorgon(int _type)
     {
-        for (int i = 0; i < AvailableDemonGergons.Count; i++)
+        if(_type==1)
         {
-            EnemyRole er = Instantiate(AvailableDemonGergons[i], Vector3.zero, Quaternion.identity) as EnemyRole;
-            er.SetEnemyData(GameDictionary.EnemyDic[AvailableDemonGergons[i].ID]);
-            //Set SpawnPos
-            er.transform.SetParent(EnemyParent);
-            er.transform.position = GetSpawnPos(new Vector2(600, 0));
-            er.SetStemFromFloor(Floor);
-            AddEnemy(er);
+            for (int i = 0; i < NextDemonGergons.Count; i++)
+            {
+                EnemyRole er = Instantiate(NextDemonGergons[i], Vector3.zero, Quaternion.identity) as EnemyRole;
+                er.SetEnemyData(GameDictionary.EnemyDic[NextDemonGergons[i].ID]);
+                //Set SpawnPos
+                er.transform.SetParent(EnemyParent);
+                er.transform.position = GetSpawnPos(new Vector2(600, 0));
+                er.SetStemFromFloor(Floor);
+                AddEnemy(er);
+            }
+            NextDemonGergons = EnemyData.GetNextDemogorgon(Floor + 1, out NextDemogorgonFloor);
         }
-        AvailableDemonGergons = EnemyData.GetNextDemogorgon(Floor + 1, out NextDemogorgonFloor);
+        else if(_type==2)
+        {
+            for (int i = 0; i < PreviousDemonGergons.Count; i++)
+            {
+                EnemyRole er = Instantiate(PreviousDemonGergons[i], Vector3.zero, Quaternion.identity) as EnemyRole;
+                er.SetEnemyData(GameDictionary.EnemyDic[PreviousDemonGergons[i].ID]);
+                //Set SpawnPos
+                er.transform.SetParent(EnemyParent);
+                er.transform.position = GetSpawnPos(new Vector2(600, 0));
+                er.SetStemFromFloor(Floor);
+                AddEnemy(er);
+            }
+            PreviousDemonGergons = EnemyData.GetPreviousDemogorgon(Floor - 1, out PreviousDemogorgonFloor);
+        }
         //Debug.Log("NextDemogorgonFloor=" + NextDemogorgonFloor);
-        IsDemogorgonFloor = false;
+        IsDemogorgonFloor = 0;
     }
     void SpanwEnemy()
     {

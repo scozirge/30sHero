@@ -118,4 +118,29 @@ public class EnemyData
         }
         return roles;
     }
+    public static List<EnemyRole> GetPreviousDemogorgon(int _curfloor, out int _previousBossFloor)
+    {
+        _previousBossFloor = 0;
+        List<EnemyRole> roles = new List<EnemyRole>();
+        for (int i = 0; i < Roles.Count; i++)
+        {
+            if (Roles[i].Type == EnemyType.Demogorgon)
+            {
+                if (_curfloor > Roles[i].DebutFloor)
+                {
+                    if (_previousBossFloor == 0)
+                    {
+                        _previousBossFloor = Roles[i].DebutFloor;
+                        roles.Add(Roles[i]);
+                    }
+                    else
+                    {
+                        if (Roles[i].DebutFloor == _previousBossFloor)
+                            roles.Add(Roles[i]);
+                    }
+                }
+            }
+        }
+        return roles;
+    }
 }

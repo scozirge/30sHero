@@ -81,7 +81,7 @@ public partial class EnemyRole
             {                
                 ResourceLoot loot = DropSpawner.SpawnResource(transform.position);
                 if (loot) loot.Init(ResourceType.Emerald, GameSettingData.NewBossEmerald);
-                BattleManage.GetEnchant();
+                BattleManage.KillNewBoss(ID);
             }
         }
         //DropLoot;

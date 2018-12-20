@@ -47,7 +47,7 @@ public partial class BattleManage
         StageList = new List<Stage>();
         FGList = new List<ForeGround>();
         UpdateCurPlate();
-        //建立門
+        //建立門(上一層的門不要生)
         if (Floor <= 1)
             SpawnGate(Floor - 1);
         else
@@ -63,7 +63,11 @@ public partial class BattleManage
             SpawnStage(new Vector2(-((BM.PlateSizeX * BM.FloorPlate) + (BM.PlateSizeX)), 0), BM.FloorPlate, Floor - 1);//上一層地形
             SpawnFG(new Vector2(-(BM.PlateSizeX * 1.5f) - (BM.PlateSizeX * BM.FloorPlate), 0), (BM.PlateSizeX * BM.FloorPlate), Floor - 1);//上一層的前景
         }
-
+        if ((Floor - 2) > 0)//因為撞門才會生地形，但上一層的門不會生，所以要事先生地形
+        {
+            SpawnStage(new Vector2(-((BM.PlateSizeX * BM.FloorPlate) * 2 + (BM.PlateSizeX)), 0), BM.FloorPlate, Floor - 2);//上上一層地形
+            SpawnFG(new Vector2(-(BM.PlateSizeX * 1.5f) - (BM.PlateSizeX * BM.FloorPlate) * 2, 0), (BM.PlateSizeX * BM.FloorPlate), Floor - 2);//上上一層的前景
+        }
     }
 
     static bool IsFirstHalf
@@ -100,14 +104,20 @@ public partial class BattleManage
         }
         Pivot.localPosition = new Vector2(FloorProcessingRatio * LocationCriterionWidth, Pivot.localPosition.y);
         BM.VelocityText.text = string.Format("{0}{1}", (int)BM.MyPlayer.MoveSpeed, StringData.GetString("Meter"));
-        if (IsDemogorgonFloor)
+        if (IsDemogorgonFloor==1 || IsDemogorgonFloor==2)
         {
-            if (CurPlate == NextDemogorgonFloor * FloorPlate - BossDebutPlate)
-                SpawnDemogorgon();
+            if (CurPlate >= FloorPlate - BossDebutPlate)
+                SpawnDemogorgon(IsDemogorgonFloor);
         }
         //樓層改變
         if (Floor != LastFloor)
         {
+            //更新怪物設定
+            if (!BM.TestMode)
+            {
+                AvailableMillions = EnemyData.GetAvailableMillions(Floor);
+                IsDemogorgonFloor = CheckDemogorgon(Floor);
+            }
             //更新介面
             BM.FloorText.text = string.Format("{0}{1}", Floor, StringData.GetString("Floor"));
             //把距離太遠的地形隱藏
@@ -153,11 +163,6 @@ public partial class BattleManage
         if (Floor > _destroyedFloor)//上一層
         {
             SpawnGate(_destroyedFloor - 1);
-            if (!BM.TestMode)
-            {
-                AvailableMillions = EnemyData.GetAvailableMillions(Floor - 1);
-                IsDemogorgonFloor = CheckDemogorgon(Floor - 1);
-            }
             //建立地形
             SpawnStage(new Vector2(-(BM.PlateSizeX * BM.FloorPlate * (StartFloor - Floor + 2) + BM.PlateSizeX), 0), BM.FloorPlate, Floor - 2);
             SpawnFG(new Vector2(-(BM.PlateSizeX * 1.5f + (BM.PlateSizeX * BM.FloorPlate * (StartFloor - Floor + 2))), 0), (BM.PlateSizeX * BM.FloorPlate), Floor - 2);
@@ -165,11 +170,6 @@ public partial class BattleManage
         else//下一層
         {
             SpawnGate(_destroyedFloor + 1);
-            if (!BM.TestMode)
-            {
-                AvailableMillions = EnemyData.GetAvailableMillions(Floor + 1);
-                IsDemogorgonFloor = CheckDemogorgon(Floor + 1);
-            }
             //建立地形
             SpawnStage(new Vector2((BM.PlateSizeX * BM.FloorPlate) * (Floor - StartFloor + 2) - BM.PlateSizeX, 0), BM.FloorPlate, Floor + 2);
             SpawnFG(new Vector2((-BM.PlateSizeX * 1.5f + (BM.PlateSizeX * BM.FloorPlate * (Floor - StartFloor + 2))), 0), (BM.PlateSizeX * BM.FloorPlate), Floor + 2);
@@ -178,9 +178,14 @@ public partial class BattleManage
         if (Floor > MaxFloor)
             MaxFloor = Floor;
     }
-    public static bool CheckDemogorgon(int _floor)
+    public static int CheckDemogorgon(int _floor)
     {
-        return (_floor == NextDemogorgonFloor);
+        if ((_floor == NextDemogorgonFloor))
+            return 1;
+        else if ((_floor == PreviousDemogorgonFloor))
+            return 2;
+        else
+            return 0;
     }
     static void SpawnStage(Vector2 _startPos, int _remainPlateSize, int _floor)
     {

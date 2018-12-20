@@ -71,15 +71,15 @@ public partial class EnemyRole : Role
         if (go)
             Target = go.GetComponent<PlayerRole>();
         InitMotionPic();
+
+        Health = MaxHealth;
+        if (Target && Health <= Target.Damage)
+            HealthObj.SetActive(false);
         if (InitBuffers != null)
             for (int i = 0; i < InitBuffers.Count; i++)
             {
                 AddBuffer(InitBuffers[i].GetMemberwiseClone());
             }
-
-        Health = MaxHealth;
-        if (Target && Health <= Target.Damage)
-            HealthObj.SetActive(false);
     }
     void InitMotionPic()
     {

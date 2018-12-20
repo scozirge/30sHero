@@ -218,7 +218,7 @@ public partial class Player
                         if (dataStr != "")
                             dataStr += "/";
                         dataStr += EnchantDic[keys[i]].ID + "," + EnchantDic[keys[i]].LV;
-                    } 
+                    }
                 }
                 PlayerPrefs.SetString(LocoData.Enchant.ToString(), dataStr);
             }
@@ -269,6 +269,32 @@ public partial class Player
             PlayerPrefs.SetInt(LocoData.MaxEnemyKills.ToString(), MaxEnemyKills);
         }
     }
+    public static void KillNewBoss(int _id)
+    {
+        if (_id <= 0)
+            return;
+        //寫入資料
+        if (PlayerInfoInitDataFinish)
+        {
+            Debug.Log("更新Loco玩家擊殺BOSS清單");
+            KillBossID.Add(_id);
+            string killBossStr = "";
+            for (int i = 0; i < KillBossID.Count; i++)
+            {
+                if (killBossStr != "")
+                    killBossStr += ",";
+                killBossStr += KillBossID[i].ToString();
+            }
+            if (LocalData)
+            {
+                PlayerPrefs.SetString(LocoData.KillBossID.ToString(), killBossStr);
+            }
+            else
+            {
+                ServerRequest.KillNewBoss(killBossStr);
+            }
+        }
+    }
     public static void GainEquip_Local(List<EquipData> _datas)
     {
         if (_datas == null || _datas.Count == 0)
@@ -288,6 +314,7 @@ public partial class Player
             EquipSaveLocalData();
         }
     }
+
     static List<EquipData> CurGainEquipDatas;
     public static void Settlement(int _gold, int _emerald, int _curFloor, int _maxFloor, List<EquipData> _equipDatas)
     {

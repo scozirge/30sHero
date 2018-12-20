@@ -192,6 +192,19 @@ partial class BattleManage
     {
         UnlockPartner++;
     }
+    public static void KillNewBoss(int _id)
+    {
+        for (int i = 0; i < Player.KillBossID.Count; i++)
+        {
+            if (_id == Player.KillBossID[i])
+            {
+                return;
+            }
+        }
+        //擊殺新BOSS
+        Player.KillNewBoss(_id);
+        GetEnchant();
+    }
     public static void GetEnchant()
     {
         EnchantData ed = EnchantData.GetAvailableRandomEnchant();

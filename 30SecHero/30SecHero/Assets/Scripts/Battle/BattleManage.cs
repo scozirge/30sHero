@@ -76,7 +76,8 @@ public partial class BattleManage : MonoBehaviour
 
 
     static List<EnemyRole> AvailableMillions;
-    static List<EnemyRole> AvailableDemonGergons;
+    static List<EnemyRole> PreviousDemonGergons;
+    static List<EnemyRole> NextDemonGergons;
     int CurSpawnCount;
     Transform EnemyParent;
     Transform LootParetn;
@@ -96,7 +97,8 @@ public partial class BattleManage : MonoBehaviour
     List<EnemyRole> EnemyList = new List<EnemyRole>();
     List<PotionLoot> LootList = new List<PotionLoot>();
     static int NextDemogorgonFloor;
-    static bool IsDemogorgonFloor;
+    static int PreviousDemogorgonFloor;
+    static int IsDemogorgonFloor;
     bool IsInit;
     int EnemySpawnCount;
 
@@ -140,7 +142,8 @@ public partial class BattleManage : MonoBehaviour
         else
         {
             AvailableMillions = EnemyData.GetAvailableMillions(Floor);
-            AvailableDemonGergons = EnemyData.GetNextDemogorgon(Floor, out NextDemogorgonFloor);
+            PreviousDemonGergons = EnemyData.GetPreviousDemogorgon(Floor, out PreviousDemogorgonFloor);
+            NextDemonGergons = EnemyData.GetNextDemogorgon(Floor, out NextDemogorgonFloor);
         }
         SpawnEnemyTimer = new MyTimer(EnemyFirstHalfInterval, SpanwEnemy, true, false);
         SpawnLootTimer = new MyTimer(PotionInterval, SpawnLoot, true, false);

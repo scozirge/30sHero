@@ -217,8 +217,19 @@ public partial class Player
         SetEmerald(int.Parse(_data[2]));
         SetCurFloor_Local(int.Parse(_data[3]));
         SetMaxFloor_Local(int.Parse(_data[4]));
+        //擊敗BOSS清單
+        string killBossStr = _data[5];
+        if (killBossStr != "")
+        {
+            string[] bossID = killBossStr.Split(',');
+            for (int i = 0; i < bossID.Length; i++)
+            {
+                KillBossID.Add(int.Parse(bossID[i]));
+            }
+        }
         Debug.Log("CurFloor=" + int.Parse(_data[3]));
         Debug.Log("MaxFloor=" + int.Parse(_data[4]));
+        Debug.Log("KillBoss=" + killBossStr);
         ServerRequest.GetEquip();
         ServerRequest.GetStrengthen();
         ServerRequest.GetEnchant();
@@ -328,5 +339,9 @@ public partial class Player
     public static void UpdateResource_CB(string[] _data)
     {
         Debug.Log("更新玩家資源成功");
+    }
+    public static void KillNewBoss_CB(string[] _data)
+    {
+        Debug.Log("更新玩家擊殺BOSS清單成功");
     }
 }
