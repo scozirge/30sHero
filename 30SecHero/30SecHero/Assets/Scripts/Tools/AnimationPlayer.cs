@@ -23,4 +23,8 @@ public class AnimationPlayer : MonoBehaviour
     {
         MyAni.SetFloat(_motion, _value);
     }
+    public void PlayTrigger(string _motion)
+    {
+        MyAni.Play(_motion, 0, 0);
+    }
 }

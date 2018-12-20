@@ -844,14 +844,14 @@ public partial class PlayerRole : Role
                             }
                             else
                                 rushForce = new Vector2(xMoveForce, yMoveForce) * RushForce;
-                            Debug.Log("RushForce=" + RushForce);
                             ChangeToKnockDrag();
                             MyRigi.velocity = rushForce;
                             //MyRigi.AddForce(rushForce);
                             AudioPlayer.PlaySound(RushSound);
                             //衝刺特效RushEffect
-                            EffectEmitter.EmitParticle(RushEffect, Vector3.zero, Vector3.zero, transform);
-                            //衝刺傷害增加特效
+                            float angle = Mathf.Atan2(MyRigi.velocity.y, MyRigi.velocity.x) * Mathf.Rad2Deg;
+                            EffectEmitter.EmitParticle(RushEffect, Vector3.zero, new Vector3(0, 0, angle), transform);
+                            //衝刺傷害增加特效  
                             if (MyEnchant[EnchantProperty.LethalDash] > 0)
                                 EffectEmitter.EmitParticle(GameManager.GM.LethalDashParticle, Vector3.zero, Vector3.zero, transform);
                         }

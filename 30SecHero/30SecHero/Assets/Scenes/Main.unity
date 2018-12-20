@@ -8778,6 +8778,7 @@ GameObject:
   m_Component:
   - component: {fileID: 899940457}
   - component: {fileID: 899940458}
+  - component: {fileID: 899940459}
   m_Layer: 5
   m_Name: Right
   m_TagString: Untagged
@@ -8826,6 +8827,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &899940459
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 899940456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65069269a16a89543bc9015ab9a79cf5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MyAni: {fileID: 899940458}
 --- !u!1 &901858728
 GameObject:
   m_ObjectHideFlags: 0
@@ -16349,6 +16363,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 899940459}
+        m_MethodName: PlayTrigger
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: SkillLevelUp
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1805688323
@@ -17079,7 +17104,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.000007801366}
+  m_AnchoredPosition: {x: 0, y: -0.000008336885}
   m_SizeDelta: {x: 23.7, y: 47.4}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1885360549
