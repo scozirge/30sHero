@@ -27,7 +27,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1253718865124768}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -59,6 +59,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Icon: {fileID: 114349823632602738}
   LVText: {fileID: 114092712887935190}
+  NumberText: {fileID: 3797824861904850026}
+  MyAni: {fileID: 7409689718945154087}
 --- !u!114 &114865814273270320
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -77,7 +79,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 3
+  m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -396,6 +398,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Icon: {fileID: 0}
   LVText: {fileID: 0}
+  NumberText: {fileID: 0}
+  MyAni: {fileID: 0}
 --- !u!1 &1789550915031544
 GameObject:
   m_ObjectHideFlags: 0
@@ -485,6 +489,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Icon: {fileID: 0}
   LVText: {fileID: 0}
+  NumberText: {fileID: 0}
+  MyAni: {fileID: 0}
 --- !u!1 &1844394035982788
 GameObject:
   m_ObjectHideFlags: 0
@@ -580,7 +586,7 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: lv
-  UIString: 
+  UIString: LV
   IsAddTextList: 0
 --- !u!1 &1373393333482551576
 GameObject:

@@ -9,6 +9,10 @@ public class StrengthenItem : Item
     Image Icon;
     [SerializeField]
     MyText LVText;
+    [SerializeField]
+    MyText NumberText;
+    [SerializeField]
+    Animator MyAni;
 
     public StrengthenData MyData;
     Strengthen ParentUI;
@@ -32,7 +36,7 @@ public class StrengthenItem : Item
     public override void RefreshText()
     {
         base.RefreshText();
-        LVText.text = MyData.GetLVString(0);
+        NumberText.text = MyData.LV.ToString();
     }
     void OnDestroy()
     {
@@ -52,6 +56,10 @@ public class StrengthenItem : Item
         if (!ParentUI)
             return;
         ParentUI.ShowInfo(this);
-
+    }
+    public void PlayAni(string _trigger)
+    {
+        if (MyAni != null)
+            MyAni.SetTrigger(_trigger);
     }
 }
