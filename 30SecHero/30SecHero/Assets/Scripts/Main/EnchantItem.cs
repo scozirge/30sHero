@@ -9,6 +9,10 @@ public class EnchantItem : Item
     Image Icon;
     [SerializeField]
     MyText LVText;
+        [SerializeField]
+    MyText NumberText;
+    [SerializeField]
+    Animator MyAni;
 
     public EnchantData MyData;
     Strengthen ParentUI;
@@ -27,7 +31,17 @@ public class EnchantItem : Item
             else
                 return;
         }
-        UpdateUI();
+        if (MyData != null)
+        {
+            Icon.sprite = MyData.GetICON();
+            NumberText.text = MyData.LV.ToString();
+            Icon.SetNativeSize();
+        }
+        else
+        {
+            Icon.sprite = GameManager.GM.UnknownIcon;
+            Icon.SetNativeSize();
+        }
         MyText.AddRefreshFunc(RefreshText);
         TheToggle = GetComponent<Toggle>();
         TheToggle.group = ParentUI.GetComponent<ToggleGroup>();
@@ -41,7 +55,7 @@ public class EnchantItem : Item
         base.RefreshText();
         if (MyData != null)
         {
-            LVText.text = MyData.GetLVString(0);
+            NumberText.text = MyData.LV.ToString();
             LVText.enabled = true;
         }
         else
@@ -49,7 +63,7 @@ public class EnchantItem : Item
     }
     public void UpdateUI()
     {
-        RefreshText();
+        //RefreshText();
         if(MyData!=null)
         {
             Icon.sprite = MyData.GetICON();
@@ -60,6 +74,7 @@ public class EnchantItem : Item
             Icon.sprite = GameManager.GM.UnknownIcon;
             Icon.SetNativeSize();
         }
+        PlayAni("LevelUp");
     }
     public override void OnPress()
     {
@@ -70,5 +85,14 @@ public class EnchantItem : Item
             return;
         ParentUI.ShowInfo(this);
 
+    }
+    void PlayAni(string _trigger)
+    {
+        if (MyAni != null)
+            MyAni.SetTrigger(_trigger);
+    }
+    public void ChangeLevelNumber()
+    {
+        NumberText.text = MyData.LV.ToString();
     }
 }

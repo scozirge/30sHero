@@ -28,7 +28,9 @@ public class StrengthenItem : Item
         }
         else
             return;
-        UpdateUI();
+        Icon.sprite = MyData.GetICON();
+        NumberText.text = MyData.LV.ToString();
+        Icon.SetNativeSize();
         MyText.AddRefreshFunc(RefreshText);
         TheToggle = GetComponent<Toggle>();
         TheToggle.group = ParentUI.GetComponent<ToggleGroup>();
@@ -44,9 +46,9 @@ public class StrengthenItem : Item
     }
     public void UpdateUI()
     {
-        RefreshText();
         Icon.sprite = MyData.GetICON();
         Icon.SetNativeSize();
+        PlayAni("LevelUp");
     }
     public override void OnPress()
     {
@@ -57,9 +59,13 @@ public class StrengthenItem : Item
             return;
         ParentUI.ShowInfo(this);
     }
-    public void PlayAni(string _trigger)
+    void PlayAni(string _trigger)
     {
         if (MyAni != null)
             MyAni.SetTrigger(_trigger);
+    }
+    public void ChangeLevelNumber()
+    {
+        NumberText.text = MyData.LV.ToString();
     }
 }
