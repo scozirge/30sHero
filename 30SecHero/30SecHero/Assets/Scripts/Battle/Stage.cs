@@ -99,8 +99,6 @@ public partial class BattleManage
     {
         if (GatePosDic.ContainsKey(Floor - 1))
             return BattleManage.BM.MyPlayer.transform.position.x - GatePosDic[Floor - 1].x;
-        else
-            Debug.LogWarning("FailToGetDistToPreviousDoor");
         return 0;
     }
     int GetCurFloor()
