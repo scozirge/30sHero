@@ -1311,6 +1311,21 @@ PrefabInstance:
       propertyPath: BaseDamage
       value: 6666
       objectReference: {fileID: 0}
+    - target: {fileID: 114529601492733476, guid: d9e47796d36fc83458ffab41aea6641e,
+        type: 3}
+      propertyPath: AvatarTimerAni
+      value: 
+      objectReference: {fileID: 2091431472}
+    - target: {fileID: 114529601492733476, guid: d9e47796d36fc83458ffab41aea6641e,
+        type: 3}
+      propertyPath: MaxAvaterTime
+      value: 999
+      objectReference: {fileID: 0}
+    - target: {fileID: 114529601492733476, guid: d9e47796d36fc83458ffab41aea6641e,
+        type: 3}
+      propertyPath: MaxHealth
+      value: 10000
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d9e47796d36fc83458ffab41aea6641e, type: 3}
 --- !u!1 &134664633

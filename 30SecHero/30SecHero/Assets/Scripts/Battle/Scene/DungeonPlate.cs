@@ -62,11 +62,16 @@ public class DungeonPlate : Plate
         while (passPlate > 0)
         {
             passPlate -= BattleManage.GetFloorPlateCount(floor);
-            if (passPlate >= 0)
+            if (passPlate > 0)
                 if (_plate >= 0)
                     floor++;
                 else
                     floor--;
+            else if(passPlate==0)
+            {
+                if (_plate >= 0)
+                    floor++;
+            }
         }
         Color color = GetCurFloorColor(floor - 1);
         switch (_type)
@@ -97,7 +102,6 @@ public class DungeonPlate : Plate
             FloorColor.Add(CurFloor, GetNewCurFloorColor(CurFloor));
         }
         FloorImage.color = GetColorByCurPlate(CurPlate, 0);
-        Debug.Log("FloorImage.color=" + FloorImage.color);
         WallTopImage.color = FloorImage.color;
         WallBotImage.color = FloorImage.color;
         /*

@@ -11,7 +11,7 @@ public class Plate : MonoBehaviour
     [SerializeField]
     Vector3 Rotation;
 
-
+    [SerializeField]
     protected int CurPlate;//目前的板塊是遊戲開始後第幾塊
     public int ColumnRank { get; private set; }//目前的板塊是顯示板塊中的第幾塊
     int MaxColumn { get; set; }//顯示幾塊板塊

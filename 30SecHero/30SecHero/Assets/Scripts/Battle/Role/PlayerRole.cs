@@ -112,6 +112,8 @@ public partial class PlayerRole : Role
     public float AvatarTimeRatio { get { return (float)AvatarTimer / (float)MaxAvaterTime; } }
     [SerializeField]
     Text AvatarTimerText;
+    [SerializeField]
+    Animator AvatarTimerAni;
     [Tooltip("變身解除無敵時間(秒)")]
     [SerializeField]
     protected float UntochableTime;
@@ -766,7 +768,13 @@ public partial class PlayerRole : Role
             }
             ActiveEnchantSkill(false);
         }
-        AvatarTimerText.text = Mathf.Round(AvatarTimer).ToString();
+        if (AvatarTimerText.text != Mathf.Round(AvatarTimer).ToString())
+        {
+            AvatarTimerText.text = Mathf.Round(AvatarTimer).ToString();
+            if (AvatarTimerAni != null)
+                if (AvatarTimer <= 10)
+                    AvatarTimerAni.SetTrigger("TimeAlarm");
+        }
     }
 
     protected override void Move()
