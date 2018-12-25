@@ -5,13 +5,15 @@ using UnityEngine;
 public partial class BattleManage
 {
     [SerializeField]
-    public int FloorPlate;
+    public int StartFloorPlate;
     [SerializeField]
     int PlateSizeX;
     [SerializeField]
     int BossDebutPlate;
     [SerializeField]
     MyText FloorText;
+    [SerializeField]
+    MyText PlateText;
     [SerializeField]
     MyText VelocityText;
     [SerializeField]
@@ -37,76 +39,128 @@ public partial class BattleManage
     float LocationCriterionWidth;
     static List<Stage> StageList;
     static List<ForeGround> FGList;
+    static Dictionary<int, Vector2> GatePosDic;
 
     void InitStage()
     {
         if (!MyPlayer)
             return;
+        Floor = GetCurFloor();
         MyStageSpawner.Init();
         LocationCriterionWidth = LocationCriterion.rect.width - 21;
         StageList = new List<Stage>();
         FGList = new List<ForeGround>();
+        GatePosDic = new Dictionary<int, Vector2>();
         UpdateCurPlate();
-        //建立門(上一層的門不要生)
         if (Floor <= 1)
             SpawnGate(Floor - 1);
-        else
+        else//建立門(上一層的門不要生)
+        {
             SpawnGate(Floor - 2);
+            Vector2 pos = new Vector2(((Floor - StartFloor) * GetFloorPlateCount(Floor) * BM.PlateSizeX) - (BM.PlateSizeX * 1.5f), 0);
+            GatePosDic.Add(Floor - 1, pos);
+        }
+
         SpawnGate(Floor);
         //建立地形
-        SpawnStage(new Vector2(BM.PlateSizeX, 0), BM.FloorPlate - 2, Floor);//目前層的地形
-        SpawnFG(new Vector2(-(BM.PlateSizeX * 1.5f), 0), (BM.PlateSizeX * BM.FloorPlate), Floor);//目前層的前景
-        SpawnStage(new Vector2((BM.PlateSizeX * BM.FloorPlate) - BM.PlateSizeX, 0), BM.FloorPlate, Floor + 1);//下一層地形
-        SpawnFG(new Vector2(-(BM.PlateSizeX * 1.5f) + (BM.PlateSizeX * BM.FloorPlate), 0), (BM.PlateSizeX * BM.FloorPlate), Floor + 1);//下一層的前景
+        SpawnStage(new Vector2(BM.PlateSizeX, 0), GetFloorPlateCount(Floor) - 2, Floor);//目前層的地形
+        SpawnFG(new Vector2(-(BM.PlateSizeX * 1.5f), 0), (BM.PlateSizeX * GetFloorPlateCount(Floor)), Floor);//目前層的前景
+        SpawnStage(new Vector2((BM.PlateSizeX * GetFloorPlateCount(Floor + 1)) - BM.PlateSizeX, 0), GetFloorPlateCount(Floor + 1), Floor + 1);//下一層地形
+        SpawnFG(new Vector2(-(BM.PlateSizeX * 1.5f) + (BM.PlateSizeX * GetFloorPlateCount(Floor + 1)), 0), (BM.PlateSizeX * GetFloorPlateCount(Floor + 1)), Floor + 1);//下一層的前景
         if ((Floor - 1) > 0)
         {
-            SpawnStage(new Vector2(-((BM.PlateSizeX * BM.FloorPlate) + (BM.PlateSizeX)), 0), BM.FloorPlate, Floor - 1);//上一層地形
-            SpawnFG(new Vector2(-(BM.PlateSizeX * 1.5f) - (BM.PlateSizeX * BM.FloorPlate), 0), (BM.PlateSizeX * BM.FloorPlate), Floor - 1);//上一層的前景
+            SpawnStage(new Vector2(-((BM.PlateSizeX * GetFloorPlateCount(Floor - 1)) + (BM.PlateSizeX)), 0), GetFloorPlateCount(Floor - 1), Floor - 1);//上一層地形
+            SpawnFG(new Vector2(-(BM.PlateSizeX * 1.5f) - (BM.PlateSizeX * GetFloorPlateCount(Floor - 1)), 0), (BM.PlateSizeX * GetFloorPlateCount(Floor - 1)), Floor - 1);//上一層的前景
         }
         if ((Floor - 2) > 0)//因為撞門才會生地形，但上一層的門不會生，所以要事先生地形
         {
-            SpawnStage(new Vector2(-((BM.PlateSizeX * BM.FloorPlate) * 2 + (BM.PlateSizeX)), 0), BM.FloorPlate, Floor - 2);//上上一層地形
-            SpawnFG(new Vector2(-(BM.PlateSizeX * 1.5f) - (BM.PlateSizeX * BM.FloorPlate) * 2, 0), (BM.PlateSizeX * BM.FloorPlate), Floor - 2);//上上一層的前景
+            SpawnStage(new Vector2(-((BM.PlateSizeX * GetFloorPlateCount(Floor - 2)) * 2 + (BM.PlateSizeX)), 0), GetFloorPlateCount(Floor - 2), Floor - 2);//上上一層地形
+            SpawnFG(new Vector2(-(BM.PlateSizeX * 1.5f) - (BM.PlateSizeX * GetFloorPlateCount(Floor - 2)) * 2, 0), (BM.PlateSizeX * GetFloorPlateCount(Floor - 2)), Floor - 2);//上上一層的前景
         }
     }
-
+    public static int GetFloorPlateCount(int _floor)
+    {
+        int plateCount = BM.StartFloorPlate + (_floor - 1) * GameSettingData.FloorUpPlate;
+        if (plateCount < BM.StartFloorPlate)
+            plateCount = BM.StartFloorPlate;
+        return plateCount;
+    }
     static bool IsFirstHalf
     {
         get
         {
-            float t = CurPlate % BM.FloorPlate;
-            return t <= (BM.FloorPlate / 2);
+            float t = CurPlate % GetFloorPlateCount(Floor);
+            return t <= (GetFloorPlateCount(Floor) / 2);
         }
     }
     static int CurPlate = 0;
     static float FloorProcessingRatio = 0;
+    float DistToPreviousDoor()
+    {
+        if (GatePosDic.ContainsKey(Floor - 1))
+            return BattleManage.BM.MyPlayer.transform.position.x - GatePosDic[Floor - 1].x;
+        else
+            Debug.LogWarning("FailToGetDistToPreviousDoor");
+        return 0;
+    }
+    int GetCurFloor()
+    {
+        float distToFirstDoor = BattleManage.BM.MyPlayer.transform.position.x + (BM.PlateSizeX * 1.5f);
+        float moveDist = Mathf.Abs(distToFirstDoor);
+        int passFloor = 0;
+        while (moveDist > 0)
+        {
+            if (distToFirstDoor >= 0)
+                moveDist -= GetFloorPlateCount(StartFloor + passFloor) * BM.PlateSizeX;
+            else
+                moveDist -= GetFloorPlateCount(StartFloor - 1 - passFloor) * BM.PlateSizeX;
+            if (moveDist > 0)
+                passFloor++;
+            else
+                break;
+        }
+        if (distToFirstDoor > 0)
+            return StartFloor + passFloor;
+        else
+            return StartFloor - passFloor - 1;
+    }
+    static Vector2 GetGatePosition(int _floor)
+    {
+        float posX = 0;
+        int passFloor = Mathf.Abs(_floor - StartFloor);
+        if (_floor >= StartFloor)
+            passFloor += 1;
+        else
+            passFloor -= 1;
+        for (int i = 0; i < passFloor; i++)
+        {
+            if (_floor < StartFloor)
+            {
+                posX -= (GetFloorPlateCount(StartFloor + ((i + 1) * -1)) * BM.PlateSizeX);
+            }
+            else
+            {
+                posX += (GetFloorPlateCount(StartFloor + i) * BM.PlateSizeX);
+            }
+        }
+        posX -= BM.PlateSizeX * 1.5f;
+        return new Vector2(posX, 0);
+    }
     void UpdateCurPlate()
     {
         if (!MyPlayer)
             return;
-
-        //CurPlate = CurPlate % BM.FloorPlate;
-
         float distToFirstDoor = BattleManage.BM.MyPlayer.transform.position.x + (BM.PlateSizeX * 1.5f);
-        Floor = (int)(distToFirstDoor / (BM.PlateSizeX * BM.FloorPlate)) + StartFloor;
-        if (distToFirstDoor >= 0)
-        {
-            CurPlate = (int)(distToFirstDoor / BM.PlateSizeX) % (BM.FloorPlate) + 1;
-            FloorProcessingRatio = (distToFirstDoor % (BM.PlateSizeX * BM.FloorPlate)) / (BM.PlateSizeX * BM.FloorPlate);
-        }
-        else
-        {
-            Floor -= 1;
-            CurPlate = ((int)(distToFirstDoor / BM.PlateSizeX) + BM.FloorPlate) % (BM.FloorPlate);
-            if (CurPlate == 0)
-                CurPlate = 10;
-            FloorProcessingRatio = (distToFirstDoor % (BM.PlateSizeX * BM.FloorPlate) + (BM.PlateSizeX * BM.FloorPlate)) / (BM.PlateSizeX * BM.FloorPlate);
-        }
+        Floor = GetCurFloor();//(int)(distToFirstDoor / (BM.PlateSizeX * GetFloorPlateCount(Floor))) + StartFloor;
+        float distToPreviousDoor = DistToPreviousDoor();
+        CurPlate = (int)(distToPreviousDoor / BM.PlateSizeX) % GetFloorPlateCount(Floor) + 1;
+        FloorProcessingRatio = distToPreviousDoor / (BM.PlateSizeX * GetFloorPlateCount(Floor));
+        PlateText.text = CurPlate.ToString();
         Pivot.localPosition = new Vector2(FloorProcessingRatio * LocationCriterionWidth, Pivot.localPosition.y);
         BM.VelocityText.text = string.Format("{0}{1}", (int)BM.MyPlayer.MoveSpeed, StringData.GetString("Meter"));
-        if (IsDemogorgonFloor==1 || IsDemogorgonFloor==2)
+        if (IsDemogorgonFloor == 1 || IsDemogorgonFloor == 2)
         {
-            if (CurPlate >= FloorPlate - BossDebutPlate)
+            if (CurPlate >= GetFloorPlateCount(Floor) - BossDebutPlate)
                 SpawnDemogorgon(IsDemogorgonFloor);
         }
         //樓層改變
@@ -139,7 +193,9 @@ public partial class BattleManage
         }
         gate.transform.SetParent(BM.GateParent);
         gate.Init(_floor);
-        gate.transform.position = new Vector2(((_floor + 1 - StartFloor) * BM.FloorPlate * BM.PlateSizeX) - (BM.PlateSizeX * 1.5f), 0);
+        gate.transform.position = GetGatePosition(_floor);//new Vector2(((_floor + 1 - StartFloor) * GetFloorPlateCount(_floor) * BM.PlateSizeX) - (BM.PlateSizeX * 1.5f), 0);
+        if (!GatePosDic.ContainsKey(_floor))
+            GatePosDic.Add(_floor, gate.transform.position);
     }
     public static void SpawnNextGate(int _destroyedFloor)
     {
@@ -164,15 +220,15 @@ public partial class BattleManage
         {
             SpawnGate(_destroyedFloor - 1);
             //建立地形
-            SpawnStage(new Vector2(-(BM.PlateSizeX * BM.FloorPlate * (StartFloor - Floor + 2) + BM.PlateSizeX), 0), BM.FloorPlate, Floor - 2);
-            SpawnFG(new Vector2(-(BM.PlateSizeX * 1.5f + (BM.PlateSizeX * BM.FloorPlate * (StartFloor - Floor + 2))), 0), (BM.PlateSizeX * BM.FloorPlate), Floor - 2);
+            SpawnStage(new Vector2(-(BM.PlateSizeX * GetFloorPlateCount(Floor - 2) * (StartFloor - Floor + 2) + BM.PlateSizeX), 0), GetFloorPlateCount(Floor - 2), Floor - 2);
+            SpawnFG(new Vector2(-(BM.PlateSizeX * 1.5f + (BM.PlateSizeX * GetFloorPlateCount(Floor - 2) * (StartFloor - Floor + 2))), 0), (BM.PlateSizeX * GetFloorPlateCount(Floor - 2)), Floor - 2);
         }
         else//下一層
         {
             SpawnGate(_destroyedFloor + 1);
             //建立地形
-            SpawnStage(new Vector2((BM.PlateSizeX * BM.FloorPlate) * (Floor - StartFloor + 2) - BM.PlateSizeX, 0), BM.FloorPlate, Floor + 2);
-            SpawnFG(new Vector2((-BM.PlateSizeX * 1.5f + (BM.PlateSizeX * BM.FloorPlate * (Floor - StartFloor + 2))), 0), (BM.PlateSizeX * BM.FloorPlate), Floor + 2);
+            SpawnStage(new Vector2((BM.PlateSizeX * GetFloorPlateCount(Floor + 2)) * (Floor - StartFloor + 2) - BM.PlateSizeX, 0), GetFloorPlateCount(Floor + 2), Floor + 2);
+            SpawnFG(new Vector2((-BM.PlateSizeX * 1.5f + (BM.PlateSizeX * GetFloorPlateCount(Floor + 2) * (Floor - StartFloor + 2))), 0), (BM.PlateSizeX * GetFloorPlateCount(Floor + 2)), Floor + 2);
         }
         PassFloorCount++;
         if (Floor > MaxFloor)

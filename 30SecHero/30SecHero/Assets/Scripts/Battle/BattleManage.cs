@@ -178,9 +178,9 @@ public partial class BattleManage : MonoBehaviour
         EnemySpawnInterval = GameSettingData.EnemySpawnInterval;
         MaxEnemy = GameSettingData.MaxEnemy;
         MaxLoot = GameSettingData.MaxLoot;
-        FloorPlate = GameSettingData.FloorPlate;
         BossDebutPlate = GameSettingData.BossDebutPlate;
         StartFloor = Player.CurFloor;
+        StartFloorPlate = GameSettingData.FloorPlate;
         if (StartFloor < 1)
             StartFloor = 1;
     }

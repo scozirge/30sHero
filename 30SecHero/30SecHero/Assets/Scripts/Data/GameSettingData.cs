@@ -111,6 +111,7 @@ public class GameSettingData : Data
     public static int MaxBackEnemy;
     public static int MaxLoot;
     public static int FloorPlate;
+    public static int FloorUpPlate;
     public static int BossDebutPlate;
     public static float EnemyHPGrow;
     public static float EnemyDMGGrow;
@@ -476,6 +477,9 @@ public class GameSettingData : Data
                                 break;
                             case "FloorPlate":
                                 FloorPlate = int.Parse(item[key].ToString());
+                                break;
+                            case "FloorUpPlate":
+                                FloorUpPlate = int.Parse(item[key].ToString());
                                 break;
                             case "BossDebutPlate":
                                 BossDebutPlate = int.Parse(item[key].ToString());

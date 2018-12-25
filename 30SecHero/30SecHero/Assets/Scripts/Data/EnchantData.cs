@@ -214,6 +214,13 @@ public class EnchantData : Data
         }
         return null;
     }
+    public static bool CheckGetAllEnchant()
+    {
+        EnchantData ed = GetRandomEnchant(1);
+        if (ed == null)
+            return true;
+        return false;
+    }
     static EnchantData GetRandomEnchant(int _lv)
     {
         List<EnchantData> availableEnchant = new List<EnchantData>();

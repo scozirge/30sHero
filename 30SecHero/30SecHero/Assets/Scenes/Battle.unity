@@ -872,6 +872,103 @@ MonoBehaviour:
   Designate: 0
   SkillLoot: {fileID: 114640900239068930, guid: bfe4c970b9b64c04a9b7b94854530aa9,
     type: 3}
+--- !u!1 &108013576
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 108013580}
+  - component: {fileID: 108013579}
+  - component: {fileID: 108013577}
+  - component: {fileID: 108013578}
+  m_Layer: 5
+  m_Name: plate
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &108013577
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 108013576}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c729b730d8fa5f4faf5aa88d6d01479, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.47058827, g: 0.6627451, b: 0.14901961, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: eab19f146f468874e92ae2105ed03340, type: 3}
+    m_FontSize: 50
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 4
+    m_MaxSize: 105
+    m_Alignment: 5
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: 10F
+  UIString: 
+  IsAddTextList: 0
+--- !u!114 &108013578
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 108013576}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 4, y: -4}
+  m_UseGraphicAlpha: 0
+--- !u!222 &108013579
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 108013576}
+  m_CullTransparentMesh: 0
+--- !u!224 &108013580
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 108013576}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1070099226}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -113, y: -70}
+  m_SizeDelta: {x: 200, y: 150}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &109092653
 GameObject:
   m_ObjectHideFlags: 0
@@ -1184,6 +1281,16 @@ PrefabInstance:
       propertyPath: MyLight
       value: 
       objectReference: {fileID: 2074361672}
+    - target: {fileID: 114529601492733476, guid: d9e47796d36fc83458ffab41aea6641e,
+        type: 3}
+      propertyPath: TestMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114529601492733476, guid: d9e47796d36fc83458ffab41aea6641e,
+        type: 3}
+      propertyPath: BaseDamage
+      value: 6666
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d9e47796d36fc83458ffab41aea6641e, type: 3}
 --- !u!1 &134664633
@@ -6590,6 +6697,7 @@ RectTransform:
   - {fileID: 1479774047}
   - {fileID: 1794995100}
   - {fileID: 2129670446}
+  - {fileID: 108013580}
   m_Father: {fileID: 1671040068}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -10348,10 +10456,11 @@ MonoBehaviour:
   EmeraldText: {fileID: 754975252}
   MySpanwer: {fileID: 232256112}
   CallSettlementTime: 1
-  FloorPlate: 20
+  StartFloorPlate: 0
   PlateSizeX: 884
   BossDebutPlate: 1
   FloorText: {fileID: 1794995101}
+  PlateText: {fileID: 108013577}
   VelocityText: {fileID: 1479774048}
   GatePrefab: {fileID: 114196004098046030, guid: f13058442fb94894587304b5c65d196f,
     type: 3}

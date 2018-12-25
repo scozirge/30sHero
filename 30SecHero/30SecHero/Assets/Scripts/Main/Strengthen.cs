@@ -62,9 +62,13 @@ public class Strengthen : MyUI
                 }
             }
         }
-        EnchantItem unknown = (EnchantItem)EnchantSpanwer.Spawn();
-        unknown.Set(null, this);
-        EnchantItemList.Add(unknown);
+        if(!EnchantData.CheckGetAllEnchant())//如果所以附魔都解索完就不跳未解鎖問號標誌
+        {
+            EnchantItem unknown = (EnchantItem)EnchantSpanwer.Spawn();
+            unknown.Set(null, this);
+            EnchantItemList.Add(unknown);
+        }
+
         //預設強化分頁並選擇第一個item
         StrengthenContent.gameObject.SetActive(true);
         EnchantContent.gameObject.SetActive(false);
