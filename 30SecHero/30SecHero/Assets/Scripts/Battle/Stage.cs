@@ -74,8 +74,8 @@ public partial class BattleManage
         }
         if ((Floor - 2) > 0)//因為撞門才會生地形，但上一層的門不會生，所以要事先生地形
         {
-            SpawnStage(new Vector2(-((BM.PlateSizeX * GetFloorPlateCount(Floor - 2)) * 2 + (BM.PlateSizeX)), 0), GetFloorPlateCount(Floor - 2), Floor - 2);//上上一層地形
-            SpawnFG(new Vector2(-(BM.PlateSizeX * 1.5f) - (BM.PlateSizeX * GetFloorPlateCount(Floor - 2)) * 2, 0), (BM.PlateSizeX * GetFloorPlateCount(Floor - 2)), Floor - 2);//上上一層的前景
+            SpawnStage(new Vector2(-((BM.PlateSizeX * (GetFloorPlateCount(Floor - 1) + GetFloorPlateCount(Floor - 2))) + (BM.PlateSizeX)), 0), GetFloorPlateCount(Floor - 2), Floor - 2);//上上一層地形
+            SpawnFG(new Vector2(-((BM.PlateSizeX * (GetFloorPlateCount(Floor - 1) + GetFloorPlateCount(Floor - 2))) + (BM.PlateSizeX)), 0), (BM.PlateSizeX * GetFloorPlateCount(Floor - 2)), Floor - 2);//上上一層的前景
         }
     }
     public static int GetFloorPlateCount(int _floor)
@@ -245,6 +245,7 @@ public partial class BattleManage
     }
     static void SpawnStage(Vector2 _startPos, int _remainPlateSize, int _floor)
     {
+        //Debug.Log(string.Format("Floor={0} StartPos={1} PlateSize={2}", _floor, _startPos, _remainPlateSize));
         List<Stage> stageList = StageSpawner.SpawnStage(_startPos, BM.PlateSizeX, _remainPlateSize, _floor);
         if (stageList == null)
             return;
