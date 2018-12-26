@@ -19,9 +19,13 @@ public partial class BattleManage
     [SerializeField]
     Gate GatePrefab;
     [SerializeField]
+    GameObject JoinPrefab;
+    [SerializeField]
     Gate EntrancePrefab;
     [SerializeField]
     Transform GateParent;
+    [SerializeField]
+    Transform JoinParent;
     [SerializeField]
     StageSpawner MyStageSpawner;
 
@@ -59,6 +63,11 @@ public partial class BattleManage
             SpawnGate(Floor - 2);
             Vector2 pos = new Vector2(((Floor - StartFloor) * GetFloorPlateCount(Floor) * BM.PlateSizeX) - (BM.PlateSizeX * 1.5f), 0);
             GatePosDic.Add(Floor - 1, pos);
+
+            //產生join
+            GameObject go = Instantiate(BM.JoinPrefab);
+            go.transform.SetParent(BM.JoinParent);
+            go.transform.position = new Vector2(GetGatePosition(Floor - 1).x, 0);
         }
 
         SpawnGate(Floor);
@@ -195,6 +204,10 @@ public partial class BattleManage
         gate.transform.position = GetGatePosition(_floor);//new Vector2(((_floor + 1 - StartFloor) * GetFloorPlateCount(_floor) * BM.PlateSizeX) - (BM.PlateSizeX * 1.5f), 0);
         if (!GatePosDic.ContainsKey(_floor))
             GatePosDic.Add(_floor, gate.transform.position);
+        //產生join
+        GameObject go = Instantiate(BM.JoinPrefab);
+        go.transform.SetParent(BM.JoinParent);
+        go.transform.position = gate.transform.position;
     }
     public static void SpawnNextGate(int _destroyedFloor)
     {
