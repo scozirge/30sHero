@@ -63,19 +63,20 @@ public partial class BattleManage
 
         SpawnGate(Floor);
         //建立地形
-        SpawnStage(new Vector2(BM.PlateSizeX, 0), GetFloorPlateCount(Floor) - 2, Floor);//目前層的地形
-        SpawnFG(new Vector2(-(BM.PlateSizeX * 1.5f), 0), (BM.PlateSizeX * GetFloorPlateCount(Floor)), Floor);//目前層的前景
-        SpawnStage(new Vector2((BM.PlateSizeX * GetFloorPlateCount(Floor + 1)) - BM.PlateSizeX, 0), GetFloorPlateCount(Floor + 1), Floor + 1);//下一層地形
-        SpawnFG(new Vector2(-(BM.PlateSizeX * 1.5f) + (BM.PlateSizeX * GetFloorPlateCount(Floor + 1)), 0), (BM.PlateSizeX * GetFloorPlateCount(Floor + 1)), Floor + 1);//下一層的前景
+
+        SpawnStage(new Vector2(GetGatePosition(Floor - 1).x + (BM.PlateSizeX * 5 / 2), 0), GetFloorPlateCount(Floor) - 2, Floor);//目前層的地形
+        SpawnFG(new Vector2(GetGatePosition(Floor - 1).x + (BM.PlateSizeX * 5 / 2), 0), (BM.PlateSizeX * GetFloorPlateCount(Floor)), Floor);//目前層的前景
+        SpawnStage(new Vector2(GetGatePosition(Floor).x + (BM.PlateSizeX / 2), 0), GetFloorPlateCount(Floor + 1), Floor + 1);//下一層地形
+        SpawnFG(new Vector2(GetGatePosition(Floor).x + (BM.PlateSizeX / 2), 0), (BM.PlateSizeX * GetFloorPlateCount(Floor + 1)), Floor + 1);//下一層的前景
         if ((Floor - 1) > 0)
         {
-            SpawnStage(new Vector2(-((BM.PlateSizeX * GetFloorPlateCount(Floor - 1)) + (BM.PlateSizeX)), 0), GetFloorPlateCount(Floor - 1), Floor - 1);//上一層地形
-            SpawnFG(new Vector2(-(BM.PlateSizeX * 1.5f) - (BM.PlateSizeX * GetFloorPlateCount(Floor - 1)), 0), (BM.PlateSizeX * GetFloorPlateCount(Floor - 1)), Floor - 1);//上一層的前景
+            SpawnStage(new Vector2(GetGatePosition(Floor - 2).x + (BM.PlateSizeX / 2), 0), GetFloorPlateCount(Floor - 1), Floor - 1);//上上一層地形
+            SpawnFG(new Vector2(GetGatePosition(Floor - 2).x + (BM.PlateSizeX / 2), 0), (BM.PlateSizeX * GetFloorPlateCount(Floor - 1)), Floor - 1);//上上一層的前景
         }
         if ((Floor - 2) > 0)//因為撞門才會生地形，但上一層的門不會生，所以要事先生地形
         {
-            SpawnStage(new Vector2(-((BM.PlateSizeX * (GetFloorPlateCount(Floor - 1) + GetFloorPlateCount(Floor - 2))) + (BM.PlateSizeX)), 0), GetFloorPlateCount(Floor - 2), Floor - 2);//上上一層地形
-            SpawnFG(new Vector2(-((BM.PlateSizeX * (GetFloorPlateCount(Floor - 1) + GetFloorPlateCount(Floor - 2))) + (BM.PlateSizeX)), 0), (BM.PlateSizeX * GetFloorPlateCount(Floor - 2)), Floor - 2);//上上一層的前景
+            SpawnStage(new Vector2(GetGatePosition(Floor - 3).x + (BM.PlateSizeX / 2), 0), GetFloorPlateCount(Floor - 2), Floor - 2);//上上一層地形
+            SpawnFG(new Vector2(GetGatePosition(Floor - 3).x + (BM.PlateSizeX / 2), 0), (BM.PlateSizeX * GetFloorPlateCount(Floor - 2)), Floor - 2);//上上一層的前景
         }
     }
     public static int GetFloorPlateCount(int _floor)
@@ -158,7 +159,7 @@ public partial class BattleManage
         BM.VelocityText.text = string.Format("{0}{1}", (int)BM.MyPlayer.MoveSpeed, StringData.GetString("Meter"));
         if (IsDemogorgonFloor == 1 || IsDemogorgonFloor == 2)
         {
-            if (CurPlate >= GetFloorPlateCount(Floor) - BossDebutPlate)
+            if (CurPlate == GetFloorPlateCount(Floor) - BossDebutPlate)
                 SpawnDemogorgon(IsDemogorgonFloor);
         }
         //樓層改變
@@ -218,15 +219,16 @@ public partial class BattleManage
         {
             SpawnGate(_destroyedFloor - 1);
             //建立地形
-            SpawnStage(new Vector2(-(BM.PlateSizeX * GetFloorPlateCount(Floor - 2) * (StartFloor - Floor + 2) + BM.PlateSizeX), 0), GetFloorPlateCount(Floor - 2), Floor - 2);
-            SpawnFG(new Vector2(-(BM.PlateSizeX * 1.5f + (BM.PlateSizeX * GetFloorPlateCount(Floor - 2) * (StartFloor - Floor + 2))), 0), (BM.PlateSizeX * GetFloorPlateCount(Floor - 2)), Floor - 2);
+            //SpawnStage(GetGatePosition(Floor - 2), GetFloorPlateCount(Floor - 2), Floor - 2);
+            SpawnStage(new Vector2(GetGatePosition(Floor - 3).x + (BM.PlateSizeX / 2), 0), GetFloorPlateCount(Floor - 2), Floor - 2);//上上一層地形
+            SpawnFG(new Vector2(GetGatePosition(Floor - 3).x + (BM.PlateSizeX / 2), 0), (BM.PlateSizeX * GetFloorPlateCount(Floor - 2)), Floor - 2);
         }
         else//下一層
         {
             SpawnGate(_destroyedFloor + 1);
             //建立地形
-            SpawnStage(new Vector2((BM.PlateSizeX * GetFloorPlateCount(Floor + 2)) * (Floor - StartFloor + 2) - BM.PlateSizeX, 0), GetFloorPlateCount(Floor + 2), Floor + 2);
-            SpawnFG(new Vector2((-BM.PlateSizeX * 1.5f + (BM.PlateSizeX * GetFloorPlateCount(Floor + 2) * (Floor - StartFloor + 2))), 0), (BM.PlateSizeX * GetFloorPlateCount(Floor + 2)), Floor + 2);
+            SpawnStage(new Vector2(GetGatePosition(Floor + 1).x + (BM.PlateSizeX / 2), 0), GetFloorPlateCount(Floor + 2), Floor + 2);
+            SpawnFG(new Vector2(GetGatePosition(Floor + 1).x + (BM.PlateSizeX / 2), 0), (BM.PlateSizeX * GetFloorPlateCount(Floor + 2)), Floor + 2);
         }
         PassFloorCount++;
         if (Floor > MaxFloor)

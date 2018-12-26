@@ -12,6 +12,7 @@ public class EnemyData
     public static string DataName;
 
     static List<EnemyRole> Roles;
+    static Dictionary<int, int> DemogorgonDic = new Dictionary<int, int>();
     /// <summary>
     /// 將字典傳入，依json表設定資料
     /// </summary>
@@ -25,9 +26,12 @@ public class EnemyData
         {
             EnemyData data = new EnemyData(items[i]);
             int id = int.Parse(items[i]["ID"].ToString());
+            if (data.Type == EnemyType.Demogorgon)
+                DemogorgonDic.Add(data.DebutFloor, data.ID);
             _dic.Add(id, data);
         }
         Roles = GetEnemys();
+        DemogorgonDic = MySort.GetSortDicByKey(DemogorgonDic);
     }
     EnemyData(JsonData _item)
     {
@@ -79,6 +83,15 @@ public class EnemyData
         }
         return roles;
     }
+    static EnemyRole GetEnemy(int _id)
+    {
+        for(int i=0;i<Roles.Count;i++)
+        {
+            if (Roles[i].ID == _id)
+                return Roles[i];
+        }
+        return null;
+    }
     public static List<EnemyRole> GetAvailableMillions(int _floor)
     {
         List<EnemyRole> roles = new List<EnemyRole>();
@@ -93,54 +106,31 @@ public class EnemyData
         }
         return roles;
     }
-    public static List<EnemyRole> GetNextDemogorgon(int _curfloor, out int _nextBossFloor)
+    public static EnemyRole GetNextDemogorgon(int _curfloor, out int _nextBossFloor)
     {
         _nextBossFloor = 0;
-        List<EnemyRole> roles = new List<EnemyRole>();
-        for (int i = 0; i < Roles.Count; i++)
+        foreach(int key in DemogorgonDic.Keys)
         {
-            if (Roles[i].Type == EnemyType.Demogorgon)
+            if (key >= _curfloor)
             {
-                if (_curfloor <= Roles[i].DebutFloor)
-                {
-                    if (_nextBossFloor == 0)
-                    {
-                        _nextBossFloor = Roles[i].DebutFloor;
-                        roles.Add(Roles[i]);
-                    }
-                    else
-                    {
-                        if (Roles[i].DebutFloor == _nextBossFloor)
-                            roles.Add(Roles[i]);
-                    }
-                }
+                _nextBossFloor = key;
+                return GetEnemy(DemogorgonDic[key]);
             }
         }
-        return roles;
+        return null;
     }
-    public static List<EnemyRole> GetPreviousDemogorgon(int _curfloor, out int _previousBossFloor)
+    public static EnemyRole GetPreviousDemogorgon(int _curfloor, out int _previousBossFloor)
     {
         _previousBossFloor = 0;
-        List<EnemyRole> roles = new List<EnemyRole>();
-        for (int i = 0; i < Roles.Count; i++)
+        Dictionary<int, int> reverseDemogorgonDic = MySort.GetReverseDic(DemogorgonDic);
+        foreach (int key in reverseDemogorgonDic.Keys)
         {
-            if (Roles[i].Type == EnemyType.Demogorgon)
+            if (key < _curfloor)
             {
-                if (_curfloor > Roles[i].DebutFloor)
-                {
-                    if (_previousBossFloor == 0)
-                    {
-                        _previousBossFloor = Roles[i].DebutFloor;
-                        roles.Add(Roles[i]);
-                    }
-                    else
-                    {
-                        if (Roles[i].DebutFloor == _previousBossFloor)
-                            roles.Add(Roles[i]);
-                    }
-                }
+                _previousBossFloor = key;
+                return GetEnemy(DemogorgonDic[key]);
             }
         }
-        return roles;
+        return null;
     }
 }

@@ -41,31 +41,33 @@ public partial class BattleManage
     {
         if(_type==1)
         {
-            for (int i = 0; i < NextDemonGergons.Count; i++)
+            if(NextDemonGergons!=null)
             {
-                EnemyRole er = Instantiate(NextDemonGergons[i], Vector3.zero, Quaternion.identity) as EnemyRole;
-                er.SetEnemyData(GameDictionary.EnemyDic[NextDemonGergons[i].ID]);
+                EnemyRole er = Instantiate(NextDemonGergons, Vector3.zero, Quaternion.identity) as EnemyRole;
+                er.SetEnemyData(GameDictionary.EnemyDic[NextDemonGergons.ID]);
                 //Set SpawnPos
                 er.transform.SetParent(EnemyParent);
                 er.transform.position = GetSpawnPos(new Vector2(600, 0));
                 er.SetStemFromFloor(Floor);
                 AddEnemy(er);
+
+                NextDemonGergons = EnemyData.GetNextDemogorgon(Floor + 1, out NextDemogorgonFloor);
             }
-            NextDemonGergons = EnemyData.GetNextDemogorgon(Floor + 1, out NextDemogorgonFloor);
         }
         else if(_type==2)
         {
-            for (int i = 0; i < PreviousDemonGergons.Count; i++)
+            if(PreviousDemonGergons!=null)
             {
-                EnemyRole er = Instantiate(PreviousDemonGergons[i], Vector3.zero, Quaternion.identity) as EnemyRole;
-                er.SetEnemyData(GameDictionary.EnemyDic[PreviousDemonGergons[i].ID]);
+                EnemyRole er = Instantiate(PreviousDemonGergons, Vector3.zero, Quaternion.identity) as EnemyRole;
+                er.SetEnemyData(GameDictionary.EnemyDic[PreviousDemonGergons.ID]);
                 //Set SpawnPos
                 er.transform.SetParent(EnemyParent);
                 er.transform.position = GetSpawnPos(new Vector2(600, 0));
                 er.SetStemFromFloor(Floor);
                 AddEnemy(er);
+
+                PreviousDemonGergons = EnemyData.GetPreviousDemogorgon(Floor - 1, out PreviousDemogorgonFloor);
             }
-            PreviousDemonGergons = EnemyData.GetPreviousDemogorgon(Floor - 1, out PreviousDemogorgonFloor);
         }
         //Debug.Log("NextDemogorgonFloor=" + NextDemogorgonFloor);
         IsDemogorgonFloor = 0;

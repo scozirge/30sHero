@@ -76,8 +76,8 @@ public partial class BattleManage : MonoBehaviour
 
 
     static List<EnemyRole> AvailableMillions;
-    static List<EnemyRole> PreviousDemonGergons;
-    static List<EnemyRole> NextDemonGergons;
+    static EnemyRole PreviousDemonGergons;
+    static EnemyRole NextDemonGergons;
     int CurSpawnCount;
     Transform EnemyParent;
     Transform LootParetn;
@@ -144,6 +144,12 @@ public partial class BattleManage : MonoBehaviour
             AvailableMillions = EnemyData.GetAvailableMillions(Floor);
             PreviousDemonGergons = EnemyData.GetPreviousDemogorgon(Floor, out PreviousDemogorgonFloor);
             NextDemonGergons = EnemyData.GetNextDemogorgon(Floor, out NextDemogorgonFloor);
+            /*
+            Debug.Log("PreviousDemonGergons=" + PreviousDemonGergons.ID);
+            Debug.Log("NextDemonGergons=" + NextDemonGergons.ID);
+            Debug.Log("PreviousDemogorgonFloor=" + PreviousDemogorgonFloor);
+            Debug.Log("NextDemogorgonFloor=" + NextDemogorgonFloor);
+            */
         }
         SpawnEnemyTimer = new MyTimer(EnemyFirstHalfInterval, SpanwEnemy, true, false);
         SpawnLootTimer = new MyTimer(PotionInterval, SpawnLoot, true, false);
