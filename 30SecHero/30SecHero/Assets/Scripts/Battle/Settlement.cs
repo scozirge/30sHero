@@ -153,8 +153,8 @@ partial class BattleManage
         SceneObject.SetActive(false);
         //顯示資料
         SpawnEquipItem();
-        FloorClearText.text = Floor.ToString();
-        MaxFloorText.text = Player.MaxFloor.ToString();
+        FloorClearText.text = PassFloorCount.ToString();
+        //MaxFloorText.text = Player.MaxFloor.ToString();
         MonsterKillsText.text = EnemyKill.ToString();
         BossKillsText.text = BossKill.ToString();
         UnlockPartnerText.text = UnlockPartner.ToString();
