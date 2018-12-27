@@ -10595,9 +10595,12 @@ MonoBehaviour:
   VelocityText: {fileID: 1479774048}
   GatePrefab: {fileID: 114196004098046030, guid: f13058442fb94894587304b5c65d196f,
     type: 3}
+  JoinPrefab: {fileID: 1504123894192767484, guid: 31bcf1799a1bc7d4aa0bd9fc93235bcb,
+    type: 3}
   EntrancePrefab: {fileID: 114963012869639902, guid: 0681b917bf0a01d439ca8915480fa2db,
     type: 3}
   GateParent: {fileID: 501039061}
+  JoinParent: {fileID: 1913190984}
   MyStageSpawner: {fileID: 501039060}
   LocationCriterion: {fileID: 1132630139}
   Pivot: {fileID: 488348743}
@@ -11662,7 +11665,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1913190983}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e211bd754a5cb5b489cbf7a692bc310d, type: 3}
   m_Name: 
@@ -11682,7 +11685,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1913190983}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e211bd754a5cb5b489cbf7a692bc310d, type: 3}
   m_Name: 
