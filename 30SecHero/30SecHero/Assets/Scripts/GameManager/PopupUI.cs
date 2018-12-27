@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PopupUI : MonoBehaviour {
+public class PopupUI : MonoBehaviour
+{
 
     public static bool IsInit { get; private set; }
     static PopupUI Myself;
@@ -36,6 +37,9 @@ public class PopupUI : MonoBehaviour {
     [SerializeField]
     Text Restart_Value;
 
+    [SerializeField]
+    Animator CutSceneAni;
+
     public void Init()
     {
         Myself = this;
@@ -67,7 +71,7 @@ public class PopupUI : MonoBehaviour {
             return;
         Myself.LoadingGo.SetActive(false);
     }
-    public static void ShowClickCancel( string _text)
+    public static void ShowClickCancel(string _text)
     {
         if (!Myself)
             return;
@@ -86,7 +90,7 @@ public class PopupUI : MonoBehaviour {
             return;
         ClickCancelGo.SetActive(false);
     }
-    public static void ShowTitleLoading( string _title,string _value)
+    public static void ShowTitleLoading(string _title, string _value)
     {
         if (!Myself)
             return;
@@ -117,6 +121,11 @@ public class PopupUI : MonoBehaviour {
     public void HidekCancelTitle()
     {
         ClickCancelTitleGo.SetActive(false);
+    }
+    public static void CallCutScene(string _nextSceneName)
+    {
+        ScenePlayer.SetNextScene_static(_nextSceneName);
+        Myself.CutSceneAni.SetTrigger("Play");
     }
 
 }

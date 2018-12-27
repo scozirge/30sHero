@@ -26,6 +26,11 @@ public class ChangeScene : MonoBehaviour
         if (NextSceneName == "")
             return;
         if(KongregateAPIBehaviour.EndLogin)
-            SceneManager.LoadScene(NextSceneName);
+        {
+            //SceneManager.LoadScene(NextSceneName);
+            PopupUI.CallCutScene(NextSceneName);
+            NextSceneName = "";
+        }
     }
+    
 }

@@ -171,11 +171,13 @@ partial class BattleManage
     }
     public void ReTry()
     {
-        ChangeScene.GoToScene(MyScene.Battle);
+        PopupUI.CallCutScene("Battle");
+        //ChangeScene.GoToScene(MyScene.Battle);
     }
     public void BackToMenu()
     {
-        ChangeScene.GoToScene(MyScene.Main);
+        PopupUI.CallCutScene("Main");
+        //ChangeScene.GoToScene(MyScene.Main);
     }
     public static void AddEnemyKill()
     {

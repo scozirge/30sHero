@@ -100,14 +100,16 @@ public class Main : MonoBehaviour
     }
     public void Battle()
     {
-        Debug.Log("Player.ItemCout=" + Player.ItemCout);
-        if(Player.ItemCout>GameSettingData.MaxItemCount)
+        if (Player.ItemCout > GameSettingData.MaxItemCount)
         {
             PopupUI.ShowClickCancel(StringData.GetString("EquipLimit"));
         }
         else
-            SceneManager.LoadScene("Battle");
-        //ChangeScene.GoToScene("Battle");
+        {
+            PopupUI.CallCutScene("Battle");
+        }
+
+        //SceneManager.LoadScene("Battle");
     }
     public void TestBtn()
     {

@@ -34,7 +34,6 @@ public class DungeonPlate : Plate
     static Dictionary<int, Color> FloorColor = new Dictionary<int, Color>();
     static Dictionary<int, Color> ShadowColor = new Dictionary<int, Color>();
     static Dictionary<int, Color> LineDraftColor = new Dictionary<int, Color>();
-    static Dictionary<int, int> FloorPlate = new Dictionary<int, int>();
 
     public override void Init(int _column, int _maxColumn)
     {
