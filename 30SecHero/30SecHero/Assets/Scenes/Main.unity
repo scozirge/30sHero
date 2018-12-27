@@ -5270,6 +5270,7 @@ GameObject:
   - component: {fileID: 471734067}
   - component: {fileID: 471734068}
   - component: {fileID: 471734069}
+  - component: {fileID: 471734070}
   m_Layer: 5
   m_Name: Strengthen
   m_TagString: Untagged
@@ -5336,6 +5337,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_AllowSwitchOff: 0
+--- !u!114 &471734070
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 471734066}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8efccf2f148eb4b4eaf1b99c590ae477, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EffectList:
+  - Name: LevelUp
+    Particle: {fileID: 4575044161456424922, guid: b37b0fa1cc26f4440b0fb2ec0e11fad4,
+      type: 3}
+    TargetParent: {fileID: 899940457}
+    Offset: {x: 0, y: 0}
+    Roration: {x: 0, y: 0}
 --- !u!1 &477474520
 GameObject:
   m_ObjectHideFlags: 0
@@ -16756,6 +16776,17 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 471734070}
+        m_MethodName: PlayEffect
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: LevelUp
           m_BoolArgument: 0
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
