@@ -9,7 +9,7 @@ public class EnchantItem : Item
     Image Icon;
     [SerializeField]
     MyText LVText;
-        [SerializeField]
+    [SerializeField]
     MyText NumberText;
     [SerializeField]
     Animator MyAni;
@@ -33,12 +33,16 @@ public class EnchantItem : Item
         }
         if (MyData != null)
         {
+            UpdateUI();
+            /*
             Icon.sprite = MyData.GetICON();
             NumberText.text = MyData.LV.ToString();
             Icon.SetNativeSize();
+            */
         }
         else
         {
+            LVText.enabled = false;
             Icon.sprite = GameManager.GM.UnknownIcon;
             Icon.SetNativeSize();
         }
@@ -55,7 +59,8 @@ public class EnchantItem : Item
         base.RefreshText();
         if (MyData != null)
         {
-            NumberText.text = MyData.LV.ToString();
+            LVText.text = MyData.GetLVString(0);
+            //NumberText.text = MyData.LV.ToString();
             LVText.enabled = true;
         }
         else
@@ -63,8 +68,8 @@ public class EnchantItem : Item
     }
     public void UpdateUI()
     {
-        //RefreshText();
-        if(MyData!=null)
+        RefreshText();
+        if (MyData != null)
         {
             Icon.sprite = MyData.GetICON();
             Icon.SetNativeSize();
@@ -74,7 +79,7 @@ public class EnchantItem : Item
             Icon.sprite = GameManager.GM.UnknownIcon;
             Icon.SetNativeSize();
         }
-        PlayAni("LevelUp");
+        //PlayAni("LevelUp");
     }
     public override void OnPress()
     {

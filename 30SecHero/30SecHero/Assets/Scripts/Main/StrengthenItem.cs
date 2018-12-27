@@ -29,16 +29,18 @@ public class StrengthenItem : Item
         else
             return;
         Icon.sprite = MyData.GetICON();
-        NumberText.text = MyData.LV.ToString();
+        //NumberText.text = MyData.LV.ToString();
         Icon.SetNativeSize();
         MyText.AddRefreshFunc(RefreshText);
         TheToggle = GetComponent<Toggle>();
         TheToggle.group = ParentUI.GetComponent<ToggleGroup>();
+        UpdateUI();
     }
     public override void RefreshText()
     {
         base.RefreshText();
-        NumberText.text = MyData.LV.ToString();
+        LVText.text = MyData.GetLVString(0);
+        //NumberText.text = MyData.LV.ToString();
     }
     void OnDestroy()
     {
@@ -46,9 +48,10 @@ public class StrengthenItem : Item
     }
     public void UpdateUI()
     {
+        RefreshText();
         Icon.sprite = MyData.GetICON();
         Icon.SetNativeSize();
-        PlayAni("LevelUp");
+        //PlayAni("LevelUp");
     }
     public override void OnPress()
     {
