@@ -4451,6 +4451,7 @@ GameObject:
   m_Component:
   - component: {fileID: 623092009}
   - component: {fileID: 623092010}
+  - component: {fileID: 623092011}
   m_Layer: 5
   m_Name: Settlement
   m_TagString: Untagged
@@ -4497,6 +4498,20 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &623092011
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 623092008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff2fe1a9f0a43bb44b33c9797a8869e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Interval: 0.1
+  PeriodTime: 2
 --- !u!1 &643473213
 GameObject:
   m_ObjectHideFlags: 0
@@ -10587,6 +10602,7 @@ MonoBehaviour:
   EmeraldText: {fileID: 754975252}
   MySpanwer: {fileID: 232256112}
   CallSettlementTime: 1
+  MyRunText: {fileID: 623092011}
   StartFloorPlate: 0
   PlateSizeX: 884
   BossDebutPlate: 1

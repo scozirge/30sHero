@@ -25,6 +25,8 @@ partial class BattleManage
     ItemSpawner MySpanwer;
     [SerializeField]
     float CallSettlementTime;
+    [SerializeField]
+    RunAnimatedText MyRunText;
 
 
 
@@ -160,6 +162,15 @@ partial class BattleManage
         UnlockPartnerText.text = UnlockPartner.ToString();
         GoldText.text = TotalGold.ToString();
         EmeraldText.text = TotalEmerald.ToString();
+        //設定動畫文字
+        MyRunText.Clear();
+        MyRunText.SetAnimatedText("FloorClear", 0, PassFloorCount, FloorClearText);
+        MyRunText.SetAnimatedText("MonsterKill", 0, EnemyKill, MonsterKillsText);
+        MyRunText.SetAnimatedText("BossKill", 0, BossKill, BossKillsText);
+        MyRunText.SetAnimatedText("UnlockPartner", 0, UnlockPartner, UnlockPartnerText);
+        MyRunText.SetAnimatedText("Gold", 0, TotalGold, GoldText);
+        MyRunText.SetAnimatedText("Emerald", 0, TotalEmerald, EmeraldText);
+
     }
     void SpawnEquipItem()
     {
