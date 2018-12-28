@@ -104,6 +104,12 @@ public partial class GameManager : MonoBehaviour
     [Tooltip("戰鬥2音樂")]
     [SerializeField]
     public AudioClip FightMusic2;
+    [Tooltip("結算")]
+    [SerializeField]
+    public AudioClip SettlementMusic;
+    [Tooltip("BOSS戰鬥")]
+    [SerializeField]
+    public AudioClip BossFightMusic;
 
     [Tooltip("金幣顏色")]
     [SerializeField]

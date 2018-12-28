@@ -102,6 +102,8 @@ MonoBehaviour:
   MainMusic: {fileID: 8300000, guid: f63f2da7478ffc44e87a4ceb599fd969, type: 3}
   FightMusic1: {fileID: 8300000, guid: 9a98e53937ce25c4888e82db89d36e84, type: 3}
   FightMusic2: {fileID: 8300000, guid: 5f1001375dc29294bb7e6d50756cd5df, type: 3}
+  SettlementMusic: {fileID: 8300000, guid: 8447d3face4ce6b428c084aff580cf54, type: 3}
+  BossFightMusic: {fileID: 8300000, guid: b058f6783c679f24c9ede6ee1189a13f, type: 3}
   GoldColor: {r: 0.9960785, g: 0.94117653, b: 0.18431373, a: 1}
   EmeraldColor: {r: 0.69803923, g: 0.9960785, b: 0.5686275, a: 1}
 --- !u!114 &114495893002156964

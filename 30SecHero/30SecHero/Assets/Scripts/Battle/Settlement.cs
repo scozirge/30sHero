@@ -103,6 +103,8 @@ partial class BattleManage
     }
     public void CalculateResult()
     {
+        AudioPlayer.StopAllMusic();
+        AudioPlayer.PlayMusicByAudioClip_Static(GameManager.GM.SettlementMusic);
         //獎勵計算
         if (MaxFloor > Player.MaxFloor)
         {

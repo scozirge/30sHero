@@ -139,6 +139,25 @@ public class AudioPlayer : MonoBehaviour
         CurPlayMusic.clip = _ac;
         CurPlayMusic.Play(0);
     }
+    public static void PlayMusicByAudioClip_Static(AudioClip _ac)
+    {
+        if (_ac == null)
+        {
+            Debug.LogWarning("要播放的音檔為null");
+            return;
+        }
+        if (IsMusicMute)
+            return;
+        if (!IsInit)
+            Init();
+        if (GetApplicableSoundSource() == null)
+        {
+            GetNewMusicSource();
+        }
+        CurPlayMusic.loop = false;
+        CurPlayMusic.clip = _ac;
+        CurPlayMusic.Play(0);
+    }
     public void PlayLoopSound(AudioClip _ac, string _key)
     {
         if (_ac == null)
