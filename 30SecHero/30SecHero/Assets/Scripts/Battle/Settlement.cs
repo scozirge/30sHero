@@ -103,8 +103,6 @@ partial class BattleManage
     }
     public void CalculateResult()
     {
-        AudioPlayer.StopAllMusic();
-        AudioPlayer.PlayMusicByAudioClip_Static(GameManager.GM.SettlementMusic);
         //獎勵計算
         if (MaxFloor > Player.MaxFloor)
         {
@@ -149,6 +147,8 @@ partial class BattleManage
     }
     void ShowResult()
     {
+        AudioPlayer.StopAllMusic();
+        AudioPlayer.PlayMusicByAudioClip_Static(GameManager.GM.SettlementMusic);
         //顯示介面
         SettlementObj.SetActive(true);
         IsPause = true;

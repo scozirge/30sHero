@@ -52,6 +52,15 @@ public partial class BattleManage
                 AddEnemy(er);
 
                 NextDemonGergons = EnemyData.GetNextDemogorgon(Floor + 1, out NextDemogorgonFloor);
+                /*
+                if (WarningAni!=null)
+                {
+                    //AudioPlayer.FadeOut("Battle", 1.5f);
+                    //AudioPlayer.FadeIn(GameManager.GM.BossFightMusic, 1.5f);
+                    WarningAni.gameObject.SetActive(true);
+                    WarningAni.Play(0);
+                }
+                */
             }
         }
         else if(_type==2)

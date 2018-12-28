@@ -43,6 +43,53 @@ public class AudioPlayer : MonoBehaviour
         CurPlayMusic = myMusic;
         IsInit = true;
     }
+    public static IEnumerator FadeOut(AudioClip _ac, string _key, float FadeTime)
+    {
+        AudioSource myAs = PlayLoopMusic_Static(_ac, _key);
+        float startVolume = myAs.volume;
+        while (myAs.volume > 0)
+        {
+            myAs.volume -= startVolume * Time.deltaTime / FadeTime;
+            yield return null;
+        }
+        myAs.Stop();
+    }
+    public static IEnumerator FadeIn(AudioClip _ac, string _key, float FadeTime)
+    {
+        AudioSource myAs = PlayLoopMusic_Static(_ac, _key);
+        myAs.volume = 0f;
+        while (myAs.volume < 1)
+        {
+            myAs.volume += Time.deltaTime / FadeTime;
+            yield return null;
+        }
+    }
+    public static IEnumerator FadeOut(string _key, float FadeTime)
+    {
+        if (LoopMusicDic.ContainsKey(_key))
+        {
+            float startVolume = LoopMusicDic[_key].volume;
+            while (LoopMusicDic[_key].volume > 0)
+            {
+                LoopMusicDic[_key].volume -= startVolume * Time.deltaTime / FadeTime;
+                yield return null;
+            }
+            LoopMusicDic[_key].Stop();
+        }
+    }
+    public static IEnumerator FadeIn(string _key, float FadeTime)
+    {
+        if (LoopMusicDic.ContainsKey(_key))
+        {
+            LoopMusicDic[_key].Play();
+            LoopMusicDic[_key].volume = 0f;
+            while (LoopMusicDic[_key].volume < 1)
+            {
+                LoopMusicDic[_key].volume += Time.deltaTime / FadeTime;
+                yield return null;
+            }
+        }
+    }
     public static void MuteSound(bool _isMute)
     {
         IsSoundMute = _isMute;
@@ -223,22 +270,22 @@ public class AudioPlayer : MonoBehaviour
         CurPlayMusic.Play();
         LoopMusicDic.Add(_key, CurPlayMusic);
     }
-    public static void PlayLoopMusic_Static(AudioClip _ac, string _key)
+    public static AudioSource PlayLoopMusic_Static(AudioClip _ac, string _key)
     {
         if (_ac == null)
         {
             Debug.LogWarning("要播放的音檔為null");
-            return;
+            return null;
         }
         if (IsMusicMute)
-            return;
+            return null;
         if (LoopMusicDic.ContainsKey(_key))
         {
             Debug.LogWarning(string.Format("Key:{0} 循環播放音效索引重複", _key));
-            return;
+            return null;
         }
         if (IsMusicMute)
-            return;
+            return null;
         if (!IsInit)
             Init();
         if (GetApplicableMusicSource() == null)
@@ -249,6 +296,7 @@ public class AudioPlayer : MonoBehaviour
         CurPlayMusic.loop = true;
         CurPlayMusic.Play();
         LoopMusicDic.Add(_key, CurPlayMusic);
+        return LoopMusicDic[_key];
     }
 
     public void StopLoopMusic(string _key)
