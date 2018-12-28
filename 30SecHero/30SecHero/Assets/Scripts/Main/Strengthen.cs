@@ -40,6 +40,8 @@ public class Strengthen : MyUI
     {
         if (IsInit)
             return;
+        StrengthenItemList = new List<StrengthenItem>();
+        EnchantItemList = new List<EnchantItem>();
         //Strengthen
         List<int> keys = new List<int>(GameDictionary.StrengthenDic.Keys);
         for (int i = 0; i < keys.Count; i++)

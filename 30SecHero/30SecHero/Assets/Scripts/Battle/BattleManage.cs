@@ -234,6 +234,17 @@ public partial class BattleManage : MonoBehaviour
         MyCameraControler.enabled = !_active;
         gameObject.SetActive(!_active);
         SettingObj.SetActive(_active);
+        if (_active)
+        {
+            if (Player.MusicOn)
+                MusicToggle.isOn = true;
+            else
+                MusicToggle.isOn = false;
+            if (Player.SoundOn)
+                SoundToggle.isOn = true;
+            else
+                SoundToggle.isOn = false;
+        }
     }
     public void Set(bool _active)
     {

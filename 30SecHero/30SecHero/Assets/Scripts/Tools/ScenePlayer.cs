@@ -18,6 +18,26 @@ public class ScenePlayer : MonoBehaviour
         if (NextSceneName == "")
             return;
         SceneManager.LoadScene(NextSceneName);
+        PlaySceneMusic();
         NextSceneName = "";
+    }
+    public void PlaySceneMusic()
+    {
+        if (SceneManager.GetActiveScene().name == MyScene.Init.ToString())
+            return;
+        AudioPlayer.StopAllMusic();
+        switch (NextSceneName)
+        {
+            case "Battle":
+                int rndNum = Random.Range(0, 2);
+                if (rndNum == 0)
+                    AudioPlayer.PlayLoopMusic_Static(GameManager.GM.FightMusic1, "Battle");
+                else
+                    AudioPlayer.PlayLoopMusic_Static(GameManager.GM.FightMusic2, "Battle");
+                break;
+            case "Main":
+                AudioPlayer.PlayLoopMusic_Static(GameManager.GM.MainMusic, "Main");
+                break;
+        }
     }
 }

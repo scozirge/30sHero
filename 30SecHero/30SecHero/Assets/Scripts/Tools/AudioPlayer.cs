@@ -139,7 +139,6 @@ public class AudioPlayer : MonoBehaviour
         CurPlayMusic.clip = _ac;
         CurPlayMusic.Play(0);
     }
-
     public void PlayLoopSound(AudioClip _ac, string _key)
     {
         if (_ac == null)
@@ -205,6 +204,34 @@ public class AudioPlayer : MonoBehaviour
         CurPlayMusic.Play();
         LoopMusicDic.Add(_key, CurPlayMusic);
     }
+    public static void PlayLoopMusic_Static(AudioClip _ac, string _key)
+    {
+        if (_ac == null)
+        {
+            Debug.LogWarning("要播放的音檔為null");
+            return;
+        }
+        if (IsMusicMute)
+            return;
+        if (LoopMusicDic.ContainsKey(_key))
+        {
+            Debug.LogWarning(string.Format("Key:{0} 循環播放音效索引重複", _key));
+            return;
+        }
+        if (IsMusicMute)
+            return;
+        if (!IsInit)
+            Init();
+        if (GetApplicableMusicSource() == null)
+        {
+            GetNewMusicSource();
+        }
+        CurPlayMusic.clip = _ac;
+        CurPlayMusic.loop = true;
+        CurPlayMusic.Play();
+        LoopMusicDic.Add(_key, CurPlayMusic);
+    }
+
     public void StopLoopMusic(string _key)
     {
         if (LoopMusicDic.ContainsKey(_key))
@@ -215,6 +242,16 @@ public class AudioPlayer : MonoBehaviour
         }
         //else
         //Debug.LogWarning(string.Format("Key:{0}　不存在尋換播放音效清單中", _key));
+    }
+    public static void StopAllMusic()
+    {
+        List<string> keys = new List<string>(LoopMusicDic.Keys);
+        for (int i = 0; i < keys.Count; i++)
+        {
+            LoopMusicDic[keys[i]].Stop();
+            LoopMusicDic[keys[i]].loop = false;
+        }
+        LoopMusicDic = new Dictionary<string, AudioSource>();
     }
     static AudioSource GetApplicableSoundSource()
     {

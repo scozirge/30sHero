@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public partial class GameManager : MonoBehaviour
 {
 
@@ -95,6 +95,15 @@ public partial class GameManager : MonoBehaviour
     [Tooltip("獲得金幣聲音")]
     [SerializeField]
     public AudioClip CoinSound;
+    [Tooltip("主介面音樂")]
+    [SerializeField]
+    public AudioClip MainMusic;
+    [Tooltip("戰鬥1音樂")]
+    [SerializeField]
+    public AudioClip FightMusic1;
+    [Tooltip("戰鬥2音樂")]
+    [SerializeField]
+    public AudioClip FightMusic2;
 
     [Tooltip("金幣顏色")]
     [SerializeField]

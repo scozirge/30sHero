@@ -25,12 +25,30 @@ public class ChangeScene : MonoBehaviour
     {
         if (NextSceneName == "")
             return;
-        if(KongregateAPIBehaviour.EndLogin)
+        if (KongregateAPIBehaviour.EndLogin)
         {
             //SceneManager.LoadScene(NextSceneName);
             PopupUI.CallCutScene(NextSceneName);
             NextSceneName = "";
         }
     }
-    
+    public void PlaySceneMusic()
+    {
+        if (SceneManager.GetActiveScene().name == MyScene.Battle.ToString())
+        {
+            int rndNum = Random.Range(0, 2);
+            if (rndNum == 0)
+                AudioPlayer.PlayLoopMusic_Static(GameManager.GM.FightMusic1, "Battle");
+            else
+                AudioPlayer.PlayLoopMusic_Static(GameManager.GM.FightMusic2, "Battle");
+        }
+        else if (SceneManager.GetActiveScene().name == MyScene.Main.ToString())
+        {
+            AudioPlayer.PlayLoopMusic_Static(GameManager.GM.MainMusic, "Main");
+        }
+        else if (SceneManager.GetActiveScene().name == MyScene.Init.ToString())
+        {
+            AudioPlayer.PlayLoopMusic_Static(GameManager.GM.MainMusic, "Main");
+        }
+    }
 }

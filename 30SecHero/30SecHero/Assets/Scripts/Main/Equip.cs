@@ -132,6 +132,7 @@ public class Equip : MyUI
         Sort();
         UpdateRoleInfo();
         SetSoldMode(false);
+        /*
         if (TagToggles != null)
         {
             for (int i = 0; i < TagToggles.Length; i++)
@@ -140,6 +141,7 @@ public class Equip : MyUI
             }
             TagToggles[0].isOn = true;
         }
+         */
     }
     public void SetSoldMode(bool _bool)
     {
