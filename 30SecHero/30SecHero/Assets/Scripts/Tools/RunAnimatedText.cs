@@ -22,7 +22,6 @@ public class RunAnimatedText : MonoBehaviour
             an.AddNumber = 1;
         if (!AnimatedNumberDic.ContainsKey(_name))
             AnimatedNumberDic.Add(_name, an);
-
     }
 
     public void Play(string _name)

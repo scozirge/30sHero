@@ -93,6 +93,8 @@ public partial class BattleManage
         int plateCount = BM.StartFloorPlate + (_floor - 1) * GameSettingData.FloorUpPlate;
         if (plateCount < BM.StartFloorPlate)
             plateCount = BM.StartFloorPlate;
+        else if (plateCount > GameSettingData.MaxFloorPlate)
+            plateCount = GameSettingData.MaxFloorPlate;
         return plateCount;
     }
     static bool IsFirstHalf

@@ -175,8 +175,8 @@ MonoBehaviour:
   HealthBar: {fileID: 0}
   DirectX: 0
   DirectY: 0
-  MaxHealth: 1000
-  BaseDamage: 1
+  MaxHealth: 10000
+  BaseDamage: 6666
   BaseMoveSpeed: 1000
   DeathEffect: {fileID: 198802542160044040, guid: a6f36c56ed46b58408125e947b5ac7db,
     type: 3}
@@ -207,6 +207,7 @@ MonoBehaviour:
   MaxExtraMove: 500
   MaxAvaterTime: 999
   AvatarTimerText: {fileID: 0}
+  AvatarTimerAni: {fileID: 0}
   UntochableTime: 2
   AvatarPotionBuff: 0
   SkillTimeBuff: 0
@@ -1693,6 +1694,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Icon: {fileID: 0}
   LVText: {fileID: 0}
+  NumberText: {fileID: 0}
+  MyAni: {fileID: 0}
 --- !u!1 &386650177782270324
 GameObject:
   m_ObjectHideFlags: 0
@@ -1782,6 +1785,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Icon: {fileID: 0}
   LVText: {fileID: 0}
+  NumberText: {fileID: 0}
+  MyAni: {fileID: 0}
 --- !u!1 &3932586184626911606
 GameObject:
   m_ObjectHideFlags: 0
@@ -1983,3 +1988,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Icon: {fileID: 0}
   LVText: {fileID: 0}
+  NumberText: {fileID: 0}
+  MyAni: {fileID: 0}
