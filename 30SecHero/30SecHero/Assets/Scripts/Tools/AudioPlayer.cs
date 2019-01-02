@@ -131,7 +131,7 @@ public class AudioPlayer : MonoBehaviour
             }
         }
     }
-    public void PlaySoundByString(string _soundName)
+    public static void PlaySoundByString(string _soundName)
     {
         if (IsSoundMute)
             return;

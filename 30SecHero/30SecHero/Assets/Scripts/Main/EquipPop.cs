@@ -88,6 +88,7 @@ public class EquipPop : MonoBehaviour
 
     public void SetEquipData(EquipData _leftData, EquipData _rightData,bool _leftSelect)
     {
+        AudioPlayer.PlaySoundByString("next_page2");
         LeftData = _leftData;
         RightData = _rightData;
         if (LeftData == null && RightData != null)
