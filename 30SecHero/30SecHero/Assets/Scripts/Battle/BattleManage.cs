@@ -73,7 +73,8 @@ public partial class BattleManage : MonoBehaviour
     Image GetEnchant_Icon;
     [SerializeField]
     GameObject TutorialGo;
-
+    [SerializeField]
+    Animator WarningAni;
 
     static List<EnemyRole> AvailableMillions;
     static EnemyRole PreviousDemonGergons;

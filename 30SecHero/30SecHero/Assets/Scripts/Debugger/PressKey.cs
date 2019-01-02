@@ -35,11 +35,15 @@ public partial class Debugger : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.C))
         {
-            Player.ShowStrengthenProperties();
+            AudioPlayer.FadeOutMusic("Battle", 1f);
+            AudioPlayer.FadeInMusic(GameManager.GM.BossFightMusic, "BossFight", 2f);
+            //Player.ShowStrengthenProperties();
         }
         else if (Input.GetKeyDown(KeyCode.V))
         {
-            Player.ShowTotalProperties();
+            AudioPlayer.FadeOutMusic("BossFight", 0.5f);
+            AudioPlayer.FadeInMusic(GameManager.GM.FightMusic2, "Battle", 2f);
+            //Player.ShowTotalProperties();
         }
         else if (Input.GetKeyDown(KeyCode.E))
         {

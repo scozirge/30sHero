@@ -103,8 +103,6 @@ partial class BattleManage
     }
     public void CalculateResult()
     {
-        AudioPlayer.StopAllMusic();
-        AudioPlayer.PlayMusicByAudioClip_Static(GameManager.GM.SettlementMusic);
         //獎勵計算
         if (MaxFloor > Player.MaxFloor)
         {
@@ -149,6 +147,8 @@ partial class BattleManage
     }
     void ShowResult()
     {
+        AudioPlayer.StopAllMusic();
+        AudioPlayer.PlayMusicByAudioClip_Static(GameManager.GM.SettlementMusic);
         //顯示介面
         SettlementObj.SetActive(true);
         IsPause = true;
@@ -199,6 +199,9 @@ partial class BattleManage
     public static void AddBossKill()
     {
         BossKill++;
+        //播放BOSS擊殺獎勵
+        AudioPlayer.FadeOutMusic("BossFight", 0.5f);
+        AudioPlayer.FadeInMusic(GameManager.GM.FightMusic1, "Battle", 2f);
         //不屈勇者(擊殺BOSS獲得額外變身秒數)
         BM.MyPlayer.AvatarTimer += BM.MyPlayer.MyEnchant[EnchantProperty.Courage];
         BattleManage.BM.MyPlayer.AvatarTimer += BattleManage.BM.MyPlayer.MyEnchant[EnchantProperty.Courage];
