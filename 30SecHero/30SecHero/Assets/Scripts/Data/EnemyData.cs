@@ -12,7 +12,7 @@ public class EnemyData
     public static string DataName;
 
     static List<EnemyRole> Roles;
-    static Dictionary<int, int> DemogorgonDic = new Dictionary<int, int>();
+    static Dictionary<int, int> DemogorgonDic = new Dictionary<int, int>();//[Floor,BossID]
     /// <summary>
     /// 將字典傳入，依json表設定資料
     /// </summary>
@@ -109,11 +109,19 @@ public class EnemyData
     public static EnemyRole GetNextDemogorgon(int _curfloor, out int _nextBossFloor)
     {
         _nextBossFloor = 0;
-        foreach(int key in DemogorgonDic.Keys)
+        List<int> keys = new List<int>(DemogorgonDic.Keys);
+        int multiple = 0;
+        if (_curfloor > keys[keys.Count-1])
         {
+            multiple = _curfloor / keys[keys.Count - 1];
+            _curfloor = _curfloor % keys[keys.Count - 1];
+        }
+        
+        foreach(int key in DemogorgonDic.Keys)
+        {            
             if (key >= _curfloor)
             {
-                _nextBossFloor = key;
+                _nextBossFloor = key + multiple * keys[keys.Count - 1];
                 return GetEnemy(DemogorgonDic[key]);
             }
         }

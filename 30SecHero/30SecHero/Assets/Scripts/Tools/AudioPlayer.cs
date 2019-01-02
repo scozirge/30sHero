@@ -61,7 +61,7 @@ public class AudioPlayer : MonoBehaviour
         if (LoopMusicDic.ContainsKey(_key))
         {
             float startVolume = LoopMusicDic[_key].volume;
-            while (LoopMusicDic[_key].volume > 0)
+            while (LoopMusicDic.ContainsKey(_key) && LoopMusicDic[_key].volume > 0)
             {
                 LoopMusicDic[_key].volume -= startVolume * Time.deltaTime / _fadeTime;
                 if (LoopMusicDic[_key].volume <= 0)
@@ -75,16 +75,19 @@ public class AudioPlayer : MonoBehaviour
     }
     IEnumerator FadeIn(AudioClip _ac,string _key, float _fadeTime)
     {
-        if (PlayLoopMusic_Static(_ac, _key) != null)
+        if (!LoopMusicDic.ContainsKey(_key))
         {
-            if (LoopMusicDic.ContainsKey(_key))
+            if (PlayLoopMusic_Static(_ac, _key) != null)
             {
-                LoopMusicDic[_key].Play();
-                LoopMusicDic[_key].volume = 0f;
-                while (LoopMusicDic[_key].volume < 1)
+                if (LoopMusicDic.ContainsKey(_key))
                 {
-                    LoopMusicDic[_key].volume += Time.deltaTime / _fadeTime;
-                    yield return null;
+                    LoopMusicDic[_key].Play();
+                    LoopMusicDic[_key].volume = 0f;
+                    while (LoopMusicDic.ContainsKey(_key) && LoopMusicDic[_key].volume < 1)
+                    {
+                        LoopMusicDic[_key].volume += Time.deltaTime / _fadeTime;
+                        yield return null;
+                    }
                 }
             }
         }
