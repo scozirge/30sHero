@@ -17,7 +17,7 @@ public class AudioPlayer : MonoBehaviour
     static Dictionary<string, AudioSource> LoopMusicDic;
     static AudioSource CurPlaySound;
     static AudioSource CurPlayMusic;
-
+    static Dictionary<string, Coroutine> MusicFadeDic;
     void Awake()
     {
         if (!IsInit)
@@ -30,6 +30,7 @@ public class AudioPlayer : MonoBehaviour
     {
         LoopSoundDic = new Dictionary<string, AudioSource>();
         LoopMusicDic = new Dictionary<string, AudioSource>();
+        MusicFadeDic = new Dictionary<string, Coroutine>();
         SoundList = new List<AudioSource>();
         MusicList = new List<AudioSource>();
         MySoundObject = new GameObject("SoundPlayer");
@@ -48,13 +49,33 @@ public class AudioPlayer : MonoBehaviour
     {
         if (!Myself)
             return;
-        Myself.StartCoroutine(Myself.FadeOut(_key, _fadeTime));
+        if (!LoopMusicDic.ContainsKey(_key))
+        {
+            return;
+        }
+        if(MusicFadeDic.ContainsKey(_key))
+        {
+            Myself.StopCoroutine(MusicFadeDic[_key]);
+            MusicFadeDic.Remove(_key);
+        }
+        Coroutine c= Myself.StartCoroutine(Myself.FadeOut(_key, _fadeTime));
+        MusicFadeDic.Add(_key, c);
     }
     public static void FadeInMusic(AudioClip _ac, string _key, float _fadeTime)
     {
         if (!Myself)
             return;
-        Myself.StartCoroutine(Myself.FadeIn(_ac, _key, _fadeTime));
+        if (LoopMusicDic.ContainsKey(_key))
+        {
+            Myself.StopLoopMusic(_key);
+        }
+        if (MusicFadeDic.ContainsKey(_key))
+        {
+            Myself.StopCoroutine(MusicFadeDic[_key]);
+            MusicFadeDic.Remove(_key);
+        }
+        Coroutine c = Myself.StartCoroutine(Myself.FadeIn(_ac, _key, _fadeTime));
+        MusicFadeDic.Add(_key, c);
     }
     IEnumerator FadeOut(string _key, float _fadeTime)
     {
@@ -73,22 +94,16 @@ public class AudioPlayer : MonoBehaviour
             }
         }
     }
-    IEnumerator FadeIn(AudioClip _ac,string _key, float _fadeTime)
+    IEnumerator FadeIn(AudioClip _ac, string _key, float _fadeTime)
     {
-        if (!LoopMusicDic.ContainsKey(_key))
+        if (PlayLoopMusic_Static(_ac, _key) != null)
         {
-            if (PlayLoopMusic_Static(_ac, _key) != null)
+            LoopMusicDic[_key].Play();
+            LoopMusicDic[_key].volume = 0f;
+            while (LoopMusicDic.ContainsKey(_key) && LoopMusicDic[_key].volume < 1)
             {
-                if (LoopMusicDic.ContainsKey(_key))
-                {
-                    LoopMusicDic[_key].Play();
-                    LoopMusicDic[_key].volume = 0f;
-                    while (LoopMusicDic.ContainsKey(_key) && LoopMusicDic[_key].volume < 1)
-                    {
-                        LoopMusicDic[_key].volume += Time.deltaTime / _fadeTime;
-                        yield return null;
-                    }
-                }
+                LoopMusicDic[_key].volume += Time.deltaTime / _fadeTime;
+                yield return null;
             }
         }
     }
@@ -99,10 +114,10 @@ public class AudioPlayer : MonoBehaviour
     public static void MuteMusic(bool _isMute)
     {
         IsMusicMute = _isMute;
-        if(IsMusicMute)
+        if (IsMusicMute)
         {
             List<string> keys = new List<string>(LoopMusicDic.Keys);
-            foreach(string key in keys)
+            foreach (string key in keys)
             {
                 LoopMusicDic[key].volume = 0;
             }
