@@ -113,6 +113,8 @@ public partial class PlayerRole : Role
     [SerializeField]
     Text AvatarTimerText;
     [SerializeField]
+    TextTexture MyAvatarText;
+    [SerializeField]
     Animator AvatarTimerAni;
     [Tooltip("變身解除無敵時間(秒)")]
     [SerializeField]
@@ -770,6 +772,14 @@ public partial class PlayerRole : Role
             }
             ActiveEnchantSkill(false);
         }
+        if (MyAvatarText.Number != Mathf.Round(AvatarTimer))
+        {
+            MyAvatarText.SetNumber((int)Mathf.Round(AvatarTimer));
+            if (AvatarTimerAni != null)
+                if (AvatarTimer <= 10)
+                    AvatarTimerAni.SetTrigger("TimeAlarm");
+        }
+        /*
         if (AvatarTimerText.text != Mathf.Round(AvatarTimer).ToString())
         {
             AvatarTimerText.text = Mathf.Round(AvatarTimer).ToString();
@@ -777,6 +787,7 @@ public partial class PlayerRole : Role
                 if (AvatarTimer <= 10)
                     AvatarTimerAni.SetTrigger("TimeAlarm");
         }
+        */
     }
 
     protected override void Move()

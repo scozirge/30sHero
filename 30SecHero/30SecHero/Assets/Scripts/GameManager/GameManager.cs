@@ -33,6 +33,10 @@ public partial class GameManager : MonoBehaviour
     [Tooltip("未知圖示")]
     [SerializeField]
     public Sprite UnknownIcon;
+    [Tooltip("數字Icon")]
+    [SerializeField]
+    public Sprite[] NumberIcons;
+
 
 
     [Tooltip("暈眩特效")]
@@ -153,6 +157,14 @@ public partial class GameManager : MonoBehaviour
         if (!CurrencySpriteDic.ContainsKey(_type))
             return null;
         return CurrencySpriteDic[_type];
+    }
+    public static Sprite GetNumberIcons(int _number)
+    {
+        if(_number<0 || _number>9)
+        {
+            return null;
+        }
+        return GM.NumberIcons[_number];
     }
     void Init()
     {

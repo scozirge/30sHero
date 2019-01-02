@@ -76,6 +76,7 @@ public partial class BattleManage : MonoBehaviour
     [SerializeField]
     Animator WarningAni;
 
+
     static List<EnemyRole> AvailableMillions;
     static EnemyRole PreviousDemonGergons;
     static EnemyRole NextDemonGergons;
