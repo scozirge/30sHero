@@ -181,6 +181,9 @@ public partial class PlayerRole : Role
     [Tooltip("攻擊音效")]
     [SerializeField]
     AudioClip AttackSound;
+    [LabelOverride("變回史萊姆音效")]
+    [SerializeField]
+    AudioClip RemoveAvatarSound;
     [Tooltip("弱化後移動跳躍的CD時間")]
     [SerializeField]
     float JumpCDTime;
@@ -754,6 +757,7 @@ public partial class PlayerRole : Role
             AvatarTimer -= Time.deltaTime;
         else//解除變身
         {
+            AudioPlayer.PlaySound(RemoveAvatarSound);
             AniPlayer.PlayTrigger("Idle2", 0);
             AvatarTimer = 0;
             ExtraMoveSpeed = 0;
