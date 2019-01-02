@@ -89,6 +89,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Icon: {fileID: 0}
   LVText: {fileID: 0}
+  NumberText: {fileID: 0}
+  MyAni: {fileID: 0}
 --- !u!1 &1196758460329254
 GameObject:
   m_ObjectHideFlags: 0
@@ -178,6 +180,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Icon: {fileID: 0}
   LVText: {fileID: 0}
+  NumberText: {fileID: 0}
+  MyAni: {fileID: 0}
 --- !u!1 &1217958164601918
 GameObject:
   m_ObjectHideFlags: 0
@@ -263,6 +267,7 @@ GameObject:
   - component: {fileID: 224214027230047884}
   - component: {fileID: 114456559650408752}
   - component: {fileID: 114805094169458312}
+  - component: {fileID: 6754856949243853254}
   m_Layer: 5
   m_Name: PurchaseItem
   m_TagString: Untagged
@@ -348,6 +353,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 6754856949243853254}
+        m_MethodName: PlaySoundByAudioClip
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 8300000, guid: 282a1d2b82ec1ba43a13601b19c142c3,
+            type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Toggle+ToggleEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
   m_IsOn: 0
@@ -365,6 +382,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Icon: {fileID: 114341663343188674}
   CountText: {fileID: 114529836976371394}
+--- !u!114 &6754856949243853254
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1418803886718358}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23453e74b9a0b7b49966cca230716054, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1748361237466738
 GameObject:
   m_ObjectHideFlags: 0
