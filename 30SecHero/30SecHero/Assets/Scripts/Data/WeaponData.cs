@@ -108,4 +108,10 @@ public class WeaponData : EquipData
         else
             EquipSlot = 0;
     }
+    //取得預設武器(沒穿裝備時預設顯示紙娃娃武器)
+    public static WeaponData GetDefaultWeapon()
+    {
+        WeaponData data = GameDictionary.WeaponDic[1].MemberwiseClone() as WeaponData;
+        return data;
+    }
 }

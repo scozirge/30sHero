@@ -13,6 +13,8 @@ public class Equip : MyUI
     [SerializeField]
     Image[] WeaponIcon;
     [SerializeField]
+    Image[] WeaponIcon_Char;
+    [SerializeField]
     Image WeaponQuality;
     [SerializeField]
     Image[] ArmorIcon;
@@ -409,6 +411,12 @@ public class Equip : MyUI
                 WeaponIcon[i].SetNativeSize();
             }
             WeaponQuality.sprite = GameManager.GetItemQualityBotSprite(Player.MyWeapon.Quality);
+            for (int i = 0; i < WeaponIcon_Char.Length; i++)
+            {
+                WeaponIcon_Char[i].sprite = Player.MyWeapon.Icons[i];
+                WeaponIcon_Char[i].enabled = true;
+                WeaponIcon_Char[i].SetNativeSize();
+            }
         }
         else
         {
@@ -420,7 +428,16 @@ public class Equip : MyUI
                     WeaponIcon[i].enabled = false;
                 WeaponIcon[i].SetNativeSize();
             }
+
             WeaponQuality.sprite = GameManager.GetItemQualityBotSprite(0);
+            //設定預設武器紙娃娃
+            WeaponData wd = WeaponData.GetDefaultWeapon();
+            for (int i = 0; i < WeaponIcon_Char.Length; i++)
+            {
+                WeaponIcon_Char[i].sprite = wd.Icons[i];
+                WeaponIcon_Char[i].enabled = true;
+                WeaponIcon_Char[i].SetNativeSize();
+            }
         }
         if (Player.MyArmor != null)
         {

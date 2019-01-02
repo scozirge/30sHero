@@ -376,6 +376,8 @@ public partial class PlayerRole : Role
         //武器紙娃娃
         if (Player.MyWeapon != null)
             SetEquipIcon(Player.MyWeapon);
+        else
+            SetEquipIcon(WeaponData.GetDefaultWeapon());
 
 
         RushCD = (float)Player.GetProperties(RoleProperty.RushCD) - MyEnchant[EnchantProperty.RushCDResuce];
