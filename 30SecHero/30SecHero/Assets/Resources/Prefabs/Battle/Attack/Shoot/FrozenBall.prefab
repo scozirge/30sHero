@@ -51,7 +51,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LocalParticles:
-  - {fileID: 7803307879986687111, guid: 003397d4312b56e46b7777279481b55e, type: 3}
+  - {fileID: 7803307879986687111, guid: 4f5274192fa636d45a09405c94d882d8, type: 3}
   GlobalParticle: []
   LocalAttackerParticles: []
   DeadParticles:

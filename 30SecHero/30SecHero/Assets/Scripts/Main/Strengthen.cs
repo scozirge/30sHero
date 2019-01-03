@@ -72,6 +72,7 @@ public class Strengthen : MyUI
         }
 
         //預設強化分頁並選擇第一個item
+        ToFilter((int)StrengthenType.Strengthen);
         StrengthenContent.gameObject.SetActive(true);
         EnchantContent.gameObject.SetActive(false);
         MyScrollRect.content = StrengthenContent;

@@ -659,12 +659,12 @@ public partial class PlayerRole : Role
         base.BeAttack(_attackerForce, ref _dmg, _force);
         if (_dmg > 0)
         {
-            //被攻擊觸發累積怒火次數，時間內滿3次發動怒火沖天
+            //被攻擊觸發累積怒火次數，時間內滿2次發動怒火沖天
             if (MyEnchant[EnchantProperty.Fury] > 0)
             {
                 FuryTimer.StartRunTimer = true;
                 FuryBeAttackTImes++;
-                if (FuryBeAttackTImes >= 3)
+                if (FuryBeAttackTImes >= 2)
                 {
                     FuryBeAttackTImes = 0;
                     FurySkil.LaunchAISpell();
