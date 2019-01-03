@@ -23,7 +23,7 @@ public class Attack : Skill
     [Tooltip("若子彈數不只一發，每發間隔的角度")]
     [SerializeField]
     protected float AngleInterval;
-     [Tooltip("(Pattern為Default時才有效)若亂數角度為true，就忽略StartAngle跟AngleInterval採用隨機角度")]
+    [Tooltip("(Pattern為Default時才有效)若亂數角度為true，就忽略StartAngle跟AngleInterval採用隨機角度")]
     [LabelOverride("亂數角度")]
     [SerializeField]
     protected bool RandomAngle;
@@ -73,6 +73,7 @@ public class Attack : Skill
     public override void PlayerInitSkill()
     {
         Interval *= GameSettingData.SkillAmmoInterval;//玩家子彈發射間隔縮小
+        DamagePercent *= GameSettingData.SkillAmmoDamage;//玩家子彈傷害
         //火力全開減少攻擊間隔時間
         Interval *= (1 - BattleManage.BM.MyPlayer.MyEnchant[EnchantProperty.OnFire]);
         base.PlayerInitSkill();
@@ -83,7 +84,7 @@ public class Attack : Skill
         Target = _role;
         AttackDir = (Target.transform.position - Myself.transform.position);
         origAngle = ((Mathf.Atan2(AttackDir.y, AttackDir.x) * Mathf.Rad2Deg) + (StartAngle + CurSpawnAmmoNum * AngleInterval)) * Mathf.Deg2Rad;
-        AttackDir = new Vector3(Mathf.Cos(origAngle), Mathf.Sin(origAngle), 0).normalized;        
+        AttackDir = new Vector3(Mathf.Cos(origAngle), Mathf.Sin(origAngle), 0).normalized;
     }
     public override void SpawnAttackPrefab()
     {
@@ -158,7 +159,7 @@ public class Attack : Skill
         AmmoData.Add("Target", Target);
         //AmmoData.Add("AmmoRotation", AmmoRotation);
         CurSpawnAmmoNum++;
-        if(AmmoInterval>0)
+        if (AmmoInterval > 0)
         {
             if (CurSpawnAmmoNum < AmmoNum)
             {
