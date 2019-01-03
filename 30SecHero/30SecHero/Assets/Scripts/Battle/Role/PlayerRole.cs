@@ -1168,7 +1168,7 @@ public partial class PlayerRole : Role
     {
         if (BloodThirsty <= 0)
             return;
-        HealHP((int)(_damage * (1 + BloodThirsty)));
+        HealHP((int)(_damage * BloodThirsty));
         //Debug.Log("Damage=" + Damage + ",True Damage=" + _damage + ", Vampire=" + (int)(_damage * (BloodThirsty)));
     }
     public override void RemoveAllSill()
