@@ -231,6 +231,7 @@ MonoBehaviour:
   RushSound: {fileID: 8300000, guid: 41b00c1ca9d97ea4796281c66b69da09, type: 3}
   AttackSound: {fileID: 8300000, guid: fc274ce0d0fd8fb40b2e7557d54975e8, type: 3}
   RemoveAvatarSound: {fileID: 8300000, guid: 4027915a7025bf14fa1be528e0a0dfd7, type: 3}
+  CountdownSound: {fileID: 8300000, guid: 7c919f9835ef7064fa42d392c9f4349f, type: 3}
   JumpCDTime: 0.2
   StopDrag: 800
   RushAntiAmooTime: 0.1

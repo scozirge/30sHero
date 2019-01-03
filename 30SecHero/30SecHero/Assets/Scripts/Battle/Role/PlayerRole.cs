@@ -184,6 +184,9 @@ public partial class PlayerRole : Role
     [LabelOverride("變回史萊姆音效")]
     [SerializeField]
     AudioClip RemoveAvatarSound;
+    [LabelOverride("變身時間倒數音效")]
+    [SerializeField]
+    AudioClip CountdownSound;
     [Tooltip("弱化後移動跳躍的CD時間")]
     [SerializeField]
     float JumpCDTime;
@@ -779,6 +782,7 @@ public partial class PlayerRole : Role
         if (MyAvatarText.Number != Mathf.Round(AvatarTimer))
         {
             MyAvatarText.SetNumber((int)Mathf.Round(AvatarTimer));
+            AudioPlayer.PlaySound(CountdownSound);
             if (AvatarTimerAni != null)
                 if (AvatarTimer <= 10)
                     AvatarTimerAni.SetTrigger("TimeAlarm");
