@@ -781,11 +781,13 @@ public partial class PlayerRole : Role
         }
         if (MyAvatarText.Number != Mathf.Round(AvatarTimer))
         {
-            MyAvatarText.SetNumber((int)Mathf.Round(AvatarTimer));
-            AudioPlayer.PlaySound(CountdownSound);
+            MyAvatarText.SetNumber((int)Mathf.Round(AvatarTimer));            
             if (AvatarTimerAni != null)
                 if (AvatarTimer <= 10)
+                {
+                    AudioPlayer.PlaySound(CountdownSound);
                     AvatarTimerAni.SetTrigger("TimeAlarm");
+                }                    
         }
         /*
         if (AvatarTimerText.text != Mathf.Round(AvatarTimer).ToString())
