@@ -42,16 +42,39 @@ public partial class EnemyRole
             return;
         PlayerRole pr = go.GetComponent<PlayerRole>();
         //DropEquip
-        int extraWeight = (BattleManage.BM.MyPlayer != null) ? BattleManage.BM.MyPlayer.EquipDropWeight : 0;
-        for (int i = 0; i < DropEquipCount; i++)
+        if (Type == EnemyType.Demogorgon)
         {
-            int equipQuality = GameSettingData.GetRandomEquipQuality(extraWeight);
-            if (equipQuality != 0)//0代表隨機到沒有掉落裝備
+            if (ID == 15 && !Player.KillBossID.Contains(ID))
             {
+                int equipQuality = 5;
                 EquipLoot loot = DropSpawner.SpawnEquip(transform.position);
-                if (loot) loot.Init(BattleManage.Floor, equipQuality);
+                if (loot) loot.Init(BattleManage.Floor, equipQuality, EquipType.Weapon);
+            }
+            for (int i = 0; i < 3; i++)
+            {
+                int equipQuality = GameSettingData.GetBossRandomEquipQuality();
+                if (equipQuality != 0)//0代表隨機到沒有掉落裝備
+                {
+                    EquipLoot loot = DropSpawner.SpawnEquip(transform.position);
+                    if (loot) loot.Init(BattleManage.Floor, equipQuality);
+                }
+            }
+
+        }
+        else
+        {
+            int extraWeight = (BattleManage.BM.MyPlayer != null) ? BattleManage.BM.MyPlayer.EquipDropWeight : 0;
+            for (int i = 0; i < DropEquipCount; i++)
+            {
+                int equipQuality = GameSettingData.GetRandomEquipQuality(extraWeight);
+                if (equipQuality != 0)//0代表隨機到沒有掉落裝備
+                {
+                    EquipLoot loot = DropSpawner.SpawnEquip(transform.position);
+                    if (loot) loot.Init(BattleManage.Floor, equipQuality);
+                }
             }
         }
+
         //DropGold
         for (int i = 0; i < DropGoldCount; i++)
         {
@@ -78,7 +101,7 @@ public partial class EnemyRole
                 }
             }
             else//擊殺尚未擊殺過的新BOSS
-            {                
+            {
                 ResourceLoot loot = DropSpawner.SpawnResource(transform.position);
                 if (loot) loot.Init(ResourceType.Emerald, GameSettingData.NewBossEmerald);
                 BattleManage.KillNewBoss(ID);
@@ -122,7 +145,7 @@ public partial class EnemyRole
     }
     string GetSkillLootSpritePath()
     {
-        string spriteName= RoleImg.sprite.name.TrimEnd("_r".ToCharArray());
+        string spriteName = RoleImg.sprite.name.TrimEnd("_r".ToCharArray());
         spriteName = spriteName.TrimEnd("_a".ToCharArray());
         spriteName = spriteName.TrimStart("char_e".ToCharArray());
         spriteName = "mask_" + spriteName;

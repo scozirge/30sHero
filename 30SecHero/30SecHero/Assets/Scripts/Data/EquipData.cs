@@ -87,6 +87,22 @@ public abstract class EquipData : Data
                 return null;
         }
     }
+    public static EquipData GetRandomNewEquip(int _lv, int _quality,EquipType _type)
+    {
+        int equipType = (int)_type;
+        switch ((EquipType)equipType)
+        {
+            case EquipType.Weapon:
+                return WeaponData.GetRandomNewWeapon(_lv, _quality);
+            case EquipType.Armor:
+                return ArmorData.GetRandomNewArmor(_lv, _quality);
+            case EquipType.Accessory:
+                return AccessoryData.GetRandomNewAccessory(_lv, _quality);
+            default:
+                Debug.LogWarning("隨機取得亂數裝備錯誤");
+                return null;
+        }
+    }
     public virtual int SetUID()
     {
         return UID;

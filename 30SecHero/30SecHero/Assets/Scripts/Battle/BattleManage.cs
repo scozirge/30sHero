@@ -159,6 +159,8 @@ public partial class BattleManage : MonoBehaviour
         IsDemogorgonFloor = CheckDemogorgon(Floor);
         IsInit = true;
         BattleBG.SetActive(true);
+        MyPlayer.InitPlayerProperties();
+        MyPlayer.UpdateAvatarTimeUI();
         //第一次進戰鬥跳教學
         if (Player.Tutorial)
         {
@@ -169,6 +171,7 @@ public partial class BattleManage : MonoBehaviour
             MyCameraControler.enabled = false;
             gameObject.SetActive(false);
             PlayerPrefs.SetInt(LocoData.Tutorial.ToString(), 1);
+            Player.SetTutorial(false);
         }
         Debug.Log("Init BattleManager");
     }

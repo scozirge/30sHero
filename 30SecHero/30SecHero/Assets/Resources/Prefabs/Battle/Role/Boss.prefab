@@ -189,7 +189,9 @@ MonoBehaviour:
   HealthObj: {fileID: 1766157516029884}
   PlayMotionDuration: 0.5
   InitBuffers: []
+  KillAvatarTime: 5
   Type: 0
+  StemFromFloor: 0
 --- !u!50 &50240295783364808
 Rigidbody2D:
   serializedVersion: 4
@@ -232,6 +234,8 @@ MonoBehaviour:
   AttackStopMove: 0
   StopMoveTime: 0
   SpellSound: {fileID: 0}
+  SpawnedInSelf: 0
+  VampireProportion: 0
   PSkillTimer: 0
   IsPlayerGetSkill: 0
   AttackOnce: 0
@@ -242,9 +246,10 @@ MonoBehaviour:
   AngleInterval: 30
   RandomAngle: 0
   Patetern: 0
-  SpawnedInSelf: 0
+  FirstAttackNoWait: 0
   AttackPrefab: {fileID: 114962956101920240, guid: 84d6f2965eaadcd4cb3265ce5e0d2e16,
     type: 3}
+  TriggerWall: 1
 --- !u!114 &114453156640465214
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -298,6 +303,8 @@ MonoBehaviour:
   AttackStopMove: 0
   StopMoveTime: 0
   SpellSound: {fileID: 0}
+  SpawnedInSelf: 0
+  VampireProportion: 0
   PSkillTimer: 0
   IsPlayerGetSkill: 0
   AttackOnce: 0
@@ -308,7 +315,7 @@ MonoBehaviour:
   AngleInterval: 0
   RandomAngle: 0
   Patetern: 0
-  SpawnedInSelf: 0
+  FirstAttackNoWait: 0
   AttackPrefab: {fileID: 114280530254980642, guid: d872e1f8aa4220344b9040c1451d878b,
     type: 3}
   AttackRadius: 0

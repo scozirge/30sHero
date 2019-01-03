@@ -707,10 +707,23 @@ public class GameSettingData : Data
     public static int GetRandomEquipQuality(int _extraWeight)
     {
         int quality = 0;
-        EquipQualityWeightList[0] -= _extraWeight;
-        if (EquipQualityWeightList[0] < 0)
-            EquipQualityWeightList[0] = 0;
-        quality = ProbabilityGetter.GetFromWeigth(EquipQualityWeightList);
+        List<int> weightList = new List<int>(EquipQualityWeightList);
+        weightList[0] -= _extraWeight;
+        if (weightList[0] < 0)
+            weightList[0] = 0;
+        quality = ProbabilityGetter.GetFromWeigth(weightList);
+        return quality;
+    }
+    /// <summary>
+    /// 返回1~5 BOSS掉落必定掉裝備
+    /// </summary>
+    /// <returns></returns>
+    public static int GetBossRandomEquipQuality()
+    {
+        int quality = 0;
+        List<int> weightList = new List<int>(EquipQualityWeightList);
+        weightList[0] = 0;
+        quality = ProbabilityGetter.GetFromWeigth(weightList);
         return quality;
     }
     public static int GetRandomEquipType()

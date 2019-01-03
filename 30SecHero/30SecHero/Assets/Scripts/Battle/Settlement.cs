@@ -88,7 +88,9 @@ partial class BattleManage
     }
     public static void GainEquip(EquipData _data)
     {
-        ExpectEquipDataList.Add(_data);
+        GainEquipDataList.Add(_data);
+        //ExpectEquipDataList.Add(_data);//改成沒通關還是會獲得裝備
+        
         //Debug.Log("UID=" + _data.UID);
         //Debug.Log("LV=" + _data.LV);
         //Debug.Log("Quaility=" + _data.Quality);

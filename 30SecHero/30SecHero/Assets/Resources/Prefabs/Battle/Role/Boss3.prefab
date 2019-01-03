@@ -745,7 +745,7 @@ MonoBehaviour:
   HealthObj: {fileID: 6141787278161278624}
   PlayMotionDuration: 1
   InitBuffers: []
-  KillAvatarTime: 30
+  KillAvatarTime: 5
   Type: 1
   StemFromFloor: 0
 --- !u!50 &6164796994483693908

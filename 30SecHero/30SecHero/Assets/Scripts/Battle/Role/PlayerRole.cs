@@ -318,7 +318,7 @@ public partial class PlayerRole : Role
     }
     protected override void Start()
     {
-        InitPlayerProperties();
+        //InitPlayerProperties();改在BattleManage就執行
         base.Start();
         if (MyEnchant[EnchantProperty.ShockWave] > 0)
             CanGenerateShockWave = true;
@@ -349,7 +349,7 @@ public partial class PlayerRole : Role
         IsTriggerRevive = false;
         IsTriggerRuleBreaker = false;
     }
-    void InitPlayerProperties()
+    public void InitPlayerProperties()
     {
         //附魔
         for (int i = 0; i < MyEnum.GetTypeCount<EnchantProperty>(); i++)
@@ -370,6 +370,7 @@ public partial class PlayerRole : Role
         MaxExtraMove = (int)Player.GetProperties(RoleProperty.MaxMoveSpeed);
         MoveDepletedTime = (float)Player.GetProperties(RoleProperty.MoveDecay);
         MaxAvaterTime = (float)Player.GetProperties(RoleProperty.AvatarTime);
+        AvatarTimer = MaxAvaterTime;
         AvatarPotionBuff = (int)Player.GetProperties(RoleProperty.AvatarPotionBuff);
         SkillTimeBuff = (float)Player.GetProperties(RoleProperty.SkillTimeBuff);
         SkillDrop = (float)Player.GetProperties(RoleProperty.SkillDrop);
@@ -779,16 +780,7 @@ public partial class PlayerRole : Role
             }
             ActiveEnchantSkill(false);
         }
-        if (MyAvatarText.Number != Mathf.Round(AvatarTimer))
-        {
-            MyAvatarText.SetNumber((int)Mathf.Round(AvatarTimer));            
-            if (AvatarTimerAni != null)
-                if (AvatarTimer <= 10)
-                {
-                    AudioPlayer.PlaySound(CountdownSound);
-                    AvatarTimerAni.SetTrigger("TimeAlarm");
-                }                    
-        }
+        UpdateAvatarTimeUI();
         /*
         if (AvatarTimerText.text != Mathf.Round(AvatarTimer).ToString())
         {
@@ -799,7 +791,19 @@ public partial class PlayerRole : Role
         }
         */
     }
-
+    public void UpdateAvatarTimeUI()
+    {
+        if (MyAvatarText.Number != Mathf.Round(AvatarTimer))
+        {
+            MyAvatarText.SetNumber((int)Mathf.Round(AvatarTimer));
+            if (AvatarTimerAni != null)
+                if (AvatarTimer <= 10)
+                {
+                    AudioPlayer.PlaySound(CountdownSound);
+                    AvatarTimerAni.SetTrigger("TimeAlarm");
+                }
+        }
+    }
     protected override void Move()
     {
         base.Move();

@@ -23,7 +23,7 @@ public class ScenePlayer : MonoBehaviour
     }
     public void PlaySceneMusic()
     {
-        if (SceneManager.GetActiveScene().name == MyScene.Init.ToString())
+        if (SceneManager.GetActiveScene().name == MyScene.Init.ToString() && NextSceneName=="Main")
             return;
         AudioPlayer.StopAllMusic();
         switch (NextSceneName)

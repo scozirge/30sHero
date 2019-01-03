@@ -239,7 +239,7 @@ public partial class EnemyRole : Role
     public override void SelfDestroy()
     {
         BattleManage.RemoveEnemy(this);
-        BattleManage.BM.MyPlayer.AvatarTimer += KillAvatarTime;
+        BattleManage.BM.MyPlayer.AddAvarTime(KillAvatarTime);
         base.SelfDestroy();
     }
 

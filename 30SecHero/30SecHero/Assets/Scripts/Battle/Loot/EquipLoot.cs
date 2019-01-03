@@ -26,6 +26,16 @@ public class EquipLoot : Loot
         }
         EquipTrans.rotation = Quaternion.Euler(new Vector3(0, 0, Random.Range(-20, 20)));
     }
+    public void Init(int _lv, int _quality,EquipType _type)
+    {
+        MyData = EquipData.GetRandomNewEquip(_lv, _quality, _type);
+        for (int i = 0; i < Icons.Length; i++)
+        {
+            Icons[i].sprite = MyData.Icons[i];
+            Icons[i].SetNativeSize();
+        }
+        EquipTrans.rotation = Quaternion.Euler(new Vector3(0, 0, Random.Range(-20, 20)));
+    }
     void OnTriggerStay2D(Collider2D _col)
     {
         if (!ReadyToAcquire)
