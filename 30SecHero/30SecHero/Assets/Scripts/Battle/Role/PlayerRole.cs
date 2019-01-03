@@ -362,6 +362,7 @@ public partial class PlayerRole : Role
         }
 
         MaxHealth = (int)Player.GetProperties(RoleProperty.Health);
+        OriginMaxHealth = MaxHealth;
         BaseDamage = (int)Player.GetProperties(RoleProperty.Strength);
         MaxShield = (int)Player.GetProperties(RoleProperty.Shield);
         ShieldRechargeTime = (float)Player.GetProperties(RoleProperty.ShieldReChargeTime);

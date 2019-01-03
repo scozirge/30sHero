@@ -35,6 +35,7 @@ public abstract class Role : MonoBehaviour
     [Tooltip("最大血量")]
     [SerializeField]
     public int MaxHealth;
+    public int OriginMaxHealth;
     public float HealthRatio { get { return (float)Health / (float)MaxHealth; } }
     public virtual int Damage
     {

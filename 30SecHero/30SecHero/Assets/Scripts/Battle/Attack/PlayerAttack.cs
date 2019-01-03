@@ -117,7 +117,7 @@ public class PlayerAttack : MonoBehaviour
         }
         //肉食(刀子殺怪增加最大血量)
         if (Attacker.MyEnchant[EnchantProperty.Carnivorous] > 0)
-            Attacker.ExtendMaxHP((int)(Attacker.MyEnchant[EnchantProperty.Carnivorous] * Attacker.MaxHealth));
+            Attacker.ExtendMaxHP((int)(Attacker.MyEnchant[EnchantProperty.Carnivorous] * Attacker.OriginMaxHealth));
         //元素擊殺產生爆炸
         if (_er.BuffersExist(RoleBuffer.Burn))
         {
