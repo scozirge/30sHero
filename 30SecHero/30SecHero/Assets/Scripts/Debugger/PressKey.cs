@@ -74,6 +74,7 @@ public partial class Debugger : MonoBehaviour
             PlayerPrefs.DeleteKey(LocoData.Gold.ToString());
             PlayerPrefs.DeleteKey(LocoData.Emerald.ToString());
             PlayerPrefs.DeleteKey(LocoData.Enchant.ToString());
+            PlayerPrefs.DeleteKey(LocoData.Tutorial.ToString());
         }
         else if (Input.GetKeyDown(KeyCode.O))
         {
