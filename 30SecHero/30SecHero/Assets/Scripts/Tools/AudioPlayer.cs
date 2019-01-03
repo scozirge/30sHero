@@ -332,7 +332,7 @@ public class AudioPlayer : MonoBehaviour
         LoopMusicDic.Add(_key, CurPlayMusic);
         if (IsMusicMute)
         {
-            LoopSoundDic[_key].volume = 0;
+            LoopMusicDic[_key].volume = 0;
         }
         return LoopMusicDic[_key];
     }

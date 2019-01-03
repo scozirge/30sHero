@@ -62,6 +62,16 @@ public partial class Player
             PlayerPrefs.SetInt(LocoData.Init.ToString(), 1);
             PlayerPrefs.SetInt(LocoData.UseLanguage.ToString(), 2);
         }
+        SetLanguage((Language)PlayerPrefs.GetInt(LocoData.UseLanguage.ToString()));
+        if (PlayerPrefs.GetInt(LocoData.MusicOn.ToString()) == 1)
+            SetMusic(true);
+        else
+            SetMusic(false);
+        if (PlayerPrefs.GetInt(LocoData.SoundOn.ToString()) == 1)
+            SetSound(true);
+        else
+            SetSound(false);
+
 
         if (LocalData)
             GetLocalData();
@@ -237,43 +247,46 @@ public partial class Player
     }
     public static void GetEquip_CB(string[] _data)
     {
-        Dictionary<long, EquipData> wlist = new Dictionary<long, EquipData>();
-        Dictionary<long, EquipData> alist = new Dictionary<long, EquipData>();
-        Dictionary<long, EquipData> aclist = new Dictionary<long, EquipData>();
-        for (int i = 0; i < _data.Length; i++)
+        if (_data != null)
         {
-            string[] properties = _data[i].Split(',');
-            int uid = int.Parse(properties[0]);
-            int jid = int.Parse(properties[1]);
-            EquipType type = (EquipType)int.Parse(properties[2]);
-            int equipSlot = int.Parse(properties[3]);
-            int lv = int.Parse(properties[4]);
-            int quality = int.Parse(properties[5]);
-            string propertiesStr = "";
-            if (properties.Length > 6)
-                propertiesStr = properties[6];//讀取本地資料要確定欄位數不然會炸掉，不能隨便追加資料，要追加要優化程式
-            int enchantID = 0;
-            if (properties.Length > 7)
-                enchantID = int.Parse(properties[7]);//讀取本地資料要確定欄位數不然會炸掉，不能隨便追加資料，要追加要優化程式
-            switch (type)
+            Dictionary<long, EquipData> wlist = new Dictionary<long, EquipData>();
+            Dictionary<long, EquipData> alist = new Dictionary<long, EquipData>();
+            Dictionary<long, EquipData> aclist = new Dictionary<long, EquipData>();
+            for (int i = 0; i < _data.Length; i++)
             {
-                case EquipType.Weapon:
-                    WeaponData w = WeaponData.GetNewWeapon(uid, jid, equipSlot, lv, quality, propertiesStr, enchantID);
-                    wlist.Add(uid, w);
-                    break;
-                case EquipType.Armor:
-                    ArmorData a = ArmorData.GetNewArmor(uid, jid, equipSlot, lv, quality, propertiesStr, enchantID);
-                    alist.Add(uid, a);
-                    break;
-                case EquipType.Accessory:
-                    AccessoryData ac = AccessoryData.GetNewAccessory(uid, jid, equipSlot, lv, quality, propertiesStr, enchantID);
-                    aclist.Add(uid, ac);
-                    break;
+                string[] properties = _data[i].Split(',');
+                int uid = int.Parse(properties[0]);
+                int jid = int.Parse(properties[1]);
+                EquipType type = (EquipType)int.Parse(properties[2]);
+                int equipSlot = int.Parse(properties[3]);
+                int lv = int.Parse(properties[4]);
+                int quality = int.Parse(properties[5]);
+                string propertiesStr = "";
+                if (properties.Length > 6)
+                    propertiesStr = properties[6];//讀取本地資料要確定欄位數不然會炸掉，不能隨便追加資料，要追加要優化程式
+                int enchantID = 0;
+                if (properties.Length > 7)
+                    enchantID = int.Parse(properties[7]);//讀取本地資料要確定欄位數不然會炸掉，不能隨便追加資料，要追加要優化程式
+                switch (type)
+                {
+                    case EquipType.Weapon:
+                        WeaponData w = WeaponData.GetNewWeapon(uid, jid, equipSlot, lv, quality, propertiesStr, enchantID);
+                        wlist.Add(uid, w);
+                        break;
+                    case EquipType.Armor:
+                        ArmorData a = ArmorData.GetNewArmor(uid, jid, equipSlot, lv, quality, propertiesStr, enchantID);
+                        alist.Add(uid, a);
+                        break;
+                    case EquipType.Accessory:
+                        AccessoryData ac = AccessoryData.GetNewAccessory(uid, jid, equipSlot, lv, quality, propertiesStr, enchantID);
+                        aclist.Add(uid, ac);
+                        break;
+                }
             }
+            Itmes[EquipType.Weapon] = wlist;
+            Itmes[EquipType.Armor] = alist;
+            Itmes[EquipType.Accessory] = aclist;
         }
-        Itmes[EquipType.Weapon] = wlist;
-        Itmes[EquipType.Armor] = alist;
-        Itmes[EquipType.Accessory] = aclist;
         EquipInitDataFinish = true;
     }
     public static void GetStrengthen_CB(string[] _data)
