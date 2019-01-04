@@ -373,22 +373,26 @@ MonoBehaviour:
     ActiveOnlyByEvent: 0
     NodeTag: 
     ExpandRandomNodes: 1
-    ToRandomNode: 0
-    GoToNodes: []
     SpellInterval: 0.5
+    Type: 1
+    LocoParticle: {fileID: 0}
+    WorldPartilce: {fileID: 0}
+    RoleAniTriggerName: 
+    CamAniTriggerName: 
+    Description: 
+    SpawnIntervalTime: 0
+    MyRushDirect: 0
+    RushForce: {x: 0, y: 0}
+    RushForce2: 0
+    ToRandomNode: 0
+    KeepNextNode: 0
+    GoToNodes: []
     SkillList:
     - {fileID: 114494556845548676}
     - {fileID: 114494556845548676}
     - {fileID: 114494556845548676}
     - {fileID: 114494556845548676}
     - {fileID: 114494556845548676}
-    Type: 1
-    LocoParticle: {fileID: 0}
-    WorldPartilce: {fileID: 0}
-    RoleAniTriggerName: 
-    CamAniTriggerName: 
-    SoundList: []
-    Description: 
     SpawnEnemyList:
     - Enemy: {fileID: 114364750184517408, guid: b2871176d9533a04e89d425f51d9351c,
         type: 3}
@@ -408,10 +412,7 @@ MonoBehaviour:
       SpawnPosition: {x: 0, y: -200}
       LifeTime: 0
       ExpandFolder: 1
-    SpawnIntervalTime: 0
-    MyRushDirect: 0
-    RushForce: {x: 0, y: 0}
-    RushForce2: 0
+    SoundList: []
   - WaitSecond: 0.5
     MaxProcessingTime: 0
     RelativeToTarget: 0
@@ -421,18 +422,22 @@ MonoBehaviour:
     ActiveOnlyByEvent: 0
     NodeTag: 
     ExpandRandomNodes: 1
-    ToRandomNode: 0
-    GoToNodes: []
     SpellInterval: 0.5
-    SkillList:
-    - {fileID: 8218340063564704566}
     Type: 1
     LocoParticle: {fileID: 0}
     WorldPartilce: {fileID: 0}
     RoleAniTriggerName: 
     CamAniTriggerName: 
-    SoundList: []
     Description: 
+    SpawnIntervalTime: 0
+    MyRushDirect: 0
+    RushForce: {x: 0, y: 0}
+    RushForce2: 0
+    ToRandomNode: 0
+    KeepNextNode: 0
+    GoToNodes: []
+    SkillList:
+    - {fileID: 8218340063564704566}
     SpawnEnemyList:
     - Enemy: {fileID: 114364750184517408, guid: b2871176d9533a04e89d425f51d9351c,
         type: 3}
@@ -452,10 +457,7 @@ MonoBehaviour:
       SpawnPosition: {x: 0, y: -200}
       LifeTime: 0
       ExpandFolder: 1
-    SpawnIntervalTime: 0
-    MyRushDirect: 0
-    RushForce: {x: 0, y: 0}
-    RushForce2: 0
+    SoundList: []
   - WaitSecond: 0.5
     MaxProcessingTime: 2
     RelativeToTarget: 5
@@ -465,22 +467,23 @@ MonoBehaviour:
     ActiveOnlyByEvent: 0
     NodeTag: 
     ExpandRandomNodes: 1
-    ToRandomNode: 0
-    GoToNodes: []
     SpellInterval: 0.5
-    SkillList: []
     Type: 0
     LocoParticle: {fileID: 0}
     WorldPartilce: {fileID: 0}
     RoleAniTriggerName: 
     CamAniTriggerName: 
-    SoundList: []
     Description: 
-    SpawnEnemyList: []
     SpawnIntervalTime: 0
     MyRushDirect: 0
     RushForce: {x: 0, y: 0}
     RushForce2: 0
+    ToRandomNode: 0
+    KeepNextNode: 0
+    GoToNodes: []
+    SkillList: []
+    SpawnEnemyList: []
+    SoundList: []
   - WaitSecond: 0.5
     MaxProcessingTime: 0
     RelativeToTarget: 0
@@ -490,18 +493,22 @@ MonoBehaviour:
     ActiveOnlyByEvent: 0
     NodeTag: 
     ExpandRandomNodes: 1
-    ToRandomNode: 0
-    GoToNodes: []
     SpellInterval: 0.5
-    SkillList:
-    - {fileID: 114494556845548676}
     Type: 1
     LocoParticle: {fileID: 0}
     WorldPartilce: {fileID: 0}
     RoleAniTriggerName: 
     CamAniTriggerName: 
-    SoundList: []
     Description: 
+    SpawnIntervalTime: 0
+    MyRushDirect: 0
+    RushForce: {x: 0, y: 0}
+    RushForce2: 0
+    ToRandomNode: 0
+    KeepNextNode: 0
+    GoToNodes: []
+    SkillList:
+    - {fileID: 114494556845548676}
     SpawnEnemyList:
     - Enemy: {fileID: 114364750184517408, guid: b2871176d9533a04e89d425f51d9351c,
         type: 3}
@@ -521,10 +528,7 @@ MonoBehaviour:
       SpawnPosition: {x: 0, y: -200}
       LifeTime: 0
       ExpandFolder: 1
-    SpawnIntervalTime: 0
-    MyRushDirect: 0
-    RushForce: {x: 0, y: 0}
-    RushForce2: 0
+    SoundList: []
   - WaitSecond: 0.5
     MaxProcessingTime: 2
     RelativeToTarget: 5
@@ -534,22 +538,23 @@ MonoBehaviour:
     ActiveOnlyByEvent: 0
     NodeTag: 
     ExpandRandomNodes: 1
-    ToRandomNode: 0
-    GoToNodes: []
     SpellInterval: 0.5
-    SkillList: []
     Type: 0
     LocoParticle: {fileID: 0}
     WorldPartilce: {fileID: 0}
     RoleAniTriggerName: 
     CamAniTriggerName: 
-    SoundList: []
     Description: 
-    SpawnEnemyList: []
     SpawnIntervalTime: 0
     MyRushDirect: 0
     RushForce: {x: 0, y: 0}
     RushForce2: 0
+    ToRandomNode: 0
+    KeepNextNode: 0
+    GoToNodes: []
+    SkillList: []
+    SpawnEnemyList: []
+    SoundList: []
   - WaitSecond: 0.5
     MaxProcessingTime: 0
     RelativeToTarget: 0
@@ -559,18 +564,22 @@ MonoBehaviour:
     ActiveOnlyByEvent: 0
     NodeTag: 
     ExpandRandomNodes: 1
-    ToRandomNode: 0
-    GoToNodes: []
     SpellInterval: 0.5
-    SkillList:
-    - {fileID: 114494556845548676}
     Type: 1
     LocoParticle: {fileID: 0}
     WorldPartilce: {fileID: 0}
     RoleAniTriggerName: 
     CamAniTriggerName: 
-    SoundList: []
     Description: 
+    SpawnIntervalTime: 0
+    MyRushDirect: 0
+    RushForce: {x: 0, y: 0}
+    RushForce2: 0
+    ToRandomNode: 0
+    KeepNextNode: 0
+    GoToNodes: []
+    SkillList:
+    - {fileID: 114494556845548676}
     SpawnEnemyList:
     - Enemy: {fileID: 114364750184517408, guid: b2871176d9533a04e89d425f51d9351c,
         type: 3}
@@ -590,10 +599,7 @@ MonoBehaviour:
       SpawnPosition: {x: 0, y: -200}
       LifeTime: 0
       ExpandFolder: 1
-    SpawnIntervalTime: 0
-    MyRushDirect: 0
-    RushForce: {x: 0, y: 0}
-    RushForce2: 0
+    SoundList: []
   - WaitSecond: 0.5
     MaxProcessingTime: 2
     RelativeToTarget: 5
@@ -603,22 +609,23 @@ MonoBehaviour:
     ActiveOnlyByEvent: 0
     NodeTag: 
     ExpandRandomNodes: 1
-    ToRandomNode: 0
-    GoToNodes: []
     SpellInterval: 0.5
-    SkillList: []
     Type: 0
     LocoParticle: {fileID: 0}
     WorldPartilce: {fileID: 0}
     RoleAniTriggerName: 
     CamAniTriggerName: 
-    SoundList: []
     Description: 
-    SpawnEnemyList: []
     SpawnIntervalTime: 0
     MyRushDirect: 0
     RushForce: {x: 0, y: 0}
     RushForce2: 0
+    ToRandomNode: 0
+    KeepNextNode: 0
+    GoToNodes: []
+    SkillList: []
+    SpawnEnemyList: []
+    SoundList: []
   MyAni: {fileID: 0}
   MaxSpawnCount: 3
   ActionRoundCount: 0
@@ -639,6 +646,7 @@ MonoBehaviour:
   DirectX: 0
   DirectY: 0
   MaxHealth: 120
+  OriginMaxHealth: 0
   BaseDamage: 60
   BaseMoveSpeed: 200
   DeathEffect: {fileID: 0}
@@ -660,7 +668,7 @@ MonoBehaviour:
   HealthObj: {fileID: 1597795968977402}
   PlayMotionDuration: 0.5
   InitBuffers: []
-  KillAvatarTime: 30
+  KillAvatarTime: 5
   Type: 1
   StemFromFloor: 0
 --- !u!50 &50786333864482318

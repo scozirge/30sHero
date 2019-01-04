@@ -28,7 +28,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1102576209836190}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -55,13 +55,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4af727ee3d4bb514e839cabbe0dd2b87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SpawnEffect: {fileID: 0}
   WaitToBeAcquire: 0
   RandomPosRadius: 50
-  DesginateLootIndex: 1
+  DesginateLootType: 0
+  Designate: 0
   LootList:
   - Type: 0
     Time: 0
-    Value: 0.1
+    Value: 0.3
     LootIcon: {fileID: 21300000, guid: 549e299f332f55f4f880f4c1ad449c54, type: 3}
     GetParticle: {fileID: 0}
   - Type: 1
