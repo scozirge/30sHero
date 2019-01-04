@@ -403,7 +403,8 @@ MonoBehaviour:
   DirectX: 0
   DirectY: 0
   MaxHealth: 1
-  BaseDamage: 10
+  OriginMaxHealth: 0
+  BaseDamage: 60
   BaseMoveSpeed: 200
   DeathEffect: {fileID: 198866349155790620, guid: 148af59c09b46fa46a0bf0429aa8adef,
     type: 3}
@@ -425,7 +426,9 @@ MonoBehaviour:
   HealthObj: {fileID: 2758820306163142408}
   PlayMotionDuration: 0.8
   InitBuffers: []
+  KillAvatarTime: 1
   Type: 0
+  StemFromFloor: 0
 --- !u!50 &2810135271942570274
 Rigidbody2D:
   serializedVersion: 4
@@ -480,8 +483,10 @@ MonoBehaviour:
   AngleInterval: 180
   RandomAngle: 0
   Patetern: 0
+  FirstAttackNoWait: 0
   AttackPrefab: {fileID: 114962956101920240, guid: bebea7f0b397ab842b561febea7726fa,
     type: 3}
+  TriggerWall: 1
 --- !u!114 &2871269675752009466
 MonoBehaviour:
   m_ObjectHideFlags: 0

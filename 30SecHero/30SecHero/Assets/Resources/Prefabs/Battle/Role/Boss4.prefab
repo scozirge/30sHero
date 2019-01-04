@@ -1204,7 +1204,7 @@ MonoBehaviour:
   PSkillName: 
   PSkillDuration: 0
   DetecteRadius: 800
-  DamagePercent: 1
+  DamagePercent: 0.5
   AttackStopMove: 0
   StopMoveTime: 0
   SpellSound: {fileID: 0}

@@ -366,7 +366,8 @@ MonoBehaviour:
   DirectX: 0
   DirectY: 0
   MaxHealth: 1
-  BaseDamage: 10
+  OriginMaxHealth: 0
+  BaseDamage: 60
   BaseMoveSpeed: 200
   DeathEffect: {fileID: 198866349155790620, guid: 148af59c09b46fa46a0bf0429aa8adef,
     type: 3}
@@ -388,6 +389,7 @@ MonoBehaviour:
   HealthObj: {fileID: 1292991921193154}
   PlayMotionDuration: 0.8
   InitBuffers: []
+  KillAvatarTime: 1
   Type: 0
   StemFromFloor: 0
 --- !u!50 &50173668922937064
@@ -428,7 +430,7 @@ MonoBehaviour:
   PSkillName: 0
   PSkillDuration: 20
   DetecteRadius: 800
-  DamagePercent: 1
+  DamagePercent: 0.5
   AttackStopMove: 0
   StopMoveTime: 1
   SpellSound: {fileID: 0}
