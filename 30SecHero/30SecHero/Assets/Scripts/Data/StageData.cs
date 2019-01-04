@@ -74,4 +74,23 @@ public class StageData
         }
         return stages;
     }
+    public static List<Stage> GetPriorStages(int _floor)
+    {
+        List<Stage> stages = new List<Stage>();
+        List<int> keys = new List<int>(GameDictionary.StageDic.Keys);
+        for (int i = 0; i < keys.Count; i++)
+        {
+            if (GameDictionary.StageDic[keys[i]].DebutFloor == _floor)
+            {
+                Stage stage = Resources.Load<Stage>(string.Format("Prefabs/Battle/Stages/{0}", GameDictionary.StageDic[keys[i]].Name)) as Stage;
+                if (stage == null)
+                {
+                    Debug.LogWarning(string.Format("找不到StageID:{0} 名稱為{1}的prefab", GameDictionary.StageDic[keys[i]].ID, GameDictionary.StageDic[keys[i]].Name));
+                    continue;
+                }
+                stages.Add(stage);
+            }
+        }
+        return stages;
+    }
 }

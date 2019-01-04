@@ -359,6 +359,7 @@ public partial class PlayerRole : Role
         AudioPlayer.PlaySound(RemoveAvatarSound);
         EffectEmitter.EmitParticle(AvatarRemoveEffect, Vector3.zero, Vector3.zero, transform);
         AniPlayer.PlayTrigger("Idle", 0);
+        yield return new WaitForSeconds(0.5f);
         StartControl = true;
     }
     public void InitPlayerProperties()

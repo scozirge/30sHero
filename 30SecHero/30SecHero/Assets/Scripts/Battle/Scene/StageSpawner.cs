@@ -13,6 +13,8 @@ public class StageSpawner : MonoBehaviour
     [SerializeField]
     List<ForeGround> FGBotList;
 
+    List<Stage> PriorStageList = new List<Stage>();
+
     static StageSpawner Myself;
 
     public void Init()
@@ -25,6 +27,8 @@ public class StageSpawner : MonoBehaviour
             return;
         Myself.StageList.Clear();
         Myself.StageList = StageData.GetAvailableStages(_floor);
+        Myself.PriorStageList.Clear();
+        Myself.PriorStageList = StageData.GetPriorStages(_floor);
     }
     static Stage GetRandomStage(ref int _remainPlateSize)
     {
@@ -34,6 +38,20 @@ public class StageSpawner : MonoBehaviour
             if (_remainPlateSize >= Myself.StageList[random].OccupyPlateSize)
             {
                 _remainPlateSize -= Myself.StageList[random].OccupyPlateSize;
+                return Myself.StageList[random];
+            }
+        }
+        return null;
+    }
+    static Stage GetRandomPriorStage(ref int _remainPlateSize)
+    {
+        for (int i = 0; i < 30; i++)
+        {
+            int random = Random.Range(0, Myself.PriorStageList.Count);
+            if (_remainPlateSize >= Myself.PriorStageList[random].OccupyPlateSize)
+            {
+                _remainPlateSize -= Myself.PriorStageList[random].OccupyPlateSize;
+                Myself.PriorStageList.RemoveAt(random);
                 return Myself.StageList[random];
             }
         }
@@ -50,9 +68,18 @@ public class StageSpawner : MonoBehaviour
             Stage stage = null;
             if (Myself.StageList.Count != 0)
             {
-                Stage stagePrefab = GetRandomStage(ref _remainPlateSize);
+                Stage stagePrefab = null;
+                if (Myself.PriorStageList.Count > 0)
+                {
+                    stagePrefab = GetRandomPriorStage(ref _remainPlateSize);
+                    if (stagePrefab == null)
+                        stagePrefab = GetRandomStage(ref _remainPlateSize);
+                }
+                else
+                    stagePrefab = GetRandomStage(ref _remainPlateSize);
                 if (stagePrefab == null)
                     break;
+                Debug.Log("Floor=" + _floor + "  Name=" + stagePrefab.name);
                 stage = Instantiate(stagePrefab, Vector3.zero, Quaternion.identity) as Stage;
             }
             else
