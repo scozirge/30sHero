@@ -54,7 +54,8 @@ public class Equip : MyUI
     MyToggle SortWayToggle;
     [SerializeField]
     Toggle[] TagToggles;
-
+    [SerializeField]
+    RunAnimatedText MyAniText;
 
     EquipData SelectedEquip;
     public EquipType CurFilterType;
@@ -114,7 +115,7 @@ public class Equip : MyUI
         Sort();
         //ID重複檢測
         List<int> test = new List<int>();
-        for(int i=0;i<ItemList.Count;i++)
+        for (int i = 0; i < ItemList.Count; i++)
         {
             for (int j = 0; j < test.Count; j++)
             {
@@ -122,7 +123,7 @@ public class Equip : MyUI
                 {
                     Debug.LogError("裝備ID重複:" + test[j]);
                     break;
-                }                
+                }
             }
             test.Add(ItemList[i].MyData.UID);
         }
@@ -132,7 +133,7 @@ public class Equip : MyUI
         base.OnEnable();
         ToFilter(0);
         Sort();
-        UpdateRoleInfo();
+        UpdateRoleInfo(false);
         SetSoldMode(false);
         /*
         if (TagToggles != null)
@@ -398,9 +399,9 @@ public class Equip : MyUI
             }
         }
         Filter();
-        UpdateRoleInfo();
+        UpdateRoleInfo(true);
     }
-    public void UpdateRoleInfo()
+    public void UpdateRoleInfo(bool _animationText)
     {
         if (Player.MyWeapon != null)
         {
@@ -508,13 +509,40 @@ public class Equip : MyUI
             }
             AccessoryQuality[1].sprite = GameManager.GetItemQualityBotSprite(0);
         }
-        StrengthText.text = Player.GetProperties(RoleProperty.Strength).ToString();
-        HealthText.text = Player.GetProperties(RoleProperty.Health).ToString();
-        ShieldText.text = Player.GetProperties(RoleProperty.Shield).ToString();
-        ShieldRecoveryText.text = string.Format("{0}%/{1}", Player.GetProperties(RoleProperty.ShieldRecovery) * 100, StringData.GetString("Second"));
-        MoveSpeedText.text = string.Format("{0}/{1}", Player.GetProperties(RoleProperty.MoveSpeed), StringData.GetString("Second"));
-        MaxMoveText.text = string.Format("{0}/{1}", Player.GetProperties(RoleProperty.MaxMoveSpeed) + Player.GetProperties(RoleProperty.MoveSpeed), StringData.GetString("Second"));
-        AvatarTimeText.text = string.Format("{0}{1}", Player.GetProperties(RoleProperty.AvatarPotionBuff), StringData.GetString("Second"));
-        SkillTimeText.text = string.Format("{0}{1}", Player.GetProperties(RoleProperty.SkillTimeBuff), StringData.GetString("Second"));
+        UpdateRolePropertyText(_animationText);
+    }
+    void UpdateRolePropertyText(bool _animationText)
+    {
+        if (_animationText)
+        {
+            MyAniText.Clear();
+            MyAniText.SetAnimatedText("StrengthText", MyMath.StringToNumber(StrengthText.text), Player.GetProperties(RoleProperty.Strength), StrengthText, "", "");
+            MyAniText.SetAnimatedText("HealthText", MyMath.StringToNumber(HealthText.text), Player.GetProperties(RoleProperty.Health), HealthText, "", "");
+            MyAniText.SetAnimatedText("ShieldText", MyMath.StringToNumber(ShieldText.text), Player.GetProperties(RoleProperty.Shield), ShieldText, "", "");
+            MyAniText.SetAnimatedText("ShieldRecoveryText",MyMath.StringToNumber(ShieldRecoveryText.text,"+","%"), TextManager.ToPercent(Player.GetProperties(RoleProperty.ShieldRecovery)), ShieldRecoveryText, "+", "%");
+            MyAniText.SetAnimatedText("MoveSpeedText", MyMath.StringToNumber(MoveSpeedText.text, "", "/" + StringData.GetString("Second")), Player.GetProperties(RoleProperty.MoveSpeed), MoveSpeedText, "", "/" + StringData.GetString("Second"));
+            MyAniText.SetAnimatedText("MaxMoveText", MyMath.StringToNumber(MaxMoveText.text, "", "/" + StringData.GetString("Second")), Player.GetProperties(RoleProperty.MaxMoveSpeed), MaxMoveText, "", "/" + StringData.GetString("Second"));
+            MyAniText.SetAnimatedText("AvatarTimeText", MyMath.StringToNumber(AvatarTimeText.text, "", StringData.GetString("Second")), Player.GetProperties(RoleProperty.AvatarTime), AvatarTimeText, "", StringData.GetString("Second"));
+            MyAniText.SetAnimatedText("SkillTimeText", MyMath.StringToNumber(SkillTimeText.text, "", StringData.GetString("Second")), Player.GetProperties(RoleProperty.SkillTimeBuff), SkillTimeText, "", StringData.GetString("Second"));
+            MyAniText.Play("StrengthText");
+            MyAniText.Play("HealthText");
+            MyAniText.Play("ShieldText");
+            MyAniText.Play("ShieldRecoveryText");
+            MyAniText.Play("MoveSpeedText");
+            MyAniText.Play("MaxMoveText");
+            MyAniText.Play("AvatarTimeText");
+            MyAniText.Play("SkillTimeText");
+        }
+        else
+        {
+            StrengthText.text = Player.GetProperties(RoleProperty.Strength).ToString();
+            HealthText.text = Player.GetProperties(RoleProperty.Health).ToString();
+            ShieldText.text = Player.GetProperties(RoleProperty.Shield).ToString();
+            ShieldRecoveryText.text = string.Format("+{0}%", TextManager.ToPercent(Player.GetProperties(RoleProperty.ShieldRecovery)));
+            MoveSpeedText.text = string.Format("{0}/{1}", Player.GetProperties(RoleProperty.MoveSpeed), StringData.GetString("Second"));
+            MaxMoveText.text = string.Format("{0}/{1}", Player.GetProperties(RoleProperty.MaxMoveSpeed) + Player.GetProperties(RoleProperty.MoveSpeed), StringData.GetString("Second"));
+            AvatarTimeText.text = string.Format("{0}{1}", Player.GetProperties(RoleProperty.AvatarTime), StringData.GetString("Second"));
+            SkillTimeText.text = string.Format("{0}{1}", Player.GetProperties(RoleProperty.SkillTimeBuff), StringData.GetString("Second"));
+        }
     }
 }

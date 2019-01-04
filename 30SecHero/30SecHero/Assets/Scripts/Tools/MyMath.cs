@@ -79,5 +79,31 @@ public class MyMath : MonoBehaviour
         }
         return result;
     }
- 
+    public static bool IsInteger(float _number)
+    {
+        if (_number.ToString().IndexOf(".") == -1)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    public static float StringToNumber(string _str)
+    {
+        float result;
+        float.TryParse(_str, out result);
+        return result;
+    }
+    public static float StringToNumber(string _str,string _prefix,string _suffix)
+    {
+        float result;
+        if(_prefix!="")
+            _str = _str.Replace(_prefix, "");
+        if (_suffix!="")
+            _str = _str.Replace(_suffix, "");
+        float.TryParse(_str, out result);
+        return result;
+    }
 }
