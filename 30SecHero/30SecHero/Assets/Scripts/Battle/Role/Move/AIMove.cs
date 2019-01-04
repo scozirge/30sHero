@@ -19,7 +19,7 @@ public abstract class AIMove : MonoBehaviour
     protected int FollowCameraSpeed = 1000;
     [Tooltip("進場速度")]
     [SerializeField]
-    protected int DebutSpeed;
+    public int DebutSpeed;
     [Tooltip("遊蕩時間間隔")]
     [SerializeField]
     protected float WanderInterval;

@@ -90,7 +90,7 @@ partial class BattleManage
     {
         GainEquipDataList.Add(_data);
         //ExpectEquipDataList.Add(_data);//改成沒通關還是會獲得裝備
-        
+
         //Debug.Log("UID=" + _data.UID);
         //Debug.Log("LV=" + _data.LV);
         //Debug.Log("Quaility=" + _data.Quality);
@@ -206,34 +206,22 @@ partial class BattleManage
         AudioPlayer.FadeInMusic(GameManager.GM.FightMusic1, "Battle", 2f);
         //不屈勇者(擊殺BOSS獲得額外變身秒數)
         BM.MyPlayer.AvatarTimer += BM.MyPlayer.MyEnchant[EnchantProperty.Courage];
-        BattleManage.BM.MyPlayer.AvatarTimer += BattleManage.BM.MyPlayer.MyEnchant[EnchantProperty.Courage];
+        BattleManage.BM.MyPlayer.AddAvarTime(BattleManage.BM.MyPlayer.MyEnchant[EnchantProperty.Courage]);
     }
     public static void AddUnlockPartner()
     {
         UnlockPartner++;
     }
-    public static void KillNewBoss(int _id)
+    public static void KillBossAndGetEnchant(int _bossID, EnchantData _ed)
     {
-        for (int i = 0; i < Player.KillBossID.Count; i++)
-        {
-            if (_id == Player.KillBossID[i])
-            {
-                return;
-            }
-        }
         //擊殺新BOSS
-        Player.KillNewBoss(_id);
-        GetEnchant();
-    }
-    public static void GetEnchant()
-    {
-        EnchantData ed = EnchantData.GetAvailableRandomEnchant();
-        if (ed != null)
+        Player.KillNewBoss(_bossID);
+        if (_ed != null)
         {
-            Player.EnchantUpgrade(ed);
-            BM.GetEnchant_Name.text = ed.Name;
-            BM.GetEnchant_Icon.sprite = ed.GetICON();
-            BM.GetEnchant_Description.text = ed.Description(0);
+            Player.EnchantUpgrade(_ed);
+            BM.GetEnchant_Name.text = _ed.Name;
+            BM.GetEnchant_Icon.sprite = _ed.GetICON();
+            BM.GetEnchant_Description.text = _ed.Description(0);
             BM.CallGetEnchantUI(true);
         }
     }

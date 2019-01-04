@@ -89,6 +89,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Icon: {fileID: 0}
   LVText: {fileID: 0}
+  NumberText: {fileID: 0}
+  MyAni: {fileID: 0}
 --- !u!1 &1329905286418492
 GameObject:
   m_ObjectHideFlags: 0
@@ -178,6 +180,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Icon: {fileID: 0}
   LVText: {fileID: 0}
+  NumberText: {fileID: 0}
+  MyAni: {fileID: 0}
 --- !u!1 &1466717084609372
 GameObject:
   m_ObjectHideFlags: 0
@@ -330,7 +334,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdc075f4dbb0b57498428372b465e8e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WaitToBeAcquire: 0.3
+  WaitToBeAcquire: 0.6
   RandomPosRadius: 300
   EquipTrans: {fileID: 224751315579743956}
   Icons:
@@ -464,6 +468,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Icon: {fileID: 0}
   LVText: {fileID: 0}
+  NumberText: {fileID: 0}
+  MyAni: {fileID: 0}
 --- !u!1 &1895670256676952
 GameObject:
   m_ObjectHideFlags: 0

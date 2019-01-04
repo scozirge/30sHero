@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Loot : MonoBehaviour {
-
+public abstract class Loot : MonoBehaviour
+{
+    [SerializeField]
+    ParticleSystem SpawnEffect;
     [Tooltip("在可以吃掉前需求的等待時間")]
     [SerializeField]
     protected float WaitToBeAcquire = 0;
@@ -21,6 +23,8 @@ public abstract class Loot : MonoBehaviour {
             MyAIMove.ReadyToMove = false;
         RandomPos();
         StartCoroutine(WaitToMoveToAcquire());
+        if (SpawnEffect)
+            EffectEmitter.EmitParticle(SpawnEffect, Vector3.zero, Vector3.zero, transform);
     }
     void RandomPos()
     {
@@ -36,6 +40,9 @@ public abstract class Loot : MonoBehaviour {
         yield return new WaitForSeconds(WaitToBeAcquire);
         ReadyToAcquire = true;
         if (MyAIMove)
+        {
+            MyAIMove.DebutSpeed = 2000;
             MyAIMove.ReadyToMove = true;
+        }
     }
 }

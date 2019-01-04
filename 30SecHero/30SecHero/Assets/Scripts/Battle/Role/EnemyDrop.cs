@@ -102,9 +102,12 @@ public partial class EnemyRole
             }
             else//擊殺尚未擊殺過的新BOSS
             {
+                //寶石
                 ResourceLoot loot = DropSpawner.SpawnResource(transform.position);
                 if (loot) loot.Init(ResourceType.Emerald, GameSettingData.NewBossEmerald + BattleManage.Floor);
-                BattleManage.KillNewBoss(ID);
+                //解鎖夥伴並加入已擊殺BOSS清單
+                PatnerLoot ploot = DropSpawner.SpawnPatner(transform.position);
+                if (ploot) ploot.Init(ID);
             }
         }
         //DropLoot;

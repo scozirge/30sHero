@@ -14,11 +14,14 @@ public class DropSpawner : MonoBehaviour
     bool Designate;
     [SerializeField]
     SkillLoot SkillLoot;
+    [SerializeField]
+    PatnerLoot PatnerLoot;
 
     static PotionLoot LootPrefab;
     static SkillLoot SkillLootPrefab;
     static ResourceLoot ResourcePrefab;
     static EquipLoot EquipPrefab;
+    static PatnerLoot PatnerPrefab;
     static Transform MyTransfrom;
     static LootType Type;
 
@@ -29,6 +32,7 @@ public class DropSpawner : MonoBehaviour
         SkillLootPrefab = SkillLoot;
         ResourcePrefab = Resource;
         EquipPrefab = Equip;
+        PatnerPrefab = PatnerLoot;
     }
     public static EquipLoot SpawnEquip(Vector3 _pos)
     {
@@ -54,6 +58,13 @@ public class DropSpawner : MonoBehaviour
     public static SkillLoot SpawnSkill(Vector3 _pos)
     {
         SkillLoot loot = Instantiate(SkillLootPrefab, Vector3.zero, Quaternion.identity) as SkillLoot;
+        loot.transform.SetParent(MyTransfrom);
+        loot.transform.localPosition = _pos;
+        return loot;
+    }
+    public static PatnerLoot SpawnPatner(Vector3 _pos)
+    {
+        PatnerLoot loot = Instantiate(PatnerPrefab, Vector3.zero, Quaternion.identity) as PatnerLoot;
         loot.transform.SetParent(MyTransfrom);
         loot.transform.localPosition = _pos;
         return loot;

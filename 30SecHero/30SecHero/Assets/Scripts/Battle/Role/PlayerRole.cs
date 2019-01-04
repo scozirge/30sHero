@@ -231,6 +231,7 @@ public partial class PlayerRole : Role
     public EnemyRole ClosestEnemy;
     bool CanJump;
     bool CanRush;
+    bool StartControl;
 
     //附魔
     public Dictionary<EnchantProperty, float> MyEnchant = new Dictionary<EnchantProperty, float>();
@@ -307,7 +308,7 @@ public partial class PlayerRole : Role
     {
         base.OnEnable();
         if (IsAvatar)
-            AniPlayer.PlayTrigger("Idle1", 0);
+            AniPlayer.PlayTrigger("Idle", 0);
         else
             AniPlayer.PlayTrigger("Idle2", 0);
     }
@@ -346,8 +347,19 @@ public partial class PlayerRole : Role
         FaceLeftOrRight = 1;
         CanJump = true;
         CanRush = true;
+        StartControl = false;
         IsTriggerRevive = false;
         IsTriggerRuleBreaker = false;
+        StartCoroutine(StartAvatarPerformance());
+    }
+    IEnumerator StartAvatarPerformance()
+    {
+        AniPlayer.PlayTrigger("Idle2", 0);
+        yield return new WaitForSeconds(0.5f);
+        AudioPlayer.PlaySound(RemoveAvatarSound);
+        EffectEmitter.EmitParticle(AvatarRemoveEffect, Vector3.zero, Vector3.zero, transform);
+        AniPlayer.PlayTrigger("Idle", 0);
+        StartControl = true;
     }
     public void InitPlayerProperties()
     {
@@ -756,13 +768,14 @@ public partial class PlayerRole : Role
     }
     protected void AvatarTimerFunc()
     {
+        if (!StartControl)
+            return;
         if (!IsAvatar)
             return;
         if (AvatarTimer > 0)
             AvatarTimer -= Time.deltaTime;
         else//解除變身
-        {
-            AudioPlayer.PlaySound(RemoveAvatarSound);
+        {            
             AniPlayer.PlayTrigger("Idle2", 0);
             AvatarTimer = 0;
             ExtraMoveSpeed = 0;
@@ -773,6 +786,7 @@ public partial class PlayerRole : Role
             //飛濺針刺
             if (MyEnchant[EnchantProperty.SplashThorn] > 0)
                 SplashThornSkil.LaunchAISpell();
+            AudioPlayer.PlaySound(RemoveAvatarSound);
             EffectEmitter.EmitParticle(AvatarRemoveEffect, Vector3.zero, Vector3.zero, transform);
             if (MoveAfterimage)
             {
@@ -807,6 +821,8 @@ public partial class PlayerRole : Role
     }
     protected override void Move()
     {
+        if (!StartControl)
+            return;
         base.Move();
         //MyRigi.velocity *= MoveDecay;
 

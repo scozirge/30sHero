@@ -22,8 +22,8 @@ public partial class Debugger : MonoBehaviour
             Player.ShowBaseProperties();
         }
         else if (Input.GetKeyDown(KeyCode.X))
-        {
-            BattleManage.GetEnchant();
+        {            
+
         }
         else if (Input.GetKeyDown(KeyCode.N))
         {

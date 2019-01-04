@@ -123,13 +123,24 @@ public class ShootAmmo : Ammo
     }
     protected override void Update()
     {
-        base.Update();        
-        if (TraceFactor > 0 && Target)
+        base.Update();
+        if (TraceFactor > 0)
         {
-            Vector2 targetVel = (Target.transform.position - transform.position).normalized * AmmoSpeed;
-            MyRigi.velocity = Vector2.Lerp(MyRigi.velocity, targetVel, TraceFactor);
-            float angle = Mathf.Atan2(MyRigi.velocity.y, MyRigi.velocity.x) * Mathf.Rad2Deg;
-            transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+            if (Target)
+            {
+                Vector2 targetVel = (Target.transform.position - transform.position).normalized * AmmoSpeed;
+                MyRigi.velocity = Vector2.Lerp(MyRigi.velocity, targetVel, TraceFactor);
+                float angle = Mathf.Atan2(MyRigi.velocity.y, MyRigi.velocity.x) * Mathf.Rad2Deg;
+                transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+            }
+            else if (Attacker.MyForce == Force.Player)
+            {
+                GameObject go = GameobjectFinder.FindClosestGameobjectWithTag(gameObject, Force.Enemy.ToString());
+                if (go != null)
+                {
+                    Target = go.GetComponent<EnemyRole>();
+                }
+            }
         }
     }
     public override void Launch()
