@@ -51,8 +51,9 @@ public class StageSpawner : MonoBehaviour
             if (_remainPlateSize >= Myself.PriorStageList[random].OccupyPlateSize)
             {
                 _remainPlateSize -= Myself.PriorStageList[random].OccupyPlateSize;
+                Stage stage = Myself.PriorStageList[random];
                 Myself.PriorStageList.RemoveAt(random);
-                return Myself.StageList[random];
+                return stage;
             }
         }
         return null;
@@ -79,7 +80,6 @@ public class StageSpawner : MonoBehaviour
                     stagePrefab = GetRandomStage(ref _remainPlateSize);
                 if (stagePrefab == null)
                     break;
-                Debug.Log("Floor=" + _floor + "  Name=" + stagePrefab.name);
                 stage = Instantiate(stagePrefab, Vector3.zero, Quaternion.identity) as Stage;
             }
             else
