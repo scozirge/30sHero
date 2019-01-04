@@ -487,6 +487,7 @@ MonoBehaviour:
   HealthObj: {fileID: 1031751305146364}
   PlayMotionDuration: 0.5
   InitBuffers: []
+  KillAvatarTime: 1
   Type: 0
   StemFromFloor: 0
 --- !u!50 &50181178060352474
@@ -536,7 +537,7 @@ MonoBehaviour:
   PSkillTimer: 0
   IsPlayerGetSkill: 0
   AttackOnce: 0
-  Interval: 2.5
+  Interval: 2
   AmmoNum: 3
   AmmoInterval: 0
   StartAngle: 45
@@ -602,7 +603,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1893100348938658}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e3283f1f3a7e6b24db127fb13fd7f595, type: 3}
   m_Name: 
