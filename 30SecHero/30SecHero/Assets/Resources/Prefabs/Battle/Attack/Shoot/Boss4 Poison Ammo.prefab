@@ -60,7 +60,7 @@ MonoBehaviour:
   HitTargetSound: {fileID: 0}
   LifeTime: 3
   KnockIntensity: 0
-  AmmoType: 1
+  AmmoType: 0
   DamageInterval: 0.3
   Buffers:
   - Type: 3
