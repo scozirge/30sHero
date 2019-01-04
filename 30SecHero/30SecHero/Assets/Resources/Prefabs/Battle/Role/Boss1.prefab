@@ -485,7 +485,7 @@ MonoBehaviour:
       LifeTime: 0
       ExpandFolder: 1
     SoundList: []
-  - WaitSecond: 2
+  - WaitSecond: 3
     MaxProcessingTime: 1
     RelativeToTarget: 5
     Destination: {x: 0, y: 0}
@@ -629,7 +629,7 @@ MonoBehaviour:
       LifeTime: 0
       ExpandFolder: 1
     SoundList: []
-  - WaitSecond: 2
+  - WaitSecond: 3
     MaxProcessingTime: 1
     RelativeToTarget: 5
     Destination: {x: 0, y: 0}
@@ -773,7 +773,7 @@ MonoBehaviour:
       LifeTime: 0
       ExpandFolder: 1
     SoundList: []
-  - WaitSecond: 2
+  - WaitSecond: 3
     MaxProcessingTime: 1
     RelativeToTarget: 5
     Destination: {x: 0, y: 0}
@@ -936,7 +936,7 @@ MonoBehaviour:
       LifeTime: 0
       ExpandFolder: 1
     SoundList: []
-  - WaitSecond: 2
+  - WaitSecond: 3
     MaxProcessingTime: 1
     RelativeToTarget: 5
     Destination: {x: 0, y: 0}
@@ -1182,7 +1182,7 @@ MonoBehaviour:
   RandomAngle: 0
   Patetern: 1
   FirstAttackNoWait: 0
-  AttackPrefab: {fileID: 114630672538787846, guid: 6a16cb5194251844da623a7b775ccc0c,
+  AttackPrefab: {fileID: 3092657568400472606, guid: e24da878f6b69924e82cdf46e22b4ca1,
     type: 3}
   TriggerWall: 1
 --- !u!114 &10437
@@ -1202,7 +1202,7 @@ MonoBehaviour:
   PSkillName: 
   PSkillDuration: 0
   DetecteRadius: 800
-  DamagePercent: 1
+  DamagePercent: 0.5
   AttackStopMove: 0
   StopMoveTime: 0
   SpellSound: {fileID: 0}

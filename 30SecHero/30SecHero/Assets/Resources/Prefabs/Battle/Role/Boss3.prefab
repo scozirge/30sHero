@@ -853,7 +853,7 @@ MonoBehaviour:
   RandomAngle: 0
   Patetern: 0
   FirstAttackNoWait: 0
-  AttackPrefab: {fileID: 114962956101920240, guid: bebea7f0b397ab842b561febea7726fa,
+  AttackPrefab: {fileID: 1552662233443208134, guid: 7d8e033210b56f14c9d98f71b972485a,
     type: 3}
   TriggerWall: 1
 --- !u!114 &10439
@@ -927,7 +927,7 @@ MonoBehaviour:
   RandomAngle: 0
   Patetern: 0
   FirstAttackNoWait: 0
-  AttackPrefab: {fileID: 114962956101920240, guid: bebea7f0b397ab842b561febea7726fa,
+  AttackPrefab: {fileID: 1552662233443208134, guid: 7d8e033210b56f14c9d98f71b972485a,
     type: 3}
   TriggerWall: 1
 --- !u!1 &3064

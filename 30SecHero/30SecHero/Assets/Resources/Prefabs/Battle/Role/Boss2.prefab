@@ -558,8 +558,8 @@ MonoBehaviour:
     SoundList: []
   - WaitSecond: 0.5
     MaxProcessingTime: 1
-    RelativeToTarget: 5
-    Destination: {x: -600, y: 0}
+    RelativeToTarget: 4
+    Destination: {x: -700, y: 0}
     ExpandFolder: 1
     MoveSpeed: 600
     ActiveOnlyByEvent: 0
@@ -728,8 +728,8 @@ MonoBehaviour:
     SoundList: []
   - WaitSecond: 0.5
     MaxProcessingTime: 1
-    RelativeToTarget: 5
-    Destination: {x: 600, y: 0}
+    RelativeToTarget: 4
+    Destination: {x: 700, y: 0}
     ExpandFolder: 1
     MoveSpeed: 600
     ActiveOnlyByEvent: 0

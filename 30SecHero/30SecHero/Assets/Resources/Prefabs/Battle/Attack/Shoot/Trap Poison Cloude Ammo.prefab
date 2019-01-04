@@ -53,6 +53,7 @@ MonoBehaviour:
   LocalParticles:
   - {fileID: 19879284, guid: 30dd72689f9b952498b9d87a7051677d, type: 3}
   GlobalParticle: []
+  LocalAttackerParticles: []
   DeadParticles: []
   HitTargetParticle: {fileID: 0}
   HitTargetSound: {fileID: 0}
@@ -64,12 +65,14 @@ MonoBehaviour:
   - Type: 3
     Time: 5
     Value: 0
+  - Type: 0
+    Time: 0.2
+    Value: 0
   TriggerOnRushRole: 0
   Value: 0
   IsPlayerGetSkill: 0
   AmmoSpeed: 0
   TraceFactor: 0
-  TriggerWall: 0
 --- !u!222 &7143822424509277316
 CanvasRenderer:
   m_ObjectHideFlags: 0
