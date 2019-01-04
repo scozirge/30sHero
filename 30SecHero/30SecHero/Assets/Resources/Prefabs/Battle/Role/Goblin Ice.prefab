@@ -390,7 +390,8 @@ MonoBehaviour:
   HealthBar: {fileID: 224679210475382498}
   DirectX: 0
   DirectY: 0
-  MaxHealth: 10
+  MaxHealth: 15
+  OriginMaxHealth: 0
   BaseDamage: 60
   BaseMoveSpeed: 200
   DeathEffect: {fileID: 198802542160044040, guid: 8f344cf8edc65e44883dfdf0168792bd,
@@ -413,6 +414,7 @@ MonoBehaviour:
   HealthObj: {fileID: 1283845278005316}
   PlayMotionDuration: 0.8
   InitBuffers: []
+  KillAvatarTime: 1
   Type: 0
   StemFromFloor: 0
 --- !u!50 &50654837008924256
