@@ -210,6 +210,8 @@ MonoBehaviour:
   AvatarTimerText: {fileID: 0}
   MyAvatarText: {fileID: 0}
   AvatarTimerAni: {fileID: 0}
+  AvatarTimePlusAni: {fileID: 0}
+  AvatarTimePlusTextTexture: {fileID: 0}
   UntochableTime: 2
   AvatarPotionBuff: 0
   SkillTimeBuff: 0

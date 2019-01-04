@@ -1305,16 +1305,6 @@ PrefabInstance:
       objectReference: {fileID: 1153055876}
     - target: {fileID: 114529601492733476, guid: d9e47796d36fc83458ffab41aea6641e,
         type: 3}
-      propertyPath: MyCamera
-      value: 
-      objectReference: {fileID: 519420031}
-    - target: {fileID: 114529601492733476, guid: d9e47796d36fc83458ffab41aea6641e,
-        type: 3}
-      propertyPath: MyLight
-      value: 
-      objectReference: {fileID: 2074361672}
-    - target: {fileID: 114529601492733476, guid: d9e47796d36fc83458ffab41aea6641e,
-        type: 3}
       propertyPath: AvatarTimePlusAni
       value: 
       objectReference: {fileID: 1258272965}
@@ -1323,6 +1313,16 @@ PrefabInstance:
       propertyPath: AvatarTimePlusTextTexture
       value: 
       objectReference: {fileID: 336182610}
+    - target: {fileID: 114529601492733476, guid: d9e47796d36fc83458ffab41aea6641e,
+        type: 3}
+      propertyPath: MyCamera
+      value: 
+      objectReference: {fileID: 519420031}
+    - target: {fileID: 114529601492733476, guid: d9e47796d36fc83458ffab41aea6641e,
+        type: 3}
+      propertyPath: MyLight
+      value: 
+      objectReference: {fileID: 2074361672}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d9e47796d36fc83458ffab41aea6641e, type: 3}
 --- !u!1 &134664633
