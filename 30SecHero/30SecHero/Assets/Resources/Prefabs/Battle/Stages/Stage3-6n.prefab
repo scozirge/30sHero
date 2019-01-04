@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 585454994762627009}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 346, y: 56, z: 0}
+  m_LocalPosition: {x: 123, y: -201, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8283273975560987325}
@@ -177,12 +177,6 @@ PolygonCollider2D:
       - {x: -148.91626, y: -134.74832}
       - {x: -148.91626, y: -134.74832}
       - {x: -88.54596, y: -134.14874}
---- !u!224 &1154932715872044030 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 7599608804308367660, guid: 413051ccde2847647a082d6cf1331fe8,
-    type: 3}
-  m_PrefabInstance: {fileID: 8750528018868140754}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &8277773558385242537
 GameObject:
   m_ObjectHideFlags: 0
@@ -210,7 +204,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8277773558385242537}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -116, y: 46, z: 0}
+  m_LocalPosition: {x: -321, y: 306, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8283273975560987325}
@@ -371,7 +365,7 @@ GameObject:
   - component: {fileID: 8283273975560987325}
   - component: {fileID: 8318231718720533117}
   m_Layer: 0
-  m_Name: Stage5-3
+  m_Name: Stage3-6n
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -391,6 +385,7 @@ Transform:
   - {fileID: 8280827110607216515}
   - {fileID: 1592483750345738102}
   - {fileID: 1154932715872044030}
+  - {fileID: 7183624337074365317}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -408,6 +403,56 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   OccupyPlateSize: 1
   Floor: 0
+--- !u!1001 &776422022645291689
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 8283273975560987325}
+    m_Modifications:
+    - target: {fileID: 7669259471119241284, guid: 413051ccde2847647a082d6cf1331fe8,
+        type: 3}
+      propertyPath: m_Name
+      value: Sting Shooter_Stage (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7599608804308367660, guid: 413051ccde2847647a082d6cf1331fe8,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7599608804308367660, guid: 413051ccde2847647a082d6cf1331fe8,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -258
+      objectReference: {fileID: 0}
+    - target: {fileID: 7599608804308367660, guid: 413051ccde2847647a082d6cf1331fe8,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 224
+      objectReference: {fileID: 0}
+    - target: {fileID: 7599608804308367660, guid: 413051ccde2847647a082d6cf1331fe8,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7599608804308367660, guid: 413051ccde2847647a082d6cf1331fe8,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7599608804308367660, guid: 413051ccde2847647a082d6cf1331fe8,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 413051ccde2847647a082d6cf1331fe8, type: 3}
+--- !u!224 &7183624337074365317 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 7599608804308367660, guid: 413051ccde2847647a082d6cf1331fe8,
+    type: 3}
+  m_PrefabInstance: {fileID: 776422022645291689}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8750528018868140754
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -423,7 +468,18 @@ PrefabInstance:
     - target: {fileID: 7599608804308367660, guid: 413051ccde2847647a082d6cf1331fe8,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -16
+      value: 242
+      objectReference: {fileID: 0}
+    - target: {fileID: 7599608804308367660, guid: 413051ccde2847647a082d6cf1331fe8,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -223
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 413051ccde2847647a082d6cf1331fe8, type: 3}
+--- !u!224 &1154932715872044030 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 7599608804308367660, guid: 413051ccde2847647a082d6cf1331fe8,
+    type: 3}
+  m_PrefabInstance: {fileID: 8750528018868140754}
+  m_PrefabAsset: {fileID: 0}
