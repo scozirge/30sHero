@@ -521,7 +521,7 @@ public class Equip : MyUI
             MyAniText.SetAnimatedText("ShieldText", MyMath.StringToNumber(ShieldText.text), Player.GetProperties(RoleProperty.Shield), ShieldText, "", "");
             MyAniText.SetAnimatedText("ShieldRecoveryText",MyMath.StringToNumber(ShieldRecoveryText.text,"+","%"), TextManager.ToPercent(Player.GetProperties(RoleProperty.ShieldRecovery)), ShieldRecoveryText, "+", "%");
             MyAniText.SetAnimatedText("MoveSpeedText", MyMath.StringToNumber(MoveSpeedText.text, "", "/" + StringData.GetString("Second")), Player.GetProperties(RoleProperty.MoveSpeed), MoveSpeedText, "", "/" + StringData.GetString("Second"));
-            MyAniText.SetAnimatedText("MaxMoveText", MyMath.StringToNumber(MaxMoveText.text, "", "/" + StringData.GetString("Second")), Player.GetProperties(RoleProperty.MaxMoveSpeed), MaxMoveText, "", "/" + StringData.GetString("Second"));
+            MyAniText.SetAnimatedText("MaxMoveText", MyMath.StringToNumber(MaxMoveText.text, "", "/" + StringData.GetString("Second")), Player.GetProperties(RoleProperty.MaxMoveSpeed) + Player.GetProperties(RoleProperty.MoveSpeed), MaxMoveText, "", "/" + StringData.GetString("Second"));
             MyAniText.SetAnimatedText("AvatarTimeText", MyMath.StringToNumber(AvatarTimeText.text, "", StringData.GetString("Second")), Player.GetProperties(RoleProperty.AvatarTime), AvatarTimeText, "", StringData.GetString("Second"));
             MyAniText.SetAnimatedText("SkillTimeText", MyMath.StringToNumber(SkillTimeText.text, "", StringData.GetString("Second")), Player.GetProperties(RoleProperty.SkillTimeBuff), SkillTimeText, "", StringData.GetString("Second"));
             MyAniText.Play("StrengthText");
