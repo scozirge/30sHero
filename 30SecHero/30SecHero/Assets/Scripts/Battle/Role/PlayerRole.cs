@@ -116,6 +116,10 @@ public partial class PlayerRole : Role
     TextTexture MyAvatarText;
     [SerializeField]
     Animator AvatarTimerAni;
+    [SerializeField]
+    Animator AvatarTimePlusAni;
+    [SerializeField]
+    TextTexture AvatarTimePlusTextTexture;
     [Tooltip("變身解除無敵時間(秒)")]
     [SerializeField]
     protected float UntochableTime;
@@ -776,7 +780,7 @@ public partial class PlayerRole : Role
         if (AvatarTimer > 0)
             AvatarTimer -= Time.deltaTime;
         else//解除變身
-        {            
+        {
             AniPlayer.PlayTrigger("Idle2", 0);
             AvatarTimer = 0;
             ExtraMoveSpeed = 0;
@@ -1056,7 +1060,7 @@ public partial class PlayerRole : Role
         switch (_data.Type)
         {
             case LootType.AvataEnergy:
-                AvatarTimer += _data.Time * (1 + PotionEfficiency) + AvatarPotionBuff + MyEnchant[EnchantProperty.Allergy];
+                AddAvarTime(_data.Time * (1 + PotionEfficiency) + AvatarPotionBuff + MyEnchant[EnchantProperty.Allergy]);
                 break;
             case LootType.DamageUp:
                 AddBuffer(RoleBuffer.DamageUp, _data.Time * (1 + PotionEfficiency) + MyEnchant[EnchantProperty.Allergy], _data.Value);
@@ -1225,6 +1229,11 @@ public partial class PlayerRole : Role
         if (!IsAvatar)
             return;
         AvatarTimer += _time;
+        if (_time >= 1)
+        {
+            AvatarTimePlusAni.SetTrigger("Play");
+            AvatarTimePlusTextTexture.SetNumber((int)_time);
+        }
     }
     void ActiveEnchantSkill(bool _bool)
     {
