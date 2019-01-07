@@ -73,18 +73,18 @@ public partial class BattleManage
         SpawnGate(Floor);
         //建立地形
 
-        SpawnStage(new Vector2(GetGatePosition(Floor - 1).x + (BM.PlateSizeX * 5 / 2), 0), GetFloorPlateCount(Floor) - 2, Floor);//目前層的地形
+        SpawnStage(new Vector2(GetGatePosition(Floor - 1).x + (BM.PlateSizeX * 5 / 2), 0), GetFloorPlateCount(Floor) - 2, Floor, StageSpawnType.ForbidSpawnOnGate);//目前層的地形
         SpawnFG(new Vector2(GetGatePosition(Floor - 1).x + (BM.PlateSizeX * 5 / 2), 0), (BM.PlateSizeX * GetFloorPlateCount(Floor)), Floor);//目前層的前景
-        SpawnStage(new Vector2(GetGatePosition(Floor).x + (BM.PlateSizeX / 2), 0), GetFloorPlateCount(Floor + 1), Floor + 1);//下一層地形
+        SpawnStage(new Vector2(GetGatePosition(Floor).x + (BM.PlateSizeX / 2), 0), GetFloorPlateCount(Floor + 1), Floor + 1, StageSpawnType.ForbidSpawnOnGate);//下一層地形
         SpawnFG(new Vector2(GetGatePosition(Floor).x + (BM.PlateSizeX / 2), 0), (BM.PlateSizeX * GetFloorPlateCount(Floor + 1)), Floor + 1);//下一層的前景
         if ((Floor - 1) > 0)
         {
-            SpawnStage(new Vector2(GetGatePosition(Floor - 2).x + (BM.PlateSizeX / 2), 0), GetFloorPlateCount(Floor - 1), Floor - 1);//上上一層地形
+            SpawnStage(new Vector2(GetGatePosition(Floor - 2).x + (BM.PlateSizeX / 2), 0), GetFloorPlateCount(Floor - 1), Floor - 1, StageSpawnType.AllowEndGate);//上一層地形
             SpawnFG(new Vector2(GetGatePosition(Floor - 2).x + (BM.PlateSizeX / 2), 0), (BM.PlateSizeX * GetFloorPlateCount(Floor - 1)), Floor - 1);//上上一層的前景
         }
         if ((Floor - 2) > 0)//因為撞門才會生地形，但上一層的門不會生，所以要事先生地形
         {
-            SpawnStage(new Vector2(GetGatePosition(Floor - 3).x + (BM.PlateSizeX / 2), 0), GetFloorPlateCount(Floor - 2), Floor - 2);//上上一層地形
+            SpawnStage(new Vector2(GetGatePosition(Floor - 3).x + (BM.PlateSizeX / 2), 0), GetFloorPlateCount(Floor - 2), Floor - 2, StageSpawnType.ForbidSpawnOnGate);//上上一層地形
             SpawnFG(new Vector2(GetGatePosition(Floor - 3).x + (BM.PlateSizeX / 2), 0), (BM.PlateSizeX * GetFloorPlateCount(Floor - 2)), Floor - 2);//上上一層的前景
         }
     }
@@ -235,14 +235,14 @@ public partial class BattleManage
             SpawnGate(_destroyedFloor - 1);
             //建立地形
             //SpawnStage(GetGatePosition(Floor - 2), GetFloorPlateCount(Floor - 2), Floor - 2);
-            SpawnStage(new Vector2(GetGatePosition(Floor - 3).x + (BM.PlateSizeX / 2), 0), GetFloorPlateCount(Floor - 2), Floor - 2);//上上一層地形
+            SpawnStage(new Vector2(GetGatePosition(Floor - 3).x + (BM.PlateSizeX / 2), 0), GetFloorPlateCount(Floor - 2), Floor - 2, StageSpawnType.ForbidSpawnOnGate);//上上一層地形
             SpawnFG(new Vector2(GetGatePosition(Floor - 3).x + (BM.PlateSizeX / 2), 0), (BM.PlateSizeX * GetFloorPlateCount(Floor - 2)), Floor - 2);
         }
         else//下一層
         {
             SpawnGate(_destroyedFloor + 1);
             //建立地形
-            SpawnStage(new Vector2(GetGatePosition(Floor + 1).x + (BM.PlateSizeX / 2), 0), GetFloorPlateCount(Floor + 2), Floor + 2);
+            SpawnStage(new Vector2(GetGatePosition(Floor + 1).x + (BM.PlateSizeX / 2), 0), GetFloorPlateCount(Floor + 2), Floor + 2, StageSpawnType.ForbidSpawnOnGate);
             SpawnFG(new Vector2(GetGatePosition(Floor + 1).x + (BM.PlateSizeX / 2), 0), (BM.PlateSizeX * GetFloorPlateCount(Floor + 2)), Floor + 2);
         }
         PassFloorCount++;
@@ -258,8 +258,27 @@ public partial class BattleManage
         else
             return 0;
     }
-    static void SpawnStage(Vector2 _startPos, int _remainPlateSize, int _floor)
+    enum StageSpawnType
     {
+        AllowStartAndEnd,
+        AllowEndGate,
+        ForbidSpawnOnGate
+    }
+    static void SpawnStage(Vector2 _startPos, int _remainPlateSize, int _floor, StageSpawnType _StageSpawnType)
+    {
+        switch(_StageSpawnType)
+        {
+            case StageSpawnType.AllowStartAndEnd:
+                break;
+            case StageSpawnType.AllowEndGate:
+                _remainPlateSize -= 1;
+                _startPos = new Vector2(_startPos.x + BM.PlateSizeX, _startPos.y);
+                break;
+            case StageSpawnType.ForbidSpawnOnGate:
+                _remainPlateSize -= 2;
+                _startPos = new Vector2(_startPos.x + BM.PlateSizeX, _startPos.y);
+                break;
+        }
         //Debug.Log(string.Format("Floor={0} StartPos={1} PlateSize={2}", _floor, _startPos, _remainPlateSize));
         List<Stage> stageList = StageSpawner.SpawnStage(_startPos, BM.PlateSizeX, _remainPlateSize, _floor);
         if (stageList == null)

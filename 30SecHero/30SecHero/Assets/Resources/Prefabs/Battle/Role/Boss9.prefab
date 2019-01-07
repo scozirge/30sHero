@@ -806,7 +806,7 @@ MonoBehaviour:
   FirstAttackNoWait: 0
   AttackPrefab: {fileID: 114630672538787846, guid: e1a992b528542bc4bbd36f18c4440c15,
     type: 3}
-  TriggerWall: 1
+  TriggerWall: 0
 --- !u!114 &9433
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -873,7 +873,7 @@ MonoBehaviour:
   FirstAttackNoWait: 0
   AttackPrefab: {fileID: 114630672538787846, guid: 6a16cb5194251844da623a7b775ccc0c,
     type: 3}
-  TriggerWall: 1
+  TriggerWall: 0
 --- !u!1 &3641
 GameObject:
   m_ObjectHideFlags: 0

@@ -12,7 +12,8 @@ public class Gate : MonoBehaviour
     AudioClip DestroySound;
     [SerializeField]
     GainEquipPerform PerformPrefab;
-
+    [SerializeField]
+    int DropGoldCount = 10;
 
 
     public int Floor { get; private set; }
@@ -31,6 +32,7 @@ public class Gate : MonoBehaviour
     void SelfDestroy()
     {
         SpawnPreformObj();
+        SpawnGold();
         DeathParticles.RemoveAll(item => item == null);
         if (DeathParticles!=null)
         {
@@ -51,5 +53,16 @@ public class Gate : MonoBehaviour
         gep.transform.SetParent(parentGO.transform);
         gep.transform.localPosition = transform.position;
         gep.Perform(BattleManage.ExpectEquipDataList);
+    }
+    void SpawnGold()
+    {
+        //int gold = GameSettingData.FloorPassGold * BattleManage.Floor;
+        //表演用，實際通關獲得的錢在settlement計算
+        //DropGold
+        for (int i = 0; i < DropGoldCount; i++)
+        {
+                ResourceLoot loot = DropSpawner.SpawnResource(transform.position);
+                if (loot) loot.Init(ResourceType.Gold, 0);
+        }
     }
 }

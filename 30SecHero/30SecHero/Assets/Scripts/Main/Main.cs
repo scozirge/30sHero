@@ -20,6 +20,8 @@ public class Main : MonoBehaviour
     Set MySet;
     [SerializeField]
     MainUI CurUI;
+    [SerializeField]
+    GameObject StrengthenTip;
 
 
     static Text MyGoldText;

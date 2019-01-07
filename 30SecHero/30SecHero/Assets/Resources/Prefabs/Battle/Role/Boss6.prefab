@@ -768,7 +768,7 @@ MonoBehaviour:
   FirstAttackNoWait: 0
   AttackPrefab: {fileID: 114962956101920240, guid: bebea7f0b397ab842b561febea7726fa,
     type: 3}
-  TriggerWall: 1
+  TriggerWall: 0
 --- !u!114 &9954
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -842,7 +842,7 @@ MonoBehaviour:
   FirstAttackNoWait: 0
   AttackPrefab: {fileID: 114630672538787846, guid: 6a16cb5194251844da623a7b775ccc0c,
     type: 3}
-  TriggerWall: 1
+  TriggerWall: 0
 --- !u!114 &9448
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -879,7 +879,7 @@ MonoBehaviour:
   FirstAttackNoWait: 0
   AttackPrefab: {fileID: 114630672538787846, guid: 6a16cb5194251844da623a7b775ccc0c,
     type: 3}
-  TriggerWall: 1
+  TriggerWall: 0
 --- !u!114 &11315
 MonoBehaviour:
   m_ObjectHideFlags: 0
