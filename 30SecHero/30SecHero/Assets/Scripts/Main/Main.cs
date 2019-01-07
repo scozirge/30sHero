@@ -21,8 +21,25 @@ public class Main : MonoBehaviour
     [SerializeField]
     MainUI CurUI;
     [SerializeField]
-    GameObject StrengthenTip;
+    GameObject EquipBtnTip;
+    [SerializeField]
+    GameObject StrengthenTagTip;
+    [SerializeField]
+    GameObject EnchantTagTip;
+    [SerializeField]
+    GameObject WeaponTagTip;
+    [SerializeField]
+    GameObject ArmorTagTip;
+    [SerializeField]
+    GameObject AccessoryTagTip;
 
+
+    public static bool ShowEquipBtnTip;
+    public static bool ShowStrengthenTagTip;
+    public static bool ShowEnchantTagTip;
+    public static bool ShowWeaponTagTip;
+    public static bool ShowArmorTagTip;
+    public static bool ShowAccessoryTagTip;
 
     static Text MyGoldText;
     static Text MyEmeraldText;
@@ -64,6 +81,7 @@ public class Main : MonoBehaviour
     }
     void OnEnable()
     {
+        UpdateTips();
         if (!Isinit)
             return;
         GoldText.text = Player.Gold.ToString();
@@ -92,6 +110,8 @@ public class Main : MonoBehaviour
             return;
         if (!UIDic.ContainsKey(_ui))
             return;
+        if (_ui == MainUI.Equip)//關閉tip
+            SetTip(TipType.EquipBtnTip, false);
         UIDic[CurUI].SetActive(false);
         UIDic[_ui].SetActive(true);
         CurUI = _ui;
@@ -121,4 +141,61 @@ public class Main : MonoBehaviour
     {
         SceneManager.LoadScene("test");
     }
+    public static void ResetTipBool()
+    {
+        ShowEquipBtnTip = false;
+        ShowStrengthenTagTip = false;
+        ShowEnchantTagTip = false;
+        ShowWeaponTagTip = false;
+        ShowArmorTagTip = false;
+        ShowAccessoryTagTip = false;
+    }
+    public void UpdateTips()
+    {
+        SetTip(TipType.EquipBtnTip, ShowEquipBtnTip);
+        SetTip(TipType.StrengthenTagTip, ShowStrengthenTagTip);
+        SetTip(TipType.EnchantTagTip, ShowEnchantTagTip);
+        SetTip(TipType.WeaponTagTip, ShowWeaponTagTip);
+        SetTip(TipType.ArmorTagTip, ShowArmorTagTip);
+        SetTip(TipType.AccessoryTagTip, ShowAccessoryTagTip);
+    }
+    public void SetTip(TipType _type, bool _on)
+    {
+        switch (_type)
+        {
+            case TipType.EquipBtnTip:
+                EquipBtnTip.SetActive(_on);
+                ShowEquipBtnTip = _on;
+                break;
+            case TipType.StrengthenTagTip:
+                StrengthenTagTip.SetActive(_on);
+                ShowStrengthenTagTip = _on;
+                break;
+            case TipType.EnchantTagTip:
+                EnchantTagTip.SetActive(_on);
+                ShowEnchantTagTip = _on;
+                break;
+            case TipType.WeaponTagTip:
+                WeaponTagTip.SetActive(_on);
+                ShowWeaponTagTip = _on;
+                break;
+            case TipType.ArmorTagTip:
+                ArmorTagTip.SetActive(_on);
+                ShowArmorTagTip = _on;
+                break;
+            case TipType.AccessoryTagTip:
+                AccessoryTagTip.SetActive(_on);
+                ShowAccessoryTagTip = _on;
+                break;
+        }
+    }
+}
+public enum TipType
+{
+    EquipBtnTip,
+    StrengthenTagTip,
+    EnchantTagTip,
+    WeaponTagTip,
+    ArmorTagTip,
+    AccessoryTagTip
 }

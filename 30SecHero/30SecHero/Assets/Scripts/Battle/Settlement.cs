@@ -49,6 +49,15 @@ partial class BattleManage
     public static List<EquipData> ExpectEquipDataList;
     static List<EquipData> GainEquipDataList;
 
+    //Tip標示
+    [SerializeField]
+    GameObject StrengthenTip;
+    static bool GainWeapon;
+    static bool GainArmor;
+    static bool GainAccessory;
+    static bool GetEnchant;
+    static bool ToStrengthen;
+
     static void InitSettlement()
     {
         NewFloorGolds = 0;
@@ -65,6 +74,11 @@ partial class BattleManage
         TotalEmerald = 0;
         GainEquipDataList = new List<EquipData>();
         ExpectEquipDataList = new List<EquipData>();
+        GainWeapon = false;
+        GainArmor = false;
+        GainAccessory = false;
+        GetEnchant = false;
+        ToStrengthen = false;
     }
 
     public static void EnemyDropGoldAdd(int _gold)
@@ -88,6 +102,17 @@ partial class BattleManage
     }
     public static void GainEquip(EquipData _data)
     {
+        for (int i = 0; i < GainEquipDataList.Count;i++ )
+        {
+            if (_data.UID == GainEquipDataList[i].UID)
+                return;
+        }
+        if (_data.Type == EquipType.Weapon)
+            GainWeapon = true;
+        if (_data.Type == EquipType.Armor)
+            GainArmor = true;
+        if (_data.Type == EquipType.Accessory)
+            GainAccessory = true;
         GainEquipDataList.Add(_data);
         //ExpectEquipDataList.Add(_data);//改成沒通關還是會獲得裝備
 
@@ -141,6 +166,30 @@ partial class BattleManage
             //送server處理
             Player.Settlement(Player.Gold + TotalGold, Player.Emerald + TotalEmerald, Floor, (MaxFloor > Player.MaxFloor) ? MaxFloor : Player.MaxFloor, GainEquipDataList);
         }
+        //設定驚嘆號tip顯示
+        Main.ResetTipBool();
+        if(GainWeapon || GainArmor || GainAccessory)
+        {
+            Main.ShowEquipBtnTip = true;
+            if (GainWeapon)
+                Main.ShowWeaponTagTip = true;
+            if (GainArmor)
+                Main.ShowArmorTagTip = true;
+            if (GainAccessory)
+                Main.ShowAccessoryTagTip = true;
+            ToStrengthen = true;
+        }
+        if(Player.CanStrengthenTipChack())
+        {
+            Main.ShowStrengthenTagTip = true;
+            ToStrengthen = true;
+        }
+        if(GetEnchant || Player.CanEnchantTipCheck())
+        {
+            Main.ShowEnchantTagTip = true;
+            ToStrengthen = true;
+        }
+        StrengthenTip.SetActive(ToStrengthen);
     }
     public IEnumerator WaitToShowResult()
     {
@@ -218,6 +267,7 @@ partial class BattleManage
         Player.KillNewBoss(_bossID);
         if (_ed != null)
         {
+            GetEnchant = true;
             Player.EnchantUpgrade(_ed);
             BM.GetEnchant_Name.text = _ed.Name;
             BM.GetEnchant_Icon.sprite = _ed.GetICON();

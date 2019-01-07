@@ -138,6 +138,26 @@ public partial class Player
             }
         }
     }
+    public static bool CanStrengthenTipChack()
+    {
+        List<int> keys = new List<int>(StrengthenDic.Keys);
+        for(int i=0;i<keys.Count;i++)
+        {
+            if (StrengthenDic[keys[i]].GetPrice() <= Player.Gold)
+                return true;
+        }
+        return false;
+    }
+    public static bool CanEnchantTipCheck()
+    {
+        List<int> keys = new List<int>(EnchantDic.Keys);
+        for (int i = 0; i < keys.Count; i++)
+        {
+            if (EnchantDic[keys[i]].GetPrice() <= Player.Emerald)
+                return true;
+        }
+        return false;
+    }
     public static void StrengthenUpgrade(StrengthenData _data)
     {
         //執行強化

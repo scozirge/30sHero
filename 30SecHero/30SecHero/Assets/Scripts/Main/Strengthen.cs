@@ -5,6 +5,8 @@ using UnityEngine.UI;
 public class Strengthen : MyUI
 {
     [SerializeField]
+    public Main MainPanel;
+    [SerializeField]
     ItemSpawner StrengthenSpanwer;
     [SerializeField]
     ItemSpawner EnchantSpanwer;
@@ -33,7 +35,7 @@ public class Strengthen : MyUI
     public static StrengthenItem CurSelectedSItem;
     public static EnchantData CurSelectedEData;
     public static EnchantItem CurSelectedEItem;
-    static List<StrengthenItem> StrengthenItemList = new List<StrengthenItem>();
+    public static List<StrengthenItem> StrengthenItemList = new List<StrengthenItem>();
     static List<EnchantItem> EnchantItemList = new List<EnchantItem>();
 
     void Start()
@@ -196,6 +198,7 @@ public class Strengthen : MyUI
         switch (CurFilterType)
         {
             case StrengthenType.Strengthen:
+                MainPanel.SetTip(TipType.StrengthenTagTip, false);
                 PriceImage.sprite = GameManager.GetCurrencySprite(Currency.Gold);
                 StrengthenContent.gameObject.SetActive(true);
                 EnchantContent.gameObject.SetActive(false);
@@ -209,6 +212,7 @@ public class Strengthen : MyUI
                 }
                 break;
             case StrengthenType.Enchant:
+                MainPanel.SetTip(TipType.EnchantTagTip, false);
                 PriceImage.sprite = GameManager.GetCurrencySprite(Currency.Emerald);
                 StrengthenContent.gameObject.SetActive(false);
                 EnchantContent.gameObject.SetActive(true);
@@ -228,6 +232,7 @@ public class Strengthen : MyUI
 
         if (CurFilterType == StrengthenType.Strengthen)
         {
+            MainPanel.SetTip(TipType.StrengthenTagTip, false);
             Player.StrengthenUpgrade(CurSelectedSData);
             CurSelectedSItem.UpdateUI();
             ShowInfo(CurSelectedSItem);

@@ -61,6 +61,8 @@ public class StrengthenItem : Item
         if (!ParentUI)
             return;
         ParentUI.ShowInfo(this);
+        if(this!=Strengthen.StrengthenItemList[0])
+            ParentUI.MainPanel.SetTip(TipType.StrengthenTagTip, false);
     }
     void PlayAni(string _trigger)
     {

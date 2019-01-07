@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public class Equip : MyUI
 {
     [SerializeField]
+    Main MainPanel;
+    [SerializeField]
     ItemSpawner MySpanwer;
     [SerializeField]
     EquipPop EquipPop;
@@ -183,6 +185,18 @@ public class Equip : MyUI
     }
     void Filter()
     {
+        switch(CurFilterType)
+        {
+            case EquipType.Weapon:
+                MainPanel.SetTip(TipType.WeaponTagTip, false);
+                break;
+            case EquipType.Armor:
+                MainPanel.SetTip(TipType.ArmorTagTip, false);
+                break;
+            case EquipType.Accessory:
+                MainPanel.SetTip(TipType.AccessoryTagTip, false);
+                break;
+        }
         for (int i = 0; i < ItemList.Count; i++)
         {
             if (!ItemList[i].MyData.IsEquiped)
