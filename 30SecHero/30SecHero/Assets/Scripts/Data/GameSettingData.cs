@@ -638,13 +638,13 @@ public class GameSettingData : Data
             switch (RandomPropertyList[rand])
             {
                 case RoleProperty.Strength:
-                    dic[RandomPropertyList[rand]] += RandomStrength * _lv;
+                    dic[RandomPropertyList[rand]] += (int)(RandomStrength * _lv);
                     break;
                 case RoleProperty.Health:
-                    dic[RandomPropertyList[rand]] += RandomHealth * _lv;
+                    dic[RandomPropertyList[rand]] += (int)(RandomHealth * _lv);
                     break;
                 case RoleProperty.Shield:
-                    dic[RandomPropertyList[rand]] += RandomShield * _lv;
+                    dic[RandomPropertyList[rand]] += (int)(RandomShield * _lv);
                     break;
                 case RoleProperty.ShieldReChargeTime:
                     dic[RandomPropertyList[rand]] += RandomShieldRecharge;

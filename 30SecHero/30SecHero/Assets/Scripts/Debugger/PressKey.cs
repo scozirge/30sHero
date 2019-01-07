@@ -22,8 +22,7 @@ public partial class Debugger : MonoBehaviour
             Player.ShowBaseProperties();
         }
         else if (Input.GetKeyDown(KeyCode.X))
-        {            
-
+        {
         }
         else if (Input.GetKeyDown(KeyCode.N))
         {

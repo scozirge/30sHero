@@ -113,8 +113,19 @@ public class Equip : MyUI
             EquipDic.Add(EquipType.Accessory, AccessoryList);
         }
         ItemCoutText.text = string.Format("{0}/{1}", ItemList.Count, GameSettingData.MaxItemCount);
-        Filter();
-        Sort();
+        //過濾裝備但不用Filter()不然會取消tip驚嘆號
+        //Filter();
+        //Sort();
+        for (int i = 0; i < ItemList.Count; i++)
+        {
+            if (!ItemList[i].MyData.IsEquiped)
+                if (ItemList[i].MyType == CurFilterType)
+                    ItemList[i].gameObject.SetActive(true);
+                else
+                    ItemList[i].gameObject.SetActive(false);
+            else
+                ItemList[i].gameObject.SetActive(false);
+        }
         //ID重複檢測
         List<int> test = new List<int>();
         for (int i = 0; i < ItemList.Count; i++)
@@ -177,9 +188,9 @@ public class Equip : MyUI
     }
     public void ToFilter(int _typeID)
     {
-        EquipType type = (EquipType)_typeID;
-        if (CurFilterType == type)
+        if ((int)CurFilterType == _typeID)
             return;
+        EquipType type = (EquipType)_typeID;
         CurFilterType = type;
         Filter();
     }
@@ -216,6 +227,7 @@ public class Equip : MyUI
         switch (CurFilterType)
         {
             case EquipType.Weapon:
+                MainPanel.SetTip(TipType.WeaponTagTip, false);
                 EquipPop.SetEquipData(Player.MyWeapon, SelectedEquip, showRightSelect);
                 break;
             case EquipType.Armor:
