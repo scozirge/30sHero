@@ -79,6 +79,7 @@ partial class BattleManage
         GainAccessory = false;
         GetEnchant = false;
         ToStrengthen = false;
+        IsCalculateResult = false;
     }
 
     public static void EnemyDropGoldAdd(int _gold)
@@ -128,8 +129,12 @@ partial class BattleManage
         }
         ExpectEquipDataList = new List<EquipData>();
     }
+    static bool IsCalculateResult;
     public void CalculateResult()
     {
+        if (IsCalculateResult)
+            return;
+        IsCalculateResult = true;
         //獎勵計算
         if (MaxFloor > Player.MaxFloor)
         {
@@ -142,6 +147,7 @@ partial class BattleManage
         EnemyKillGolds = EnemyKill * GameSettingData.EnemyGold;
         TotalGold = (int)((NewFloorGolds + EnemyKillGolds + EnemyDropGolds + ExtraDropGolds) * (1 + GoldsMultiple));
         TotalEmerald = BossDropEmeralds;
+        Debug.Log("GainEquipDataList.Count=" + GainEquipDataList.Count);
         //寫入資料
         if (Player.LocalData)
         {
