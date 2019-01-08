@@ -115,7 +115,6 @@ public class Equip : MyUI
         ItemCoutText.text = string.Format("{0}/{1}", ItemList.Count, GameSettingData.MaxItemCount);
         //過濾裝備但不用Filter()不然會取消tip驚嘆號
         //Filter();
-        //Sort();
         for (int i = 0; i < ItemList.Count; i++)
         {
             if (!ItemList[i].MyData.IsEquiped)
@@ -126,6 +125,7 @@ public class Equip : MyUI
             else
                 ItemList[i].gameObject.SetActive(false);
         }
+        Sort();
         //ID重複檢測
         List<int> test = new List<int>();
         for (int i = 0; i < ItemList.Count; i++)

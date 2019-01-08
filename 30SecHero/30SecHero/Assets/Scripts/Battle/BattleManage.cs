@@ -83,6 +83,20 @@ public partial class BattleManage : MonoBehaviour
     int MaxTutorialPage;
     [SerializeField]
     Animator DirectArrowAni;
+    [SerializeField]
+    GameObject PopupTutorialGo;
+    [SerializeField]
+    Text PopupTutorialTitle;
+    [SerializeField]
+    Text PopupTutorialDescription;
+    [SerializeField]
+    Image PopupTutorialPic_Left;
+    [SerializeField]
+    Image PopupTutorialPic_Right;
+    [SerializeField]
+    List<Sprite> PopupTutorialSprites;
+
+
 
     static List<EnemyRole> AvailableMillions;
     static EnemyRole PreviousDemonGergons;
@@ -176,15 +190,15 @@ public partial class BattleManage : MonoBehaviour
         if (Player.Tutorial)
         {
             Setting(true);
-            Tutorial(true);
+            OpenTutorial();
             IsPause = true;
             SoulGo.SetActive(false);
             MyCameraControler.enabled = false;
             gameObject.SetActive(false);
-            PlayerPrefs.SetInt(LocoData.Tutorial.ToString(), 1);
-            Player.SetTutorial(false);
+            //如果第一次進入教學，行進方向箭頭指示改在關掉教學介面時顯示
         }
-        DirectArrowAni.SetTrigger("Play");
+        else//行進方向箭頭指示
+            DirectArrowAni.SetTrigger("Play");
         Debug.Log("Init BattleManager");
     }
     void InitBattleSetting()
@@ -238,15 +252,7 @@ public partial class BattleManage : MonoBehaviour
         SpawnLootTimer.StartRunTimer = true;
         LootList.Add(loot);
     }
-    public void Tutorial(bool _bool)
-    {        
-        TutorialGo.SetActive(_bool);
-        if(_bool)
-        {
-            CurTutorialPage = 0;
-            UpdateTutorialPage();
-        }
-    }
+
     public void Tutorial_NextPage(bool _next)
     {
         TutorialPages[CurTutorialPage].SetActive(false);
@@ -254,16 +260,16 @@ public partial class BattleManage : MonoBehaviour
         {
             CurTutorialPage++;
             if (CurTutorialPage >= MaxTutorialPage)
-                CurTutorialPage = 0;
+                CurTutorialPage = MaxTutorialPage - 1;
         }
         else
         {
             CurTutorialPage--;
             if (CurTutorialPage < 0)
-                CurTutorialPage = MaxTutorialPage-1;
+                CurTutorialPage = 0;
         }
         TutorialPages[CurTutorialPage].SetActive(true);
-        PageText.text = string.Format("{0}/{1}", CurTutorialPage+1, MaxTutorialPage);
+        PageText.text = string.Format("{0}/{1}", CurTutorialPage + 1, MaxTutorialPage);
     }
     public void UpdateTutorialPage()
     {
@@ -274,22 +280,94 @@ public partial class BattleManage : MonoBehaviour
             else
                 TutorialPages[i].SetActive(true);
         }
-        PageText.text = string.Format("{0}/{1}", CurTutorialPage+1, MaxTutorialPage);
+        PageText.text = string.Format("{0}/{1}", CurTutorialPage + 1, MaxTutorialPage);
+    }
+    public void PopupTutorial(string _type)
+    {
+        Pause(true);
+        PopupTutorialGo.SetActive(true);
+        switch (_type)
+        {
+            case "AvataEnergy":
+                PopupTutorialDescription.text = StringData.GetString("EnergyPotionDescription");
+                PopupTutorialTitle.text = StringData.GetString("EnergyPotionTitle");
+                PopupTutorialPic_Left.sprite = PopupTutorialSprites[0];
+                PopupTutorialPic_Right.sprite = PopupTutorialSprites[1];
+                break;
+            case "DamageUp":
+                PopupTutorialDescription.text = StringData.GetString("DamagePotionDescription");
+                PopupTutorialTitle.text = StringData.GetString("DamagePotionTitle");
+                PopupTutorialPic_Left.sprite = PopupTutorialSprites[2];
+                PopupTutorialPic_Right.sprite = PopupTutorialSprites[3];
+                break;
+            case "HPRecovery":
+                PopupTutorialDescription.text = StringData.GetString("HealthPotionDescription");
+                PopupTutorialTitle.text = StringData.GetString("HealthPotionTitle");
+                PopupTutorialPic_Left.sprite = PopupTutorialSprites[4];
+                PopupTutorialPic_Right.sprite = PopupTutorialSprites[5];
+                break;
+            case "Immortal":
+                PopupTutorialDescription.text = StringData.GetString("ImmortalPotionDescription");
+                PopupTutorialTitle.text = StringData.GetString("ImmortalPotionTitle");
+                PopupTutorialPic_Left.sprite = PopupTutorialSprites[6];
+                PopupTutorialPic_Right.sprite = PopupTutorialSprites[7];
+                break;
+            case "SpeedUp":
+                PopupTutorialDescription.text = StringData.GetString("SpeedPotionDescription");
+                PopupTutorialTitle.text = StringData.GetString("SpeedPotionTitle");
+                PopupTutorialPic_Left.sprite = PopupTutorialSprites[8];
+                PopupTutorialPic_Right.sprite = PopupTutorialSprites[9];
+                break;
+        }
+    }
+    public void OpenTutorial()
+    {
+        CurTutorialPage = 0;
+        UpdateTutorialPage();
+        TutorialGo.SetActive(true);
+    }
+    public void ClosePopupTutorial()
+    {
+        PopupTutorialGo.SetActive(false);
+        Pause(false);
     }
     public void CloseTutorial()
     {
-        Tutorial(false);
-        Setting(false);
-        Set(true);
+        if (Player.Tutorial)
+        {
+            if (CurTutorialPage < (MaxTutorialPage - 1))
+            {
+                Tutorial_NextPage(true);
+            }
+            else
+            {
+                DirectArrowAni.SetTrigger("Play");
+                PlayerPrefs.SetInt(LocoData.Tutorial.ToString(), 1);
+                Player.SetTutorial(false);
+                Setting(false);
+                Set(true);
+                TutorialGo.SetActive(false);
+            }
+        }
+        else
+        {
+            Setting(false);
+            Set(true);
+            TutorialGo.SetActive(false);
+        }
+    }
+    public void Pause(bool _pause)
+    {
+        IsPause = _pause;
+        SoulGo.SetActive(!_pause);
+        MyCameraControler.enabled = !_pause;
+        gameObject.SetActive(!_pause);
     }
     public void Setting(bool _active)
     {
         if (MyPlayer == null)
             return;
-        IsPause = _active;
-        SoulGo.SetActive(!_active);
-        MyCameraControler.enabled = !_active;
-        gameObject.SetActive(!_active);
+        Pause(_active);
         SettingObj.SetActive(_active);
         if (_active)
         {
