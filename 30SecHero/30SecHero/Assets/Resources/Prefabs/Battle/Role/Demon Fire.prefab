@@ -388,7 +388,7 @@ MonoBehaviour:
   PSkillTimer: 0
   IsPlayerGetSkill: 0
   AttackOnce: 0
-  Interval: 2
+  Interval: 1.5
   AmmoNum: 1
   AmmoInterval: 0.2
   StartAngle: 0

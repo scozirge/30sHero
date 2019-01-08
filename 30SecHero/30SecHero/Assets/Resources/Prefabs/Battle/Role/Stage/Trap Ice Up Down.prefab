@@ -483,7 +483,7 @@ MonoBehaviour:
   AngleInterval: 180
   RandomAngle: 0
   Patetern: 0
-  FirstAttackNoWait: 0
+  FirstAttackNoWait: 1
   AttackPrefab: {fileID: 114962956101920240, guid: bebea7f0b397ab842b561febea7726fa,
     type: 3}
   TriggerWall: 1
