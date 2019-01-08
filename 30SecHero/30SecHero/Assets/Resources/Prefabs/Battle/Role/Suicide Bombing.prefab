@@ -331,7 +331,7 @@ MonoBehaviour:
   - {fileID: 198962121974398558, guid: 7b5cfc2b626dfbe4d800e4a9ea706e96, type: 3}
   AttackPrefab: {fileID: 114836237506999114, guid: 774f612a87c98c24a8231a3a8fa34b6d,
     type: 3}
-  PrepareTime: 1.5
+  PrepareTime: 1
 --- !u!114 &1333048113425418536
 MonoBehaviour:
   m_ObjectHideFlags: 0
