@@ -189,6 +189,12 @@ public partial class PlayerRole : Role
     [Tooltip("攻擊音效")]
     [SerializeField]
     AudioClip AttackSound;
+    [Tooltip("被打音效")]
+    [SerializeField]
+    AudioClip BeAttackSound;
+    [Tooltip("護盾被打音效")]
+    [SerializeField]
+    AudioClip ShieldBeAttackSound;
     [LabelOverride("變回史萊姆音效")]
     [SerializeField]
     AudioClip RemoveAvatarSound;
@@ -772,6 +778,7 @@ public partial class PlayerRole : Role
             //Damage Shield
             if (_dmg >= Shield)
             {
+                AudioPlayer.PlaySound(BeAttackSound);
                 _dmg = (int)(_dmg - Shield);
                 Shield = 0;
                 //護盾破碎釋放冰凍衝擊
@@ -785,6 +792,7 @@ public partial class PlayerRole : Role
             }
             else
             {
+                AudioPlayer.PlaySound(ShieldBeAttackSound);
                 Shield -= _dmg;
                 _dmg = 0;
             }
