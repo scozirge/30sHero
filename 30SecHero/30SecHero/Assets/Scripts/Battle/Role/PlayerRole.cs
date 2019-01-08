@@ -199,6 +199,12 @@ public partial class PlayerRole : Role
     [Tooltip("護盾被打音效")]
     [SerializeField]
     AudioClip ShieldBeAttackSound;
+    [Tooltip("護盾被打破音效")]
+    [SerializeField]
+    AudioClip ShieldBreakSound;
+    [Tooltip("護盾被打破特效")]
+    [SerializeField]
+    ParticleSystem ShieldBreakEffect;
     [LabelOverride("變回史萊姆音效")]
     [SerializeField]
     AudioClip RemoveAvatarSound;
@@ -775,16 +781,16 @@ public partial class PlayerRole : Role
     {
         base.ShieldBlock(ref _dmg);
         if (Shield != 0)
-        {
+        {             
             if (CurBeHitEffect) Destroy(CurBeHitEffect.gameObject);
-            if (_dmg > 0)
-                if (BeHitEffect_Shield) CurBeHitEffect = EffectEmitter.EmitParticle(BeHitEffect_Shield, Vector2.zero, Vector3.zero, transform).MyParticle;
             //Damage Shield
-            if (_dmg >= Shield)
+            if (_dmg >= Shield)//護盾被打破(傷害高於目前護盾值)
             {
-                AudioPlayer.PlaySound(BeAttackSound);
+                if (_dmg > 0)
+                    if (ShieldBreakEffect) CurBeHitEffect = EffectEmitter.EmitParticle(ShieldBreakEffect, Vector2.zero, Vector3.zero, transform).MyParticle;
                 _dmg = (int)(_dmg - Shield);
                 Shield = 0;
+                AudioPlayer.PlaySound(ShieldBreakSound);
                 //護盾破碎釋放冰凍衝擊
                 GenerateBlizzard();
                 //護盾破碎時短暫無敵(一場戰鬥只會觸發一次)
@@ -796,6 +802,8 @@ public partial class PlayerRole : Role
             }
             else
             {
+                if (_dmg > 0)
+                    if (BeHitEffect_Shield) CurBeHitEffect = EffectEmitter.EmitParticle(BeHitEffect_Shield, Vector2.zero, Vector3.zero, transform).MyParticle;
                 AudioPlayer.PlaySound(ShieldBeAttackSound);
                 Shield -= _dmg;
                 _dmg = 0;
@@ -803,6 +811,7 @@ public partial class PlayerRole : Role
         }
         else
         {
+            AudioPlayer.PlaySound(BeAttackSound);
             if (CurBeHitEffect) Destroy(CurBeHitEffect.gameObject);
             if (BeHitEffect) CurBeHitEffect = EffectEmitter.EmitParticle(BeHitEffect, Vector2.zero, Vector3.zero, transform).MyParticle;
             CameraController.PlayEffect("BeHitFrame");
