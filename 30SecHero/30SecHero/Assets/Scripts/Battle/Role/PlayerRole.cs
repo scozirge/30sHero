@@ -236,7 +236,12 @@ public partial class PlayerRole : Role
     bool CanJump;
     bool CanRush;
     bool StartControl;
-
+    //是否跳藥水教學說明
+    bool EnergyPotionTutorial;
+    bool DamagePotionTutorial;
+    bool HealthPotionTutorial;
+    bool ImmortalPotionTutorial;
+    bool SpeedPotionTutorial;
     //附魔
     public Dictionary<EnchantProperty, float> MyEnchant = new Dictionary<EnchantProperty, float>();
     List<Skill> MyEnchantSkill = new List<Skill>();
@@ -355,6 +360,17 @@ public partial class PlayerRole : Role
         IsTriggerRevive = false;
         IsTriggerRuleBreaker = false;
         StartCoroutine(StartAvatarPerformance());
+        //是否要跳藥水教學說明設定
+        if (PlayerPrefs.GetInt("EnergyPotionTutorial") == 0)
+            EnergyPotionTutorial = true;
+        if (PlayerPrefs.GetInt("DamagePotionTutorial") == 0)
+            DamagePotionTutorial = true;
+        if (PlayerPrefs.GetInt("HealthPotionTutorial") == 0)
+            HealthPotionTutorial = true;
+        if (PlayerPrefs.GetInt("ImmortalPotionTutorial") == 0)
+            ImmortalPotionTutorial = true;
+        if (PlayerPrefs.GetInt("SpeedPotionTutorial") == 0)
+            SpeedPotionTutorial = true;
     }
     IEnumerator StartAvatarPerformance()
     {
@@ -1061,9 +1077,21 @@ public partial class PlayerRole : Role
         {
             case LootType.AvataEnergy:
                 AddAvarTime(_data.Time * (1 + PotionEfficiency) + AvatarPotionBuff + MyEnchant[EnchantProperty.Allergy]);
+                if (EnergyPotionTutorial)
+                {
+                    BattleManage.BM.PopupTutorial(_data.Type.ToString());
+                    PlayerPrefs.SetInt("EnergyPotionTutorial", 1);
+                    EnergyPotionTutorial = false;
+                }
                 break;
             case LootType.DamageUp:
                 AddBuffer(RoleBuffer.DamageUp, _data.Time * (1 + PotionEfficiency) + MyEnchant[EnchantProperty.Allergy], _data.Value);
+                if (DamagePotionTutorial)
+                {
+                    BattleManage.BM.PopupTutorial(_data.Type.ToString());
+                    PlayerPrefs.SetInt("DamagePotionTutorial", 1);
+                    DamagePotionTutorial = false;
+                }
                 break;
             case LootType.HPRecovery:
                 if (HealthRatio == 1)
@@ -1072,12 +1100,30 @@ public partial class PlayerRole : Role
                         BattleManage.ExtraDropGoldAdd((int)(MyEnchant[EnchantProperty.BloodyGold] * (int)(MaxHealth * _data.Value * (1 + PotionEfficiency))));
                 }
                 HealHP((int)(MaxHealth * _data.Value * (1 + PotionEfficiency)));
+                if (HealthPotionTutorial)
+                {
+                    BattleManage.BM.PopupTutorial(_data.Type.ToString());
+                    PlayerPrefs.SetInt("HealthPotionTutorial", 1);
+                    HealthPotionTutorial = false;
+                }
                 break;
             case LootType.Immortal:
                 AddBuffer(RoleBuffer.Immortal, _data.Time * (1 + PotionEfficiency) + MyEnchant[EnchantProperty.Allergy]);
+                if (ImmortalPotionTutorial)
+                {
+                    BattleManage.BM.PopupTutorial(_data.Type.ToString());
+                    PlayerPrefs.SetInt("ImmortalPotionTutorial", 1);
+                    ImmortalPotionTutorial = false;
+                }
                 break;
             case LootType.SpeedUp:
                 AddBuffer(RoleBuffer.SpeedUp, _data.Time * (1 + PotionEfficiency) + MyEnchant[EnchantProperty.Allergy], _data.Value);
+                if (SpeedPotionTutorial)
+                {
+                    BattleManage.BM.PopupTutorial(_data.Type.ToString());
+                    PlayerPrefs.SetInt("SpeedPotionTutorial", 1);
+                    SpeedPotionTutorial = false;
+                }
                 break;
         }
         AttackMotion();

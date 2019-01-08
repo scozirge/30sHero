@@ -104,7 +104,7 @@ public partial class EnemyRole
             {
                 //寶石
                 ResourceLoot loot = DropSpawner.SpawnResource(transform.position);
-                if (loot) loot.Init(ResourceType.Emerald, GameSettingData.NewBossEmerald + BattleManage.Floor);
+                if (loot) loot.Init(ResourceType.Emerald, GameSettingData.NewBossEmerald);
                 //解鎖夥伴並加入已擊殺BOSS清單
                 PatnerLoot ploot = DropSpawner.SpawnPatner(transform.position);
                 if (ploot) ploot.Init(ID);

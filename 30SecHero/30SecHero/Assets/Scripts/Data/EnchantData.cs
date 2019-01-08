@@ -166,7 +166,10 @@ public class EnchantData : Data
     }
     public int GetPrice()
     {
-        return BaseEmerald + LV * LevelUpEmerald;
+        if (MyEnchantType == EnchantType.Enchant)
+            return BaseEmerald + LV * LevelUpEmerald;
+        else
+            return 0;
     }
     public float GetValue()
     {

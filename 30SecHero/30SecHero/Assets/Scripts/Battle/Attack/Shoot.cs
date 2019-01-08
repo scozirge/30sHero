@@ -11,7 +11,11 @@ public class Shoot : Attack
     [SerializeField]
     protected bool TriggerWall = true;
 
-
+    public override void PlayerInitSkill()
+    {
+        DamagePercent *= GameSettingData.SkillAmmoDamage;//玩家子彈傷害
+        base.PlayerInitSkill();
+    }
     public override void SpawnAttackPrefab()
     {
         if (Target == null && Patetern == ShootPatetern.TowardTarget)
