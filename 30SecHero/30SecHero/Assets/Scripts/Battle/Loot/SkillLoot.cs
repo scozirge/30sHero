@@ -55,6 +55,7 @@ public class SkillLoot : Loot
         {
             EffectEmitter.EmitParticle(GetEffect, transform.position, Vector3.zero, null);
             _col.GetComponent<PlayerRole>().GenerateMonsterSkill(Name, SpritePath);
+            AudioPlayer.PlaySound(GainSound);
             SelfDestroy();
         }
     }

@@ -54,8 +54,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1dbb9b310f80ae46bd7aa6853f154a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SpawnEffect: {fileID: 0}
   WaitToBeAcquire: 0.3
   RandomPosRadius: 300
+  GainSound: {fileID: 8300000, guid: 7657e4ce488f6ea47bff3bf74ef0b31e, type: 3}
   MyIcon: {fileID: 114629167383406342}
   GoldIcon: {fileID: 21300000, guid: ae659436bf3294e448c29693626f56c0, type: 3}
   EmeraldIcon: {fileID: 21300000, guid: 17b02e78dcf73f348a4500855832f255, type: 3}

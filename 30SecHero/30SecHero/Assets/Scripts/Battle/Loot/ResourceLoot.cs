@@ -13,6 +13,7 @@ public class ResourceLoot : Loot
     Sprite EmeraldIcon;
     [SerializeField]
     ParticleSystem DeathEffect;
+    
 
     ResourceType MyType;
     int ResourceValue;
@@ -41,6 +42,7 @@ public class ResourceLoot : Loot
         {
             _col.GetComponent<PlayerRole>().GetResource(MyType, ResourceValue);
             if (DeathEffect) EffectEmitter.EmitParticle(DeathEffect, transform.position, Vector3.zero, null);
+            AudioPlayer.PlaySound(GainSound);
             SelfDestroy();
         }
     }

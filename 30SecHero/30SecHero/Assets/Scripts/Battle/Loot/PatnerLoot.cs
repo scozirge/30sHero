@@ -34,6 +34,7 @@ public class PatnerLoot : Loot
         {
             BattleManage.KillBossAndGetEnchant(KillBossID, MyData);
             if (DeathEffect) EffectEmitter.EmitParticle(DeathEffect, transform.position, Vector3.zero, null);
+            AudioPlayer.PlaySound(GainSound);
             SelfDestroy();
         }
     }

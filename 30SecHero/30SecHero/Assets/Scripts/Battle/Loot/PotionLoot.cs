@@ -72,6 +72,7 @@ public class PotionLoot : Loot
             EffectEmitter.EmitParticle(Data.GetParticle, Vector2.zero, Vector2.zero, _col.transform);
             _col.GetComponent<PlayerRole>().GetLoot(Data);
             if (DeathEffect) EffectEmitter.EmitParticle(DeathEffect, transform.position, Vector3.zero, null);
+            AudioPlayer.PlaySound(GainSound);
             SelfDestroy();
         }
     }

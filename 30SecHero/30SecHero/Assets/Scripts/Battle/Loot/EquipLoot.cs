@@ -44,6 +44,7 @@ public class EquipLoot : Loot
         {
             _col.GetComponent<PlayerRole>().GetEquip(MyData);
             if (DeathEffect) EffectEmitter.EmitParticle(DeathEffect, transform.position, Vector3.zero, null);
+            AudioPlayer.PlaySound(GainSound);
             SelfDestroy();
         }
     }

@@ -84,19 +84,16 @@ partial class BattleManage
 
     public static void EnemyDropGoldAdd(int _gold)
     {
-        AudioPlayer.PlaySound(GameManager.GM.CoinSound);
         EnemyDropGolds += _gold;
         //Debug.Log("_gold=" + _gold);
         //Debug.Log("EnemyKillGolds=" + EnemyKillGolds);
     }
     public static void ExtraDropGoldAdd(int _gold)
     {
-        AudioPlayer.PlaySound(GameManager.GM.CoinSound);
         ExtraDropGolds += _gold;
     }
     public static void BossDropEmeraldAdd(int _emerald)
     {
-        AudioPlayer.PlaySound(GameManager.GM.CoinSound);
         BossDropEmeralds += _emerald;
         //Debug.Log("_emerald=" + _emerald);
         //Debug.Log("BossDropEmeralds=" + BossDropEmeralds);

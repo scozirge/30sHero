@@ -14,7 +14,8 @@ public abstract class Loot : MonoBehaviour
     protected int RandomPosRadius = 0;
     AILootMove MyAIMove;
     protected bool ReadyToAcquire;
-
+    [SerializeField]
+    protected AudioClip GainSound;
 
     protected virtual void Start()
     {
