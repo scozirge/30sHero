@@ -75,7 +75,14 @@ public partial class BattleManage : MonoBehaviour
     GameObject TutorialGo;
     [SerializeField]
     Animator WarningAni;
-
+    [SerializeField]
+    List<GameObject> TutorialPages;
+    [SerializeField]
+    Text PageText;
+    int CurTutorialPage;
+    int MaxTutorialPage;
+    [SerializeField]
+    Animator DirectArrowAni;
 
     static List<EnemyRole> AvailableMillions;
     static EnemyRole PreviousDemonGergons;
@@ -128,6 +135,10 @@ public partial class BattleManage : MonoBehaviour
         LootParetn = GameObject.FindGameObjectWithTag("LootParent").GetComponent<Transform>();
         CurSpawnCount = 0;
         EnemyKill = 0;
+        CurTutorialPage = 0;
+        TutorialPages.RemoveAll(item => item == null);
+        MaxTutorialPage = TutorialPages.Count;
+        UpdateTutorialPage();
         InitStage();
         MyCameraControler = CameraControler;
         ScreenSize = MyCameraControler.ScreenSize;
@@ -173,6 +184,7 @@ public partial class BattleManage : MonoBehaviour
             PlayerPrefs.SetInt(LocoData.Tutorial.ToString(), 1);
             Player.SetTutorial(false);
         }
+        DirectArrowAni.SetTrigger("Play");
         Debug.Log("Init BattleManager");
     }
     void InitBattleSetting()
@@ -227,8 +239,48 @@ public partial class BattleManage : MonoBehaviour
         LootList.Add(loot);
     }
     public void Tutorial(bool _bool)
-    {
+    {        
         TutorialGo.SetActive(_bool);
+        if(_bool)
+        {
+            CurTutorialPage = 0;
+            UpdateTutorialPage();
+        }
+    }
+    public void Tutorial_NextPage(bool _next)
+    {
+        TutorialPages[CurTutorialPage].SetActive(false);
+        if (_next)
+        {
+            CurTutorialPage++;
+            if (CurTutorialPage >= MaxTutorialPage)
+                CurTutorialPage = 0;
+        }
+        else
+        {
+            CurTutorialPage--;
+            if (CurTutorialPage < 0)
+                CurTutorialPage = MaxTutorialPage-1;
+        }
+        TutorialPages[CurTutorialPage].SetActive(true);
+        PageText.text = string.Format("{0}/{1}", CurTutorialPage+1, MaxTutorialPage);
+    }
+    public void UpdateTutorialPage()
+    {
+        for (int i = 0; i < MaxTutorialPage; i++)
+        {
+            if (i != CurTutorialPage)
+                TutorialPages[i].SetActive(false);
+            else
+                TutorialPages[i].SetActive(true);
+        }
+        PageText.text = string.Format("{0}/{1}", CurTutorialPage+1, MaxTutorialPage);
+    }
+    public void CloseTutorial()
+    {
+        Tutorial(false);
+        Setting(false);
+        Set(true);
     }
     public void Setting(bool _active)
     {
