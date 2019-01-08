@@ -357,7 +357,7 @@ public partial class PlayerRole : Role
         AttackTimer = new MyTimer(DontAttackRestoreTime, RestoreAttack, false, false);
         ShieldTimer = new MyTimer(ShieldRechargeTime, ShieldRestore, false, false);
         JumpTimer = new MyTimer(JumpCDTime, SetCanJump, false, false);
-        RushTimer = new MyTimer(RushCD, SetCanRush, false, false);
+        RushTimer = new MyTimer(RushCD, SetCanRush, ShowRushCD, false, false);
         OnRushTimer = new MyTimer(RushAntiAmooTime, SetNotOnRush, false, false);
         Skill[] skills = GetComponents<Skill>();
         for (int i = 0; i < skills.Length; i++)
@@ -549,6 +549,12 @@ public partial class PlayerRole : Role
     void SetCanRush()
     {
         CanRush = true;
+    }
+    void ShowRushCD()
+    {
+        float proportion = 1 - (RushTimer.CurTimer / RushCD);
+        WingLeft.fillAmount = proportion;
+        WingRight.fillAmount = proportion;
     }
     void SetNotOnRush()
     {
@@ -781,7 +787,7 @@ public partial class PlayerRole : Role
     {
         base.ShieldBlock(ref _dmg);
         if (Shield != 0)
-        {             
+        {
             if (CurBeHitEffect) Destroy(CurBeHitEffect.gameObject);
             //Damage Shield
             if (_dmg >= Shield)//護盾被打破(傷害高於目前護盾值)

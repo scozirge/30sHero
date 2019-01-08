@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MyTimer
 {
-    float CurTimer;
+    public float CurTimer;
     public float MaxTime { get; private set; }
     public bool StartRunTimer;
     public bool Loop;

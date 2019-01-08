@@ -1665,6 +1665,16 @@ PrefabInstance:
       objectReference: {fileID: 1310029715}
     - target: {fileID: 114529601492733476, guid: d9e47796d36fc83458ffab41aea6641e,
         type: 3}
+      propertyPath: WingLeft
+      value: 
+      objectReference: {fileID: 1557383901}
+    - target: {fileID: 114529601492733476, guid: d9e47796d36fc83458ffab41aea6641e,
+        type: 3}
+      propertyPath: WingRight
+      value: 
+      objectReference: {fileID: 106951863}
+    - target: {fileID: 114529601492733476, guid: d9e47796d36fc83458ffab41aea6641e,
+        type: 3}
       propertyPath: AvatarTimerText
       value: 
       objectReference: {fileID: 2091431469}
