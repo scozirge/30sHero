@@ -74,7 +74,7 @@ public class Strengthen : MyUI
         }
 
         //預設強化分頁並選擇第一個item
-        ToFilter((int)StrengthenType.Strengthen);
+        //ToFilter((int)StrengthenType.Strengthen);
         StrengthenContent.gameObject.SetActive(true);
         EnchantContent.gameObject.SetActive(false);
         MyScrollRect.content = StrengthenContent;
@@ -187,6 +187,11 @@ public class Strengthen : MyUI
     }
     public void ToFilter(int _typeID)
     {
+        if((StrengthenType)_typeID==StrengthenType.Strengthen)
+            MainPanel.SetTip(TipType.StrengthenTagTip, false);
+        else
+            MainPanel.SetTip(TipType.EnchantTagTip, false);
+
         if ((int)CurFilterType == _typeID)
             return;
         StrengthenType type = (StrengthenType)_typeID;
@@ -197,8 +202,7 @@ public class Strengthen : MyUI
     {
         switch (CurFilterType)
         {
-            case StrengthenType.Strengthen:
-                MainPanel.SetTip(TipType.StrengthenTagTip, false);
+            case StrengthenType.Strengthen:                
                 PriceImage.sprite = GameManager.GetCurrencySprite(Currency.Gold);
                 StrengthenContent.gameObject.SetActive(true);
                 EnchantContent.gameObject.SetActive(false);
@@ -212,7 +216,6 @@ public class Strengthen : MyUI
                 }
                 break;
             case StrengthenType.Enchant:
-                MainPanel.SetTip(TipType.EnchantTagTip, false);
                 PriceImage.sprite = GameManager.GetCurrencySprite(Currency.Emerald);
                 StrengthenContent.gameObject.SetActive(false);
                 EnchantContent.gameObject.SetActive(true);

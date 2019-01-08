@@ -82,6 +82,10 @@ public partial class BattleManage : MonoBehaviour
     int CurTutorialPage;
     int MaxTutorialPage;
     [SerializeField]
+    GameObject TPageArrow_Left;
+    [SerializeField]
+    GameObject TPageArrow_Right;
+    [SerializeField]
     Animator DirectArrowAni;
     [SerializeField]
     GameObject PopupTutorialGo;
@@ -269,6 +273,15 @@ public partial class BattleManage : MonoBehaviour
                 CurTutorialPage = 0;
         }
         TutorialPages[CurTutorialPage].SetActive(true);
+        if (CurTutorialPage == 0)
+            TPageArrow_Left.SetActive(false);
+        else
+            TPageArrow_Left.SetActive(true);
+
+        if (CurTutorialPage == MaxTutorialPage-1)
+            TPageArrow_Right.SetActive(false);
+        else
+            TPageArrow_Right.SetActive(true);
         PageText.text = string.Format("{0}/{1}", CurTutorialPage + 1, MaxTutorialPage);
     }
     public void UpdateTutorialPage()
@@ -280,6 +293,15 @@ public partial class BattleManage : MonoBehaviour
             else
                 TutorialPages[i].SetActive(true);
         }
+        if (CurTutorialPage == 0)
+            TPageArrow_Left.SetActive(false);
+        else
+            TPageArrow_Left.SetActive(true);
+
+        if (CurTutorialPage == MaxTutorialPage - 1)
+            TPageArrow_Right.SetActive(false);
+        else
+            TPageArrow_Right.SetActive(true);
         PageText.text = string.Format("{0}/{1}", CurTutorialPage + 1, MaxTutorialPage);
     }
     public void PopupTutorial(string _type)

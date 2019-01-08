@@ -70,6 +70,7 @@ public class Equip : MyUI
     static int CurItemIndex;
     static int CurEquipAccessoryIndex;
     public static bool SoldMode;
+    bool IsInit;
 
     void Start()
     {
@@ -140,9 +141,12 @@ public class Equip : MyUI
             }
             test.Add(ItemList[i].MyData.UID);
         }
+        IsInit = true;
     }
     public override void OnEnable()
     {
+        if (!IsInit)
+            return;
         base.OnEnable();
         ToFilter(0);
         Sort();
@@ -188,15 +192,7 @@ public class Equip : MyUI
     }
     public void ToFilter(int _typeID)
     {
-        if ((int)CurFilterType == _typeID)
-            return;
-        EquipType type = (EquipType)_typeID;
-        CurFilterType = type;
-        Filter();
-    }
-    void Filter()
-    {
-        switch(CurFilterType)
+        switch ((EquipType)_typeID)
         {
             case EquipType.Weapon:
                 MainPanel.SetTip(TipType.WeaponTagTip, false);
@@ -208,6 +204,14 @@ public class Equip : MyUI
                 MainPanel.SetTip(TipType.AccessoryTagTip, false);
                 break;
         }
+        if ((int)CurFilterType == _typeID)
+            return;
+        EquipType type = (EquipType)_typeID;
+        CurFilterType = type;
+        Filter();
+    }
+    void Filter()
+    {
         for (int i = 0; i < ItemList.Count; i++)
         {
             if (!ItemList[i].MyData.IsEquiped)
