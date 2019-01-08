@@ -203,6 +203,8 @@ MonoBehaviour:
   ShieldBar: {fileID: 0}
   ShieldGenerateProportion: 0.1
   ShieldRechargeTime: 5
+  SpeedLevelText: {fileID: 0}
+  SpeedBar: {fileID: 0}
   GainMoveFromKilling: 150
   MoveDepletedTime: 10
   MaxExtraMove: 500
@@ -233,6 +235,8 @@ MonoBehaviour:
   RushForce: 10
   RushSound: {fileID: 8300000, guid: 41b00c1ca9d97ea4796281c66b69da09, type: 3}
   AttackSound: {fileID: 8300000, guid: fc274ce0d0fd8fb40b2e7557d54975e8, type: 3}
+  BeAttackSound: {fileID: 8300000, guid: fc274ce0d0fd8fb40b2e7557d54975e8, type: 3}
+  ShieldBeAttackSound: {fileID: 8300000, guid: da6a6610f225d5c498bfced84ec89d98, type: 3}
   RemoveAvatarSound: {fileID: 8300000, guid: 4027915a7025bf14fa1be528e0a0dfd7, type: 3}
   CountdownSound: {fileID: 8300000, guid: 7c919f9835ef7064fa42d392c9f4349f, type: 3}
   JumpCDTime: 0.2

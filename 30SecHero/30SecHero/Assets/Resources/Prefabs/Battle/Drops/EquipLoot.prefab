@@ -334,8 +334,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdc075f4dbb0b57498428372b465e8e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SpawnEffect: {fileID: 0}
   WaitToBeAcquire: 0.6
   RandomPosRadius: 300
+  GainSound: {fileID: 8300000, guid: 6e6d88baa6cc0d448aa4fa35a494e0d9, type: 3}
   EquipTrans: {fileID: 224751315579743956}
   Icons:
   - {fileID: 114280876041232990}
