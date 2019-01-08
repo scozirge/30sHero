@@ -65,6 +65,10 @@ public partial class PlayerRole : Role
     [Tooltip("護盾要沒受到攻擊多久時間(秒)才會開始充能")]
     [SerializeField]
     float ShieldRechargeTime;
+    [SerializeField]
+    Text SpeedLevelText;
+    [SerializeField]
+    Image SpeedBar;
     bool StartGenerateShield;
     MyTimer ShieldTimer;
     public override int Damage
@@ -660,6 +664,16 @@ public partial class PlayerRole : Role
         ShieldGenerate();
         ExtraMoveSpeedDecay();
         SetEnemyDirection();
+        UpdateSpeedPanel();
+    }
+    void UpdateSpeedPanel()
+    {
+        float speedProportion = (ExtraMoveSpeed / MaxExtraMove);
+        int speedLevel = (int)(speedProportion * 5);
+        if (speedProportion > 0.85f)
+            speedLevel = 5;
+        SpeedLevelText.text = speedLevel.ToString();
+        SpeedBar.fillAmount = speedProportion * (0.8f) + 0.14f;
     }
     void SetEnemyDirection()
     {

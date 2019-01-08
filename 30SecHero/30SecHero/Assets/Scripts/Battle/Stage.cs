@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public partial class BattleManage
 {
@@ -11,11 +12,9 @@ public partial class BattleManage
     [SerializeField]
     int BossDebutPlate;
     [SerializeField]
-    MyText FloorText;
+    Text FloorText;
     [SerializeField]
     MyText PlateText;
-    [SerializeField]
-    MyText VelocityText;
     [SerializeField]
     Gate GatePrefab;
     [SerializeField]
@@ -167,7 +166,6 @@ public partial class BattleManage
         FloorProcessingRatio = distToPreviousDoor / (BM.PlateSizeX * GetFloorPlateCount(Floor));
         PlateText.text = CurPlate.ToString();
         Pivot.localPosition = new Vector2(FloorProcessingRatio * LocationCriterionWidth, Pivot.localPosition.y);
-        BM.VelocityText.text = string.Format("{0}{1}", (int)BM.MyPlayer.MoveSpeed, StringData.GetString("Meter"));
         if (IsDemogorgonFloor == 1 || IsDemogorgonFloor == 2)
         {
             if (CurPlate == GetFloorPlateCount(Floor) - BossDebutPlate)
