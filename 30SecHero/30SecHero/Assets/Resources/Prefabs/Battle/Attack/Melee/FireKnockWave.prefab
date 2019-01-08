@@ -93,9 +93,8 @@ MonoBehaviour:
   - {fileID: 297456061721937175, guid: 4f2b523e55584364cbe815c135e7b2d9, type: 3}
   LocalAttackerParticles: []
   DeadParticles: []
-  HitTargetParticle: {fileID: 198308960938074910, guid: 6ebb3848cff528744a0ce66822bd1588,
-    type: 3}
-  HitTargetSound: {fileID: 0}
+  HitTargetParticle: {fileID: 19849376, guid: d16221e794fe16e4e8994a7f8c770561, type: 3}
+  HitTargetSound: {fileID: 8300000, guid: 64fb9477894fa2e4a997518fbb1c2f15, type: 3}
   LifeTime: 1
   KnockIntensity: 3000
   AmmoType: 1
