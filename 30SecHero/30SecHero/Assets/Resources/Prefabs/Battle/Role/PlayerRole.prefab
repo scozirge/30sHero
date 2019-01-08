@@ -205,6 +205,8 @@ MonoBehaviour:
   ShieldRechargeTime: 5
   SpeedLevelText: {fileID: 0}
   SpeedBar: {fileID: 0}
+  WingLeft: {fileID: 0}
+  WingRight: {fileID: 0}
   GainMoveFromKilling: 150
   MoveDepletedTime: 10
   MaxExtraMove: 500

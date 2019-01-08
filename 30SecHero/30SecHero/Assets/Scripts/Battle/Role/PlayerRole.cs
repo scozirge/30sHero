@@ -69,6 +69,10 @@ public partial class PlayerRole : Role
     Text SpeedLevelText;
     [SerializeField]
     Image SpeedBar;
+    [SerializeField]
+    Image WingLeft;
+    [SerializeField]
+    Image WingRight;
     bool StartGenerateShield;
     MyTimer ShieldTimer;
     public override int Damage
