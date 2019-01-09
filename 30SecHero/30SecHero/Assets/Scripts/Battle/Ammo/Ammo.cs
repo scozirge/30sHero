@@ -249,7 +249,17 @@ public partial class Ammo : MonoBehaviour
             AudioPlayer.PlaySound(HitTargetSound);
         TriggerHitCondition(_role);
         if (HitTargetParticle != null)
-            EffectEmitter.EmitParticle(HitTargetParticle, _role.transform.position, Vector3.zero, ParticleParent);
+        {
+            if (_role.MyForce == Force.Player)
+            {
+                PlayerRole pRole = (PlayerRole)_role;
+                if (pRole.ShieldRatio <= 0)
+                    EffectEmitter.EmitParticle(HitTargetParticle, _role.transform.position, Vector3.zero, ParticleParent);
+            }
+            else
+                EffectEmitter.EmitParticle(HitTargetParticle, _role.transform.position, Vector3.zero, ParticleParent);
+        }
+
         SpawnDeadParticles(_pos);
     }
     protected virtual void Update()
