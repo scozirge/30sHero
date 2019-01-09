@@ -116,7 +116,7 @@ public class Purchase : MyUI
         {
             case PurchaseType.BuyEmerald:
                 BtnIcon.sprite = GameManager.GetCurrencySprite(Currency.Kred);
-                PriceText.text = CurSelectedData.PayKreds.ToString();
+                PriceText.text = CurSelectedData.PayKreds.ToString();                
                 break;
             case PurchaseType.TradeGold:
                 if (Player.Emerald < CurSelectedData.PayEmerald)

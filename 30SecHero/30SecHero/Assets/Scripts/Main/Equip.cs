@@ -193,6 +193,8 @@ public class Equip : MyUI
     }
     public void ToFilter(int _typeID)
     {
+        if ((int)CurFilterType == _typeID)
+            return;
         switch ((EquipType)_typeID)
         {
             case EquipType.Weapon:
@@ -205,8 +207,6 @@ public class Equip : MyUI
                 MainPanel.SetTip(TipType.AccessoryTagTip, false);
                 break;
         }
-        if ((int)CurFilterType == _typeID)
-            return;
         EquipType type = (EquipType)_typeID;
         CurFilterType = type;
         Filter();

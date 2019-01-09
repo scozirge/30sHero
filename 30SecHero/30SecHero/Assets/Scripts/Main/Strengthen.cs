@@ -17,7 +17,7 @@ public class Strengthen : MyUI
     [SerializeField]
     Button UpgradeButton;
     [SerializeField]
-    MyText PriceText;
+    Text PriceText;
     [SerializeField]
     Image PriceImage;
     [SerializeField]
@@ -58,7 +58,7 @@ public class Strengthen : MyUI
         {
             if (Player.EnchantDic[keys[i]].MyEnchantType == EnchantType.Enchant)
             {
-                if(Player.EnchantDic[keys[i]].LV>0)
+                if (Player.EnchantDic[keys[i]].LV > 0)
                 {
                     EnchantItem ei = (EnchantItem)EnchantSpanwer.Spawn();
                     ei.Set(Player.EnchantDic[keys[i]], this);
@@ -66,7 +66,7 @@ public class Strengthen : MyUI
                 }
             }
         }
-        if(!EnchantData.CheckGetAllEnchant())//如果所以附魔都解索完就不跳未解鎖問號標誌
+        if (!EnchantData.CheckGetAllEnchant())//如果所以附魔都解索完就不跳未解鎖問號標誌
         {
             EnchantItem unknown = (EnchantItem)EnchantSpanwer.Spawn();
             unknown.Set(null, this);
@@ -112,7 +112,7 @@ public class Strengthen : MyUI
     }
     public void ShowInfo(EnchantItem _item)
     {
-        if(_item.MyData!=null)
+        if (_item.MyData != null)
         {
             CurSelectedEData = _item.MyData;
             CurSelectedEItem = _item;
@@ -143,9 +143,8 @@ public class Strengthen : MyUI
             {
                 DescriptionText.text = CurSelectedSData.Description(-1);
                 PriceText.text = StringData.GetString("MaxLevel");
-
             }
-            else if(Player.Gold < CurSelectedSData.GetPrice())
+            else if (Player.Gold < CurSelectedSData.GetPrice())
             {
                 DescriptionText.text = CurSelectedSData.Description(0);
                 PriceText.text = CurSelectedSData.GetPrice().ToString(); //PriceText.text = StringData.GetString("Unaffordable");
@@ -158,7 +157,7 @@ public class Strengthen : MyUI
         }
         else if (CurFilterType == StrengthenType.Enchant)
         {
-            if (CurSelectedEData!=null)
+            if (CurSelectedEData != null)
             {
                 NameText.text = CurSelectedEData.Name;
                 if (!CurSelectedEData.CanUpgrade())
@@ -167,7 +166,7 @@ public class Strengthen : MyUI
                     PriceText.text = StringData.GetString("MaxLevel");
 
                 }
-                else if(Player.Emerald < CurSelectedEData.GetPrice())
+                else if (Player.Emerald < CurSelectedEData.GetPrice())
                 {
                     DescriptionText.text = CurSelectedEData.Description(0);
                     PriceText.text = CurSelectedEData.GetPrice().ToString(); //PriceText.text = StringData.GetString("Unaffordable");
@@ -187,22 +186,19 @@ public class Strengthen : MyUI
     }
     public void ToFilter(int _typeID)
     {
-        if((StrengthenType)_typeID==StrengthenType.Strengthen)
-            MainPanel.SetTip(TipType.StrengthenTagTip, false);
-        else
-            MainPanel.SetTip(TipType.EnchantTagTip, false);
-
         if ((int)CurFilterType == _typeID)
             return;
         StrengthenType type = (StrengthenType)_typeID;
         CurFilterType = type;
+
         Filter();
     }
     void Filter()
     {
         switch (CurFilterType)
         {
-            case StrengthenType.Strengthen:                
+            case StrengthenType.Strengthen:
+                MainPanel.SetTip(TipType.StrengthenTagTip, false);
                 PriceImage.sprite = GameManager.GetCurrencySprite(Currency.Gold);
                 StrengthenContent.gameObject.SetActive(true);
                 EnchantContent.gameObject.SetActive(false);
@@ -216,6 +212,7 @@ public class Strengthen : MyUI
                 }
                 break;
             case StrengthenType.Enchant:
+                MainPanel.SetTip(TipType.EnchantTagTip, false);
                 PriceImage.sprite = GameManager.GetCurrencySprite(Currency.Emerald);
                 StrengthenContent.gameObject.SetActive(false);
                 EnchantContent.gameObject.SetActive(true);

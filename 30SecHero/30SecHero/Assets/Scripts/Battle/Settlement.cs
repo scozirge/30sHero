@@ -156,7 +156,6 @@ partial class BattleManage
         EnemyKillGolds = EnemyKill * GameSettingData.EnemyGold;
         TotalGold = (int)((NewFloorGolds + EnemyKillGolds + EnemyDropGolds + ExtraDropGolds) * (1 + GoldsMultiple));
         TotalEmerald = BossDropEmeralds;
-        Debug.Log("GainEquipDataList.Count=" + GainEquipDataList.Count);
         //寫入資料
         if (Player.LocalData)
         {
