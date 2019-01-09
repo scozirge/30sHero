@@ -5262,6 +5262,7 @@ GameObject:
   - component: {fileID: 466900936}
   - component: {fileID: 466900937}
   - component: {fileID: 466900938}
+  - component: {fileID: 466900939}
   m_Layer: 5
   m_Name: AccessoryTag
   m_TagString: Untagged
@@ -5380,6 +5381,39 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &466900939
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 466900935}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7999cd6ff852c49488e97cab3365324e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MyClickEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1621577637}
+        m_MethodName: SetTipOff
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  MyPointerEnterEvent:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!1 &467043863
 GameObject:
   m_ObjectHideFlags: 0
@@ -6230,6 +6264,7 @@ GameObject:
   - component: {fileID: 548912457}
   - component: {fileID: 548912458}
   - component: {fileID: 548912459}
+  - component: {fileID: 548912460}
   m_Layer: 5
   m_Name: WeaponTag
   m_TagString: Untagged
@@ -6348,6 +6383,39 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &548912460
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 548912456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7999cd6ff852c49488e97cab3365324e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MyClickEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1621577637}
+        m_MethodName: SetTipOff
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  MyPointerEnterEvent:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!1 &567801180
 GameObject:
   m_ObjectHideFlags: 0
@@ -7984,7 +8052,7 @@ PrefabInstance:
     - target: {fileID: 5387651270469980267, guid: e64d7957fe1156340bc8c7e788c49563,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5387651270469980267, guid: e64d7957fe1156340bc8c7e788c49563,
         type: 3}
@@ -17469,6 +17537,7 @@ GameObject:
   - component: {fileID: 1719333655}
   - component: {fileID: 1719333656}
   - component: {fileID: 1719333657}
+  - component: {fileID: 1719333658}
   m_Layer: 5
   m_Name: SkillTag
   m_TagString: Untagged
@@ -17599,6 +17668,39 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1719333658
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1719333653}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7999cd6ff852c49488e97cab3365324e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MyClickEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 471734068}
+        m_MethodName: SetTipOff
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  MyPointerEnterEvent:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!1 &1732040346
 GameObject:
   m_ObjectHideFlags: 0
@@ -20372,6 +20474,7 @@ GameObject:
   - component: {fileID: 2035297226}
   - component: {fileID: 2035297227}
   - component: {fileID: 2035297228}
+  - component: {fileID: 2035297229}
   m_Layer: 5
   m_Name: EnchantmentTag
   m_TagString: Untagged
@@ -20502,6 +20605,39 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &2035297229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2035297224}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7999cd6ff852c49488e97cab3365324e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MyClickEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 471734068}
+        m_MethodName: SetTipOff
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  MyPointerEnterEvent:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!1 &2040795342
 GameObject:
   m_ObjectHideFlags: 0
@@ -21212,6 +21348,7 @@ GameObject:
   - component: {fileID: 2086435728}
   - component: {fileID: 2086435729}
   - component: {fileID: 2086435730}
+  - component: {fileID: 2086435731}
   m_Layer: 5
   m_Name: ArmorTag
   m_TagString: Untagged
@@ -21330,6 +21467,39 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &2086435731
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2086435727}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7999cd6ff852c49488e97cab3365324e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MyClickEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1621577637}
+        m_MethodName: SetTipOff
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  MyPointerEnterEvent:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!1 &2089774435
 GameObject:
   m_ObjectHideFlags: 0

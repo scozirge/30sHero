@@ -17,12 +17,31 @@ public class PlayerAttack : MonoBehaviour
     protected float DamagePercent = 1;
     [SerializeField]
     CircleCollider2D RangeCol;
+    [Tooltip("傷害間隔，最低為0.1")]
+    [SerializeField]
+    protected float DamageInterval = 0.3f;
+    protected List<MyTimer> ReadyToDamageTimers;
+    protected Dictionary<string, bool> ReadyToDamageTargets;
 
+    void Start()
+    {
+        ReadyToDamageTargets = new Dictionary<string, bool>();
+        ReadyToDamageTimers = new List<MyTimer>();
+        if (DamageInterval < 0.1f)
+            DamageInterval = 0.1f;
+    }
+    void Update()
+    {
+        for (int i = 0; i < ReadyToDamageTimers.Count; i++)
+        {
+            ReadyToDamageTimers[i].RunTimer();
+        }
+    }
     public void SetRange()
     {
         RangeCol.radius = RangeCol.radius * (1 + Attacker.MyEnchant[EnchantProperty.AttackRange]);
     }
-    void OnTriggerEnter2D(Collider2D _col)
+    void OnTriggerStay2D(Collider2D _col)
     {
         if (Attacker.BuffersExist(RoleBuffer.Untouch))
             return;
@@ -30,6 +49,8 @@ public class PlayerAttack : MonoBehaviour
         {
             if (Attacker.IsAvatar)
             {
+                if (!CheckReadyToDamageTarget(_col))
+                    return;
                 EnemyRole er = _col.GetComponent<EnemyRole>();
                 float extraDamageProportion = 0;
                 //衝擊斬(攻擊有機率施放)
@@ -146,5 +167,34 @@ public class PlayerAttack : MonoBehaviour
             Attacker.DashImpactSkil.LaunchAISpell();
         }
 
+    }
+
+    protected bool CheckReadyToDamageTarget(Collider2D _target)
+    {
+        string id = _target.GetInstanceID().ToString();
+        if (ReadyToDamageTargets.ContainsKey(id))
+        {
+            if (ReadyToDamageTargets[id])
+            {
+                ReadyToDamageTargets[id] = false;
+                return true;
+            }
+            else
+                return false;
+        }
+        else
+        {
+            if (DamageInterval > 0)
+                ReadyToDamageTimers.Add(new MyTimer(DamageInterval, ReadyToDamageTimeOutFunc, true, true, id));
+            ReadyToDamageTargets.Add(id, false);
+            return true;
+        }
+    }
+    protected void ReadyToDamageTimeOutFunc(string _key)
+    {
+        if (ReadyToDamageTargets.ContainsKey(_key))
+        {
+            ReadyToDamageTargets[_key] = true;
+        }
     }
 }

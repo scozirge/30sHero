@@ -191,6 +191,21 @@ public class Equip : MyUI
         Player.SellEquips(list);
         ItemCoutText.text = string.Format("{0}/{1}", ItemList.Count, GameSettingData.MaxItemCount);
     }
+    public void SetTipOff(int _type)
+    {
+        switch ((EquipType)_type)
+        {
+            case EquipType.Weapon:
+                MainPanel.SetTip(TipType.WeaponTagTip, false);
+                break;
+            case EquipType.Armor:
+                MainPanel.SetTip(TipType.ArmorTagTip, false);
+                break;
+            case EquipType.Accessory:
+                MainPanel.SetTip(TipType.AccessoryTagTip, false);
+                break;
+        }
+    }
     public void ToFilter(int _typeID)
     {
         if ((int)CurFilterType == _typeID)

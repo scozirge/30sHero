@@ -2,6 +2,8 @@
 using UnityEditor;
 using UnityEngine.UI;
 using System.Collections;
+using UnityEditor.Events;
+using UnityEngine.Events;
 
 [CustomEditor(typeof(MyToggle))]
 public class MyToggleEditor : UnityEditor.UI.ToggleEditor
@@ -12,6 +14,7 @@ public class MyToggleEditor : UnityEditor.UI.ToggleEditor
         //EditorGUI.BeginChangeCheck();
         base.OnInspectorGUI();
         myToggle.OffGraphic = EditorGUILayout.ObjectField("OffGraphic", myToggle.OffGraphic, typeof(Graphic), true) as Graphic;
+
         /*
         if(Application.isPlaying)
         {
@@ -23,4 +26,5 @@ public class MyToggleEditor : UnityEditor.UI.ToggleEditor
         }
         */
     }
+
 }

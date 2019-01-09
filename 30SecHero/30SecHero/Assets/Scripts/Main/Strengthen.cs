@@ -193,12 +193,23 @@ public class Strengthen : MyUI
 
         Filter();
     }
+    public void SetTipOff(int _type)
+    {
+        switch((StrengthenType)_type)
+        {
+            case StrengthenType.Strengthen:
+                MainPanel.SetTip(TipType.StrengthenTagTip, false);
+                break;
+            case StrengthenType.Enchant:
+                MainPanel.SetTip(TipType.EnchantTagTip, false);
+                break;
+        }
+    }
     void Filter()
     {
         switch (CurFilterType)
         {
-            case StrengthenType.Strengthen:
-                MainPanel.SetTip(TipType.StrengthenTagTip, false);
+            case StrengthenType.Strengthen:                
                 PriceImage.sprite = GameManager.GetCurrencySprite(Currency.Gold);
                 StrengthenContent.gameObject.SetActive(true);
                 EnchantContent.gameObject.SetActive(false);
@@ -211,8 +222,7 @@ public class Strengthen : MyUI
                     MyText.AddRefreshFunc(RefreshText);
                 }
                 break;
-            case StrengthenType.Enchant:
-                MainPanel.SetTip(TipType.EnchantTagTip, false);
+            case StrengthenType.Enchant:                
                 PriceImage.sprite = GameManager.GetCurrencySprite(Currency.Emerald);
                 StrengthenContent.gameObject.SetActive(false);
                 EnchantContent.gameObject.SetActive(true);
