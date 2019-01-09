@@ -73,6 +73,8 @@ public partial class PlayerRole : Role
     Image WingLeft;
     [SerializeField]
     Image WingRight;
+    [SerializeField]
+    Animator WingAni;
     bool StartGenerateShield;
     MyTimer ShieldTimer;
     public override int Damage
@@ -380,15 +382,15 @@ public partial class PlayerRole : Role
         IsTriggerRuleBreaker = false;
         StartCoroutine(StartAvatarPerformance());
         //是否要跳藥水教學說明設定
-        if (PlayerPrefs.GetInt("EnergyPotionTutorial") == 0)
+        if (PlayerPrefs.GetInt(LocoData.EnergyPotionTutorial.ToString()) == 0)
             EnergyPotionTutorial = true;
-        if (PlayerPrefs.GetInt("DamagePotionTutorial") == 0)
+        if (PlayerPrefs.GetInt(LocoData.DamagePotionTutorial.ToString()) == 0)
             DamagePotionTutorial = true;
-        if (PlayerPrefs.GetInt("HealthPotionTutorial") == 0)
+        if (PlayerPrefs.GetInt(LocoData.HealthPotionTutorial.ToString()) == 0)
             HealthPotionTutorial = true;
-        if (PlayerPrefs.GetInt("ImmortalPotionTutorial") == 0)
+        if (PlayerPrefs.GetInt(LocoData.ImmortalPotionTutorial.ToString()) == 0)
             ImmortalPotionTutorial = true;
-        if (PlayerPrefs.GetInt("SpeedPotionTutorial") == 0)
+        if (PlayerPrefs.GetInt(LocoData.SpeedPotionTutorial.ToString()) == 0)
             SpeedPotionTutorial = true;
     }
     IEnumerator StartAvatarPerformance()
@@ -554,6 +556,8 @@ public partial class PlayerRole : Role
         float proportion = 1 - (RushTimer.CurTimer / RushCD);
         WingLeft.fillAmount = proportion;
         WingRight.fillAmount = proportion;
+        if (proportion >= 1)
+            WingAni.SetTrigger("Play");
     }
     void SetNotOnRush()
     {
@@ -1121,7 +1125,7 @@ public partial class PlayerRole : Role
                 if (EnergyPotionTutorial)
                 {
                     BattleManage.BM.PopupTutorial(_data.Type.ToString());
-                    PlayerPrefs.SetInt("EnergyPotionTutorial", 1);
+                    PlayerPrefs.SetInt(LocoData.EnergyPotionTutorial.ToString(), 1);
                     EnergyPotionTutorial = false;
                 }
                 break;
@@ -1130,7 +1134,7 @@ public partial class PlayerRole : Role
                 if (DamagePotionTutorial)
                 {
                     BattleManage.BM.PopupTutorial(_data.Type.ToString());
-                    PlayerPrefs.SetInt("DamagePotionTutorial", 1);
+                    PlayerPrefs.SetInt(LocoData.DamagePotionTutorial.ToString(), 1);
                     DamagePotionTutorial = false;
                 }
                 break;
@@ -1144,7 +1148,7 @@ public partial class PlayerRole : Role
                 if (HealthPotionTutorial)
                 {
                     BattleManage.BM.PopupTutorial(_data.Type.ToString());
-                    PlayerPrefs.SetInt("HealthPotionTutorial", 1);
+                    PlayerPrefs.SetInt(LocoData.HealthPotionTutorial.ToString(), 1);
                     HealthPotionTutorial = false;
                 }
                 break;
@@ -1153,7 +1157,7 @@ public partial class PlayerRole : Role
                 if (ImmortalPotionTutorial)
                 {
                     BattleManage.BM.PopupTutorial(_data.Type.ToString());
-                    PlayerPrefs.SetInt("ImmortalPotionTutorial", 1);
+                    PlayerPrefs.SetInt(LocoData.ImmortalPotionTutorial.ToString(), 1);
                     ImmortalPotionTutorial = false;
                 }
                 break;
@@ -1162,7 +1166,7 @@ public partial class PlayerRole : Role
                 if (SpeedPotionTutorial)
                 {
                     BattleManage.BM.PopupTutorial(_data.Type.ToString());
-                    PlayerPrefs.SetInt("SpeedPotionTutorial", 1);
+                    PlayerPrefs.SetInt(LocoData.SpeedPotionTutorial.ToString(), 1);
                     SpeedPotionTutorial = false;
                 }
                 break;

@@ -127,6 +127,7 @@ public class Equip : MyUI
                 ItemList[i].gameObject.SetActive(false);
         }
         Sort();
+        UpdateRoleInfo(false);
         //ID重複檢測
         List<int> test = new List<int>();
         for (int i = 0; i < ItemList.Count; i++)

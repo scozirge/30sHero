@@ -171,7 +171,7 @@ public abstract class EquipData : Data
             PropertyText enchantPT = new PropertyText();
             enchantPT.Text = MyEnchant.Description(0);//MyEnchant.Name + "\r\n" + MyEnchant.Description(0)
             enchantPT.Comparison = Comparator.Equal;
-            enchantPT.ColorCode = GameSettingData.NormalNumberColor;
+            enchantPT.ColorCode = GameSettingData.EnchantTextColor;
             enchantPT.DisableSizeFilter = true;
             enchantPT.AutoHeighWithLineCount = true;
             enchantPT.Width = 550;
@@ -202,7 +202,7 @@ public abstract class EquipData : Data
             PropertyText enchantPT = new PropertyText();
             enchantPT.Text = MyEnchant.Description(0);//MyEnchant.Name + "\r\n" + MyEnchant.Description(0)
             enchantPT.Comparison = Comparator.Equal;
-            enchantPT.ColorCode = GameSettingData.NormalNumberColor;
+            enchantPT.ColorCode = GameSettingData.EnchantTextColor;
             enchantPT.DisableSizeFilter = true;
             enchantPT.AutoHeighWithLineCount = true;
             enchantPT.Width = 550;

@@ -61,21 +61,8 @@ public partial class Debugger : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.P))
         {
-            Debug.Log("清空玩家本基資料");
-            PlayerPrefs.DeleteKey(LocoData.UseLanguage.ToString());
-            PlayerPrefs.DeleteKey(LocoData.Init.ToString());
-            PlayerPrefs.DeleteKey(LocoData.Equip.ToString());
-            PlayerPrefs.DeleteKey(LocoData.Strengthen.ToString());
-            PlayerPrefs.DeleteKey(LocoData.SoundOn.ToString());
-            PlayerPrefs.DeleteKey(LocoData.MusicOn.ToString());
-            PlayerPrefs.DeleteKey(LocoData.CurFloor.ToString());
-            PlayerPrefs.DeleteKey(LocoData.MaxFloor.ToString());
-            PlayerPrefs.DeleteKey(LocoData.MaxEnemyKills.ToString());
-            PlayerPrefs.DeleteKey(LocoData.KillBossID.ToString());
-            PlayerPrefs.DeleteKey(LocoData.Gold.ToString());
-            PlayerPrefs.DeleteKey(LocoData.Emerald.ToString());
-            PlayerPrefs.DeleteKey(LocoData.Enchant.ToString());
-            PlayerPrefs.DeleteKey(LocoData.Tutorial.ToString());
+            Player.ClearLocoData();
+
         }
         else if (Input.GetKeyDown(KeyCode.O))
         {

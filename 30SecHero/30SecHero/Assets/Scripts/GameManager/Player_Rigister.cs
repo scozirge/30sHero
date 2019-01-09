@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System;
 public partial class Player
 {
     public static Language UseLanguage { get; private set; }
@@ -107,6 +108,14 @@ public partial class Player
         }
 
     }
+    public static void ClearLocoData()
+    {
+        foreach (int i in Enum.GetValues(typeof(LocoData))) 
+        {
+            PlayerPrefs.DeleteKey(((LocoData)i).ToString());
+        }
+        Debug.Log("清空玩家本基資料");
+    }
     public static void GetLocalData()
     {
         //PlayerPrefs.DeleteKey(LocoData.Init.ToString());
@@ -118,20 +127,7 @@ public partial class Player
         bool ClearAllLocoData = false;
         if (ClearAllLocoData)
         {
-            PlayerPrefs.DeleteKey(LocoData.UseLanguage.ToString());
-            PlayerPrefs.DeleteKey(LocoData.Init.ToString());
-            PlayerPrefs.DeleteKey(LocoData.Equip.ToString());
-            PlayerPrefs.DeleteKey(LocoData.Strengthen.ToString());
-            PlayerPrefs.DeleteKey(LocoData.SoundOn.ToString());
-            PlayerPrefs.DeleteKey(LocoData.MusicOn.ToString());
-            PlayerPrefs.DeleteKey(LocoData.CurFloor.ToString());
-            PlayerPrefs.DeleteKey(LocoData.MaxFloor.ToString());
-            PlayerPrefs.DeleteKey(LocoData.MaxEnemyKills.ToString());
-            PlayerPrefs.DeleteKey(LocoData.KillBossID.ToString());
-            PlayerPrefs.DeleteKey(LocoData.Gold.ToString());
-            PlayerPrefs.DeleteKey(LocoData.Emerald.ToString());
-            PlayerPrefs.DeleteKey(LocoData.Enchant.ToString());
-            PlayerPrefs.DeleteKey(LocoData.Tutorial.ToString());
+            ClearLocoData();
         }
 
 

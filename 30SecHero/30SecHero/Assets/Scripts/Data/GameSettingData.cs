@@ -44,6 +44,7 @@ public class GameSettingData : Data
     public static string GrowingNumberColor;
     public static string DropingNumberColor;
     public static string NormalNumberColor;
+    public static string EnchantTextColor;
     public static string StrengthenPath;
     public static string WeaponPath;
     public static string ArmorPath;
@@ -276,6 +277,9 @@ public class GameSettingData : Data
                                 break;
                             case "NormalNumberColor":
                                 NormalNumberColor = item[key].ToString();
+                                break;
+                            case "EnchantTextColor":
+                                EnchantTextColor = item[key].ToString();
                                 break;
                             case "StrengthenPath":
                                 StrengthenPath = item[key].ToString();

@@ -13,5 +13,10 @@
     CurFloor,
     MaxFloor,
     MaxEnemyKills,
-    Tutorial
+    Tutorial,
+    EnergyPotionTutorial,
+    DamagePotionTutorial,
+    HealthPotionTutorial,
+    ImmortalPotionTutorial,
+    SpeedPotionTutorial
 }

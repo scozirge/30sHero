@@ -41,7 +41,7 @@ public class PlayerAttack : MonoBehaviour
                 //生命低時機率強化傷害
                 if (Attacker.HealthRatio < 0.4f && ProbabilityGetter.GetResult(Attacker.MyEnchant[EnchantProperty.Berserker]))
                 {
-                    extraDamageProportion += 0.5f;
+                    extraDamageProportion += 0.3f;
                     Attacker.SetBerserkerBladeLight(true);
                 }
                 else
