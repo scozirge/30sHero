@@ -137,7 +137,8 @@ public partial class EnemyRole : Role
     }
     void ToAttackMotion()
     {
-        MotionTimer.StartRunTimer = true;
+        if (MotionTimer != null)
+            MotionTimer.StartRunTimer = true;
         if (MotionSprite[1] == null)
             return;
         if (RoleImg != null)

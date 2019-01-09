@@ -141,9 +141,12 @@ public abstract class Role : MonoBehaviour
     }
     protected void ChangeToKnockDrag()
     {
-        DragTimer.RestartCountDown();
-        DragTimer.StartRunTimer = true;
-        MyRigi.drag = KnockDrag;
+        if (DragTimer!=null)
+        {
+            DragTimer.RestartCountDown();
+            DragTimer.StartRunTimer = true;
+            MyRigi.drag = KnockDrag;
+        }
     }
     protected void DragRecovery()
     {

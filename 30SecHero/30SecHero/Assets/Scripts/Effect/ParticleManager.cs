@@ -8,6 +8,7 @@ public class ParticleManager : MonoBehaviour
     public ParticleSystem MyParticle;
     public bool Loop;
     public float LifeTime;
+    [SerializeField]
     float CurParticleTime = 0;
     static Dictionary<string, float> ParticleLifeTimeDic = new Dictionary<string, float>();
     AudioSource[] MyAudios;
@@ -15,6 +16,7 @@ public class ParticleManager : MonoBehaviour
     public void Init()
     {
         MyParticle = GetComponent<ParticleSystem>();
+        MyParticle.Stop();
         var particleModule = GetComponent<ParticleSystem>().main;
         particleModule.playOnAwake = false;
         if (ParticleLifeTimeDic.ContainsKey(name))
@@ -22,11 +24,12 @@ public class ParticleManager : MonoBehaviour
             LifeTime = ParticleLifeTimeDic[name];
             if (LifeTime == 1000)
                 Loop = true;
+
         }
         else
         {
             LifeTime = 0;
-            Loop = false;
+            Loop = false;            
             ParticleSystem[] psArray = transform.GetComponentsInChildrenExcludeSelf<ParticleSystem>();
             for (int i = 0; i < psArray.Length; i++)
             {
@@ -44,6 +47,9 @@ public class ParticleManager : MonoBehaviour
             else
                 ParticleLifeTimeDic.Add(name, LifeTime);
         }
+        var main = MyParticle.main;
+        main.duration = LifeTime + 0.1f;
+        MyParticle.Play();
     }
 
     void OnDisable()
@@ -52,8 +58,11 @@ public class ParticleManager : MonoBehaviour
             return;
         CurParticleTime = MyParticle.time;
         if (!Loop)
-            if (CurParticleTime > LifeTime)
-                CurParticleTime = LifeTime;
+            if (CurParticleTime >= LifeTime)
+            {
+                Destroy(gameObject);
+                //CurParticleTime = LifeTime;
+            }
         DisableAudio();
     }
     void DisableAudio()

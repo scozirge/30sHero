@@ -28,7 +28,10 @@ public class RoleBehavior : MonoBehaviour
     int CurRoundCount;
     List<EnemyRole> SpawnList = new List<EnemyRole>();
     int CurSpawnIndex;
-
+    WaitToDo<Node> MyWaitToDoAction;
+    WaitToDo<Node> MyWaitToSpell;
+    WaitToDo<Node> MyWaitToSpawn;
+    WaitToDo<float> MyWaitToForceDoNextAction;
 
     void Start()
     {
@@ -44,7 +47,7 @@ public class RoleBehavior : MonoBehaviour
             if (Nodes[CurNodeIndex].ActiveOnlyByEvent)
                 DoNextAction();
             else
-                StartCoroutine(WaitToAction(Nodes[CurNodeIndex]));
+                NewWaitToDoNode(Nodes[CurNodeIndex]);
         }
     }
     bool InitBehavior()
@@ -73,7 +76,7 @@ public class RoleBehavior : MonoBehaviour
                 Destination = GetRelativeDestination(_node);
                 StartMove = true;
                 if (_node.MaxProcessingTime > 0)
-                    ForceStopCoroutine = StartCoroutine(ForceDoNextAction(_node.MaxProcessingTime));
+                    ForceDoNextAction(_node.MaxProcessingTime);
                 break;
             case ActionType.Spawn:
                 StartSpawn(_node);
@@ -83,7 +86,7 @@ public class RoleBehavior : MonoBehaviour
                     MyRole.Rush(_node.RushForce);
                 else
                 {
-                    if(BattleManage.BM.MyPlayer)
+                    if (BattleManage.BM.MyPlayer)
                     {
                         Vector2 dir = ((Vector2)BattleManage.BM.MyPlayer.transform.position - (Vector2)transform.position).normalized;
                         Vector2 force = dir * _node.RushForce2;
@@ -155,7 +158,7 @@ public class RoleBehavior : MonoBehaviour
                 pos = (Vector2)BattleManage.MyCameraControler.transform.position + _node.Destination;
                 break;
             case RelativeTo.TrackPlayer:
-                if (_node.Type==ActionType.Move && _node.MaxProcessingTime <= 0)
+                if (_node.Type == ActionType.Move && _node.MaxProcessingTime <= 0)
                 {
                     _node.MaxProcessingTime = 1;
                     Debug.Log("移動模式為TrackPlayer時，MaxProcessingTime不可設定為0");
@@ -194,13 +197,8 @@ public class RoleBehavior : MonoBehaviour
             CheckRandomNode();
         }
         else
-            StartCoroutine(WaitForSpell(_node));
+            NewWaitToSpell(_node);
 
-    }
-    IEnumerator WaitForSpell(Node _node)
-    {
-        yield return new WaitForSeconds(_node.SpellInterval);
-        Spell(_node);
     }
     bool SkipCheckRandNode;
     void CheckRandomNode()
@@ -220,7 +218,7 @@ public class RoleBehavior : MonoBehaviour
                             CurNodeIndex = i;
                         else
                             SkipCheckRandNode = true;
-                        StartCoroutine(WaitToAction(Nodes[i]));
+                        NewWaitToDoNode(Nodes[i]);
                         return;
                     }
                 }
@@ -245,9 +243,19 @@ public class RoleBehavior : MonoBehaviour
         if (Nodes[CurNodeIndex].ActiveOnlyByEvent)
             DoNextAction();
         else
-            StartCoroutine(WaitToAction(Nodes[CurNodeIndex]));
+            NewWaitToDoNode(Nodes[CurNodeIndex]);
     }
-
+    void Update()
+    {
+        if (MyWaitToDoAction != null)
+            MyWaitToDoAction.RunTimer();
+        if (MyWaitToSpell != null)
+            MyWaitToSpell.RunTimer();
+        if (MyWaitToSpawn != null)
+            MyWaitToSpawn.RunTimer();
+        if (MyWaitToForceDoNextAction != null)
+            MyWaitToForceDoNextAction.RunTimer();
+    }
     void FixedUpdate()
     {
         if (Nodes.Count <= 0)
@@ -276,8 +284,8 @@ public class RoleBehavior : MonoBehaviour
                 transform.position = _pos;
                 MyRigid.velocity = Vector2.zero;
                 StartMove = false;
-                if (ForceStopCoroutine != null)
-                    StopCoroutine(ForceStopCoroutine);
+                if (MyWaitToForceDoNextAction != null)
+                    MyWaitToForceDoNextAction.StartRunTimer = false;
                 CheckRandomNode();
             }
         }
@@ -289,6 +297,51 @@ public class RoleBehavior : MonoBehaviour
             MyRigid.velocity = Vector2.Lerp(MyRigid.velocity, targetVel, 0.1f);
         }
     }
+    void NewWaitToDoNode(Node _node)
+    {
+        if (_node.Type == ActionType.Spell)
+        {
+            if (!MyRole.IsPreAttack)
+                MyRole.PreAttack();
+        }
+        if (_node.WaitSecond != 0)
+            MyWaitToDoAction = new WaitToDo<Node>(_node.WaitSecond, DoAction, true, _node);
+        else
+            DoAction(_node);
+    }
+    void NewWaitToSpell(Node _node)
+    {
+        if (_node.SpellInterval != 0)
+            MyWaitToSpell = new WaitToDo<Node>(_node.SpellInterval, Spell, true, _node);
+        else
+            Spell(_node);
+    }
+    void NewWaitToSpawn(Node _node)
+    {
+        if (_node.SpawnIntervalTime != 0)
+            MyWaitToSpawn = new WaitToDo<Node>(_node.SpawnIntervalTime, SpanwEnemy, true, _node);
+        else
+            SpanwEnemy(_node);
+    }
+    void ForceDoNextAction(float _time)
+    {
+        if (_time != 0)
+            MyWaitToForceDoNextAction = new WaitToDo<float>(_time, StopMoveAndDoNextAction, true);
+        else
+            StopMoveAndDoNextAction();
+    }
+    void StopMoveAndDoNextAction()
+    {
+        if (Nodes[CurNodeIndex].Type == ActionType.Move)
+        {
+            MyRigid.velocity = Vector2.zero;
+            StartMove = false;
+            if (MyAIRoleMove)
+                MyAIRoleMove.SetHereToDestination();
+        }
+        CheckRandomNode();
+    }
+    /*舊版已經不使用了，因為物件inactive時會導致計時中斷
     IEnumerator WaitToAction(Node _node)
     {
         if (_node.Type == ActionType.Spell)
@@ -298,6 +351,16 @@ public class RoleBehavior : MonoBehaviour
         }
         yield return new WaitForSeconds(_node.WaitSecond);
         DoAction(_node);
+    }
+    IEnumerator WaitForSpell(Node _node)
+    {
+        yield return new WaitForSeconds(_node.SpellInterval);
+        Spell(_node);
+    }
+    IEnumerator WaitToSpawnEnemy(Node _node)
+    {
+        yield return new WaitForSeconds(_node.SpawnIntervalTime);
+        SpanwEnemy(_node);
     }
     IEnumerator ForceDoNextAction(float _time)
     {
@@ -311,6 +374,8 @@ public class RoleBehavior : MonoBehaviour
         }
         CheckRandomNode();
     }
+    */
+
 
     void StartSpawn(Node _node)
     {
@@ -348,7 +413,7 @@ public class RoleBehavior : MonoBehaviour
         SpawnList.Add(er);
         CurSpawnIndex++;
         if (CurSpawnIndex < _node.SpawnEnemyList.Count)
-            StartCoroutine(WaitToSpawnEnemy(_node));
+            NewWaitToSpawn(_node);
         else
             CheckRandomNode();
     }
@@ -360,9 +425,5 @@ public class RoleBehavior : MonoBehaviour
         else
             return false;
     }
-    IEnumerator WaitToSpawnEnemy(Node _node)
-    {
-        yield return new WaitForSeconds(_node.SpawnIntervalTime);
-        SpanwEnemy(_node);
-    }
+
 }
