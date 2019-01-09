@@ -28,7 +28,9 @@ partial class BattleManage
     [SerializeField]
     RunAnimatedText MyRunText;
 
-
+    public static bool ReadyToGetEnchant;
+    WaitToDo<bool> WaitToCallEnchantUI;//玩家殺死BOSS但自己也立刻死掉時會等待幾秒後自動跳獲得夥伴視窗，在之後才跳結算
+    WaitToDo<float> WaitToCalculateResult;//玩家殺死BOSS但自己也立刻死掉時會等待幾秒後自動跳獲得夥伴視窗，在之後才跳結算
 
     //結算資料
     static int NewFloorGolds;
@@ -80,8 +82,18 @@ partial class BattleManage
         GetEnchant = false;
         ToStrengthen = false;
         IsCalculateResult = false;
+        ReadyToGetEnchant = false;
     }
-
+    public static void PlayerDie()
+    {
+        if (ReadyToGetEnchant)
+        {
+            BM.WaitToCallEnchantUI = new WaitToDo<bool>(1, BM.CallGetEnchantUI, true, true);
+            BM.WaitToCalculateResult = new WaitToDo<float>(2, BM.CalculateResult, true);
+        }
+        else
+            BM.CalculateResult();
+    }
     public static void EnemyDropGoldAdd(int _gold)
     {
         EnemyDropGolds += _gold;
@@ -270,12 +282,12 @@ partial class BattleManage
         Player.KillNewBoss(_bossID);
         if (_ed != null)
         {
+            ReadyToGetEnchant = true;
             GetEnchant = true;
             Player.EnchantUpgrade(_ed);
             BM.GetEnchant_Name.text = _ed.Name;
             BM.GetEnchant_Icon.sprite = _ed.GetICON();
             BM.GetEnchant_Description.text = _ed.Description(0);
-            BM.CallGetEnchantUI(true);
         }
     }
 }

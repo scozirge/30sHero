@@ -152,7 +152,6 @@ public class AudioPlayer : MonoBehaviour
     {
         if (_ac == null)
         {
-            Debug.LogWarning("要播放的音檔為null");
             return;
         }
         if (IsSoundMute)

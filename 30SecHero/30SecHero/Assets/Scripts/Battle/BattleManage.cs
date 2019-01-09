@@ -128,6 +128,7 @@ public partial class BattleManage : MonoBehaviour
     static int IsDemogorgonFloor;
     bool IsInit;
     int EnemySpawnCount;
+   
 
     static bool IsPause;
 
@@ -455,6 +456,10 @@ public partial class BattleManage : MonoBehaviour
                     SpawnEnemyTimer.RunTimer();
                 if (SpawnLootTimer != null)
                     SpawnLootTimer.RunTimer();
+                if (WaitToCallEnchantUI != null)
+                    WaitToCallEnchantUI.RunTimer();
+                if (WaitToCalculateResult != null)
+                    WaitToCalculateResult.RunTimer();
             }
         }
         else if (Player.IsInit)
@@ -518,5 +523,6 @@ public partial class BattleManage : MonoBehaviour
         MyCameraControler.enabled = !_active;
         gameObject.SetActive(!_active);
         GetEnchantObj.SetActive(_active);
+        ReadyToGetEnchant = false;
     }
 }

@@ -266,7 +266,6 @@ public partial class PlayerRole : Role
     public Dictionary<EnchantProperty, float> MyEnchant = new Dictionary<EnchantProperty, float>();
     List<Skill> MyEnchantSkill = new List<Skill>();
 
-
     MyTimer NoDamageRecoveryTimer;
     MyTimer NoDamageRecoveryIntervalTimer;
     bool IsTriggerRevive;//一場戰鬥只會觸發一次復活
@@ -644,11 +643,11 @@ public partial class PlayerRole : Role
         CameraController.PlayMotion("Shake1");
         AudioPlayer.PlaySound(AttackSound);
     }
+
     public override void SelfDestroy()
     {
         base.SelfDestroy();
-        BattleManage.BM.CalculateResult();
-
+        BattleManage.PlayerDie();
     }
     public void BumpingAttack()
     {
@@ -674,6 +673,7 @@ public partial class PlayerRole : Role
         ShieldTimer.RunTimer();
         JumpTimer.RunTimer();
         RushTimer.RunTimer();
+
         if (MyEnchant[EnchantProperty.Fury] > 0)
             FuryTimer.RunTimer();
         OnRushTimer.RunTimer();

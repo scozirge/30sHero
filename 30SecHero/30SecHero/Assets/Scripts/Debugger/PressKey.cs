@@ -23,6 +23,8 @@ public partial class Debugger : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.X))
         {
+            int aa = 10000000;
+            BattleManage.BM.MyPlayer.ReceiveDmg(ref aa);
         }
         else if (Input.GetKeyDown(KeyCode.N))
         {

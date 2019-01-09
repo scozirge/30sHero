@@ -18,10 +18,10 @@ public class PatnerLoot : Loot
 
 
 
-    public void Init(int _bossID)
+    public void Init(int _bossID,EnchantData _ed)
     {
-        EnchantData ed = EnchantData.GetAvailableRandomEnchant();
-        MyData = ed;
+        //EnchantData ed = EnchantData.GetAvailableRandomEnchant();
+        MyData = _ed;
         PatnerImage.sprite = MyData.GetICON();
         PatnerImage.SetNativeSize();
         KillBossID = _bossID;
@@ -32,7 +32,7 @@ public class PatnerLoot : Loot
             return;
         if (_col.gameObject.tag == Force.Player.ToString())
         {
-            BattleManage.KillBossAndGetEnchant(KillBossID, MyData);
+            BattleManage.BM.CallGetEnchantUI(true);
             if (DeathEffect) EffectEmitter.EmitParticle(DeathEffect, transform.position, Vector3.zero, null);
             AudioPlayer.PlaySound(GainSound);
             SelfDestroy();
