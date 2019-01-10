@@ -48,6 +48,7 @@ public class PreLoad : MonoBehaviour
             Sprite[] sprites = Resources.LoadAll<Sprite>(LoadFolderSprites[i]);
             if (sprites != null)
             {
+                Debug.Log(string.Format("PreLoadSprite:{0}", sprites.Length));
                 for (int j = 0; j < sprites.Length; j++)
                 {
                     //SpriteRenderer
@@ -71,6 +72,7 @@ public class PreLoad : MonoBehaviour
             ParticleSystem[] particles = Resources.LoadAll<ParticleSystem>(LoadFolderParticles[i]);
             if (particles != null)
             {
+                Debug.Log(string.Format("PreLoadParticle:{0}", particles.Length));
                 for (int j = 0; j < particles.Length; j++)
                 {
                     ParticleSystem ps = Instantiate(particles[i], PreLoadPos, Quaternion.identity) as ParticleSystem;
@@ -104,8 +106,7 @@ public class PreLoad : MonoBehaviour
             WaitToDestroy.RunTimer();
     }
     void DestroyPreloadObjs()
-    {
-        Debug.Log(string.Format("PreLoadItems:{0}", GoList.Count));
+    {        
         for (int i = 0; i < GoList.Count; i++)
         {
             if (GoList[i] == null)

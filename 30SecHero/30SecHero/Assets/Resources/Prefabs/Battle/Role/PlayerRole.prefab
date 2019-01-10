@@ -211,7 +211,7 @@ MonoBehaviour:
   GainMoveFromKilling: 150
   MoveDepletedTime: 10
   MaxExtraMove: 500
-  MaxAvaterTime: 999
+  MaxAvaterTime: 5
   AvatarTimerText: {fileID: 0}
   MyAvatarText: {fileID: 0}
   AvatarTimerAni: {fileID: 0}
@@ -573,7 +573,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Description: SplashThorn
   BehaviorSkill: 1
-  PSkillName: 
+  PSkillName: SplashThorn
   PSkillDuration: 20
   DetecteRadius: 1000
   DamagePercent: 1
