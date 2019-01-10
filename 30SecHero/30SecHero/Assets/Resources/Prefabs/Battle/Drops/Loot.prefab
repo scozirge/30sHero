@@ -58,6 +58,7 @@ MonoBehaviour:
   SpawnEffect: {fileID: 0}
   WaitToBeAcquire: 0
   RandomPosRadius: 50
+  GainSound: {fileID: 0}
   DesginateLootType: 0
   Designate: 0
   LootList:
@@ -77,7 +78,7 @@ MonoBehaviour:
     LootIcon: {fileID: 21300000, guid: aef88ca2dfcface48966dcb4e703ba9e, type: 3}
     GetParticle: {fileID: 0}
   - Type: 3
-    Time: 4
+    Time: 3
     Value: 0
     LootIcon: {fileID: 21300000, guid: 6f54b1c98b21ba542b28ea2a3478a416, type: 3}
     GetParticle: {fileID: 0}
