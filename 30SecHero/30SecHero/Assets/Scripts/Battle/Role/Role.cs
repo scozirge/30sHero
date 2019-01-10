@@ -278,13 +278,20 @@ public abstract class Role : MonoBehaviour
     protected virtual void ConditionTimerFunc()
     {
         List<RoleBuffer> keyList = new List<RoleBuffer>(Buffers.Keys);
+        List<BufferData> removeList = new List<BufferData>();
         for (int i = 0; i < keyList.Count; i++)
         {
             Buffers[keyList[i]].Time -= Time.deltaTime;
             if (Buffers[keyList[i]].Time <= 0)
             {
-                RemoveBuffer(Buffers[keyList[i]]);
+                //加入移除狀態清單
+                removeList.Add(Buffers[keyList[i]]);
             }
+        }
+        //移除狀態
+        for(int i=0;i<removeList.Count;i++)
+        {
+            RemoveBuffer(removeList[i]);
         }
     }
     public virtual void RemoveBuffer(BufferData _buffer)

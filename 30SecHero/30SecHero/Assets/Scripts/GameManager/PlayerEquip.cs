@@ -92,11 +92,6 @@ public partial class Player
             }
         }
         RefreshEquipEnchant();
-        if (EquipPlus[RoleProperty.EquipDrop] > 20)
-        {
-            Debug.LogError("測試");
-            Debug.Log("EquipPlus[RoleProperty.EquipDrop]=" + EquipPlus[RoleProperty.EquipDrop]);
-        }
     }
     public static void Equip(ArmorData _data)
     {

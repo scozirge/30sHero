@@ -19,8 +19,11 @@ public class MyEnum : MonoBehaviour
         {
             for (int j = 0; j < _check.Length; j++)
             {
-                if (_array[i].GetType() == _check[j].GetType())
+                if (_array[i].ToString() == _check[j].ToString())
+                {                    
                     return true;
+                }
+
             }
         }
         return false;
@@ -32,7 +35,7 @@ public class MyEnum : MonoBehaviour
         {
             for (int j = 0; j < _check.Length; j++)
             {
-                if (array[i].GetType() == _check[j].GetType())
+                if (array[i].ToString() == _check[j].ToString())
                     return true;
             }
         }
