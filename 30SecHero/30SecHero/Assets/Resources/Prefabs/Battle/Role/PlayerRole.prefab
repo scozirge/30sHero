@@ -177,7 +177,7 @@ MonoBehaviour:
   DirectY: 0
   MaxHealth: 10000
   OriginMaxHealth: 0
-  BaseDamage: 6666
+  BaseDamage: 1
   BaseMoveSpeed: 1000
   DeathEffect: {fileID: 198802542160044040, guid: a6f36c56ed46b58408125e947b5ac7db,
     type: 3}
@@ -789,7 +789,7 @@ MonoBehaviour:
   StopMoveTime: 0
   SpellSound: {fileID: 8300000, guid: 4c924f11eb5f6ca4f8cf60b1d9e596cb, type: 3}
   SpawnedInSelf: 0
-  VampireProportion: 2
+  VampireProportion: 8
   PSkillTimer: 0
   IsPlayerGetSkill: 0
   AttackOnce: 0
@@ -1287,6 +1287,7 @@ MonoBehaviour:
   KnockForce: 3000
   DamagePercent: 1
   RangeCol: {fileID: 58315650398947288}
+  DamageInterval: 0.2
 --- !u!50 &50359093130138826
 Rigidbody2D:
   serializedVersion: 4

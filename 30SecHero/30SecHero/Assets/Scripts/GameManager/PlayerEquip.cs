@@ -125,11 +125,6 @@ public partial class Player
             }
         }
         RefreshEquipEnchant();
-        if (EquipPlus[RoleProperty.EquipDrop] > 20)
-        {
-            Debug.LogError("測試");
-            Debug.Log("EquipPlus[RoleProperty.EquipDrop]=" + EquipPlus[RoleProperty.EquipDrop]);
-        }
     }
     public static void Equip(AccessoryData _data, int _index)
     {
@@ -160,11 +155,6 @@ public partial class Player
             }
         }
         RefreshEquipEnchant();
-        if (EquipPlus[RoleProperty.EquipDrop] > 20)
-        {
-            Debug.LogError("測試");
-            Debug.Log("EquipPlus[RoleProperty.EquipDrop]=" + EquipPlus[RoleProperty.EquipDrop]);
-        }
     }
     public static void TakeOff(EquipType _type, int _index)
     {

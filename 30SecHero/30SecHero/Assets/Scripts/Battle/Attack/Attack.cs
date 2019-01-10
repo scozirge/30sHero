@@ -72,7 +72,6 @@ public class Attack : Skill
     }
     public override void PlayerInitSkill()
     {
-        Interval *= GameSettingData.SkillAmmoInterval;//玩家子彈發射間隔縮小
         //火力全開減少攻擊間隔時間
         Interval *= (1 - BattleManage.BM.MyPlayer.MyEnchant[EnchantProperty.OnFire]);
         base.PlayerInitSkill();

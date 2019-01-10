@@ -76,6 +76,7 @@ public class GameSettingData : Data
     public static float PotionDrop;
     public static float RushCD;
     public static float SkillAmmoInterval;
+    public static float SkillFaceTargetAmmoInterval;
     public static float SkillAmmoSpeed;
     public static float SkillAmmoDamage;
 
@@ -371,6 +372,9 @@ public class GameSettingData : Data
                                 break;
                             case "SkillAmmoInterval":
                                 SkillAmmoInterval = float.Parse(item[key].ToString());
+                                break;
+                            case "SkillFaceTargetAmmoInterval":
+                                SkillFaceTargetAmmoInterval = float.Parse(item[key].ToString());
                                 break;
                             case "SkillAmmoSpeed":
                                 SkillAmmoSpeed = float.Parse(item[key].ToString());

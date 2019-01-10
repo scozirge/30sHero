@@ -13,6 +13,10 @@ public class Shoot : Attack
 
     public override void PlayerInitSkill()
     {
+        if (Patetern == ShootPatetern.FaceDirection)
+            Interval *= GameSettingData.SkillFaceTargetAmmoInterval;//玩家子彈發射間隔縮小
+        else
+            Interval *= GameSettingData.SkillAmmoInterval;//玩家子彈發射間隔縮小
         DamagePercent *= GameSettingData.SkillAmmoDamage;//玩家子彈傷害
         base.PlayerInitSkill();
     }
