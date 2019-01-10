@@ -153,7 +153,7 @@ public partial class Player
         List<int> keys = new List<int>(EnchantDic.Keys);
         for (int i = 0; i < keys.Count; i++)
         {
-            if (EnchantDic[keys[i]].MyEnchantType == EnchantType.Enchant && EnchantDic[keys[i]].LV>0)
+            if (EnchantDic[keys[i]].MyEnchantType == EnchantType.Enchant && EnchantDic[keys[i]].LV > 0)
             {
                 if (EnchantDic[keys[i]].GetPrice() <= Player.Emerald)
                     return true;
@@ -220,10 +220,11 @@ public partial class Player
         if (MyAccessorys[1] != null && MyAccessorys[1].MyEnchant != null)
             EnchantPlus[MyAccessorys[1].MyEnchant.PropertyType] = MyAccessorys[1].MyEnchant.GetValue();
     }
-    public static void EnchantUpgrade(EnchantData _data)
+    public static void EnchantUpgrade(EnchantData _data, bool _needPay)
     {
         //執行附魔
-        GainEmerald(-_data.GetPrice());
+        if (_needPay)
+            GainEmerald(-_data.GetPrice());
         GameSettingData.EnchantPropertyOperate(EnchantPlus, _data.Properties, Operator.Minus);//減去原本值
         _data.LVUP();
         GameSettingData.EnchantPropertyOperate(EnchantPlus, _data.Properties, Operator.Plus);//加上升級後的值

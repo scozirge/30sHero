@@ -74,10 +74,7 @@ public class Strengthen : MyUI
         }
 
         //預設強化分頁並選擇第一個item
-        //ToFilter((int)StrengthenType.Strengthen);
-        StrengthenContent.gameObject.SetActive(true);
-        EnchantContent.gameObject.SetActive(false);
-        MyScrollRect.content = StrengthenContent;
+        Filter();
         if (StrengthenItemList[0] != null)
         {
             StrengthenItemList[0].OnPress();
@@ -249,7 +246,7 @@ public class Strengthen : MyUI
         }
         else if (CurFilterType == StrengthenType.Enchant)
         {
-            Player.EnchantUpgrade(CurSelectedEData);
+            Player.EnchantUpgrade(CurSelectedEData,true);
             CurSelectedEItem.UpdateUI();
             ShowInfo(CurSelectedEItem);
         }

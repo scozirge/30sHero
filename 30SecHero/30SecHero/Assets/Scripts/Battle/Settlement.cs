@@ -283,7 +283,7 @@ partial class BattleManage
         {
             ReadyToGetEnchant = true;
             GetEnchant = true;
-            Player.EnchantUpgrade(_ed);
+            Player.EnchantUpgrade(_ed,false);
             BM.GetEnchant_Name.text = _ed.Name;
             BM.GetEnchant_Icon.sprite = _ed.GetICON();
             BM.GetEnchant_Description.text = _ed.Description(0);

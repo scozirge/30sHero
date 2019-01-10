@@ -271,7 +271,7 @@ public partial class PlayerRole : Role
     MyTimer NoDamageRecoveryTimer;
     MyTimer NoDamageRecoveryIntervalTimer;
     bool IsTriggerRevive;//一場戰鬥只會觸發一次復活
-    int DrugFeverSpeedUp = 50;
+    int DrugFeverSpeedUp = 100;
     public struct LastTargeData
     {
         public Role Target;

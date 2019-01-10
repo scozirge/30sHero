@@ -77,9 +77,9 @@ public partial class Debugger : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.U))
         {
             List<EquipData> GainEquipDataList = new List<EquipData>();
-            GainEquipDataList.Add(WeaponData.GetRandomNewWeapon(99, 5));
-            GainEquipDataList.Add(ArmorData.GetRandomNewArmor(99, 5));
-            GainEquipDataList.Add(AccessoryData.GetRandomNewAccessory(99, 5));
+            GainEquipDataList.Add(WeaponData.GetRandomNewWeapon(10, 5));
+            GainEquipDataList.Add(ArmorData.GetRandomNewArmor(10, 5));
+            GainEquipDataList.Add(AccessoryData.GetRandomNewAccessory(10, 5));
             //裝備獲得
             if (Player.LocalData)
                 Player.GainEquip_Local(GainEquipDataList);
@@ -92,7 +92,7 @@ public partial class Debugger : MonoBehaviour
             EnchantData ed = EnchantData.GetAvailableRandomEnchant();
             if (ed != null)
             {
-                Player.EnchantUpgrade(ed);
+                Player.EnchantUpgrade(ed,false);
                 Debug.Log("Unlock Enchant:" + ed.Name + " LV:" + ed.LV);
             }
             else
