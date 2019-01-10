@@ -11,7 +11,10 @@ public class Soul : MonoBehaviour
     SpriteRenderer SoulIcon;
     [Tooltip("距離目標位置的亂數最大距離")]
     [SerializeField]
-    int SurroundRange;
+    int SurroundMinRange;
+    [Tooltip("距離目標位置的亂數最大距離")]
+    [SerializeField]
+    int SurroundMaxRange;
     [Tooltip("改變目標間隔")]
     [SerializeField]
     float SurroundInterval;
@@ -32,6 +35,8 @@ public class Soul : MonoBehaviour
     void Start()
     {
         MyRigid = GetComponent<Rigidbody2D>();
+        if (SurroundMaxRange <= SurroundMinRange)
+            SurroundMinRange = 0;
         RandomPosTimer = new MyTimer(SurroundInterval, SetRandomOffsetSurroundTarget, false, false);
         RandomPosTimer.StartRunTimer = true;
         SetRandomOffsetSurroundTarget();
@@ -61,8 +66,18 @@ public class Soul : MonoBehaviour
     }
     void SetRandomOffsetSurroundTarget()
     {
-        int randX = Random.Range(-SurroundRange, SurroundRange);
-        int randY = Random.Range(-SurroundRange, SurroundRange);
+        int randX = Random.Range(-SurroundMaxRange, SurroundMaxRange);
+        if (randX < 0 && randX > -SurroundMinRange)
+            randX = -SurroundMinRange;
+        else if (randX > 0 && randX < SurroundMinRange)
+            randX = SurroundMinRange;
+
+        int randY = Random.Range(-SurroundMaxRange, SurroundMaxRange);
+        if (randY < 0 && randY > -SurroundMinRange)
+            randY = -SurroundMinRange;
+        else if (randY > 0 && randY < SurroundMinRange)
+            randY = SurroundMinRange;
+
         TargetOffset = new Vector2(randX, randY);
         RandomPosTimer.StartRunTimer = true;
     }

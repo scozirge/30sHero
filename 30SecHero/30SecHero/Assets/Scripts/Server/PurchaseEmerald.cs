@@ -39,7 +39,8 @@ public partial class ServerRequest
         if (ReSendQuestTimes_PurchaseEmerald == MaxReSendQuestTimes_PurchaseEmerald)
             if (ShowLoading) CaseTableData.ShowPopLog(1003);//帳號建立中
         yield return w;
-        Debug.LogWarning(w.text);
+        if (ShowCBLog)
+            Debug.LogWarning(w.text);
         if (WaitCB_PurchaseEmerald)
         {
             WaitCB_PurchaseEmerald = false;

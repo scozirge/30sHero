@@ -202,7 +202,7 @@ public partial class Player
         }
         else
             EnchantInitDataFinish = true;
-        if (true)
+        if (false)
         {
             Debug.Log("CurFloor=" + CurFloor + "  MaxFloor=" + MaxFloor + "  gold=" + gold + "  emerald=" + emerald);
             Debug.Log("equipStr=" + equipStr);

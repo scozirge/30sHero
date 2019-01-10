@@ -228,7 +228,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SoulIcon: {fileID: 6280436780588288947}
-  SurroundRange: 100
+  SurroundMinRange: 80
+  SurroundMaxRange: 150
   SurroundInterval: 1
   MoveSpeed: 1200
   RotateFactor: 0.04

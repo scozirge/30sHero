@@ -24,7 +24,6 @@ public partial class Player
     public static int MaxFloor { get; private set; }
     public static int MaxEnemyKills { get; private set; }
 
-
     public static void Init()
     {
         if (IsInit)

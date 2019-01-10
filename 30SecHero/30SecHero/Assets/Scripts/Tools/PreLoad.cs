@@ -10,13 +10,14 @@ public class PreLoad : MonoBehaviour
     [SerializeField]
     List<string> LoadFolderSprites;
     [SerializeField]
-    List<GameObject> PreLoadParticles;
+    List<string> LoadFolderParticles;
     [SerializeField]
     string PreloadDicTag;
 
 
     List<GameObject> GoList;
     public static Dictionary<string, bool> IsPreloadDic;
+    WaitToDo<float> WaitToDestroy;
 
     void Awake()
     {
@@ -38,13 +39,7 @@ public class PreLoad : MonoBehaviour
     public void PreLoadGameObject()
     {
         GoList = new List<GameObject>();
-        for (int i = 0; i < PreLoadParticles.Count; i++)
-        {
-            if (PreLoadParticles[i] == null)
-                continue;
-            GameObject go = Instantiate(PreLoadParticles[i], PreLoadPos, Quaternion.identity) as GameObject;
-            GoList.Add(go);
-        }
+        //Sprite資料夾
         for (int i = 0; i < LoadFolderSprites.Count; i++)
         {
             if (LoadFolderSprites[i] == "")
@@ -55,16 +50,38 @@ public class PreLoad : MonoBehaviour
                 for (int j = 0; j < sprites.Length; j++)
                 {
                     GameObject go = new GameObject();
-                    go.transform.position = PreLoadPos;
                     SpriteRenderer sr = go.AddComponent<SpriteRenderer>();
                     sr.sprite = sprites[j];
                     GoList.Add(go);
                 }
             }
         }
-        StartCoroutine(DestroyPreloadObjs());
-
-
+        //Particle資料夾
+        for (int i = 0; i < LoadFolderParticles.Count; i++)
+        {
+            if (LoadFolderSprites[i] == "")
+                continue;
+            ParticleSystem[] particles = Resources.LoadAll<ParticleSystem>(LoadFolderParticles[i]);
+            if (particles != null)
+            {
+                for (int j = 0; j < particles.Length; j++)
+                {
+                    ParticleSystem ps = Instantiate(particles[i], PreLoadPos, Quaternion.identity) as ParticleSystem;
+                    if(ps)
+                    {
+                        ps.Play();
+                    }
+                    GoList.Add(ps.gameObject);
+                }
+            }
+        }
+        for (int i = 0; i < GoList.Count; i++)
+        {
+            if (GoList[i] == null)
+                continue;
+            GoList[i].transform.SetParent(transform);
+            GoList[i].transform.position = PreLoadPos;
+        }
         if (PreloadDicTag != null && PreloadDicTag != "")
         {
             if (!IsPreloadDic.ContainsKey(PreloadDicTag))
@@ -72,11 +89,15 @@ public class PreLoad : MonoBehaviour
             else
                 IsPreloadDic[PreloadDicTag] = true;
         }
+        WaitToDestroy = new WaitToDo<float>(DestroyTime, DestroyPreloadObjs, true);
     }
-    IEnumerator DestroyPreloadObjs()
+    void Update()
     {
-        Debug.Log(string.Format("PreLoadPrefab:{0}", GoList.Count));
-        yield return new WaitForSeconds(DestroyTime);
+        WaitToDestroy.RunTimer();
+    }
+    void DestroyPreloadObjs()
+    {
+        Debug.Log(string.Format("PreLoadItems:{0}", GoList.Count));
         for (int i = 0; i < GoList.Count; i++)
         {
             if (GoList[i] == null)

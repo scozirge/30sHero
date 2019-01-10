@@ -41,7 +41,8 @@ public partial class ServerRequest : MonoBehaviour
         if (ReSendQuestTimes_Settlement == MaxReSendQuestTimes_Settlement)
             if (true) CaseTableData.ShowPopLog(1003);
         yield return w;
-        Debug.LogWarning(w.text);
+        if (ShowCBLog)
+            Debug.LogWarning(w.text);
         if (WaitCB_Settlement)
         {
             WaitCB_Settlement = false;

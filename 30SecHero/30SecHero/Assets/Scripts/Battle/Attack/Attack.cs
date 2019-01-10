@@ -142,6 +142,8 @@ public class Attack : Skill
                     AttackDir = Vector2.right;
                 else
                     AttackDir = Vector2.left;
+                origAngle = ((Mathf.Atan2(AttackDir.y, AttackDir.x) * Mathf.Rad2Deg) + (StartAngle + CurSpawnAmmoNum * AngleInterval)) * Mathf.Deg2Rad;
+                AttackDir = new Vector3(Mathf.Cos(origAngle), Mathf.Sin(origAngle), 0).normalized;
                 break;
             case ShootPatetern.LockDirect:
                 break;

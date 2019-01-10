@@ -38,7 +38,8 @@ public partial class ServerRequest : MonoBehaviour
         if (ReSendQuestTimes_QuickSignUp == MaxReSendQuestTimes_QuickSignUp)
             if (ShowLoading) CaseTableData.ShowPopLog(1003);//帳號建立中
         yield return w;
-        Debug.LogWarning(w.text);
+        if (ShowCBLog)
+            Debug.LogWarning(w.text);
         if (WaitCB_QuickSignUp)
         {
             WaitCB_QuickSignUp = false;
