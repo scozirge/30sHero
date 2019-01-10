@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 public class PreLoad : MonoBehaviour
 {
     [SerializeField]
@@ -49,10 +50,16 @@ public class PreLoad : MonoBehaviour
             {
                 for (int j = 0; j < sprites.Length; j++)
                 {
+                    //SpriteRenderer
                     GameObject go = new GameObject();
                     SpriteRenderer sr = go.AddComponent<SpriteRenderer>();
                     sr.sprite = sprites[j];
                     GoList.Add(go);
+                    //Image
+                    GameObject go2 = new GameObject();
+                    Image im = go2.AddComponent<Image>();
+                    im.sprite = sprites[i];
+                    GoList.Add(go2);
                 }
             }
         }
@@ -93,7 +100,8 @@ public class PreLoad : MonoBehaviour
     }
     void Update()
     {
-        WaitToDestroy.RunTimer();
+        if (WaitToDestroy!=null)
+            WaitToDestroy.RunTimer();
     }
     void DestroyPreloadObjs()
     {

@@ -57,7 +57,7 @@ MonoBehaviour:
   DeadParticles:
   - {fileID: 198809433350172102, guid: ab4a4457b56853b4fbf8fb746a73af84, type: 3}
   HitTargetParticle: {fileID: 0}
-  HitTargetSound: {fileID: 0}
+  HitTargetSound: {fileID: 8300000, guid: c93a8e50374a0a04081258b9a7335269, type: 3}
   LifeTime: 3
   KnockIntensity: 0
   AmmoType: 0
@@ -66,7 +66,7 @@ MonoBehaviour:
   TriggerOnRushRole: 0
   Value: 0
   IsPlayerGetSkill: 0
-  AmmoSpeed: 3000
+  AmmoSpeed: 2000
   TraceFactor: 0
 --- !u!222 &222836414818298276
 CanvasRenderer:

@@ -622,12 +622,13 @@ public partial class PlayerRole : Role
         }
     }
     //重新化身為英雄ReAvatarProportion
-    public void ReAvatar()
+    public void ReAvatar(float _time)
     {
         IsAvatar = true;
-        AvatarTimer = 30;
+        AvatarTimer = _time;
         AniPlayer.PlayTrigger("Idle", 0);
         EffectEmitter.EmitParticle(AvatarRemoveEffect, Vector3.zero, Vector3.zero, transform);
+        AudioPlayer.PlaySound(RemoveAvatarSound);
         ActiveEnchantSkill(true);
     }
     public void AttackMotion()
@@ -1317,9 +1318,13 @@ public partial class PlayerRole : Role
     }
     public void AddAvarTime(float _time)
     {
+
         if (!IsAvatar)
-            return;
-        AvatarTimer += _time;
+        {
+            ReAvatar(_time);
+        }
+        else
+            AvatarTimer += _time;
         if (_time >= 1)
         {
             AvatarTimePlusAni.SetTrigger("Play");
@@ -1330,6 +1335,8 @@ public partial class PlayerRole : Role
     {
         for (int i = 0; i < MyEnchantSkill.Count; i++)
         {
+            if (MyEnchantSkill[i].PSkillName == "SplashThorn")
+                continue;
             MyEnchantSkill[i].enabled = _bool;
         }
     }

@@ -219,7 +219,7 @@ public partial class BattleManage
         //史萊姆衝撞城門有機會變回英雄
         if (!BM.MyPlayer.IsAvatar && ProbabilityGetter.GetResult(BM.MyPlayer.MyEnchant[EnchantProperty.ReAvatar]))
         {
-            BM.MyPlayer.ReAvatar();
+            BM.MyPlayer.ReAvatar(30);
         }
         //英雄衝撞城門獲得變身時間
         if (BM.MyPlayer.IsAvatar)
