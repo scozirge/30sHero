@@ -16,6 +16,7 @@ public abstract class Loot : MonoBehaviour
     protected bool ReadyToAcquire;
     [SerializeField]
     protected AudioClip GainSound;
+    WaitToDo<float> WaitToAcquire;
 
     protected virtual void Start()
     {
@@ -23,7 +24,10 @@ public abstract class Loot : MonoBehaviour
         if (MyAIMove)
             MyAIMove.ReadyToMove = false;
         RandomPos();
-        StartCoroutine(WaitToMoveToAcquire());
+        if (WaitToBeAcquire != 0)
+            WaitToAcquire = new WaitToDo<float>(WaitToBeAcquire, WaitToMoveToAcquire, true);
+        else
+            WaitToMoveToAcquire();
         if (SpawnEffect)
             EffectEmitter.EmitParticle(SpawnEffect, Vector3.zero, Vector3.zero, transform);
     }
@@ -35,10 +39,13 @@ public abstract class Loot : MonoBehaviour
         int randY = Random.Range(-RandomPosRadius, RandomPosRadius);
         transform.position += new Vector3(randX, randY);
     }
-
-    IEnumerator WaitToMoveToAcquire()
+    void Update()
     {
-        yield return new WaitForSeconds(WaitToBeAcquire);
+        if (WaitToAcquire != null)
+            WaitToAcquire.RunTimer();
+    }
+    void WaitToMoveToAcquire()
+    {
         ReadyToAcquire = true;
         if (MyAIMove)
         {
@@ -46,4 +53,5 @@ public abstract class Loot : MonoBehaviour
             MyAIMove.ReadyToMove = true;
         }
     }
+
 }

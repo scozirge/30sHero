@@ -235,9 +235,6 @@ public partial class Player
                 KillBossID.Add(int.Parse(bossID[i]));
             }
         }
-        Debug.Log("CurFloor=" + int.Parse(_data[3]));
-        Debug.Log("MaxFloor=" + int.Parse(_data[4]));
-        Debug.Log("KillBoss=" + killBossStr);
         ServerRequest.GetEquip();
         ServerRequest.GetStrengthen();
         ServerRequest.GetEnchant();
@@ -357,6 +354,8 @@ public partial class Player
     }
     public static void ShowUserItemListCB(string _dataStr)
     {
+        TrueEmerald = 0;
+        PayKredsLog = "";
         if (_dataStr != "")
         {
             string[] items = _dataStr.Split('/');
@@ -365,14 +364,18 @@ public partial class Player
             {
                 string[] itemData = items[i].Split(',');
                 int id = int.Parse(itemData[1]);
-                int count = int.Parse(itemData[3]);
-                if (GameDictionary.PurchaseDic[id].MyType == PurchaseType.BuyEmerald)
+                int count=0;
+                int.TryParse(itemData[3], out count);
+                if (count!=0)
                 {
-                    TrueEmerald += GameDictionary.PurchaseDic[id].Gain * count;
-                    if (payTypeCount.ContainsKey(GameDictionary.PurchaseDic[id].ID))
-                        payTypeCount[id] += count;
-                    else
-                        payTypeCount.Add(id, count);
+                    if (GameDictionary.PurchaseDic[id].MyType == PurchaseType.BuyEmerald)
+                    {
+                        TrueEmerald += GameDictionary.PurchaseDic[id].Gain * count;
+                        if (payTypeCount.ContainsKey(GameDictionary.PurchaseDic[id].ID))
+                            payTypeCount[id] += count;
+                        else
+                            payTypeCount.Add(id, count);
+                    }
                 }
             }
             List<int> keys = new List<int>(payTypeCount.Keys);
@@ -383,12 +386,6 @@ public partial class Player
                 PayKredsLog += string.Format("{0}={1}", keys[i], payTypeCount[keys[i]]);
             }
         }
-        else
-        {
-            TrueEmerald = 0;
-            PayKredsLog = "";
-        }
-        Debug.Log("TrueEmerald=" + TrueEmerald);
-        Debug.Log("PayKredsLog=" + PayKredsLog);
+        Debug.Log("UpdatePayKredsLog=" + PayKredsLog);
     }
 }

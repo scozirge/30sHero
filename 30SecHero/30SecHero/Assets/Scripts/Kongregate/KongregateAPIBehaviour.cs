@@ -38,7 +38,10 @@ public class KongregateAPIBehaviour : MonoBehaviour
             InitTimer = new MyTimer(0.1f, EndKongregateLogin, true, false);
         }
         if (Test)
-            OnKongregateUserInfo("1|scozirge");
+        {
+            //OnKongregateUserInfo("1|scozirge");
+            OnKongregateUserInfo("41605611|starbrogamemaker");
+        }            
     }
     void Update()
     {
@@ -73,7 +76,7 @@ public class KongregateAPIBehaviour : MonoBehaviour
         }
         ShowUserItemList();
         if (Test)
-            OnShowUserItemListCB("1,1,0,1/2,2,0,1/3,3,0,1/4,1,0,1");
+            OnShowUserItemListCB("13356700,1,,1/13356696,2,,1/13356697,2,,1/13356698,2,,1/13345602,3,,/13355292,3,,/13356695,3,,1/13356699,3,,1");
     }
     public static void ShowItemList()
     {
@@ -122,8 +125,9 @@ public class KongregateAPIBehaviour : MonoBehaviour
     {
         Debug.Log("OnPurchaseResult" + _result);
         if (_result == "true")
-        {
+        {            
             Purchase.ToPurchaseCB(true);
+            GetUserItemList();
         }
         else
         {
@@ -157,6 +161,7 @@ public class KongregateAPIBehaviour : MonoBehaviour
 
     public void OnShowUserItemListCB(string _datas)
     {
+        Debug.Log("///////////////Kongregate UserItem Info: " + _datas);
         if (_datas != "Fail")
         {
             Player.ShowUserItemListCB(_datas);
@@ -166,6 +171,44 @@ public class KongregateAPIBehaviour : MonoBehaviour
         {
             Debug.Log("Fail to ShowUserItemListCB");
             CaseTableData.ShowPopLog(8);
+        }
+    }
+
+    public static void GetUserItemList()
+    {
+        Debug.Log("////////////////Send GetUserItemList");
+        Application.ExternalEval(@"
+          kongregate.mtx.requestUserItemList(null, function(result) {
+            var unityObject = kongregateUnitySupport.getUnityObject();
+            if(result.success) {
+                var datas = [];
+                for(var i = 0; i < result.data.length; i++) 
+                {
+                    var item = result.data[i];
+                    if(i!=0)
+                        datas+='/';
+                    datas+=[item.id, item.identifier, item.data , item.remaining_uses ].join(',');
+                }       
+                unityObject.SendMessage('KongregateAPI', 'OnGetUserItemListCB', datas);     
+            }
+            else
+            {
+                unityObject.SendMessage('KongregateAPI', 'OnGetUserItemListCB', 'Fail'); 
+            }
+          });
+        ");
+    }
+    public void OnGetUserItemListCB(string _datas)
+    {
+        Debug.Log("///////////////Kongregate UserItem Info: " + _datas);
+        if (_datas != "Fail")
+        {
+            Player.ShowUserItemListCB(_datas);
+            ServerRequest.UpdateResource();
+        }
+        else
+        {
+            Debug.Log("Fail to GetUserItemListCB");
         }
     }
 }

@@ -14,6 +14,7 @@ public class ChangeScene : MonoBehaviour
     }
     public void SetNextScene(string _scene)
     {
+        Debug.Log("KongregateAPIBehaviour.EndLogin=" + KongregateAPIBehaviour.EndLogin);
         if (Player.Tutorial)
             NextSceneName = "Battle";
         else

@@ -62,13 +62,22 @@ public partial class Player
         FreeEmerald = _freeEmerald;
         PayEmerald = _payEmerald;
         Emerald = _emerald;
-        if(!Player.LocalData)
+        if (!Player.LocalData)
         {
+            bool updateDB = false;
             if (TrueEmerald != _trueEmerald || PayKredsLog != _payKredsLog)
             {
                 Emerald = TrueEmerald + FreeEmerald - PayEmerald;
-                ServerRequest.UpdateResource();
+                updateDB = true;
             }
+            else
+            {
+                if (Emerald != (TrueEmerald + FreeEmerald - _payEmerald))
+                    Emerald = TrueEmerald + FreeEmerald - PayEmerald;
+                updateDB = true;
+            }
+            if (updateDB)
+                ServerRequest.UpdateResource();
         }
 
         Main.UpdateResource();
@@ -140,7 +149,7 @@ public partial class Player
         if (_emerald == 0)
             return;
         Emerald += _emerald;
-        if (_emerald > 0)
+        if (_emerald >= 0)
         {
             if (_trueEmerald)
                 TrueEmerald += _emerald;
@@ -253,7 +262,11 @@ public partial class Player
     {
         //執行附魔
         if (_needPay)
+        {
             GainEmerald(-_data.GetPrice(), false);
+            PayEmerald += Mathf.Abs(_data.GetPrice());
+        }
+
         GameSettingData.EnchantPropertyOperate(EnchantPlus, _data.Properties, Operator.Minus);//減去原本值
         _data.LVUP();
         GameSettingData.EnchantPropertyOperate(EnchantPlus, _data.Properties, Operator.Plus);//加上升級後的值

@@ -25,6 +25,7 @@ public partial class ServerRequest : MonoBehaviour
         form.AddField("jid", _EnchantID);
         form.AddField("lv", _lv);
         form.AddField("emerald", _emerald);
+        form.AddField("payEmerald", Player.PayEmerald);
         WWW w = new WWW(string.Format("{0}{1}", GetServerURL(), "EnchantUpgrade.php"), form);
         //設定為正等待伺服器回傳
         WaitCB_EnchantUpgrade = true;

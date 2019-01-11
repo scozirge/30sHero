@@ -14,6 +14,7 @@ $ownUserID=$_POST['ownUserID'];
 $jid=$_POST['jid'];
 $lv=$_POST['lv'];
 $emerald=$_POST['emerald'];
+$payEmerald=$_POST['payEmerald'];
 //新增讀取DB連線
 $con_l = mysql_connect($db_host_load,$db_user,$db_pass) or ("Fail:1:"  . mysql_error());
 if (!$con_l)
@@ -42,7 +43,7 @@ else
 }
 if($enchantResult)
 {
-	$set = mysql_query("UPDATE ".$db_name.".playeraccount SET `emerald` = '".$emerald."' WHERE `id` = '".$ownUserID."' ",$con_w);
+	$set = mysql_query("UPDATE ".$db_name.".playeraccount SET `emerald` = '".$emerald."',`payEmerald` = '".$payEmerald."' WHERE `id` = '".$ownUserID."' ",$con_w);
 	if($set)
 	{
 		//計算執行時間
