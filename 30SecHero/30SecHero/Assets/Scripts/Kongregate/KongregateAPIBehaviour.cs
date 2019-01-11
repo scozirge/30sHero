@@ -9,7 +9,7 @@ public class KongregateAPIBehaviour : MonoBehaviour
     public static bool KongregateLogin = false;
     public static bool EndLogin;
     float WaitInitTime = 10;
-    static bool Test = true;
+    static bool Test = false;
 
     public void Init()
     {
