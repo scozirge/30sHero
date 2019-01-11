@@ -79,7 +79,6 @@ public partial class Player
             if (updateDB)
                 ServerRequest.UpdateResource();
         }
-
         Main.UpdateResource();
         //寫入資料
         if (PlayerInfoInitDataFinish)
@@ -158,7 +157,7 @@ public partial class Player
         }
         else
         {
-            PayEmerald = Mathf.Abs(_emerald);
+            PayEmerald += Mathf.Abs(_emerald);
         }
         Main.UpdateResource();
         //寫入資料
@@ -264,7 +263,6 @@ public partial class Player
         if (_needPay)
         {
             GainEmerald(-_data.GetPrice(), false);
-            PayEmerald += Mathf.Abs(_data.GetPrice());
         }
 
         GameSettingData.EnchantPropertyOperate(EnchantPlus, _data.Properties, Operator.Minus);//減去原本值
