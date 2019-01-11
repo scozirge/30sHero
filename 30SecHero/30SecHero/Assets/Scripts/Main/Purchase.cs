@@ -151,7 +151,7 @@ public class Purchase : MyUI
     {
         if (_result)
         {
-            Player.GainEmerald(CurPurchaseData.Gain);
+            Player.GainEmerald(CurPurchaseData.Gain, true);
             PopupUI.ShowClickCancel(string.Format(StringData.GetString("PurchaseEmeraldSuccess"), CurPurchaseData.Gain));
             ServerRequest.PurchaseEmerald(Player.Emerald);
         }

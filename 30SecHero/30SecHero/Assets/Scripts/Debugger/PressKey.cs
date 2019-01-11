@@ -72,7 +72,7 @@ public partial class Debugger : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.I))
         {
             Debug.Log("Gain Emerald 10");
-            Player.GainEmerald(10);
+            Player.GainEmerald(10,false);
         }
         else if (Input.GetKeyDown(KeyCode.U))
         {
@@ -85,7 +85,7 @@ public partial class Debugger : MonoBehaviour
                 Player.GainEquip_Local(GainEquipDataList);
             else
                 //送server處理
-                Player.Settlement(Player.Gold, Player.Emerald, Player.CurFloor, Player.MaxFloor, GainEquipDataList);
+                Player.Settlement(Player.Gold, Player.Emerald,Player.FreeEmerald, Player.CurFloor, Player.MaxFloor, GainEquipDataList);
         }
         else if (Input.GetKeyDown(KeyCode.L))
         {

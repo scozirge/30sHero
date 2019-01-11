@@ -19,6 +19,10 @@ public partial class Player
     public static string Name_K { get; private set; }
     public static int Gold { get; private set; }
     public static int Emerald { get; private set; }
+    public static int PayEmerald { get; private set; }
+    public static int FreeEmerald { get; private set; }
+    public static int TrueEmerald { get; private set; }
+    public static string PayKredsLog { get; private set; }
     public static List<int> KillBossID = new List<int>();
     public static int CurFloor { get; private set; }
     public static int MaxFloor { get; private set; }
@@ -53,9 +57,20 @@ public partial class Player
             }
         }
     }
-    public static void SetEmerald(int _emerald)
+    public static void SetEmeraldCB(int _emerald, int _trueEmerald, int _freeEmerald, int _payEmerald, string _payKredsLog)
     {
+        FreeEmerald = _freeEmerald;
+        PayEmerald = _payEmerald;
         Emerald = _emerald;
+        if(!Player.LocalData)
+        {
+            if (TrueEmerald != _trueEmerald || PayKredsLog != _payKredsLog)
+            {
+                Emerald = TrueEmerald + FreeEmerald - PayEmerald;
+                ServerRequest.UpdateResource();
+            }
+        }
+
         Main.UpdateResource();
         //寫入資料
         if (PlayerInfoInitDataFinish)
@@ -69,6 +84,8 @@ public partial class Player
             {
                 Debug.Log("更新Loco玩家資源");
                 PlayerPrefs.SetInt(LocoData.Emerald.ToString(), Emerald);
+                PlayerPrefs.SetInt(LocoData.FreeEmerald.ToString(), FreeEmerald);
+                PlayerPrefs.SetInt(LocoData.PayEmerald.ToString(), PayEmerald);
             }
         }
     }
@@ -99,6 +116,7 @@ public partial class Player
             return;
         Gold += _gold;
         Emerald -= _emerald;
+        PayEmerald += Mathf.Abs(_emerald);
         Main.UpdateResource();
         //寫入資料
         if (PlayerInfoInitDataFinish)
@@ -113,14 +131,26 @@ public partial class Player
                 Debug.Log("更新Loco玩家資源");
                 PlayerPrefs.SetInt(LocoData.Gold.ToString(), Gold);
                 PlayerPrefs.SetInt(LocoData.Emerald.ToString(), Emerald);
+                PlayerPrefs.SetInt(LocoData.PayEmerald.ToString(), PayEmerald);
             }
         }
     }
-    public static void GainEmerald(int _emerald)
+    public static void GainEmerald(int _emerald, bool _trueEmerald)
     {
         if (_emerald == 0)
             return;
         Emerald += _emerald;
+        if (_emerald > 0)
+        {
+            if (_trueEmerald)
+                TrueEmerald += _emerald;
+            else
+                FreeEmerald += _emerald;
+        }
+        else
+        {
+            PayEmerald = Mathf.Abs(_emerald);
+        }
         Main.UpdateResource();
         //寫入資料
         if (PlayerInfoInitDataFinish)
@@ -223,7 +253,7 @@ public partial class Player
     {
         //執行附魔
         if (_needPay)
-            GainEmerald(-_data.GetPrice());
+            GainEmerald(-_data.GetPrice(), false);
         GameSettingData.EnchantPropertyOperate(EnchantPlus, _data.Properties, Operator.Minus);//減去原本值
         _data.LVUP();
         GameSettingData.EnchantPropertyOperate(EnchantPlus, _data.Properties, Operator.Plus);//加上升級後的值
@@ -341,7 +371,7 @@ public partial class Player
     }
 
     static List<EquipData> CurGainEquipDatas;
-    public static void Settlement(int _gold, int _emerald, int _curFloor, int _maxFloor, List<EquipData> _equipDatas)
+    public static void Settlement(int _gold, int _emerald, int _freeEmerald, int _curFloor, int _maxFloor, List<EquipData> _equipDatas)
     {
         if (_equipDatas.Count != 0)
             CurGainEquipDatas = _equipDatas;
@@ -358,19 +388,20 @@ public partial class Player
 
         }
         //Debug.Log("gold=" + _gold + " emerald=" + _emerald + " maxFloor=" + _maxFloor + " addEquipStr=" + addEquipStr);
-        ServerRequest.Settlement(_gold, _emerald, _curFloor, _maxFloor, addEquipStr);
+        ServerRequest.Settlement(_gold, _emerald, _freeEmerald, _curFloor, _maxFloor, addEquipStr);
     }
     public static void Settlement_CB(string[] _data)
     {
         //設定玩家資料
         Gold = int.Parse(_data[0]);
         Emerald = int.Parse(_data[1]);
-        CurFloor = int.Parse(_data[2]);
-        MaxFloor = int.Parse(_data[3]);
+        FreeEmerald = int.Parse(_data[2]);
+        CurFloor = int.Parse(_data[3]);
+        MaxFloor = int.Parse(_data[4]);
         //設定裝備
         if (CurGainEquipDatas != null && CurGainEquipDatas.Count != 0)
         {
-            string[] equipUID = _data[4].Split(',');
+            string[] equipUID = _data[5].Split(',');
             if (equipUID.Length != CurGainEquipDatas.Count)
             {
                 Debug.LogWarning("結算server回傳資料錯誤");

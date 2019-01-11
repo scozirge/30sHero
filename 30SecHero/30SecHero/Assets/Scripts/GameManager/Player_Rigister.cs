@@ -110,7 +110,7 @@ public partial class Player
     }
     public static void ClearLocoData()
     {
-        foreach (int i in Enum.GetValues(typeof(LocoData))) 
+        foreach (int i in Enum.GetValues(typeof(LocoData)))
         {
             PlayerPrefs.DeleteKey(((LocoData)i).ToString());
         }
@@ -149,8 +149,10 @@ public partial class Player
         if (gold != 0)
             SetGold(gold);
         int emerald = PlayerPrefs.GetInt(LocoData.Emerald.ToString());
+        int freeEmerald = PlayerPrefs.GetInt(LocoData.FreeEmerald.ToString());
+        int payEmerald = PlayerPrefs.GetInt(LocoData.PayEmerald.ToString());
         if (emerald != 0)
-            SetEmerald(emerald);
+            SetEmeraldCB(emerald, 0, freeEmerald, payEmerald, "");
 
         //目前所在關卡
         int curFloor = PlayerPrefs.GetInt(LocoData.CurFloor.ToString());
@@ -220,11 +222,11 @@ public partial class Player
     {
         ID = int.Parse(_data[0]);
         SetGold(int.Parse(_data[1]));
-        SetEmerald(int.Parse(_data[2]));
-        SetCurFloor_Local(int.Parse(_data[3]));
-        SetMaxFloor_Local(int.Parse(_data[4]));
+        SetEmeraldCB(int.Parse(_data[2]), int.Parse(_data[3]), int.Parse(_data[4]), int.Parse(_data[5]), _data[6]);
+        SetCurFloor_Local(int.Parse(_data[7]));
+        SetMaxFloor_Local(int.Parse(_data[8]));
         //擊敗BOSS清單
-        string killBossStr = _data[5];
+        string killBossStr = _data[9];
         if (killBossStr != "")
         {
             string[] bossID = killBossStr.Split(',');
@@ -352,5 +354,41 @@ public partial class Player
     public static void KillNewBoss_CB(string[] _data)
     {
         Debug.Log("更新玩家擊殺BOSS清單成功");
+    }
+    public static void ShowUserItemListCB(string _dataStr)
+    {
+        if (_dataStr != "")
+        {
+            string[] items = _dataStr.Split('/');
+            Dictionary<int, int> payTypeCount = new Dictionary<int, int>();
+            for (int i = 0; i < items.Length; i++)
+            {
+                string[] itemData = items[i].Split(',');
+                int id = int.Parse(itemData[1]);
+                int count = int.Parse(itemData[3]);
+                if (GameDictionary.PurchaseDic[id].MyType == PurchaseType.BuyEmerald)
+                {
+                    TrueEmerald += GameDictionary.PurchaseDic[id].Gain * count;
+                    if (payTypeCount.ContainsKey(GameDictionary.PurchaseDic[id].ID))
+                        payTypeCount[id] += count;
+                    else
+                        payTypeCount.Add(id, count);
+                }
+            }
+            List<int> keys = new List<int>(payTypeCount.Keys);
+            for (int i = 0; i < keys.Count; i++)
+            {
+                if (i != 0)
+                    PayKredsLog += "/";
+                PayKredsLog += string.Format("{0}={1}", keys[i], payTypeCount[keys[i]]);
+            }
+        }
+        else
+        {
+            TrueEmerald = 0;
+            PayKredsLog = "";
+        }
+        Debug.Log("TrueEmerald=" + TrueEmerald);
+        Debug.Log("PayKredsLog=" + PayKredsLog);
     }
 }

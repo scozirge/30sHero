@@ -8,7 +8,8 @@ public class KongregateAPIBehaviour : MonoBehaviour
     MyTimer InitTimer;
     public static bool KongregateLogin = false;
     public static bool EndLogin;
-    float WaitInitTime = 5;
+    float WaitInitTime = 10;
+    static bool Test = true;
 
     public void Init()
     {
@@ -36,7 +37,8 @@ public class KongregateAPIBehaviour : MonoBehaviour
         {
             InitTimer = new MyTimer(0.1f, EndKongregateLogin, true, false);
         }
-        //OnKongregateUserInfo("1|scozirge");
+        if (Test)
+            OnKongregateUserInfo("1|scozirge");
     }
     void Update()
     {
@@ -47,8 +49,7 @@ public class KongregateAPIBehaviour : MonoBehaviour
         if (EndLogin)
             return;
         EndLogin = true;
-        Player.UseLocalData(!KongregateLogin);
-        ShowUserItemList();
+        Player.UseLocalData(!KongregateLogin);        
     }
 
     public void OnKongregateAPILoaded(string userInfoString)
@@ -70,7 +71,9 @@ public class KongregateAPIBehaviour : MonoBehaviour
             KongregateLogin = true;
             Player.GetKongregateUserData_CB(username, userId);
         }
-        EndKongregateLogin();
+        ShowUserItemList();
+        if (Test)
+            OnShowUserItemListCB("1,1,0,1/2,2,0,1/3,3,0,1/4,1,0,1");
     }
     public static void ShowItemList()
     {
@@ -131,7 +134,7 @@ public class KongregateAPIBehaviour : MonoBehaviour
     {
         Debug.Log("////////////////Send ShowUserItemList");
         Application.ExternalEval(@"
-          kongregate.mtx.RequestUserItemList("", function(result) {
+          kongregate.mtx.requestUserItemList(null, function(result) {
             var unityObject = kongregateUnitySupport.getUnityObject();
             if(result.success) {
                 var datas = [];
@@ -140,13 +143,13 @@ public class KongregateAPIBehaviour : MonoBehaviour
                     var item = result.data[i];
                     if(i!=0)
                         datas+='/';
-                    datas+=[item.identifier, item.name, item.description , item.price ].join(',');
+                    datas+=[item.id, item.identifier, item.data , item.remaining_uses ].join(',');
                 }       
-                unityObject.SendMessage('KongregateAPI', 'OnItemListCB', datas);     
+                unityObject.SendMessage('KongregateAPI', 'OnShowUserItemListCB', datas);     
             }
             else
             {
-                unityObject.SendMessage('KongregateAPI', 'OnItemListCB', 'Fail'); 
+                unityObject.SendMessage('KongregateAPI', 'OnShowUserItemListCB', 'Fail'); 
             }
           });
         ");
@@ -156,15 +159,8 @@ public class KongregateAPIBehaviour : MonoBehaviour
     {
         if (_datas != "Fail")
         {
-            string[] datas = _datas.Split(',');
-            string uid = datas[0];
-            string id = datas[1];
-            string data = datas[2];
-            string remainUses = datas[3];
-            Debug.Log("uid=" + uid);
-            Debug.Log("id=" + id);
-            Debug.Log("data=" + data);
-            Debug.Log("remainUses=" + remainUses);
+            Player.ShowUserItemListCB(_datas);
+            EndKongregateLogin();
         }
         else
         {

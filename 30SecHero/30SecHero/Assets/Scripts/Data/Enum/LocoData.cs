@@ -6,6 +6,8 @@
     SoundOn,
     Gold,
     Emerald,
+    FreeEmerald,
+    PayEmerald,
     Equip,
     Strengthen,
     Enchant,

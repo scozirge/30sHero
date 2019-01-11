@@ -30,11 +30,15 @@ if ($numrows == 0)//找不到已經存在的Kongregate帳號就創新帳號
         die('Fail:1:' . mysql_error());
 	$gold=100;
 	$emerald=0;
+	$trueEmerald=0;
+	$freeEmerald=0;
+	$payEmerald=0;
+	$payKredsLog="";
 	$curFloor=1;
 	$maxFloor=1;
 	$killBoss="";
 	//寫入資料庫
-    $signUpResult = mysql_query("INSERT INTO  ".$db_name.".playeraccount (  `ac_K` ,`userID_K` ,`gold` ,`emerald` ,`maxFloor`,`killBoss`,`signUpTime`,`signInTime`) VALUES ( '".$ac_K."','".$userID_K."','".$gold."','".$emerald."','".$maxFloor."','".$killBoss."' ,'".$signUpTime."','".$signUpTime."') ; ",$con_w);
+    $signUpResult = mysql_query("INSERT INTO  ".$db_name.".playeraccount (  `ac_K` ,`userID_K` ,`gold` ,`emerald`,`trueEmerald`,`freeEmerald`,`payEmerald`,`payKredsLog` ,`maxFloor`,`killBoss`,`signUpTime`,`signInTime`) VALUES ( '".$ac_K."','".$userID_K."','".$gold."','".$emerald."','".$trueEmerald."','".$freeEmerald."','".$payEmerald."','".$payKredsLog."','".$maxFloor."','".$killBoss."' ,'".$signUpTime."','".$signUpTime."') ; ",$con_w);
 	if ($signUpResult)
 	{
 		//流水號
@@ -46,7 +50,7 @@ if ($numrows == 0)//找不到已經存在的Kongregate帳號就創新帳號
         $time_end = microtime(true);
         $executeTime = $time_end - $time_start;
 		//送回client
-		die("Success:".$id.",".$gold.",".$emerald.",".$curFloor.",".$maxFloor.": \nExecuteTime=".$executeTime);
+		die("Success:".$id.",".$gold.",".$emerald.",".$trueEmerald.",".$freeEmerald.",".$payEmerald.",".$payKredsLog.",".$curFloor.",".$maxFloor.",".$killBoss.": \nExecuteTime=".$executeTime);
 	}
 	else
 	{
@@ -66,6 +70,10 @@ else//找到Kongregate帳戶就進行登入
 		$id=$row['id'];
 		$gold=$row['gold'];
 		$emerald=$row['emerald'];
+		$trueEmerald=$row['trueEmerald'];
+		$freeEmerald=$row['freeEmerald'];
+		$payEmerald=$row['payEmerald'];
+		$payKredsLog=$row['payKredsLog'];
 		$curFloor=$row['curFloor'];
 		$maxFloor=$row['maxFloor'];
 		$killBoss=$row['killBoss'];
@@ -77,7 +85,7 @@ else//找到Kongregate帳戶就進行登入
 		$time_end = microtime(true);
 		$executeTime = $time_end - $time_start;
 		//送回client
-		die("Success:".$id.",".$gold.",".$emerald.",".$curFloor.",".$maxFloor.",".$killBoss.": \nExecuteTime=".$executeTime);
+		die("Success:".$id.",".$gold.",".$emerald.",".$trueEmerald.",".$freeEmerald.",".$payEmerald.",".$payKredsLog.",".$curFloor.",".$maxFloor.",".$killBoss.": \nExecuteTime=".$executeTime);
 	}
 	else
 	{

@@ -10,12 +10,12 @@ public partial class ServerRequest : MonoBehaviour
     //每次需求最大重送次數
     const byte MaxReSendQuestTimes_Settlement = 1;
 
-    public static void Settlement(int _gold, int _emerald, int _curFloor, int _maxFloor, string _equipDatas)
+    public static void Settlement(int _gold, int _emerald, int _freeEmerald, int _curFloor, int _maxFloor, string _equipDatas)
     {
         ReSendQuestTimes_Settlement = MaxReSendQuestTimes_Settlement;//重置重送要求給Server的次數
-        SendSettlementQuest(_gold, _emerald, _curFloor, _maxFloor, _equipDatas);
+        SendSettlementQuest(_gold, _emerald, _freeEmerald, _curFloor, _maxFloor, _equipDatas);
     }
-    static void SendSettlementQuest(int _gold, int _emerald, int _curFloor, int _maxFloor, string _equipStr)
+    static void SendSettlementQuest(int _gold, int _emerald, int _freeEmerald, int _curFloor, int _maxFloor, string _equipStr)
     {
         if (Conn == null)
             return;
@@ -24,6 +24,7 @@ public partial class ServerRequest : MonoBehaviour
         form.AddField("id", Player.ID);
         form.AddField("gold", _gold);
         form.AddField("emerald", _emerald);
+        form.AddField("freeEmerald", _freeEmerald);
         form.AddField("curFloor", _curFloor);
         form.AddField("maxFloor", _maxFloor);
         form.AddField("equipStr", _equipStr);

@@ -13,6 +13,10 @@ $now= date("Y/m/d H:i:s");
 $id=$_POST['id'];
 $gold=$_POST['gold'];
 $emerald=$_POST['emerald'];
+$trueEmerald=$_POST['trueEmerald'];
+$freeEmerald=$_POST['freeEmerald'];
+$payEmerald=$_POST['payEmerald'];
+$payKredsLog=$_POST['payKredsLog'];
 //die("ID:".$id1.",".$equipSlot1."  ID2:".$id2.",".$equipSlot2);
 //新增寫入DB連線
 $con_w = mysql_connect($db_host_write,$db_user,$db_pass,true) or ("Fail:1:"  . mysql_error());
@@ -21,7 +25,7 @@ if (!$con_w)
 mysql_select_db($db_name , $con_w) or die ("Fail:1:" . mysql_error());
 
 
-$set = mysql_query("UPDATE ".$db_name.".playeraccount SET `gold` = '".$gold."', `emerald` = '".$emerald."' WHERE `id` = '".$id."'",$con_w);
+$set = mysql_query("UPDATE ".$db_name.".playeraccount SET `gold` = '".$gold."', `emerald` = '".$emerald."', `trueEmerald` = '".$trueEmerald."', `freeEmerald` = '".$freeEmerald."', `payEmerald` = '".$payEmerald."', `payKredsLog` = '".$payKredsLog."' WHERE `id` = '".$id."'",$con_w);
 if($set)
 {
 	//計算執行時間

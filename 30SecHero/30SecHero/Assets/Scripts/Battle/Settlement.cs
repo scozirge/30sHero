@@ -112,7 +112,7 @@ partial class BattleManage
     }
     public static void GainEquip(EquipData _data)
     {
-        for (int i = 0; i < GainEquipDataList.Count;i++ )
+        for (int i = 0; i < GainEquipDataList.Count; i++)
         {
             if (_data.UID == GainEquipDataList[i].UID)
                 return;
@@ -169,7 +169,7 @@ partial class BattleManage
             //金幣獲得
             Player.GainGold(TotalGold);
             //寶石獲得
-            Player.GainEmerald(TotalEmerald);
+            Player.GainEmerald(TotalEmerald, false);
             //裝備獲得
             Player.GainEquip_Local(GainEquipDataList);
             //顯示結果
@@ -178,11 +178,11 @@ partial class BattleManage
         else
         {
             //送server處理
-            Player.Settlement(Player.Gold + TotalGold, Player.Emerald + TotalEmerald, Floor, (MaxFloor > Player.MaxFloor) ? MaxFloor : Player.MaxFloor, GainEquipDataList);
+            Player.Settlement(Player.Gold + TotalGold, Player.Emerald + TotalEmerald, Player.FreeEmerald + TotalEmerald, Floor, (MaxFloor > Player.MaxFloor) ? MaxFloor : Player.MaxFloor, GainEquipDataList);
         }
         //設定驚嘆號tip顯示
         Main.ResetTipBool();
-        if(GainWeapon || GainArmor || GainAccessory)
+        if (GainWeapon || GainArmor || GainAccessory)
         {
             Main.ShowEquipBtnTip = true;
             if (GainWeapon)
@@ -193,12 +193,12 @@ partial class BattleManage
                 Main.ShowAccessoryTagTip = true;
             ToStrengthen = true;
         }
-        if(Player.CanStrengthenTipChack())
+        if (Player.CanStrengthenTipChack())
         {
             Main.ShowStrengthenTagTip = true;
             ToStrengthen = true;
         }
-        if(GetEnchant || Player.CanEnchantTipCheck())
+        if (GetEnchant || Player.CanEnchantTipCheck())
         {
             Main.ShowEnchantTagTip = true;
             ToStrengthen = true;
@@ -283,10 +283,10 @@ partial class BattleManage
         {
             ReadyToGetEnchant = true;
             GetEnchant = true;
-            Player.EnchantUpgrade(_ed,false);
+            Player.EnchantUpgrade(_ed, false);
             BM.GetEnchant_Name.text = _ed.Name;
             BM.GetEnchant_Icon.sprite = _ed.GetICON();
-            BM.GetEnchant_Description.text = _ed.Description(0);
+            BM.GetEnchant_Description.text = _ed.Description(-1);
         }
     }
 }

@@ -14,6 +14,7 @@ $now= date("Y/m/d H:i:s");
 $id=$_POST['id'];
 $gold=$_POST['gold'];
 $emerald=$_POST['emerald'];
+$freeEmerald=$_POST['freeEmerald'];
 $curFloor=$_POST['curFloor'];
 $maxFloor=$_POST['maxFloor'];
 $equipStr=$_POST['equipStr'];
@@ -22,7 +23,7 @@ $con_w = mysql_connect($db_host_write,$db_user,$db_pass,true) or ("Fail:1:"  . m
 if (!$con_w)
 	die('Fail:1:' . mysql_error());
 $settlementResult=false;
-$update = mysql_query("UPDATE ".$db_name.".playeraccount SET `gold` = '".$gold."', `emerald` = '".$emerald."', `curFloor` = '".$curFloor."', `maxFloor` = '".$maxFloor."' WHERE `id` = '".$id."'",$con_w);
+$update = mysql_query("UPDATE ".$db_name.".playeraccount SET `gold` = '".$gold."', `emerald` = '".$emerald."', `freeEmerald` = '".$freeEmerald."', `curFloor` = '".$curFloor."', `maxFloor` = '".$maxFloor."' WHERE `id` = '".$id."'",$con_w);
 if($update)
 {
 	if($equipStr=="")
@@ -30,7 +31,7 @@ if($update)
 		//計算執行時間
 		$time_end = microtime(true);
 		$executeTime = $time_end - $time_start;
-		die("Success:".$gold."/".$emerald."/".$curFloor."/".$maxFloor.": \nExecuteTime=".$executeTime);
+		die("Success:".$gold."/".$emerald."/".$freeEmerald."/".$curFloor."/".$maxFloor.": \nExecuteTime=".$executeTime);
 	}
 	else
 	{
@@ -70,7 +71,7 @@ if($update)
 			//計算執行時間
 			$time_end = microtime(true);
 			$executeTime = $time_end - $time_start;
-			die("Success:".$gold."/".$emerald."/".$curFloor."/".$maxFloor."/".$uidStr.": \nExecuteTime=".$executeTime);
+			die("Success:".$gold."/".$emerald."/".$freeEmerald."/".$curFloor."/".$maxFloor."/".$uidStr.": \nExecuteTime=".$executeTime);
 		}
 		else
 		{

@@ -24,6 +24,11 @@ public partial class ServerRequest : MonoBehaviour
         form.AddField("id", Player.ID);
         form.AddField("gold", Player.Gold);
         form.AddField("emerald", Player.Emerald);
+        form.AddField("trueEmerald", Player.TrueEmerald);
+        form.AddField("freeEmerald", Player.FreeEmerald);
+        form.AddField("payEmerald", Player.PayEmerald);
+        Debug.Log("PayKredsLog=" + Player.PayKredsLog);
+        form.AddField("payKredsLog", Player.PayKredsLog);
         WWW w = new WWW(string.Format("{0}{1}", GetServerURL(), "UpdateResource.php"), form);
         //設定為正等待伺服器回傳
         WaitCB_UpdateResource = true;
