@@ -48,6 +48,7 @@ public class KongregateAPIBehaviour : MonoBehaviour
             return;
         EndLogin = true;
         Player.UseLocalData(!KongregateLogin);
+        ShowUserItemList();
     }
 
     public void OnKongregateAPILoaded(string userInfoString)
@@ -124,6 +125,51 @@ public class KongregateAPIBehaviour : MonoBehaviour
         else
         {
             Purchase.ToPurchaseCB(false);
+        }
+    }
+    public static void ShowUserItemList()
+    {
+        Debug.Log("////////////////Send ShowUserItemList");
+        Application.ExternalEval(@"
+          kongregate.mtx.RequestUserItemList("", function(result) {
+            var unityObject = kongregateUnitySupport.getUnityObject();
+            if(result.success) {
+                var datas = [];
+                for(var i = 0; i < result.data.length; i++) 
+                {
+                    var item = result.data[i];
+                    if(i!=0)
+                        datas+='/';
+                    datas+=[item.identifier, item.name, item.description , item.price ].join(',');
+                }       
+                unityObject.SendMessage('KongregateAPI', 'OnItemListCB', datas);     
+            }
+            else
+            {
+                unityObject.SendMessage('KongregateAPI', 'OnItemListCB', 'Fail'); 
+            }
+          });
+        ");
+    }
+
+    public void OnShowUserItemListCB(string _datas)
+    {
+        if (_datas != "Fail")
+        {
+            string[] datas = _datas.Split(',');
+            string uid = datas[0];
+            string id = datas[1];
+            string data = datas[2];
+            string remainUses = datas[3];
+            Debug.Log("uid=" + uid);
+            Debug.Log("id=" + id);
+            Debug.Log("data=" + data);
+            Debug.Log("remainUses=" + remainUses);
+        }
+        else
+        {
+            Debug.Log("Fail to ShowUserItemListCB");
+            CaseTableData.ShowPopLog(8);
         }
     }
 }
