@@ -27,7 +27,7 @@ public class StrengthenData : Data
         }
         string valueString = "";
         if (ShowPercentage)
-            valueString = string.Format("{0}{1}", TextManager.ToPercent(BaseValue + (LV + _offset) * LevelUpValue).ToString("0.0"), "%");
+            valueString = string.Format("{0}{1}", TextManager.ToPercent(BaseValue + (LV + _offset) * LevelUpValue).ToString("0"), "%");
         else
             valueString = string.Format("{0}", BaseValue + (LV + _offset) * LevelUpValue);
         return string.Format(GameDictionary.String_StrengthenDic[ID.ToString()].GetString(1, Player.UseLanguage), valueString);

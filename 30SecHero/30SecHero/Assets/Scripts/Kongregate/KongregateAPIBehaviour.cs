@@ -41,7 +41,13 @@ public class KongregateAPIBehaviour : MonoBehaviour
         {
             //OnKongregateUserInfo("1|scozirge");
             OnKongregateUserInfo("41605611|starbrogamemaker");
-        }            
+        }
+    }
+    public static void KGLogin()
+    {
+        Debug.Log("Kongregate Login");
+        Application.ExternalEval(@"
+          kongregate.services.showRegistrationBox();");
     }
     void Update()
     {
@@ -52,7 +58,7 @@ public class KongregateAPIBehaviour : MonoBehaviour
         if (EndLogin)
             return;
         EndLogin = true;
-        Player.UseLocalData(!KongregateLogin);        
+        Player.UseLocalData(!KongregateLogin);
     }
 
     public void OnKongregateAPILoaded(string userInfoString)
@@ -125,7 +131,7 @@ public class KongregateAPIBehaviour : MonoBehaviour
     {
         Debug.Log("OnPurchaseResult" + _result);
         if (_result == "true")
-        {            
+        {
             Purchase.ToPurchaseCB(true);
             GetUserItemList();
         }

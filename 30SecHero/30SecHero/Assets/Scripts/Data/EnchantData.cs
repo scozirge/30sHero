@@ -29,14 +29,14 @@ public class EnchantData : Data
         if (MyEnchantType == EnchantType.Enchant)
         {
             if (ShowPercentage)
-                valueString = string.Format("{0}{1}", TextManager.ToPercent(BaseValue + (LV + _offset) * LevelUpValue).ToString("0.0"), "%");
+                valueString = string.Format("{0}{1}", TextManager.ToPercent(BaseValue + (LV + _offset) * LevelUpValue).ToString("0"), "%");
             else
                 valueString = string.Format("{0}", BaseValue + (LV + _offset) * LevelUpValue);
         }
         else
         {
             if (ShowPercentage)
-                valueString = string.Format("{0}{1}", TextManager.ToPercent(GetValue()).ToString("0.0"), "%");
+                valueString = string.Format("{0}{1}", TextManager.ToPercent(GetValue()).ToString("0"), "%");
             else
                 valueString = string.Format("{0}", GetValue());
         }

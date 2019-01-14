@@ -635,7 +635,7 @@ public class GameSettingData : Data
     public static Dictionary<RoleProperty, float> GetRandomEquipProperties(int _quality, int _lv)
     {
         Dictionary<RoleProperty, float> dic = GetNewRolePropertiesDic(0);
-        int qualityPropertyCount = _quality;
+        int qualityPropertyCount = _quality - 1;
         if (qualityPropertyCount < 0)
             qualityPropertyCount = 0;
         //_quality = RandomPropertyList.Count;

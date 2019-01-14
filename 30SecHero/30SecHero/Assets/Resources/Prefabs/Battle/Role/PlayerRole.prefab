@@ -1283,6 +1283,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AttackEffect: {fileID: 198308960938074910, guid: 6ebb3848cff528744a0ce66822bd1588,
     type: 3}
+  RushAttackEffect: {fileID: 19823286, guid: 77d6e8e3fa15a0b419d018e3e16931f6, type: 3}
   Attacker: {fileID: 114529601492733476}
   KnockForce: 3000
   DamagePercent: 1

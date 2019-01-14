@@ -19,6 +19,8 @@ public class Main : MonoBehaviour
     [SerializeField]
     Set MySet;
     [SerializeField]
+    GameObject KGLoginBtn;
+    [SerializeField]
     MainUI CurUI;
     [SerializeField]
     GameObject EquipBtnTip;
@@ -32,6 +34,7 @@ public class Main : MonoBehaviour
     GameObject ArmorTagTip;
     [SerializeField]
     GameObject AccessoryTagTip;
+
 
 
     public static bool ShowEquipBtnTip;
@@ -82,10 +85,18 @@ public class Main : MonoBehaviour
     void OnEnable()
     {
         UpdateTips();
+        if (Player.Name_K==null || Player.Name_K == "")
+            KGLoginBtn.SetActive(true);
+        else
+            KGLoginBtn.SetActive(false);
         if (!Isinit)
             return;
         GoldText.text = Player.Gold.ToString();
         EmeraldText.text = Player.Emerald.ToString();
+    }
+    public void KGLogin()
+    {
+        KongregateAPIBehaviour.KGLogin();
     }
     void Update()
     {

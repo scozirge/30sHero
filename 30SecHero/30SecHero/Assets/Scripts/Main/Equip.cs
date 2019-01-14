@@ -13,6 +13,8 @@ public class Equip : MyUI
     EquipPop EquipPop;
 
     [SerializeField]
+    Text[] EquipLVTExt;
+    [SerializeField]
     Image[] WeaponIcon;
     [SerializeField]
     Image[] WeaponIcon_Char;
@@ -457,6 +459,8 @@ public class Equip : MyUI
                 WeaponIcon[i].enabled = true;
                 WeaponIcon[i].SetNativeSize();
             }
+            EquipLVTExt[0].gameObject.SetActive(true);
+            EquipLVTExt[0].text = Player.MyWeapon.GetLVString();
             WeaponQuality.sprite = GameManager.GetItemQualityBotSprite(Player.MyWeapon.Quality);
             for (int i = 0; i < WeaponIcon_Char.Length; i++)
             {
@@ -475,7 +479,7 @@ public class Equip : MyUI
                     WeaponIcon[i].enabled = false;
                 WeaponIcon[i].SetNativeSize();
             }
-
+            EquipLVTExt[0].gameObject.SetActive(false);
             WeaponQuality.sprite = GameManager.GetItemQualityBotSprite(0);
             //設定預設武器紙娃娃
             WeaponData wd = WeaponData.GetDefaultWeapon();
@@ -494,6 +498,8 @@ public class Equip : MyUI
                 ArmorIcon[i].enabled = true;
                 ArmorIcon[i].SetNativeSize();
             }
+            EquipLVTExt[1].gameObject.SetActive(true);
+            EquipLVTExt[1].text = Player.MyArmor.GetLVString();
             ArmorQuality.sprite = GameManager.GetItemQualityBotSprite(Player.MyArmor.Quality);
         }
         else
@@ -506,6 +512,7 @@ public class Equip : MyUI
                     ArmorIcon[i].enabled = false;
                 ArmorIcon[i].SetNativeSize();
             }
+            EquipLVTExt[1].gameObject.SetActive(false);
             ArmorQuality.sprite = GameManager.GetItemQualityBotSprite(0);
         }
         //Accessory1
@@ -517,6 +524,8 @@ public class Equip : MyUI
                 Accessory1Icon[j].enabled = true;
                 Accessory1Icon[j].SetNativeSize();
             }
+            EquipLVTExt[2].gameObject.SetActive(true);
+            EquipLVTExt[2].text = Player.MyAccessorys[0].GetLVString();
             AccessoryQuality[0].sprite = GameManager.GetItemQualityBotSprite(Player.MyAccessorys[0].Quality);
         }
         else
@@ -529,6 +538,7 @@ public class Equip : MyUI
                     Accessory1Icon[j].enabled = false;
                 Accessory1Icon[j].SetNativeSize();
             }
+            EquipLVTExt[2].gameObject.SetActive(false);
             AccessoryQuality[0].sprite = GameManager.GetItemQualityBotSprite(0);
         }
         //Accessory2
@@ -540,6 +550,8 @@ public class Equip : MyUI
                 Accessory2Icon[j].enabled = true;
                 Accessory2Icon[j].SetNativeSize();
             }
+            EquipLVTExt[3].gameObject.SetActive(true);
+            EquipLVTExt[3].text = Player.MyAccessorys[1].GetLVString();
             AccessoryQuality[1].sprite = GameManager.GetItemQualityBotSprite(Player.MyAccessorys[1].Quality);
         }
         else
@@ -553,6 +565,7 @@ public class Equip : MyUI
                     Accessory2Icon[j].enabled = false;
                 Accessory2Icon[j].SetNativeSize();
             }
+            EquipLVTExt[3].gameObject.SetActive(false);
             AccessoryQuality[1].sprite = GameManager.GetItemQualityBotSprite(0);
         }
         UpdateRolePropertyText(_animationText);

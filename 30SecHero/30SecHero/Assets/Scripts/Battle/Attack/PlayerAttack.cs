@@ -7,6 +7,9 @@ public class PlayerAttack : MonoBehaviour
     [Tooltip("攻擊特效")]
     [SerializeField]
     ParticleSystem AttackEffect;
+    [Tooltip("衝刺攻擊特效")]
+    [SerializeField]
+    ParticleSystem RushAttackEffect;
     [SerializeField]
     PlayerRole Attacker;
     [Tooltip("擊退力道")]
@@ -67,9 +70,15 @@ public class PlayerAttack : MonoBehaviour
                 }
                 else
                     Attacker.SetBerserkerBladeLight(false);
-                //衝刺加傷害
+                //衝刺攻擊附帶效果
                 if (Attacker.OnRush)
+                {
+                    EffectEmitter.EmitParticle(RushAttackEffect, er.transform.position, Vector3.zero, null);
+                    //衝刺加傷害
                     extraDamageProportion += Attacker.MyEnchant[EnchantProperty.LethalDash];
+
+                }
+
                 //火焰刀增加傷害&特效
                 if (Attacker.BuffersExist(RoleBuffer.Burn))
                 {
@@ -94,6 +103,11 @@ public class PlayerAttack : MonoBehaviour
                 {
                     Attacker.BumpingAttack();
                     AfterAttackAction_TargetAlive(er);
+                    //衝刺攻擊會暈眩目標
+                    if (Attacker.OnRush)
+                    {
+                        er.AddBuffer(RoleBuffer.Stun, 1);                        
+                    }
                 }
                 else
                 {
