@@ -20,5 +20,9 @@
     DamagePotionTutorial,
     HealthPotionTutorial,
     ImmortalPotionTutorial,
-    SpeedPotionTutorial
+    SpeedPotionTutorial,
+    SlimeTimeTutorial,
+    IgniteTutorial,
+    FreezeTutorial,
+    PoisonedTutorial
 }

@@ -98,6 +98,10 @@ public partial class BattleManage : MonoBehaviour
     [SerializeField]
     Image PopupTutorialPic_Right;
     [SerializeField]
+    GameObject PopupTutorialGo_Left;
+    [SerializeField]
+    GameObject PopupTutorialGo_Right;
+    [SerializeField]
     List<Sprite> PopupTutorialSprites;
 
 
@@ -128,7 +132,7 @@ public partial class BattleManage : MonoBehaviour
     static int IsDemogorgonFloor;
     bool IsInit;
     int EnemySpawnCount;
-   
+
 
     static bool IsPause;
 
@@ -279,7 +283,7 @@ public partial class BattleManage : MonoBehaviour
         else
             TPageArrow_Left.SetActive(true);
 
-        if (CurTutorialPage == MaxTutorialPage-1)
+        if (CurTutorialPage == MaxTutorialPage - 1)
             TPageArrow_Right.SetActive(false);
         else
             TPageArrow_Right.SetActive(true);
@@ -309,6 +313,8 @@ public partial class BattleManage : MonoBehaviour
     {
         Pause(true);
         PopupTutorialGo.SetActive(true);
+        PopupTutorialGo_Left.SetActive(true);
+        PopupTutorialGo_Right.SetActive(true);
         switch (_type)
         {
             case "AvataEnergy":
@@ -340,6 +346,30 @@ public partial class BattleManage : MonoBehaviour
                 PopupTutorialTitle.text = StringData.GetString("SpeedPotionTitle");
                 PopupTutorialPic_Left.sprite = PopupTutorialSprites[8];
                 PopupTutorialPic_Right.sprite = PopupTutorialSprites[9];
+                break;
+            case "Slime":
+                PopupTutorialDescription.text = StringData.GetString("AvatarTimeDescription");
+                PopupTutorialTitle.text = StringData.GetString("Slime");
+                PopupTutorialPic_Left.sprite = PopupTutorialSprites[10];
+                PopupTutorialPic_Right.sprite = PopupTutorialSprites[11];
+                break;
+            case "Ignite":
+                PopupTutorialGo_Right.SetActive(false);
+                PopupTutorialDescription.text = StringData.GetString("IgniteDescription");
+                PopupTutorialTitle.text = StringData.GetString("Ignite");
+                PopupTutorialPic_Left.sprite = PopupTutorialSprites[12];
+                break;
+            case "Freeze":
+                PopupTutorialGo_Right.SetActive(false);
+                PopupTutorialDescription.text = StringData.GetString("FreezeDescription");
+                PopupTutorialTitle.text = StringData.GetString("Freeze");
+                PopupTutorialPic_Left.sprite = PopupTutorialSprites[13];
+                break;
+            case "Poisoned":
+                PopupTutorialGo_Right.SetActive(false);
+                PopupTutorialDescription.text = StringData.GetString("PoisonedDescription");
+                PopupTutorialTitle.text = StringData.GetString("Poisoned");
+                PopupTutorialPic_Left.sprite = PopupTutorialSprites[14];
                 break;
         }
     }

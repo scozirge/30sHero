@@ -258,12 +258,16 @@ public partial class PlayerRole : Role
     bool CanJump;
     bool CanRush;
     bool StartControl;
-    //是否跳藥水教學說明
+    //是否跳彈窗教學說明
     bool EnergyPotionTutorial;
     bool DamagePotionTutorial;
     bool HealthPotionTutorial;
     bool ImmortalPotionTutorial;
     bool SpeedPotionTutorial;
+    bool SlimeTimeTutorial;
+    bool IgniteTutorial;
+    bool FreezeTutorial;
+    bool PoisonedTutorial;
     //附魔
     public Dictionary<EnchantProperty, float> MyEnchant = new Dictionary<EnchantProperty, float>();
     List<Skill> MyEnchantSkill = new List<Skill>();
@@ -392,6 +396,14 @@ public partial class PlayerRole : Role
             ImmortalPotionTutorial = true;
         if (PlayerPrefs.GetInt(LocoData.SpeedPotionTutorial.ToString()) == 0)
             SpeedPotionTutorial = true;
+        if (PlayerPrefs.GetInt(LocoData.SlimeTimeTutorial.ToString()) == 0)
+            SlimeTimeTutorial = true;
+        if (PlayerPrefs.GetInt(LocoData.IgniteTutorial.ToString()) == 0)
+            IgniteTutorial = true;
+        if (PlayerPrefs.GetInt(LocoData.FreeEmerald.ToString()) == 0)
+            FreezeTutorial = true;
+        if (PlayerPrefs.GetInt(LocoData.PoisonedTutorial.ToString()) == 0)
+            PoisonedTutorial = true;
     }
     IEnumerator StartAvatarPerformance()
     {
@@ -843,6 +855,13 @@ public partial class PlayerRole : Role
             AvatarTimer -= Time.deltaTime;
         else//解除變身
         {
+            //是否跳彈窗教學
+            if (SlimeTimeTutorial)
+            {
+                BattleManage.BM.PopupTutorial("Slime");
+                PlayerPrefs.SetInt(LocoData.SlimeTimeTutorial.ToString(), 1);
+                SlimeTimeTutorial = false;
+            }
             AniPlayer.PlayTrigger("Idle2", 0);
             AvatarTimer = 0;
             ExtraMoveSpeed = 0;
@@ -1073,7 +1092,37 @@ public partial class PlayerRole : Role
                         }
                     }
                     if (addBuff)
+                    {
                         base.AddBuffer(_buffer);
+                        //是否跳彈窗教學
+                        switch(_buffer.Type)
+                        {
+                            case RoleBuffer.Burn:
+                                if (IgniteTutorial)
+                                {
+                                    BattleManage.BM.PopupTutorial("Ignite");
+                                    PlayerPrefs.SetInt(LocoData.IgniteTutorial.ToString(), 1);
+                                    IgniteTutorial = false;
+                                }
+                                break;
+                            case RoleBuffer.Freeze:
+                                if (FreezeTutorial)
+                                {
+                                    BattleManage.BM.PopupTutorial("Freeze");
+                                    PlayerPrefs.SetInt(LocoData.FreezeTutorial.ToString(), 1);
+                                    FreezeTutorial = false;
+                                }
+                                break;
+                            case RoleBuffer.DamageUp:
+                                if (PoisonedTutorial)
+                                {
+                                    BattleManage.BM.PopupTutorial("Poisoned");
+                                    PlayerPrefs.SetInt(LocoData.PoisonedTutorial.ToString(), 1);
+                                    PoisonedTutorial = false;
+                                }
+                                break;
+                        }
+                    }                        
                 }
             }
         }
