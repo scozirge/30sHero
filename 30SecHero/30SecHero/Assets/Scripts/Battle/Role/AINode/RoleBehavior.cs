@@ -247,6 +247,8 @@ public class RoleBehavior : MonoBehaviour
     }
     void Update()
     {
+        if (MyRole.BuffersExist(RoleBuffer.Stun))
+            return;
         if (MyWaitToDoAction != null)
             MyWaitToDoAction.RunTimer();
         if (MyWaitToSpell != null)
@@ -260,15 +262,18 @@ public class RoleBehavior : MonoBehaviour
     {
         if (Nodes.Count <= 0)
             return;
-        if (Nodes[CurNodeIndex].RelativeToTarget == RelativeTo.PlayerRole_Continued ||
-            Nodes[CurNodeIndex].RelativeToTarget == RelativeTo.Camera_Continued ||
-        Nodes[CurNodeIndex].RelativeToTarget == RelativeTo.TrackCamera ||
-            Nodes[CurNodeIndex].RelativeToTarget == RelativeTo.TrackPlayer)
+        if(!MyRole.BuffersExist(RoleBuffer.Stun))
         {
-            MoveTo(GetRelativeDestination(Nodes[CurNodeIndex]), Nodes[CurNodeIndex].MoveSpeed);
+            if (Nodes[CurNodeIndex].RelativeToTarget == RelativeTo.PlayerRole_Continued ||
+    Nodes[CurNodeIndex].RelativeToTarget == RelativeTo.Camera_Continued ||
+Nodes[CurNodeIndex].RelativeToTarget == RelativeTo.TrackCamera ||
+    Nodes[CurNodeIndex].RelativeToTarget == RelativeTo.TrackPlayer)
+            {
+                MoveTo(GetRelativeDestination(Nodes[CurNodeIndex]), Nodes[CurNodeIndex].MoveSpeed);
+            }
+            else
+                MoveTo(Destination, Nodes[CurNodeIndex].MoveSpeed);
         }
-        else
-            MoveTo(Destination, Nodes[CurNodeIndex].MoveSpeed);
     }
 
     void MoveTo(Vector2 _pos, float _moveSpeed)
