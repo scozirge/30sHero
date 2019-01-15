@@ -2,8 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-public class ChangeScene : MonoBehaviour
+public class InitScene : MonoBehaviour
 {
+    [SerializeField]
+    GameObject StartBtn;
+    [SerializeField]
+    GameObject SetUI;
+    bool InitSetLanguage;
+    void Start()
+    {
+        if (PlayerPrefs.GetInt(LocoData.InitSetLanguage.ToString()) == 0)
+            InitSetLanguage = true;
+        StartBtn.SetActive(false);
+        SetUI.SetActive(false);
+    }
     public static void GoToScene(MyScene _scene)
     {
         SceneManager.LoadScene(_scene.ToString());
@@ -38,6 +50,8 @@ public class ChangeScene : MonoBehaviour
     }
     public void PlaySceneMusic()
     {
+        if (!InitSetLanguage)
+            StartBtn.SetActive(true);
         if (SceneManager.GetActiveScene().name == MyScene.Battle.ToString())
         {
             int rndNum = Random.Range(0, 2);
@@ -54,5 +68,20 @@ public class ChangeScene : MonoBehaviour
         {
             AudioPlayer.PlayLoopMusic_Static(GameManager.GM.MainMusic, "Main");
         }
+    }
+    public void SetLanguage(int _language)
+    {
+        StartBtn.SetActive(true);
+        Player.SetLanguage((Language)_language);
+    }
+    public void CallSetUI(bool _show)
+    {
+        SetUI.SetActive(_show);
+    }
+    public void ShowSetUI()
+    {
+        CallSetUI(InitSetLanguage);
+        InitSetLanguage = false;
+        PlayerPrefs.SetInt(LocoData.InitSetLanguage.ToString(), 1);
     }
 }

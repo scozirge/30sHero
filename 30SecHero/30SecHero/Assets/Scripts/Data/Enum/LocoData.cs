@@ -24,5 +24,6 @@
     SlimeTimeTutorial,
     IgniteTutorial,
     FreezeTutorial,
-    PoisonedTutorial
+    PoisonedTutorial,
+    InitSetLanguage
 }

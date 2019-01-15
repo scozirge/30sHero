@@ -63,7 +63,7 @@ public class PopupUI : MonoBehaviour
     public void Restart()
     {
         Myself.RestartGo.SetActive(false);
-        ChangeScene.RestartGame();
+        InitScene.RestartGame();
     }
     public static void HideLoading()
     {
