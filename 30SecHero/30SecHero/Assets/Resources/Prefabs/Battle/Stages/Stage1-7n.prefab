@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4000863506097606}
   - component: {fileID: 114993583261456872}
   m_Layer: 0
-  m_Name: Stage1-14
+  m_Name: Stage1-7n
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -24,7 +24,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1393024585430296}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -98,7 +98,7 @@ SpriteShapeRenderer:
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e7e0b069a4ac62a4ba1796e2c97da78b, type: 2}
+  - {fileID: 2100000, guid: be52776d0d24bd74485d53172d594cd9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -225,18 +225,6 @@ PolygonCollider2D:
       - {x: 223.46512, y: -154.30446}
       - {x: 223.46512, y: -154.30446}
       - {x: 215.81477, y: -43.15765}
---- !u!224 &6447228332096598698 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 784925681095396314, guid: 2d54999be3752b44b8a1aced2b3cc4c7,
-    type: 3}
-  m_PrefabInstance: {fileID: 6025171703413766512}
-  m_PrefabAsset: {fileID: 0}
---- !u!224 &7176341576152610569 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 1795865925595974367, guid: 4ed4d3d061fd9914d901843067212ee8,
-    type: 3}
-  m_PrefabInstance: {fileID: 8897791453075422678}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6025171703413766512
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -244,6 +232,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4000863506097606}
     m_Modifications:
+    - target: {fileID: 720460934756767386, guid: 2d54999be3752b44b8a1aced2b3cc4c7,
+        type: 3}
+      propertyPath: m_Name
+      value: Bothside Melee_Stage
+      objectReference: {fileID: 0}
     - target: {fileID: 784925681095396314, guid: 2d54999be3752b44b8a1aced2b3cc4c7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -349,13 +342,14 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 720460934756767386, guid: 2d54999be3752b44b8a1aced2b3cc4c7,
-        type: 3}
-      propertyPath: m_Name
-      value: Bothside Melee_Stage
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2d54999be3752b44b8a1aced2b3cc4c7, type: 3}
+--- !u!224 &6447228332096598698 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 784925681095396314, guid: 2d54999be3752b44b8a1aced2b3cc4c7,
+    type: 3}
+  m_PrefabInstance: {fileID: 6025171703413766512}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8897791453075422678
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -363,6 +357,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4000863506097606}
     m_Modifications:
+    - target: {fileID: 2015141291584427935, guid: 4ed4d3d061fd9914d901843067212ee8,
+        type: 3}
+      propertyPath: m_Name
+      value: Skull_Stage
+      objectReference: {fileID: 0}
     - target: {fileID: 1795865925595974367, guid: 4ed4d3d061fd9914d901843067212ee8,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -468,10 +467,11 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 2015141291584427935, guid: 4ed4d3d061fd9914d901843067212ee8,
-        type: 3}
-      propertyPath: m_Name
-      value: Skull_Stage
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4ed4d3d061fd9914d901843067212ee8, type: 3}
+--- !u!224 &7176341576152610569 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 1795865925595974367, guid: 4ed4d3d061fd9914d901843067212ee8,
+    type: 3}
+  m_PrefabInstance: {fileID: 8897791453075422678}
+  m_PrefabAsset: {fileID: 0}

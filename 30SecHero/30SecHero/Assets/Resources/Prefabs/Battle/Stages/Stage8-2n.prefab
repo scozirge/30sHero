@@ -1,17 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!224 &6154487330231589324 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 4001693542039201891, guid: 99b3cd272eda77f4c8f485609749848f,
-    type: 3}
-  m_PrefabInstance: {fileID: 7125255968834728367}
-  m_PrefabAsset: {fileID: 0}
---- !u!224 &7168649691066555158 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 2134763918839783753, guid: a61cc59b51b1d64468707f8e146e9bc7,
-    type: 3}
-  m_PrefabInstance: {fileID: 9141212752599611999}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &8277773558385242537
 GameObject:
   m_ObjectHideFlags: 0
@@ -62,7 +50,7 @@ SpriteShapeRenderer:
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e7e0b069a4ac62a4ba1796e2c97da78b, type: 2}
+  - {fileID: 2100000, guid: be52776d0d24bd74485d53172d594cd9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -222,7 +210,7 @@ GameObject:
   - component: {fileID: 8283273975560987325}
   - component: {fileID: 8318231718720533117}
   m_Layer: 0
-  m_Name: Stage5-5
+  m_Name: Stage8-2n
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -266,6 +254,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8283273975560987325}
     m_Modifications:
+    - target: {fileID: 3788606782612731171, guid: 99b3cd272eda77f4c8f485609749848f,
+        type: 3}
+      propertyPath: m_Name
+      value: Demon Fire_Stage
+      objectReference: {fileID: 0}
     - target: {fileID: 4001693542039201891, guid: 99b3cd272eda77f4c8f485609749848f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -371,13 +364,14 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 3788606782612731171, guid: 99b3cd272eda77f4c8f485609749848f,
-        type: 3}
-      propertyPath: m_Name
-      value: Demon Fire_Stage
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 99b3cd272eda77f4c8f485609749848f, type: 3}
+--- !u!224 &6154487330231589324 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 4001693542039201891, guid: 99b3cd272eda77f4c8f485609749848f,
+    type: 3}
+  m_PrefabInstance: {fileID: 7125255968834728367}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &9141212752599611999
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -385,6 +379,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8283273975560987325}
     m_Modifications:
+    - target: {fileID: 2214219350639756399, guid: a61cc59b51b1d64468707f8e146e9bc7,
+        type: 3}
+      propertyPath: m_Name
+      value: Small Dragon Fire_Stage
+      objectReference: {fileID: 0}
     - target: {fileID: 2134763918839783753, guid: a61cc59b51b1d64468707f8e146e9bc7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -490,10 +489,11 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 2214219350639756399, guid: a61cc59b51b1d64468707f8e146e9bc7,
-        type: 3}
-      propertyPath: m_Name
-      value: Small Dragon Fire_Stage
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a61cc59b51b1d64468707f8e146e9bc7, type: 3}
+--- !u!224 &7168649691066555158 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 2134763918839783753, guid: a61cc59b51b1d64468707f8e146e9bc7,
+    type: 3}
+  m_PrefabInstance: {fileID: 9141212752599611999}
+  m_PrefabAsset: {fileID: 0}

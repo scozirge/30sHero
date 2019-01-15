@@ -1,17 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!224 &4413976006783823909 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 6221937525079371115, guid: 6adc2eb5677abe94f9e143658e4a84a0,
-    type: 3}
-  m_PrefabInstance: {fileID: 7717292877892885838}
-  m_PrefabAsset: {fileID: 0}
---- !u!224 &5182603690308184731 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 6247207275400078948, guid: 010da91d4e51a184cb3aeaaff0f31e0e,
-    type: 3}
-  m_PrefabInstance: {fileID: 1251657047419096319}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &6419223306226561631
 GameObject:
   m_ObjectHideFlags: 0
@@ -62,7 +50,7 @@ SpriteShapeRenderer:
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e7e0b069a4ac62a4ba1796e2c97da78b, type: 2}
+  - {fileID: 2100000, guid: be52776d0d24bd74485d53172d594cd9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -200,7 +188,7 @@ GameObject:
   - component: {fileID: 6421655890982769613}
   - component: {fileID: 6378420713819458009}
   m_Layer: 0
-  m_Name: Stage6
+  m_Name: Stage3-5n
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -213,7 +201,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6419625778081007223}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -288,7 +276,7 @@ SpriteShapeRenderer:
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e7e0b069a4ac62a4ba1796e2c97da78b, type: 2}
+  - {fileID: 2100000, guid: be52776d0d24bd74485d53172d594cd9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -422,6 +410,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6421655890982769613}
     m_Modifications:
+    - target: {fileID: 6172483295905703202, guid: 010da91d4e51a184cb3aeaaff0f31e0e,
+        type: 3}
+      propertyPath: m_Name
+      value: Suicide Bombing_Stage
+      objectReference: {fileID: 0}
     - target: {fileID: 6247207275400078948, guid: 010da91d4e51a184cb3aeaaff0f31e0e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -527,13 +520,14 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 6172483295905703202, guid: 010da91d4e51a184cb3aeaaff0f31e0e,
-        type: 3}
-      propertyPath: m_Name
-      value: Suicide Bombing_Stage
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 010da91d4e51a184cb3aeaaff0f31e0e, type: 3}
+--- !u!224 &5182603690308184731 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 6247207275400078948, guid: 010da91d4e51a184cb3aeaaff0f31e0e,
+    type: 3}
+  m_PrefabInstance: {fileID: 1251657047419096319}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7717292877892885838
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -541,6 +535,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6421655890982769613}
     m_Modifications:
+    - target: {fileID: 6143185070056701851, guid: 6adc2eb5677abe94f9e143658e4a84a0,
+        type: 3}
+      propertyPath: m_Name
+      value: Goblin Ice_Stage
+      objectReference: {fileID: 0}
     - target: {fileID: 6221937525079371115, guid: 6adc2eb5677abe94f9e143658e4a84a0,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -646,10 +645,11 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 6143185070056701851, guid: 6adc2eb5677abe94f9e143658e4a84a0,
-        type: 3}
-      propertyPath: m_Name
-      value: Goblin Ice_Stage
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6adc2eb5677abe94f9e143658e4a84a0, type: 3}
+--- !u!224 &4413976006783823909 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 6221937525079371115, guid: 6adc2eb5677abe94f9e143658e4a84a0,
+    type: 3}
+  m_PrefabInstance: {fileID: 7717292877892885838}
+  m_PrefabAsset: {fileID: 0}
