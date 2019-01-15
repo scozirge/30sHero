@@ -400,7 +400,7 @@ public partial class PlayerRole : Role
             SlimeTimeTutorial = true;
         if (PlayerPrefs.GetInt(LocoData.IgniteTutorial.ToString()) == 0)
             IgniteTutorial = true;
-        if (PlayerPrefs.GetInt(LocoData.FreeEmerald.ToString()) == 0)
+        if (PlayerPrefs.GetInt(LocoData.FreezeTutorial.ToString()) == 0)
             FreezeTutorial = true;
         if (PlayerPrefs.GetInt(LocoData.PoisonedTutorial.ToString()) == 0)
             PoisonedTutorial = true;
@@ -1113,7 +1113,7 @@ public partial class PlayerRole : Role
                                     FreezeTutorial = false;
                                 }
                                 break;
-                            case RoleBuffer.DamageUp:
+                            case RoleBuffer.DamageDown:
                                 if (PoisonedTutorial)
                                 {
                                     BattleManage.BM.PopupTutorial("Poisoned");

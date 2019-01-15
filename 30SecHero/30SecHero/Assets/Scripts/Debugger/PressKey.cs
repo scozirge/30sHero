@@ -56,8 +56,11 @@ public partial class Debugger : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.T))
         {
+            BattleManage.BM.MyPlayer.AddBuffer(RoleBuffer.DamageDown, 5);
+            /*
             int damage = 10;
             BattleManage.BM.MyPlayer.BeAttack(Force.Enemy, ref damage, Vector2.zero);
+             */
         }
         else if (Input.GetKeyDown(KeyCode.P))
         {
