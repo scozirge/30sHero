@@ -121,7 +121,7 @@ public class GameSettingData : Data
     public static float EnemyDMGGrow;
     public static float BossHPGrow;
     public static float BossDMGGrow;
-
+    public static float BossSturn;
 
 
 
@@ -511,6 +511,9 @@ public class GameSettingData : Data
                                 break;
                             case "BossDMGGrow":
                                 BossDMGGrow = float.Parse(item[key].ToString());
+                                break;
+                            case "BossSturn":
+                                BossSturn = float.Parse(item[key].ToString());
                                 break;
                             default:
                                 Debug.LogWarning(string.Format("{0}表有不明屬性:{1}", DataName, key));

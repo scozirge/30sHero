@@ -206,8 +206,11 @@ public partial class BattleManage
         int count = 0;
         for (int i = 0; i < EnemyList.Count; i++)
         {
-            if (EnemyList[i].isActiveAndEnabled)
-                count++;
+            if (EnemyList[i]!=null)
+            {
+                if (EnemyList[i].isActiveAndEnabled)
+                    count++;
+            }
         }
         if (count < MaxEnemy)
             return false;

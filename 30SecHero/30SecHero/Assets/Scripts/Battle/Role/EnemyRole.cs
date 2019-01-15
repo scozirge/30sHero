@@ -191,6 +191,7 @@ public partial class EnemyRole : Role
         if (_skill.AttackStopMove)
             AddBuffer(RoleBuffer.EnemyAttacking, _skill.StopMoveTime);
     }
+
     public override void PreAttack()
     {
         base.PreAttack();
@@ -260,6 +261,10 @@ public partial class EnemyRole : Role
             {
                 return;
             }
+        }
+        if (Type == EnemyType.Demogorgon && _buffer.Type == RoleBuffer.Stun)
+        {
+            _buffer.Time = GameSettingData.BossSturn;
         }
         base.AddBuffer(_buffer);
         UpdateCanMove();
