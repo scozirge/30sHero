@@ -18,6 +18,20 @@ public class EnchantData : Data
         }
         private set { return; }
     }
+    public string Description()
+    {
+        if (!GameDictionary.String_EnchantDic.ContainsKey(ID.ToString()))
+        {
+            Debug.LogWarning(string.Format("{0}表不包含{1}的文字資料", DataName, ID));
+            return "NullText";
+        }
+        string valueString = "";
+        if (ShowPercentage)
+            valueString = string.Format("{0}{1}{2}{3}{4}", TextManager.ToPercent(BaseValue + (LV-1) * LevelUpValue).ToString("0"), StringData.GetString("Percent"), StringData.GetString("Arrow2"), TextManager.ToPercent(BaseValue + (LV ) * LevelUpValue).ToString("0"), StringData.GetString("Percent"));
+        else
+            valueString = string.Format("{0}{1}{2}", BaseValue + (LV-1) * LevelUpValue, StringData.GetString("Arrow2"), BaseValue + (LV ) * LevelUpValue);
+        return string.Format(GameDictionary.String_EnchantDic[ID.ToString()].GetString(1, Player.UseLanguage), valueString);
+    }
     public string Description(int _offset)
     {
         if (!GameDictionary.String_EnchantDic.ContainsKey(ID.ToString()))
@@ -29,14 +43,14 @@ public class EnchantData : Data
         if (MyEnchantType == EnchantType.Enchant)
         {
             if (ShowPercentage)
-                valueString = string.Format("{0}{1}", TextManager.ToPercent(BaseValue + (LV + _offset) * LevelUpValue).ToString("0"), "%");
+                valueString = string.Format("{0}{1}", TextManager.ToPercent(BaseValue + (LV-1 + _offset) * LevelUpValue).ToString("0"), StringData.GetString("Percent"));
             else
-                valueString = string.Format("{0}", BaseValue + (LV + _offset) * LevelUpValue);
+                valueString = string.Format("{0}", BaseValue + (LV-1 + _offset) * LevelUpValue);
         }
         else
         {
             if (ShowPercentage)
-                valueString = string.Format("{0}{1}", TextManager.ToPercent(GetValue()).ToString("0"), "%");
+                valueString = string.Format("{0}{1}", TextManager.ToPercent(GetValue()).ToString("0"), StringData.GetString("Percent"));
             else
                 valueString = string.Format("{0}", GetValue());
         }
@@ -205,6 +219,11 @@ public class EnchantData : Data
         data.InitSet(_lv);
         return data;
     }
+    public static EnchantData GetUnLockRandomEnchant()
+    {
+        EnchantData ed = GetRandomEnchant(1);
+        return ed;
+    }
     public static EnchantData GetAvailableRandomEnchant()
     {
         for (int i = 1; i < 4; i++)
@@ -223,6 +242,15 @@ public class EnchantData : Data
         if (ed == null)
             return true;
         return false;
+    }
+    public static EnchantData GetCertainEnchant(int _id)
+    {
+        if (Player.EnchantDic.ContainsKey(_id))
+        {
+            return Player.EnchantDic[_id];
+        }
+        else
+            return null;
     }
     static EnchantData GetRandomEnchant(int _lv)
     {

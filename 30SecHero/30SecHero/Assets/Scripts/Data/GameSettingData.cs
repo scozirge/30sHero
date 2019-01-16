@@ -58,6 +58,7 @@ public class GameSettingData : Data
     //腳色基本數值
     public static int MaxHealth;
     public static int BaseDamage;
+    public static int WeaponDamage;
     public static int BaseMoveSpeed;
     public static int MaxShield;
     public static float ShieldGenerateProportion;
@@ -319,6 +320,9 @@ public class GameSettingData : Data
                                 break;
                             case "BaseDamage":
                                 BaseDamage = int.Parse(item[key].ToString());
+                                break;
+                            case "WeaponDamage":
+                                WeaponDamage = int.Parse(item[key].ToString());
                                 break;
                             case "BaseMoveSpeed":
                                 BaseMoveSpeed = int.Parse(item[key].ToString());

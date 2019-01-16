@@ -18,6 +18,20 @@ public class StrengthenData : Data
         }
         private set { return; }
     }
+    public string Description()
+    {
+        if (!GameDictionary.String_StrengthenDic.ContainsKey(ID.ToString()))
+        {
+            Debug.LogWarning(string.Format("{0}表不包含{1}的文字資料", DataName, ID));
+            return "NullText";
+        }
+        string valueString = "";
+        if (ShowPercentage)
+            valueString = string.Format("{0}{1}{2}{3}{4}", TextManager.ToPercent(BaseValue + (LV) * LevelUpValue).ToString("0"), StringData.GetString("Percent"), StringData.GetString("Arrow2"), TextManager.ToPercent(BaseValue + (LV + 1) * LevelUpValue).ToString("0"), StringData.GetString("Percent"));
+        else
+            valueString = string.Format("{0}{1}{2}", BaseValue + (LV) * LevelUpValue, StringData.GetString("Arrow2"), BaseValue + (LV + 1) * LevelUpValue);
+        return string.Format(GameDictionary.String_StrengthenDic[ID.ToString()].GetString(1, Player.UseLanguage), valueString);
+    }
     public string Description(int _offset)
     {
         if (!GameDictionary.String_StrengthenDic.ContainsKey(ID.ToString()))
@@ -27,7 +41,7 @@ public class StrengthenData : Data
         }
         string valueString = "";
         if (ShowPercentage)
-            valueString = string.Format("{0}{1}", TextManager.ToPercent(BaseValue + (LV + _offset) * LevelUpValue).ToString("0"), "%");
+            valueString = string.Format("{0}{1}", TextManager.ToPercent(BaseValue + (LV + _offset) * LevelUpValue).ToString("0"), StringData.GetString("Percent"));
         else
             valueString = string.Format("{0}", BaseValue + (LV + _offset) * LevelUpValue);
         return string.Format(GameDictionary.String_StrengthenDic[ID.ToString()].GetString(1, Player.UseLanguage), valueString);

@@ -92,7 +92,7 @@ public partial class Debugger : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.L))
         {
-            EnchantData ed = EnchantData.GetAvailableRandomEnchant();
+            EnchantData ed = EnchantData.GetUnLockRandomEnchant();
             if (ed != null)
             {
                 Player.EnchantUpgrade(ed,false);

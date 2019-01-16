@@ -18,5 +18,6 @@
     BloodThirsty,
     PotionEfficiency,
     PotionDrop,
-    RushCD
+    RushCD,
+    WeaponDamage
 }

@@ -198,17 +198,17 @@ public class Strengthen : MyUI
             NameText.text = CurSelectedSData.Name;
             if (!CurSelectedSData.CanUpgrade())
             {
-                DescriptionText.text = CurSelectedSData.Description(-1);
+                DescriptionText.text = CurSelectedSData.Description(0);
                 PriceText.text = StringData.GetString("MaxLevel");
             }
             else if (Player.Gold < CurSelectedSData.GetPrice())
             {
-                DescriptionText.text = CurSelectedSData.Description(0);
+                DescriptionText.text = CurSelectedSData.Description();
                 PriceText.text = CurSelectedSData.GetPrice().ToString(); //PriceText.text = StringData.GetString("Unaffordable");
             }
             else
             {
-                DescriptionText.text = CurSelectedSData.Description(0);
+                DescriptionText.text = CurSelectedSData.Description();
                 PriceText.text = CurSelectedSData.GetPrice().ToString();
             }
         }
@@ -219,18 +219,18 @@ public class Strengthen : MyUI
                 NameText.text = CurSelectedEData.Name;
                 if (!CurSelectedEData.CanUpgrade())
                 {
-                    DescriptionText.text = CurSelectedEData.Description(-1);
+                    DescriptionText.text = CurSelectedEData.Description();
                     PriceText.text = StringData.GetString("MaxLevel");
 
                 }
                 else if (Player.Emerald < CurSelectedEData.GetPrice())
                 {
-                    DescriptionText.text = CurSelectedEData.Description(0);
+                    DescriptionText.text = CurSelectedEData.Description();
                     PriceText.text = CurSelectedEData.GetPrice().ToString(); //PriceText.text = StringData.GetString("Unaffordable");
                 }
                 else
                 {
-                    DescriptionText.text = CurSelectedEData.Description(0);
+                    DescriptionText.text = CurSelectedEData.Description();
                     PriceText.text = CurSelectedEData.GetPrice().ToString();
                 }
             }

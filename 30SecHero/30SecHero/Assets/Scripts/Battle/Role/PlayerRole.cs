@@ -123,6 +123,9 @@ public partial class PlayerRole : Role
     [Tooltip("殺怪最高額外速度")]
     [SerializeField]
     float MaxExtraMove;
+    [Tooltip("刀子傷害")]
+    [SerializeField]
+    public int WeaponAttack;
     [Tooltip("變身時間")]
     [SerializeField]
     public float MaxAvaterTime;
@@ -441,6 +444,7 @@ public partial class PlayerRole : Role
         MaxHealth = (int)Player.GetProperties(RoleProperty.Health);
         OriginMaxHealth = MaxHealth;
         BaseDamage = (int)Player.GetProperties(RoleProperty.Strength);
+        WeaponAttack = (int)Player.GetProperties(RoleProperty.WeaponDamage);
         MaxShield = (int)Player.GetProperties(RoleProperty.Shield);
         ShieldRechargeTime = (float)Player.GetProperties(RoleProperty.ShieldReChargeTime);
         ShieldGenerateProportion = (float)Player.GetProperties(RoleProperty.ShieldRecovery);

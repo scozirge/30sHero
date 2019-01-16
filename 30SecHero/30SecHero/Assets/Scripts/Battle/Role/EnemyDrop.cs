@@ -105,11 +105,27 @@ public partial class EnemyRole
                 //寶石
                 ResourceLoot loot = DropSpawner.SpawnResource(transform.position);
                 if (loot) loot.Init(ResourceType.Emerald, GameSettingData.NewBossEmerald);
-                //解鎖夥伴並加入已擊殺BOSS清單                
-                PatnerLoot ploot = DropSpawner.SpawnPatner(transform.position);
-                EnchantData ed = EnchantData.GetAvailableRandomEnchant();
-                BattleManage.KillBossAndGetEnchant(ID, ed);
-                if (ploot) ploot.Init(ID, ed);
+            }
+            //解鎖夥伴並加入已擊殺BOSS清單
+            if(Player.KillBossID.Contains(15))
+            {
+                EnchantData ed = EnchantData.GetUnLockRandomEnchant();
+                if (ed != null)
+                {
+                    PatnerLoot ploot = DropSpawner.SpawnPatner(transform.position);
+                    BattleManage.KillBossAndGetEnchant(ID, ed);
+                    if (ploot) ploot.Init(ID, ed);
+                }
+            }
+            else
+            {
+                EnchantData ed = EnchantData.GetCertainEnchant(20);
+                if (ed != null)
+                {
+                    PatnerLoot ploot = DropSpawner.SpawnPatner(transform.position);
+                    BattleManage.KillBossAndGetEnchant(ID, ed);
+                    if (ploot) ploot.Init(ID, ed);
+                }
             }
         }
         //DropLoot;
