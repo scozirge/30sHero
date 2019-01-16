@@ -65,9 +65,12 @@ public partial class Player
     }
     public static void UpToDateCurMaxEquipUID()
     {
-        CurMaxWeaponUID = Itmes[EquipType.Weapon].Keys.Max();
-        CurMaxArmorUID = Itmes[EquipType.Armor].Keys.Max();
-        CurMaxAccessoryUID = Itmes[EquipType.Accessory].Keys.Max();
+        if (Itmes.ContainsKey(EquipType.Weapon) && Itmes[EquipType.Weapon].Count != 0)
+            CurMaxWeaponUID = Itmes[EquipType.Weapon].Keys.Max();
+        if (Itmes.ContainsKey(EquipType.Armor) && Itmes[EquipType.Armor].Count != 0)
+            CurMaxArmorUID = Itmes[EquipType.Armor].Keys.Max();
+        if (Itmes.ContainsKey(EquipType.Accessory) && Itmes[EquipType.Accessory].Count != 0)
+            CurMaxAccessoryUID = Itmes[EquipType.Accessory].Keys.Max();
     }
     public static void EquipSaveLocalData()
     {
