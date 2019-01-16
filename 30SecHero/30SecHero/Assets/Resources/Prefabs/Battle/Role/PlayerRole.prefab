@@ -241,7 +241,7 @@ MonoBehaviour:
   BeAttackSound: {fileID: 8300000, guid: f09cc00cfbcd8ad48ba26d221fc06857, type: 3}
   ShieldBeAttackSound: {fileID: 8300000, guid: 6a374b8b01a46994687c76e55b940c80, type: 3}
   ShieldBreakSound: {fileID: 8300000, guid: dfea194beaf6ed049b416ac8b8390bab, type: 3}
-  ShieldBreakEffect: {fileID: 198809433350172102, guid: 57e8c86ea4e12194197302088b4eded5,
+  ShieldBreakEffect: {fileID: 7325413229783261636, guid: f7dc99ead1a58ed4eb3ece54ac0b1b73,
     type: 3}
   RemoveAvatarSound: {fileID: 8300000, guid: 4027915a7025bf14fa1be528e0a0dfd7, type: 3}
   CountdownSound: {fileID: 8300000, guid: 7c919f9835ef7064fa42d392c9f4349f, type: 3}
