@@ -1207,7 +1207,7 @@ public partial class PlayerRole : Role
                         switch (_buffer.Type)
                         {
                             case RoleBuffer.Burn:
-                                if (IgniteTutorial)
+                                if (IgniteTutorial && IsAlive)
                                 {
                                     BattleManage.BM.PopupTutorial("Ignite");
                                     PlayerPrefs.SetInt(LocoData.IgniteTutorial.ToString(), 1);
@@ -1215,7 +1215,7 @@ public partial class PlayerRole : Role
                                 }
                                 break;
                             case RoleBuffer.Freeze:
-                                if (FreezeTutorial)
+                                if (FreezeTutorial && IsAlive)
                                 {
                                     BattleManage.BM.PopupTutorial("Freeze");
                                     PlayerPrefs.SetInt(LocoData.FreezeTutorial.ToString(), 1);
@@ -1223,7 +1223,7 @@ public partial class PlayerRole : Role
                                 }
                                 break;
                             case RoleBuffer.DamageDown:
-                                if (PoisonedTutorial)
+                                if (PoisonedTutorial && IsAlive)
                                 {
                                     BattleManage.BM.PopupTutorial("Poisoned");
                                     PlayerPrefs.SetInt(LocoData.PoisonedTutorial.ToString(), 1);
