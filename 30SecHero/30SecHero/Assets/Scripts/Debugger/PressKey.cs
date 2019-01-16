@@ -19,7 +19,7 @@ public partial class Debugger : MonoBehaviour
         */
         if (Input.GetKeyDown(KeyCode.Z))
         {
-            Player.ShowBaseProperties();
+            BattleManage.BM.MyPlayer.HealHP(10000);
         }
         else if (Input.GetKeyDown(KeyCode.X))
         {
@@ -37,13 +37,13 @@ public partial class Debugger : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.C))
         {
             AudioPlayer.FadeOutMusic("Battle", 1f);
-            AudioPlayer.FadeInMusic(GameManager.GM.BossFightMusic, "BossFight", 2f);
+            AudioPlayer.FadeInMusic(GameManager.GM.BossFightMusic, "BossFight", 2f,1);
             //Player.ShowStrengthenProperties();
         }
         else if (Input.GetKeyDown(KeyCode.V))
         {
             AudioPlayer.FadeOutMusic("BossFight", 0.5f);
-            AudioPlayer.FadeInMusic(GameManager.GM.FightMusic2, "Battle", 2f);
+            AudioPlayer.FadeInMusic(GameManager.GM.FightMusic2, "Battle", 2f, 1);
             //Player.ShowTotalProperties();
         }
         else if (Input.GetKeyDown(KeyCode.E))

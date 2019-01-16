@@ -5,6 +5,12 @@ using UnityEngine.UI;
 
 public partial class PlayerRole : Role
 {
+    [LabelOverride("心跳聲")]
+    [SerializeField]
+    AudioClip Heartbeat;
+    [LabelOverride("受傷邊框內光暈")]
+    [SerializeField]
+    SpriteRenderer HurtInnerGlow;
     [Tooltip("使用測試模式，非測試模式時，玩家數值為讀表")]
     [SerializeField]
     bool TestMode;
@@ -385,6 +391,7 @@ public partial class PlayerRole : Role
         IsTriggerRevive = false;
         IsTriggerRuleBreaker = false;
         StartCoroutine(StartAvatarPerformance());
+        UpdateHurtInnerGlow();
         //是否要跳藥水教學說明設定
         if (PlayerPrefs.GetInt(LocoData.EnergyPotionTutorial.ToString()) == 0)
             EnergyPotionTutorial = true;
@@ -729,6 +736,67 @@ public partial class PlayerRole : Role
         else
             DirectY = Direction.Bottom;
     }
+    public void StopHeartbeatAndInnerGlow()
+    {
+        if (HurtInnerGlow)
+            HurtInnerGlow.gameObject.SetActive(false);
+        AudioPlayer.AdusjtMusicVolume(1);
+        AudioPlayer.StopLoopSound_Static("Heartbeat");
+    }
+    void UpdateHurtInnerGlow()
+    {
+        if (HurtInnerGlow)
+        {
+            if (!IsAlive)
+            {
+                HurtInnerGlow.gameObject.SetActive(false);
+            }
+            else
+            {
+                if (HealthRatio < 1)
+                    HurtInnerGlow.gameObject.SetActive(true);
+                else
+                    HurtInnerGlow.gameObject.SetActive(false);
+                Color c = HurtInnerGlow.color;
+                c.a = (1 - HealthRatio);
+                HurtInnerGlow.color = c;
+            }
+        }
+    }
+    float BGM_SoftVolume = 0.3f;
+    public float GetBGMVolume()
+    {
+        if (HealthRatio < 1)
+        {
+            return BGM_SoftVolume;
+        }
+        else
+            return 1;
+    }
+    void UpdateHeartbeat()
+    {
+        if (Heartbeat)
+        {
+            if (!IsAlive)
+            {
+                AudioPlayer.AdusjtMusicVolume(1);
+                AudioPlayer.StopLoopSound_Static("Heartbeat");
+            }
+            else
+            {
+                if (HealthRatio < 1)
+                {
+                    AudioPlayer.AdusjtMusicVolume(BGM_SoftVolume);
+                    AudioPlayer.PlayLoopSound_Static(Heartbeat, "Heartbeat");
+                }
+                else
+                {
+                    AudioPlayer.AdusjtMusicVolume(1);
+                    AudioPlayer.StopLoopSound_Static("Heartbeat");
+                }
+            }
+        }
+    }
     public override void BeAttack(Force _attackerForce, ref int _dmg, Vector2 _force)
     {
         if (!IsAvatar)
@@ -782,9 +850,17 @@ public partial class PlayerRole : Role
             }
         }
     }
+    public override void HealHP(int _heal)
+    {
+        base.HealHP(_heal);
+        UpdateHurtInnerGlow();
+        UpdateHeartbeat();
+    }
     public override void ReceiveDmg(ref int _dmg)
     {
         base.ReceiveDmg(ref _dmg);
+        UpdateHurtInnerGlow();
+        UpdateHeartbeat();
         //受到傷害解除自癒
         if (NoDamageRecoveryTimer != null)
         {
@@ -951,6 +1027,7 @@ public partial class PlayerRole : Role
                 if (!DragTimer.StartRunTimer)
                 {
                     DragRecovery();
+
                     if (IsAvatar)
                     {
                         float xMoveForce = 0;
@@ -996,8 +1073,6 @@ public partial class PlayerRole : Role
                     }
                     else
                     {
-                        if (!CanJump)
-                            return;
                         float xMoveForce = 0;
                         float yMoveForce = 0;
                         if (Input.GetAxis("Horizontal") == 0)
@@ -1012,13 +1087,47 @@ public partial class PlayerRole : Role
                             yMoveForce = 1;
                         else if (Input.GetAxis("Vertical") < 0)
                             yMoveForce = -1;
-                        if (xMoveForce != 0 || yMoveForce != 0)
-                            AniPlayer.PlayTrigger("Jump", 0);
                         xMoveForce *= MoveSpeed * KeyboardJumpMoveFactor;
                         yMoveForce *= MoveSpeed * KeyboardJumpMoveFactor;
-                        MyRigi.velocity = new Vector2(xMoveForce, yMoveForce);
-                        JumpTimer.StartRunTimer = true;
-                        CanJump = false;
+                        //史萊姆衝刺
+                        if (CanRush && Input.GetKeyDown(KeyCode.Space))
+                        {
+                            RushTimer.StartRunTimer = true;
+                            OnRushTimer.StartRunTimer = true;
+                            //寫少時衝刺CD減少
+                            if (MyEnchant[EnchantProperty.DashForLife] > 0)
+                            {
+                                if (HealthRatio < MyEnchant[EnchantProperty.DashForLife])
+                                    RushTimer.ResetMaxTime(RushCD - 0.5f);
+                                else
+                                    RushTimer.ResetMaxTime(RushCD);
+                            }
+                            CanRush = false;
+                            OnRush = true;
+                            ExtraMoveSpeed += MyEnchant[EnchantProperty.Inertia];
+                            Vector2 rushForce;
+                            if (xMoveForce == 0 && yMoveForce == 0)
+                            {
+                                rushForce = new Vector2(FaceLeftOrRight, 0) * RushForce;
+                            }
+                            else
+                                rushForce = new Vector2(xMoveForce, yMoveForce) * RushForce;
+                            ChangeToKnockDrag();
+                            MyRigi.velocity = rushForce;
+                            //MyRigi.AddForce(rushForce);
+                            AudioPlayer.PlaySound(RushSound);
+                            //衝刺特效RushEffect
+                            float angle = Mathf.Atan2(MyRigi.velocity.y, MyRigi.velocity.x) * Mathf.Rad2Deg;
+                            EffectEmitter.EmitParticle(RushEffect, Vector3.zero, new Vector3(0, 0, angle), transform);
+                        }
+                        if (CanJump)//史萊姆跳
+                        {                            
+                            if (xMoveForce != 0 || yMoveForce != 0)
+                                AniPlayer.PlayTrigger("Jump", 0);
+                            MyRigi.velocity = new Vector2(xMoveForce, yMoveForce);
+                            JumpTimer.StartRunTimer = true;
+                            CanJump = false;
+                        }                   
                     }
                 }
             }
@@ -1095,7 +1204,7 @@ public partial class PlayerRole : Role
                     {
                         base.AddBuffer(_buffer);
                         //是否跳彈窗教學
-                        switch(_buffer.Type)
+                        switch (_buffer.Type)
                         {
                             case RoleBuffer.Burn:
                                 if (IgniteTutorial)
@@ -1122,7 +1231,7 @@ public partial class PlayerRole : Role
                                 }
                                 break;
                         }
-                    }                        
+                    }
                 }
             }
         }
@@ -1358,6 +1467,7 @@ public partial class PlayerRole : Role
         bool death = base.DeathCheck();
         if (death)
         {
+            UpdateHeartbeat();
             Vector3 pos = MyLight.transform.position;
             MyLight.transform.SetParent(BattleManage.BM.transform);
             MyLight.transform.position = pos;

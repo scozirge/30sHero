@@ -56,7 +56,7 @@ public partial class BattleManage
                 if (WarningAni!=null)
                 {
                     AudioPlayer.FadeOutMusic("Battle", 1f);
-                    AudioPlayer.FadeInMusic(GameManager.GM.BossFightMusic, "BossFight", 2f);
+                    AudioPlayer.FadeInMusic(GameManager.GM.BossFightMusic, "BossFight", 2f, BattleManage.BM.MyPlayer.GetBGMVolume());
                     WarningAni.gameObject.SetActive(true);
                     WarningAni.Play(0);
                 }
