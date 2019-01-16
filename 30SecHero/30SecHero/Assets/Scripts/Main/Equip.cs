@@ -116,6 +116,7 @@ public class Equip : MyUI
             EquipDic.Add(EquipType.Accessory, AccessoryList);
         }
         ItemCoutText.text = string.Format("{0}/{1}", ItemList.Count, GameSettingData.MaxItemCount);
+        SoldMode = false;
         //過濾裝備但不用Filter()不然會取消tip驚嘆號
         //Filter();
         for (int i = 0; i < ItemList.Count; i++)
@@ -151,6 +152,7 @@ public class Equip : MyUI
         if (!IsInit)
             return;
         base.OnEnable();
+        SoldMode = false;
         ToFilter(0);
         Sort();
         UpdateRoleInfo(false);

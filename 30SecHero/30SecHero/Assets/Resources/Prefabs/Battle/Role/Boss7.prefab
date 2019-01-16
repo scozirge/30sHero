@@ -286,7 +286,7 @@ MonoBehaviour:
     - {fileID: 9445}
     SpawnEnemyList: []
     SoundList: []
-  - WaitSecond: 0
+  - WaitSecond: 1
     MaxProcessingTime: 2
     RelativeToTarget: 4
     Destination: {x: -600, y: -400}
@@ -314,7 +314,7 @@ MonoBehaviour:
     SkillList: []
     SpawnEnemyList: []
     SoundList: []
-  - WaitSecond: 0
+  - WaitSecond: 1
     MaxProcessingTime: 2
     RelativeToTarget: 4
     Destination: {x: -600, y: 400}
@@ -342,7 +342,7 @@ MonoBehaviour:
     SkillList: []
     SpawnEnemyList: []
     SoundList: []
-  - WaitSecond: 1
+  - WaitSecond: 2
     MaxProcessingTime: 0
     RelativeToTarget: 4
     Destination: {x: 600, y: 0}
