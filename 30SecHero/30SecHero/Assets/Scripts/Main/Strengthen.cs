@@ -100,12 +100,7 @@ public class Strengthen : MyUI
         CurSelectedSItem = _item;
         RefreshText();
         UpgradeButton.gameObject.SetActive(true);
-        if (Player.Gold < CurSelectedSData.GetPrice() || !CurSelectedSData.CanUpgrade())
-        {
-            UpgradeButton.interactable = false;
-        }
-        else
-            UpgradeButton.interactable = true;
+        CheckStrengthenConfirmBtn();
     }
     public void ShowInfo(EnchantItem _item)
     {
@@ -115,12 +110,7 @@ public class Strengthen : MyUI
             CurSelectedEItem = _item;
             RefreshText();
             UpgradeButton.gameObject.SetActive(true);
-            if (Player.Emerald < CurSelectedEData.GetPrice() || !CurSelectedEData.CanUpgrade())
-            {
-                UpgradeButton.interactable = false;
-            }
-            else
-                UpgradeButton.interactable = true;
+            CheckStrengthenConfirmBtn();
         }
         else
         {
@@ -128,6 +118,31 @@ public class Strengthen : MyUI
             CurSelectedEItem = null;
             RefreshText();
             UpgradeButton.gameObject.SetActive(false);
+        }
+    }
+    public void CheckStrengthenConfirmBtn()
+    {
+        if (CurFilterType == StrengthenType.Strengthen)
+        {
+            if (Player.Gold < CurSelectedSData.GetPrice() || !CurSelectedSData.CanUpgrade())
+            {
+                UpgradeButton.interactable = false;
+            }
+            else
+            {
+                UpgradeButton.interactable = true;
+            }
+        }
+        else
+        {
+            if (Player.Emerald < CurSelectedEData.GetPrice() || !CurSelectedEData.CanUpgrade())
+            {
+                UpgradeButton.interactable = false;
+            }
+            else
+            {
+                UpgradeButton.interactable = true;
+            }
         }
     }
     public override void RefreshText()
