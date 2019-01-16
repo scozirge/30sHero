@@ -11,6 +11,7 @@ public partial class PlayerRole : Role
     [LabelOverride("受傷邊框內光暈")]
     [SerializeField]
     SpriteRenderer HurtInnerGlow;
+    float HurtInnerGlowTransparent;
     [Tooltip("使用測試模式，非測試模式時，玩家數值為讀表")]
     [SerializeField]
     bool TestMode;
@@ -231,6 +232,7 @@ public partial class PlayerRole : Role
     [Tooltip("衝刺CD")]
     [SerializeField]
     protected float RushCD;
+    protected float SlimeRushCD;
     [SerializeField]
     protected Light MyLight;
     [Tooltip("破盾冰風暴")]
@@ -370,6 +372,7 @@ public partial class PlayerRole : Role
         JumpTimer = new MyTimer(JumpCDTime, SetCanJump, false, false);
         RushTimer = new MyTimer(RushCD, SetCanRush, ShowRushCD, false, false);
         OnRushTimer = new MyTimer(RushAntiAmooTime, SetNotOnRush, false, false);
+        SlimeRushCD = RushCD - 0.5f;
         Skill[] skills = GetComponents<Skill>();
         for (int i = 0; i < skills.Length; i++)
         {
@@ -385,6 +388,7 @@ public partial class PlayerRole : Role
         Shield = MaxShield;
         InitMoveAfterimage();
         FaceLeftOrRight = 1;
+        HurtInnerGlowTransparent = 0;
         CanJump = true;
         CanRush = true;
         StartControl = false;
@@ -643,6 +647,7 @@ public partial class PlayerRole : Role
     //重新化身為英雄ReAvatarProportion
     public void ReAvatar(float _time)
     {
+        RushTimer.ResetMaxTime(RushCD);
         IsAvatar = true;
         AvatarTimer = _time;
         AniPlayer.PlayTrigger("Idle", 0);
@@ -689,6 +694,7 @@ public partial class PlayerRole : Role
     protected override void Update()
     {
         base.Update();
+        HurtInnerGlowFunc();
         GameObject go = GameobjectFinder.FindClosestGameobjectWithTag(gameObject, Force.Enemy.ToString());
         if (go)
             ClosestEnemy = go.GetComponent<EnemyRole>();
@@ -757,10 +763,38 @@ public partial class PlayerRole : Role
                     HurtInnerGlow.gameObject.SetActive(true);
                 else
                     HurtInnerGlow.gameObject.SetActive(false);
+                HurtInnerGlowTransparent = ((1 - HealthRatio) * 0.6f);
                 Color c = HurtInnerGlow.color;
                 c.a = (1 - HealthRatio);
                 HurtInnerGlow.color = c;
             }
+        }
+    }
+    bool HurtInnerGlowFactor;
+    void HurtInnerGlowFunc()
+    {
+        if(HurtInnerGlowTransparent>0)
+        {
+            Color c = HurtInnerGlow.color;
+            if (HurtInnerGlowFactor)
+            {
+                if (c.a < HurtInnerGlowTransparent)
+                {
+                    c.a += (HurtInnerGlowTransparent / 1) * Time.deltaTime;
+                }
+                else
+                    HurtInnerGlowFactor = false;
+            }
+            else
+            {
+                if (c.a > 0)
+                {
+                    c.a -= (HurtInnerGlowTransparent / 1) * Time.deltaTime;
+                }
+                else
+                    HurtInnerGlowFactor = true;
+            }
+            HurtInnerGlow.color = c;
         }
     }
     float BGM_SoftVolume = 0.3f;
@@ -784,7 +818,7 @@ public partial class PlayerRole : Role
             }
             else
             {
-                if (HealthRatio < 1)
+                if (HealthRatio < 0.7)
                 {
                     AudioPlayer.AdusjtMusicVolume(BGM_SoftVolume);
                     AudioPlayer.PlayLoopSound_Static(Heartbeat, "Heartbeat");
@@ -931,6 +965,7 @@ public partial class PlayerRole : Role
             AvatarTimer -= Time.deltaTime;
         else//解除變身
         {
+            RushTimer.ResetMaxTime(SlimeRushCD);
             //是否跳彈窗教學
             if (SlimeTimeTutorial)
             {
@@ -1104,6 +1139,7 @@ public partial class PlayerRole : Role
                             }
                             CanRush = false;
                             OnRush = true;
+                            AddBuffer(RoleBuffer.Untouch, RushAntiAmooTime);
                             ExtraMoveSpeed += MyEnchant[EnchantProperty.Inertia];
                             Vector2 rushForce;
                             if (xMoveForce == 0 && yMoveForce == 0)
@@ -1121,13 +1157,13 @@ public partial class PlayerRole : Role
                             EffectEmitter.EmitParticle(RushEffect, Vector3.zero, new Vector3(0, 0, angle), transform);
                         }
                         if (CanJump)//史萊姆跳
-                        {                            
+                        {
                             if (xMoveForce != 0 || yMoveForce != 0)
                                 AniPlayer.PlayTrigger("Jump", 0);
                             MyRigi.velocity = new Vector2(xMoveForce, yMoveForce);
                             JumpTimer.StartRunTimer = true;
                             CanJump = false;
-                        }                   
+                        }
                     }
                 }
             }

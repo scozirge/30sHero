@@ -252,14 +252,17 @@ public partial class BattleManage : MonoBehaviour
             SpawnLootTimer.StartRunTimer = true;
             return;
         }
-        PotionLoot loot = Instantiate(LootPrefab, Vector3.zero, Quaternion.identity) as PotionLoot;
-        //Set SpawnPos
-        loot.transform.SetParent(LootParetn);
-        AIMove ai = loot.GetComponent<AIMove>();
-        Vector2 offset = ai.SetRandDestination();
-        loot.transform.position = GetSpawnPos(offset);
+        if(ProbabilityGetter.GetResult(GameSettingData.PotionProportion))
+        {
+            PotionLoot loot = Instantiate(LootPrefab, Vector3.zero, Quaternion.identity) as PotionLoot;
+            //Set SpawnPos
+            loot.transform.SetParent(LootParetn);
+            AIMove ai = loot.GetComponent<AIMove>();
+            Vector2 offset = ai.SetRandDestination();
+            loot.transform.position = GetSpawnPos(offset);
+            LootList.Add(loot);
+        }
         SpawnLootTimer.StartRunTimer = true;
-        LootList.Add(loot);
     }
 
     public void Tutorial_NextPage(bool _next)

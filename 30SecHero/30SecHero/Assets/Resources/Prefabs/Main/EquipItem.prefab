@@ -53,6 +53,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd782e46f25f611448d54542b4dfa864, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TipObj: {fileID: 0}
   Icons:
   - {fileID: 114553157141157456}
   - {fileID: 114093662832140542}
@@ -150,6 +151,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e309cbde359b6e04ebbe14eadf5fec09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TipObj: {fileID: 0}
   Icon: {fileID: 0}
   LVText: {fileID: 0}
   NumberText: {fileID: 0}
@@ -241,6 +243,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e309cbde359b6e04ebbe14eadf5fec09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TipObj: {fileID: 0}
   Icon: {fileID: 0}
   LVText: {fileID: 0}
   NumberText: {fileID: 0}
@@ -355,7 +358,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -75.37, y: -58.4}
-  m_SizeDelta: {x: 160, y: 50}
+  m_SizeDelta: {x: 200, y: 100}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!222 &222718727001597540
 CanvasRenderer:
@@ -410,7 +413,7 @@ MonoBehaviour:
     m_Alignment: 3
     m_AlignByGeometry: 0
     m_RichText: 1
-    m_HorizontalOverflow: 0
+    m_HorizontalOverflow: 1
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: lv1
@@ -503,6 +506,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e309cbde359b6e04ebbe14eadf5fec09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TipObj: {fileID: 0}
   Icon: {fileID: 0}
   LVText: {fileID: 0}
   NumberText: {fileID: 0}
