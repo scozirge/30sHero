@@ -146,7 +146,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Nodes:
-  - WaitSecond: 0
+  - WaitSecond: 1
     MaxProcessingTime: 0
     RelativeToTarget: 4
     Destination: {x: 600, y: 0}
@@ -418,7 +418,7 @@ MonoBehaviour:
     - {fileID: 9444}
     SpawnEnemyList: []
     SoundList: []
-  - WaitSecond: 0
+  - WaitSecond: 1
     MaxProcessingTime: 6
     RelativeToTarget: 4
     Destination: {x: -600, y: 400}
@@ -535,7 +535,7 @@ MonoBehaviour:
     - {fileID: 9441}
     SpawnEnemyList: []
     SoundList: []
-  - WaitSecond: 0
+  - WaitSecond: 1
     MaxProcessingTime: 6
     RelativeToTarget: 0
     Destination: {x: 0, y: 300}
@@ -651,7 +651,7 @@ MonoBehaviour:
     - {fileID: 9444}
     SpawnEnemyList: []
     SoundList: []
-  - WaitSecond: 0
+  - WaitSecond: 1
     MaxProcessingTime: 2
     RelativeToTarget: 0
     Destination: {x: 0, y: -600}
@@ -801,7 +801,7 @@ MonoBehaviour:
     - {fileID: 9437}
     SpawnEnemyList: []
     SoundList: []
-  - WaitSecond: 0
+  - WaitSecond: 1
     MaxProcessingTime: 6
     RelativeToTarget: 4
     Destination: {x: 400, y: 0}
@@ -830,11 +830,11 @@ MonoBehaviour:
     - {fileID: 9441}
     SpawnEnemyList: []
     SoundList: []
-  - WaitSecond: 0
+  - WaitSecond: 1
     MaxProcessingTime: 6
     RelativeToTarget: 4
     Destination: {x: -600, y: 400}
-    ExpandFolder: 0
+    ExpandFolder: 1
     MoveSpeed: 200
     ActiveOnlyByEvent: 1
     NodeTag: successiveSummon
