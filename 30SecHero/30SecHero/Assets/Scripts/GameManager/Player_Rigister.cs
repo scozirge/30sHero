@@ -250,7 +250,7 @@ public partial class Player
             for (int i = 0; i < _data.Length; i++)
             {
                 string[] properties = _data[i].Split(',');
-                int uid = int.Parse(properties[0]);
+                int uid = int.Parse(properties[0]);                    
                 int jid = int.Parse(properties[1]);
                 EquipType type = (EquipType)int.Parse(properties[2]);
                 int equipSlot = int.Parse(properties[3]);
@@ -266,7 +266,7 @@ public partial class Player
                 {
                     case EquipType.Weapon:
                         WeaponData w = WeaponData.GetNewWeapon(uid, jid, equipSlot, lv, quality, propertiesStr, enchantID);
-                        wlist.Add(uid, w);
+                        wlist.Add(uid, w);                        
                         break;
                     case EquipType.Armor:
                         ArmorData a = ArmorData.GetNewArmor(uid, jid, equipSlot, lv, quality, propertiesStr, enchantID);
@@ -281,6 +281,7 @@ public partial class Player
             Itmes[EquipType.Weapon] = wlist;
             Itmes[EquipType.Armor] = alist;
             Itmes[EquipType.Accessory] = aclist;
+            Player.UpToDateCurMaxEquipUID();
         }
         EquipInitDataFinish = true;
     }
@@ -364,9 +365,9 @@ public partial class Player
             {
                 string[] itemData = items[i].Split(',');
                 int id = int.Parse(itemData[1]);
-                int count=0;
+                int count = 0;
                 int.TryParse(itemData[3], out count);
-                if (count!=0)
+                if (count != 0)
                 {
                     if (GameDictionary.PurchaseDic[id].MyType == PurchaseType.BuyEmerald)
                     {

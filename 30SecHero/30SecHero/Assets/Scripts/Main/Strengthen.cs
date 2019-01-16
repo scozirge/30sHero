@@ -74,6 +74,7 @@ public class Strengthen : MyUI
         }
 
         //預設強化分頁並選擇第一個item
+        RefreshTip();
         Filter();
         if (StrengthenItemList[0] != null)
         {
@@ -92,6 +93,7 @@ public class Strengthen : MyUI
         if (!IsInit)
             return;
         base.OnEnable();
+        RefreshTip();
         ToFilter((int)StrengthenType.Strengthen);
     }
     public void ShowInfo(StrengthenItem _item)
@@ -118,6 +120,49 @@ public class Strengthen : MyUI
             CurSelectedEItem = null;
             RefreshText();
             UpgradeButton.gameObject.SetActive(false);
+        }
+    }
+    void RefreshTip()
+    {
+        for (int i = 0; i < StrengthenItemList.Count; i++)
+        {
+            if (StrengthenItemList[i] != null )
+            {
+                if (StrengthenItemList[i].MyData!=null)
+                {
+                    if (Player.Gold < StrengthenItemList[i].MyData.GetPrice() || !StrengthenItemList[i].MyData.CanUpgrade())
+                    {
+                        StrengthenItemList[i].SetTip(false);
+                    }
+                    else
+                    {
+                        StrengthenItemList[i].SetTip(true);
+                    }
+                }
+                else
+                {
+                    StrengthenItemList[i].SetTip(false);
+                }
+            }
+        }
+        for (int i = 0; i < EnchantItemList.Count; i++)
+        {
+            if (EnchantItemList[i] != null)
+            {
+                if (EnchantItemList[i].MyData!=null)
+                {
+                    if (Player.Emerald < EnchantItemList[i].MyData.GetPrice() || !EnchantItemList[i].MyData.CanUpgrade())
+                    {
+                        EnchantItemList[i].SetTip(false);
+                    }
+                    else
+                    {
+                        EnchantItemList[i].SetTip(true);
+                    }
+                }
+                else
+                    EnchantItemList[i].SetTip(false);
+            }
         }
     }
     public void CheckStrengthenConfirmBtn()
@@ -207,7 +252,7 @@ public class Strengthen : MyUI
     }
     public void SetTipOff(int _type)
     {
-        switch((StrengthenType)_type)
+        switch ((StrengthenType)_type)
         {
             case StrengthenType.Strengthen:
                 MainPanel.SetTip(TipType.StrengthenTagTip, false);
@@ -221,7 +266,7 @@ public class Strengthen : MyUI
     {
         switch (CurFilterType)
         {
-            case StrengthenType.Strengthen:                
+            case StrengthenType.Strengthen:
                 PriceImage.sprite = GameManager.GetCurrencySprite(Currency.Gold);
                 StrengthenContent.gameObject.SetActive(true);
                 EnchantContent.gameObject.SetActive(false);
@@ -234,7 +279,7 @@ public class Strengthen : MyUI
                     MyText.AddRefreshFunc(RefreshText);
                 }
                 break;
-            case StrengthenType.Enchant:                
+            case StrengthenType.Enchant:
                 PriceImage.sprite = GameManager.GetCurrencySprite(Currency.Emerald);
                 StrengthenContent.gameObject.SetActive(false);
                 EnchantContent.gameObject.SetActive(true);
@@ -251,7 +296,6 @@ public class Strengthen : MyUI
     }
     public void ToStrengthen()
     {
-
         if (CurFilterType == StrengthenType.Strengthen)
         {
             MainPanel.SetTip(TipType.StrengthenTagTip, false);
@@ -261,10 +305,10 @@ public class Strengthen : MyUI
         }
         else if (CurFilterType == StrengthenType.Enchant)
         {
-            Player.EnchantUpgrade(CurSelectedEData,true);
+            Player.EnchantUpgrade(CurSelectedEData, true);
             CurSelectedEItem.UpdateUI();
             ShowInfo(CurSelectedEItem);
         }
-
+        RefreshTip();
     }
 }

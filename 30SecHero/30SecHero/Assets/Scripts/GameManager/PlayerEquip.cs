@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public partial class Player
 {
@@ -23,6 +24,50 @@ public partial class Player
                 count += Itmes[EquipType.Accessory].Count;
             return count;
         }
+    }
+    public static long CurMaxWeaponUID { get; private set; }
+    public static long CurMaxArmorUID { get; private set; }
+    public static long CurMaxAccessoryUID { get; private set; }
+    public static void UudateCurMaxEquipUID(EquipType _type, int _newUID)
+    {
+        switch (_type)
+        {
+            case EquipType.Weapon:
+                if (_newUID > Player.CurMaxWeaponUID)
+                    Player.CurMaxWeaponUID = _newUID;
+                Debug.Log("Player.CurMaxWeaponUID=" + Player.CurMaxWeaponUID);
+                break;
+            case EquipType.Armor:
+                if (_newUID > Player.CurMaxArmorUID)
+                    Player.CurMaxArmorUID = _newUID;
+                Debug.Log("Player.CurMaxArmorUID=" + Player.CurMaxArmorUID);
+                break;
+            case EquipType.Accessory:
+                if (_newUID > Player.CurMaxAccessoryUID)
+                    Player.CurMaxAccessoryUID = _newUID;
+                Debug.Log("Player.CurMaxAccessoryUID=" + Player.CurMaxAccessoryUID);
+                break;
+        }
+    }
+    public static long GetCurMaxEquipUID(EquipType _type)
+    {
+        switch (_type)
+        {
+            case EquipType.Weapon:
+                return CurMaxWeaponUID;
+            case EquipType.Armor:
+                return CurMaxArmorUID;
+            case EquipType.Accessory:
+                return CurMaxAccessoryUID;
+            default:
+                return 0;
+        }
+    }
+    public static void UpToDateCurMaxEquipUID()
+    {
+        CurMaxWeaponUID = Itmes[EquipType.Weapon].Keys.Max();
+        CurMaxArmorUID = Itmes[EquipType.Armor].Keys.Max();
+        CurMaxAccessoryUID = Itmes[EquipType.Accessory].Keys.Max();
     }
     public static void EquipSaveLocalData()
     {

@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public class EquipItem : Item
 {
     [SerializeField]
+    GameObject TipObj;
+    [SerializeField]
     Image[] Icons;
     [SerializeField]
     Image QualityBottom;
@@ -50,6 +52,18 @@ public class EquipItem : Item
         }
         QualityBottom.sprite = GameManager.GetItemQualityBotSprite(MyData.Quality);
         SetSoldMode(false);
+        SetTip();
+    }
+    void SetTip()
+    {
+        if (TipObj)
+        {
+            long maxID = Player.GetCurMaxEquipUID(MyType);
+            if (MyData.UID > maxID)
+                TipObj.SetActive(true);
+            else
+                TipObj.SetActive(false);
+        }
     }
     void OnDestroy()
     {
@@ -74,6 +88,7 @@ public class EquipItem : Item
         base.OnPress();
         if (!ParentUI)
             return;
+        TipObj.SetActive(false);
         if (!Equip.SoldMode)
         {
             ParentUI.ToEquip(MyData);

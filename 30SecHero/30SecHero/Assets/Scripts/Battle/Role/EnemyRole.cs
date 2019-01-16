@@ -264,7 +264,8 @@ public partial class EnemyRole : Role
         }
         if (Type == EnemyType.Demogorgon && _buffer.Type == RoleBuffer.Stun)
         {
-            _buffer.Time = GameSettingData.BossSturn;
+            if (_buffer.Time > GameSettingData.BossSturn)
+                _buffer.Time = GameSettingData.BossSturn;
         }
         base.AddBuffer(_buffer);
         UpdateCanMove();

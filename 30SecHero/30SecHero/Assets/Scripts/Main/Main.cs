@@ -140,6 +140,7 @@ public class Main : MonoBehaviour
         else
         {
             PopupUI.CallCutScene("Battle");
+            Player.UpToDateCurMaxEquipUID();
         }
 
         //SceneManager.LoadScene("Battle");

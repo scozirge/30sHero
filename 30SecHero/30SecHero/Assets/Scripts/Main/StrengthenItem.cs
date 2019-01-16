@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public class StrengthenItem : Item
 {
     [SerializeField]
+    GameObject TipObj;
+    [SerializeField]
     Image Icon;
     [SerializeField]
     MyText LVText;
@@ -35,6 +37,10 @@ public class StrengthenItem : Item
         TheToggle = GetComponent<Toggle>();
         TheToggle.group = ParentUI.GetComponent<ToggleGroup>();
         UpdateUI();
+    }
+    public void SetTip(bool _show)
+    {
+        TipObj.SetActive(_show);
     }
     public override void RefreshText()
     {

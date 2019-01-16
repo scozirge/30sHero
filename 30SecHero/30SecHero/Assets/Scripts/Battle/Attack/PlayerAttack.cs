@@ -106,7 +106,7 @@ public class PlayerAttack : MonoBehaviour
                     //衝刺攻擊會暈眩目標
                     if (Attacker.OnRush)
                     {
-                        er.AddBuffer(RoleBuffer.Stun, 1);                        
+                        er.AddBuffer(RoleBuffer.Stun, GameSettingData.RushStun);                        
                     }
                 }
                 else

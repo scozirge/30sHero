@@ -373,7 +373,9 @@ public partial class Player
             {
                 //Debug.Log("Type=" + _datas[i].Type + "  UID=" + _datas[i].UID);
                 if (!Itmes[_datas[i].Type].ContainsKey(_datas[i].UID))
+                {
                     Itmes[_datas[i].Type].Add(_datas[i].UID, _datas[i]);
+                }
                 else
                     Debug.LogWarning("重複裝備UID  Type=" + _datas[i].Type + "  UID=" + _datas[i].UID);
             }

@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public class EnchantItem : Item
 {
     [SerializeField]
+    GameObject TipObj;
+    [SerializeField]
     Image Icon;
     [SerializeField]
     MyText LVText;
@@ -53,6 +55,10 @@ public class EnchantItem : Item
     void OnDestroy()
     {
         MyText.RemoveRefreshFunc(RefreshText);
+    }
+    public void SetTip(bool _show)
+    {
+        TipObj.SetActive(_show);
     }
     public override void RefreshText()
     {
