@@ -69,7 +69,7 @@ MonoBehaviour:
   TriggerOnRushRole: 0
   Value: 0
   IsPlayerGetSkill: 0
-  AmmoSpeed: 500
+  AmmoSpeed: 400
   TraceFactor: 0
 --- !u!222 &222441390583901092
 CanvasRenderer:
