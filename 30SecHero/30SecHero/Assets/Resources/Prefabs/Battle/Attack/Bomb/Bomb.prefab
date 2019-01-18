@@ -77,8 +77,10 @@ MonoBehaviour:
   LocalParticles: []
   GlobalParticle:
   - {fileID: 198466921542759630, guid: e77354340c4749646b37a0d627136175, type: 3}
+  LocalAttackerParticles: []
   DeadParticles: []
   HitTargetParticle: {fileID: 0}
+  SpawnSound: {fileID: 8300000, guid: 92d3259b6a9732e4ba3fb95331b2c95d, type: 3}
   HitTargetSound: {fileID: 0}
   LifeTime: 0.2
   KnockIntensity: 4000
