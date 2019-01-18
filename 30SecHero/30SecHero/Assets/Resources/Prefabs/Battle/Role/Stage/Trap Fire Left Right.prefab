@@ -373,7 +373,7 @@ MonoBehaviour:
     type: 3}
   AniPlayer: {fileID: 114022675983671600}
   RoleTrans: {fileID: 224481872461191760}
-  DeathSound: {fileID: 8300000, guid: fc274ce0d0fd8fb40b2e7557d54975e8, type: 3}
+  DeathSound: {fileID: 8300000, guid: 92d3259b6a9732e4ba3fb95331b2c95d, type: 3}
   KnockDrag: 30
   NormalDrag: 0
   KnockDragDuration: 0.9
