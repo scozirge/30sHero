@@ -10,6 +10,7 @@ public class AudioPlayer : MonoBehaviour
     public static bool IsMusicMute = false;
     static List<AudioSource> SoundList;
     static List<AudioSource> MusicList;
+    static GameObject AudioManager;
     static GameObject MySoundObject;
     static GameObject MyMusicObject;
 
@@ -20,14 +21,22 @@ public class AudioPlayer : MonoBehaviour
     static Dictionary<string, Coroutine> MusicFadeDic;
     void Awake()
     {
+        InstantiateAudioManager();
+    }
+    public static void InstantiateAudioManager()
+    {
         if (!IsInit)
         {
-            Myself = this;
-            Init();
+            IsInit = true;
+            AudioManager = new GameObject("AudioManager");
+            AudioPlayer ap = AudioManager.AddComponent<AudioPlayer>();
+            ap.Init();
         }
     }
-    static void Init()
+    public void Init()
     {
+        Myself = this;
+        DontDestroyOnLoad(gameObject);
         LoopSoundDic = new Dictionary<string, AudioSource>();
         LoopMusicDic = new Dictionary<string, AudioSource>();
         MusicFadeDic = new Dictionary<string, Coroutine>();
@@ -35,6 +44,8 @@ public class AudioPlayer : MonoBehaviour
         MusicList = new List<AudioSource>();
         MySoundObject = new GameObject("SoundPlayer");
         MyMusicObject = new GameObject("MusicPlayer");
+        MySoundObject.transform.SetParent(AudioManager.transform);
+        MyMusicObject.transform.SetParent(AudioManager.transform);
         DontDestroyOnLoad(MySoundObject);
         DontDestroyOnLoad(MyMusicObject);
         AudioSource mySound = MySoundObject.AddComponent<AudioSource>();
@@ -43,7 +54,6 @@ public class AudioPlayer : MonoBehaviour
         MusicList.Add(myMusic);
         CurPlaySound = mySound;
         CurPlayMusic = myMusic;
-        IsInit = true;
     }
     public static void FadeOutMusic(string _key, float _fadeTime)
     {
@@ -53,15 +63,15 @@ public class AudioPlayer : MonoBehaviour
         {
             return;
         }
-        if(MusicFadeDic.ContainsKey(_key))
+        if (MusicFadeDic.ContainsKey(_key))
         {
             Myself.StopCoroutine(MusicFadeDic[_key]);
             MusicFadeDic.Remove(_key);
         }
-        Coroutine c= Myself.StartCoroutine(Myself.FadeOut(_key, _fadeTime));
+        Coroutine c = Myself.StartCoroutine(Myself.FadeOut(_key, _fadeTime));
         MusicFadeDic.Add(_key, c);
     }
-    public static void FadeInMusic(AudioClip _ac, string _key, float _fadeTime,float _volume)
+    public static void FadeInMusic(AudioClip _ac, string _key, float _fadeTime, float _volume)
     {
         if (!Myself)
             return;
@@ -74,7 +84,7 @@ public class AudioPlayer : MonoBehaviour
             Myself.StopCoroutine(MusicFadeDic[_key]);
             MusicFadeDic.Remove(_key);
         }
-        Coroutine c = Myself.StartCoroutine(Myself.FadeIn(_ac, _key, _fadeTime, _volume));       
+        Coroutine c = Myself.StartCoroutine(Myself.FadeIn(_ac, _key, _fadeTime, _volume));
         MusicFadeDic.Add(_key, c);
     }
     IEnumerator FadeOut(string _key, float _fadeTime)
@@ -111,6 +121,22 @@ public class AudioPlayer : MonoBehaviour
     public static void MuteSound(bool _isMute)
     {
         IsSoundMute = _isMute;
+        if (IsSoundMute)
+        {
+            List<string> keys = new List<string>(LoopSoundDic.Keys);
+            foreach (string key in keys)
+            {
+                LoopSoundDic[key].mute = true;
+            }
+        }
+        else
+        {
+            List<string> keys = new List<string>(LoopSoundDic.Keys);
+            foreach (string key in keys)
+            {
+                LoopSoundDic[key].mute = false;
+            }
+        }
     }
     public static void MuteMusic(bool _isMute)
     {
@@ -120,7 +146,7 @@ public class AudioPlayer : MonoBehaviour
             List<string> keys = new List<string>(LoopMusicDic.Keys);
             foreach (string key in keys)
             {
-                LoopMusicDic[key].volume = 0;
+                LoopMusicDic[key].mute = true;
             }
         }
         else
@@ -128,25 +154,22 @@ public class AudioPlayer : MonoBehaviour
             List<string> keys = new List<string>(LoopMusicDic.Keys);
             foreach (string key in keys)
             {
-                LoopMusicDic[key].volume = 1;
+                LoopMusicDic[key].mute = false;
             }
         }
     }
     public static void PlaySoundByString(string _soundName)
     {
-        if (IsSoundMute)
-            return;
-
-        if (IsSoundMute)
-            return;
         if (!IsInit)
-            Init();
+            InstantiateAudioManager();
         if (GetApplicableSoundSource() == null)
         {
             GetNewSoundSource();
         }
         CurPlaySound.clip = Resources.Load<AudioClip>(string.Format("Sounds/{0}", _soundName));
         CurPlaySound.loop = false;
+        CurPlaySound.volume = 1;
+        CurPlaySound.mute = IsSoundMute;
         CurPlaySound.Play(0);
     }
     public static void PlaySound(AudioClip _ac)
@@ -155,15 +178,15 @@ public class AudioPlayer : MonoBehaviour
         {
             return;
         }
-        if (IsSoundMute)
-            return;
         if (!IsInit)
-            Init();
+            InstantiateAudioManager();
         if (GetApplicableSoundSource() == null)
         {
             GetNewSoundSource();
         }
         CurPlaySound.clip = _ac;
+        CurPlaySound.volume = 1;
+        CurPlaySound.mute = IsSoundMute;
         CurPlaySound.loop = false;
         CurPlaySound.Play(0);
     }
@@ -174,30 +197,31 @@ public class AudioPlayer : MonoBehaviour
             Debug.LogWarning("要播放的音檔為null");
             return;
         }
-        if (IsSoundMute)
-            return;
         if (!IsInit)
-            Init();
+            InstantiateAudioManager();
         if (GetApplicableSoundSource() == null)
         {
             GetNewSoundSource();
         }
         CurPlaySound.clip = _ac;
+        CurPlaySound.volume = 1;
+        CurPlaySound.mute = IsSoundMute;
         CurPlaySound.loop = false;
         CurPlaySound.Play(0);
     }
     public void PlayMusicByString(string _MusicName)
     {
-        if (IsMusicMute)
-            return;
+
         if (!IsInit)
-            Init();
+            InstantiateAudioManager();
         if (GetApplicableSoundSource() == null)
         {
             GetNewMusicSource();
         }
         CurPlayMusic.loop = false;
         CurPlayMusic.clip = Resources.Load<AudioClip>(string.Format("Musics/{0}", _MusicName));
+        CurPlayMusic.volume = 1;
+        CurPlayMusic.mute = IsMusicMute;
         CurPlayMusic.Play(0);
     }
     public void PlayMusicByAudioClip(AudioClip _ac)
@@ -207,16 +231,16 @@ public class AudioPlayer : MonoBehaviour
             Debug.LogWarning("要播放的音檔為null");
             return;
         }
-        if (IsMusicMute)
-            return;
         if (!IsInit)
-            Init();
+            InstantiateAudioManager();
         if (GetApplicableSoundSource() == null)
         {
             GetNewMusicSource();
         }
         CurPlayMusic.loop = false;
         CurPlayMusic.clip = _ac;
+        CurPlayMusic.volume = 1;
+        CurPlayMusic.mute = IsMusicMute;
         CurPlayMusic.Play(0);
     }
     public static void PlayMusicByAudioClip_Static(AudioClip _ac)
@@ -226,20 +250,21 @@ public class AudioPlayer : MonoBehaviour
             Debug.LogWarning("要播放的音檔為null");
             return;
         }
-        if (IsMusicMute)
-            return;
         if (!IsInit)
-            Init();
+            InstantiateAudioManager();
         if (GetApplicableSoundSource() == null)
         {
             GetNewMusicSource();
         }
         CurPlayMusic.loop = false;
         CurPlayMusic.clip = _ac;
+        CurPlayMusic.volume = 1;
+        CurPlayMusic.mute = IsMusicMute;
         CurPlayMusic.Play(0);
     }
     public void PlayLoopSound(AudioClip _ac, string _key)
     {
+
         if (_ac == null)
         {
             Debug.LogWarning("要播放的音檔為null");
@@ -250,23 +275,20 @@ public class AudioPlayer : MonoBehaviour
             //Debug.LogWarning(string.Format("Key:{0} 循環播放音效索引重複", _key));
             return;
         }
-        if (IsSoundMute)
-            return;
         if (!IsInit)
-            Init();
+            InstantiateAudioManager();
         if (GetApplicableSoundSource() == null)
         {
             GetNewSoundSource();
         }
+
         CurPlaySound.clip = _ac;
         CurPlaySound.loop = true;
         CurPlaySound.volume = 1;
+        CurPlaySound.mute = IsSoundMute;
         CurPlaySound.Play();
         LoopSoundDic.Add(_key, CurPlaySound);
-        if (IsMusicMute)
-        {
-            LoopSoundDic[_key].volume = 0;
-        }
+        LoopSoundDic[_key].mute = IsMusicMute;
     }
     public static void PlayLoopSound_Static(AudioClip _ac, string _key)
     {
@@ -280,10 +302,8 @@ public class AudioPlayer : MonoBehaviour
             //Debug.LogWarning(string.Format("Key:{0} 循環播放音效索引重複", _key));
             return;
         }
-        if (IsSoundMute)
-            return;
         if (!IsInit)
-            Init();
+            InstantiateAudioManager();
         if (GetApplicableSoundSource() == null)
         {
             GetNewSoundSource();
@@ -291,12 +311,9 @@ public class AudioPlayer : MonoBehaviour
         CurPlaySound.clip = _ac;
         CurPlaySound.loop = true;
         CurPlaySound.volume = 1;
+        CurPlaySound.mute = IsSoundMute;
         CurPlaySound.Play();
         LoopSoundDic.Add(_key, CurPlaySound);
-        if (IsMusicMute)
-        {
-            LoopSoundDic[_key].volume = 0;
-        }
     }
     public void StopLoopSound(string _key)
     {
@@ -340,7 +357,7 @@ public class AudioPlayer : MonoBehaviour
             return;
         }
         if (!IsInit)
-            Init();
+            InstantiateAudioManager();
         if (GetApplicableMusicSource() == null)
         {
             GetNewMusicSource();
@@ -348,12 +365,10 @@ public class AudioPlayer : MonoBehaviour
         CurPlayMusic.clip = _ac;
         CurPlayMusic.loop = true;
         CurPlayMusic.volume = 1;
+        CurPlayMusic.mute = IsMusicMute;
         CurPlayMusic.Play();
         LoopMusicDic.Add(_key, CurPlayMusic);
-        if (IsMusicMute)
-        {
-            LoopSoundDic[_key].volume = 0;
-        }
+
     }
     public static AudioSource PlayLoopMusic_Static(AudioClip _ac, string _key)
     {
@@ -368,7 +383,7 @@ public class AudioPlayer : MonoBehaviour
             return null;
         }
         if (!IsInit)
-            Init();
+            InstantiateAudioManager();
         if (GetApplicableMusicSource() == null)
         {
             GetNewMusicSource();
@@ -376,12 +391,9 @@ public class AudioPlayer : MonoBehaviour
         CurPlayMusic.clip = _ac;
         CurPlayMusic.loop = true;
         CurPlayMusic.volume = 1;
+        CurPlayMusic.mute = IsMusicMute;
         CurPlayMusic.Play();
         LoopMusicDic.Add(_key, CurPlayMusic);
-        if (IsMusicMute)
-        {
-            LoopMusicDic[_key].volume = 0;
-        }
         return LoopMusicDic[_key];
     }
 

@@ -362,6 +362,8 @@ public partial class PlayerRole : Role
         base.Awake();
         IsAvatar = true;
     }
+    WaitToDo<float> WaitForChangingToHero;
+    WaitToDo<float> WaitForStartControl;
     protected override void Start()
     {
         //InitPlayerProperties();改在BattleManage就執行
@@ -397,7 +399,9 @@ public partial class PlayerRole : Role
         StartControl = false;
         IsTriggerRevive = false;
         IsTriggerRuleBreaker = false;
-        StartCoroutine(StartAvatarPerformance());
+        AniPlayer.PlayTrigger("Idle2", 0);
+        WaitForChangingToHero = new WaitToDo<float>(0.5f, ChangeToHeroPerform, true);
+        WaitForStartControl = new WaitToDo<float>(0.5f, SetStartControl, true);
         UpdateHurtInnerGlow();
         //是否要跳藥水教學說明設定
         if (PlayerPrefs.GetInt(LocoData.EnergyPotionTutorial.ToString()) == 0)
@@ -419,14 +423,14 @@ public partial class PlayerRole : Role
         if (PlayerPrefs.GetInt(LocoData.PoisonedTutorial.ToString()) == 0)
             PoisonedTutorial = true;
     }
-    IEnumerator StartAvatarPerformance()
+    void ChangeToHeroPerform()
     {
-        AniPlayer.PlayTrigger("Idle2", 0);
-        yield return new WaitForSeconds(0.5f);
         AudioPlayer.PlaySound(RemoveAvatarSound);
         EffectEmitter.EmitParticle(AvatarRemoveEffect, Vector3.zero, Vector3.zero, transform);
         AniPlayer.PlayTrigger("Idle", 0);
-        yield return new WaitForSeconds(0.5f);
+    }
+    void SetStartControl()
+    {
         StartControl = true;
     }
     public void InitPlayerProperties()
@@ -707,7 +711,8 @@ public partial class PlayerRole : Role
         ShieldTimer.RunTimer();
         JumpTimer.RunTimer();
         RushTimer.RunTimer();
-
+        WaitForChangingToHero.RunTimer();
+        WaitForStartControl.RunTimer();
         if (MyEnchant[EnchantProperty.Fury] > 0)
             FuryTimer.RunTimer();
         OnRushTimer.RunTimer();

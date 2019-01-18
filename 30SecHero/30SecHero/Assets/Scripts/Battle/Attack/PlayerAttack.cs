@@ -96,7 +96,6 @@ public class PlayerAttack : MonoBehaviour
                 }
                 BeforeAttackAction(er);
                 Vector2 force = (er.transform.position - transform.position).normalized * KnockForce;
-                Debug.Log("Attacker.WeaponAttack=" + Attacker.WeaponAttack);
                 int causeDamage = (int)((Attacker.Damage + Attacker.WeaponAttack) * DamagePercent * (1 + extraDamageProportion));
                 er.BeAttack(Attacker.MyForce, ref causeDamage, force);
                 Attacker.HealFromCauseDamage(causeDamage);

@@ -219,7 +219,7 @@ public class Strengthen : MyUI
                 NameText.text = CurSelectedEData.Name;
                 if (!CurSelectedEData.CanUpgrade())
                 {
-                    DescriptionText.text = CurSelectedEData.Description();
+                    DescriptionText.text = CurSelectedEData.Description(0);
                     PriceText.text = StringData.GetString("MaxLevel");
 
                 }

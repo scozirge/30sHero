@@ -52,14 +52,6 @@ public partial class BattleManage
                 AddEnemy(er);
 
                 NextDemonGergons = EnemyData.GetNextDemogorgon(Floor + 1, out NextDemogorgonFloor);
-                //播放BOSS出場警告動畫與背景音樂
-                if (WarningAni!=null)
-                {
-                    AudioPlayer.FadeOutMusic("Battle", 1f);
-                    AudioPlayer.FadeInMusic(GameManager.GM.BossFightMusic, "BossFight", 2f, BattleManage.BM.MyPlayer.GetBGMVolume());
-                    WarningAni.gameObject.SetActive(true);
-                    WarningAni.Play(0);
-                }
             }
         }
         else if(_type==2)
@@ -76,6 +68,14 @@ public partial class BattleManage
 
                 PreviousDemonGergons = EnemyData.GetPreviousDemogorgon(Floor - 1, out PreviousDemogorgonFloor);
             }
+        }
+        //播放BOSS出場警告動畫與背景音樂
+        if (WarningAni != null)
+        {
+            AudioPlayer.FadeOutMusic("Battle", 1f);
+            AudioPlayer.FadeInMusic(GameManager.GM.BossFightMusic, "BossFight", 2f, BattleManage.BM.MyPlayer.GetBGMVolume());
+            WarningAni.gameObject.SetActive(true);
+            WarningAni.Play(0);
         }
         //Debug.Log("NextDemogorgonFloor=" + NextDemogorgonFloor);
         IsDemogorgonFloor = 0;
