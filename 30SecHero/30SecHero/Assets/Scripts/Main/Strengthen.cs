@@ -72,9 +72,10 @@ public class Strengthen : MyUI
             unknown.Set(null, this);
             EnchantItemList.Add(unknown);
         }
-
-        //預設強化分頁並選擇第一個item
+        //設定tip
         RefreshTip();
+        //預設強化分頁並選擇第一個item
+
         Filter();
         if (StrengthenItemList[0] != null)
         {
@@ -126,9 +127,9 @@ public class Strengthen : MyUI
     {
         for (int i = 0; i < StrengthenItemList.Count; i++)
         {
-            if (StrengthenItemList[i] != null )
+            if (StrengthenItemList[i] != null)
             {
-                if (StrengthenItemList[i].MyData!=null)
+                if (StrengthenItemList[i].MyData != null)
                 {
                     if (Player.Gold < StrengthenItemList[i].MyData.GetPrice() || !StrengthenItemList[i].MyData.CanUpgrade())
                     {
@@ -149,11 +150,19 @@ public class Strengthen : MyUI
         {
             if (EnchantItemList[i] != null)
             {
-                if (EnchantItemList[i].MyData!=null)
+                if (EnchantItemList[i].MyData != null)
                 {
                     if (Player.Emerald < EnchantItemList[i].MyData.GetPrice() || !EnchantItemList[i].MyData.CanUpgrade())
                     {
                         EnchantItemList[i].SetTip(false);
+                        for (int j = 0; j < BattleManage.NewGetEnchatIDs.Count; j++)
+                        {
+                            if (EnchantItemList[i].MyData.ID == BattleManage.NewGetEnchatIDs[j])
+                            {
+                                EnchantItemList[i].SetTip(true);
+                                break;
+                            }
+                        }
                     }
                     else
                     {

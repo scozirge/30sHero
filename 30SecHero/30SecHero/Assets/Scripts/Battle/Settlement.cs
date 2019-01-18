@@ -59,6 +59,7 @@ partial class BattleManage
     static bool GainAccessory;
     static bool GetEnchant;
     static bool ToStrengthen;
+    public static List<int> NewGetEnchatIDs = new List<int>();
 
     static void InitSettlement()
     {
@@ -288,6 +289,7 @@ partial class BattleManage
             BM.GetEnchant_Name.text = _ed.Name;
             BM.GetEnchant_Icon.sprite = _ed.GetICON();
             BM.GetEnchant_Description.text = _ed.Description(0);
+            NewGetEnchatIDs.Add(_ed.ID);
         }
     }
 }

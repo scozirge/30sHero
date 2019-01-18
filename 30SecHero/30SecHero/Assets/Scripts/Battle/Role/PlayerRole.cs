@@ -772,7 +772,7 @@ public partial class PlayerRole : Role
                     HurtInnerGlow.gameObject.SetActive(true);
                 else
                     HurtInnerGlow.gameObject.SetActive(false);
-                HurtInnerGlowTransparent = ((1 - HealthRatio) * 0.6f);
+                HurtInnerGlowTransparent = ((1 - HealthRatio) * 0.5f);
                 Color c = HurtInnerGlow.color;
                 c.a = (1 - HealthRatio);
                 HurtInnerGlow.color = c;

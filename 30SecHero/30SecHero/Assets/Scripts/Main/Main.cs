@@ -141,6 +141,7 @@ public class Main : MonoBehaviour
         {
             PopupUI.CallCutScene("Battle");
             Player.UpToDateCurMaxEquipUID();
+            BattleManage.NewGetEnchatIDs.Clear();
         }
 
         //SceneManager.LoadScene("Battle");

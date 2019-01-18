@@ -87,6 +87,14 @@ public class EnchantItem : Item
         }
         //PlayAni("LevelUp");
     }
+    public void OnClickSetTip()
+    {
+        if (Player.Emerald < MyData.GetPrice() || !MyData.CanUpgrade())
+        {
+            SetTip(false);
+            BattleManage.NewGetEnchatIDs.RemoveAll(item => item == MyData.ID);
+        }
+    }
     public override void OnPress()
     {
         if (!TheToggle.isOn)
