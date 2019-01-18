@@ -20,6 +20,9 @@ public partial class Ammo : MonoBehaviour
     [Tooltip("命中特效-目標")]
     [SerializeField]
     ParticleSystem HitTargetParticle;
+    [Tooltip("產生音效")]
+    [SerializeField]
+    protected AudioClip SpawnSound;
     [Tooltip("命中音效")]
     [SerializeField]
     protected AudioClip HitTargetSound;
@@ -83,6 +86,8 @@ public partial class Ammo : MonoBehaviour
             }
         }
          */
+        if (SpawnSound)
+            AudioPlayer.PlaySound(SpawnSound);
     }
 
     public virtual void TriggerHitCondition(Role _role)
