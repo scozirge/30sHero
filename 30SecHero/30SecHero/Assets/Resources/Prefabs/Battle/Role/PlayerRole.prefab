@@ -213,7 +213,8 @@ MonoBehaviour:
   GainMoveFromKilling: 150
   MoveDepletedTime: 10
   MaxExtraMove: 500
-  MaxAvaterTime: 5
+  WeaponAttack: 0
+  MaxAvaterTime: 100
   AvatarTimerText: {fileID: 0}
   MyAvatarText: {fileID: 0}
   AvatarTimerAni: {fileID: 0}

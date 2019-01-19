@@ -1794,16 +1794,6 @@ PrefabInstance:
       propertyPath: MyLight
       value: 
       objectReference: {fileID: 2074361672}
-    - target: {fileID: 114529601492733476, guid: d9e47796d36fc83458ffab41aea6641e,
-        type: 3}
-      propertyPath: TestMode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114529601492733476, guid: d9e47796d36fc83458ffab41aea6641e,
-        type: 3}
-      propertyPath: MaxAvaterTime
-      value: 100
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d9e47796d36fc83458ffab41aea6641e, type: 3}
 --- !u!1 &134664633
