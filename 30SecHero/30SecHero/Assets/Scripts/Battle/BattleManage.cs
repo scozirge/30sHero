@@ -252,7 +252,7 @@ public partial class BattleManage : MonoBehaviour
             SpawnLootTimer.StartRunTimer = true;
             return;
         }
-        if(ProbabilityGetter.GetResult(GameSettingData.PotionProportion))
+        if (ProbabilityGetter.GetResult(GameSettingData.PotionProportion))
         {
             PotionLoot loot = Instantiate(LootPrefab, Vector3.zero, Quaternion.identity) as PotionLoot;
             //Set SpawnPos
@@ -513,22 +513,23 @@ public partial class BattleManage : MonoBehaviour
             {
                 if (EnemyList[i].Type != EnemyType.Demogorgon)
                 {
-                    if (EnemyList[i].transform.position.x < DisableMargin_Left ||
-                        EnemyList[i].transform.position.x > DisableMargin_Right)
+                    if (EnemyList[i].transform.position.x < GetGatePosition(0).x)
                     {
-                        EnemyList[i].gameObject.SetActive(false);
-                        /*
-                        if (EnemyList[i].transform.position.x < DestructMargin_Left ||
-                            EnemyList[i].transform.position.x > DestructMargin_Right)
-                        {
-                            EnemyList[i].SelfDestroy();
-                        }
-                        */
+                        EnemyList[i].SelfDestroy();
                     }
                     else
                     {
-                        EnemyList[i].gameObject.SetActive(true);
+                        if (EnemyList[i].transform.position.x < DisableMargin_Left ||
+    EnemyList[i].transform.position.x > DisableMargin_Right)
+                        {
+                            EnemyList[i].gameObject.SetActive(false);
+                        }
+                        else
+                        {
+                            EnemyList[i].gameObject.SetActive(true);
+                        }
                     }
+
                 }
             }
         }

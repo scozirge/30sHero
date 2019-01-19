@@ -32,7 +32,7 @@ public partial class Debugger : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.M))
         {
-            Player.ShowEquipProperties();
+            KongregateAPIBehaviour.EndLogin = true;
         }
         else if (Input.GetKeyDown(KeyCode.C))
         {

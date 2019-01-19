@@ -123,6 +123,7 @@ public abstract class Role : MonoBehaviour
     }
     protected virtual void Awake()
     { }
+    List<PassiveBomb> PassiveList;
     protected virtual void Start()
     {
         IsAlive = true;
@@ -133,6 +134,7 @@ public abstract class Role : MonoBehaviour
         if (RoleAni == null)
             RoleAni = GetComponent<Animator>();
         Skill[] coms = GetComponents<Skill>();
+        PassiveList = GetComponents<PassiveBomb>().ToList();
         //ActiveMonsterSkills = coms.ToList<Skill>();
         //ActiveMonsterSkills.RemoveAll(item => item.BehaviorSkill == true);
         BurningTimer = new MyTimer(GameSettingData.BurnInterval, Burn, false, false);
@@ -141,7 +143,7 @@ public abstract class Role : MonoBehaviour
     }
     protected void ChangeToKnockDrag()
     {
-        if (DragTimer!=null)
+        if (DragTimer != null)
         {
             DragTimer.RestartCountDown();
             DragTimer.StartRunTimer = true;
@@ -186,6 +188,14 @@ public abstract class Role : MonoBehaviour
             _dmg = 0;
         //ShieldBlock
         ShieldBlock(ref _dmg);
+        //被攻擊觸發被動
+        if (PassiveList.Count > 0)
+        {
+            for (int i = 0; i < PassiveList.Count; i++)
+            {
+                PassiveList[i].TriggerPassiveCheck();
+            }
+        }
         //take damage
         ReceiveDmg(ref _dmg);
     }
@@ -289,7 +299,7 @@ public abstract class Role : MonoBehaviour
             }
         }
         //移除狀態
-        for(int i=0;i<removeList.Count;i++)
+        for (int i = 0; i < removeList.Count; i++)
         {
             RemoveBuffer(removeList[i]);
         }

@@ -390,6 +390,7 @@ GameObject:
   - component: {fileID: 11033}
   - component: {fileID: 10439}
   - component: {fileID: 9447}
+  - component: {fileID: 1505110843485333144}
   m_Layer: 9
   m_Name: Boss3
   m_TagString: Enemy
@@ -930,6 +931,35 @@ MonoBehaviour:
   AttackPrefab: {fileID: 1552662233443208134, guid: 7d8e033210b56f14c9d98f71b972485a,
     type: 3}
   TriggerWall: 0
+--- !u!114 &1505110843485333144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3059}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b145bb7b193be6e42950c67e204da54e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Description: 
+  BehaviorSkill: 0
+  PSkillName: 
+  PSkillDuration: 0
+  DetecteRadius: 800
+  DamagePercent: 0
+  AttackStopMove: 0
+  StopMoveTime: 0
+  SpellSound: {fileID: 0}
+  SpawnedInSelf: 0
+  VampireProportion: 0
+  PSkillTimer: 0
+  IsPlayerGetSkill: 0
+  AttackPrefab: {fileID: 114836237506999114, guid: 67c857ec427c560448121b6d3a81f6f3,
+    type: 3}
+  BeAttackTimesTrigger: 4
+  ResetTime: 3
 --- !u!1 &3064
 GameObject:
   m_ObjectHideFlags: 0

@@ -26,7 +26,6 @@ public class InitScene : MonoBehaviour
     }
     public void SetNextScene(string _scene)
     {
-        Debug.Log("KongregateAPIBehaviour.EndLogin=" + KongregateAPIBehaviour.EndLogin);
         if (Player.Tutorial)
             NextSceneName = "Battle";
         else
@@ -41,12 +40,9 @@ public class InitScene : MonoBehaviour
     {
         if (NextSceneName == "")
             return;
-        if (KongregateAPIBehaviour.EndLogin)
-        {
-            //SceneManager.LoadScene(NextSceneName);
-            PopupUI.CallCutScene(NextSceneName);
-            NextSceneName = "";
-        }
+        //SceneManager.LoadScene(NextSceneName);
+        PopupUI.CallCutScene(NextSceneName);
+        NextSceneName = "";
     }
     public void PlaySceneMusic()
     {

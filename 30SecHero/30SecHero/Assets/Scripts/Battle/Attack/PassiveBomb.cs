@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Role))]
-public class Passive : Skill
+public class PassiveBomb : Skill
 {
     [Tooltip("炸彈子彈物件")]
     [SerializeField]
@@ -11,7 +11,12 @@ public class Passive : Skill
     [Tooltip("被攻擊幾次觸發")]
     [SerializeField]
     int BeAttackTimesTrigger;
+    [Tooltip("多久重製被攻擊觸發技能次數")]
+    [SerializeField]
+    float ResetTime;
+    int CurBeAttackTimes;
 
+    MyTimer ResetTimer;
 
     protected Force TargetForce;
 
@@ -27,7 +32,24 @@ public class Passive : Skill
                 Target = go.GetComponent<PlayerRole>();
             TargetForce = Force.Player;
         }
+        if (ResetTime > 0)
+            ResetTimer = new MyTimer(ResetTime, ResetBeAttackTimer, true, false);
         //Dector = transform.GetComponentInChildrenExcludeSelf<Collider2D>();
+    }
+    void ResetBeAttackTimer()
+    {
+        CurBeAttackTimes = 0;
+        ResetTimer.StartRunTimer = true;
+    }
+    public void TriggerPassiveCheck()
+    {
+        CurBeAttackTimes++;
+        ResetTimer.RestartCountDown();
+        if(CurBeAttackTimes>=BeAttackTimesTrigger)
+        {
+            CurBeAttackTimes = 0;
+            SpawnAttackPrefab();
+        }
     }
     public override void PlayerGetSkill(float _skillTimeBuff)
     {
@@ -40,6 +62,8 @@ public class Passive : Skill
     protected override void Update()
     {
         base.Update();
+        if (ResetTimer != null)
+            ResetTimer.RunTimer();
     }
     protected override void TimerFunc()
     {

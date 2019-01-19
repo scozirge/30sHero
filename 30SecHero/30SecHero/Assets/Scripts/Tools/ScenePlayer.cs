@@ -5,6 +5,9 @@ using UnityEngine.SceneManagement;
 public class ScenePlayer : MonoBehaviour
 {
     static string NextSceneName;
+    public Animator MyAni;
+    [SerializeField]
+    GameObject LoadingGO;
     public static void SetNextScene_static(string _sceneName)
     {
         NextSceneName = _sceneName;
@@ -38,6 +41,29 @@ public class ScenePlayer : MonoBehaviour
             case "Main":
                 AudioPlayer.PlayLoopMusic_Static(GameManager.GM.MainMusic, "Main");
                 break;
+        }
+    }
+    void Start()
+    {
+        LoadingGO.SetActive(false);
+    }
+    void Update()
+    {
+        if (KongregateAPIBehaviour.EndLogin)
+        {
+            MyAni.enabled = true;
+            StopAni = false;
+            LoadingGO.SetActive(false);
+        }
+    }
+    bool StopAni;
+    public void LoadingFinishCheck()
+    {
+        if (!KongregateAPIBehaviour.EndLogin)
+        {
+            MyAni.enabled = false;
+            StopAni = true;
+            LoadingGO.SetActive(true);
         }
     }
 }

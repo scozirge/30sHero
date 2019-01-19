@@ -233,6 +233,7 @@ public partial class EnemyRole : Role
         if (base.DeathCheck())
         {
             Drop();
+            BattleManage.BM.MyPlayer.AddAvarTime(KillAvatarTime);
             return true;
         }
         else
@@ -241,7 +242,6 @@ public partial class EnemyRole : Role
     public override void SelfDestroy()
     {
         BattleManage.RemoveEnemy(this);
-        BattleManage.BM.MyPlayer.AddAvarTime(KillAvatarTime);
         base.SelfDestroy();
     }
 

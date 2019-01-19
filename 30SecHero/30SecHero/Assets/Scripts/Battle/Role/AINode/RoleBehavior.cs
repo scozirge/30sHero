@@ -247,6 +247,8 @@ public class RoleBehavior : MonoBehaviour
     }
     void Update()
     {
+        if (MyRole == null)
+            return;
         if (MyRole.BuffersExist(RoleBuffer.Stun))
             return;
         if (MyWaitToDoAction != null)
@@ -260,6 +262,8 @@ public class RoleBehavior : MonoBehaviour
     }
     void FixedUpdate()
     {
+        if (MyRole == null)
+            return;
         if (Nodes.Count <= 0)
             return;
         if(!MyRole.BuffersExist(RoleBuffer.Stun))
