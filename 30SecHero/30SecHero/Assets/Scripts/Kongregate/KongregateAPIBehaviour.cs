@@ -57,8 +57,8 @@ public class KongregateAPIBehaviour : MonoBehaviour
     {
         if (EndLogin)
             return;
-        EndLogin = true;
         Player.UseLocalData(!KongregateLogin);
+        EndLogin = true;
     }
 
     public void OnKongregateAPILoaded(string userInfoString)
