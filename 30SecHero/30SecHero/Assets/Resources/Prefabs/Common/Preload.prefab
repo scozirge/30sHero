@@ -117,4 +117,4 @@ MonoBehaviour:
   - Images
   LoadFolderParticles:
   - Particles
-  PreloadDicTag: Battle
+  PreloadDicTag: 

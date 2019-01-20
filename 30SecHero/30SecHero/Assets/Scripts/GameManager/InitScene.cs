@@ -26,10 +26,7 @@ public class InitScene : MonoBehaviour
     }
     public void SetNextScene(string _scene)
     {
-        if (Player.Tutorial)
-            NextSceneName = "Battle";
-        else
-            NextSceneName = _scene;
+        NextSceneName = _scene;
     }
     public static void RestartGame()
     {

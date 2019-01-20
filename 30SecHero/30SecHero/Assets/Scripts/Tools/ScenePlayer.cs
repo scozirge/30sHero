@@ -51,19 +51,20 @@ public class ScenePlayer : MonoBehaviour
     {
         if (KongregateAPIBehaviour.EndLogin)
         {
+            if (Player.Tutorial)
+                NextSceneName = "Battle";
             MyAni.enabled = true;
-            StopAni = false;
             LoadingGO.SetActive(false);
         }
     }
-    bool StopAni;
     public void LoadingFinishCheck()
     {
         if (!KongregateAPIBehaviour.EndLogin)
         {
             MyAni.enabled = false;
-            StopAni = true;
             LoadingGO.SetActive(true);
         }
+        if (Player.Tutorial)
+            NextSceneName = "Battle";
     }
 }
