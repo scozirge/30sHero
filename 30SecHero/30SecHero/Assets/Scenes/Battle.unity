@@ -17943,6 +17943,21 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 519420031}
+    - target: {fileID: 7047219028223874800, guid: ef48814bab6e7a34d9675a70272582c0,
+        type: 3}
+      propertyPath: PreLoadPos.x
+      value: 10000
+      objectReference: {fileID: 0}
+    - target: {fileID: 7047219028223874800, guid: ef48814bab6e7a34d9675a70272582c0,
+        type: 3}
+      propertyPath: PreLoadPos.y
+      value: 10000
+      objectReference: {fileID: 0}
+    - target: {fileID: 7047219028223874800, guid: ef48814bab6e7a34d9675a70272582c0,
+        type: 3}
+      propertyPath: DestroyTime
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ef48814bab6e7a34d9675a70272582c0, type: 3}
 --- !u!1001 &7449862064590955190

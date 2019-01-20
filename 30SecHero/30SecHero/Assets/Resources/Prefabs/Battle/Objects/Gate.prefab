@@ -331,8 +331,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DeathParticles:
-  - {fileID: 198697248839094646, guid: a2be963d537b7d14f95e421703721f1a, type: 3}
-  - {fileID: 198388158754195800, guid: 80e63988fb8585c4cb704033d7473e79, type: 3}
+  - {fileID: 6306, guid: a2be963d537b7d14f95e421703721f1a, type: 3}
+  - {fileID: 6254, guid: 80e63988fb8585c4cb704033d7473e79, type: 3}
   DestroySound: {fileID: 8300000, guid: 4e9bff56ee93c6f42b214141e44e763d, type: 3}
   PerformPrefab: {fileID: 114293770445150970, guid: 66edd9bd8dc28b74db82a9774d37ca5d,
     type: 3}

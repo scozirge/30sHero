@@ -75,7 +75,7 @@ public class PreLoad : MonoBehaviour
                 Debug.Log(string.Format("PreLoadParticle:{0}", particles.Length));
                 for (int j = 0; j < particles.Length; j++)
                 {
-                    ParticleSystem ps = Instantiate(particles[i], PreLoadPos, Quaternion.identity) as ParticleSystem;
+                    ParticleSystem ps = Instantiate(particles[j], PreLoadPos, Quaternion.identity) as ParticleSystem;
                     if(ps)
                     {
                         ps.Play();

@@ -95,12 +95,12 @@ TextureImporter:
     buildTarget: WebGL
     maxTextureSize: 2048
     resizeAlgorithm: 0
-    textureFormat: -1
+    textureFormat: 4
     textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
-    overridden: 0
+    overridden: 1
     androidETC2FallbackOverride: 0
   spriteSheet:
     serializedVersion: 2
@@ -1435,7 +1435,7 @@ TextureImporter:
       boneIndex[1]: 5
       boneIndex[2]: 0
       boneIndex[3]: 1
-  spritePackingTag: 
+  spritePackingTag: Soul
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
   userData: 

@@ -46,8 +46,6 @@ public class AudioPlayer : MonoBehaviour
         MyMusicObject = new GameObject("MusicPlayer");
         MySoundObject.transform.SetParent(AudioManager.transform);
         MyMusicObject.transform.SetParent(AudioManager.transform);
-        DontDestroyOnLoad(MySoundObject);
-        DontDestroyOnLoad(MyMusicObject);
         AudioSource mySound = MySoundObject.AddComponent<AudioSource>();
         AudioSource myMusic = MyMusicObject.AddComponent<AudioSource>();
         SoundList.Add(mySound);

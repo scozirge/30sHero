@@ -61,7 +61,6 @@ public partial class Player
             PlayerPrefs.SetInt(LocoData.SoundOn.ToString(), 1);
             PlayerPrefs.SetInt(LocoData.MusicOn.ToString(), 1);
             PlayerPrefs.SetInt(LocoData.Init.ToString(), 1);
-            PlayerPrefs.SetInt(LocoData.UseLanguage.ToString(), 2);
         }
         SetLanguage((Language)PlayerPrefs.GetInt(LocoData.UseLanguage.ToString()));
         if (PlayerPrefs.GetInt(LocoData.MusicOn.ToString()) == 1)
