@@ -8540,9 +8540,11 @@ MonoBehaviour:
   - {fileID: 133063990}
   - {fileID: 1629537043}
   - {fileID: 923214593}
-  Loop: 0
+  Loop: 1
   OpenAtFirstPage: 1
   PageText: {fileID: 3015465494156828192}
+  LeftArrow: {fileID: 3015465492584005220}
+  RightArrow: {fileID: 3015465494120488421}
 --- !u!114 &551002968
 MonoBehaviour:
   m_ObjectHideFlags: 0

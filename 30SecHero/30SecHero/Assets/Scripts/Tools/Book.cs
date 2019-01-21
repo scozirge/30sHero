@@ -14,6 +14,10 @@ public class Book : MonoBehaviour
     bool OpenAtFirstPage;
     [SerializeField]
     Text PageText;
+    [SerializeField]
+    GameObject LeftArrow;
+    [SerializeField]
+    GameObject RightArrow;
 
     int MaxPage;
     int CurrentPageIndex;
@@ -44,6 +48,7 @@ public class Book : MonoBehaviour
                 PageList[i].SetActive(true);
         }
         RefreshPage();
+        RefreshArrow();
     }
     void OnEnable()
     {
@@ -67,6 +72,7 @@ public class Book : MonoBehaviour
                 CurrentPageIndex = MaxPage - 1;
         PageList[CurrentPageIndex].SetActive(true);
         RefreshPage();
+        RefreshArrow();
     }
     public void PreviousPage()
     {
@@ -81,6 +87,7 @@ public class Book : MonoBehaviour
                 CurrentPageIndex = MaxPage - 1;
         PageList[CurrentPageIndex].SetActive(true);
         RefreshPage();
+        RefreshArrow();
     }
     public void GoToPage(int _index)
     {
@@ -92,10 +99,26 @@ public class Book : MonoBehaviour
         CurrentPageIndex = _index;
         PageList[CurrentPageIndex].SetActive(true);
         RefreshPage();
+        RefreshArrow();
     }
     void RefreshPage()
     {
         PageText.text = string.Format("{0}{1}{2}", CurrentPageIndex + 1, StringData.GetString("Divide"), MaxPage);
+    }
+    void RefreshArrow()
+    {
+        if (!Loop)
+        {
+            if (CurrentPageIndex == 0)
+                LeftArrow.SetActive(false);
+            else
+                LeftArrow.SetActive(true);
+
+            if (CurrentPageIndex == MaxPage - 1)
+                RightArrow.SetActive(false);
+            else
+                RightArrow.SetActive(true);
+        }
     }
     public void OpenBook(bool _bool)
     {
