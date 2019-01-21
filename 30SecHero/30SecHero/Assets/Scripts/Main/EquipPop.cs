@@ -111,7 +111,7 @@ public class EquipPop : MonoBehaviour
             SetPropertyItems(RightData, RightPropertyItems, false);
             //武器要擺斜
             if (_rightData.Type == EquipType.Weapon)
-                RightEquipTrans.rotation = Quaternion.Euler(new Vector3(0, 0, 30));
+                RightEquipTrans.rotation = Quaternion.Euler(new Vector3(0, 0, 40));
             else
                 RightEquipTrans.rotation = Quaternion.Euler(Vector3.zero);
         }
@@ -131,7 +131,7 @@ public class EquipPop : MonoBehaviour
             SetPropertyItems(LeftData, RightPropertyItems, false);
             //武器要擺斜
             if (_leftData.Type == EquipType.Weapon)
-                LeftEquipTrans.rotation = Quaternion.Euler(new Vector3(0, 0, 30));
+                LeftEquipTrans.rotation = Quaternion.Euler(new Vector3(0, 0, 40));
             else
                 LeftEquipTrans.rotation = Quaternion.Euler(Vector3.zero);
         }
@@ -161,11 +161,11 @@ public class EquipPop : MonoBehaviour
             SetPropertyItems(RightData, RightPropertyItems, false);
             //武器要擺斜
             if (_rightData.Type == EquipType.Weapon)
-                RightEquipTrans.rotation = Quaternion.Euler(new Vector3(0, 0, 30));
+                RightEquipTrans.rotation = Quaternion.Euler(new Vector3(0, 0, 40));
             else
                 RightEquipTrans.rotation = Quaternion.Euler(Vector3.zero);
             if (_leftData.Type == EquipType.Weapon)
-                LeftEquipTrans.rotation = Quaternion.Euler(new Vector3(0, 0, 30));
+                LeftEquipTrans.rotation = Quaternion.Euler(new Vector3(0, 0, 40));
             else
                 LeftEquipTrans.rotation = Quaternion.Euler(Vector3.zero);
         }

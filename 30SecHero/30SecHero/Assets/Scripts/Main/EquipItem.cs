@@ -30,7 +30,7 @@ public class EquipItem : Item
         {
             MyType = EquipType.Weapon;
             MyData = ((WeaponData)_data);
-            IconTrans.rotation = Quaternion.Euler(new Vector3(0, 0, 30));
+            IconTrans.rotation = Quaternion.Euler(new Vector3(0, 0, 40));
         }
         else if (_data.GetType() == typeof(ArmorData))
         {

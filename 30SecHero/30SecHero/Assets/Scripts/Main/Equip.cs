@@ -472,7 +472,7 @@ public class Equip : MyUI
                 WeaponIcon_Char[i].enabled = true;
                 WeaponIcon_Char[i].SetNativeSize();
             }
-            WeaponIconTrans.rotation = Quaternion.Euler(new Vector3(0, 0, 30));
+            WeaponIconTrans.rotation = Quaternion.Euler(new Vector3(0, 0, 40));
         }
         else
         {
