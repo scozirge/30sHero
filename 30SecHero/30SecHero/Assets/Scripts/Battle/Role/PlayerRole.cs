@@ -190,6 +190,9 @@ public partial class PlayerRole : Role
     [Tooltip("自身攻擊時彈開暈眩時間")]
     [SerializeField]
     float SelfSturnTime;
+    [Tooltip("自身攻擊BOSS時彈開暈眩時間")]
+    [SerializeField]
+    float SelfSturnTimeBoss;
     [Tooltip("移動方式")]
     [SerializeField]
     MoveControl ControlDevice;
@@ -700,11 +703,18 @@ public partial class PlayerRole : Role
         ChangeToKnockDrag();
         Vector2 force = Vector2.zero;
         if (!_isBoss)
+        {
             force = MyRigi.velocity.normalized * SelfKnockForce * -1;
+            AddBuffer(new BufferData(RoleBuffer.Stun, SelfSturnTime));
+        }            
         else
+        {
             force = MyRigi.velocity.normalized * SelfKnockForceBoss * -1;
+            AddBuffer(new BufferData(RoleBuffer.Stun, SelfSturnTimeBoss));
+        }
+
         MyRigi.AddForce(force);
-        AddBuffer(new BufferData(RoleBuffer.Stun, SelfSturnTime));
+        
     }
     protected override void Update()
     {

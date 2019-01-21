@@ -236,6 +236,7 @@ MonoBehaviour:
   SelfKnockForce: 10000
   SelfKnockForceBoss: 20000
   SelfSturnTime: 0.25
+  SelfSturnTimeBoss: 0.4
   ControlDevice: 1
   CursorLimitDist: 200
   MyCamera: {fileID: 0}
