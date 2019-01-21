@@ -184,6 +184,9 @@ public partial class PlayerRole : Role
     [Tooltip("自身攻擊時彈開力道")]
     [SerializeField]
     int SelfKnockForce;
+    [Tooltip("自身攻擊BOSS時彈開力道")]
+    [SerializeField]
+    int SelfKnockForceBoss;
     [Tooltip("自身攻擊時彈開暈眩時間")]
     [SerializeField]
     float SelfSturnTime;
@@ -686,7 +689,7 @@ public partial class PlayerRole : Role
         base.SelfDestroy();
         BattleManage.PlayerDie();
     }
-    public void BumpingAttack()
+    public void BumpingAttack(bool _isBoss)
     {
         if (!IsAvatar)
         {
@@ -695,7 +698,11 @@ public partial class PlayerRole : Role
             return;
         }
         ChangeToKnockDrag();
-        Vector2 force = MyRigi.velocity.normalized * SelfKnockForce * -1;
+        Vector2 force = Vector2.zero;
+        if (!_isBoss)
+            force = MyRigi.velocity.normalized * SelfKnockForce * -1;
+        else
+            force = MyRigi.velocity.normalized * SelfKnockForceBoss * -1;
         MyRigi.AddForce(force);
         AddBuffer(new BufferData(RoleBuffer.Stun, SelfSturnTime));
     }
@@ -782,7 +789,7 @@ public partial class PlayerRole : Role
     bool HurtInnerGlowFactor;
     void HurtInnerGlowFunc()
     {
-        if(HurtInnerGlowTransparent>0)
+        if (HurtInnerGlowTransparent > 0)
         {
             Color c = HurtInnerGlow.color;
             if (HurtInnerGlowFactor)

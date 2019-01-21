@@ -26,6 +26,10 @@ public class EquipPop : MonoBehaviour
     ItemSpawner LeftSpanwer;
     [SerializeField]
     ItemSpawner RightSpanwer;
+    [SerializeField]
+    Transform LeftEquipTrans;
+    [SerializeField]
+    Transform RightEquipTrans;
 
     public static EquipCondition Condition;
     List<PropertyItem> LeftPropertyItems = new List<PropertyItem>();
@@ -105,6 +109,11 @@ public class EquipPop : MonoBehaviour
             QualityBottom[1].sprite = GameManager.GetItemQualityBotSprite(RightData.Quality);
             LvText[1].text = RightData.GetLVString();
             SetPropertyItems(RightData, RightPropertyItems, false);
+            //武器要擺斜
+            if (_rightData.Type == EquipType.Weapon)
+                RightEquipTrans.rotation = Quaternion.Euler(new Vector3(0, 0, 30));
+            else
+                RightEquipTrans.rotation = Quaternion.Euler(Vector3.zero);
         }
         else if (LeftData != null && RightData == null)
         {
@@ -120,6 +129,11 @@ public class EquipPop : MonoBehaviour
             QualityBottom[1].sprite = GameManager.GetItemQualityBotSprite(LeftData.Quality);
             LvText[1].text = LeftData.GetLVString();
             SetPropertyItems(LeftData, RightPropertyItems, false);
+            //武器要擺斜
+            if (_leftData.Type == EquipType.Weapon)
+                LeftEquipTrans.rotation = Quaternion.Euler(new Vector3(0, 0, 30));
+            else
+                LeftEquipTrans.rotation = Quaternion.Euler(Vector3.zero);
         }
         else
         {
@@ -145,6 +159,15 @@ public class EquipPop : MonoBehaviour
             QualityBottom[1].sprite = GameManager.GetItemQualityBotSprite(RightData.Quality);
             LvText[1].text = RightData.GetLVString();
             SetPropertyItems(RightData, RightPropertyItems, false);
+            //武器要擺斜
+            if (_rightData.Type == EquipType.Weapon)
+                RightEquipTrans.rotation = Quaternion.Euler(new Vector3(0, 0, 30));
+            else
+                RightEquipTrans.rotation = Quaternion.Euler(Vector3.zero);
+            if (_leftData.Type == EquipType.Weapon)
+                LeftEquipTrans.rotation = Quaternion.Euler(new Vector3(0, 0, 30));
+            else
+                LeftEquipTrans.rotation = Quaternion.Euler(Vector3.zero);
         }
         for (int j = 0; j < LeftEquipSprite.Length; j++)
         {

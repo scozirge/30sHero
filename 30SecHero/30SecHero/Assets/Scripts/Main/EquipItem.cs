@@ -17,6 +17,8 @@ public class EquipItem : Item
     GameObject SoldCoverObj;
     [SerializeField]
     GameObject SoldCheckObj;
+    [SerializeField]
+    Transform IconTrans;
     public EquipType MyType;
     public EquipData MyData;
     Equip ParentUI;
@@ -28,16 +30,19 @@ public class EquipItem : Item
         {
             MyType = EquipType.Weapon;
             MyData = ((WeaponData)_data);
+            IconTrans.rotation = Quaternion.Euler(new Vector3(0, 0, 30));
         }
         else if (_data.GetType() == typeof(ArmorData))
         {
             MyType = EquipType.Armor;
             MyData = ((ArmorData)_data);
+            IconTrans.rotation = Quaternion.Euler(Vector3.zero);
         }
         else if (_data.GetType() == typeof(AccessoryData))
         {
             MyType = EquipType.Accessory;
             MyData = ((AccessoryData)_data);
+            IconTrans.rotation = Quaternion.Euler(Vector3.zero);
         }
         else
             return;

@@ -101,12 +101,15 @@ public class PlayerAttack : MonoBehaviour
                 Attacker.HealFromCauseDamage(causeDamage);
                 if (er.IsAlive)
                 {
-                    Attacker.BumpingAttack();
+                    if (er.Type == EnemyType.Minion)
+                        Attacker.BumpingAttack(false);
+                    else
+                        Attacker.BumpingAttack(true);
                     AfterAttackAction_TargetAlive(er);
                     //衝刺攻擊會暈眩目標
                     if (Attacker.OnRush)
                     {
-                        er.AddBuffer(RoleBuffer.Stun, GameSettingData.RushStun);                        
+                        er.AddBuffer(RoleBuffer.Stun, GameSettingData.RushStun);
                     }
                 }
                 else
@@ -126,7 +129,9 @@ public class PlayerAttack : MonoBehaviour
                 }
             }
             else
-                Attacker.BumpingAttack();
+            {
+                Attacker.BumpingAttack(false);
+            }
         }
     }
     void BeforeAttackAction(EnemyRole _er)

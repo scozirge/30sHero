@@ -234,6 +234,7 @@ MonoBehaviour:
     type: 3}
   DontAttackRestoreTime: 2
   SelfKnockForce: 10000
+  SelfKnockForceBoss: 20000
   SelfSturnTime: 0.25
   ControlDevice: 1
   CursorLimitDist: 200

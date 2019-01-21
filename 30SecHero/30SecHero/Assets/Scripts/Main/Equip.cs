@@ -60,6 +60,8 @@ public class Equip : MyUI
     Toggle[] TagToggles;
     [SerializeField]
     RunAnimatedText MyAniText;
+    [SerializeField]
+    Transform WeaponIconTrans;
 
     EquipData SelectedEquip;
     public EquipType CurFilterType;
@@ -470,6 +472,7 @@ public class Equip : MyUI
                 WeaponIcon_Char[i].enabled = true;
                 WeaponIcon_Char[i].SetNativeSize();
             }
+            WeaponIconTrans.rotation = Quaternion.Euler(new Vector3(0, 0, 30));
         }
         else
         {
@@ -491,6 +494,7 @@ public class Equip : MyUI
                 WeaponIcon_Char[i].enabled = true;
                 WeaponIcon_Char[i].SetNativeSize();
             }
+            WeaponIconTrans.rotation = Quaternion.Euler(Vector3.zero);
         }
         if (Player.MyArmor != null)
         {

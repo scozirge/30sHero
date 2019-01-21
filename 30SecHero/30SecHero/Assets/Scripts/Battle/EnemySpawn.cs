@@ -62,7 +62,7 @@ public partial class BattleManage
                 er.SetEnemyData(GameDictionary.EnemyDic[PreviousDemonGergons.ID]);
                 //Set SpawnPos
                 er.transform.SetParent(EnemyParent);
-                er.transform.position = GetSpawnPos(new Vector2(600, 0));
+                er.transform.position = GetSpawnPos(new Vector2(-600, 0));
                 er.SetStemFromFloor(Floor);
                 AddEnemy(er);
 
