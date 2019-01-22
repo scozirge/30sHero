@@ -194,7 +194,10 @@ partial class BattleManage
             if (EnemyKill > Player.MaxEnemyKills)
                 Player.SetMaxEnemyKills_Local(EnemyKill);
             //目前樓層
-            Player.SetCurFloor_Local(Floor);
+            if (!_endGame)
+                Player.SetCurFloor_Local(Floor + 1);
+            else
+                Player.SetCurFloor_Local(Floor);
             //最高樓層
             Player.SetMaxFloor_Local(MaxFloor);
             //金幣獲得
@@ -208,8 +211,17 @@ partial class BattleManage
         }
         else
         {
-            //送server處理
-            Player.Settlement(Player.Gold + TotalGold, Player.Emerald + TotalEmerald, Player.FreeEmerald + TotalEmerald, Floor, (MaxFloor > Player.MaxFloor) ? MaxFloor : Player.MaxFloor, GainEquipDataList);
+            if (!_endGame)
+            {
+                //送server處理
+                Player.Settlement(Player.Gold + TotalGold, Player.Emerald + TotalEmerald, Player.FreeEmerald + TotalEmerald, (Floor+1), (MaxFloor > Player.MaxFloor) ? MaxFloor : Player.MaxFloor, GainEquipDataList);
+            }
+            else
+            {
+                //送server處理
+                Player.Settlement(Player.Gold + TotalGold, Player.Emerald + TotalEmerald, Player.FreeEmerald + TotalEmerald, Floor, (MaxFloor > Player.MaxFloor) ? MaxFloor : Player.MaxFloor, GainEquipDataList);
+            }
+
         }
         //設定驚嘆號tip顯示
         Main.ResetTipBool();
