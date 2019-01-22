@@ -16,6 +16,7 @@ TagManager:
   - Soul
   - Skull
   - Wall
+  - AvatarTimer
   layers:
   - Default
   - TransparentFX

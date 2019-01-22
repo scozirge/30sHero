@@ -163,6 +163,12 @@ public partial class EnemyRole
             }
         }
         pr.GetExtraMoveSpeed();
+        //DropEnergy
+        if(KillAvatarTime>0)
+        {
+            EnergyLoot el= DropSpawner.SpawnEnergy(transform.position);
+            if (el) el.Init(KillAvatarTime);
+        }
     }
     string GetSkillLootSpritePath()
     {

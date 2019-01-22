@@ -53,8 +53,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b11096736a6934b48862b3f74240557f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SpawnEffect: {fileID: 0}
   WaitToBeAcquire: 0
   RandomPosRadius: 0
+  GainSound: {fileID: 0}
   SoulIcon: {fileID: 114515800619740280}
   ExistEffect: {fileID: 692384644245826070, guid: c60a536b7b01a264b93e7154e312c5d2,
     type: 3}
@@ -72,7 +74,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ba44017135a3df4fb4ad12647f588ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MoveToPlayer: 0
+  MoveToTarget: 0
+  TargetTag: Player
   Wander: 1
   FollowCamera: 0
   FollowCameraSpeed: 2000

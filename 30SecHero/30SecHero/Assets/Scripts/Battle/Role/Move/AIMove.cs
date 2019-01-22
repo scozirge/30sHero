@@ -5,9 +5,12 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public abstract class AIMove : MonoBehaviour
 {
-    [Tooltip("是否直接移動到玩家身上，移動速度是看DebutSpeed")]
+    [Tooltip("是否直接移動到目標身上，移動速度是看DebutSpeed")]
     [SerializeField]
-    protected bool MoveToPlayer;
+    protected bool MoveToTarget;
+    [SerializeField]
+    protected string TargetTag;
+    protected Transform TargetTrans;
     [Tooltip("移動到指定座標後會不會遊蕩")]
     [SerializeField]
     protected bool Wander;
@@ -49,7 +52,14 @@ public abstract class AIMove : MonoBehaviour
     protected virtual void Start()
     {
         MyRigi = GetComponent<Rigidbody2D>();
-        if (ReadyToMove && MoveToPlayer)
+        if (TargetTag != "")
+        {
+            GameObject go = GameObject.FindGameObjectWithTag(TargetTag);
+            if (go != null)
+                TargetTrans = go.transform;
+        }
+
+        if (ReadyToMove && MoveToTarget)
         {
             MyRigi.velocity = new Vector2(Random.Range(-1200, 1200), Random.Range(-1200, 1200));
         }
@@ -148,9 +158,9 @@ public abstract class AIMove : MonoBehaviour
     {
         if (CanMove)
         {
-            if (MoveToPlayer)
+            if (MoveToTarget)
             {
-                MoveToPlayerFunc();
+                MoveToTargetFunc();
             }
             else
             {
@@ -159,10 +169,10 @@ public abstract class AIMove : MonoBehaviour
             }
         }
     }
-    void MoveToPlayerFunc()
+    void MoveToTargetFunc()
     {
-        if (BattleManage.BM.MyPlayer && ReadyToMove)
-            MyRigi.velocity = Vector2.Lerp(MyRigi.velocity, (BattleManage.BM.MyPlayer.transform.position - transform.position).normalized * DebutSpeed, 0.1f);
+        if (TargetTrans != null && ReadyToMove)
+            MyRigi.velocity = Vector2.Lerp(MyRigi.velocity, (TargetTrans.position - transform.position).normalized * DebutSpeed, 0.1f);
     }
     public void SetCanMove(bool _bool)
     {
@@ -172,7 +182,7 @@ public abstract class AIMove : MonoBehaviour
     {
         if (CanMove)
         {
-            if (!MoveToPlayer)
+            if (!MoveToTarget)
             {
                 WanderTimerFunc();
             }

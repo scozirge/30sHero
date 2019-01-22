@@ -706,7 +706,7 @@ public partial class PlayerRole : Role
         {
             force = MyRigi.velocity.normalized * SelfKnockForce * -1;
             AddBuffer(new BufferData(RoleBuffer.Stun, SelfSturnTime));
-        }            
+        }
         else
         {
             force = MyRigi.velocity.normalized * SelfKnockForceBoss * -1;
@@ -714,7 +714,7 @@ public partial class PlayerRole : Role
         }
 
         MyRigi.AddForce(force);
-        
+
     }
     protected override void Update()
     {
@@ -1083,7 +1083,7 @@ public partial class PlayerRole : Role
         else if (ControlDevice == MoveControl.Keyboard)//鍵盤移動
         {
             if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.W)
-                || Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.DownArrow))
+                || Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.Space))
             {
                 if (!DragTimer.StartRunTimer)
                 {
@@ -1116,7 +1116,8 @@ public partial class PlayerRole : Role
                             Vector2 rushForce;
                             if (xMoveForce == 0 && yMoveForce == 0)
                             {
-                                rushForce = new Vector2(FaceLeftOrRight, 0) * RushForce;
+                                xMoveForce = FaceLeftOrRight * MoveSpeed * KeyboardMoveFactor;
+                                rushForce = new Vector2(xMoveForce, 0) * RushForce;
                             }
                             else
                                 rushForce = new Vector2(xMoveForce, yMoveForce) * RushForce;
@@ -1136,6 +1137,7 @@ public partial class PlayerRole : Role
                     {
                         float xMoveForce = 0;
                         float yMoveForce = 0;
+
                         if (Input.GetAxis("Horizontal") == 0)
                             xMoveForce = 0;
                         else if (Input.GetAxis("Horizontal") > 0)
@@ -1148,6 +1150,7 @@ public partial class PlayerRole : Role
                             yMoveForce = 1;
                         else if (Input.GetAxis("Vertical") < 0)
                             yMoveForce = -1;
+
                         xMoveForce *= MoveSpeed * KeyboardJumpMoveFactor;
                         yMoveForce *= MoveSpeed * KeyboardJumpMoveFactor;
                         //史萊姆衝刺
@@ -1170,7 +1173,8 @@ public partial class PlayerRole : Role
                             Vector2 rushForce;
                             if (xMoveForce == 0 && yMoveForce == 0)
                             {
-                                rushForce = new Vector2(FaceLeftOrRight, 0) * RushForce;
+                                xMoveForce = FaceLeftOrRight * MoveSpeed * KeyboardJumpMoveFactor;
+                                rushForce = new Vector2(xMoveForce, 0) * RushForce;
                             }
                             else
                                 rushForce = new Vector2(xMoveForce, yMoveForce) * RushForce;

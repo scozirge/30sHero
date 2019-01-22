@@ -12,7 +12,7 @@ public class AIRoleMove : AIMove
     protected override void Start()
     {
         base.Start();
-        if (!MoveToPlayer)
+        if (!MoveToTarget)
         {
             ER = GetComponent<EnemyRole>();
             //int randX = Random.Range(0, 800);

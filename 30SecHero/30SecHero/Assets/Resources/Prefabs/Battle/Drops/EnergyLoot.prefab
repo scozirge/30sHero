@@ -1,79 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1466717084609372
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 224332978857240164}
-  - component: {fileID: 222882241904195162}
-  - component: {fileID: 114062623907706864}
-  m_Layer: 12
-  m_Name: icon
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &224332978857240164
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1466717084609372}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 224593079169604558}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -19.17}
-  m_SizeDelta: {x: 96, y: 96}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!222 &222882241904195162
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1466717084609372}
-  m_CullTransparentMesh: 0
---- !u!114 &114062623907706864
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1466717084609372}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: c5eb6b9986d27f14dab5d6ec280e0338, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
 --- !u!1 &1834583185934042
 GameObject:
   m_ObjectHideFlags: 0
@@ -86,9 +12,10 @@ GameObject:
   - component: {fileID: 114612046629608950}
   - component: {fileID: 70786121786361916}
   - component: {fileID: 50081146118109540}
-  - component: {fileID: 4605794452835450940}
+  - component: {fileID: 999236395055453340}
+  - component: {fileID: 7872377174267016268}
   m_Layer: 12
-  m_Name: PatnerLoot
+  m_Name: EnergyLoot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -104,8 +31,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 224332978857240164}
+  m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -127,13 +53,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MoveToTarget: 1
-  TargetTag: Player
+  TargetTag: AvatarTimer
   Wander: 0
   FollowCamera: 0
   FollowCameraSpeed: 6000
   DebutSpeed: 1000
   WanderInterval: 0
-  RotateFactor: 0
+  RotateFactor: 0.005
   WanderRange: 0
   Destination: {x: 0, y: 0}
   KeepDebut: 0
@@ -177,7 +103,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &4605794452835450940
+--- !u!114 &999236395055453340
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -186,14 +112,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 1834583185934042}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 36449b1ee1832234da7e44e8e71d42f4, type: 3}
+  m_Script: {fileID: 11500000, guid: 65069269a16a89543bc9015ab9a79cf5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SpawnEffect: {fileID: 7487427906953799366, guid: ff36adcba83c9634985aa5f0a803d8d4,
+  MyAni: {fileID: 0}
+--- !u!114 &7872377174267016268
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1834583185934042}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3749a8a68f2aea2449464d9653f7ae4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SpawnEffect: {fileID: 198298351546003630, guid: c5942366ac4765643805d8b826cfa8c8,
     type: 3}
-  WaitToBeAcquire: 1.5
+  WaitToBeAcquire: 0
   RandomPosRadius: 0
-  GainSound: {fileID: 0}
-  PatnerTrans: {fileID: 224593079169604558}
-  PatnerImage: {fileID: 114062623907706864}
+  GainSound: {fileID: 8300000, guid: 54eb9279c5a50b74786c5ef98fee39dc, type: 3}
   DeathEffect: {fileID: 0}
+  TargetEffect: {fileID: 198889853383162744, guid: 62e80a188ca802a45b0ed415b26a7ff0,
+    type: 3}

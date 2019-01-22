@@ -7,7 +7,7 @@ public class AILootMove : AIMove
     [Tooltip("移動速度")]
     [SerializeField]
     protected int MoveSpeed;
-    [Tooltip("靠近玩家自動吸過去半徑")]
+    [Tooltip("靠近目標自動吸過去半徑")]
     [SerializeField]
     public int AbsorbRadius;
 
@@ -21,12 +21,12 @@ public class AILootMove : AIMove
     protected override void Update()
     {
         base.Update();
-        if (!MoveToPlayer && AbsorbRadius > 0)
+        if (!MoveToTarget && AbsorbRadius > 0)
         {
-            if (BattleManage.BM.MyPlayer!=null)
-                if (Vector2.Distance(transform.position, BattleManage.BM.MyPlayer.transform.position) <= AbsorbRadius)
+            if (TargetTrans != null)
+                if (Vector2.Distance(transform.position, TargetTrans.position) <= AbsorbRadius)
                 {
-                    MoveToPlayer = true;
+                    MoveToTarget = true;
                     DebutSpeed = 2000;
                 }
 

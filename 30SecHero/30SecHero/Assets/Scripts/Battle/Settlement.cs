@@ -218,10 +218,7 @@ partial class BattleManage
         AudioPlayer.PlayMusicByAudioClip_Static(GameManager.GM.SettlementMusic);
         //顯示介面
         SettlementObj.SetActive(true);
-        IsPause = true;
-        SoulGo.SetActive(false);
-        MyCameraControler.enabled = false;
-        SceneObject.SetActive(false);
+        Pause(true);
         //顯示資料
         SpawnEquipItem();
         FloorClearText.text = PassFloorCount.ToString();

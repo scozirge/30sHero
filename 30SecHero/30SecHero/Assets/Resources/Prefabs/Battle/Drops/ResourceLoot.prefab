@@ -74,7 +74,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ba44017135a3df4fb4ad12647f588ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MoveToPlayer: 1
+  MoveToTarget: 1
+  TargetTag: Player
   Wander: 0
   FollowCamera: 0
   FollowCameraSpeed: 6000

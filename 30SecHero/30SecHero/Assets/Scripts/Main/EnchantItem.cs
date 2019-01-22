@@ -89,6 +89,8 @@ public class EnchantItem : Item
     }
     public void OnClickSetTip()
     {
+        if (MyData == null)
+            return;
         if (Player.Emerald < MyData.GetPrice() || !MyData.CanUpgrade())
         {
             SetTip(false);

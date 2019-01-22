@@ -232,8 +232,7 @@ public partial class EnemyRole : Role
     {
         if (base.DeathCheck())
         {
-            Drop();
-            BattleManage.BM.MyPlayer.AddAvarTime(KillAvatarTime);
+            Drop();            
             return true;
         }
         else

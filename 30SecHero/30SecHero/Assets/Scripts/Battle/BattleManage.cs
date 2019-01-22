@@ -200,10 +200,7 @@ public partial class BattleManage : MonoBehaviour
         {
             Setting(true);
             OpenTutorial();
-            IsPause = true;
-            SoulGo.SetActive(false);
-            MyCameraControler.enabled = false;
-            gameObject.SetActive(false);
+            Pause(true);
             //如果第一次進入教學，行進方向箭頭指示改在關掉教學介面時顯示
         }
         else//行進方向箭頭指示
@@ -312,8 +309,18 @@ public partial class BattleManage : MonoBehaviour
             TPageArrow_Right.SetActive(true);
         PageText.text = string.Format("{0}/{1}", CurTutorialPage + 1, MaxTutorialPage);
     }
+    MyTimer WaitToClosePopupTimer;
+    bool CanClosePopupTutorial;
+    public void SetCanClosePopupTutorial()
+    {
+        CanClosePopupTutorial = true;
+    }
     public void PopupTutorial(string _type)
     {
+        if (WaitToClosePopupTimer == null)
+            WaitToClosePopupTimer = new MyTimer(1.5f, SetCanClosePopupTutorial, false, false);
+        CanClosePopupTutorial = false;
+        WaitToClosePopupTimer.StartRunTimer = true;
         Pause(true);
         PopupTutorialGo.SetActive(true);
         PopupTutorialGo_Left.SetActive(true);
@@ -384,6 +391,8 @@ public partial class BattleManage : MonoBehaviour
     }
     public void ClosePopupTutorial()
     {
+        if (!CanClosePopupTutorial)
+            return;
         PopupTutorialGo.SetActive(false);
         Pause(false);
     }
@@ -417,7 +426,7 @@ public partial class BattleManage : MonoBehaviour
         IsPause = _pause;
         SoulGo.SetActive(!_pause);
         MyCameraControler.enabled = !_pause;
-        gameObject.SetActive(!_pause);
+        SceneObject.SetActive(!_pause);
     }
     public void Setting(bool _active)
     {
@@ -481,6 +490,7 @@ public partial class BattleManage : MonoBehaviour
     {
         if (IsInit)
         {
+            OnKeyPress();
             if (!IsPause)
             {
                 InActivityOutSideEnemysAndLoots();
@@ -494,9 +504,23 @@ public partial class BattleManage : MonoBehaviour
                 if (WaitToCalculateResult != null)
                     WaitToCalculateResult.RunTimer();
             }
+            else
+            {
+                if (WaitToClosePopupTimer != null)
+                {
+                    WaitToClosePopupTimer.RunTimer();
+                }
+            }
         }
         else if (Player.IsInit)
             Init();
+    }
+    void OnKeyPress()
+    {
+        if (Input.GetKey(KeyCode.Space))
+        {
+            ClosePopupTutorial();
+        }
     }
     void InActivityOutSideEnemysAndLoots()
     {
@@ -552,10 +576,7 @@ public partial class BattleManage : MonoBehaviour
     }
     public void CallGetEnchantUI(bool _active)
     {
-        IsPause = _active;
-        SoulGo.SetActive(!_active);
-        MyCameraControler.enabled = !_active;
-        gameObject.SetActive(!_active);
+        Pause(_active);
         GetEnchantObj.SetActive(_active);
         ReadyToGetEnchant = false;
     }
