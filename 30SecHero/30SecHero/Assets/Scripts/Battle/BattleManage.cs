@@ -318,7 +318,7 @@ public partial class BattleManage : MonoBehaviour
     public void PopupTutorial(string _type)
     {
         if (WaitToClosePopupTimer == null)
-            WaitToClosePopupTimer = new MyTimer(1.5f, SetCanClosePopupTutorial, false, false);
+            WaitToClosePopupTimer = new MyTimer(1, SetCanClosePopupTutorial, false, false);
         CanClosePopupTutorial = false;
         WaitToClosePopupTimer.StartRunTimer = true;
         Pause(true);
