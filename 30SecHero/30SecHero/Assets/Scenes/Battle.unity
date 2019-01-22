@@ -4223,14 +4223,14 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1773075371}
         m_MethodName: CalculateResult
-        m_Mode: 1
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 0
+          m_BoolArgument: 1
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
@@ -13564,7 +13564,7 @@ MonoBehaviour:
     m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: press space to continue
-  UIString: 
+  UIString: PressSpaceToContinue
   IsAddTextList: 0
 --- !u!222 &1624560800
 CanvasRenderer:
@@ -14503,6 +14503,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 56d8abc9a53286049884f814f983b075, type: 3}
   - {fileID: 21300000, guid: 0edbf837ae122584db37adc6c5878af8, type: 3}
   - {fileID: 21300000, guid: d012d18900188704db5a8342c103d9f6, type: 3}
+  CloseTipTextObj: {fileID: 1624560796}
   SettlementObj: {fileID: 623092008}
   FloorClearText: {fileID: 1123841256}
   MaxFloorText: {fileID: 1529749857}
@@ -14511,6 +14512,7 @@ MonoBehaviour:
   UnlockPartnerText: {fileID: 1346656016}
   GoldText: {fileID: 320368145}
   EmeraldText: {fileID: 754975252}
+  RetryText: {fileID: 1780763168}
   MySpanwer: {fileID: 232256112}
   CallSettlementTime: 1
   MyRunText: {fileID: 623092011}

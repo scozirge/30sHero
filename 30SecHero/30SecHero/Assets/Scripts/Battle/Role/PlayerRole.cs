@@ -1346,7 +1346,9 @@ public partial class PlayerRole : Role
         switch (_data.Type)
         {
             case LootType.AvataEnergy:
-                AddAvarTime(_data.Time * (1 + PotionEfficiency) + AvatarPotionBuff + MyEnchant[EnchantProperty.Allergy]);
+                float energy = _data.Time * (1 + PotionEfficiency) + AvatarPotionBuff + MyEnchant[EnchantProperty.Allergy];
+                EnergyLoot el = DropSpawner.SpawnEnergy(transform.position);
+                if (el) el.Init(energy);
                 if (EnergyPotionTutorial)
                 {
                     BattleManage.BM.PopupTutorial(_data.Type.ToString());

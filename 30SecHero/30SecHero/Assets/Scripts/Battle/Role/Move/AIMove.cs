@@ -34,6 +34,9 @@ public abstract class AIMove : MonoBehaviour
     protected float WanderRange;
     [SerializeField]
     public Vector2 Destination;
+    [Tooltip("初始隨機力道")]
+    [SerializeField]
+    Vector2 RandomForce;
 
     protected bool CanMove;
     protected static float InRangeStartWander = 50;
@@ -61,7 +64,7 @@ public abstract class AIMove : MonoBehaviour
 
         if (ReadyToMove && MoveToTarget)
         {
-            MyRigi.velocity = new Vector2(Random.Range(-1200, 1200), Random.Range(-1200, 1200));
+            //MyRigi.velocity = new Vector2(Random.Range(-1200, 1200), Random.Range(-1200, 1200));
         }
         else
         {
@@ -72,7 +75,13 @@ public abstract class AIMove : MonoBehaviour
         {
             SetHereToDestination();
         }
-
+        if (RandomForce!=Vector2.zero)
+        {
+            float x = Random.Range(-RandomForce.x, RandomForce.x);
+            float y = Random.Range(-RandomForce.y, RandomForce.y);
+            RandomForce = new Vector2(x, y);
+            MyRigi.AddForce(RandomForce);
+        }
         CanMove = true;
     }
     public void SetHereToDestination()

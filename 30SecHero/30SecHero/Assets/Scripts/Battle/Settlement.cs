@@ -22,15 +22,20 @@ partial class BattleManage
     [SerializeField]
     Text EmeraldText;
     [SerializeField]
+    Text RetryText;
+    [SerializeField]
     ItemSpawner MySpanwer;
     [SerializeField]
     float CallSettlementTime;
     [SerializeField]
     RunAnimatedText MyRunText;
 
+
+
     public static bool ReadyToGetEnchant;
     WaitToDo<bool> WaitToCallEnchantUI;//玩家殺死BOSS但自己也立刻死掉時會等待幾秒後自動跳獲得夥伴視窗，在之後才跳結算
-    WaitToDo<float> WaitToCalculateResult;//玩家殺死BOSS但自己也立刻死掉時會等待幾秒後自動跳獲得夥伴視窗，在之後才跳結算
+    WaitToDo<bool> WaitToCalculateResult;//玩家殺死BOSS但自己也立刻死掉時會等待幾秒後自動跳獲得夥伴視窗，在之後才跳結算
+    WaitToDo<float> WaitToSettlement;//撞破城門等待進入結算
 
     //結算資料
     static int NewFloorGolds;
@@ -50,6 +55,7 @@ partial class BattleManage
     static int TotalEmerald;
     public static List<EquipData> ExpectEquipDataList;
     static List<EquipData> GainEquipDataList;
+    static List<EquipItem> EquipItems;
 
     //Tip標示
     [SerializeField]
@@ -70,18 +76,34 @@ partial class BattleManage
         GoldsMultiple = 0;
         BossDropEmeralds = 0;
         PassFloorCount = 0;
+        PassNewFloorCount = 0;
+        EnemyKill = 0;
+        BossKill = 0;
         MaxFloor = 0;
+        UnlockPartner = 0;
 
 
         TotalGold = 0;
         TotalEmerald = 0;
         GainEquipDataList = new List<EquipData>();
         ExpectEquipDataList = new List<EquipData>();
+        if (EquipItems != null && EquipItems.Count != 0)
+        {
+            for (int i = 0; i < EquipItems.Count; i++)
+            {
+                if (EquipItems[i] != null)
+                    Destroy(EquipItems[i].gameObject);
+            }
+        }
+
+        EquipItems = new List<EquipItem>();
+        /*
         GainWeapon = false;
         GainArmor = false;
         GainAccessory = false;
         GetEnchant = false;
         ToStrengthen = false;
+        */
         IsCalculateResult = false;
         ReadyToGetEnchant = false;
     }
@@ -90,10 +112,10 @@ partial class BattleManage
         if (ReadyToGetEnchant)
         {
             BM.WaitToCallEnchantUI = new WaitToDo<bool>(1, BM.CallGetEnchantUI, true, true);
-            BM.WaitToCalculateResult = new WaitToDo<float>(2, BM.CalculateResult, true);
+            BM.WaitToCalculateResult = new WaitToDo<bool>(2, BM.CalculateResult, true, true);
         }
         else
-            BM.CalculateResult();
+            BM.CalculateResult(true);
     }
     public static void EnemyDropGoldAdd(int _gold)
     {
@@ -140,10 +162,17 @@ partial class BattleManage
         ExpectEquipDataList = new List<EquipData>();
     }
     static bool IsCalculateResult;
-    public void CalculateResult()
+    static bool IsEndGame;
+    public void CalculateResult(bool _endGame)
     {
         if (IsCalculateResult)
             return;
+        IsEndGame = _endGame;
+        if (!IsEndGame)
+        {
+            AudioPlayer.StopAllMusic();
+            AudioPlayer.PlayMusicByAudioClip_Static(GameManager.GM.SettlementMusic);
+        }
         MyPlayer.StopHeartbeatAndInnerGlow();
         IsCalculateResult = true;
         //獎勵計算
@@ -174,8 +203,8 @@ partial class BattleManage
             Player.GainEmerald(TotalEmerald, false);
             //裝備獲得
             Player.GainEquip_Local(GainEquipDataList);
-            //顯示結果
-            StartCoroutine(WaitToShowResult());
+            //等待顯示結果
+            WaitToShowResult();
         }
         else
         {
@@ -207,15 +236,17 @@ partial class BattleManage
         }
         StrengthenTip.SetActive(ToStrengthen);
     }
-    public IEnumerator WaitToShowResult()
+    public void WaitToShowResult()
     {
-        yield return new WaitForSeconds(CallSettlementTime);
-        ShowResult();
+        WaitToSettlement = new WaitToDo<float>(CallSettlementTime, ShowResult, true);
+        if (BM.MyPlayer)
+        {
+            BM.MyPlayer.AddBuffer(RoleBuffer.Immortal, BM.CallSettlementTime);
+            BM.MyPlayer.AddBuffer(RoleBuffer.Untouch, BM.CallSettlementTime);
+        }
     }
     void ShowResult()
     {
-        AudioPlayer.StopAllMusic();
-        AudioPlayer.PlayMusicByAudioClip_Static(GameManager.GM.SettlementMusic);
         //顯示介面
         SettlementObj.SetActive(true);
         Pause(true);
@@ -228,6 +259,14 @@ partial class BattleManage
         UnlockPartnerText.text = UnlockPartner.ToString();
         GoldText.text = TotalGold.ToString();
         EmeraldText.text = TotalEmerald.ToString();
+        if (IsEndGame)
+        {
+            AudioPlayer.StopAllMusic();
+            AudioPlayer.PlayMusicByAudioClip_Static(GameManager.GM.SettlementMusic);
+            RetryText.text = StringData.GetString("Retry");
+        }
+        else
+            RetryText.text = StringData.GetString("Continue");
         //設定動畫文字
         MyRunText.Clear();
         MyRunText.SetAnimatedText("FloorClear", 0, PassFloorCount, FloorClearText, "", "");
@@ -244,12 +283,23 @@ partial class BattleManage
         {
             EquipItem ei = (EquipItem)MySpanwer.Spawn();
             ei.Set(GainEquipDataList[i], null);
+            EquipItems.Add(ei);
         }
     }
     public void ReTry()
     {
-        PopupUI.CallCutScene("Battle");
-        //ChangeScene.GoToScene(MyScene.Battle);
+        if (IsEndGame)
+            PopupUI.CallCutScene("Battle");
+        else
+        {
+            AudioPlayer.StopAllMusic();
+            AudioPlayer.PlayMusicByAudioClip_Static(GameManager.GM.FightMusic2);
+            InitSettlement();
+            //顯示介面
+            SettlementObj.SetActive(false);
+            Pause(false);
+
+        }
     }
     public void BackToMenu()
     {

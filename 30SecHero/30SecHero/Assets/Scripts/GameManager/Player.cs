@@ -435,6 +435,6 @@ public partial class Player
         }
         //顯示結果在結算
         if (BattleManage.BM)
-            BattleManage.BM.StartCoroutine(BattleManage.BM.WaitToShowResult());
+            BattleManage.BM.WaitToShowResult();
     }
 }

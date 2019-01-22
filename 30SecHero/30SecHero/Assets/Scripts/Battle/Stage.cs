@@ -211,6 +211,8 @@ public partial class BattleManage
     }
     public static void SpawnNextGate(int _destroyedFloor)
     {
+        //衝撞城門進入結算&無敵
+        BM.CalculateResult(false);
         //史萊姆狀態衝撞城門有機會獲得額外金幣
         if (!BM.MyPlayer.IsAvatar && ProbabilityGetter.GetResult(BM.MyPlayer.MyEnchant[EnchantProperty.BreakDoorGold]))
         {

@@ -57,11 +57,12 @@ MonoBehaviour:
   Wander: 0
   FollowCamera: 0
   FollowCameraSpeed: 6000
-  DebutSpeed: 1000
+  DebutSpeed: 2000
   WanderInterval: 0
   RotateFactor: 0.005
   WanderRange: 0
   Destination: {x: 0, y: 0}
+  RandomForce: {x: 10000, y: 2000}
   KeepDebut: 0
   ReadyToMove: 0
   MoveSpeed: 0

@@ -311,16 +311,23 @@ public partial class BattleManage : MonoBehaviour
     }
     MyTimer WaitToClosePopupTimer;
     bool CanClosePopupTutorial;
+    [SerializeField]
+    GameObject CloseTipTextObj;
     public void SetCanClosePopupTutorial()
     {
         CanClosePopupTutorial = true;
+        CloseTipTextObj.SetActive(true);
     }
     public void PopupTutorial(string _type)
     {
+        //設定幾秒後才可關閉介面
         if (WaitToClosePopupTimer == null)
-            WaitToClosePopupTimer = new MyTimer(1, SetCanClosePopupTutorial, false, false);
+            WaitToClosePopupTimer = new MyTimer(2, SetCanClosePopupTutorial, false, false);
         CanClosePopupTutorial = false;
         WaitToClosePopupTimer.StartRunTimer = true;
+        CloseTipTextObj.SetActive(false);
+
+
         Pause(true);
         PopupTutorialGo.SetActive(true);
         PopupTutorialGo_Left.SetActive(true);
@@ -491,6 +498,8 @@ public partial class BattleManage : MonoBehaviour
         if (IsInit)
         {
             OnKeyPress();
+            if (WaitToSettlement != null)
+                WaitToSettlement.RunTimer();
             if (!IsPause)
             {
                 InActivityOutSideEnemysAndLoots();
