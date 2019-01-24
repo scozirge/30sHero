@@ -69,8 +69,6 @@ public class PassiveBomb : Skill
     {
         if (BehaviorSkill)
             return;
-        if (!CanAttack)
-            return;
         if (!Target)
             return;
         if (Vector3.Distance(Target.transform.position, transform.position) > DetecteRadius)

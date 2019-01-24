@@ -26,6 +26,9 @@ public class Support : Skill
     [Tooltip("是否會對擁有support這個技能的目標施放")]
     [SerializeField]
     bool SpellToSupportTarget;
+    [Tooltip("是否會對BOSS目標施放")]
+    [SerializeField]
+    bool SpellToBossTarget;
 
     protected float Timer;
     protected float AmmoIntervalTimer;
@@ -68,7 +71,13 @@ public class Support : Skill
             {
                 for (int i = 0; i < gos.Count; i++)
                 {
-                    SupportTargets.Add(gos[i].GetComponent<EnemyRole>());
+                    EnemyRole er = gos[i].GetComponent<EnemyRole>();
+                    if (er != null)
+                    {
+                        if (er.Type != EnemyType.Demogorgon)
+                            SupportTargets.Add(er);
+                    }
+
                 }
             }
         }
@@ -103,7 +112,7 @@ public class Support : Skill
     {
         if (BehaviorSkill)
             return;
-        if (!CanAttack)
+        if (Myself.BuffersExist(RoleBuffer.Stun))
             return;
         if (SupportTargets.Count < 0)
             return;

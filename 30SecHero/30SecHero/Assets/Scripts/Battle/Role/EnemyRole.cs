@@ -174,6 +174,8 @@ public partial class EnemyRole : Role
     {
         if (!Target)
             return;
+        if (BuffersExist(RoleBuffer.Stun))
+            return;
         if (transform.position.x > Target.transform.position.x)
         {
             RoleTrans.localScale = Vector3.one;

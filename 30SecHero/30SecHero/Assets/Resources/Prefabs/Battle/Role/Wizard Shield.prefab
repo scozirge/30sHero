@@ -139,7 +139,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4f0a44c2e05082409ff650163011e2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MoveToPlayer: 0
+  MoveToTarget: 0
+  TargetTag: 
   Wander: 1
   FollowCamera: 1
   FollowCameraSpeed: 200
@@ -148,6 +149,7 @@ MonoBehaviour:
   RotateFactor: 0.02
   WanderRange: 25
   Destination: {x: 0, y: 0}
+  RandomForce: {x: 0, y: 0}
   KeepDebut: 0
   ReadyToMove: 1
 --- !u!114 &114364750184517408
@@ -295,6 +297,7 @@ MonoBehaviour:
     type: 3}
   SelfTarget: 0
   SpellToSupportTarget: 0
+  SpellToBossTarget: 0
 --- !u!1 &1610887402048710
 GameObject:
   m_ObjectHideFlags: 0

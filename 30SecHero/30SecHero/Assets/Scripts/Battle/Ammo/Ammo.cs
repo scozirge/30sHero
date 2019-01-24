@@ -133,6 +133,7 @@ public partial class Ammo : MonoBehaviour
             MyRigi = gameObject.AddComponent<Rigidbody2D>();
             MyRigi.gravityScale = 0;
         }
+        MyRigi.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
         LifeTimer = LifeTime;
         AttackerRoleTag = ((Force)(_dic["AttackerForce"]));
         TargetRoleTag = ((Force)(_dic["TargetRoleTag"]));

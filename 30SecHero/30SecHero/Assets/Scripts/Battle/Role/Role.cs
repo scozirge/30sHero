@@ -355,10 +355,6 @@ public abstract class Role : MonoBehaviour
         switch (_buffer.Type)
         {
             case RoleBuffer.Stun:
-                for (int i = 0; i < ActiveMonsterSkills.Count; i++)
-                {
-                    ActiveMonsterSkills[i].SetCanAttack(!_add);
-                }
                 break;
             case RoleBuffer.Burn:
                 if (_add)

@@ -50,7 +50,6 @@ public class Skill : MonoBehaviour
     [HideInInspector]
     public float PSkillTimer;
     protected Role Target;
-    protected bool CanAttack;
     public bool IsPlayerGetSkill;
 
     public virtual void LaunchAISpell()
@@ -86,15 +85,10 @@ public class Skill : MonoBehaviour
         if (DamagePercent < 0)
             DamagePercent = 0;
         PSkillTimer = PSkillDuration;
-        CanAttack = !Myself.Buffers.ContainsKey(RoleBuffer.Stun);
         AmmoParent = GameObject.FindGameObjectWithTag("AmmoParent").transform;
         if (SpawnedInSelf)
             AmmoParent = transform;
         SubordinateAmmos = new List<Ammo>();
-    }
-    public virtual void SetCanAttack(bool _bool)
-    {
-        CanAttack = _bool;
     }
     public virtual void PlayerInitSkill()
     {

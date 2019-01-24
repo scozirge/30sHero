@@ -214,7 +214,7 @@ MonoBehaviour:
   MoveDepletedTime: 10
   MaxExtraMove: 500
   WeaponAttack: 0
-  MaxAvaterTime: 100
+  MaxAvaterTime: 999
   AvatarTimerText: {fileID: 0}
   MyAvatarText: {fileID: 0}
   AvatarTimerAni: {fileID: 0}
@@ -252,7 +252,7 @@ MonoBehaviour:
   CountdownSound: {fileID: 8300000, guid: 7c919f9835ef7064fa42d392c9f4349f, type: 3}
   JumpCDTime: 0.2
   StopDrag: 800
-  RushAntiAmooTime: 0.2
+  RushAntiAmooTime: 0.3
   RushCD: 3
   MyLight: {fileID: 0}
   Blizzard: {fileID: 1362518505}
@@ -407,6 +407,7 @@ MonoBehaviour:
     type: 3}
   SelfTarget: 1
   SpellToSupportTarget: 1
+  SpellToBossTarget: 0
 --- !u!114 &435051386195516395
 MonoBehaviour:
   m_ObjectHideFlags: 0

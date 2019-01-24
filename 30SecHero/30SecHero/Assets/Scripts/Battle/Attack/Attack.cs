@@ -172,7 +172,7 @@ public class Attack : Skill
     {
         if (BehaviorSkill)
             return;
-        if (!CanAttack)
+        if (Myself.BuffersExist(RoleBuffer.Stun))
             return;
         if (!Target)
             return;
