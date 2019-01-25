@@ -41,8 +41,12 @@ public class Purchase : MyUI
             Destroy(ItemList[i].gameObject);
         }
         ItemList = new List<PurchaseItem>();
+        if (Player.UserID_K ==0)
+        {
+            KongregateAPIBehaviour.KGLogin();
+        }
         ShowInfo(null);
-        ShowItemList();
+        //ShowItemList();
         KongregateAPIBehaviour.ShowItemList();
         //ShowItemListCB("1,test,test,1/2,test2,test2,5");
     }
@@ -116,7 +120,7 @@ public class Purchase : MyUI
         {
             case PurchaseType.BuyEmerald:
                 BtnIcon.sprite = GameManager.GetCurrencySprite(Currency.Kred);
-                PriceText.text = CurSelectedData.PayKreds.ToString();                
+                PriceText.text = CurSelectedData.PayKreds.ToString();
                 break;
             case PurchaseType.TradeGold:
                 if (Player.Emerald < CurSelectedData.PayEmerald)

@@ -55,21 +55,53 @@ public class KongregateAPIBehaviour : MonoBehaviour
           kongregate.services.showRegistrationBox();");
         CaseTableData.ShowPopLog(1001);
         Application.ExternalEval(
-  @"if(typeof(kongregateUnitySupport) != 'undefined'){
+            @"if(typeof(kongregateUnitySupport) != 'undefined'){
+        kongregate.services.addEventListener('login', 'OnKongregateInPageLogin');
+      };"
+            );
+        WaitSignInCheck = new MyTimer(WaitInitTime, EndKongregateLogin, true, false);
+    }
+    public static void OnKongregateInPageLogin(string _userInfoString)
+    {
+        Debug.Log("OnKongregateInPageLogin.................");
+        Debug.Log("_userInfoString=" + _userInfoString);
+        Application.ExternalEval(
+@"if(typeof(kongregateUnitySupport) != 'undefined'){
         kongregateUnitySupport.initAPI('KongregateAPI', 'OnKongregateAPILoaded');
       };"
 );
-        WaitSignInCheck = new MyTimer(WaitInitTime, EndKongregateLogin, true, false);
+        /*
+         kongregate.services.addEventListener("login", onKongregateInPageLogin);
+
+        function onKongregateInPageLogin() {
+          var user_id = kongregate.services.getUserId();
+          var username = kongregate.services.getUsername();
+          var token = kongregate.services.getGameAuthToken();
+        }
+         */
     }
+
+
+
+
     void Update()
     {
         if (InitTimer != null)
             InitTimer.RunTimer();
+        if (WaitSignInCheck != null)
+            WaitSignInCheck.RunTimer();
     }
     public static void EndKongregateLogin()
     {
         if (EndLogin)
             return;
+        if (!KongregateLogin && Relogin)
+        {
+            CaseTableData.HidePopLog(1001);
+            CaseTableData.ShowPopLog(9);
+            Relogin = false;
+            return;
+        }
         Player.UseLocalData(!KongregateLogin);
         EndLogin = true;
     }
