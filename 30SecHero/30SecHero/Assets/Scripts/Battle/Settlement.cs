@@ -26,7 +26,9 @@ partial class BattleManage
     [SerializeField]
     ItemSpawner MySpanwer;
     [SerializeField]
-    float CallSettlementTime;
+    float CallSettlementTime_End;
+    [SerializeField]
+    float CallSettlementTime_PassStage;
     [SerializeField]
     RunAnimatedText MyRunText;
 
@@ -214,7 +216,7 @@ partial class BattleManage
             if (!_endGame)
             {
                 //送server處理
-                Player.Settlement(Player.Gold + TotalGold, Player.Emerald + TotalEmerald, Player.FreeEmerald + TotalEmerald, (Floor+1), (MaxFloor > Player.MaxFloor) ? MaxFloor : Player.MaxFloor, GainEquipDataList);
+                Player.Settlement(Player.Gold + TotalGold, Player.Emerald + TotalEmerald, Player.FreeEmerald + TotalEmerald, (Floor + 1), (MaxFloor > Player.MaxFloor) ? MaxFloor : Player.MaxFloor, GainEquipDataList);
             }
             else
             {
@@ -250,11 +252,16 @@ partial class BattleManage
     }
     public void WaitToShowResult()
     {
-        WaitToSettlement = new WaitToDo<float>(CallSettlementTime, ShowResult, true);
+        float time = 0;
+        if (IsEndGame)
+            time = CallSettlementTime_End;
+        else
+            time = CallSettlementTime_PassStage;
+        WaitToSettlement = new WaitToDo<float>(time, ShowResult, true);
         if (BM.MyPlayer)
         {
-            BM.MyPlayer.AddBuffer(RoleBuffer.Immortal, BM.CallSettlementTime);
-            BM.MyPlayer.AddBuffer(RoleBuffer.Untouch, BM.CallSettlementTime);
+            BM.MyPlayer.AddBuffer(RoleBuffer.Immortal, time);
+            BM.MyPlayer.AddBuffer(RoleBuffer.Untouch, time);
         }
     }
     void ShowResult()

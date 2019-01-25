@@ -211,8 +211,6 @@ public partial class BattleManage
     }
     public static void SpawnNextGate(int _destroyedFloor)
     {
-        //衝撞城門進入結算&無敵
-        BM.CalculateResult(false);
         //史萊姆狀態衝撞城門有機會獲得額外金幣
         if (!BM.MyPlayer.IsAvatar && ProbabilityGetter.GetResult(BM.MyPlayer.MyEnchant[EnchantProperty.BreakDoorGold]))
         {
@@ -244,10 +242,11 @@ public partial class BattleManage
             //建立地形
             SpawnStage(new Vector2(GetGatePosition(Floor + 1).x + (BM.PlateSizeX / 2), 0), GetFloorPlateCount(Floor + 2), Floor + 2, StageSpawnType.ForbidSpawnOnGate);
             SpawnFG(new Vector2(GetGatePosition(Floor + 1).x + (BM.PlateSizeX / 2), 0), (BM.PlateSizeX * GetFloorPlateCount(Floor + 2)), Floor + 2);
+            MaxFloor = (_destroyedFloor + 1);
         }
         PassFloorCount++;
-        if (Floor > MaxFloor)
-            MaxFloor = Floor;
+        //衝撞城門進入結算&無敵
+        BM.CalculateResult(false);
     }
     public static int CheckDemogorgon(int _floor)
     {

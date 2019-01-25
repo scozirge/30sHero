@@ -15,8 +15,8 @@ public partial class Player
         }
     }
     public static int ID { get; private set; }
-    public static int UserID_K { get; private set; }
-    public static string Name_K { get; private set; }
+    public static int UserID_K;
+    public static string Name_K;
     public static int Gold { get; private set; }
     public static int Emerald { get; private set; }
     public static int PayEmerald { get; private set; }
@@ -32,9 +32,9 @@ public partial class Player
     {
         if (IsInit)
             return;
-        Itmes.Add(EquipType.Weapon, new Dictionary<long, EquipData>());
-        Itmes.Add(EquipType.Armor, new Dictionary<long, EquipData>());
-        Itmes.Add(EquipType.Accessory, new Dictionary<long, EquipData>());
+        Items.Add(EquipType.Weapon, new Dictionary<long, EquipData>());
+        Items.Add(EquipType.Armor, new Dictionary<long, EquipData>());
+        Items.Add(EquipType.Accessory, new Dictionary<long, EquipData>());
         InitProperty();
     }
 
@@ -172,6 +172,8 @@ public partial class Player
             {
                 Debug.Log("更新Loco玩家資源");
                 PlayerPrefs.SetInt(LocoData.Emerald.ToString(), Emerald);
+                PlayerPrefs.SetInt(LocoData.FreeEmerald.ToString(), FreeEmerald);
+                PlayerPrefs.SetInt(LocoData.PayEmerald.ToString(), PayEmerald);
             }
         }
     }
@@ -372,9 +374,9 @@ public partial class Player
             for (int i = 0; i < _datas.Count; i++)
             {
                 //Debug.Log("Type=" + _datas[i].Type + "  UID=" + _datas[i].UID);
-                if (!Itmes[_datas[i].Type].ContainsKey(_datas[i].UID))
+                if (!Items[_datas[i].Type].ContainsKey(_datas[i].UID))
                 {
-                    Itmes[_datas[i].Type].Add(_datas[i].UID, _datas[i]);
+                    Items[_datas[i].Type].Add(_datas[i].UID, _datas[i]);
                 }
                 else
                     Debug.LogWarning("重複裝備UID  Type=" + _datas[i].Type + "  UID=" + _datas[i].UID);
@@ -422,9 +424,9 @@ public partial class Player
             }
             for (int i = 0; i < CurGainEquipDatas.Count; i++)
             {
-                if (!Itmes[CurGainEquipDatas[i].Type].ContainsKey(CurGainEquipDatas[i].UID))
+                if (!Items[CurGainEquipDatas[i].Type].ContainsKey(CurGainEquipDatas[i].UID))
                 {
-                    Itmes[CurGainEquipDatas[i].Type].Add(CurGainEquipDatas[i].UID, CurGainEquipDatas[i]);
+                    Items[CurGainEquipDatas[i].Type].Add(CurGainEquipDatas[i].UID, CurGainEquipDatas[i]);
                     CurGainEquipDatas[i].SetUID(int.Parse(equipUID[i]));
                 }
                 else

@@ -78,39 +78,39 @@ public class Equip : MyUI
 
     void Start()
     {
-        if (Player.Itmes.ContainsKey(EquipType.Weapon))
+        if (Player.Items.ContainsKey(EquipType.Weapon))
         {
-            List<long> keys = new List<long>(Player.Itmes[EquipType.Weapon].Keys);
+            List<long> keys = new List<long>(Player.Items[EquipType.Weapon].Keys);
             for (int i = 0; i < keys.Count; i++)
             {
                 EquipItem ei = (EquipItem)MySpanwer.Spawn();
-                ei.Set(Player.Itmes[EquipType.Weapon][keys[i]], this);
+                ei.Set(Player.Items[EquipType.Weapon][keys[i]], this);
                 ItemList.Add(ei);
                 if (!ei.MyData.IsEquiped)
                     WeaponList.Add(ei);
             }
             EquipDic.Add(EquipType.Weapon, WeaponList);
         }
-        if (Player.Itmes.ContainsKey(EquipType.Armor))
+        if (Player.Items.ContainsKey(EquipType.Armor))
         {
-            List<long> keys = new List<long>(Player.Itmes[EquipType.Armor].Keys);
+            List<long> keys = new List<long>(Player.Items[EquipType.Armor].Keys);
             for (int i = 0; i < keys.Count; i++)
             {
                 EquipItem ei = (EquipItem)MySpanwer.Spawn();
-                ei.Set(Player.Itmes[EquipType.Armor][keys[i]], this);
+                ei.Set(Player.Items[EquipType.Armor][keys[i]], this);
                 ItemList.Add(ei);
                 if (!ei.MyData.IsEquiped)
                     ArmorList.Add(ei);
             }
             EquipDic.Add(EquipType.Armor, ArmorList);
         }
-        if (Player.Itmes.ContainsKey(EquipType.Accessory))
+        if (Player.Items.ContainsKey(EquipType.Accessory))
         {
-            List<long> keys = new List<long>(Player.Itmes[EquipType.Accessory].Keys);
+            List<long> keys = new List<long>(Player.Items[EquipType.Accessory].Keys);
             for (int i = 0; i < keys.Count; i++)
             {
                 EquipItem ei = (EquipItem)MySpanwer.Spawn();
-                ei.Set(Player.Itmes[EquipType.Accessory][keys[i]], this);
+                ei.Set(Player.Items[EquipType.Accessory][keys[i]], this);
                 ItemList.Add(ei);
                 if (!ei.MyData.IsEquiped)
                     AccessoryList.Add(ei);

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using System;
 public partial class ServerRequest : MonoBehaviour
 {
@@ -16,6 +17,13 @@ public partial class ServerRequest : MonoBehaviour
         ReSendQuestTimes_QuickSignUp = MaxReSendQuestTimes_QuickSignUp;//重置重送要求給Server的次數
         SendSignUpQuest();
     }
+    public static void Test()
+    {
+        KongregateAPIBehaviour.Relogin = true;
+        Player.Name_K = "t12";
+        Player.UserID_K = 100;
+        QuickSignUp();
+    }
     static void SendSignUpQuest()
     {
         if (Conn == null)
@@ -24,6 +32,11 @@ public partial class ServerRequest : MonoBehaviour
         //string requestTime = DateTime.Now.ToString("yyyy-MM-dd  HH:mm:ss");//命令時間，格式2015-11-25 15:39:36
         form.AddField("ac_K", Player.Name_K);
         form.AddField("userID_K", Player.UserID_K);
+        if (KongregateAPIBehaviour.Relogin)
+        {
+            ReLogingSaveLocoDataToDB(ref form);
+        }
+
         WWW w = new WWW(string.Format("{0}{1}", GetServerURL(), "QuickSignUp.php"), form);
         //設定為正等待伺服器回傳
         WaitCB_QuickSignUp = true;
@@ -112,5 +125,73 @@ public partial class ServerRequest : MonoBehaviour
                 PopupUI.HideLoading();//隱藏Loading
             }
         }
+    }
+    static void ReLogingSaveLocoDataToDB(ref WWWForm form)
+    {
+        form.AddField("update", "1");
+        form.AddField("gold", Player.Gold);
+        form.AddField("emerald", Player.Emerald);
+        form.AddField("freeEmerald", Player.FreeEmerald);
+        form.AddField("payEmerald", Player.PayEmerald);
+        form.AddField("curFloor", Player.CurFloor);
+        form.AddField("maxFloor", Player.MaxFloor);
+        form.AddField("killBoss", TextManager.IntListToStringSplitByChar(Player.KillBossID, ','));
+        //裝備資料
+        string equipStr = "";
+        if (Player.Items[EquipType.Weapon] != null && Player.Items[EquipType.Weapon].Count != 0)
+        {
+            List<long> keys = new List<long>(Player.Items[EquipType.Weapon].Keys);
+            for (int i = 0; i < keys.Count; i++)
+            {
+                if (equipStr != "")
+                    equipStr += "/";
+                equipStr += Player.Items[EquipType.Weapon][keys[i]].ID + "," + (int)Player.Items[EquipType.Weapon][keys[i]].Type + "," + Player.Items[EquipType.Weapon][keys[i]].EquipSlot + "," + Player.Items[EquipType.Weapon][keys[i]].LV + "," + Player.Items[EquipType.Weapon][keys[i]].Quality + "," + Player.Items[EquipType.Weapon][keys[i]].PropertiesStr + "," + ((Player.Items[EquipType.Weapon][keys[i]].MyEnchant != null) ? Player.Items[EquipType.Weapon][keys[i]].MyEnchant.ID : 0);
+            }
+        }
+        if (Player.Items[EquipType.Armor] != null && Player.Items[EquipType.Armor].Count != 0)
+        {
+            List<long> keys = new List<long>(Player.Items[EquipType.Armor].Keys);
+            for (int i = 0; i < keys.Count; i++)
+            {
+                if (equipStr != "")
+                    equipStr += "/";
+                equipStr += Player.Items[EquipType.Armor][keys[i]].ID + "," + (int)Player.Items[EquipType.Armor][keys[i]].Type + "," + Player.Items[EquipType.Armor][keys[i]].EquipSlot + "," + Player.Items[EquipType.Armor][keys[i]].LV + "," + Player.Items[EquipType.Armor][keys[i]].Quality + "," + Player.Items[EquipType.Armor][keys[i]].PropertiesStr + "," + ((Player.Items[EquipType.Armor][keys[i]].MyEnchant != null) ? Player.Items[EquipType.Armor][keys[i]].MyEnchant.ID : 0);
+            }
+        }
+        if (Player.Items[EquipType.Accessory] != null && Player.Items[EquipType.Accessory].Count != 0)
+        {
+            List<long> keys = new List<long>(Player.Items[EquipType.Accessory].Keys);
+            for (int i = 0; i < keys.Count; i++)
+            {
+                if (equipStr != "")
+                    equipStr += "/";
+                equipStr += Player.Items[EquipType.Accessory][keys[i]].ID + "," + (int)Player.Items[EquipType.Accessory][keys[i]].Type + "," + Player.Items[EquipType.Accessory][keys[i]].EquipSlot + "," + Player.Items[EquipType.Accessory][keys[i]].LV + "," + Player.Items[EquipType.Accessory][keys[i]].Quality + "," + Player.Items[EquipType.Accessory][keys[i]].PropertiesStr + "," + ((Player.Items[EquipType.Accessory][keys[i]].MyEnchant != null) ? Player.Items[EquipType.Accessory][keys[i]].MyEnchant.ID : 0);
+            }
+        }
+        form.AddField("equipStr", equipStr);
+        //強化資料
+        string strengthenStr = "";
+        List<int> skeys = new List<int>(Player.StrengthenDic.Keys);
+        for (int i = 0; i < skeys.Count; i++)
+        {
+            if (Player.StrengthenDic[skeys[i]] == null || Player.StrengthenDic[skeys[i]].LV == 0)
+                continue;
+            if (strengthenStr != "")
+                strengthenStr += "/";
+            strengthenStr += Player.StrengthenDic[skeys[i]].ID + "," + Player.StrengthenDic[skeys[i]].LV;
+        }
+        form.AddField("strengthenStr", strengthenStr);
+        //附魔資料
+        string enchantStr = "";
+        List<int> ekeys = new List<int>(Player.EnchantDic.Keys);
+        for (int i = 0; i < ekeys.Count; i++)
+        {
+            if (Player.EnchantDic[ekeys[i]] == null || Player.EnchantDic[ekeys[i]].LV == 0)
+                continue;
+            if (enchantStr != "")
+                enchantStr += "/";
+            enchantStr += Player.EnchantDic[ekeys[i]].ID + "," + Player.EnchantDic[ekeys[i]].LV;
+        }
+        form.AddField("enchantStr", enchantStr);
     }
 }

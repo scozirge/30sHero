@@ -8,7 +8,7 @@ public class KongregateAPIBehaviour : MonoBehaviour
     MyTimer InitTimer;
     public static bool KongregateLogin = false;
     public static bool EndLogin;
-    float WaitInitTime = 10;
+    static float WaitInitTime = 10;
     static bool Test = false;
 
     public void Init()
@@ -40,20 +40,33 @@ public class KongregateAPIBehaviour : MonoBehaviour
         if (Test)
         {
             //OnKongregateUserInfo("1|scozirge");
-            OnKongregateUserInfo("41605611|starbrogamemaker");
+            //OnKongregateUserInfo("41605611|starbrogamemaker");
+            OnKongregateUserInfo("100|t12");
         }
     }
+    static MyTimer WaitSignInCheck;
+    public static bool Relogin;//是否為遊戲進行到一半時登入
     public static void KGLogin()
     {
+        EndLogin = false;
+        Relogin = true;
         Debug.Log("Kongregate Login");
         Application.ExternalEval(@"
           kongregate.services.showRegistrationBox();");
+        CaseTableData.ShowPopLog(1001);
+        Application.ExternalEval(
+  @"if(typeof(kongregateUnitySupport) != 'undefined'){
+        kongregateUnitySupport.initAPI('KongregateAPI', 'OnKongregateAPILoaded');
+      };"
+);
+        WaitSignInCheck = new MyTimer(WaitInitTime, EndKongregateLogin, true, false);
     }
     void Update()
     {
-        InitTimer.RunTimer();
+        if (InitTimer != null)
+            InitTimer.RunTimer();
     }
-    public void EndKongregateLogin()
+    public static void EndKongregateLogin()
     {
         if (EndLogin)
             return;
@@ -78,11 +91,31 @@ public class KongregateAPIBehaviour : MonoBehaviour
         if (userId != 0)
         {
             KongregateLogin = true;
-            Player.GetKongregateUserData_CB(username, userId);
+            if (!Relogin)
+            {
+                Player.GetKongregateUserData_CB(username, userId);
+                ShowUserItemList();
+            }
+            else
+            {
+                EndKongregateLogin();
+            }
         }
-        ShowUserItemList();
+        else
+        {
+            if (!Relogin)
+            {
+                EndKongregateLogin();
+                Debug.Log("Guest account");
+            }
+            else
+            {
+                Relogin = false;
+                CaseTableData.HidePopLog(1001);
+            }
+        }
         if (Test)
-            OnShowUserItemListCB("13356700,1,,1/13356696,2,,1/13356697,2,,1/13356698,2,,1/13345602,3,,/13355292,3,,/13356695,3,,1/13356699,3,,1");
+            OnShowUserItemListCB("13356700,1,,1/13356696,2,,1/13356697,2,,1/13356698,2,,1/13345602,3,,/13355292,3,,/13356695,3,,1");
     }
     public static void ShowItemList()
     {

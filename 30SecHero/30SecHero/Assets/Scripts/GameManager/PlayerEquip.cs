@@ -10,18 +10,18 @@ public partial class Player
     public static ArmorData MyArmor;
     public static AccessoryData[] MyAccessorys = new AccessoryData[2] { null, null };
     //Items
-    public static Dictionary<EquipType, Dictionary<long, EquipData>> Itmes = new Dictionary<EquipType, Dictionary<long, EquipData>>();
+    public static Dictionary<EquipType, Dictionary<long, EquipData>> Items = new Dictionary<EquipType, Dictionary<long, EquipData>>();
     public static int ItemCout
     {
         get
         {
             int count = 0;
-            if (Itmes.ContainsKey(EquipType.Weapon))
-                count += Itmes[EquipType.Weapon].Count;
-            if (Itmes.ContainsKey(EquipType.Armor))
-                count += Itmes[EquipType.Armor].Count;
-            if (Itmes.ContainsKey(EquipType.Accessory))
-                count += Itmes[EquipType.Accessory].Count;
+            if (Items.ContainsKey(EquipType.Weapon))
+                count += Items[EquipType.Weapon].Count;
+            if (Items.ContainsKey(EquipType.Armor))
+                count += Items[EquipType.Armor].Count;
+            if (Items.ContainsKey(EquipType.Accessory))
+                count += Items[EquipType.Accessory].Count;
             return count;
         }
     }
@@ -65,28 +65,28 @@ public partial class Player
     }
     public static void UpToDateCurMaxEquipUID()
     {
-        if (Itmes.ContainsKey(EquipType.Weapon) && Itmes[EquipType.Weapon].Count != 0)
-            CurMaxWeaponUID = Itmes[EquipType.Weapon].Keys.Max();
-        if (Itmes.ContainsKey(EquipType.Armor) && Itmes[EquipType.Armor].Count != 0)
-            CurMaxArmorUID = Itmes[EquipType.Armor].Keys.Max();
-        if (Itmes.ContainsKey(EquipType.Accessory) && Itmes[EquipType.Accessory].Count != 0)
-            CurMaxAccessoryUID = Itmes[EquipType.Accessory].Keys.Max();
+        if (Items.ContainsKey(EquipType.Weapon) && Items[EquipType.Weapon].Count != 0)
+            CurMaxWeaponUID = Items[EquipType.Weapon].Keys.Max();
+        if (Items.ContainsKey(EquipType.Armor) && Items[EquipType.Armor].Count != 0)
+            CurMaxArmorUID = Items[EquipType.Armor].Keys.Max();
+        if (Items.ContainsKey(EquipType.Accessory) && Items[EquipType.Accessory].Count != 0)
+            CurMaxAccessoryUID = Items[EquipType.Accessory].Keys.Max();
     }
     public static void EquipSaveLocalData()
     {
         //武器文字
-        List<long> keys = new List<long>(Itmes[EquipType.Weapon].Keys);
+        List<long> keys = new List<long>(Items[EquipType.Weapon].Keys);
         string dataStr = "";
         for (int i = 0; i < keys.Count; i++)
         {
             if (i != 0)
                 dataStr += "/";
-            dataStr += Itmes[EquipType.Weapon][keys[i]].UID + "," + Itmes[EquipType.Weapon][keys[i]].ID + "," + (int)Itmes[EquipType.Weapon][keys[i]].Type + "," + Itmes[EquipType.Weapon][keys[i]].EquipSlot + "," + Itmes[EquipType.Weapon][keys[i]].LV + "," + Itmes[EquipType.Weapon][keys[i]].Quality + "," + Itmes[EquipType.Weapon][keys[i]].PropertiesStr;
-            if (Itmes[EquipType.Weapon][keys[i]].MyEnchant != null)
-                dataStr += "," + Itmes[EquipType.Weapon][keys[i]].MyEnchant.ID;
+            dataStr += Items[EquipType.Weapon][keys[i]].UID + "," + Items[EquipType.Weapon][keys[i]].ID + "," + (int)Items[EquipType.Weapon][keys[i]].Type + "," + Items[EquipType.Weapon][keys[i]].EquipSlot + "," + Items[EquipType.Weapon][keys[i]].LV + "," + Items[EquipType.Weapon][keys[i]].Quality + "," + Items[EquipType.Weapon][keys[i]].PropertiesStr;
+            if (Items[EquipType.Weapon][keys[i]].MyEnchant != null)
+                dataStr += "," + Items[EquipType.Weapon][keys[i]].MyEnchant.ID;
         }
         //防具文字
-        keys = new List<long>(Itmes[EquipType.Armor].Keys);
+        keys = new List<long>(Items[EquipType.Armor].Keys);
         for (int i = 0; i < keys.Count; i++)
         {
             if (i != 0)
@@ -94,12 +94,12 @@ public partial class Player
             else
                 if (dataStr != "")
                     dataStr += "/";
-            dataStr += Itmes[EquipType.Armor][keys[i]].UID + "," + Itmes[EquipType.Armor][keys[i]].ID + "," + (int)Itmes[EquipType.Armor][keys[i]].Type + "," + Itmes[EquipType.Armor][keys[i]].EquipSlot + "," + Itmes[EquipType.Armor][keys[i]].LV + "," + Itmes[EquipType.Armor][keys[i]].Quality + "," + Itmes[EquipType.Armor][keys[i]].PropertiesStr;
-            if (Itmes[EquipType.Armor][keys[i]].MyEnchant != null)
-                dataStr += "," + Itmes[EquipType.Armor][keys[i]].MyEnchant.ID;
+            dataStr += Items[EquipType.Armor][keys[i]].UID + "," + Items[EquipType.Armor][keys[i]].ID + "," + (int)Items[EquipType.Armor][keys[i]].Type + "," + Items[EquipType.Armor][keys[i]].EquipSlot + "," + Items[EquipType.Armor][keys[i]].LV + "," + Items[EquipType.Armor][keys[i]].Quality + "," + Items[EquipType.Armor][keys[i]].PropertiesStr;
+            if (Items[EquipType.Armor][keys[i]].MyEnchant != null)
+                dataStr += "," + Items[EquipType.Armor][keys[i]].MyEnchant.ID;
         }
         //飾品文字
-        keys = new List<long>(Itmes[EquipType.Accessory].Keys);
+        keys = new List<long>(Items[EquipType.Accessory].Keys);
         for (int i = 0; i < keys.Count; i++)
         {
             if (i != 0)
@@ -107,9 +107,9 @@ public partial class Player
             else
                 if (dataStr != "")
                     dataStr += "/";
-            dataStr += Itmes[EquipType.Accessory][keys[i]].UID + "," + Itmes[EquipType.Accessory][keys[i]].ID + "," + (int)Itmes[EquipType.Accessory][keys[i]].Type + "," + Itmes[EquipType.Accessory][keys[i]].EquipSlot + "," + Itmes[EquipType.Accessory][keys[i]].LV + "," + Itmes[EquipType.Accessory][keys[i]].Quality + "," + Itmes[EquipType.Accessory][keys[i]].PropertiesStr;
-            if (Itmes[EquipType.Accessory][keys[i]].MyEnchant != null)
-                dataStr += "," + Itmes[EquipType.Accessory][keys[i]].MyEnchant.ID;
+            dataStr += Items[EquipType.Accessory][keys[i]].UID + "," + Items[EquipType.Accessory][keys[i]].ID + "," + (int)Items[EquipType.Accessory][keys[i]].Type + "," + Items[EquipType.Accessory][keys[i]].EquipSlot + "," + Items[EquipType.Accessory][keys[i]].LV + "," + Items[EquipType.Accessory][keys[i]].Quality + "," + Items[EquipType.Accessory][keys[i]].PropertiesStr;
+            if (Items[EquipType.Accessory][keys[i]].MyEnchant != null)
+                dataStr += "," + Items[EquipType.Accessory][keys[i]].MyEnchant.ID;
         }
         PlayerPrefs.SetString(LocoData.Equip.ToString(), dataStr);
     }
@@ -243,10 +243,10 @@ public partial class Player
     }
     public static void SellEquip(EquipData _data)
     {
-        if (Itmes[_data.Type].ContainsKey(_data.UID))
+        if (Items[_data.Type].ContainsKey(_data.UID))
         {
             GainGold(_data.SellGold);
-            Itmes[_data.Type].Remove(_data.UID);
+            Items[_data.Type].Remove(_data.UID);
         }
         else
             Debug.LogWarning("Sell Equip isn't in Items");
@@ -276,14 +276,14 @@ public partial class Player
         bool getFirstEquip = false;
         for (int i = 0; i < _datas.Count; i++)
         {
-            if (Itmes[_datas[i].Type].ContainsKey(_datas[i].UID))
+            if (Items[_datas[i].Type].ContainsKey(_datas[i].UID))
             {
                 if (getFirstEquip)
                     ids += ",";
                 ids += _datas[i].UID.ToString();
                 getFirstEquip = true;
                 GainGold(_datas[i].SellGold);
-                Itmes[_datas[i].Type].Remove(_datas[i].UID);
+                Items[_datas[i].Type].Remove(_datas[i].UID);
             }
             else
                 Debug.LogWarning("Sell Equip isn't in Items");

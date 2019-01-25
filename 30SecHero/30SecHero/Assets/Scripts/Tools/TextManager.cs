@@ -54,6 +54,23 @@ public class TextManager
         return result;
     }
     /// <summary>
+    /// int List轉字串並以字元分割
+    /// </summary>
+    /// <returns></returns>
+    public static string IntListToStringSplitByChar(List<int> _ints, char _char)
+    {
+        string result = "";
+        if (_ints != null)
+            _ints.RemoveAll(item => item == null);
+        for (int i = 0; i < _ints.Count; i++)
+        {
+            if (i != 0)
+                result += _char;
+            result += _ints[i].ToString();
+        }
+        return result;
+    }
+    /// <summary>
     /// 小數轉為百分比
     /// </summary>
     public static float ToPercent(float _value)

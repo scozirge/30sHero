@@ -17,6 +17,7 @@ public partial class Debugger : MonoBehaviour
 
         }
         */
+
         if (Input.GetKeyDown(KeyCode.Z))
         {
             BattleManage.BM.MyPlayer.HealHP(10000);
@@ -48,19 +49,13 @@ public partial class Debugger : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.E))
         {
-            BattleManage.BM.MyPlayer.AddBuffer(RoleBuffer.Freeze, 5);
+            //ServerRequest.Test();
         }
         else if (Input.GetKeyDown(KeyCode.R))
         {
-            BattleManage.BM.MyPlayer.AddBuffer(RoleBuffer.Burn, 5);
         }
         else if (Input.GetKeyDown(KeyCode.T))
         {
-            BattleManage.BM.MyPlayer.AddBuffer(RoleBuffer.DamageDown, 5);
-            /*
-            int damage = 10;
-            BattleManage.BM.MyPlayer.BeAttack(Force.Enemy, ref damage, Vector2.zero);
-             */
         }
         else if (Input.GetKeyDown(KeyCode.P))
         {

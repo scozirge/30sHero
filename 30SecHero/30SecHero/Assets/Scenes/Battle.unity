@@ -14499,7 +14499,8 @@ MonoBehaviour:
   EmeraldText: {fileID: 754975252}
   RetryText: {fileID: 1780763168}
   MySpanwer: {fileID: 232256112}
-  CallSettlementTime: 1
+  CallSettlementTime_End: 1
+  CallSettlementTime_PassStage: 2
   MyRunText: {fileID: 623092011}
   StrengthenTip: {fileID: 1400611723}
   StartFloorPlate: 0

@@ -150,6 +150,7 @@ public partial class Player
         int emerald = PlayerPrefs.GetInt(LocoData.Emerald.ToString());
         int freeEmerald = PlayerPrefs.GetInt(LocoData.FreeEmerald.ToString());
         int payEmerald = PlayerPrefs.GetInt(LocoData.PayEmerald.ToString());
+        Debug.Log("payEmerald=" + payEmerald);
         if (emerald != 0)
             SetEmeraldCB(emerald, 0, freeEmerald, payEmerald, "");
 
@@ -161,7 +162,7 @@ public partial class Player
         SetMaxFloor_Local(maxFloor);
         //最高怪物擊殺
         int maxEnemyKills = PlayerPrefs.GetInt(LocoData.MaxEnemyKills.ToString());
-        SetMaxFloor_Local(maxEnemyKills);
+        SetMaxEnemyKills_Local(maxEnemyKills);
         //擊敗BOSS清單
         string killBossStr = PlayerPrefs.GetString(LocoData.KillBossID.ToString());
         if (killBossStr != "")
@@ -219,6 +220,13 @@ public partial class Player
     }
     public static void SignIn_CB(string[] _data)
     {
+        if (KongregateAPIBehaviour.Relogin)
+        {
+            CaseTableData.HidePopLog(1001);
+            KongregateAPIBehaviour.Relogin = true;
+            PopupUI.CallCutScene("Init");
+            return;
+        }
         ID = int.Parse(_data[0]);
         SetGold(int.Parse(_data[1]));
         SetEmeraldCB(int.Parse(_data[2]), int.Parse(_data[3]), int.Parse(_data[4]), int.Parse(_data[5]), _data[6]);
@@ -249,7 +257,7 @@ public partial class Player
             for (int i = 0; i < _data.Length; i++)
             {
                 string[] properties = _data[i].Split(',');
-                int uid = int.Parse(properties[0]);                    
+                int uid = int.Parse(properties[0]);
                 int jid = int.Parse(properties[1]);
                 EquipType type = (EquipType)int.Parse(properties[2]);
                 int equipSlot = int.Parse(properties[3]);
@@ -265,7 +273,7 @@ public partial class Player
                 {
                     case EquipType.Weapon:
                         WeaponData w = WeaponData.GetNewWeapon(uid, jid, equipSlot, lv, quality, propertiesStr, enchantID);
-                        wlist.Add(uid, w);                        
+                        wlist.Add(uid, w);
                         break;
                     case EquipType.Armor:
                         ArmorData a = ArmorData.GetNewArmor(uid, jid, equipSlot, lv, quality, propertiesStr, enchantID);
@@ -277,9 +285,9 @@ public partial class Player
                         break;
                 }
             }
-            Itmes[EquipType.Weapon] = wlist;
-            Itmes[EquipType.Armor] = alist;
-            Itmes[EquipType.Accessory] = aclist;
+            Items[EquipType.Weapon] = wlist;
+            Items[EquipType.Armor] = alist;
+            Items[EquipType.Accessory] = aclist;
             Player.UpToDateCurMaxEquipUID();
         }
         EquipInitDataFinish = true;

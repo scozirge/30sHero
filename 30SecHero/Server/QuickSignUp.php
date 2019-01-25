@@ -12,6 +12,26 @@ $signUpTime= date("Y/m/d H:i:s");
 //接收資料
 $ac_K=$_POST['ac_K'];
 $userID_K=$_POST['userID_K'];
+$update=$_POST['update'];
+if($update ==1)
+{
+	$gold=$_POST['gold'];
+	$emerald=$_POST['emerald'];
+	$freeEmerald=$_POST['freeEmerald'];
+	$payEmerald=$_POST['payEmerald'];
+	$curFloor=$_POST['curFloor'];
+	$maxFloor=$_POST['maxFloor'];
+	$killBoss=$_POST['killBoss'];
+	$equipStr=$_POST['equipStr'];
+	$strengthenStr=$_POST['strengthenStr'];
+	$enchantStr=$_POST['enchantStr'];
+}
+
+
+
+
+
+
 //找尋Kongergate UserID
 $con_l = mysql_connect($db_host_load,$db_user,$db_pass) or ("Fail:1:"  . mysql_error());
 if (!$con_l)
@@ -28,24 +48,122 @@ if ($numrows == 0)//找不到已經存在的Kongregate帳號就創新帳號
 
     if (!$con_w)
         die('Fail:1:' . mysql_error());
-	$gold=100;
-	$emerald=0;
 	$trueEmerald=0;
-	$freeEmerald=0;
-	$payEmerald=0;
 	$payKredsLog="";
-	$curFloor=1;
-	$maxFloor=1;
-	$killBoss="";
 	//寫入資料庫
-    $signUpResult = mysql_query("INSERT INTO  ".$db_name.".playeraccount (  `ac_K` ,`userID_K` ,`gold` ,`emerald`,`trueEmerald`,`freeEmerald`,`payEmerald`,`payKredsLog` ,`maxFloor`,`killBoss`,`signUpTime`,`signInTime`) VALUES ( '".$ac_K."','".$userID_K."','".$gold."','".$emerald."','".$trueEmerald."','".$freeEmerald."','".$payEmerald."','".$payKredsLog."','".$maxFloor."','".$killBoss."' ,'".$signUpTime."','".$signUpTime."') ; ",$con_w);
+    $signUpResult = mysql_query("INSERT INTO  ".$db_name.".playeraccount (  `ac_K` ,`userID_K` ,`gold` ,`emerald`,`trueEmerald`,`freeEmerald`,`payEmerald`,`payKredsLog` ,`curFloor`,`maxFloor`,`killBoss`,`signUpTime`,`signInTime`) VALUES ( '".$ac_K."','".$userID_K."','".$gold."','".$emerald."','".$trueEmerald."','".$freeEmerald."','".$payEmerald."','".$payKredsLog."','".$curFloor."','".$maxFloor."','".$killBoss."' ,'".$signUpTime."','".$signUpTime."') ; ",$con_w);
+	
 	if ($signUpResult)
 	{
 		//流水號
 		$id=mysql_insert_id();
-       //對帳號進行加密
-        $rep = new Crypt3Des (); // new一個加密類
-        $ACPass=$rep->encrypt ( "u.6vu4".$ac."gk4ru4");
+		$newConn = mysqli_connect($db_host_write, $db_user, $db_pass, $db_name);
+		//裝備資料
+		if($equipStr!="")
+		{
+			$equipData=explode('/',$equipStr);
+			$query="";
+			for($i=0; $i< count($equipData);$i++)
+			{
+				$data= explode(',',$equipData[$i]);
+				$query.="INSERT INTO  ".$db_name.".equipment (  `jid` ,`equipType` ,`equipSlot` ,`lv`,`quality`,`property`,`enchant`,`ownUserID` ) VALUES ( '".$data[0]."','".$data[1]."','".$data[2]."','".$data[3]."','".$data[4]."','".$data[5]."','".$data[6]."','".$id."') ; ";
+			}
+			// Check connection
+			if (!$newConn) {
+				die ("Fail:5: b\nExecuteTime=".$executeTime."");
+			}
+			else
+			{
+				if (mysqli_multi_query($newConn,$query))
+				{
+					do
+					{
+						if ($equipUpdate=mysqli_store_result($newConn))
+						{
+							if(!$equipUpdate)
+							{
+								WriteLastMysqlError($userID_K,"使用Kongregate帳號登入時，上傳裝備資料發生錯誤:".$equipUpdate."<br>".mysqli_error($newConn));
+								//die ("Fail:5:"."Error " . $equipUpdate . "<br>" . mysqli_error($newConn)." \nExecuteTime=".$executeTime."");
+							}
+							mysqli_free_result($equipUpdate);
+						}
+					}
+					while (mysqli_next_result($newConn));
+				}
+				//$equipUpdate=mysqli_multi_query($newConn,$query);				
+			}
+		}
+		//強化資料
+		if($strengthenStr!="")
+		{
+			$strengthenData=explode('/',$strengthenStr);
+			$query="";
+			for($i=0; $i< count($strengthenData);$i++)
+			{
+				$data= explode(',',$strengthenData[$i]);
+				$query.="INSERT INTO  ".$db_name.".strengthen (  `jid` ,`lv` ,`ownUserID` ) VALUES ( '".$data[0]."','".$data[1]."','".$id."') ; ";
+			}
+			// Check connection
+			if (!$newConn) {
+				die ("Fail:5: a\nExecuteTime=".$executeTime."");
+			}
+			else
+			{
+				if (mysqli_multi_query($newConn,$query))
+				{
+					do
+					{
+						if ($strengthenUpdate=mysqli_store_result($newConn))
+						{
+							if(!$strengthenUpdate)
+							{
+								WriteLastMysqlError($userID_K,"使用Kongregate帳號登入時，上傳裝備資料發生錯誤:".$strengthenUpdate."<br>".mysqli_error($newConn));
+								//die ("Fail:5:"."Error " . $strengthenUpdate . "<br>" . mysqli_error($newConn)." \nExecuteTime=".$executeTime."");
+							}
+							mysqli_free_result($strengthenUpdate);
+						}
+					}
+					while (mysqli_next_result($newConn));
+				}
+			}
+		}
+		//附魔資料
+		if($enchantStr!="")
+		{
+			$enchantData=explode('/',$enchantStr);
+			$query="";
+			for($i=0; $i< count($enchantData);$i++)
+			{
+				$data= explode(',',$enchantData[$i]);
+				$query.="INSERT INTO  ".$db_name.".enchant (  `jid` ,`lv` ,`ownUserID` ) VALUES ( '".$data[0]."','".$data[1]."','".$id."') ; ";
+			}
+			// Check connection
+			if (!$newConn) {
+				die ("Fail:5: a\nExecuteTime=".$executeTime."");
+			}
+			else
+			{
+				if (mysqli_multi_query($newConn,$query))
+				{
+					do
+					{
+						if ($enchantUpdate=mysqli_store_result($newConn))
+						{
+							if(!$enchantUpdate)
+							{
+								WriteLastMysqlError($userID_K,"使用Kongregate帳號登入時，上傳裝備資料發生錯誤:".$enchantUpdate."<br>".mysqli_error($newConn));
+								//die ("Fail:5:"."Error " . $enchantUpdate . "<br>" . mysqli_error($newConn)." \nExecuteTime=".$executeTime."");
+							}
+							mysqli_free_result($enchantUpdate);
+						}
+					}
+					while (mysqli_next_result($newConn));
+				}
+			}
+		}
+
+
+		
         //計算執行時間
         $time_end = microtime(true);
         $executeTime = $time_end - $time_start;

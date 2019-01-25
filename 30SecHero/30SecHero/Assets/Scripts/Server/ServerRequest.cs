@@ -10,7 +10,7 @@ public partial class ServerRequest : MonoBehaviour
     const string ServerURL = "https://30sechero.000webhostapp.com/";
     static bool IsFormal;
     static bool ShowLoading = false;//是否顯示loading
-    static bool ShowCBLog = false;
+    static bool ShowCBLog = true;
 
     /// <summary>
     /// 初始化
