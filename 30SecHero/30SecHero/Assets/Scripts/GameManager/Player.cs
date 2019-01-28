@@ -8,7 +8,12 @@ public partial class Player
     {
         get
         {
-            if (PlayerInfoInitDataFinish && StrengthenInitDataFinish && EquipInitDataFinish)
+            /*
+            Debug.Log("PlayerInfoInitDataFinish=" + PlayerInfoInitDataFinish);
+            Debug.Log("StrengthenInitDataFinish=" + StrengthenInitDataFinish);
+            Debug.Log("EquipInitDataFinish=" + EquipInitDataFinish);
+            */
+            if (PlayerInfoInitDataFinish && StrengthenInitDataFinish && EquipInitDataFinish && EnchantInitDataFinish)
                 return true;
             else
                 return false;

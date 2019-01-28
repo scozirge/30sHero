@@ -41,12 +41,15 @@ public class Purchase : MyUI
             Destroy(ItemList[i].gameObject);
         }
         ItemList = new List<PurchaseItem>();
+        ShowInfo(null);
         if (Player.UserID_K ==0)
         {
             KongregateAPIBehaviour.KGLogin();
         }
-        ShowInfo(null);
-        //ShowItemList();
+        else
+        {
+            ShowItemList();
+        }
         KongregateAPIBehaviour.ShowItemList();
         //ShowItemListCB("1,test,test,1/2,test2,test2,5");
     }

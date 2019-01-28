@@ -9,7 +9,7 @@ public class KongregateAPIBehaviour : MonoBehaviour
     public static bool KongregateLogin = false;
     public static bool EndLogin;
     static float WaitInitTime = 10;
-    static bool Test = false;
+    static bool Test = true;
 
     public void Init()
     {
@@ -40,8 +40,8 @@ public class KongregateAPIBehaviour : MonoBehaviour
         if (Test)
         {
             //OnKongregateUserInfo("1|scozirge");
-            //OnKongregateUserInfo("41605611|starbrogamemaker");
-            OnKongregateUserInfo("100|t12");
+            OnKongregateUserInfo("41605611|starbrogamemaker");
+            //OnKongregateUserInfo("100|t12");
         }
     }
     static MyTimer WaitSignInCheck;
@@ -97,6 +97,7 @@ public class KongregateAPIBehaviour : MonoBehaviour
             return;
         if (!KongregateLogin && Relogin)
         {
+            Debug.Log("Fail To InPageLogin...");
             CaseTableData.HidePopLog(1001);
             CaseTableData.ShowPopLog(9);
             Relogin = false;
@@ -114,7 +115,10 @@ public class KongregateAPIBehaviour : MonoBehaviour
 
     public void OnKongregateUserInfo(string userInfoString)
     {
-        InitTimer.StartRunTimer = false;
+        if (InitTimer!=null)
+            InitTimer.StartRunTimer = false;
+        if (WaitSignInCheck!=null)
+            WaitSignInCheck.StartRunTimer = false;
         var info = userInfoString.Split('|');
         var userId = System.Convert.ToInt32(info[0]);
         var username = info[1];
@@ -125,6 +129,7 @@ public class KongregateAPIBehaviour : MonoBehaviour
             KongregateLogin = true;
             if (!Relogin)
             {
+                Debug.Log("KongregateLogin=" + KongregateLogin);
                 Player.GetKongregateUserData_CB(username, userId);
                 ShowUserItemList();
             }

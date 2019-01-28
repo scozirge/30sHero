@@ -62,7 +62,7 @@ public partial class Player
             PlayerPrefs.SetInt(LocoData.MusicOn.ToString(), 1);
             PlayerPrefs.SetInt(LocoData.Init.ToString(), 1);
         }
-        SetLanguage((Language)PlayerPrefs.GetInt(LocoData.UseLanguage.ToString()));
+        //SetLanguage((Language)PlayerPrefs.GetInt(LocoData.UseLanguage.ToString()));
         if (PlayerPrefs.GetInt(LocoData.MusicOn.ToString()) == 1)
             SetMusic(true);
         else
@@ -71,7 +71,6 @@ public partial class Player
             SetSound(true);
         else
             SetSound(false);
-
 
         if (LocalData)
             GetLocalData();
@@ -150,7 +149,6 @@ public partial class Player
         int emerald = PlayerPrefs.GetInt(LocoData.Emerald.ToString());
         int freeEmerald = PlayerPrefs.GetInt(LocoData.FreeEmerald.ToString());
         int payEmerald = PlayerPrefs.GetInt(LocoData.PayEmerald.ToString());
-        Debug.Log("payEmerald=" + payEmerald);
         if (emerald != 0)
             SetEmeraldCB(emerald, 0, freeEmerald, payEmerald, "");
 
@@ -223,7 +221,7 @@ public partial class Player
         if (KongregateAPIBehaviour.Relogin)
         {
             CaseTableData.HidePopLog(1001);
-            KongregateAPIBehaviour.Relogin = true;
+            KongregateAPIBehaviour.Relogin = false;
             PopupUI.CallCutScene("Init");
             return;
         }

@@ -34,8 +34,11 @@ public partial class ServerRequest : MonoBehaviour
         form.AddField("userID_K", Player.UserID_K);
         if (KongregateAPIBehaviour.Relogin)
         {
+            form.AddField("update", "1");
             ReLogingSaveLocoDataToDB(ref form);
         }
+        else
+            form.AddField("update", "0");
 
         WWW w = new WWW(string.Format("{0}{1}", GetServerURL(), "QuickSignUp.php"), form);
         //設定為正等待伺服器回傳
@@ -128,7 +131,6 @@ public partial class ServerRequest : MonoBehaviour
     }
     static void ReLogingSaveLocoDataToDB(ref WWWForm form)
     {
-        form.AddField("update", "1");
         form.AddField("gold", Player.Gold);
         form.AddField("emerald", Player.Emerald);
         form.AddField("freeEmerald", Player.FreeEmerald);
