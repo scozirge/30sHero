@@ -50,6 +50,11 @@ public partial class Debugger : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.E))
         {
             //ServerRequest.Test();
+
+            KongregateAPIBehaviour.ResetData();
+            Player.ResetData();
+            GameManager.KG.Init();
+            PopupUI.CallCutScene("Init");
         }
         else if (Input.GetKeyDown(KeyCode.R))
         {

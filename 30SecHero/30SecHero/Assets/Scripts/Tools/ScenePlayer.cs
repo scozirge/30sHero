@@ -63,6 +63,7 @@ public class ScenePlayer : MonoBehaviour
         {
             MyAni.enabled = false;
             LoadingGO.SetActive(true);
+            Player.ShowInitDataProgress();
         }
         if (Player.Tutorial)
             NextSceneName = "Battle";

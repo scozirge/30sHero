@@ -72,6 +72,7 @@ public partial class Player
         else
             SetSound(false);
 
+        Debug.Log("LocalData=" + LocalData);
         if (LocalData)
             GetLocalData();
         else
@@ -217,21 +218,28 @@ public partial class Player
         UserID_K = _kongregateID;
     }
     public static void SignIn_CB(string[] _data)
-    {
-        if (KongregateAPIBehaviour.Relogin)
-        {
-            CaseTableData.HidePopLog(1001);
-            KongregateAPIBehaviour.Relogin = false;
-            PopupUI.CallCutScene("Init");
-            return;
-        }
+    {        
         ID = int.Parse(_data[0]);
         SetGold(int.Parse(_data[1]));
+        Debug.Log("int.Parse(_data[2])=" + int.Parse(_data[2]));
+        Debug.Log(" int.Parse(_data[3]),=" + int.Parse(_data[3]));
+        Debug.Log("int.Parse(_data[4])=" + int.Parse(_data[4]));
+        Debug.Log("int.Parse(_data[5])=" + int.Parse(_data[5]));
+        Debug.Log("_data[6]=" + _data[6]);
+        for(int i=0;i< _data.Length;i++)
+        {
+            if (_data[i] == null)
+                _data[i] = "";
+        }
         SetEmeraldCB(int.Parse(_data[2]), int.Parse(_data[3]), int.Parse(_data[4]), int.Parse(_data[5]), _data[6]);
+        Debug.Log("e");
         SetCurFloor_Local(int.Parse(_data[7]));
+        Debug.Log("f");
         SetMaxFloor_Local(int.Parse(_data[8]));
+        Debug.Log("g");
         //擊敗BOSS清單
         string killBossStr = _data[9];
+        Debug.Log("h");
         if (killBossStr != "")
         {
             string[] bossID = killBossStr.Split(',');
@@ -240,9 +248,13 @@ public partial class Player
                 KillBossID.Add(int.Parse(bossID[i]));
             }
         }
+        Debug.Log("i");
         ServerRequest.GetEquip();
+        Debug.Log("j");
         ServerRequest.GetStrengthen();
+        Debug.Log("k");
         ServerRequest.GetEnchant();
+        Debug.Log("PlayerInfoInitDataFinish OK!");
         PlayerInfoInitDataFinish = true;
     }
     public static void GetEquip_CB(string[] _data)
@@ -289,6 +301,7 @@ public partial class Player
             Player.UpToDateCurMaxEquipUID();
         }
         EquipInitDataFinish = true;
+        Debug.Log("EquipInitDataFinish OK!");
     }
     public static void GetStrengthen_CB(string[] _data)
     {
@@ -307,6 +320,7 @@ public partial class Player
             }
         }
         StrengthenInitDataFinish = true;
+        Debug.Log("StrengthenInitDataFinish OK!");
     }
     public static void GetEnchant_CB(string[] _data)
     {
@@ -325,6 +339,7 @@ public partial class Player
             }
         }
         EnchantInitDataFinish = true;
+        Debug.Log("EnchantInitDataFinish OK!");
     }
     public static void StrengthenUpgrade_CB(string[] _data)
     {

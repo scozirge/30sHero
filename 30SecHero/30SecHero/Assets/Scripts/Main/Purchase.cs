@@ -26,10 +26,12 @@ public class Purchase : MyUI
     Button UpgradeButton;
 
     List<PurchaseItem> ItemList = new List<PurchaseItem>();
-
+    
     public static Purchase MySelf;
     public static PurchaseData CurSelectedData;
     public static PurchaseItem CurSelectedItem;
+
+    string TestStr = "1,emeraldx100,Paying 50 Kreds to acquire 100 emeralds,50/2,emeraldx40,Paying 20 Kreds to acquire 40 emeralds,20/3,emeraldx20,Paying 10 Kreds to acquire 20 emeralds,10";
 
     public override void OnEnable()
     {
@@ -42,16 +44,22 @@ public class Purchase : MyUI
         }
         ItemList = new List<PurchaseItem>();
         ShowInfo(null);
+
+        ShowItemList();
         if (Player.UserID_K ==0)
         {
+            HideItemList();
             KongregateAPIBehaviour.KGLogin();
-        }
-        else
-        {
-            ShowItemList();
         }
         KongregateAPIBehaviour.ShowItemList();
         //ShowItemListCB("1,test,test,1/2,test2,test2,5");
+    }
+    void HideItemList()
+    {
+        for(int i=0;i< ItemList.Count;i++)
+        {
+            ItemList[i].gameObject.SetActive(false);
+        }
     }
     void ShowItemList()
     {
@@ -65,7 +73,7 @@ public class Purchase : MyUI
     }
     public void ShowItemListCB(string _datas)
     {
-        Debug.Log("////////////////OnItemListCB-" + _datas);
+        //Debug.Log("////////////////OnItemListCB-" + _datas);
         string[] items = _datas.Split('/');
         for (int i = 0; i < items.Length; i++)
         {
@@ -82,6 +90,7 @@ public class Purchase : MyUI
                 }
             }
         }
+        Debug.Log("ItemList.Count=" + ItemList.Count);
         if (ItemList[0] != null)
         {
             for (int i = 0; i < ItemList.Count; i++)
@@ -93,6 +102,11 @@ public class Purchase : MyUI
         }
         else
             ShowInfo(null);
+        //顯示所有商品
+        for (int i = 0; i < ItemList.Count; i++)
+        {
+            ItemList[i].gameObject.SetActive(true);
+        }
     }
     public void ShowInfo(PurchaseItem _item)
     {

@@ -129,7 +129,7 @@ public partial class GameManager : MonoBehaviour
     static Dictionary<RoleBuffer, ParticleSystem> BufferParticles = new Dictionary<RoleBuffer, ParticleSystem>();
     static Dictionary<Currency, Sprite> CurrencySpriteDic = new Dictionary<Currency, Sprite>();
     static Dictionary<string, ParticleSystem> OtherParticles = new Dictionary<string, ParticleSystem>();
-    KongregateAPIBehaviour KG;
+    public static KongregateAPIBehaviour KG;
 
     public static Sprite GetItemQualityBotSprite(int _quality)
     {
@@ -160,7 +160,7 @@ public partial class GameManager : MonoBehaviour
     }
     public static Sprite GetNumberIcons(int _number)
     {
-        if(_number<0 || _number>9)
+        if (_number < 0 || _number > 9)
         {
             return null;
         }
@@ -170,13 +170,16 @@ public partial class GameManager : MonoBehaviour
     {
         if (IsInit)
             return;
+        Debug.Log("GM Init");
         GM = this;
         CurrencySpriteDic.Add(Currency.Gold, GoldSprite);
         CurrencySpriteDic.Add(Currency.Emerald, EmeraldSprite);
         CurrencySpriteDic.Add(Currency.Kred, KredSprite);
         CurrencySpriteDic.Add(Currency.AD, ADSprite);
+
         QualityBotSprites = QualityBotPrefabs;
         EquipTypBot = EquipTypBotPrefab;
+
         BufferParticles.Add(RoleBuffer.Stun, StunPrefab);
         BufferParticles.Add(RoleBuffer.Freeze, FreezePrefab);
         BufferParticles.Add(RoleBuffer.Burn, BurnPrefab);

@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class KongregateAPIBehaviour : MonoBehaviour
 {
     private static KongregateAPIBehaviour instance;
@@ -11,10 +11,20 @@ public class KongregateAPIBehaviour : MonoBehaviour
     static float WaitInitTime = 10;
     static bool Test = false;
 
+    public static void ResetData()
+    {
+        EndLogin = false;
+        KongregateLogin = false;
+    }
+
     public void Init()
     {
+
+
         if (instance == null)
         {
+            Application.ExternalEval(@"
+        parent.kongregate.stats.submit('EnterGame', 1);");
             instance = this;
         }
         else if (instance != this)
@@ -27,10 +37,13 @@ public class KongregateAPIBehaviour : MonoBehaviour
         gameObject.name = "KongregateAPI";
 
         Application.ExternalEval(
-          @"if(typeof(kongregateUnitySupport) != 'undefined'){
-        kongregateUnitySupport.initAPI('KongregateAPI', 'OnKongregateAPILoaded');
-      };"
-        );
+@"if(typeof(kongregateUnitySupport) != 'undefined'){
+            kongregateUnitySupport.initAPI('KongregateAPI', 'OnKongregateAPILoaded');
+          };");
+
+
+
+
         if (!Application.isEditor)
             InitTimer = new MyTimer(WaitInitTime, EndKongregateLogin, true, false);
         else
@@ -39,12 +52,12 @@ public class KongregateAPIBehaviour : MonoBehaviour
         }
         if (Test)
         {
-            //OnKongregateUserInfo("1|scozirge");
-            OnKongregateUserInfo("41605611|starbrogamemaker");
+            OnKongregateUserInfo("1|scozirge");
+            //OnKongregateUserInfo("41605611|starbrogamemaker");
             //OnKongregateUserInfo("100|t12");
         }
     }
-    static MyTimer WaitSignInCheck;
+    //static MyTimer WaitSignInCheck;
     public static bool Relogin;//是否為遊戲進行到一半時登入
     public static void KGLogin()
     {
@@ -52,33 +65,12 @@ public class KongregateAPIBehaviour : MonoBehaviour
         Relogin = true;
         Debug.Log("Kongregate Login");
         Application.ExternalEval(@"
-          kongregate.services.showRegistrationBox();");
-        CaseTableData.ShowPopLog(1001);
-        Application.ExternalEval(
-            @"if(typeof(kongregateUnitySupport) != 'undefined'){
-        kongregate.services.addEventListener('login', 'OnKongregateInPageLogin');
-      };"
-            );
-        WaitSignInCheck = new MyTimer(WaitInitTime, EndKongregateLogin, true, false);
+          parent.kongregate.services.showRegistrationBox();");
     }
     public static void OnKongregateInPageLogin(string _userInfoString)
     {
         Debug.Log("OnKongregateInPageLogin.................");
         Debug.Log("_userInfoString=" + _userInfoString);
-        Application.ExternalEval(
-@"if(typeof(kongregateUnitySupport) != 'undefined'){
-        kongregateUnitySupport.initAPI('KongregateAPI', 'OnKongregateAPILoaded');
-      };"
-);
-        /*
-         kongregate.services.addEventListener("login", onKongregateInPageLogin);
-
-        function onKongregateInPageLogin() {
-          var user_id = kongregate.services.getUserId();
-          var username = kongregate.services.getUsername();
-          var token = kongregate.services.getGameAuthToken();
-        }
-         */
     }
 
 
@@ -88,8 +80,8 @@ public class KongregateAPIBehaviour : MonoBehaviour
     {
         if (InitTimer != null)
             InitTimer.RunTimer();
-        if (WaitSignInCheck != null)
-            WaitSignInCheck.RunTimer();
+        //if (WaitSignInCheck != null)
+        //WaitSignInCheck.RunTimer();
     }
     public static void EndKongregateLogin()
     {
@@ -110,45 +102,70 @@ public class KongregateAPIBehaviour : MonoBehaviour
     public void OnKongregateAPILoaded(string userInfoString)
     {
         Debug.Log("OnKongregateAPILoaded...");
+        //偵聽是否有登入kongregate
+        if (!Relogin)
+        {
+            Debug.Log("建立kongregate登入偵聽");
+            Application.ExternalEval(@"
+      parent.kongregate.services.addEventListener('login', function(){
+        var unityObject = kongregateUnitySupport.getUnityObject();
+        var services = parent.kongregate.services;
+        var params=[services.getUserId(), services.getUsername(), 
+                    services.getGameAuthToken()].join('|');
+
+        unityObject.SendMessage('KongregateAPI', 'OnKongregateUserInfo', params);
+    });"
+);
+        }
+
+
+        //設定玩家資料
         OnKongregateUserInfo(userInfoString);
     }
 
     public void OnKongregateUserInfo(string userInfoString)
     {
-        if (InitTimer!=null)
+        //重置玩家資料
+        ResetData();
+        Player.ResetData();
+
+        if (InitTimer != null)
             InitTimer.StartRunTimer = false;
-        if (WaitSignInCheck!=null)
-            WaitSignInCheck.StartRunTimer = false;
+        //if (WaitSignInCheck!=null)
+        //WaitSignInCheck.StartRunTimer = false;
         var info = userInfoString.Split('|');
         var userId = System.Convert.ToInt32(info[0]);
         var username = info[1];
         //var gameAuthToken = info[2];
-        Debug.Log("///////////////Kongregate User Info: " + username + ", userId: " + userId);
-        if (userId != 0)
+        //Debug.Log("///////////////Kongregate User Info: " + username + ", userId: " + userId);
+        if (userId != 0)//帳號ID不是0代表登入Kongregate帳號了
         {
             KongregateLogin = true;
-            if (!Relogin)
+            if (!Relogin)//一開始進遊戲登入kongregate成功
             {
                 Debug.Log("KongregateLogin=" + KongregateLogin);
                 Player.GetKongregateUserData_CB(username, userId);
                 ShowUserItemList();
             }
-            else
+            else//商品頁面跳登入視窗時後登入成功
             {
-                EndKongregateLogin();
+                Relogin = false;
+                Init();
+                PopupUI.CallCutScene("Init");
             }
         }
-        else
+        else//帳號ID是0代表沒登入Kongregate
         {
-            if (!Relogin)
+            if (!Relogin)//一開始遊戲登入失敗
             {
                 EndKongregateLogin();
                 Debug.Log("Guest account");
             }
-            else
+            else//商品頁面跳登入視窗時，登入失敗
             {
                 Relogin = false;
                 CaseTableData.HidePopLog(1001);
+                CaseTableData.ShowPopLog(9);
             }
         }
         if (Test)
@@ -158,7 +175,7 @@ public class KongregateAPIBehaviour : MonoBehaviour
     {
         Debug.Log("////////////////Send ShowItemList");
         Application.ExternalEval(@"
-          kongregate.mtx.requestItemList([], function(result) {
+          parent.kongregate.mtx.requestItemList([], function(result) {
             var unityObject = kongregateUnitySupport.getUnityObject();
             if(result.success) {
                 var datas = [];
@@ -168,7 +185,7 @@ public class KongregateAPIBehaviour : MonoBehaviour
                     if(i!=0)
                         datas+='/';
                     datas+=[item.identifier, item.name, item.description , item.price ].join(',');
-                }       
+                }
                 unityObject.SendMessage('KongregateAPI', 'OnItemListCB', datas);     
             }
             else
@@ -181,7 +198,9 @@ public class KongregateAPIBehaviour : MonoBehaviour
     public void OnItemListCB(string _datas)
     {
         if (_datas != "Fail")
+        {
             Purchase.MySelf.ShowItemListCB(_datas);
+        }
         else
         {
             CaseTableData.ShowPopLog(8);
@@ -191,7 +210,7 @@ public class KongregateAPIBehaviour : MonoBehaviour
     {
         Debug.Log("////////////////Send PurchaseIte ID:" + _id);
         Application.ExternalEval(@"
-          kongregate.mtx.purchaseItems(['" + _id + @"'], function(result) {
+          parent.kongregate.mtx.purchaseItems(['" + _id + @"'], function(result) {
             var unityObject = kongregateUnitySupport.getUnityObject();
             var success = String(result.success);
             unityObject.SendMessage('KongregateAPI', 'OnPurchaseResult', success);
@@ -214,17 +233,19 @@ public class KongregateAPIBehaviour : MonoBehaviour
     {
         Debug.Log("////////////////Send ShowUserItemList");
         Application.ExternalEval(@"
-          kongregate.mtx.requestUserItemList(null, function(result) {
+          parent.kongregate.mtx.requestUserItemList(null, function(result) {
             var unityObject = kongregateUnitySupport.getUnityObject();
             if(result.success) {
-                var datas = [];
+                var datas = '';
                 for(var i = 0; i < result.data.length; i++) 
                 {
                     var item = result.data[i];
                     if(i!=0)
                         datas+='/';
                     datas+=[item.id, item.identifier, item.data , item.remaining_uses ].join(',');
-                }       
+                }
+                if(datas=='')
+                    datas='Empty';
                 unityObject.SendMessage('KongregateAPI', 'OnShowUserItemListCB', datas);     
             }
             else
@@ -237,16 +258,21 @@ public class KongregateAPIBehaviour : MonoBehaviour
 
     public void OnShowUserItemListCB(string _datas)
     {
-        Debug.Log("///////////////Kongregate UserItem Info: " + _datas);
-        if (_datas != "Fail")
+        //Debug.Log("///////////////Kongregate UserItem Info: " + _datas);
+        switch(_datas)
         {
-            Player.ShowUserItemListCB(_datas);
-            EndKongregateLogin();
-        }
-        else
-        {
-            Debug.Log("Fail to ShowUserItemListCB");
-            CaseTableData.ShowPopLog(8);
+            case "Fail":
+                Debug.Log("Fail to ShowUserItemListCB");
+                CaseTableData.ShowPopLog(8);
+                break;
+            case "Empty":
+                Debug.Log("PayItem is Empty");
+                EndKongregateLogin();
+                break;
+            default:
+                Player.ShowUserItemListCB(_datas);
+                EndKongregateLogin();
+                break;
         }
     }
 
@@ -254,17 +280,19 @@ public class KongregateAPIBehaviour : MonoBehaviour
     {
         Debug.Log("////////////////Send GetUserItemList");
         Application.ExternalEval(@"
-          kongregate.mtx.requestUserItemList(null, function(result) {
+          parent.kongregate.mtx.requestUserItemList(null, function(result) {
             var unityObject = kongregateUnitySupport.getUnityObject();
             if(result.success) {
-                var datas = [];
+                var datas = '';
                 for(var i = 0; i < result.data.length; i++) 
                 {
                     var item = result.data[i];
                     if(i!=0)
                         datas+='/';
                     datas+=[item.id, item.identifier, item.data , item.remaining_uses ].join(',');
-                }       
+                }
+                if(datas=='')
+                    datas='Empty';
                 unityObject.SendMessage('KongregateAPI', 'OnGetUserItemListCB', datas);     
             }
             else
@@ -276,15 +304,20 @@ public class KongregateAPIBehaviour : MonoBehaviour
     }
     public void OnGetUserItemListCB(string _datas)
     {
-        Debug.Log("///////////////Kongregate UserItem Info: " + _datas);
-        if (_datas != "Fail")
+        //Debug.Log("///////////////Kongregate UserItem Info: " + _datas);
+        switch (_datas)
         {
-            Player.ShowUserItemListCB(_datas);
-            ServerRequest.UpdateResource();
-        }
-        else
-        {
-            Debug.Log("Fail to GetUserItemListCB");
+            case "Fail":
+                Debug.Log("Fail to GetUserItemListCB");
+                break;
+            case "Empty":
+                Debug.Log("PayItem is Empty");
+                ServerRequest.UpdateResource();
+                break;
+            default:
+                Player.ShowUserItemListCB(_datas);
+                ServerRequest.UpdateResource();
+                break;
         }
     }
 }

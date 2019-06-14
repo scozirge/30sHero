@@ -19,6 +19,13 @@ public partial class Player
                 return false;
         }
     }
+    public static void ShowInitDataProgress()
+    {
+        Debug.Log("PlayerInfoInitDataFinish=" + PlayerInfoInitDataFinish);
+        Debug.Log("StrengthenInitDataFinish=" + StrengthenInitDataFinish);
+        Debug.Log("EquipInitDataFinish=" + EquipInitDataFinish);
+        Debug.Log("EnchantInitDataFinish=" + EnchantInitDataFinish);
+    }
     public static int ID { get; private set; }
     public static int UserID_K;
     public static string Name_K;
@@ -33,13 +40,25 @@ public partial class Player
     public static int MaxFloor { get; private set; }
     public static int MaxEnemyKills { get; private set; }
 
+
+    public static void ResetData()
+    {
+        PlayerInfoInitDataFinish = false;
+        StrengthenInitDataFinish = false;
+        EquipInitDataFinish = false;
+        EnchantInitDataFinish = false;
+    }
+
     public static void Init()
     {
         if (IsInit)
             return;
-        Items.Add(EquipType.Weapon, new Dictionary<long, EquipData>());
-        Items.Add(EquipType.Armor, new Dictionary<long, EquipData>());
-        Items.Add(EquipType.Accessory, new Dictionary<long, EquipData>());
+        if(Items.Count==0)
+        {
+            Items.Add(EquipType.Weapon, new Dictionary<long, EquipData>());
+            Items.Add(EquipType.Armor, new Dictionary<long, EquipData>());
+            Items.Add(EquipType.Accessory, new Dictionary<long, EquipData>());
+        }
         InitProperty();
     }
 
@@ -69,6 +88,7 @@ public partial class Player
         Emerald = _emerald;
         if (!Player.LocalData)
         {
+            Debug.Log("這裡有問題估計是PayKredsLog是null");
             bool updateDB = false;
             if (TrueEmerald != _trueEmerald || PayKredsLog != _payKredsLog)
             {
@@ -84,6 +104,7 @@ public partial class Player
             if (updateDB)
                 ServerRequest.UpdateResource();
         }
+        Debug.Log("3");
         Main.UpdateResource();
         //寫入資料
         if (PlayerInfoInitDataFinish)
