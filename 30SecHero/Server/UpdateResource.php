@@ -16,7 +16,12 @@ $emerald=$_POST['emerald'];
 $trueEmerald=$_POST['trueEmerald'];
 $freeEmerald=$_POST['freeEmerald'];
 $payEmerald=$_POST['payEmerald'];
-$payKredsLog=$_POST['payKredsLog'];
+$payKredsLog="";
+if( isset($_POST['payKredsLog']) )
+{
+	$payKredsLog=$_POST['payKredsLog'];
+}
+
 //die("ID:".$id1.",".$equipSlot1."  ID2:".$id2.",".$equipSlot2);
 //新增寫入DB連線
 $con_w = mysql_connect($db_host_write,$db_user,$db_pass,true) or ("Fail:1:"  . mysql_error());

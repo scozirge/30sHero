@@ -12,9 +12,7 @@ $signUpTime= date("Y/m/d H:i:s");
 //接收資料
 $ac_K=$_POST['ac_K'];
 $userID_K=$_POST['userID_K'];
-$update=$_POST['update'];
-if($update ==1)
-{
+//如果server端判斷資料庫中沒此kg帳戶的玩家就新增kg帳戶並把本地送來的資料(以下)新增到DB
 	$gold=$_POST['gold'];
 	$emerald=$_POST['emerald'];
 	$freeEmerald=$_POST['freeEmerald'];
@@ -25,9 +23,7 @@ if($update ==1)
 	$equipStr=$_POST['equipStr'];
 	$strengthenStr=$_POST['strengthenStr'];
 	$enchantStr=$_POST['enchantStr'];
-}
-
-
+	//echo "gold=".$gold." emerald=".$emerald." freeEmerald=".$freeEmerald." payEmerald=".$payEmerald." curFloor=".$curFloor." maxFloor=".$maxFloor." killBoss=".$killBoss." equipStr=".$equipStr." strengthenStr=".$strengthenStr." enchantStr=".$enchantStr;
 
 
 
@@ -43,7 +39,7 @@ $numrows = mysql_num_rows($check);
 //新增寫入DB連線
 $con_w = mysql_connect($db_host_write,$db_user,$db_pass,true) or ("Fail:1:"  . mysql_error());
 	
-if ($numrows == 0)//找不到已經存在的Kongregate帳號就創新帳號
+if ($numrows == 0)//找不到已經存在的Kongregate帳號就創新帳號並把本地送來的資料(以下)新增到DB
 {
 
     if (!$con_w)
@@ -66,7 +62,12 @@ if ($numrows == 0)//找不到已經存在的Kongregate帳號就創新帳號
 			for($i=0; $i< count($equipData);$i++)
 			{
 				$data= explode(',',$equipData[$i]);
-				$query.="INSERT INTO  ".$db_name.".equipment (  `jid` ,`equipType` ,`equipSlot` ,`lv`,`quality`,`property`,`enchant`,`ownUserID` ) VALUES ( '".$data[0]."','".$data[1]."','".$data[2]."','".$data[3]."','".$data[4]."','".$data[5]."','".$data[6]."','".$id."') ; ";
+				//如果有8筆代表此裝備有附魔資料
+				if(count($data)==8)
+					$query.="INSERT INTO  ".$db_name.".equipment (  `jid` ,`equipType` ,`equipSlot` ,`lv`,`quality`,`property`,`enchant`,`ownUserID` ) VALUES ( '".$data[1]."','".$data[2]."','".$data[3]."','".$data[4]."','".$data[5]."','".$data[6]."','".$data[7]."','".$id."') ; ";
+				else if (count($data)==7)
+					$query.="INSERT INTO  ".$db_name.".equipment (  `jid` ,`equipType` ,`equipSlot` ,`lv`,`quality`,`property`,`ownUserID` ) VALUES ( '".$data[1]."','".$data[2]."','".$data[3]."','".$data[4]."','".$data[5]."','".$data[6]."','".$id."') ; ";
+
 			}
 			// Check connection
 			if (!$newConn) {
@@ -102,6 +103,7 @@ if ($numrows == 0)//找不到已經存在的Kongregate帳號就創新帳號
 			{
 				$data= explode(',',$strengthenData[$i]);
 				$query.="INSERT INTO  ".$db_name.".strengthen (  `jid` ,`lv` ,`ownUserID` ) VALUES ( '".$data[0]."','".$data[1]."','".$id."') ; ";
+
 			}
 			// Check connection
 			if (!$newConn) {
@@ -117,7 +119,7 @@ if ($numrows == 0)//找不到已經存在的Kongregate帳號就創新帳號
 						{
 							if(!$strengthenUpdate)
 							{
-								WriteLastMysqlError($userID_K,"使用Kongregate帳號登入時，上傳裝備資料發生錯誤:".$strengthenUpdate."<br>".mysqli_error($newConn));
+								WriteLastMysqlError($userID_K,"使用Kongregate帳號登入時，上傳強化資料發生錯誤:".$strengthenUpdate."<br>".mysqli_error($newConn));
 								//die ("Fail:5:"."Error " . $strengthenUpdate . "<br>" . mysqli_error($newConn)." \nExecuteTime=".$executeTime."");
 							}
 							mysqli_free_result($strengthenUpdate);
@@ -151,7 +153,7 @@ if ($numrows == 0)//找不到已經存在的Kongregate帳號就創新帳號
 						{
 							if(!$enchantUpdate)
 							{
-								WriteLastMysqlError($userID_K,"使用Kongregate帳號登入時，上傳裝備資料發生錯誤:".$enchantUpdate."<br>".mysqli_error($newConn));
+								WriteLastMysqlError($userID_K,"使用Kongregate帳號登入時，上傳附魔資料發生錯誤:".$enchantUpdate."<br>".mysqli_error($newConn));
 								//die ("Fail:5:"."Error " . $enchantUpdate . "<br>" . mysqli_error($newConn)." \nExecuteTime=".$executeTime."");
 							}
 							mysqli_free_result($enchantUpdate);
