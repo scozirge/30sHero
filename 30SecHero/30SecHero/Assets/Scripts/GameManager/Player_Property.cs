@@ -8,6 +8,17 @@ public partial class Player
     public static Dictionary<int, StrengthenData> StrengthenDic = new Dictionary<int, StrengthenData>();
     //Enchant Dic
     public static Dictionary<int, EnchantData> EnchantDic = new Dictionary<int, EnchantData>();
+    public static int GetPartnerEnchantCount()
+    {
+        int count = 0;
+        List<int> keys = new List<int>(EnchantDic.Keys);
+        for (int i = 0; i < keys.Count; i++)
+        {
+            if (EnchantDic[keys[i]].MyEnchantType == EnchantType.Enchant && EnchantDic[keys[i]].LV > 0)
+                count++;
+        }
+        return count;
+    }
     //Properties
     public static Dictionary<RoleProperty, float> Properties = new Dictionary<RoleProperty, float>();
     static Dictionary<RoleProperty, float> EquipPlus = new Dictionary<RoleProperty, float>();

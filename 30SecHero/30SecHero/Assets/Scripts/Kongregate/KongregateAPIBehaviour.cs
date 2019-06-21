@@ -6,6 +6,7 @@ public class KongregateAPIBehaviour : MonoBehaviour
 {
     private static KongregateAPIBehaviour instance;
     MyTimer InitTimer;
+    static bool KGIsInit;
     public static bool KongregateLogin = false;
     public static bool EndLogin;
     static float WaitInitTime = 10;
@@ -17,14 +18,20 @@ public class KongregateAPIBehaviour : MonoBehaviour
         KongregateLogin = false;
     }
 
+    public static void SendKGStatistics(string _name,int _value)
+    {
+        if (_name == null)
+            return;
+        if (_value < 0)
+            return;
+        Application.ExternalEval(@"
+        parent.kongregate.stats.submit('" + _name + @"'," + _value + @");");
+    }
+
     public void Init()
     {
-
-
         if (instance == null)
         {
-            Application.ExternalEval(@"
-        parent.kongregate.stats.submit('EnterGame', 1);");
             instance = this;
         }
         else if (instance != this)
@@ -102,6 +109,12 @@ public class KongregateAPIBehaviour : MonoBehaviour
     public void OnKongregateAPILoaded(string userInfoString)
     {
         Debug.Log("OnKongregateAPILoaded...");
+        if(!KGIsInit)
+        {
+            Application.ExternalEval(@"
+        parent.kongregate.stats.submit('EnterGame', 1);");
+        }
+        KGIsInit = true;
         //偵聽是否有登入kongregate
         if (!Relogin)
         {

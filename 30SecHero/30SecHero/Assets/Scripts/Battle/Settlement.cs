@@ -213,6 +213,15 @@ partial class BattleManage
         }
         else
         {
+            //送kongregate統計資料
+            KongregateAPIBehaviour.SendKGStatistics("Nobleman", TotalGold);
+            KongregateAPIBehaviour.SendKGStatistics("Monster Killer", EnemyKill);
+            KongregateAPIBehaviour.SendKGStatistics("Great Adventurer", MaxFloor);
+            KongregateAPIBehaviour.SendKGStatistics("Boss Hunter", Player.KillBossID.Count);
+            KongregateAPIBehaviour.SendKGStatistics("Happy Partner", Player.GetPartnerEnchantCount());
+            Debug.Log("Player.KillBossID.Count=" + Player.KillBossID.Count);
+            Debug.Log("Player.GetPartnerEnchantCount=" + Player.GetPartnerEnchantCount());
+
             if (!_endGame)
             {
                 //送server處理

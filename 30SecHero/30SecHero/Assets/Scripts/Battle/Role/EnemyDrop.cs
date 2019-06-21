@@ -59,7 +59,6 @@ public partial class EnemyRole
                     if (loot) loot.Init(BattleManage.Floor, equipQuality);
                 }
             }
-
         }
         else
         {

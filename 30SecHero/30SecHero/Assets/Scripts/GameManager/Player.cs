@@ -88,7 +88,6 @@ public partial class Player
         Emerald = _emerald;
         if (!Player.LocalData)
         {
-            Debug.Log("這裡有問題估計是PayKredsLog是null");
             bool updateDB = false;
             if (TrueEmerald != _trueEmerald || PayKredsLog != _payKredsLog)
             {
@@ -96,7 +95,7 @@ public partial class Player
                 updateDB = true;
             }
             else
-            {
+            {                
                 if (Emerald != (TrueEmerald + FreeEmerald - _payEmerald))
                     Emerald = TrueEmerald + FreeEmerald - PayEmerald;
                 updateDB = true;
@@ -104,7 +103,6 @@ public partial class Player
             if (updateDB)
                 ServerRequest.UpdateResource();
         }
-        Debug.Log("3");
         Main.UpdateResource();
         //寫入資料
         if (PlayerInfoInitDataFinish)

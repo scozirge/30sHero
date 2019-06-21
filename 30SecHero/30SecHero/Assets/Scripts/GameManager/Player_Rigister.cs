@@ -61,8 +61,7 @@ public partial class Player
             PlayerPrefs.SetInt(LocoData.SoundOn.ToString(), 1);
             PlayerPrefs.SetInt(LocoData.MusicOn.ToString(), 1);
             PlayerPrefs.SetInt(LocoData.Init.ToString(), 1);
-        }
-        //SetLanguage((Language)PlayerPrefs.GetInt(LocoData.UseLanguage.ToString()));
+        }        
         if (PlayerPrefs.GetInt(LocoData.MusicOn.ToString()) == 1)
             SetMusic(true);
         else
@@ -185,7 +184,6 @@ public partial class Player
             EquipInitDataFinish = true;
         //強化
         string strengthenStr = PlayerPrefs.GetString(LocoData.Strengthen.ToString());
-
         if (strengthenStr != "")
         {
             string[] strengthenData = strengthenStr.Split('/');
@@ -195,7 +193,6 @@ public partial class Player
             StrengthenInitDataFinish = true;
         //附魔
         string enchantStr = PlayerPrefs.GetString(LocoData.Enchant.ToString());
-
         if (enchantStr != "")
         {
             string[] enchantData = enchantStr.Split('/');
@@ -221,25 +218,16 @@ public partial class Player
     {        
         ID = int.Parse(_data[0]);
         SetGold(int.Parse(_data[1]));
-        Debug.Log("int.Parse(_data[2])=" + int.Parse(_data[2]));
-        Debug.Log(" int.Parse(_data[3]),=" + int.Parse(_data[3]));
-        Debug.Log("int.Parse(_data[4])=" + int.Parse(_data[4]));
-        Debug.Log("int.Parse(_data[5])=" + int.Parse(_data[5]));
-        Debug.Log("_data[6]=" + _data[6]);
         for(int i=0;i< _data.Length;i++)
         {
             if (_data[i] == null)
                 _data[i] = "";
         }
         SetEmeraldCB(int.Parse(_data[2]), int.Parse(_data[3]), int.Parse(_data[4]), int.Parse(_data[5]), _data[6]);
-        Debug.Log("e");
         SetCurFloor_Local(int.Parse(_data[7]));
-        Debug.Log("f");
         SetMaxFloor_Local(int.Parse(_data[8]));
-        Debug.Log("g");
         //擊敗BOSS清單
         string killBossStr = _data[9];
-        Debug.Log("h");
         if (killBossStr != "")
         {
             string[] bossID = killBossStr.Split(',');
@@ -248,11 +236,8 @@ public partial class Player
                 KillBossID.Add(int.Parse(bossID[i]));
             }
         }
-        Debug.Log("i");
         ServerRequest.GetEquip();
-        Debug.Log("j");
         ServerRequest.GetStrengthen();
-        Debug.Log("k");
         ServerRequest.GetEnchant();
         Debug.Log("PlayerInfoInitDataFinish OK!");
         PlayerInfoInitDataFinish = true;
@@ -340,6 +325,12 @@ public partial class Player
         }
         EnchantInitDataFinish = true;
         Debug.Log("EnchantInitDataFinish OK!");
+        //送kongregate統計資料
+        KongregateAPIBehaviour.SendKGStatistics("Great Adventurer", MaxFloor);
+        KongregateAPIBehaviour.SendKGStatistics("Boss Hunter", Player.KillBossID.Count);
+        KongregateAPIBehaviour.SendKGStatistics("Happy Partner", Player.GetPartnerEnchantCount());
+        Debug.Log("Player.KillBossID.Count=" + Player.KillBossID.Count);
+        Debug.Log("Player.GetPartnerEnchantCount=" + Player.GetPartnerEnchantCount());
     }
     public static void StrengthenUpgrade_CB(string[] _data)
     {

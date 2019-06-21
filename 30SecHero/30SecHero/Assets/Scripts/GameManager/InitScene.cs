@@ -11,8 +11,17 @@ public class InitScene : MonoBehaviour
     bool InitSetLanguage;
     void Start()
     {
+        /*如要藥第一次進遊戲時顯示語言選擇，就取消此段註解，改註解下一段
         if (PlayerPrefs.GetInt(LocoData.InitSetLanguage.ToString()) == 0)
             InitSetLanguage = true;
+           */
+        if (PlayerPrefs.GetInt(LocoData.InitSetLanguage.ToString()) == 0)
+        {
+            PlayerPrefs.SetInt(LocoData.InitSetLanguage.ToString(), 1);
+            PlayerPrefs.SetInt(LocoData.UseLanguage.ToString(), (int)Language.EN);
+            Player.SetLanguage((Language)PlayerPrefs.GetInt(LocoData.UseLanguage.ToString()));
+        }
+        
         StartBtn.SetActive(false);
         SetUI.SetActive(false);
     }
