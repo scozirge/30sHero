@@ -60,7 +60,7 @@ public class ArmorData : EquipData
         int randIndex = UnityEngine.Random.Range(0, keys.Count);
         return keys[randIndex];
     }
-    public override int SetUID()
+    public override long SetUID()
     {
         base.SetUID();
         MaxUID++;

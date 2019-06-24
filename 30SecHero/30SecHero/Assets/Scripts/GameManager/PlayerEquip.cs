@@ -243,6 +243,7 @@ public partial class Player
     }
     public static void SellEquip(EquipData _data)
     {
+        Debug.Log(_data.ID);
         if (Items[_data.Type].ContainsKey(_data.UID))
         {
             GainGold(_data.SellGold);

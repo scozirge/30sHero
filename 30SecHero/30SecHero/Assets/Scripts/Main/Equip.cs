@@ -134,7 +134,7 @@ public class Equip : MyUI
         Sort();
         UpdateRoleInfo(false);
         //ID重複檢測
-        List<int> test = new List<int>();
+        List<long> test = new List<long>();
         for (int i = 0; i < ItemList.Count; i++)
         {
             for (int j = 0; j < test.Count; j++)

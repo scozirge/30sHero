@@ -60,7 +60,7 @@ public class AccessoryData : EquipData
         int randIndex = UnityEngine.Random.Range(0, keys.Count);
         return keys[randIndex];
     }
-    public override int SetUID()
+    public override long SetUID()
     {
         base.SetUID();
         MaxUID++;
@@ -77,7 +77,7 @@ public class AccessoryData : EquipData
         data.SetRandomProperties();
         return data;
     }
-    public static AccessoryData GetNewAccessory(int _uid, int _id, int _equipSlot, int _lv, int _quality, string _propertiesStr,int _enchantID)
+    public static AccessoryData GetNewAccessory(long _uid, int _id, int _equipSlot, int _lv, int _quality, string _propertiesStr,int _enchantID)
     {
         AccessoryData data = GameDictionary.AccessoryDic[_id].MemberwiseClone() as AccessoryData;
         data.PropertiesStr = _propertiesStr;

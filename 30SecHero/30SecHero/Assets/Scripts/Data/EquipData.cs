@@ -6,8 +6,8 @@ using System;
 
 public abstract class EquipData : Data
 {
-    public int UID;
-    protected static int MaxUID;//只使用本地資料才會用到
+    public long UID;
+    protected static long MaxUID;//只使用本地資料才會用到
     public int EquipSlot { get; protected set; }
     public virtual EquipType Type { get; protected set; }
     public virtual string Name { get; protected set; }
@@ -103,16 +103,16 @@ public abstract class EquipData : Data
                 return null;
         }
     }
-    public virtual int SetUID()
+    public virtual long SetUID()
     {
         return UID;
     }
     //server回傳UID時使用
-    public void SetUID(int _uid)
+    public void SetUID(long _uid)
     {
         UID = _uid;
     }
-    protected static void UpdateMaxUID(int _uid)
+    protected static void UpdateMaxUID(long _uid)
     {
         if (_uid > MaxUID)
             MaxUID = _uid;

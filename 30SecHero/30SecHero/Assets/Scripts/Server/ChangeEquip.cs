@@ -10,21 +10,21 @@ public partial class ServerRequest : MonoBehaviour
     //每次需求最大重送次數
     const byte MaxReSendQuestTimes_ChangeEquip = 3;
 
-    public static void ChangeEquip(int _id1, int _equipSlot1, int _id2 ,int _equipSlot2)
+    public static void ChangeEquip(long _id1, int _equipSlot1, long _id2 ,int _equipSlot2)
     {
         ReSendQuestTimes_ChangeEquip = MaxReSendQuestTimes_ChangeEquip;//重置重送要求給Server的次數
         SendChangeEquipQuest(_id1, _equipSlot1, _id2, _equipSlot2);
     }
-    static void SendChangeEquipQuest(int _id1, int _equipSlot1, int _id2, int _equipSlot2)
+    static void SendChangeEquipQuest(long _id1, int _equipSlot1, long _id2, int _equipSlot2)
     {
         if (Conn == null)
             return;
         WWWForm form = new WWWForm();
         //string requestTime = DateTime.Now.ToString("yyyy-MM-dd  HH:mm:ss");//命令時間，格式2015-11-25 15:39:36
         form.AddField("ownUserID", Player.ID);
-        form.AddField("id1", _id1);
+        form.AddField("id1", _id1.ToString());
         form.AddField("equipSlot1", _equipSlot1);
-        form.AddField("id2", _id2);
+        form.AddField("id2", _id2.ToString());
         form.AddField("equipSlot2", _equipSlot2);
         WWW w = new WWW(string.Format("{0}{1}", GetServerURL(), "ChangeEquip.php"), form);
         //設定為正等待伺服器回傳
