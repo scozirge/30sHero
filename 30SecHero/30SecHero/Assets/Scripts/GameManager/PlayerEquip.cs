@@ -28,24 +28,21 @@ public partial class Player
     public static long CurMaxWeaponUID { get; private set; }
     public static long CurMaxArmorUID { get; private set; }
     public static long CurMaxAccessoryUID { get; private set; }
-    public static void UudateCurMaxEquipUID(EquipType _type, int _newUID)
+    public static void UpdateCurMaxEquipUID(EquipType _type, int _newUID)
     {
         switch (_type)
         {
             case EquipType.Weapon:
                 if (_newUID > Player.CurMaxWeaponUID)
                     Player.CurMaxWeaponUID = _newUID;
-                Debug.Log("Player.CurMaxWeaponUID=" + Player.CurMaxWeaponUID);
                 break;
             case EquipType.Armor:
                 if (_newUID > Player.CurMaxArmorUID)
                     Player.CurMaxArmorUID = _newUID;
-                Debug.Log("Player.CurMaxArmorUID=" + Player.CurMaxArmorUID);
                 break;
             case EquipType.Accessory:
                 if (_newUID > Player.CurMaxAccessoryUID)
                     Player.CurMaxAccessoryUID = _newUID;
-                Debug.Log("Player.CurMaxAccessoryUID=" + Player.CurMaxAccessoryUID);
                 break;
         }
     }
@@ -243,7 +240,6 @@ public partial class Player
     }
     public static void SellEquip(EquipData _data)
     {
-        Debug.Log(_data.ID);
         if (Items[_data.Type].ContainsKey(_data.UID))
         {
             GainGold(_data.SellGold);

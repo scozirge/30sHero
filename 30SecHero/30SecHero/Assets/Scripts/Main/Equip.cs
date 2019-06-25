@@ -105,7 +105,7 @@ public class Equip : MyUI
             EquipDic.Add(EquipType.Armor, ArmorList);
         }
         if (Player.Items.ContainsKey(EquipType.Accessory))
-        {
+        {            
             List<long> keys = new List<long>(Player.Items[EquipType.Accessory].Keys);
             for (int i = 0; i < keys.Count; i++)
             {

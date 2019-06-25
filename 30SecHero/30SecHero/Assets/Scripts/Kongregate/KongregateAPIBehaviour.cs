@@ -10,7 +10,7 @@ public class KongregateAPIBehaviour : MonoBehaviour
     public static bool KongregateLogin = false;
     public static bool EndLogin;
     static float WaitInitTime = 10;
-    static bool Test = false;
+    static bool Test = true;
 
     public static void ResetData()
     {
@@ -59,8 +59,8 @@ public class KongregateAPIBehaviour : MonoBehaviour
         }
         if (Test)
         {
-            OnKongregateUserInfo("1|scozirge");
-            //OnKongregateUserInfo("41605611|starbrogamemaker");
+            //OnKongregateUserInfo("1|scozirge");
+            OnKongregateUserInfo("41605611|starbrogamemaker");
             //OnKongregateUserInfo("100|t12");
         }
     }

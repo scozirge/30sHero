@@ -448,10 +448,10 @@ public partial class Player
             }
             for (int i = 0; i < CurGainEquipDatas.Count; i++)
             {
-                if (!Items[CurGainEquipDatas[i].Type].ContainsKey(CurGainEquipDatas[i].UID))
+                if (!Items[CurGainEquipDatas[i].Type].ContainsKey(long.Parse(equipUID[i])))
                 {
-                    Items[CurGainEquipDatas[i].Type].Add(CurGainEquipDatas[i].UID, CurGainEquipDatas[i]);
-                    CurGainEquipDatas[i].SetUID(int.Parse(equipUID[i]));
+                    CurGainEquipDatas[i].SetUID(long.Parse(equipUID[i]));
+                    Items[CurGainEquipDatas[i].Type].Add(long.Parse(equipUID[i]), CurGainEquipDatas[i]);
                 }
                 else
                 {

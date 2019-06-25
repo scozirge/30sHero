@@ -71,7 +71,19 @@ public partial class Player
         else
             SetSound(false);
 
-        Debug.Log("LocalData=" + LocalData);
+        /*如要藥第一次進遊戲時顯示語言選擇，就取消此段註解，改註解下一段
+if (PlayerPrefs.GetInt(LocoData.InitSetLanguage.ToString()) == 0)
+    InitSetLanguage = true;
+   */
+        if (PlayerPrefs.GetInt(LocoData.InitSetLanguage.ToString()) == 0)
+        {
+            PlayerPrefs.SetInt(LocoData.InitSetLanguage.ToString(), 1);
+            PlayerPrefs.SetInt(LocoData.UseLanguage.ToString(), (int)Language.EN);
+            Player.SetLanguage((Language)PlayerPrefs.GetInt(LocoData.UseLanguage.ToString()));
+        }
+        else
+            SetLanguage((Language)PlayerPrefs.GetInt(LocoData.UseLanguage.ToString()));
+
         if (LocalData)
             GetLocalData();
         else
@@ -132,7 +144,7 @@ public partial class Player
         //PlayerPrefs.SetInt(LocoData.Emerald.ToString(), 1000);
         //PlayerPrefs.SetInt(LocoData.Gold.ToString(), 10000);
         //Debug.Log((Language)PlayerPrefs.GetInt(LocoData.UseLanguage.ToString()));
-        SetLanguage((Language)PlayerPrefs.GetInt(LocoData.UseLanguage.ToString()));
+        
         if (PlayerPrefs.GetInt(LocoData.MusicOn.ToString()) == 1)
             SetMusic(true);
         else
@@ -368,6 +380,7 @@ public partial class Player
     {
         TrueEmerald = 0;
         PayKredsLog = "";
+        Debug.Log("_dataStr=" + _dataStr);
         if (_dataStr != "")
         {
             string[] items = _dataStr.Split('/');
