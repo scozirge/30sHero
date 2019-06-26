@@ -380,17 +380,19 @@ if (PlayerPrefs.GetInt(LocoData.InitSetLanguage.ToString()) == 0)
     {
         TrueEmerald = 0;
         PayKredsLog = "";
-        Debug.Log("_dataStr=" + _dataStr);
         if (_dataStr != "")
         {
+            //163697,1,,/163698,2,,/164105,3,,
+            //13356700,1,,1/13609218,1,,1/13356696,2,,1/13356697,2,,1/13356698,2,,1/13358938,2,,1/13345602,3,,/13355292,3,,/13356695,3,,1/13356699,3,,1/13357027,3,,1/13357029,3,,1/13357047,3,,1/13357066,3,,1/13358576,3,,1/13358579,3,,1/13582902,3,,1
+            //1,1/1,1/2,1/2,1/2,1/2,1/3,/3,/3,1/3,1/3,1/3,1/3,1/3,1/3,1/3,1/3,1
             string[] items = _dataStr.Split('/');
             Dictionary<int, int> payTypeCount = new Dictionary<int, int>();
             for (int i = 0; i < items.Length; i++)
             {
                 string[] itemData = items[i].Split(',');
-                int id = int.Parse(itemData[1]);
+                int id = int.Parse(itemData[0]);
                 int count = 0;
-                int.TryParse(itemData[3], out count);
+                int.TryParse(itemData[1], out count);
                 if (count != 0)
                 {
                     if (GameDictionary.PurchaseDic[id].MyType == PurchaseType.BuyEmerald)

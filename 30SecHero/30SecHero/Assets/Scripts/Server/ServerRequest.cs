@@ -39,7 +39,7 @@ public partial class ServerRequest : MonoBehaviour
                 IsFormal = true;
                 break;
         }
-        IsFormal = true;
+        //IsFormal = true;
         Conn = this;
         //切場景不移除物件
         DontDestroyOnLoad(gameObject);

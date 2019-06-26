@@ -10,7 +10,7 @@ public class KongregateAPIBehaviour : MonoBehaviour
     public static bool KongregateLogin = false;
     public static bool EndLogin;
     static float WaitInitTime = 10;
-    static bool Test = true;
+    static bool Test = false;
 
     public static void ResetData()
     {
@@ -108,30 +108,15 @@ public class KongregateAPIBehaviour : MonoBehaviour
 
     public void OnKongregateAPILoaded(string userInfoString)
     {
-        Debug.Log("OnKongregateAPILoaded...");
+        Debug.Log("OnKongregateAPILoaded:" + userInfoString);
         if(!KGIsInit)
         {
             Application.ExternalEval(@"
         parent.kongregate.stats.submit('EnterGame', 1);");
         }
         KGIsInit = true;
-        //偵聽是否有登入kongregate
-        if (!Relogin)
-        {
-            Debug.Log("建立kongregate登入偵聽");
-            Application.ExternalEval(@"
-      parent.kongregate.services.addEventListener('login', function(){
-        var unityObject = kongregateUnitySupport.getUnityObject();
-        var services = parent.kongregate.services;
-        var params=[services.getUserId(), services.getUsername(), 
-                    services.getGameAuthToken()].join('|');
 
-        unityObject.SendMessage('KongregateAPI', 'OnKongregateUserInfo', params);
-    });"
-);
-        }
-
-
+        
         //設定玩家資料
         OnKongregateUserInfo(userInfoString);
     }
@@ -146,6 +131,7 @@ public class KongregateAPIBehaviour : MonoBehaviour
             InitTimer.StartRunTimer = false;
         //if (WaitSignInCheck!=null)
         //WaitSignInCheck.StartRunTimer = false;
+        Debug.Log("KGUserInfo:" + userInfoString);
         var info = userInfoString.Split('|');
         var userId = System.Convert.ToInt32(info[0]);
         var username = info[1];
@@ -158,7 +144,7 @@ public class KongregateAPIBehaviour : MonoBehaviour
             {
                 Debug.Log("KongregateLogin=" + KongregateLogin);
                 Player.GetKongregateUserData_CB(username, userId);
-                ShowUserItemList();
+                InitSetUserItemList();
             }
             else//商品頁面跳登入視窗時後登入成功
             {
@@ -173,6 +159,21 @@ public class KongregateAPIBehaviour : MonoBehaviour
             {
                 EndKongregateLogin();
                 Debug.Log("Guest account");
+                //偵聽是否有登入kongregate
+                //if (!Relogin)
+                //{
+                    Debug.Log("建立kongregate登入偵聽");
+                    Application.ExternalEval(@"
+      parent.kongregate.services.addEventListener('login', function(){
+        var unityObject = kongregateUnitySupport.getUnityObject();
+        var services = parent.kongregate.services;
+        var params=[services.getUserId(), services.getUsername(), 
+                    services.getGameAuthToken()].join('|');
+
+        unityObject.SendMessage('KongregateAPI', 'OnKongregateUserInfo', params);
+    });"
+        );
+                //}
             }
             else//商品頁面跳登入視窗時，登入失敗
             {
@@ -182,7 +183,7 @@ public class KongregateAPIBehaviour : MonoBehaviour
             }
         }
         if (Test)
-            OnShowUserItemListCB("13356700,1,,1/13356696,2,,1/13356697,2,,1/13356698,2,,1/13345602,3,,/13355292,3,,/13356695,3,,1");
+            InitSetUserItemCB("13356700,1,,1/13356696,2,,1/13356697,2,,1/13356698,2,,1/13345602,3,,/13355292,3,,/13356695,3,,1");
     }
     public static void ShowItemList()
     {
@@ -242,36 +243,38 @@ public class KongregateAPIBehaviour : MonoBehaviour
             Purchase.ToPurchaseCB(false);
         }
     }
-    public static void ShowUserItemList()
+    public static void InitSetUserItemList()
     {
-        Debug.Log("////////////////Send ShowUserItemList");
+        Debug.Log("////////////////Send InitSetUserItem : " + Player.Name_K);
+        //datas+=[item.id, item.identifier, item.data , item.remaining_uses ].join(',');
         Application.ExternalEval(@"
-          parent.kongregate.mtx.requestUserItemList(null, function(result) {
+          parent.kongregate.mtx.requestUserItemList('"+ Player.Name_K+@"', function(result) {
             var unityObject = kongregateUnitySupport.getUnityObject();
             if(result.success) {
                 var datas = '';
+                console.log('result.data.length='+result.data.length);
                 for(var i = 0; i < result.data.length; i++) 
                 {
                     var item = result.data[i];
                     if(i!=0)
                         datas+='/';
-                    datas+=[item.id, item.identifier, item.data , item.remaining_uses ].join(',');
+                    datas+=[item.identifier,  item.remaining_uses ].join(',');
                 }
                 if(datas=='')
                     datas='Empty';
-                unityObject.SendMessage('KongregateAPI', 'OnShowUserItemListCB', datas);     
+                unityObject.SendMessage('KongregateAPI', 'InitSetUserItemCB', datas);     
             }
             else
             {
-                unityObject.SendMessage('KongregateAPI', 'OnShowUserItemListCB', 'Fail'); 
+                unityObject.SendMessage('KongregateAPI', 'InitSetUserItemCB', 'Fail'); 
             }
           });
         ");
     }
 
-    public void OnShowUserItemListCB(string _datas)
+    public void InitSetUserItemCB(string _datas)
     {
-        //Debug.Log("///////////////Kongregate UserItem Info: " + _datas);
+        Debug.Log("///////////////Kongregate InitSetUserItem Info: " + _datas);
         switch(_datas)
         {
             case "Fail":
@@ -302,7 +305,7 @@ public class KongregateAPIBehaviour : MonoBehaviour
                     var item = result.data[i];
                     if(i!=0)
                         datas+='/';
-                    datas+=[item.id, item.identifier, item.data , item.remaining_uses ].join(',');
+                    datas+=[ item.identifier , item.remaining_uses ].join(',');
                 }
                 if(datas=='')
                     datas='Empty';
@@ -317,7 +320,7 @@ public class KongregateAPIBehaviour : MonoBehaviour
     }
     public void OnGetUserItemListCB(string _datas)
     {
-        //Debug.Log("///////////////Kongregate UserItem Info: " + _datas);
+        Debug.Log("///////////////Kongregate GetUserItem Info: " + _datas);
         switch (_datas)
         {
             case "Fail":
