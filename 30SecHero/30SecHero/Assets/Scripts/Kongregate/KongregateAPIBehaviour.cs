@@ -25,7 +25,7 @@ public class KongregateAPIBehaviour : MonoBehaviour
         if (_value < 0)
             return;
         Application.ExternalEval(@"
-        parent.kongregate.stats.submit('" + _name + @"'," + _value + @");");
+        kongregate.stats.submit('" + _name + @"'," + _value + @");");
     }
 
     public void Init()
@@ -72,7 +72,7 @@ public class KongregateAPIBehaviour : MonoBehaviour
         Relogin = true;
         Debug.Log("Kongregate Login");
         Application.ExternalEval(@"
-          parent.kongregate.services.showRegistrationBox();");
+          kongregate.services.showRegistrationBox();");
     }
     public static void OnKongregateInPageLogin(string _userInfoString)
     {
@@ -112,7 +112,7 @@ public class KongregateAPIBehaviour : MonoBehaviour
         if(!KGIsInit)
         {
             Application.ExternalEval(@"
-        parent.kongregate.stats.submit('EnterGame', 1);");
+        kongregate.stats.submit('EnterGame', 1);");
         }
         KGIsInit = true;
 
@@ -131,7 +131,7 @@ public class KongregateAPIBehaviour : MonoBehaviour
             InitTimer.StartRunTimer = false;
         //if (WaitSignInCheck!=null)
         //WaitSignInCheck.StartRunTimer = false;
-        Debug.Log("KGUserInfo:" + userInfoString);
+        //Debug.Log("KGUserInfo:" + userInfoString);
         var info = userInfoString.Split('|');
         var userId = System.Convert.ToInt32(info[0]);
         var username = info[1];
@@ -164,9 +164,9 @@ public class KongregateAPIBehaviour : MonoBehaviour
                 //{
                     Debug.Log("建立kongregate登入偵聽");
                     Application.ExternalEval(@"
-      parent.kongregate.services.addEventListener('login', function(){
+      kongregate.services.addEventListener('login', function(){
         var unityObject = kongregateUnitySupport.getUnityObject();
-        var services = parent.kongregate.services;
+        var services = kongregate.services;
         var params=[services.getUserId(), services.getUsername(), 
                     services.getGameAuthToken()].join('|');
 
@@ -189,7 +189,7 @@ public class KongregateAPIBehaviour : MonoBehaviour
     {
         Debug.Log("////////////////Send ShowItemList");
         Application.ExternalEval(@"
-          parent.kongregate.mtx.requestItemList([], function(result) {
+          kongregate.mtx.requestItemList([], function(result) {
             var unityObject = kongregateUnitySupport.getUnityObject();
             if(result.success) {
                 var datas = [];
@@ -224,7 +224,7 @@ public class KongregateAPIBehaviour : MonoBehaviour
     {
         Debug.Log("////////////////Send PurchaseIte ID:" + _id);
         Application.ExternalEval(@"
-          parent.kongregate.mtx.purchaseItems(['" + _id + @"'], function(result) {
+          kongregate.mtx.purchaseItems(['" + _id + @"'], function(result) {
             var unityObject = kongregateUnitySupport.getUnityObject();
             var success = String(result.success);
             unityObject.SendMessage('KongregateAPI', 'OnPurchaseResult', success);
@@ -248,7 +248,7 @@ public class KongregateAPIBehaviour : MonoBehaviour
         Debug.Log("////////////////Send InitSetUserItem : " + Player.Name_K);
         //datas+=[item.id, item.identifier, item.data , item.remaining_uses ].join(',');
         Application.ExternalEval(@"
-          parent.kongregate.mtx.requestUserItemList('"+ Player.Name_K+@"', function(result) {
+          kongregate.mtx.requestUserItemList(null, function(result) {
             var unityObject = kongregateUnitySupport.getUnityObject();
             if(result.success) {
                 var datas = '';
@@ -296,7 +296,7 @@ public class KongregateAPIBehaviour : MonoBehaviour
     {
         Debug.Log("////////////////Send GetUserItemList");
         Application.ExternalEval(@"
-          parent.kongregate.mtx.requestUserItemList(null, function(result) {
+          kongregate.mtx.requestUserItemList(null, function(result) {
             var unityObject = kongregateUnitySupport.getUnityObject();
             if(result.success) {
                 var datas = '';
